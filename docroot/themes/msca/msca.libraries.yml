@@ -1,0 +1,7 @@
+base:
+  version: VERSION
+  css:
+    theme:
+      styles.css: {}
+  js:
+    scripts.js: {}
