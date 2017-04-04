@@ -285,7 +285,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = '';
+$settings['hash_salt'] = 'NbQPD2Bh3NzMgvRUuHHS5QcN_8PEo2PPnF3NFt3Kb5oNsK3oKL-n5UI1iD8CJqzMhjngQfQE1g';
 
 /**
  * Deployment identifier.
@@ -750,9 +750,9 @@ $settings['file_scan_ignore_directories'] = [
  * Keep this code block at the end of this file to take full effect.
  */
 #
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}
 
 
 // On Acquia Cloud, this include file configures Drupal to use the correct
@@ -762,3 +762,15 @@ $settings['file_scan_ignore_directories'] = [
 if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/msca/msca-settings.inc');
 }
+$databases['default']['default'] = array (
+  'database' => 'msc',
+  'username' => 'root',
+  'password' => 'b3m7rXJT',
+  'prefix' => '',
+  'host' => 'localhost',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+$settings['install_profile'] = 'standard';
+$config_directories['sync'] = 'sites/default/files/config_ryzEZsqgib9k9pUuaXPiLIY5mLfCsz-t8ri_VuiiXacNieALHAdDgVnTcA57R897ScuJ89XMlA/sync';
