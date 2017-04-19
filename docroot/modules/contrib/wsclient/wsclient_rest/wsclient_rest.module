@@ -1,0 +1,168 @@
+<?php
+
+/**
+ * @file
+ * Web service client endpoint for invoking a RESTful service.
+ */
+
+/**
+ * Implements hook_wsclient_endpoint_types().
+ */
+function wsclient_rest_wsclient_endpoint_types() {
+  return array(
+    'rest' => array(
+      'label' => t('REST'),
+      'class' => 'WSClientRESTEndpoint',
+    ),
+  );
+}
+
+/**
+ * Form submit callback for the form.
+ */
+function wsclient_rest_form_submit($form, &$form_state) {
+  // Allow formatters to react on form submit.
+  $options = wsclient_rest_formatters_as_options();
+  foreach ($options as $options_groupped) {
+    foreach (array_keys($options_groupped) as $formatter_class) {
+      if ($formatter_class == 'custom') {
+        // Skip custom.
+        continue;
+      }
+      $formatter = new $formatter_class();
+      if (method_exists($formatter, 'formSubmit')) {
+        $formatter->formSubmit($form, $form_state);
+      }
+    }
+  }
+  switch ($form_state['form']) {
+    case 'main':
+      wsclient_rest_main_form_submit($form, $form_state);
+      break;
+    case 'operation':
+      wsclient_rest_operation_form_submit($form, $form_state);
+      break;
+  }
+}
+
+/**
+ * Form submit callback for the main form.
+ */
+function wsclient_rest_main_form_submit($form, &$form_state) {
+  foreach (array('send_formatter', 'receive_formatter') as $formatter_type) {
+    // Make sure to avoid overridding of the custom formatter, defined in the
+    // settings.
+    if ($form_state['values'][$formatter_type]['formatter'] === 'custom') {
+      continue;
+    }
+    // Save settings in the service settings.
+    $formatter_settings = &$form_state['service']->settings[$formatter_type];
+    $formatter_settings['class'] = $form_state['values'][$formatter_type]['formatter'];
+    if (!empty($form_state['values'][$formatter_type]['settings'])) {
+      $formatter_settings['settings'] = $form_state['values'][$formatter_type]['settings'];
+    }
+  }
+}
+
+/**
+ * Form submit callback for the operation form.
+ */
+function wsclient_rest_operation_form_submit($form, &$form_state) {
+  $form_state['operation']['type'] = $form_state['values']['type'];
+  $form_state['operation']['url'] = $form_state['values']['url'];
+}
+
+/**
+ * Returns a list of formatters, suitable for use as form options.
+ */
+function wsclient_rest_formatters_as_options() {
+  $options = array();
+  // Get a list of all format definitions.
+  $info = module_invoke_all('wsclient_rest_formatter_info');
+  // Turn this list into the options array.
+  foreach ($info as $formatter_class => $implementation) {
+    $options[$implementation['format']][$formatter_class] = $implementation['label'];
+  }
+  return $options;
+}
+
+/**
+ * Implements hook_wsclient_rest_formatter_info().
+ */
+function wsclient_rest_wsclient_rest_formatter_info() {
+  return array(
+    'WsclientRestFormFormatter' => array(
+      'label' => t('Basic url-encoded form formatter'),
+      'format' => t('Url-encoded form'),
+      'settings' => array(),
+    ),
+    'WsclientRestJSONFormatter' => array(
+      'label' => t('Basic JSON formatter'),
+      'format' => t('JSON'),
+      'settings' => array(),
+    ),
+    'WsclientRestPHPFormatter' => array(
+      'label' => t('Basic PHP formatter'),
+      'format' => t('PHP'),
+      'settings' => array(),
+    ),
+    'WsclientRestXMLFormatter' => array(
+      'label' => t('Basic XML formatter'),
+      'format' => t('XML'),
+      'settings' => array(
+        'default_root' => 'result',
+        'adaptive_root' => FALSE,
+      ),
+    ),
+    // Is defined to provide backward compatibility.
+    'custom' => array(
+      'label' => t('Custom formatter defined in service settings'),
+      'format' => t('Custom formatters without hook implementation'),
+      'settings' => array(),
+    ),
+  );
+}
+
+/**
+ * Determines whether custom formatter is defined in settings: "custom" means
+ *   that it implements the HttpClientFormatter interface but has no
+ *   corresponding implementation in info hook.
+ * @see hook_wsclient_rest_formatter_info()
+ *
+ * @param string $formatter_type
+ *   Either 'send_formatter' or 'receive_formatter'.
+ * @return bool
+ */
+function wsclient_rest_has_custom_formatter($settings, $formatter_type) {
+  $custom = TRUE;
+  // In case if valid formatter found configured old-style - skip returning true.
+  if (wsclient_rest_has_old_formatter($settings)) {
+    return TRUE;
+  }
+  // Empty entry couldn't be custom implementation.
+  if (empty($settings[$formatter_type]['class'])) {
+    return FALSE;
+  }
+  // If doesn't implement the interface - considered as broken and will be overridden.
+  if (!(new $settings[$formatter_type]['class']() instanceof HttpClientFormatter)) {
+    return FALSE;
+  }
+  // Search through the implementations.
+  $info = module_invoke_all('wsclient_rest_formatter_info');
+  if (!empty($info[$settings[$formatter_type]['class']])) {
+    return FALSE;
+  }
+  // If none of the above applies, it means that we've finally checked that
+  // the formatter is really custom.
+  return $custom;
+}
+
+/**
+ * Determines whether the formatter is defined old-style.
+ *   Provided for backward compatibility.
+ *
+ * @return boolean
+ */
+function wsclient_rest_has_old_formatter($settings) {
+  return !empty($settings['formatter']) && (new $settings['formatter']() instanceof HttpClientFormatter);
+}

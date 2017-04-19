@@ -1,0 +1,5 @@
+wsclient.notify:
+  path: /wsclient/%wsclient_service/notify
+  defaults: {  }
+  requirements:
+    _access: 'true'

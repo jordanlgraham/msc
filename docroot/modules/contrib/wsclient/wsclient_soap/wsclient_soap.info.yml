@@ -1,0 +1,10 @@
+name: 'Web service client SOAP'
+description: 'Implements a SOAP endpoint to connect to SOAP services.'
+package: Services
+core: 8.x
+dependencies:
+  - wsclient
+version: 7.x-1.0+21-dev
+project: wsclient
+datestamp: '1479473644'
+type: module

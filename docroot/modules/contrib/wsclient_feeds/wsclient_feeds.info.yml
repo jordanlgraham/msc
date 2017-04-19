@@ -1,0 +1,11 @@
+name: 'Web Service Feeds support'
+description: 'Connects Webservice Client instances with Feeds importers and mappers.'
+core: 8.x
+package: Services
+dependencies:
+  - wsclient
+  - feeds
+version: 7.x-1.0+14-dev
+project: wsclient_feeds
+datestamp: '1428967082'
+type: module

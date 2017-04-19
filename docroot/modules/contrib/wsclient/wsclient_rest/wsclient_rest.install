@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Web service client REST - installation file.
+ */
+
+/**
+ * Add default formatters (send_formatter and receive_formatter) if they are not set for each existing service.
+ */
+function wsclient_rest_update_7100() {
+  foreach (entity_load_multiple_by_name('wsclient_service') as $service) {
+    foreach (array('send_formatter', 'receive_formatter') as $formatter) {
+      if (empty($service->settings[$formatter]['class'])) {
+        $service->settings[$formatter]['class'] = 'WsclientRestJSONFormatter';
+      }
+    }
+    $service->save();
+  }
+}

@@ -1,0 +1,10 @@
+name: 'Web service client Tester'
+description: 'Extends the webservice client UI with a form for realtime web service debugging.'
+core: 8.x
+package: Services
+dependencies:
+  - wsclient_ui
+version: 7.x-1.0+21-dev
+project: wsclient
+datestamp: '1479473644'
+type: module

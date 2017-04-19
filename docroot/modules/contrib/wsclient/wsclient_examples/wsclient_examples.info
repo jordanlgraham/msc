@@ -1,0 +1,14 @@
+name = Web service client examples
+description = Example web services.
+package = Services
+core = 7.x
+files[] = wsclient_examples.test
+dependencies[] = wsclient_soap
+dependencies[] = wsclient_rest
+
+; Information added by Drupal.org packaging script on 2016-11-18
+version = "7.x-1.0+21-dev"
+core = "7.x"
+project = "wsclient"
+datestamp = "1479473644"
+
