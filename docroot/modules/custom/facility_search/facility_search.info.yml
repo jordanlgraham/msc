@@ -1,0 +1,6 @@
+name: MSC Facility Search
+description: Functionality for facility and search
+package: MSC
+
+type: module
+core: 8.x
