@@ -38,7 +38,12 @@
         "drupal/node_clone": "1.x-dev",
         "drupal/shield": "^1.0",
         "drupal/field_formatter": "^1.0",
-        "drupal/block_class": "^1.0@alpha"
+        "drupal/block_class": "^1.0@alpha",
+        "drupal/address": "^1.0@RC",
+        "drupal/geofield": "^1.0@alpha",
+        "drupal/geocoder": "2.x-dev",
+        "drupal/geolocation": "^1.10",
+        "drupal/devel": "^1.0@RC"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

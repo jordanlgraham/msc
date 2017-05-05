@@ -1,0 +1,48 @@
+<?php
+/**
+ * @file
+ *  Drupal hooks for facility_search.module
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function facility_search_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $form_state->get('view');
+  if ($view->id() !== 'facility_search') {
+    return;
+  }
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  // Turn the state filter into a dropdown.
+  $form['state']['#type'] = 'select';
+  $form['state']['#size'] = 1;
+  $form['state']['#empty_option'] = t('-Select-');
+  $form['state']['#options'] = \Drupal::service('address.subdivision_repository')->getList(['US']);
+  // Turn the proximity filter into a dropdown.
+  $form['proximity']['#type'] = 'select';
+  $form['proximity']['#size'] = 1;
+  $form['proximity']['#empty_option'] = t('-Select-');
+  for ($i = 1; $i < 21; $i++) {
+    $form['proximity']['#options'][$i*5] = $i*5;
+  }
+}
+/**
+ * Implements hook_geocoder_provider_info_alter().
+ */
+function facility_search_geocoder_provider_info_alter(&$providers) {
+  // Alter the google maps geocoder.
+  if (isset($providers['googlemaps'])) {
+    $providers['googlemaps']['arguments']['useSsl'] = TRUE;
+    $config = \Drupal::config('geolocation.settings');
+    // Use the Google Map API key variable provided by the geolocation module.
+    if (!empty($config->get('google_map_api_key'))) {
+      $api_arg_key = array_search('apiKey', $providers['googlemaps']['arguments'], TRUE);
+      // This is a numbered array, so have to remove the original key or there will be an extra argument.
+      unset($providers['googlemaps']['arguments'][$api_arg_key]);
+      $providers['googlemaps']['arguments']['apiKey'] = $config->get('google_map_api_key');
+    }
+  };
+}
