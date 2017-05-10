@@ -16,11 +16,6 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     return;
   }
   $node_storage = \Drupal::entityTypeManager()->getStorage('node');
-  // Turn the state filter into a dropdown.
-  $form['state']['#type'] = 'select';
-  $form['state']['#size'] = 1;
-  $form['state']['#empty_option'] = t('-Select-');
-  $form['state']['#options'] = \Drupal::service('address.subdivision_repository')->getList(['US']);
   // Turn the proximity filter into a dropdown.
   $form['proximity']['#type'] = 'select';
   $form['proximity']['#size'] = 1;
@@ -31,7 +26,7 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
 }
 /**
  * Implements hook_geocoder_provider_info_alter().
- */
+*/
 function facility_search_geocoder_provider_info_alter(&$providers) {
   // Alter the google maps geocoder.
   if (isset($providers['googlemaps'])) {

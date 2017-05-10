@@ -21,7 +21,7 @@ use Drupal\geocoder\GeocoderInterface;
  * )
  */
 
-class MSCGeocoder extends GeocoderBase implements ContainerFactoryPluginInterface {
+class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterface {
   /** @var GeocoderInterface */
   protected $geocoder;
 

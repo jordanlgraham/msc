@@ -43,7 +43,9 @@
         "drupal/geofield": "^1.0@alpha",
         "drupal/geocoder": "2.x-dev",
         "drupal/geolocation": "^1.10",
-        "drupal/devel": "^1.0@RC"
+        "drupal/devel": "^1.0@RC",
+        "php-http/guzzle6-adapter": "^1.1",
+        "willdurand/geocoder": "^3.3"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

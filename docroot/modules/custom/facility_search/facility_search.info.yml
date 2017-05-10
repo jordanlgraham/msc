@@ -1,5 +1,5 @@
 name: MSC Facility Search
-description: Functionality for facility and search
+description: Functionality for facility search
 package: MSC
 
 type: module
