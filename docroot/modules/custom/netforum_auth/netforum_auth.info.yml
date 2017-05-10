@@ -1,0 +1,5 @@
+name: NetForum Authentication
+type: module
+description: NetForum Authentication
+core: 8.x
+package: NetForum

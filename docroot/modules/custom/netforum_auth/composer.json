@@ -1,0 +1,14 @@
+{
+  "name": "drupal/netforum_auth",
+  "type": "drupal-module",
+  "description": "NetForum Authentication",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/netforum_auth",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/netforum_auth",
+    "source": "http://cgit.drupalcode.org/netforum_auth"
+  },
+  "require": { }
+}
