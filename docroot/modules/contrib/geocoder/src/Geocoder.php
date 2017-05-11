@@ -30,7 +30,7 @@ class Geocoder implements GeocoderInterface {
    * {@inheritdoc}
    */
   public function geocode($data, array $plugins, array $options = []) {
-    foreach ($plugins as $plugin_id) {
+    foreach (array_keys($plugins) as $plugin_id) {
       $options += [$plugin_id => []];
       $provider = $this->providerPluginManager->createInstance($plugin_id, $options[$plugin_id]);
 
