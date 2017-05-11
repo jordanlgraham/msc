@@ -17,6 +17,7 @@ class ComposerStaticInitDrupal8
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        'a16312f9300fed4a097923eacb0ba814' => __DIR__ . '/..' . '/igorw/get-in/src/get_in.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -72,6 +73,16 @@ class ComposerStaticInitDrupal8
         array (
             'Masterminds\\' => 12,
         ),
+        'I' => 
+        array (
+            'Ivory\\HttpAdapter\\' => 18,
+        ),
+        'H' => 
+        array (
+            'Http\\Promise\\' => 13,
+            'Http\\Client\\' => 12,
+            'Http\\Adapter\\Guzzle6\\' => 21,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -92,6 +103,10 @@ class ComposerStaticInitDrupal8
         array (
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'CommerceGuys\\Zone\\' => 18,
+            'CommerceGuys\\Intl\\' => 18,
+            'CommerceGuys\\Enum\\' => 18,
+            'CommerceGuys\\Addressing\\' => 24,
         ),
         'B' => 
         array (
@@ -239,6 +254,22 @@ class ComposerStaticInitDrupal8
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'Ivory\\HttpAdapter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egeloen/http-adapter/src',
+        ),
+        'Http\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/httplug/src',
+        ),
+        'Http\\Adapter\\Guzzle6\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/guzzle6-adapter/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -290,6 +321,22 @@ class ComposerStaticInitDrupal8
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
+        'CommerceGuys\\Zone\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/zone/src',
+        ),
+        'CommerceGuys\\Intl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/intl/src',
+        ),
+        'CommerceGuys\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/enum/src',
+        ),
+        'CommerceGuys\\Addressing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
+        ),
         'Behat\\Mink\\Driver\\' => 
         array (
             0 => __DIR__ . '/..' . '/behat/mink-browserkit-driver/src',
@@ -328,6 +375,13 @@ class ComposerStaticInitDrupal8
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+        ),
+        'G' => 
+        array (
+            'Geocoder' => 
+            array (
+                0 => __DIR__ . '/..' . '/willdurand/geocoder/src',
             ),
         ),
         'E' => 
@@ -834,6 +888,7 @@ class ComposerStaticInitDrupal8
         'Symfony\\Component\\HttpKernel\\HttpKernelInterface' => __DIR__ . '/..' . '/symfony/http-kernel/HttpKernelInterface.php',
         'Symfony\\Component\\HttpKernel\\TerminableInterface' => __DIR__ . '/..' . '/symfony/http-kernel/TerminableInterface.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'geoPHP' => __DIR__ . '/..' . '/phayes/geophp/geoPHP.inc',
     );
 
     public static function getInitializer(ClassLoader $loader)
