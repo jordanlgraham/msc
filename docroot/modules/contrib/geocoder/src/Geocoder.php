@@ -29,7 +29,7 @@ class Geocoder implements GeocoderInterface {
   /**
    * {@inheritdoc}
    */
-   public function geocode($data, array $plugins, array $options = []) {
+  public function geocode($data, array $plugins, array $options = []) {
     foreach ($plugins as $plugin_id) {
       $options += [$plugin_id => []];
       $provider = $this->providerPluginManager->createInstance($plugin_id, $options[$plugin_id]);
@@ -47,6 +47,7 @@ class Geocoder implements GeocoderInterface {
 
     return FALSE;
   }
+
   /**
    * {@inheritdoc}
    */
@@ -74,9 +75,12 @@ class Geocoder implements GeocoderInterface {
    *
    * @param string $message
    *   The message.
+   * @param string $type
+   *   The type of message.
    */
-  public static function log($message) {
+  public static function log($message, $type) {
     \Drupal::logger('geocoder')->error($message);
+    drupal_set_message($message, $type);
   }
 
 }
