@@ -1,0 +1,26 @@
+diff --git a/modules/geocoder_field/src/GeocoderFieldPluginInterface.php b/modules/geocoder_field/src/GeocoderFieldPluginInterface.php
+index c60cf0a..e61e536 100644
+--- a/modules/geocoder_field/src/GeocoderFieldPluginInterface.php
++++ b/modules/geocoder_field/src/GeocoderFieldPluginInterface.php
+@@ -3,7 +3,7 @@
+ namespace Drupal\geocoder_field;
+
+ use Drupal\Core\Form\FormStateInterface;
+-use Drupal\field\FieldConfigInterface;
++use Drupal\Core\Field\FieldConfigInterface;
+
+ /**
+  * Provides an interface for field plugins.
+diff --git a/modules/geocoder_field/src/Plugin/Geocoder/Field/DefaultField.php b/modules/geocoder_field/src/Plugin/Geocoder/Field/DefaultField.php
+index c05165a..bdfd3cf 100644
+--- a/modules/geocoder_field/src/Plugin/Geocoder/Field/DefaultField.php
++++ b/modules/geocoder_field/src/Plugin/Geocoder/Field/DefaultField.php
+@@ -5,7 +5,7 @@ namespace Drupal\geocoder_field\Plugin\Geocoder\Field;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+ use Drupal\Core\Plugin\PluginBase;
+-use Drupal\field\FieldConfigInterface;
++use Drupal\Core\Field\FieldConfigInterface;
+ use Drupal\geocoder\DumperPluginManager;
+ use Drupal\geocoder\ProviderPluginManager;
+ use Drupal\geocoder_field\GeocoderFieldPluginInterface;
