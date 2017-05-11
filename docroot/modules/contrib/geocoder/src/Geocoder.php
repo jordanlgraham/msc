@@ -29,24 +29,24 @@ class Geocoder implements GeocoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function geocode($data, array $plugins, array $options = []) {
+   public function geocode($data, array $plugins, array $options = []) {
     foreach ($plugins as $plugin_id) {
       $options += [$plugin_id => []];
       $provider = $this->providerPluginManager->createInstance($plugin_id, $options[$plugin_id]);
+
       try {
         return $provider->geocode($data);
       }
       catch (InvalidCredentials $e) {
-        static::log($e->getMessage());
+        static::log($e->getMessage(), 'error');
       }
       catch (\Exception $e) {
-        static::log($e->getMessage());
+        static::log($e->getMessage(), 'error');
       }
     }
 
     return FALSE;
   }
-
   /**
    * {@inheritdoc}
    */
