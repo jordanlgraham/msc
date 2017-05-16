@@ -1,19 +1,23 @@
+// Temporary styles for demo day
 .views-exposed-form label,
 .views-exposed-form .form-type-select.form-item-proximity label {
-  display: none; }
+  display: none;
+}
 
 .views-exposed-form .form-type-select label {
-  display: inline-block; }
+  display: inline-block;
+}
 
 .views-exposed-form .form-item {
   margin: 0 15px 15px 0;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  -ms-flex-direction: column;
-      flex-direction: column; }
+  flex-direction: column;
+}
 
 .views-row {
-  margin-bottom: 20px; }
-  .views-row .organization {
+  margin-bottom: 20px;
+  .organization {
     font-weight: bold;
-    font-size: 20px; }
+    font-size: 20px;
+  }
+}

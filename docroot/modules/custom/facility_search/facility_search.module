@@ -15,13 +15,24 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
   if ($view->id() !== 'facility_search') {
     return;
   }
-  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+
   // Turn the proximity filter into a dropdown.
   $form['proximity']['#type'] = 'select';
   $form['proximity']['#size'] = 1;
-  $form['proximity']['#empty_option'] = t('-Select-');
+  $form['proximity']['#empty_option'] = t('-Distance-');
   for ($i = 1; $i < 21; $i++) {
-    $form['proximity']['#options'][$i*5] = $i*5;
+    $form['proximity']['#options'][$i*5] = $i*5 . ' miles';
+  }
+
+  // Add placeholders to all text fields. Uses label values so they're editable in interface
+  foreach($form['#info'] as $key => $form_info_item) {
+    foreach ($form as $form_item_key => $form_item_value) {
+      if ($form_item_key == $form_info_item['value']) {
+        if ($form[$form_item_key]['#type'] == 'textfield') {
+          $form[$form_item_key]['#placeholder'] = $form_info_item['label'];
+        }
+      }
+    }
   }
 }
 /**
