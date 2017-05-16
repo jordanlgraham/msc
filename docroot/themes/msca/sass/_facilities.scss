@@ -1,23 +1,26 @@
 // Temporary styles for demo day
-.views-exposed-form label,
-.views-exposed-form .form-type-select.form-item-proximity label {
-  display: none;
-}
 
-.views-exposed-form .form-type-select label {
-  display: inline-block;
-}
+.facility-search {
+  .views-exposed-form label,
+  .views-exposed-form .form-type-select.form-item-proximity label {
+    display: none;
+  }
 
-.views-exposed-form .form-item {
-  margin: 0 15px 15px 0;
-  display: inline-flex;
-  flex-direction: column;
-}
+  .views-exposed-form .form-type-select label {
+    display: inline-block;
+  }
 
-.views-row {
-  margin-bottom: 20px;
-  .organization {
-    font-weight: bold;
-    font-size: 20px;
+  .views-exposed-form .form-item {
+    margin: 0 15px 15px 0;
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  .views-row {
+    margin-bottom: 20px;
+    .organization {
+      font-weight: bold;
+      font-size: 20px;
+    }
   }
 }
