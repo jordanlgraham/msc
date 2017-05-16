@@ -44,7 +44,9 @@
         "drupal/geolocation": "^1.10",
         "drupal/devel": "^1.0@RC",
         "php-http/guzzle6-adapter": "^1.1",
-        "willdurand/geocoder": "^3.3"
+        "willdurand/geocoder": "^3.3",
+        "drupal/address": "~1.0",
+        "drupal/better_exposed_filters": "^3.0@alpha"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
