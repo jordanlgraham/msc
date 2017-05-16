@@ -1,19 +1,19 @@
-.views-exposed-form label,
-.views-exposed-form .form-type-select.form-item-proximity label {
+.facility-search .views-exposed-form label,
+.facility-search .views-exposed-form .form-type-select.form-item-proximity label {
   display: none; }
 
-.views-exposed-form .form-type-select label {
+.facility-search .views-exposed-form .form-type-select label {
   display: inline-block; }
 
-.views-exposed-form .form-item {
+.facility-search .views-exposed-form .form-item {
   margin: 0 15px 15px 0;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -ms-flex-direction: column;
       flex-direction: column; }
 
-.views-row {
+.facility-search .views-row {
   margin-bottom: 20px; }
-  .views-row .organization {
+  .facility-search .views-row .organization {
     font-weight: bold;
     font-size: 20px; }
