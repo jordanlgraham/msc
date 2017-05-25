@@ -1,0 +1,14 @@
+{
+  "name": "drupal/netforum_org_sync",
+  "type": "drupal-module",
+  "description": "Syncs both Facilities and Preferred Vendors from Mass Senior Care's NetForum account",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/netforum_org_sync",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/netforum_org_sync",
+    "source": "http://cgit.drupalcode.org/netforum_org_sync"
+  },
+  "require": { }
+}
