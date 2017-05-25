@@ -103,7 +103,6 @@ class ComposerStaticInitDrupal8
         array (
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
-            'CommerceGuys\\Zone\\' => 18,
             'CommerceGuys\\Intl\\' => 18,
             'CommerceGuys\\Enum\\' => 18,
             'CommerceGuys\\Addressing\\' => 24,
@@ -112,6 +111,10 @@ class ComposerStaticInitDrupal8
         array (
             'Behat\\Mink\\Driver\\' => 18,
             'Behat\\Mink\\' => 11,
+        ),
+        'A' => 
+        array (
+            'Asm89\\Stack\\' => 12,
         ),
     );
 
@@ -321,10 +324,6 @@ class ComposerStaticInitDrupal8
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'CommerceGuys\\Zone\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/commerceguys/zone/src',
-        ),
         'CommerceGuys\\Intl\\' => 
         array (
             0 => __DIR__ . '/..' . '/commerceguys/intl/src',
@@ -345,6 +344,10 @@ class ComposerStaticInitDrupal8
         'Behat\\Mink\\' => 
         array (
             0 => __DIR__ . '/..' . '/behat/mink/src',
+        ),
+        'Asm89\\Stack\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
         ),
     );
 
@@ -416,13 +419,6 @@ class ComposerStaticInitDrupal8
             'Doctrine\\Common\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/common/lib',
-            ),
-        ),
-        'A' => 
-        array (
-            'Asm89\\Stack' => 
-            array (
-                0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
             ),
         ),
     );
