@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d798345ba4485044ab51838d7fcd2df",
+    "content-hash": "59f8219a59ae661396294b98b039d51d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -240,7 +240,7 @@
                 }
             ],
             "description": "Zone management library.",
-            "time": "2017-04-20 12:44:24"
+            "time": "2017-04-20T12:44:24+00:00"
         },
         {
             "name": "composer/installers",
@@ -812,17 +812,17 @@
         },
         {
             "name": "drupal/acquia_connector",
-            "version": "1.8.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/acquia_connector",
-                "reference": "8.x-1.8"
+                "reference": "8.x-1.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/acquia_connector-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "457e44a9a9411c4d54dfd7284a1b55e6ed5a4ed3"
+                "url": "https://ftp.drupal.org/files/projects/acquia_connector-8.x-1.11.zip",
+                "reference": "8.x-1.11",
+                "shasum": "97e582036e8ee71c78f774649d8952d448edb7ae"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -836,8 +836,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1490205485"
+                    "version": "8.x-1.11",
+                    "datestamp": "1495479183"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1021,7 +1021,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/better_exposed_filters-8.x-3.0-alpha2.zip",
-                "reference": null,
+                "reference": "8.x-3.0-alpha2",
                 "shasum": "f1bbe21379a4ac8e28e3edfbdd4964343299caeb"
             },
             "require": {
@@ -1236,16 +1236,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.2.7",
+            "version": "8.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "5d3fb8a93514f23198ac6848b2679ef1026d2326"
+                "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/5d3fb8a93514f23198ac6848b2679ef1026d2326",
-                "reference": "5d3fb8a93514f23198ac6848b2679ef1026d2326",
+                "url": "https://api.github.com/repos/drupal/core/zipball/7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
+                "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
                 "shasum": ""
             },
             "require": {
@@ -1409,7 +1409,7 @@
                 "GPL-2.0+"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2017-03-15T20:19:51+00:00"
+            "time": "2017-04-19T16:45:52+00:00"
         },
         {
             "name": "drupal/ctools",
@@ -1843,7 +1843,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/feeds",
-                "reference": "2e4908dda72e27daaf9feb0944a82522791f1238"
+                "reference": "907a986bb3d48126c7fb52b2facc5e2a70acc886"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -1855,7 +1855,7 @@
                 },
                 "drupal": {
                     "version": "8.x-3.x-dev",
-                    "datestamp": "1491851043"
+                    "datestamp": "1493544543"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -1929,7 +1929,7 @@
                 "source": "http://cgit.drupalcode.org/feeds",
                 "issues": "https://www.drupal.org/project/issues/feeds"
             },
-            "time": "2017-04-13 10:15:52"
+            "time": "2017-04-30 10:51:18"
         },
         {
             "name": "drupal/field_formatter",
@@ -2066,8 +2066,7 @@
                 "source": "https://cgit.drupalcode.org/geocoder",
                 "issues": "https://drupal.org/project/issues/geocoder",
                 "irc": "irc://irc.freenode.org/drupal-geo"
-            },
-            "time": "2017-01-12 17:39:36"
+            }
         },
         {
             "name": "drupal/geofield",
@@ -3565,7 +3564,7 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
-            "time": "2016-03-04 05:42:29"
+            "time": "2016-03-04T05:42:29+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
