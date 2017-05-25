@@ -1,0 +1,7 @@
+name: NetForum Organization Sync
+type: module
+description: Syncs both Facilities and Preferred Vendors from Mass Senior Care's NetForum account
+core: 8.x
+package: NetForum
+dependencies:
+  - netforum_soap
