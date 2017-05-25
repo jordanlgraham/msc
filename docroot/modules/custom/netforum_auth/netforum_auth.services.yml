@@ -1,5 +1,0 @@
-services:
-  netforum_auth.get_token:
-    class: Drupal\netforum_auth\GetToken
-    arguments: []
-

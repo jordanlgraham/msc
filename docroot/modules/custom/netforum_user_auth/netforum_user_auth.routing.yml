@@ -1,0 +1,9 @@
+
+netforum_user_auth.user_auth_form:
+  path: '/netforum_user_auth/form/user_auth'
+  defaults:
+    _form: '\Drupal\netforum_user_auth\Form\UserAuthForm'
+    _title: 'UserAuthForm'
+  requirements:
+    _access: 'TRUE'
+  

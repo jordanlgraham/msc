@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\netforum_auth\Form;
+namespace Drupal\netforum_soap\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class NetForumConfig.
  *
- * @package Drupal\netforum_auth\Form
+ * @package Drupal\netforum_soap\Form
  */
 class NetForumConfig extends ConfigFormBase {
 
@@ -17,7 +17,7 @@ class NetForumConfig extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'netforum_auth.netforumconfig',
+      'netforum_soap.netforumconfig',
     ];
   }
 
@@ -32,9 +32,9 @@ class NetForumConfig extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('netforum_auth.netforumconfig');
+    $config = $this->config('netforum_soap.netforumconfig');
     $form['wsdl_address'] = [
-      '#type' => 'url',
+      '#type' => 'textfield',
       '#title' => $this->t('NetForum WSDL Address'),
       '#description' => $this->t('The full URL to the NetForum WSDL. Unless you have a specific configuration, this should be https://netforum.avectra.com/xWeb/netForumXMLOnDemand.asmx?WSDL'),
       '#maxlength' => 64,
@@ -76,7 +76,8 @@ class NetForumConfig extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
-    $this->config('netforum_auth.netforumconfig')
+    $this->config('netforum_soap.netforumconfig')
+      ->set('wsdl_address', $form_state->getValue('wsdl_address'))
       ->set('api_username', $form_state->getValue('api_username'))
       ->set('api_password', $form_state->getValue('api_password'))
       ->save();

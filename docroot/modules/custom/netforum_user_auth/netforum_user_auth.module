@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains netforum_user_auth.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function netforum_user_auth_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the netforum_user_auth module.
+    case 'help.page.netforum_user_auth':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Automatically creates and logs in Drupal users that are able to authenticate against NetForum&#039;s CheckEWebUser method') . '</p>';
+      return $output;
+
+    default:
+  }
+}
