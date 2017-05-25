@@ -2,46 +2,15 @@
 
 namespace Drupal\Tests\address\Kernel\Formatter;
 
-use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
-use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\entity_test\Entity\EntityTest;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\language\Entity\ConfigurableLanguage;
-use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Tests the default formatter.
+ * Tests the address_default formatter.
  *
  * @group address
  */
-class DefaultFormatterTest extends KernelTestBase {
-
-  /**
-   * @var array
-   */
-  public static $modules = ['system', 'field', 'language', 'text', 'entity_test', 'user', 'address'];
-
-  /**
-   * @var string
-   */
-  protected $entityType;
-
-  /**
-   * @var string
-   */
-  protected $bundle;
-
-  /**
-   * @var string
-   */
-  protected $fieldName;
-
-  /**
-   * @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface
-   */
-  protected $display;
+class AddressDefaultFormatterTest extends FormatterTestBase {
 
   /**
    * {@inheritdoc}
@@ -49,44 +18,9 @@ class DefaultFormatterTest extends KernelTestBase {
   protected function setUp() {
     parent::setUp();
 
-    $this->installConfig(['system']);
-    $this->installConfig(['field']);
-    $this->installConfig(['text']);
-    $this->installConfig(['address']);
-    $this->installEntitySchema('entity_test');
-
     ConfigurableLanguage::createFromLangcode('zh-hant')->save();
 
-    $this->entityType = 'entity_test';
-    $this->bundle = $this->entityType;
-    $this->fieldName = Unicode::strtolower($this->randomMachineName());
-
-    $field_storage = FieldStorageConfig::create([
-      'field_name' => $this->fieldName,
-      'entity_type' => $this->entityType,
-      'type' => 'address',
-    ]);
-    $field_storage->save();
-
-    $field = FieldConfig::create([
-      'field_storage' => $field_storage,
-      'bundle' => $this->bundle,
-      'label' => $this->randomMachineName(),
-    ]);
-    $field->save();
-
-    $values = [
-      'targetEntityType' => $this->entityType,
-      'bundle' => $this->bundle,
-      'mode' => 'default',
-      'status' => TRUE,
-    ];
-    $this->display = \Drupal::entityTypeManager()->getStorage('entity_view_display')->create($values);
-    $this->display->setComponent($this->fieldName, [
-      'type' => 'address_default',
-      'settings' => [],
-    ]);
-    $this->display->save();
+    $this->createField('address', 'address_default');
   }
 
   /**
@@ -155,6 +89,8 @@ class DefaultFormatterTest extends KernelTestBase {
   public function testTaiwanAddress() {
     $language = \Drupal::languageManager()->getLanguage('zh-hant');
     \Drupal::languageManager()->setConfigOverrideLanguage($language);
+    // Reload the country repository for the new language to take effect.
+    $this->container->set('address.country_repository', NULL);
 
     $entity = EntityTest::create([]);
     $entity->{$this->fieldName} = [
@@ -217,23 +153,6 @@ class DefaultFormatterTest extends KernelTestBase {
       'line5' => '</p>',
     ]);
     $this->assertRaw($expected, 'The US address has been properly formatted.');
-  }
-
-  /**
-   * Renders fields of a given entity with a given display.
-   *
-   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
-   *   The entity object with attached fields to render.
-   * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
-   *   The display to render the fields in.
-   *
-   * @return string
-   *   The rendered entity fields.
-   */
-  protected function renderEntityFields(FieldableEntityInterface $entity, EntityViewDisplayInterface $display) {
-    $content = $display->build($entity);
-    $content = $this->render($content);
-    return $content;
   }
 
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "59f8219a59ae661396294b98b039d51d",
+    "content-hash": "2d798345ba4485044ab51838d7fcd2df",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -193,54 +193,6 @@
             ],
             "description": "Internationalization library powered by CLDR data.",
             "time": "2016-12-13T12:33:19+00:00"
-        },
-        {
-            "name": "commerceguys/zone",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/commerceguys/zone.git",
-                "reference": "9bd0b361a971284442972c42b6749ca855c65435"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/zone/zipball/9bd0b361a971284442972c42b6749ca855c65435",
-                "reference": "9bd0b361a971284442972c42b6749ca855c65435",
-                "shasum": ""
-            },
-            "require": {
-                "commerceguys/addressing": "~1.0",
-                "doctrine/collections": "~1.0",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "1.*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "2.*",
-                "symfony/intl": ">=2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "CommerceGuys\\Zone\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bojan Zivanovic"
-                }
-            ],
-            "description": "Zone management library.",
-            "time": "2017-04-20T12:44:24+00:00"
         },
         {
             "name": "composer/installers",
@@ -898,22 +850,21 @@
         },
         {
             "name": "drupal/address",
-            "version": "1.0.0-rc4",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/address",
-                "reference": "8.x-1.0-rc4"
+                "reference": "8.x-1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0-rc4.zip",
-                "reference": "8.x-1.0-rc4",
-                "shasum": "541b020ce839dd9c75374e213c1131d9c1f6f52d"
+                "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0.zip",
+                "reference": null,
+                "shasum": "2be22f841f8e4af2ba23b6bc9983e013c167c520"
             },
             "require": {
                 "commerceguys/addressing": "~1.0",
                 "commerceguys/intl": "~0.7",
-                "commerceguys/zone": "~1.0",
                 "drupal/core": "*"
             },
             "type": "drupal-module",
@@ -922,8 +873,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-rc4",
-                    "datestamp": "1486737287"
+                    "version": "8.x-1.0",
+                    "datestamp": "1495109886"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2611,17 +2562,17 @@
         },
         {
             "name": "drupal/services",
-            "version": "4.0.0-beta3",
+            "version": "4.0.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/services",
-                "reference": "8.x-4.0-beta3"
+                "reference": "8.x-4.0-beta4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/services-8.x-4.0-beta3.zip",
-                "reference": "8.x-4.0-beta3",
-                "shasum": "79a43eec58270cd1162f2122ce8798a5dec6dc59"
+                "url": "https://ftp.drupal.org/files/projects/services-8.x-4.0-beta4.zip",
+                "reference": null,
+                "shasum": "d5a1dde872837395bc59247df20a3e6066833d69"
             },
             "require": {
                 "drupal/core": "*",
@@ -2633,8 +2584,8 @@
                     "dev-4.x": "4.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-4.0-beta3",
-                    "datestamp": "1482946983"
+                    "version": "8.x-4.0-beta4",
+                    "datestamp": "1495725783"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -5622,6 +5573,54 @@
                 "testing"
             ],
             "time": "2016-03-05T09:04:22+00:00"
+        },
+        {
+            "name": "commerceguys/zone",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/commerceguys/zone.git",
+                "reference": "9bd0b361a971284442972c42b6749ca855c65435"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/commerceguys/zone/zipball/9bd0b361a971284442972c42b6749ca855c65435",
+                "reference": "9bd0b361a971284442972c42b6749ca855c65435",
+                "shasum": ""
+            },
+            "require": {
+                "commerceguys/addressing": "~1.0",
+                "doctrine/collections": "~1.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "1.*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "2.*",
+                "symfony/intl": ">=2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CommerceGuys\\Zone\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bojan Zivanovic"
+                }
+            ],
+            "description": "Zone management library.",
+            "time": "2017-04-20T12:44:24+00:00"
         },
         {
             "name": "doctrine/instantiator",

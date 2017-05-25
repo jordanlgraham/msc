@@ -5,18 +5,14 @@ namespace Drupal\Tests\address\Kernel\Formatter;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
-use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
-use Drupal\language\Entity\ConfigurableLanguage;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
- * Tests the plain formatter.
- *
- * @group address
+ * Provides a base test for kernel formatter tests.
  */
-class PlainFormatterTest extends KernelTestBase {
+abstract class FormatterTestBase extends KernelTestBase {
 
   /**
    * @var array
@@ -32,21 +28,15 @@ class PlainFormatterTest extends KernelTestBase {
   ];
 
   /**
-   * @var string
-   */
-  protected $entityType;
-
-  /**
-   * @var string
-   */
-  protected $bundle;
-
-  /**
+   * The generated field name.
+   *
    * @var string
    */
   protected $fieldName;
 
   /**
+   * The entity display.
+   *
    * @var \Drupal\Core\Entity\Display\EntityViewDisplayInterface
    */
   protected $display;
@@ -63,63 +53,38 @@ class PlainFormatterTest extends KernelTestBase {
     $this->installConfig(['address']);
     $this->installEntitySchema('entity_test');
 
-    ConfigurableLanguage::createFromLangcode('zh-hant')->save();
-
-    $this->entityType = 'entity_test';
-    $this->bundle = $this->entityType;
     $this->fieldName = Unicode::strtolower($this->randomMachineName());
+  }
 
+  /**
+   * Creates an entity_test field of the given type.
+   *
+   * @param string $field_type
+   *   The field type.
+   * @param string $formatter_id
+   *   The formatter ID.
+   */
+  protected function createField($field_type, $formatter_id) {
     $field_storage = FieldStorageConfig::create([
       'field_name' => $this->fieldName,
-      'entity_type' => $this->entityType,
-      'type' => 'address',
+      'entity_type' => 'entity_test',
+      'type' => $field_type,
     ]);
     $field_storage->save();
 
     $field = FieldConfig::create([
       'field_storage' => $field_storage,
-      'bundle' => $this->bundle,
+      'bundle' => 'entity_test',
       'label' => $this->randomMachineName(),
     ]);
     $field->save();
 
-    $this->display = entity_get_display($this->entityType, $this->bundle, 'default');
+    $this->display = entity_get_display('entity_test', 'entity_test', 'default');
     $this->display->setComponent($this->fieldName, [
-      'type' => 'address_plain',
+      'type' => $formatter_id,
       'settings' => [],
     ]);
     $this->display->save();
-  }
-
-  /**
-   * Tests the rendered output.
-   */
-  public function testRender() {
-    $entity = EntityTest::create([]);
-    $entity->{$this->fieldName} = [
-      'country_code' => 'AD',
-      'locality' => 'Canillo',
-      'postal_code' => 'AD500',
-      'address_line1' => 'C. Prat de la Creu, 62-64',
-    ];
-    $this->renderEntityFields($entity, $this->display);
-
-    // Confirm the expected elements, including the predefined locality
-    // (properly escaped), country name.
-    $expected_elements = [
-      'C. Prat de la Creu, 62-64',
-      'AD500',
-      'Canillo',
-      'Andorra',
-    ];
-    foreach ($expected_elements as $expected_element) {
-      $this->assertRaw($expected_element);
-    }
-
-    // Confirm that an unrecognized locality is shown unmodified.
-    $entity->{$this->fieldName}->locality = 'FAKE_LOCALITY';
-    $this->renderEntityFields($entity, $this->display);
-    $this->assertRaw('FAKE_LOCALITY');
   }
 
   /**

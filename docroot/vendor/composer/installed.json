@@ -5062,66 +5062,6 @@
         }
     },
     {
-        "name": "drupal/services",
-        "version": "4.0.0-beta3",
-        "version_normalized": "4.0.0.0-beta3",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/services",
-            "reference": "8.x-4.0-beta3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/services-8.x-4.0-beta3.zip",
-            "reference": "8.x-4.0-beta3",
-            "shasum": "79a43eec58270cd1162f2122ce8798a5dec6dc59"
-        },
-        "require": {
-            "drupal/core": "*",
-            "drupal/ctools": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-4.x": "4.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-4.0-beta3",
-                "datestamp": "1482946983"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "See contributors",
-                "homepage": "https://www.drupal.org/node/109640/committers",
-                "role": "Developer"
-            },
-            {
-                "name": "kylebrowning",
-                "homepage": "https://www.drupal.org/user/211387"
-            },
-            {
-                "name": "marcingy",
-                "homepage": "https://www.drupal.org/user/77320"
-            },
-            {
-                "name": "tyler.frankenstein",
-                "homepage": "https://www.drupal.org/user/150680"
-            }
-        ],
-        "description": "A standardized solution of integrating external applications with Drupal.",
-        "homepage": "https://www.drupal.org/project/services",
-        "support": {
-            "source": "http://cgit.drupalcode.org/services",
-            "issues": "https://www.drupal.org/project/issues/services"
-        }
-    },
-    {
         "name": "drupal/external_entities",
         "version": "1.0.0-alpha2",
         "version_normalized": "1.0.0.0-alpha2",
@@ -6686,62 +6626,6 @@
         "description": "Internationalization library powered by CLDR data."
     },
     {
-        "name": "drupal/address",
-        "version": "1.0.0-rc4",
-        "version_normalized": "1.0.0.0-RC4",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/address",
-            "reference": "8.x-1.0-rc4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0-rc4.zip",
-            "reference": "8.x-1.0-rc4",
-            "shasum": "541b020ce839dd9c75374e213c1131d9c1f6f52d"
-        },
-        "require": {
-            "commerceguys/addressing": "~1.0",
-            "commerceguys/intl": "~0.7",
-            "commerceguys/zone": "~1.0",
-            "drupal/core": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.0-rc4",
-                "datestamp": "1486737287"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "bojanz",
-                "homepage": "https://www.drupal.org/user/86106"
-            },
-            {
-                "name": "googletorp",
-                "homepage": "https://www.drupal.org/user/386230"
-            },
-            {
-                "name": "rszrama",
-                "homepage": "https://www.drupal.org/user/49344"
-            }
-        ],
-        "description": "Provides functionality for storing, validating and displaying international postal addresses.",
-        "homepage": "http://drupal.org/project/address",
-        "support": {
-            "source": "http://cgit.drupalcode.org/address"
-        }
-    },
-    {
         "name": "drupal/acquia_connector",
         "version": "1.11.0",
         "version_normalized": "1.11.0.0",
@@ -6827,6 +6711,345 @@
         "homepage": "https://www.drupal.org/project/acquia_connector",
         "support": {
             "source": "http://cgit.drupalcode.org/acquia_connector"
+        }
+    },
+    {
+        "name": "drupal/better_exposed_filters",
+        "version": "3.0.0-alpha2",
+        "version_normalized": "3.0.0.0-alpha2",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/better_exposed_filters",
+            "reference": "8.x-3.0-alpha2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/better_exposed_filters-8.x-3.0-alpha2.zip",
+            "reference": "8.x-3.0-alpha2",
+            "shasum": "f1bbe21379a4ac8e28e3edfbdd4964343299caeb"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-3.x": "3.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-3.0-alpha2",
+                "datestamp": "1484626084"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "mikeker",
+                "homepage": "https://www.drupal.org/user/192273"
+            }
+        ],
+        "description": "Provides advanced options (such as links, checkboxes, or jQueryUI widgets) for exposed Views elements.",
+        "homepage": "https://www.drupal.org/project/better_exposed_filters",
+        "support": {
+            "source": "http://cgit.drupalcode.org/better_exposed_filters"
+        }
+    },
+    {
+        "name": "drupal/core",
+        "version": "8.2.8",
+        "version_normalized": "8.2.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/drupal/core.git",
+            "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/drupal/core/zipball/7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
+            "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
+            "shasum": ""
+        },
+        "require": {
+            "asm89/stack-cors": "~1.0",
+            "composer/semver": "~1.0",
+            "doctrine/annotations": "1.2.*",
+            "doctrine/common": "2.5.*",
+            "easyrdf/easyrdf": "0.9.*",
+            "egulias/email-validator": "1.2.*",
+            "guzzlehttp/guzzle": "^6.2.1",
+            "masterminds/html5": "~2.1",
+            "paragonie/random_compat": "^1|^2",
+            "php": ">=5.5.9",
+            "stack/builder": "1.0.*",
+            "symfony-cmf/routing": "~1.4",
+            "symfony/class-loader": "~2.8",
+            "symfony/console": "~2.8",
+            "symfony/dependency-injection": "~2.8",
+            "symfony/event-dispatcher": "~2.8",
+            "symfony/http-foundation": "~2.8",
+            "symfony/http-kernel": "~2.8",
+            "symfony/polyfill-iconv": "~1.0",
+            "symfony/process": "~2.8",
+            "symfony/psr-http-message-bridge": "v0.2",
+            "symfony/routing": "~2.8",
+            "symfony/serializer": "~2.8",
+            "symfony/translation": "~2.8",
+            "symfony/validator": "~2.8",
+            "symfony/yaml": "~2.8",
+            "twig/twig": "^1.23.1",
+            "zendframework/zend-diactoros": "~1.1",
+            "zendframework/zend-feed": "~2.4"
+        },
+        "replace": {
+            "drupal/action": "self.version",
+            "drupal/aggregator": "self.version",
+            "drupal/automated_cron": "self.version",
+            "drupal/ban": "self.version",
+            "drupal/bartik": "self.version",
+            "drupal/basic_auth": "self.version",
+            "drupal/big_pipe": "self.version",
+            "drupal/block": "self.version",
+            "drupal/block_content": "self.version",
+            "drupal/block_place": "self.version",
+            "drupal/book": "self.version",
+            "drupal/breakpoint": "self.version",
+            "drupal/ckeditor": "self.version",
+            "drupal/classy": "self.version",
+            "drupal/color": "self.version",
+            "drupal/comment": "self.version",
+            "drupal/config": "self.version",
+            "drupal/config_translation": "self.version",
+            "drupal/contact": "self.version",
+            "drupal/content_moderation": "self.version",
+            "drupal/content_translation": "self.version",
+            "drupal/contextual": "self.version",
+            "drupal/core-annotation": "self.version",
+            "drupal/core-assertion": "self.version",
+            "drupal/core-bridge": "self.version",
+            "drupal/core-datetime": "self.version",
+            "drupal/core-dependency-injection": "self.version",
+            "drupal/core-diff": "self.version",
+            "drupal/core-discovery": "self.version",
+            "drupal/core-event-dispatcher": "self.version",
+            "drupal/core-file-cache": "self.version",
+            "drupal/core-filesystem": "self.version",
+            "drupal/core-gettext": "self.version",
+            "drupal/core-graph": "self.version",
+            "drupal/core-http-foundation": "self.version",
+            "drupal/core-php-storage": "self.version",
+            "drupal/core-plugin": "self.version",
+            "drupal/core-proxy-builder": "self.version",
+            "drupal/core-render": "self.version",
+            "drupal/core-serialization": "self.version",
+            "drupal/core-transliteration": "self.version",
+            "drupal/core-utility": "self.version",
+            "drupal/core-uuid": "self.version",
+            "drupal/datetime": "self.version",
+            "drupal/datetime_range": "self.version",
+            "drupal/dblog": "self.version",
+            "drupal/dynamic_page_cache": "self.version",
+            "drupal/editor": "self.version",
+            "drupal/entity_reference": "self.version",
+            "drupal/field": "self.version",
+            "drupal/field_ui": "self.version",
+            "drupal/file": "self.version",
+            "drupal/filter": "self.version",
+            "drupal/forum": "self.version",
+            "drupal/hal": "self.version",
+            "drupal/help": "self.version",
+            "drupal/history": "self.version",
+            "drupal/image": "self.version",
+            "drupal/inline_form_errors": "self.version",
+            "drupal/language": "self.version",
+            "drupal/link": "self.version",
+            "drupal/locale": "self.version",
+            "drupal/menu_link_content": "self.version",
+            "drupal/menu_ui": "self.version",
+            "drupal/migrate": "self.version",
+            "drupal/migrate_drupal": "self.version",
+            "drupal/migrate_drupal_ui": "self.version",
+            "drupal/minimal": "self.version",
+            "drupal/node": "self.version",
+            "drupal/options": "self.version",
+            "drupal/outside_in": "self.version",
+            "drupal/page_cache": "self.version",
+            "drupal/path": "self.version",
+            "drupal/quickedit": "self.version",
+            "drupal/rdf": "self.version",
+            "drupal/responsive_image": "self.version",
+            "drupal/rest": "self.version",
+            "drupal/search": "self.version",
+            "drupal/serialization": "self.version",
+            "drupal/seven": "self.version",
+            "drupal/shortcut": "self.version",
+            "drupal/simpletest": "self.version",
+            "drupal/standard": "self.version",
+            "drupal/stark": "self.version",
+            "drupal/statistics": "self.version",
+            "drupal/syslog": "self.version",
+            "drupal/system": "self.version",
+            "drupal/taxonomy": "self.version",
+            "drupal/telephone": "self.version",
+            "drupal/text": "self.version",
+            "drupal/toolbar": "self.version",
+            "drupal/tour": "self.version",
+            "drupal/tracker": "self.version",
+            "drupal/update": "self.version",
+            "drupal/user": "self.version",
+            "drupal/views": "self.version",
+            "drupal/views_ui": "self.version"
+        },
+        "require-dev": {
+            "behat/mink": "~1.7",
+            "behat/mink-goutte-driver": "~1.2",
+            "jcalderonzumba/gastonjs": "~1.0.2",
+            "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
+            "mikey179/vfsstream": "~1.2",
+            "phpunit/phpunit": ">=4.8.28 <5",
+            "symfony/css-selector": "~2.8"
+        },
+        "time": "2017-04-19T16:45:52+00:00",
+        "type": "drupal-core",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Drupal\\Core\\": "lib/Drupal/Core",
+                "Drupal\\Component\\": "lib/Drupal/Component",
+                "Drupal\\Driver\\": "../drivers/lib/Drupal/Driver"
+            },
+            "classmap": [
+                "lib/Drupal.php",
+                "lib/Drupal/Component/Utility/Timer.php",
+                "lib/Drupal/Component/Utility/Unicode.php",
+                "lib/Drupal/Core/Database/Database.php",
+                "lib/Drupal/Core/DrupalKernel.php",
+                "lib/Drupal/Core/DrupalKernelInterface.php",
+                "lib/Drupal/Core/Site/Settings.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "description": "Drupal is an open source content management platform powering millions of websites and applications."
+    },
+    {
+        "name": "drupal/services",
+        "version": "4.0.0-beta4",
+        "version_normalized": "4.0.0.0-beta4",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/services",
+            "reference": "8.x-4.0-beta4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/services-8.x-4.0-beta4.zip",
+            "reference": null,
+            "shasum": "d5a1dde872837395bc59247df20a3e6066833d69"
+        },
+        "require": {
+            "drupal/core": "*",
+            "drupal/ctools": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-4.x": "4.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-4.0-beta4",
+                "datestamp": "1495725783"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "See contributors",
+                "homepage": "https://www.drupal.org/node/109640/committers",
+                "role": "Developer"
+            },
+            {
+                "name": "kylebrowning",
+                "homepage": "https://www.drupal.org/user/211387"
+            },
+            {
+                "name": "marcingy",
+                "homepage": "https://www.drupal.org/user/77320"
+            },
+            {
+                "name": "tyler.frankenstein",
+                "homepage": "https://www.drupal.org/user/150680"
+            }
+        ],
+        "description": "A standardized solution of integrating external applications with Drupal.",
+        "homepage": "https://www.drupal.org/project/services",
+        "support": {
+            "source": "http://cgit.drupalcode.org/services",
+            "issues": "https://www.drupal.org/project/issues/services"
+        }
+    },
+    {
+        "name": "drupal/address",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/address",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/address-8.x-1.0.zip",
+            "reference": null,
+            "shasum": "2be22f841f8e4af2ba23b6bc9983e013c167c520"
+        },
+        "require": {
+            "commerceguys/addressing": "~1.0",
+            "commerceguys/intl": "~0.7",
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1495109886"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "bojanz",
+                "homepage": "https://www.drupal.org/user/86106"
+            },
+            {
+                "name": "googletorp",
+                "homepage": "https://www.drupal.org/user/386230"
+            },
+            {
+                "name": "rszrama",
+                "homepage": "https://www.drupal.org/user/49344"
+            }
+        ],
+        "description": "Provides functionality for storing, validating and displaying international postal addresses.",
+        "homepage": "http://drupal.org/project/address",
+        "support": {
+            "source": "http://cgit.drupalcode.org/address"
         }
     },
     {
@@ -7064,229 +7287,5 @@
         "support": {
             "source": "http://cgit.drupalcode.org/node_clone"
         }
-    },
-    {
-        "name": "drupal/better_exposed_filters",
-        "version": "3.0.0-alpha2",
-        "version_normalized": "3.0.0.0-alpha2",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/better_exposed_filters",
-            "reference": "8.x-3.0-alpha2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/better_exposed_filters-8.x-3.0-alpha2.zip",
-            "reference": "8.x-3.0-alpha2",
-            "shasum": "f1bbe21379a4ac8e28e3edfbdd4964343299caeb"
-        },
-        "require": {
-            "drupal/core": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-3.x": "3.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-3.0-alpha2",
-                "datestamp": "1484626084"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "mikeker",
-                "homepage": "https://www.drupal.org/user/192273"
-            }
-        ],
-        "description": "Provides advanced options (such as links, checkboxes, or jQueryUI widgets) for exposed Views elements.",
-        "homepage": "https://www.drupal.org/project/better_exposed_filters",
-        "support": {
-            "source": "http://cgit.drupalcode.org/better_exposed_filters"
-        }
-    },
-    {
-        "name": "drupal/core",
-        "version": "8.2.8",
-        "version_normalized": "8.2.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/drupal/core.git",
-            "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
-            "reference": "7ccc248f4058dd5985ad0c61c129243d0d2b58b8",
-            "shasum": ""
-        },
-        "require": {
-            "asm89/stack-cors": "~1.0",
-            "composer/semver": "~1.0",
-            "doctrine/annotations": "1.2.*",
-            "doctrine/common": "2.5.*",
-            "easyrdf/easyrdf": "0.9.*",
-            "egulias/email-validator": "1.2.*",
-            "guzzlehttp/guzzle": "^6.2.1",
-            "masterminds/html5": "~2.1",
-            "paragonie/random_compat": "^1|^2",
-            "php": ">=5.5.9",
-            "stack/builder": "1.0.*",
-            "symfony-cmf/routing": "~1.4",
-            "symfony/class-loader": "~2.8",
-            "symfony/console": "~2.8",
-            "symfony/dependency-injection": "~2.8",
-            "symfony/event-dispatcher": "~2.8",
-            "symfony/http-foundation": "~2.8",
-            "symfony/http-kernel": "~2.8",
-            "symfony/polyfill-iconv": "~1.0",
-            "symfony/process": "~2.8",
-            "symfony/psr-http-message-bridge": "v0.2",
-            "symfony/routing": "~2.8",
-            "symfony/serializer": "~2.8",
-            "symfony/translation": "~2.8",
-            "symfony/validator": "~2.8",
-            "symfony/yaml": "~2.8",
-            "twig/twig": "^1.23.1",
-            "zendframework/zend-diactoros": "~1.1",
-            "zendframework/zend-feed": "~2.4"
-        },
-        "replace": {
-            "drupal/action": "self.version",
-            "drupal/aggregator": "self.version",
-            "drupal/automated_cron": "self.version",
-            "drupal/ban": "self.version",
-            "drupal/bartik": "self.version",
-            "drupal/basic_auth": "self.version",
-            "drupal/big_pipe": "self.version",
-            "drupal/block": "self.version",
-            "drupal/block_content": "self.version",
-            "drupal/block_place": "self.version",
-            "drupal/book": "self.version",
-            "drupal/breakpoint": "self.version",
-            "drupal/ckeditor": "self.version",
-            "drupal/classy": "self.version",
-            "drupal/color": "self.version",
-            "drupal/comment": "self.version",
-            "drupal/config": "self.version",
-            "drupal/config_translation": "self.version",
-            "drupal/contact": "self.version",
-            "drupal/content_moderation": "self.version",
-            "drupal/content_translation": "self.version",
-            "drupal/contextual": "self.version",
-            "drupal/core-annotation": "self.version",
-            "drupal/core-assertion": "self.version",
-            "drupal/core-bridge": "self.version",
-            "drupal/core-datetime": "self.version",
-            "drupal/core-dependency-injection": "self.version",
-            "drupal/core-diff": "self.version",
-            "drupal/core-discovery": "self.version",
-            "drupal/core-event-dispatcher": "self.version",
-            "drupal/core-file-cache": "self.version",
-            "drupal/core-filesystem": "self.version",
-            "drupal/core-gettext": "self.version",
-            "drupal/core-graph": "self.version",
-            "drupal/core-http-foundation": "self.version",
-            "drupal/core-php-storage": "self.version",
-            "drupal/core-plugin": "self.version",
-            "drupal/core-proxy-builder": "self.version",
-            "drupal/core-render": "self.version",
-            "drupal/core-serialization": "self.version",
-            "drupal/core-transliteration": "self.version",
-            "drupal/core-utility": "self.version",
-            "drupal/core-uuid": "self.version",
-            "drupal/datetime": "self.version",
-            "drupal/datetime_range": "self.version",
-            "drupal/dblog": "self.version",
-            "drupal/dynamic_page_cache": "self.version",
-            "drupal/editor": "self.version",
-            "drupal/entity_reference": "self.version",
-            "drupal/field": "self.version",
-            "drupal/field_ui": "self.version",
-            "drupal/file": "self.version",
-            "drupal/filter": "self.version",
-            "drupal/forum": "self.version",
-            "drupal/hal": "self.version",
-            "drupal/help": "self.version",
-            "drupal/history": "self.version",
-            "drupal/image": "self.version",
-            "drupal/inline_form_errors": "self.version",
-            "drupal/language": "self.version",
-            "drupal/link": "self.version",
-            "drupal/locale": "self.version",
-            "drupal/menu_link_content": "self.version",
-            "drupal/menu_ui": "self.version",
-            "drupal/migrate": "self.version",
-            "drupal/migrate_drupal": "self.version",
-            "drupal/migrate_drupal_ui": "self.version",
-            "drupal/minimal": "self.version",
-            "drupal/node": "self.version",
-            "drupal/options": "self.version",
-            "drupal/outside_in": "self.version",
-            "drupal/page_cache": "self.version",
-            "drupal/path": "self.version",
-            "drupal/quickedit": "self.version",
-            "drupal/rdf": "self.version",
-            "drupal/responsive_image": "self.version",
-            "drupal/rest": "self.version",
-            "drupal/search": "self.version",
-            "drupal/serialization": "self.version",
-            "drupal/seven": "self.version",
-            "drupal/shortcut": "self.version",
-            "drupal/simpletest": "self.version",
-            "drupal/standard": "self.version",
-            "drupal/stark": "self.version",
-            "drupal/statistics": "self.version",
-            "drupal/syslog": "self.version",
-            "drupal/system": "self.version",
-            "drupal/taxonomy": "self.version",
-            "drupal/telephone": "self.version",
-            "drupal/text": "self.version",
-            "drupal/toolbar": "self.version",
-            "drupal/tour": "self.version",
-            "drupal/tracker": "self.version",
-            "drupal/update": "self.version",
-            "drupal/user": "self.version",
-            "drupal/views": "self.version",
-            "drupal/views_ui": "self.version"
-        },
-        "require-dev": {
-            "behat/mink": "~1.7",
-            "behat/mink-goutte-driver": "~1.2",
-            "jcalderonzumba/gastonjs": "~1.0.2",
-            "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-            "mikey179/vfsstream": "~1.2",
-            "phpunit/phpunit": ">=4.8.28 <5",
-            "symfony/css-selector": "~2.8"
-        },
-        "time": "2017-04-19T16:45:52+00:00",
-        "type": "drupal-core",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Drupal\\Core\\": "lib/Drupal/Core",
-                "Drupal\\Component\\": "lib/Drupal/Component",
-                "Drupal\\Driver\\": "../drivers/lib/Drupal/Driver"
-            },
-            "classmap": [
-                "lib/Drupal.php",
-                "lib/Drupal/Component/Utility/Timer.php",
-                "lib/Drupal/Component/Utility/Unicode.php",
-                "lib/Drupal/Core/Database/Database.php",
-                "lib/Drupal/Core/DrupalKernel.php",
-                "lib/Drupal/Core/DrupalKernelInterface.php",
-                "lib/Drupal/Core/Site/Settings.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "description": "Drupal is an open source content management platform powering millions of websites and applications."
     }
 ]
