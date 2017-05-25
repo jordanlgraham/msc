@@ -1,12 +1,15 @@
 <?php
 
-namespace Drupal\netforum_auth;
+namespace Drupal\netforum_soap;
 
 /**
  * Class GetToken.
  *
- * @package Drupal\netforum_auth
+ * @package Drupal\netforum_soap
  */
+use SoapClient;
+use SoapHeader;
+use Exception;
 class GetToken {
   public $auth_headers;
   /**
@@ -16,11 +19,12 @@ class GetToken {
     $auth_headers = $this->getAuthHeaders();
     return $auth_headers;
   }
-  private function getAuthHeaders() {
+  public function getAuthHeaders() {
+
     $client = $this->getClient();
     $params = array(
-      'userName' => \Drupal::config('netforum_auth.netforumconfig')->get('api_username'),
-      'password' => \Drupal::config('netforum_auth.netforumconfig')->get('api_password'),
+      'userName' => \Drupal::config('netforum_soap.netforumconfig')->get('api_username'),
+      'password' => \Drupal::config('netforum_soap.netforumconfig')->get('api_password'),
     );
     try {
       $response_headers = '';
@@ -32,19 +36,19 @@ class GetToken {
     }
     catch(Exception $e) {
       $message = t('Failed to retrieve token.');
-      \Drupal::logger('msc_netforum_auth')->error($message);
+      \Drupal::logger('msc_netforum_soap')->error($message);
       return false;
     }
   }
-  private function getClient() {
-    $wsdl = \Drupal::config('netforum_auth.netforumconfig')->get('wsdl_address');
+  public function getClient() {
+    $wsdl = \Drupal::config('netforum_soap.netforumconfig')->get('wsdl_address');
     try{
       $client = new SoapClient($wsdl, array('trace' => 1));
       return $client;
     }
     catch(Exception $e) {
       $message = t('Unable to connect to WSDL file.');
-      \Drupal::logger('msc_netforum_auth')->error($message);
+      \Drupal::logger('msc_netforum_soap')->error($message);
       return false;
     }
   }

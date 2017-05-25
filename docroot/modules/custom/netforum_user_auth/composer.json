@@ -1,0 +1,14 @@
+{
+  "name": "drupal/netforum_user_auth",
+  "type": "drupal-module",
+  "description": "Automatically creates and logs in Drupal users that are able to authenticate against NetForum's CheckEWebUser method",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/netforum_user_auth",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/netforum_user_auth",
+    "source": "http://cgit.drupalcode.org/netforum_user_auth"
+  },
+  "require": { }
+}

@@ -1,0 +1,5 @@
+services:
+  netforum_soap.get_token:
+    class: Drupal\netforum_soap\GetToken
+    arguments: []
+

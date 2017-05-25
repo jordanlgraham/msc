@@ -1,6 +1,6 @@
-netforum_auth.net_forum_config:
+netforum_soap.net_forum_config:
   title: 'NetForum API Configuration'
-  route_name: netforum_auth.net_forum_config
+  route_name: netforum_soap.net_forum_config
   description: 'For defining API credentials for NetForum'
   parent: system.admin_config_services
   weight: 99
