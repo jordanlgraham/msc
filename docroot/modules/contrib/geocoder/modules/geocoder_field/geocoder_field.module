@@ -106,7 +106,7 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
     $default_values = $entity->get($field_name);
     $result = [];
     foreach ($remote_field->getValue() as $delta => $value) {
-      if ($address_collection = \Drupal::service('geocoder')->geocode($value['value'], $geocoder['plugins'])) {
+      if ($address_collection = \Drupal::service('geocoder')->geocode($value['value'], array_fill_keys($geocoder['plugins'], $geocoder['plugins']))) {
         $result[$delta] = $dumper->dump($address_collection->first());
         continue;
       }

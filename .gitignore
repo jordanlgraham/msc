@@ -4,4 +4,4 @@ docroot/sites/*/files
 docroot/sites/*/private
 
 .idea/*
-
+docroot/vendor/phayes/geophp/.gitignore
