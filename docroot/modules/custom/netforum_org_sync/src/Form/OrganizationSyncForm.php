@@ -88,7 +88,7 @@ class OrganizationSyncForm extends ConfigFormBase {
         //If the API returns an organization as an "associate,"
         //the organization should be in the vendor content type,
         //not the facility content type.
-        if($this->cleanField($organization['OrgCode']) == 'associate') {
+        if($this->cleanField($organization['OrgCode']) == 'Associate') {
           $org_type = 'vendor';
         } else {
           $org_type = 'facility';
@@ -100,15 +100,14 @@ class OrganizationSyncForm extends ConfigFormBase {
           $node = Node::load($existing_node);
         }
 
-        if($org_type == 'vendor') {
+        if($org_type == 'vendor' && !empty($organization['SortName'])) {
           //field_primary_services
           //field_additional_services
           //field_contact
           //field_contact_title
-          //field_email
           //field_facebook
           //field_phone
-          //field_twitter
+          $node->set('title', $this->cleanField($organization['SortName']));
           $node->field_web_address = $this->cleanField($organization['CstWebSite']);
           $node->field_address->country_code = 'US';
           $node->field_address->administrative_area = $this->cleanField($organization['AddressState']);
@@ -116,14 +115,17 @@ class OrganizationSyncForm extends ConfigFormBase {
           $node->field_address->postal_code = $this->cleanField($organization['AddressZip']);
           $node->field_address->address_line1 = $this->cleanField($organization['AddressLine1']);
           $node->field_address->address_line2 = $this->cleanField($organization['AddressLine2']);
-
+          $node->set('field_twitter', $this->cleanField($organization['TwitterName']));
+          $node->set('field_email', $this->cleanField($organization['EmailAddress']));
+          $node->save();
+//          $node->set('field_')
           //todo: handle vendors
         }
 
         //We definitely need a title or this function will cause a fatal error,
         //thus we check for $organization['SortName'].
 
-        if(!empty($organization['SortName'])) {
+        elseif(!empty($organization['SortName'])) {
           $node->set('title', $this->cleanField($organization['SortName']));
           $node->set('field_customer_key', $this->cleanField($organization['cst_key']));
           $node->field_address->country_code = 'US';
@@ -150,7 +152,6 @@ class OrganizationSyncForm extends ConfigFormBase {
   private function getOrganizations() {
     $responseHeaders = '';
     $facility_types= explode("\n", str_replace("\r", "", \Drupal::config('netforum_org_sync.organizationsync')->get('org_types')));
-    drupal_set_message(print_r($facility_types,true));
     $netforum_service = \Drupal::service('netforum_soap.get_token');
     $client = $netforum_service->getClient();
     //todo: handle more than 300 records
