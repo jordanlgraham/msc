@@ -4,8 +4,8 @@ type: module
 # core: 8.x
 # version: VERSION
 
-# Information added by Drupal.org packaging script on 2016-07-12
-version: '8.x-1.0'
+# Information added by Drupal.org packaging script on 2017-05-31
+version: '8.x-1.1'
 core: '8.x'
 project: 'field_formatter'
-datestamp: 1468356850
+datestamp: 1496241554

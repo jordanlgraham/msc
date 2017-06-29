@@ -21,11 +21,11 @@ class GeofieldBackendDefault extends GeofieldBackendBase {
    * {@inheritdoc}
    */
   public function schema() {
-    return array(
+    return [
       'type' => 'blob',
       'size' => 'big',
       'not null' => FALSE,
-    );
+    ];
   }
 
   /**

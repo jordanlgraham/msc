@@ -26,14 +26,14 @@ class GeofieldProximity extends Numeric {
     $options = parent::defineOptions();
 
     // Data sources and info needed.
-    $options['source'] = array('default' => 'manual');
+    $options['source'] = ['default' => 'manual'];
 
     foreach (geofield_proximity_views_handlers() as $key => $handler) {
       $proximityPlugin = geofield_proximity_load_plugin($key);
       $proximityPlugin->option_definition($options, $this);
     }
 
-    $options['radius_of_earth'] = array('default' => GEOFIELD_KILOMETERS);
+    $options['radius_of_earth'] = ['default' => GEOFIELD_KILOMETERS];
     return $options;
   }
 
@@ -43,13 +43,13 @@ class GeofieldProximity extends Numeric {
   public function buildOptionsForm(&$form, &$form_state) {
     parent::buildOptionsForm($form, $form_state);
 
-    $form['source'] = array(
+    $form['source'] = [
       '#type' => 'select',
       '#title' => t('Source of Origin Point'),
       '#description' => t('How do you want to enter your origin point?'),
-      '#options' => array(),
+      '#options' => [],
       '#default_value' => $this->options['source'],
-    );
+    ];
 
     $proximityHandlers = geofield_proximity_views_handlers();
     foreach ($proximityHandlers as $key => $handler) {
@@ -58,13 +58,13 @@ class GeofieldProximity extends Numeric {
       $proximityPlugin->options_form($form, $form_state, $this);
     }
 
-    $form['radius_of_earth'] = array(
+    $form['radius_of_earth'] = [
       '#type' => 'select',
       '#title' => t('Unit of Measure'),
       '#description' => '',
       '#options' => geofield_radius_options(),
       '#default_value' => $this->options['radius_of_earth'],
-    );
+    ];
   }
 
   /**
@@ -97,13 +97,13 @@ class GeofieldProximity extends Numeric {
     $options = $proximityPlugin->getSourceValue($this);
 
     if ($options != FALSE) {
-      $haversine_options = array(
+      $haversine_options = [
         'origin_latitude' => $options['latitude'],
         'origin_longitude' => $options['longitude'],
         'destination_latitude' => $lat_alias,
         'destination_longitude' => $lon_alias,
         'earth_radius' => $this->options['radius_of_earth'],
-      );
+      ];
 
       $this->field_alias = $this->query->add_field(NULL, geofield_haversine($haversine_options), $this->tableAlias . '_' . $this->field);
     }
