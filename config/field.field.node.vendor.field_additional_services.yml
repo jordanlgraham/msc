@@ -1,0 +1,28 @@
+uuid: a5ded551-d33c-477b-9a61-6f108d36a6a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_additional_services
+    - node.type.vendor
+    - taxonomy.vocabulary.vendor_services_offered
+id: node.vendor.field_additional_services
+field_name: field_additional_services
+entity_type: node
+bundle: vendor
+label: 'Additional Services'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      vendor_services_offered: vendor_services_offered
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

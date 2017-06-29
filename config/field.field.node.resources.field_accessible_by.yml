@@ -1,0 +1,21 @@
+uuid: 3b9d3cfc-ccc1-41cf-a076-7e98be7ad119
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_accessible_by
+    - node.type.resources
+  module:
+    - options
+id: node.resources.field_accessible_by
+field_name: field_accessible_by
+entity_type: node
+bundle: resources
+label: 'Accessible By'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_float

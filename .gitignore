@@ -5,3 +5,5 @@ docroot/sites/*/private
 
 .idea/*
 docroot/vendor/phayes/geophp/.gitignore
+
+docroot/sites/default/settings.local.php

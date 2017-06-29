@@ -1,0 +1,44 @@
+uuid: e7f5ffe4-a6da-4410-9c8b-d17758e8df4f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.facility.field_address
+    - field.field.node.facility.field_customer_fax_number
+    - field.field.node.facility.field_customer_id
+    - field.field.node.facility.field_customer_key
+    - field.field.node.facility.field_customer_phone_number
+    - field.field.node.facility.field_customer_type
+    - field.field.node.facility.field_customer_web_site
+    - field.field.node.facility.field_ge
+    - field.field.node.facility.field_languages_spoken
+    - field.field.node.facility.field_member_flag
+    - field.field.node.facility.field_populations_served
+    - field.field.node.facility.field_service_type
+    - field.field.node.facility.field_specialized_unit
+    - node.type.facility
+  module:
+    - user
+id: node.facility.teaser
+targetEntityType: node
+bundle: facility
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_address: true
+  field_customer_fax_number: true
+  field_customer_id: true
+  field_customer_key: true
+  field_customer_phone_number: true
+  field_customer_type: true
+  field_customer_web_site: true
+  field_ge: true
+  field_languages_spoken: true
+  field_member_flag: true
+  field_populations_served: true
+  field_service_type: true
+  field_specialized_unit: true

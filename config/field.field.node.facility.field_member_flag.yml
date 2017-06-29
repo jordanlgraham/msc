@@ -1,0 +1,23 @@
+uuid: 6174e7f8-777e-4ee3-9eb6-cbfead572274
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_member_flag
+    - node.type.facility
+id: node.facility.field_member_flag
+field_name: field_member_flag
+entity_type: node
+bundle: facility
+label: 'Member Flag'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
