@@ -14,7 +14,7 @@ interface GeoPHPInterface {
   /**
    * Loads a geometry object given some parameters.
    *
-   * @return geometry
+   * @return \Geometry
    *   The geometry object
    */
   public function load();

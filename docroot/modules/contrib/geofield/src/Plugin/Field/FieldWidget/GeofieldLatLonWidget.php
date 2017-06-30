@@ -29,15 +29,15 @@ class GeofieldLatLonWidget extends WidgetBase {
    *
    * @var array
    */
-  public $components = array('lon', 'lat');
+  public $components = ['lon', 'lat'];
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'html5_geolocation' => FALSE,
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -46,11 +46,11 @@ class GeofieldLatLonWidget extends WidgetBase {
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $elements = parent::settingsForm($form, $form_state);
 
-    $elements['html5_geolocation'] = array(
+    $elements['html5_geolocation'] = [
       '#type' => 'checkbox',
       '#title' => 'Use HTML5 Geolocation to set default values',
       '#default_value' => $this->getSetting('html5_geolocation'),
-    );
+    ];
 
     return $elements;
   }
@@ -59,29 +59,29 @@ class GeofieldLatLonWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    return array(
-      t('HTML5 Geolocation button is @state', array('@state' => $this->getSetting('html5_geolocation') ? t('enabled') : t('disabled')))
-    );
+    return [
+      $this->t('HTML5 Geolocation button is @state', ['@state' => $this->getSetting('html5_geolocation') ? $this->t('enabled') : $this->t('disabled')])
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $latlon_value = array();
+    $latlon_value = [];
 
     foreach ($this->components as $component) {
       $latlon_value[$component] = isset($items[$delta]->{$component}) ? floatval($items[$delta]->{$component}) : '';
     }
 
-    $element += array(
+    $element += [
       '#type' => 'geofield_latlon',
       '#default_value' => $latlon_value,
       '#geolocation' => $this->getSetting('html5_geolocation'),
       '#error_label' => !empty($element['#title']) ? $element['#title'] : $this->fieldDefinition->getLabel(),
-    );
+    ];
 
-    return array('value' => $element);
+    return ['value' => $element];
   }
 
   /**
@@ -96,7 +96,7 @@ class GeofieldLatLonWidget extends WidgetBase {
         }
       }
       $components = $value['value'];
-      $values[$delta]['value'] = \Drupal::service('geofield.wkt_generator')->WktBuildPoint(array($components['lon'], $components['lat']));
+      $values[$delta]['value'] = \Drupal::service('geofield.wkt_generator')->WktBuildPoint([$components['lon'], $components['lat']]);
     }
 
     return $values;

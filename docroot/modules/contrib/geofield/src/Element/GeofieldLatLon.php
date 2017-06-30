@@ -21,32 +21,32 @@ class GeofieldLatLon extends GeofieldElementBase {
   /**
    * {@inheritdoc}
    */
-  public static $components = array(
-    'lat' => array(
+  public static $components = [
+    'lat' => [
       'title' => 'Latitude',
       'range' => 90,
-    ),
-    'lon' => array(
+    ],
+    'lon' => [
       'title' => 'Longitude',
       'range' => 180,
-    ),
-  );
+    ],
+  ];
 
   /**
    * {@inheritdoc}
    */
   public function getInfo() {
     $class = get_class($this);
-    return array(
+    return [
       '#input' => TRUE,
-      '#process' => array(
-        array($class, 'latlonProcess'),
-      ),
-      '#element_validate' => array(
-        array($class, 'elementValidate'),
-      ),
-      '#theme_wrappers' => array('fieldset'),
-    );
+      '#process' => [
+        [$class, 'latlonProcess'],
+      ],
+      '#element_validate' => [
+        [$class, 'elementValidate'],
+      ],
+      '#theme_wrappers' => ['fieldset'],
+    ];
   }
 
   /**
@@ -69,12 +69,12 @@ class GeofieldLatLon extends GeofieldElementBase {
 
     if (!empty($element['#geolocation']) && $element['#geolocation'] == TRUE) {
       $element['#attached']['library'][] = 'geofield/geolocation';
-      $element['geocode'] = array(
+      $element['geocode'] = [
         '#type' => 'button',
         '#value' => t('Find my location'),
         '#name' => 'geofield-html5-geocode-button',
-      );
-      $element['#attributes']['class'] = array('auto-geocode');
+      ];
+      $element['#attributes']['class'] = ['auto-geocode'];
     }
 
     return $element;

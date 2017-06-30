@@ -73,15 +73,13 @@ class FieldFormatterWithInlineSettingsUITest extends WebTestBase {
     // are available (all bundles).
     $this->drupalGet('admin/structure/types/manage/test_content_type/display');
     // Open the formatter settings.
-    $edit = [
-      'fields[field_field_test_ref_inline][type]' => 'field_formatter_with_inline_settings',
-    ];
     $this->drupalPostAjaxForm(NULL, [], 'field_field_test_ref_inline_settings_edit');
     $this->assertFieldByName('fields[field_field_test_ref_inline][settings_edit_form][settings][field_name]', NULL, 'Destination fields dropdown element found.');
     $field_select_element = $this->xpath('//*[@name="fields[field_field_test_ref_inline][settings_edit_form][settings][field_name]"]');
     $field_select_id = $field_select_element[0]['id'];
     $this->assertOption($field_select_id, 'field_test_field', 'First target field is an available option.');
     $this->assertOption($field_select_id, 'field_test_field2', 'Second target field is an available option.');
+    $this->assertFieldByName('fields[field_field_test_ref_inline][settings_edit_form][settings][label]', 'above', 'The "Label" dropdown element exists and is set to "Above".');
 
   }
 

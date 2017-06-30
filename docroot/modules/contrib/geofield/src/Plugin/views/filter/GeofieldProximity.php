@@ -23,15 +23,15 @@ class GeofieldProximity extends Numeric {
     $options = parent::defineOptions();
 
     // Data sources and info needed.
-    $options['source'] = array('default' => 'manual');
-    $options['value'] = array(
-      'default' => array(
+    $options['source'] = ['default' => 'manual'];
+    $options['value'] = [
+      'default' => [
         'distance' => 100,
         'distance2' => 200,
         'unit' => GEOFIELD_KILOMETERS,
-        'origin' => array(),
-      ),
-    );
+        'origin' => [],
+      ],
+    ];
     $proximityHandlers = geofield_proximity_views_handlers();
     foreach ($proximityHandlers as $key => $handler) {
       $proximityPlugin = geofield_proximity_load_plugin($key);
@@ -41,56 +41,56 @@ class GeofieldProximity extends Numeric {
   }
 
   public function operators() {
-    $operators = array(
-      '<' => array(
+    $operators = [
+      '<' => [
         'title' => t('Is less than'),
         'method' => 'opSimple',
         'short' => t('<'),
         'values' => 1,
-      ),
-      '<=' => array(
+      ],
+      '<=' => [
         'title' => t('Is less than or equal to'),
         'method' => 'opSimple',
         'short' => t('<='),
         'values' => 1,
-      ),
-      '=' => array(
+      ],
+      '=' => [
         'title' => t('Is equal to'),
         'method' => 'opSimple',
         'short' => t('='),
         'values' => 1,
-      ),
-      '!=' => array(
+      ],
+      '!=' => [
         'title' => t('Is not equal to'),
         'method' => 'opSimple',
         'short' => t('!='),
         'values' => 1,
-      ),
-      '>=' => array(
+      ],
+      '>=' => [
         'title' => t('Is greater than or equal to'),
         'method' => 'opSimple',
         'short' => t('>='),
         'values' => 1,
-      ),
-      '>' => array(
+      ],
+      '>' => [
         'title' => t('Is greater than'),
         'method' => 'opSimple',
         'short' => t('>'),
         'values' => 1,
-      ),
-      'between' => array(
+      ],
+      'between' => [
         'title' => t('Is between'),
         'method' => 'opBetween',
         'short' => t('between'),
         'values' => 2,
-      ),
-      'not between' => array(
+      ],
+      'not between' => [
         'title' => t('Is not between'),
         'method' => 'opBetween',
         'short' => t('not between'),
         'values' => 2,
-      ),
-    );
+      ],
+    ];
 
     return $operators;
   }
@@ -106,13 +106,13 @@ class GeofieldProximity extends Numeric {
 
       $info = $this->operators();
       if (!empty($info[$this->operator]['method'])) {
-        $haversine_options = array(
+        $haversine_options = [
           'origin_latitude' => $options['latitude'],
           'origin_longitude' => $options['longitude'],
           'destination_latitude' => $this->tableAlias . '.' . $lat_alias,
           'destination_longitude' => $this->tableAlias . '.' . $lon_alias,
           'earth_radius' => $this->value['unit'],
-        );
+        ];
         $this->{$info[$this->operator]['method']}($haversine_options);
       }
     }
@@ -128,24 +128,24 @@ class GeofieldProximity extends Numeric {
 
   public function buildOptionsForm(&$form, &$form_state) {
     parent::buildOptionsForm($form, $form_state);
-    $form['source'] = array(
+    $form['source'] = [
       '#type' => 'select',
       '#title' => t('Source of Origin Point'),
       '#description' => t('How do you want to enter your origin point?'),
-      '#options' => array(),
-      '#attached' => array(
-        'js' => array(
+      '#options' => [],
+      '#attached' => [
+        'js' => [
           drupal_get_path('module', 'geofield') . '/js/viewsProximityValue.js',
-        ),
-      ),
+        ],
+      ],
       '#default_value' => $this->options['source'],
-    );
+    ];
 
-    $form['source_change'] = array(
+    $form['source_change'] = [
       '#type' => 'submit',
       '#value' => 'Change Source Widget',
-      '#submit' => array('geofield_views_ui_change_proximity_widget'),
-    );
+      '#submit' => ['geofield_views_ui_change_proximity_widget'],
+    ];
 
     $proximityHandlers = geofield_proximity_views_handlers();
     foreach ($proximityHandlers as $key => $handler) {
@@ -174,25 +174,25 @@ class GeofieldProximity extends Numeric {
   }
 
   protected function valueForm(&$form, &$form_state) {
-    $form['value'] = array(
+    $form['value'] = [
       '#type' => 'geofield_proximity',
       '#title' => t('Proximity Search'),
-      '#default_value' => array(
+      '#default_value' => [
         'distance' => $this->value['distance'],
         'unit' => $this->value['unit'],
         'origin' => (is_string($this->value['origin'])) ? trim($this->value['origin']) : $this->value['origin'],
-      ),
-      '#origin_options' => array(
-        '#attributes' => array(
-          'class' => array('geofield-proximity-origin'),
-        ),
-      ),
-    );
+      ],
+      '#origin_options' => [
+        '#attributes' => [
+          'class' => ['geofield-proximity-origin'],
+        ],
+      ],
+    ];
 
     $proximityPlugin = geofield_proximity_load_plugin($this->options['source']);
     $proximityPlugin->value_form($form, $form_state, $this);
 
-    if (in_array($this->operator, array('between', 'not between'))) {
+    if (in_array($this->operator, ['between', 'not between'])) {
       $form['value']['#geofield_range'] = TRUE;
       $form['value']['#default_value']['distance2'] = $this->value['distance2'];
     }
@@ -249,7 +249,7 @@ function geofield_views_ui_change_proximity_widget($form, &$form_state) {
 
   if ($changed) {
     if ($item['source'] == 'manual') {
-      $item['value']['origin'] = array('lat' => '', 'lon' => '');
+      $item['value']['origin'] = ['lat' => '', 'lon' => ''];
     }
     else {
       $item['value']['origin'] = '';

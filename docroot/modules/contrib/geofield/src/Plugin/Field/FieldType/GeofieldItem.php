@@ -30,9 +30,10 @@ class GeofieldItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function defaultInstanceSettings() {
-    return array(
+    return [
       'backend' => 'geofield_backend_default',
-    ) + parent::defaultInstanceSettings();
+    ] + parent::defaultInstanceSettings();
+
   }
 
   /**
@@ -50,68 +51,68 @@ class GeofieldItem extends FieldItemBase {
       $backendPlugin = $backendManager->createInstance('geofield_backend_default');
     }
 
-    return array(
-      'columns' => array(
+    return [
+      'columns' => [
         'value' => $backendPlugin->schema(),
-        'geo_type' => array(
+        'geo_type' => [
           'type' => 'varchar',
           'default' => '',
           'length' => 64,
-        ),
-        'lat' => array(
+        ],
+        'lat' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'lon' => array(
+        ],
+        'lon' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'left' => array(
+        ],
+        'left' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'top' => array(
+        ],
+        'top' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'right' => array(
+        ],
+        'right' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'bottom' => array(
+        ],
+        'bottom' => [
           'type' => 'numeric',
           'precision' => 18,
           'scale' => 12,
           'not null' => FALSE,
-        ),
-        'geohash' => array(
+        ],
+        'geohash' => [
           'type' => 'varchar',
           'length' => GEOFIELD_GEOHASH_LENGTH,
           'not null' => FALSE,
-        ),
-      ),
-      'indexes' => array(
-        'lat' => array('lat'),
-        'lon' => array('lon'),
-        'top' => array('top'),
-        'bottom' => array('bottom'),
-        'left' => array('left'),
-        'right' => array('right'),
-        'geohash' => array('geohash'),
-        'centroid' => array('lat','lon'),
-        'bbox' => array('top','bottom','left','right'),
-      ),
-    );
+        ],
+      ],
+      'indexes' => [
+        'lat' => ['lat'],
+        'lon' => ['lon'],
+        'top' => ['top'],
+        'bottom' => ['bottom'],
+        'left' => ['left'],
+        'right' => ['right'],
+        'geohash' => ['geohash'],
+        'centroid' => ['lat','lon'],
+        'bbox' => ['top','bottom','left','right'],
+      ],
+    ];
   }
 
   /**
@@ -158,24 +159,24 @@ class GeofieldItem extends FieldItemBase {
   public function instanceSettingsForm(array $form, FormStateInterface $form_state) {
     // @TODO: Backend plugins need to define requirement/settings methods,
     //   allow them to inject data here.
-    $element = array();
+    $element = [];
 
     $backendManager = \Drupal::service('plugin.manager.geofield_backend');
 
     $backends = $backendManager->getDefinitions();
-    $backend_options = array();
+    $backend_options = [];
 
     foreach ($backends as $id => $backend) {
       $backend_options[$id] = $backend['admin_label'];
     }
 
-    $element['backend'] = array(
+    $element['backend'] = [
       '#type' => 'select',
-      '#title' => t('Storage Backend'),
+      '#title' => $this->t('Storage Backend'),
       '#default_value' => $this->getSetting('backend'),
       '#options' => $backend_options,
-      '#description' => t("Select the Geospatial storage backend you would like to use to store geofield geometry data. If you don't know what this means, select 'Default'."),
-    );
+      '#description' => $this->t("Select the Geospatial storage backend you would like to use to store geofield geometry data. If you don't know what this means, select 'Default'."),
+    ];
 
     return $element;
   }
@@ -232,9 +233,9 @@ class GeofieldItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
-    $value = array(
+    $value = [
       'value' => \Drupal::service('geofield.wkt_generator')->WktGenerateGeometry(),
-    );
+    ];
 
     return $value;
   }

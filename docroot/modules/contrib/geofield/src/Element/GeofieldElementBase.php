@@ -18,7 +18,7 @@ abstract class GeofieldElementBase extends FormElement {
    *
    * @var array
    */
-   public static $components = array();
+   public static $components = [];
 
   /**
    * Generates a Geofield generic component based form element.
@@ -40,15 +40,15 @@ abstract class GeofieldElementBase extends FormElement {
     $element['#input'] = TRUE;
 
     foreach (static::$components as $name => $component) {
-      $element[$name] = array(
+      $element[$name] = [
         '#type' => 'textfield',
         '#title' => t($component['title']),
         '#required' => (!empty($element['#required'])) ? $element['#required'] : FALSE,
         '#default_value' => (isset($element['#default_value'][$name])) ? $element['#default_value'][$name] : '',
-        '#attributes' => array(
-          'class' => array('geofield-' . $name),
-        ),
-      );
+        '#attributes' => [
+          'class' => ['geofield-' . $name],
+        ],
+      ];
     }
 
     unset($element['#value']);
@@ -75,10 +75,10 @@ abstract class GeofieldElementBase extends FormElement {
     foreach (static::$components as $key => $component) {
       if (!empty($element[$key]['#value'])) {
         if (!is_numeric($element[$key]['#value'])) {
-          $form_state->setError($element[$key], t('@title: @component_title is not numeric.', array('@title' => $error_label, '@component_title' => $component['title'])));
+          $form_state->setError($element[$key], t('@title: @component_title is not numeric.', ['@title' => $error_label, '@component_title' => $component['title']]));
         }
         elseif (abs($element[$key]['#value']) > $component['range']) {
-          $form_state->setError($element[$key], t('@title: @component_title is out of bounds.', array('@title' => $error_label, '@component_title' => $component['title'])));
+          $form_state->setError($element[$key], t('@title: @component_title is out of bounds.', ['@title' => $error_label, '@component_title' => $component['title']]));
         }
       }
       if ($element[$key]['#value'] == '') {
@@ -91,7 +91,7 @@ abstract class GeofieldElementBase extends FormElement {
     if ($anyFilled && !$allFilled) {
       foreach (self::$components as $key => $component) {
         if ($element[$key]['#value'] == '') {
-          $form_state->setError($element[$key], t('@title: @component_title must be filled too.', array('@title' => $error_label, '@component_title' => $component['title'])));
+          $form_state->setError($element[$key], t('@title: @component_title must be filled too.', ['@title' => $error_label, '@component_title' => $component['title']]));
         }
       }
     }

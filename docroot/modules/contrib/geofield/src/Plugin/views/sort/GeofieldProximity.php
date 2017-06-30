@@ -23,7 +23,7 @@ class GeofieldProximity extends SortPluginBase {
   protected function defineOptions() {
     $options = parent::defineOptions();
     // Data sources and info needed.
-    $options['source'] = array('default' => 'manual');
+    $options['source'] = ['default' => 'manual'];
 
     $proximityHandlers = geofield_proximity_views_handlers();
     foreach ($proximityHandlers as $key => $handler) {
@@ -42,13 +42,13 @@ class GeofieldProximity extends SortPluginBase {
     $options = $proximityPlugin->getSourceValue($this);
 
     if ($options != FALSE) {
-      $haversine_options = array(
+      $haversine_options = [
         'origin_latitude' => $options['latitude'],
         'origin_longitude' => $options['longitude'],
         'destination_latitude' => $lat_alias,
         'destination_longitude' => $lon_alias,
         'earth_radius' => GEOFIELD_KILOMETERS,
-      );
+      ];
       $this->query->add_orderby(NULL, geofield_haversine($haversine_options), $this->options['order'], $this->tableAlias . '_geofield_distance');
     }
   }
@@ -56,13 +56,13 @@ class GeofieldProximity extends SortPluginBase {
   function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
-    $form['source'] = array(
+    $form['source'] = [
       '#type' => 'select',
       '#title' => t('Source of Origin Point'),
       '#description' => t('How do you want to enter your origin point?'),
-      '#options' => array(),
+      '#options' => [],
       '#default_value' => $this->options['source'],
-    );
+    ];
 
     $proximityHandlers = geofield_proximity_views_handlers();
     foreach ($proximityHandlers as $key => $handler) {

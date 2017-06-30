@@ -42,14 +42,14 @@ class WktGenerator implements WktGeneratorInterface {
    * {@inheritdoc}
    */
   public function WktGenerateGeometry() {
-    $types = array(
+    $types = [
       GEOFIELD_TYPE_POINT,
       GEOFIELD_TYPE_MULTIPOINT,
       GEOFIELD_TYPE_LINESTRING,
       GEOFIELD_TYPE_MULTILINESTRING,
       GEOFIELD_TYPE_POLYGON,
       GEOFIELD_TYPE_MULTIPOLYGON,
-    );
+    ];
     // Don't always generate the same type.
     shuffle($types);
     $type = $types[0];
@@ -69,7 +69,7 @@ class WktGenerator implements WktGeneratorInterface {
   protected function randomPoint() {
     $lon = $this->DdGenerate(-180, 180);
     $lat = $this->DdGenerate(-84, 84);
-    return array($lon, $lat);
+    return [$lon, $lat];
   }
 
   /**
@@ -168,13 +168,13 @@ class WktGenerator implements WktGeneratorInterface {
   protected function generateLinestring($start = NULL, $segments = NULL) {
     $start = $start ? $start : $this->randomPoint();
     $segments = $segments ? $segments : $this->DdGenerate(2, 5, TRUE);
-    $points[] = array($start[0], $start[1]);
+    $points[] = [$start[0], $start[1]];
     // Points are at most 1km away from each other.
     for ($i = 1; $i < $segments; $i += 1) {
       $diff = $this->randomPoint();
       $start[0] += $diff[0] / 100;
       $start[1] += $diff[1] / 100;
-      $points[] = array($start[0], $start[1]);
+      $points[] = [$start[0], $start[1]];
     }
     return $points;
   }
@@ -196,7 +196,7 @@ class WktGenerator implements WktGeneratorInterface {
    *   The structured linestring coordinates.
    */
   protected function buildLinestring($points) {
-    $components = array();
+    $components = [];
     foreach ($points as $point) {
       $components[] = $this->buildPoint($point);
     }
@@ -273,7 +273,7 @@ class WktGenerator implements WktGeneratorInterface {
    *   The structured polygon coordinates.
    */
   protected function buildPolygon($points) {
-    $components = array();
+    $components = [];
     foreach ($points as $point) {
       $components[] = $this->buildPoint($point);
     }
