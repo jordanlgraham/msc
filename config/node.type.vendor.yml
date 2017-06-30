@@ -1,0 +1,17 @@
+uuid: efc612ee-959a-4249-b009-d1d7bb8b5a27
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Vendor
+type: vendor
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,32 @@
+uuid: e786f8f5-9243-410f-8252-3e6ff426d586
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_scholars_name
+    - node.type.scholarships
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.scholarships.field_scholars_name
+field_name: field_scholars_name
+entity_type: node
+bundle: scholarships
+label: 'Scholars Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
