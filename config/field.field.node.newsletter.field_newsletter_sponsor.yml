@@ -1,0 +1,35 @@
+uuid: 6b71b8aa-63be-4560-900b-86770747eb8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_newsletter_sponsor
+    - node.type.newsletter
+  module:
+    - geocoder_field
+    - text
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+_core:
+  default_config_hash: Wyik8t2I5j7UGASbeh3PoWc_SsFtekhe3o3PjchEx5g
+id: node.newsletter.field_newsletter_sponsor
+field_name: field_newsletter_sponsor
+entity_type: node
+bundle: newsletter
+label: Sponsor
+description: 'Will display at the top of the Newsletter'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

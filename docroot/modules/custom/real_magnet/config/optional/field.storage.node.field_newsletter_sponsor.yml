@@ -1,0 +1,19 @@
+uuid: 99b82f4c-43c6-429b-92b9-f00e292c8960
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_newsletter_sponsor
+field_name: field_newsletter_sponsor
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
