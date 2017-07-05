@@ -1,0 +1,24 @@
+uuid: 6fd608d0-9312-4193-b957-7fa8de71c7ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.newsletter_article
+  module:
+    - text
+_core:
+  default_config_hash: 3ubNuGRRX07ESZyngpwoYi50qd-UFJfXYLuto-flAaw
+id: node.newsletter_article.body
+field_name: body
+entity_type: node
+bundle: newsletter_article
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

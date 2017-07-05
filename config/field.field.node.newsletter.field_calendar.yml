@@ -1,0 +1,31 @@
+uuid: f8e7d198-74ea-4338-a14a-b4ea69569de9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_calendar
+    - node.type.education_events
+    - node.type.newsletter
+_core:
+  default_config_hash: 3mtrAJOk9-64Q8WStQ_Em6agXFt5iJNILjVbSsO0poI
+id: node.newsletter.field_calendar
+field_name: field_calendar
+entity_type: node
+bundle: newsletter
+label: Calendar
+description: 'Select or add events for the Calendar section of this issue of the Newsletter.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      education_events: education_events
+    sort:
+      field: nid
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

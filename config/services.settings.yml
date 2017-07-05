@@ -1,0 +1,7 @@
+default_formats:
+  - json
+default_authentication:
+  - cookie
+default_no_cache: 0
+_core:
+  default_config_hash: yhD9EVuggxAwzEZS1SU3qOIOgQtG8ZAKjuF4eN8DwZs

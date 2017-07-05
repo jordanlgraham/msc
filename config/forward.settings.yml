@@ -1,0 +1,70 @@
+langcode: en
+forward_entity_node: true
+forward_view_full: true
+forward_view_teaser: true
+forward_interface_type: link
+forward_interface_title: 'Email this Article'
+forward_interface_weight: 26
+forward_link_inline: 0
+forward_link_title: 'Forward this [forward:entity-type] to a friend'
+forward_link_icon: sites/default/files/inline-images/email_news.jpg
+forward_link_style: 2
+forward_link_noindex: true
+forward_link_nofollow: false
+forward_form_instructions: 'Thank you for your interest in spreading the word about <em>[forward:entity-title]</em> on [site:name].'
+forward_form_display_page: false
+forward_form_display_subject: false
+forward_form_display_body: false
+forward_form_confirmation: 'Thank you for spreading the word about [site:name]. We appreciate your help.'
+forward_personal_message: 1
+forward_personal_message_filter: false
+forward_personal_message_tags: 'p,br,em,strong,cite,code,ul,ol,li,dl,dt,dd'
+forward_email_logo: ''
+forward_email_subject: '[forward:sender-name] has forwarded a page to you from [site:name]'
+forward_email_message: '[forward:sender-name] thought you would like to see this page from the [site:name] web site.'
+forward_bypass_access_control: 0
+forward_filter_format: ''
+forward_flood_control_limit: 10
+forward_flood_control_error: 'You can''t send more than @number messages per hour. Please try again later.'
+_core:
+  default_config_hash: LjNmrZEGeLdWqwJcnscz5MMdBFPuS_pFjmJx0AoTFAQ
+forward_email_from_address: matthew@bluecoda.com
+forward_entity_block_content: false
+forward_block_content_basic: false
+forward_entity_comment: false
+forward_comment_comment: false
+forward_entity_contact_message: false
+forward_contact_message_feedback: false
+forward_contact_message_personal: false
+forward_entity_entity_subqueue: false
+forward_entity_file: false
+forward_file_file: false
+forward_entity_flagging: false
+forward_node_article: false
+forward_node_education_events: false
+forward_node_facility: false
+forward_node_job_listings: false
+forward_node_newsletter: false
+forward_node_newsletter_article: true
+forward_node_newsroom: false
+forward_node_page: false
+forward_node_resources: false
+forward_node_scholarships: false
+forward_node_scholarship_recipient: false
+forward_node_sponsor: false
+forward_node_vendor: false
+forward_entity_redirect: false
+forward_redirect_redirect: false
+forward_entity_shortcut: false
+forward_shortcut_default: false
+forward_entity_taxonomy_term: false
+forward_taxonomy_term_event_types: false
+forward_taxonomy_term_job_categories: false
+forward_taxonomy_term_job_regions: false
+forward_taxonomy_term_news_types: false
+forward_taxonomy_term_tags: false
+forward_taxonomy_term_vendor_services_offered: false
+forward_entity_user: false
+forward_user_user: false
+forward_entity_menu_link_content: false
+forward_menu_link_content_menu_link_content: false

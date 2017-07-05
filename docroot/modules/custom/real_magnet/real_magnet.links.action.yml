@@ -1,0 +1,6 @@
+real_magnet.real_magnet_send:
+  route_name: real_magnet.real_magnet_send
+  title: 'Send Newsletter'
+  weight: 5
+  appears_on:
+    - entity.node.canonical

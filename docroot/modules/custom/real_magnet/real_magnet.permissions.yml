@@ -1,0 +1,7 @@
+
+admin settings:
+  title: 'Administer settings'
+  description: 'Allow administration of Real Magnet credentials.'
+send newsletters:
+  title: 'Send newsletters'
+  description: 'Allow sending of Newsletter content to Real Magnet.'

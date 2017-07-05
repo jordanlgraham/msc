@@ -1,0 +1,7 @@
+real_magnet.real_magnet_settings:
+  title: 'Real Magnet'
+  route_name: real_magnet.real_magnet_settings
+  description: 'Configure Real Magnet settings.'
+  parent: system.admin_config_services
+  weight: 99
+
