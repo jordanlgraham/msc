@@ -1,9 +1,0 @@
-uuid: 2bb37030-36fa-4ccc-ad70-e5dc325c3a80
-langcode: en
-status: true
-dependencies: {  }
-name: 'Job Regions'
-vid: job_regions
-description: ''
-hierarchy: 0
-weight: 0
