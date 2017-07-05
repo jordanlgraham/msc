@@ -1,0 +1,32 @@
+uuid: 42c57d54-470b-416f-9b5b-fbe5a092bc24
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_fax
+    - node.type.job_listings
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.job_listings.field_contact_fax
+field_name: field_contact_fax
+entity_type: node
+bundle: job_listings
+label: 'Contact Fax'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

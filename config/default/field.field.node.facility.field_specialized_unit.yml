@@ -1,0 +1,21 @@
+uuid: b42c242a-a011-4524-9378-60c627acbc91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_specialized_unit
+    - node.type.facility
+  module:
+    - options
+id: node.facility.field_specialized_unit
+field_name: field_specialized_unit
+entity_type: node
+bundle: facility
+label: 'Specialized Units'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

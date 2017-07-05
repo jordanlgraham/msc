@@ -1,0 +1,44 @@
+uuid: 68d9fdd3-1f36-4646-81f9-7cb0ca047623
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.newsroom.body
+    - field.field.node.newsroom.field_news_source
+    - field.field.node.newsroom.field_newsroom_category
+    - node.type.newsroom
+  module:
+    - link
+    - text
+    - user
+id: node.newsroom.default
+targetEntityType: node
+bundle: newsroom
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_news_source:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_newsroom_category: true
