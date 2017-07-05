@@ -1,5 +1,0 @@
-hide_tab:
-  version: 1.x
-  css:
-    theme:
-      css/real_magnet.css: {}

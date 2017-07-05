@@ -1,4 +1,0 @@
-real_magnet.real_magnet_send:
-  route_name: real_magnet.real_magnet_send
-  group: node
-  title: Real Magnet
