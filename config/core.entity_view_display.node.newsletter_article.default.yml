@@ -40,6 +40,9 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  flag_bookmark:
+    weight: 10
+    region: content
   links:
     weight: 0
     region: content

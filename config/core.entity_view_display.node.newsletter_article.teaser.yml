@@ -25,6 +25,9 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  flag_bookmark:
+    weight: 10
+    region: content
   links:
     weight: 100
     region: content
