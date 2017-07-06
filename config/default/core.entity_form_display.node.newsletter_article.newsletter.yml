@@ -1,0 +1,49 @@
+uuid: e33fe012-d3d3-469a-956b-4a17ac1a845b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.newsletter
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - node.type.newsletter_article
+  module:
+    - text
+_core:
+  default_config_hash: EyvIYzPlqIJWJXlnkeY2_TjPEpFjGzhKaARK_DbOGBI
+id: node.newsletter_article.newsletter
+targetEntityType: node
+bundle: newsletter_article
+mode: newsletter
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_newsletter_byline:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

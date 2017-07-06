@@ -1,0 +1,14 @@
+{
+  "name": "drupal/real_magnet",
+  "type": "drupal-module",
+  "description": "Send newsletter node content to Real Magnet service.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/real_magnet",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/real_magnet",
+    "source": "http://cgit.drupalcode.org/real_magnet"
+  },
+  "require": { }
+}

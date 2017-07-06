@@ -1,0 +1,5 @@
+real_magnet.real_magnet_send:
+  route_name: real_magnet.real_magnet_send
+  base_route: entity.node.canonical
+  title: Real Magnet
+  weight: 99

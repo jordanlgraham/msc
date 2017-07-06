@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the forward module.
+ *
+ */
+
+use Drupal\Core\Entity\Entity\EntityViewMode;
+
+/**
+ * Implements hook_install().
+ */
+function forward_install() {
+  // Set default values for config which require dynamic values.
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->set('forward_email_from_address', \Drupal::config('system.site')->get('mail'))
+    ->save();
+
+  // Add the Forward mail plugin that sends HTML email for the 'send_entity' key only.
+  // All other emails from Forward or any other module will use the standard plugin.
+  // If a different mail plug becomes the default, that plugin will be used instead.
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $interface = $config->get('interface');
+  $interface['forward_send_entity'] = 'forward_mail';
+  \Drupal::configFactory()->getEditable('system.mail')
+    ->set('interface', $interface)
+    ->save();
+
+  // Add a custom view mode.
+  EntityViewMode::create(array(
+    'id' => 'node.forward',
+    'label' => 'Forward',
+    'status' => 0,
+    'targetEntityType' => 'node'
+  ))->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function forward_uninstall() {
+  // Clear default values for config which require dynamic values.
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->clear('forward_email_from_address')
+    ->save();
+
+  // Remove the Forward mail plugin.
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  unset($mail_plugins['forward_send_entity']);
+  $config->set('interface', $mail_plugins)->save();
+
+  // Remove the custom view mode.
+  $view_mode = EntityViewMode::load('node.forward');
+  if ($view_mode) {
+    $view_mode->delete();
+  }
+
+  // Remove the Forward logs view.
+  $view = \Drupal::service('entity_type.manager')->getStorage('view')->load('forward_logs');
+  if ($view) {
+    $view->delete();
+  }
+
+  // Remove the Forward statistics view.
+  $view = \Drupal::service('entity_type.manager')->getStorage('view')->load('forward_statistics');
+  if ($view) {
+    $view->delete();
+  }
+}
+
+/**
+ * Implements hook_schema().
+ */
+function forward_schema() {
+  $schema['forward_log'] = array(
+    'fields' => array(
+      'logid'     => array('type' => 'serial', 'not null' => TRUE, 'description' => 'Primary Key: Unique log ID.',),
+      'type'      => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
+      'id'        => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'path'      => array('type' => 'varchar', 'not null' => TRUE, 'default' => '<front>', 'length' => 255),
+      'action'    => array('type' => 'varchar', 'not null' => TRUE, 'length' => 8),
+      'timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'uid'       => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'hostname'  => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE, 'default' => '', 'description' => 'Hostname of the user who triggered the event.',),
+    ),
+    'primary key' => array('logid'),
+    'indexes' => array(
+      'forward_entity'   => array('type', 'id'),
+      'forward_uid'      => array('uid'),
+    ),
+  );
+  $schema['forward_statistics'] = array(
+    'fields' => array(
+      'type'                   => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
+      'bundle'                 => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
+      'id'                     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'last_forward_timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'forward_count'          => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'clickthrough_count'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+    ),
+    'primary key' => array('type', 'bundle', 'id'),
+    'indexes' => array(
+      'forward_timestamp' => array('last_forward_timestamp'),
+    ),
+  );
+  return $schema;
+}
