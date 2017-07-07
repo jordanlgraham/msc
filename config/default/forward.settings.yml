@@ -7,8 +7,8 @@ forward_interface_title: 'Email this Article'
 forward_interface_weight: 26
 forward_link_inline: 0
 forward_link_title: 'Forward this [forward:entity-type] to a friend'
-forward_link_icon: sites/default/files/inline-images/email_news.jpg
-forward_link_style: 2
+forward_link_icon: ''
+forward_link_style: 0
 forward_link_noindex: true
 forward_link_nofollow: false
 forward_form_instructions: 'Thank you for your interest in spreading the word about <em>[forward:entity-title]</em> on [site:name].'
@@ -68,3 +68,4 @@ forward_entity_user: false
 forward_user_user: false
 forward_entity_menu_link_content: false
 forward_menu_link_content_menu_link_content: false
+forward_flagging_bookmark: false

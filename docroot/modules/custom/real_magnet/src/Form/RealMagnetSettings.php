@@ -40,6 +40,7 @@ class RealMagnetSettings extends ConfigFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#default_value' => $config->get('real_magnet_username'),
+      '#required' => TRUE,
     ];
     $form['real_magnet_password'] = [
       '#type' => 'textfield',
@@ -48,6 +49,7 @@ class RealMagnetSettings extends ConfigFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#default_value' => $config->get('real_magnet_password'),
+      '#required' => TRUE,
     ];
     $form['real_magnet_template_id'] = [
       '#type' => 'textfield',
@@ -56,6 +58,7 @@ class RealMagnetSettings extends ConfigFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#default_value' => $config->get('real_magnet_template_id'),
+      '#required' => TRUE,
     ];
     $form['real_magnet_login_id'] = [
       '#type' => 'textfield',
@@ -64,15 +67,9 @@ class RealMagnetSettings extends ConfigFormBase {
       '#maxlength' => 64,
       '#size' => 64,
       '#default_value' => $config->get('real_magnet_login_id'),
+      '#required' => TRUE,
     ];
     return parent::buildForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
   }
 
   /**

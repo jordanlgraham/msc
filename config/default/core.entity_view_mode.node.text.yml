@@ -1,10 +1,10 @@
-uuid: 4e7efcd6-ba5b-418c-ad24-551dd09cd48f
+uuid: 5fc17324-2f42-4cfa-b063-f3a51fdcfe9e
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.newsletter
-label: Newsletter
+id: node.text
+label: Text
 targetEntityType: node
 cache: true

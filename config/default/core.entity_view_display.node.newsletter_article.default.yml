@@ -1,4 +1,4 @@
-uuid: 19e7bb5d-9389-46c4-9f87-9c2f8e07673b
+uuid: 19d100b7-fe24-4174-ad09-b1d879ce3aa6
 langcode: en
 status: true
 dependencies:
@@ -7,33 +7,47 @@ dependencies:
     - field.field.node.newsletter_article.field_newsletter_byline
     - node.type.newsletter_article
   module:
+    - entity_print
     - text
     - user
-_core:
-  default_config_hash: VgdAsQavoPWZCcJxPD07KNif-XtLYhaFxQnadhMFEuA
+third_party_settings:
+  entity_print:
+    pdf_label: 'Print this Article'
 id: node.newsletter_article.default
 targetEntityType: node
 bundle: newsletter_article
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 101
+    weight: 0
+    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+  entity_print_view_pdf:
+    weight: 4
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_newsletter_byline:
-    weight: 102
+    type: string
+    weight: 1
+    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
-  links:
-    weight: 100
+  flag_bookmark:
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_word_docx: true
