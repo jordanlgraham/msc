@@ -3,3 +3,6 @@ services:
     class: Drupal\real_magnet\Access\SendAccess
     tags:
      - {name: access_check, applies_to: _real_magnet_access}
+  logger.channel.real_magnet:
+        parent: logger.channel_base
+        arguments: ['real_magnet']

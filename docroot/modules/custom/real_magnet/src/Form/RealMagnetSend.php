@@ -10,6 +10,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\Component\Utility\Html;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class RealMagnetSend.
@@ -33,17 +34,24 @@ class RealMagnetSend extends FormBase {
    */
   protected $node_viewer;
 
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('http_client_factory'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('logger.factory')->get('real_magnet')
     );
   }
 
-  public function __construct(ClientFactory $clientFactory, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(ClientFactory $clientFactory, EntityTypeManagerInterface $entityTypeManager, LoggerInterface $logger) {
     $this->client = $clientFactory->fromOptions([]);
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->node_viewer = $entityTypeManager->getViewBuilder('node');
+    $this->logger = $logger;
   }
 
   /**
@@ -93,7 +101,6 @@ class RealMagnetSend extends FormBase {
 
   // We have to authenticate using Real Magnet API call and get the session id
   private function realMagnetAuth($username, $password, $newsletter_nid) {
-
     try {
       $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/Authenticate/', [
         'auth' => [$username, $password],
@@ -118,8 +125,11 @@ class RealMagnetSend extends FormBase {
       }
 
     }
-    catch (RequestException $e) {
-      watchdog_exception('real_magnet', $e->getMessage());
+    catch (\Exception $e) {
+      $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
+      drupal_set_message(Html::escape($message), 'error');
+      $this->logger->error($message);
+      return false;
     }
 
   }
@@ -164,15 +174,18 @@ class RealMagnetSend extends FormBase {
         ]);
         // Confirmation and error handling.
         $response = json_decode($request->getBody());
-        if ($response->Error == '1') {
-          drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: ' . Html::escape($response->Message))), 'error');
+        if ($response->Error != '0') {
+          drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: @message', ['@message' => Html::escape($response->Message)])), 'error');
         }
         else {
-          drupal_set_message(Html::escape($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.')), 'status');
+          drupal_set_message($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
         }
       }
-      catch (RequestException $e) {
-        watchdog_exception('real_magnet', $e->getMessage());
+      catch (\Exception $e) {
+        $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
+        drupal_set_message(Html::escape($message), 'error');
+        $this->logger->error($message);
+        return false;
       }
     }
 
