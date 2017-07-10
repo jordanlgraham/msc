@@ -1,0 +1,38 @@
+uuid: 1922988e-fc94-475d-a0b5-b967d634563f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - node.type.newsletter_article
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: QUNNn5nVKl2cPQS5L39ao_qn4cQwqnTNDbWk2DBRsVs
+id: node.newsletter_article.teaser
+targetEntityType: node
+bundle: newsletter_article
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  flag_bookmark:
+    weight: 10
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_newsletter_byline: true
