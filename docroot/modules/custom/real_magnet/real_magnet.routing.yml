@@ -1,0 +1,19 @@
+real_magnet.real_magnet_settings:
+  path: '/admin/config/real_magnet'
+  defaults:
+    _form: '\Drupal\real_magnet\Form\RealMagnetSettings'
+    _title: 'RealMagnetSettings'
+  requirements:
+    _permission: 'admin real_magnet settings'
+  options:
+    _admin_route: TRUE
+
+real_magnet.real_magnet_send:
+  path: '/node/{node}/real_magnet'
+  defaults:
+    _form: '\Drupal\real_magnet\Form\RealMagnetSend'
+    _title: 'Real Magnet Send'
+  requirements:
+    node: \d+
+    _real_magnet_access: 'true'
+    _permission: 'send real_magnet newsletters'

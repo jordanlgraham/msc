@@ -1,0 +1,10 @@
+uuid: 9d13df33-bac0-4a86-8edf-0814f13aab34
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+id: node.forward
+label: Forward
+targetEntityType: node
+cache: true

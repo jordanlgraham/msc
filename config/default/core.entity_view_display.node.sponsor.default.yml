@@ -27,19 +27,19 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 9
     settings: {  }
     third_party_settings: {  }
     region: content
   field_address:
-    weight: 106
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_facebook:
-    weight: 104
+    weight: 3
     label: above
     settings:
       trim_length: 80
@@ -51,8 +51,8 @@ content:
     type: link
     region: content
   field_logo:
-    weight: 102
-    label: above
+    weight: 1
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -60,7 +60,7 @@ content:
     type: image
     region: content
   field_phone:
-    weight: 107
+    weight: 6
     label: above
     settings:
       link_to_entity: false
@@ -68,7 +68,7 @@ content:
     type: string
     region: content
   field_primary_services:
-    weight: 103
+    weight: 2
     label: above
     settings:
       link: true
@@ -76,7 +76,7 @@ content:
     type: entity_reference_label
     region: content
   field_related_event:
-    weight: 108
+    weight: 7
     label: above
     settings:
       link: true
@@ -84,7 +84,7 @@ content:
     type: entity_reference_label
     region: content
   field_twitter:
-    weight: 105
+    weight: 4
     label: above
     settings:
       trim_length: 80
@@ -96,7 +96,7 @@ content:
     type: link
     region: content
   field_web_address:
-    weight: 109
+    weight: 8
     label: above
     settings:
       trim_length: 80
@@ -108,8 +108,11 @@ content:
     type: link
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

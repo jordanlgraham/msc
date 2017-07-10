@@ -1,0 +1,71 @@
+uuid: 8a9e6f00-d8b8-4d65-b2c5-a9d6a5c8b953
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.newsletter
+    - field.field.node.sponsor.body
+    - field.field.node.sponsor.field_address
+    - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_logo
+    - field.field.node.sponsor.field_phone
+    - field.field.node.sponsor.field_primary_services
+    - field.field.node.sponsor.field_related_event
+    - field.field.node.sponsor.field_twitter
+    - field.field.node.sponsor.field_web_address
+    - image.style.thumbnail
+    - node.type.sponsor
+  module:
+    - image
+    - link
+    - text
+id: node.sponsor.newsletter
+targetEntityType: node
+bundle: sponsor
+mode: newsletter
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_logo:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_web_address:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_address: true
+  field_facebook: true
+  field_phone: true
+  field_primary_services: true
+  field_related_event: true
+  field_twitter: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true
