@@ -8724,6 +8724,72 @@
         }
     },
     {
+        "name": "drupal/forward",
+        "version": "2.0.0-rc2",
+        "version_normalized": "2.0.0.0-RC2",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/forward",
+            "reference": "8.x-2.0-rc2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/forward-8.x-2.0-rc2.zip",
+            "reference": "8.x-2.0-rc2",
+            "shasum": "d5b54cc023543f069c7968fe7290e2f9f1da8154"
+        },
+        "require": {
+            "drupal/core": "*",
+            "drupal/node": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-2.x": "2.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-2.0-rc2",
+                "datestamp": "1499215743"
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "John Oltman",
+                "homepage": "https://www.drupal.org/u/john.oltman",
+                "email": "developer@sitebasin.com",
+                "role": "Maintainer"
+            },
+            {
+                "name": "chx",
+                "homepage": "https://www.drupal.org/user/9446"
+            },
+            {
+                "name": "john.oltman",
+                "homepage": "https://www.drupal.org/user/699926"
+            },
+            {
+                "name": "moshe weitzman",
+                "homepage": "https://www.drupal.org/user/23"
+            },
+            {
+                "name": "seanr",
+                "homepage": "https://www.drupal.org/user/7074"
+            }
+        ],
+        "description": "Forward pages and other site elements to a friend.",
+        "homepage": "http://drupal.org/project/forward",
+        "support": {
+            "source": "http://cgit.drupalcode.org/forward",
+            "issues": "http://drupal.org/project/forward",
+            "irc": "irc://irc.freenode.org/drupal-contribute"
+        }
+    },
+    {
         "name": "drupal/flag",
         "version": "4.0.0-alpha2",
         "version_normalized": "4.0.0.0-alpha2",
@@ -8794,72 +8860,6 @@
         "homepage": "https://www.drupal.org/project/flag",
         "support": {
             "source": "http://cgit.drupalcode.org/flag"
-        }
-    },
-    {
-        "name": "drupal/forward",
-        "version": "2.0.0-rc2",
-        "version_normalized": "2.0.0.0-RC2",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/forward",
-            "reference": "8.x-2.0-rc2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/forward-8.x-2.0-rc2.zip",
-            "reference": "8.x-2.0-rc2",
-            "shasum": "d5b54cc023543f069c7968fe7290e2f9f1da8154"
-        },
-        "require": {
-            "drupal/core": "*",
-            "drupal/node": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-2.x": "2.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-2.0-rc2",
-                "datestamp": "1493584143"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "John Oltman",
-                "homepage": "https://www.drupal.org/u/john.oltman",
-                "email": "developer@sitebasin.com",
-                "role": "Maintainer"
-            },
-            {
-                "name": "chx",
-                "homepage": "https://www.drupal.org/user/9446"
-            },
-            {
-                "name": "john.oltman",
-                "homepage": "https://www.drupal.org/user/699926"
-            },
-            {
-                "name": "moshe weitzman",
-                "homepage": "https://www.drupal.org/user/23"
-            },
-            {
-                "name": "seanr",
-                "homepage": "https://www.drupal.org/user/7074"
-            }
-        ],
-        "description": "Forward pages and other site elements to a friend.",
-        "homepage": "http://drupal.org/project/forward",
-        "support": {
-            "source": "http://cgit.drupalcode.org/forward",
-            "issues": "http://drupal.org/project/forward",
-            "irc": "irc://irc.freenode.org/drupal-contribute"
         }
     },
     {

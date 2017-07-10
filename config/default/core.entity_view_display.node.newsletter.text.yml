@@ -1,22 +1,25 @@
-uuid: 5e04de42-bd02-4beb-a28b-41af906d4aa1
+uuid: 283caa39-e79f-4a2f-a0d4-59125670e141
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.text
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_newsletter_article
+    - field.field.node.newsletter.field_newsletter_calendar
     - field.field.node.newsletter.field_newsletter_date
+    - field.field.node.newsletter.field_newsletter_sponsor
     - field.field.node.newsletter.field_sponsor
     - node.type.newsletter
   module:
     - datetime
     - user
 _core:
-  default_config_hash: M68_izOusr10cctSJv5-KKk58_GsfBcZC49hu8IjlPQ
-id: node.newsletter.default
+  default_config_hash: ORjAk1_Ogfeh0YtUrEJaFfEE6NC_4zB7tt2KbWcaWf8
+id: node.newsletter.text
 targetEntityType: node
 bundle: newsletter
-mode: default
+mode: text
 content:
   field_calendar:
     weight: 6
@@ -59,4 +62,9 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_newsletter_calendar: true
+  field_newsletter_sponsor: true

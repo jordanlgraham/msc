@@ -24,36 +24,8 @@ function real_magnet_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_theme().
- */
-function real_magnet_theme() {
-  return [
-    'real_magnet' => [
-      'render element' => 'children',
-    ],
-  ];
-}
-/**
- * Implements hook_page_attachments().
- */
-/**
- * Implements hook_page_attachments().
- */
-function real_magnet_page_attachments(array &$page) {
-  // If user doesn't have permissions or it's not a node, no point doing anything.
-  if (!\Drupal::currentUser()->hasPermission('access contextual links')) {
-    return;
-  }
-  if (\Drupal::routeMatch()->getParameter('node')) {
-    // If user has permissions and current page is a node.
-    $page['#attached']['library'][] =  'real_magnet/hide_tab';
-  }
-}
-
-/**
  * Implements hook_preprocess_node().
  */
 function real_magnet_preprocess_node(&$variables) {
-  //$variables['base_path'] = $_SERVER['SERVER_NAME'];
-  $variables['base_path'] = 'msca.dev.dd:8083';
+  $variables['base_path'] = $_SERVER['SERVER_NAME'];
 }

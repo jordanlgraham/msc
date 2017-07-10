@@ -51,10 +51,10 @@
                             <tr><td align="center" valign="top" style="padding:10px 0px">
                                     <table class="sidebar" width="90%" cellpadding="3" cellspacing="0"  style="color:#333333; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:12px">
                                         {% for item in node.field_newsletter_article %}
-                                        <!--tocstart -->
-                                        <tr><td width="9" valign="top" style="padding-top:6px"><img src="http://newsmanager.commpartners.com/mecf/images/bullet.jpg" width="9" height="9"></td>
-                                            <td align="left"><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></td></tr>
-                                        <!--tocend -->
+                                            <!--tocstart -->
+                                            <tr><td width="9" valign="top" style="padding-top:6px"><img src="http://newsmanager.commpartners.com/mecf/images/bullet.jpg" width="9" height="9"></td>
+                                                <td align="left"><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></td></tr>
+                                            <!--tocend -->
                                         {% endfor %}
                                     </table>
                                 </td></tr>
@@ -91,7 +91,7 @@
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr><td align="left" valign="top" bgcolor="#FFFFFF" style="font-family: Arial, Helvetica, sans-serif; padding: 10px; font-size: 12px; line-height: 16px;">{{ item.entity.body.value|raw }}</td></tr>
                                         </table>
-                                </td></tr>
+                                    </td></tr>
                             {% endfor %}
                             <!--custom-top ad space-end -->
                             <tr><td colspan="2" height="25" bgcolor="#000000">&nbsp;</td></tr>
@@ -99,7 +99,7 @@
                         <br />
 
                         {% for item in node.field_newsletter_article %}
-                        <!--articlestart -->
+                            <!--articlestart -->
                             <a name="{{ item.entity.nid.value }}"></a>
                             <table cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px">
                                 <tr>
@@ -120,19 +120,19 @@
                                         <img src="http://{{ base_path }}/sites/default/files/inline-images/print_article.gif" width="18" height="16">
                                         <a href="http://{{ base_path }}/print/pdf/node/{{ item.entity.nid.value }}" style="margin:5px; position:relative; top:-4px; color: #37567b;">Print This Article</a></td></tr>
                             </table><br>
-                        <!--articleend -->
+                            <!--articleend -->
                         {% endfor %}
                         <!--custom-calendar-start -->
                         <a name="calendar"></a>
                         <table cellpadding="0" cellspacing="0" width="95%" align="center" style="margin: 0px 10px;">
                             <tr><td colspan="2" valign="bottom" style="color: #37567B; font-size:18px; font-weight:bold; font-family:Arial, Helvetica, sans-serif; padding: 05px 25px;">Mass Senior Care Calendar</td></tr>
                             <tr><td style="padding: 0px 25px;">
-                                <tr valign="top" bgcolor="#000066" style="border: 1px solid #37567B;">
-                                    <td valign="top" colspan="3">
-                                        <h2 style="color: #FFF;">&nbsp;{{ 'now'|date('Y') }}</h2>
-                                    </td>
-                                </tr>
-                                {% for item in node.field_calendar %}
+                            <tr valign="top" bgcolor="#000066" style="border: 1px solid #37567B;">
+                                <td valign="top" colspan="3">
+                                    <h2 style="color: #FFF;">&nbsp;{{ 'now'|date('Y') }}</h2>
+                                </td>
+                            </tr>
+                            {% for item in node.field_calendar %}
                                 <tr valign="top" style="border: 1px solid #37567B;">
                                     <td valign="top" width="20%" style="padding: 5px;">
                                         <p>&nbsp;{{ item.entity.field_date.value|date('n/j') }}</p>
@@ -147,7 +147,7 @@
                                         </p>
                                     </td>
                                 </tr>
-                                {% endfor %}
+                            {% endfor %}
                             </td></tr>
                         </table>
                         <br>

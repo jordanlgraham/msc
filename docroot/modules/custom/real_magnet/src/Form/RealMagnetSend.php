@@ -2,8 +2,15 @@
 
 namespace Drupal\real_magnet\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Http\ClientFactory;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use GuzzleHttp\Exception\RequestException;
+use Drupal\Component\Utility\Html;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class RealMagnetSend.
@@ -12,7 +19,40 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class RealMagnetSend extends FormBase {
 
-  //$realMagnetConfig = \Drupal::config('real_magnet.realmagnetsettings');
+  /**
+   * @var \GuzzleHttp\Client
+   */
+  protected $client;
+
+  /**
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  protected $node_storage;
+
+  /**
+   * @var \Drupal\Core\Entity\EntityViewBuilderInterface
+   */
+  protected $node_viewer;
+
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('http_client_factory'),
+      $container->get('entity_type.manager'),
+      $container->get('logger.factory')->get('real_magnet')
+    );
+  }
+
+  public function __construct(ClientFactory $clientFactory, EntityTypeManagerInterface $entityTypeManager, LoggerInterface $logger) {
+    $this->client = $clientFactory->fromOptions([]);
+    $this->node_storage = $entityTypeManager->getStorage('node');
+    $this->node_viewer = $entityTypeManager->getViewBuilder('node');
+    $this->logger = $logger;
+  }
 
   /**
    * {@inheritdoc}
@@ -24,13 +64,11 @@ class RealMagnetSend extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-
-    $newsletter_nid  = \Drupal::routeMatch()->getParameter('node');
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $node = NULL) {
 
     $form['newsletter_nid'] = [
       '#type' => 'hidden',
-      '#value' => $newsletter_nid,
+      '#value' => $node->id(),
     ];
 
     $form['send_to_real_magnet'] = [
@@ -45,33 +83,26 @@ class RealMagnetSend extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
     $username = $realMagnetConfig->get('real_magnet_username');
     $password = $realMagnetConfig->get('real_magnet_password');
     $newsletter_nid = $form['newsletter_nid']['#value'];
+    // If credentials have been configured.
     if(!empty($username) && !empty($password)) {
       $this->realMagnetAuth($username, $password, $newsletter_nid);
     }
+    // Else credentials have not been configured.
     else {
-      drupal_set_message(t('Real Magnet refused connection. Your credentials may be wrong or
-      incomplete. Confirm credential settings here: /admin/config/real_magnet'), 'error');
+      drupal_set_message($this->t('It appears you have not configured your Real Magnet credentials. 
+      Confirm credential settings here: /admin/config/real_magnet'), 'error');
     }
   }
 
   // We have to authenticate using Real Magnet API call and get the session id
   private function realMagnetAuth($username, $password, $newsletter_nid) {
-    $client = \Drupal::httpClient();
-
     try {
-      $request = $client->post('https://dna.magnetmail.net/ApiAdapter/Rest/Authenticate/', [
+      $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/Authenticate/', [
         'auth' => [$username, $password],
         'json' => [
           "Password" => $password,
@@ -83,33 +114,39 @@ class RealMagnetSend extends FormBase {
       $login_id = $response->LoginID;
       $session_id = $response->SessionID;
       $user_id = $response->UserID;
-
+      // If we get a valid response back from real magnet endpoint.
       if($login_id != '0' && !empty($session_id) && !empty($user_id)) {
         $this->realMagnetPost($login_id, $session_id, $user_id, $username, $password, $newsletter_nid);
       }
+      // Else the real magnet endpoint is probably down.
       else {
-        drupal_set_message(t('Real Magnet refused connection. Service may be down. Try again later and contact 
-        RealMagnet.com if problem persists.'), 'error');
+        drupal_set_message(Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact 
+        RealMagnet.com if problem persists.')), 'error');
       }
 
     }
-    catch (RequestException $e) {
-      watchdog_exception('real_magnet', $e->getMessage());
+    catch (\Exception $e) {
+      $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
+      drupal_set_message(Html::escape($message), 'error');
+      $this->logger->error($message);
+      return false;
     }
 
   }
 
     private function realMagnetPost($login_id, $session_id, $user_id, $username, $password, $newsletter_nid) {
-      $client = \Drupal::httpClient();
       $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
       $template_id = $realMagnetConfig->get('real_magnet_template_id');
 
       // Load the node so we can send it as message body.
-      $node = \Drupal::entityTypeManager()->getStorage('node')->load($newsletter_nid);
+      $node = $this->node_storage->load($newsletter_nid);
       // Use 'Email' view display.
-      $node_array = node_view($node, 'email');
+      $node_array = $this->node_viewer->view($node, 'email');
+      // Use 'Text' view display.
+      $text_array = $this->node_viewer->view($node, 'text');
       // Capture rendered and themed html.
       $node_html = drupal_render($node_array);
+      $text_html = drupal_render($text_array);
       // Capture the node title for use as MessageName.
       $message_name_array = $node->get('title')->getValue();
       $message_name = $message_name_array[0]['value'];
@@ -120,7 +157,7 @@ class RealMagnetSend extends FormBase {
       $full_message_name = $message_name . '- version ' . $message_vid;
       // Now we post the newsletter to Real Magnet
       try {
-        $request = $client->post('https://dna.magnetmail.net/ApiAdapter/Rest/CreateMessage/', [
+        $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/CreateMessage/', [
           'auth' => [$username, $password],
           'json' => [
             "SessionID" => $session_id,
@@ -132,20 +169,23 @@ class RealMagnetSend extends FormBase {
             "MessageName" => $full_message_name,
             "SubjectLine" => "MSCA E-News Update",
             "TemplateID" => $template_id,
-            "TextVersion" => "Testing"
+            "TextVersion" => $text_html
           ]
         ]);
         // Confirmation and error handling.
         $response = json_decode($request->getBody());
-        if ($response->Error == '1') {
-          drupal_set_message(t('Real Magnet refused this newsletter. Reason: ' . $response->Message), 'error');
+        if ($response->Error != '0') {
+          drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: @message', ['@message' => Html::escape($response->Message)])), 'error');
         }
         else {
-          drupal_set_message(t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
+          drupal_set_message($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
         }
       }
-      catch (RequestException $e) {
-        watchdog_exception('real_magnet', $e->getMessage());
+      catch (\Exception $e) {
+        $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
+        drupal_set_message(Html::escape($message), 'error');
+        $this->logger->error($message);
+        return false;
       }
     }
 
