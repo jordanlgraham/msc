@@ -6,11 +6,6 @@ package: Blue Coda
 configure: real_magnet.real_magnet_settings
 dependencies:
   - inline_entity_form
-  - services
-  - hal
-  - serialization
-  - basic_auth
-  - rest
   - forward
   - entity_print
   - flag
