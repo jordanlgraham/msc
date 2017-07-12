@@ -6,8 +6,11 @@ dependencies:
     - core.entity_form_mode.node.newsletter
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_newsletter_image
+    - image.style.thumbnail
     - node.type.newsletter_article
   module:
+    - image
     - text
 _core:
   default_config_hash: EyvIYzPlqIJWJXlnkeY2_TjPEpFjGzhKaARK_DbOGBI
@@ -26,13 +29,21 @@ content:
     third_party_settings: {  }
     region: content
   field_newsletter_byline:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_newsletter_image:
+    type: image_image
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0

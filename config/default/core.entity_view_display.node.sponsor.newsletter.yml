@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.sponsor.field_related_event
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
+    - image.style.logo
     - node.type.sponsor
   module:
     - image
@@ -36,7 +37,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: ''
+      image_style: logo
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -59,6 +60,9 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_address: true
   field_facebook: true
   field_phone: true

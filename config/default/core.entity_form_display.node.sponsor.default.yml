@@ -58,8 +58,8 @@ content:
   field_logo:
     weight: 7
     settings:
-      progress_indicator: throbber
       preview_image_style: thumbnail
+      progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
     region: content

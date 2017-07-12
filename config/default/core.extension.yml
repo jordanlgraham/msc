@@ -20,6 +20,7 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
+  devel: 0
   dynamic_page_cache: 0
   editor: 0
   entity_print: 0
@@ -42,6 +43,8 @@ module:
   history: 0
   image: 0
   inline_entity_form: 0
+  insert: 0
+  kint: 0
   link: 0
   masquerade: 0
   menu_ui: 0
@@ -59,6 +62,7 @@ module:
   real_magnet: 0
   redirect: 0
   redirect_404: 0
+  responsive_image: 0
   search: 0
   seckit: 0
   shield: 0
