@@ -73,9 +73,11 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  twig_tweak: 0
   user: 0
   views_ui: 0
   xmlsitemap: 0
+  forum: 1
   menu_link_content: 1
   views: 10
   standard: 1000
