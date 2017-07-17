@@ -134,60 +134,58 @@ class RealMagnetSend extends FormBase {
 
   }
 
-    private function realMagnetPost($login_id, $session_id, $user_id, $username, $password, $newsletter_nid) {
-      $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
-      $template_id = $realMagnetConfig->get('real_magnet_template_id');
+  private function realMagnetPost($login_id, $session_id, $user_id, $username, $password, $newsletter_nid) {
+    $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
+    $template_id = $realMagnetConfig->get('real_magnet_template_id');
 
-      // Load the node so we can send it as message body.
-      $node = $this->node_storage->load($newsletter_nid);
-      // Use 'Email' view display.
-      $node_array = $this->node_viewer->view($node, 'email');
-      // Use 'Text' view display.
-      $text_array = $this->node_viewer->view($node, 'text');
-      // Capture rendered and themed html.
-      $node_html = drupal_render($node_array);
-      $text_html = drupal_render($text_array);
-      // Capture the node title for use as MessageName.
-      $message_name_array = $node->get('title')->getValue();
-      $message_name = $message_name_array[0]['value'];
-      // Capture the node's version ID for use in MessageName to satisfy Real Magnet's unique MessageName constraint.
-      $message_vid_array = $node->get('vid')->getValue();
-      $message_vid = $message_vid_array[0]['value'];
-      // Concatenate node title and vid for unique MessageName.
-      $full_message_name = $message_name . '- version ' . $message_vid;
-      // Now we post the newsletter to Real Magnet
-      try {
-        $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/CreateMessage/', [
-          'auth' => [$username, $password],
-          'json' => [
-            "SessionID" => $session_id,
-            "UserID" => $user_id,
-            "AutoUnsubscribeLink" => true,
-            "CopyPasteTemplate" => true,
-            "HTMLVersion" => $node_html,
-            "LoginID" => $login_id,
-            "MessageName" => $full_message_name,
-            "SubjectLine" => "MSCA E-News Update",
-            "TemplateID" => $template_id,
-            "TextVersion" => $text_html
-          ]
-        ]);
-        // Confirmation and error handling.
-        $response = json_decode($request->getBody());
-        if ($response->Error != '0') {
-          drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: @message', ['@message' => Html::escape($response->Message)])), 'error');
-        }
-        else {
-          drupal_set_message($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
-        }
+    // Load the node so we can send it as message body.
+    $node = $this->node_storage->load($newsletter_nid);
+    // Use 'Email' view display.
+    $node_array = $this->node_viewer->view($node, 'email');
+    // Use 'Text' view display.
+    $text_array = $this->node_viewer->view($node, 'text');
+    // Capture rendered and themed html.
+    $node_html = drupal_render($node_array);
+    $text_html = drupal_render($text_array);
+    // Capture the node title for use as MessageName.
+    $message_name_array = $node->get('title')->getValue();
+    $message_name = $message_name_array[0]['value'];
+    // Capture the current date and time for use in MessageName to satisfy Real Magnet's unique MessageName constraint.
+    $now = date("m-d-y h:i");
+    // Concatenate title and date for unique MessageName.
+    $full_message_name = $message_name . $now;
+    // Now we post the newsletter to Real Magnet
+    try {
+      $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/CreateMessage/', [
+        'auth' => [$username, $password],
+        'json' => [
+          "SessionID" => $session_id,
+          "UserID" => $user_id,
+          "AutoUnsubscribeLink" => true,
+          "CopyPasteTemplate" => true,
+          "HTMLVersion" => $node_html,
+          "LoginID" => $login_id,
+          "MessageName" => $full_message_name,
+          "SubjectLine" => "MSCA E-News Update",
+          "TemplateID" => $template_id,
+          "TextVersion" => $text_html
+        ]
+      ]);
+      // Confirmation and error handling.
+      $response = json_decode($request->getBody());
+      if ($response->Error != '0') {
+        drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: @message', ['@message' => Html::escape($response->Message)])), 'error');
       }
-      catch (\Exception $e) {
-        $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
-        drupal_set_message(Html::escape($message), 'error');
-        $this->logger->error($message);
-        return false;
+      else {
+        drupal_set_message($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
       }
     }
+    catch (\Exception $e) {
+      $message = Html::escape($this->t('Real Magnet refused connection. Service may be down. Try again later and contact RealMagnet.com if problem persists.'));
+      drupal_set_message(Html::escape($message), 'error');
+      $this->logger->error($message);
+      return false;
+    }
+  }
 
 }
-
