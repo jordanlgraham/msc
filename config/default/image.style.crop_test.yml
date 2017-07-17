@@ -1,0 +1,15 @@
+uuid: ac9303c6-0587-44d6-8cca-a373f7dd8864
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+name: crop_test
+label: 'Crop test'
+effects:
+  fc2614cc-2dab-41b4-b7d1-ceb10b40804c:
+    uuid: fc2614cc-2dab-41b4-b7d1-ceb10b40804c
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: test
