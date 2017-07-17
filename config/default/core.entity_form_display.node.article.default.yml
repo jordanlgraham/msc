@@ -11,7 +11,7 @@ dependencies:
     - node.type.article
   module:
     - comment
-    - image
+    - image_widget_crop
     - path
     - text
 _core:
@@ -43,17 +43,26 @@ content:
     third_party_settings: {  }
     region: content
   field_image:
-    type: image_image
+    type: image_widget_crop
     weight: 4
     settings:
-      progress_indicator: throbber
+      show_default_crop: true
+      warn_multiple_usages: true
       preview_image_style: thumbnail
+      crop_preview_image_style: crop_thumbnail
+      crop_list:
+        - test
+      progress_indicator: throbber
+      show_crop_area: false
     third_party_settings: {  }
     region: content
   field_tags:
     type: entity_reference_autocomplete_tags
     weight: 3
-    settings: {  }
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
     region: content
   path:
