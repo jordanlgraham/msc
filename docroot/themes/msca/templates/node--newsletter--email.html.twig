@@ -49,8 +49,8 @@
                                 </td>
                             </tr>
                             <tr><td width="261" height="36" bgcolor="#37567B" background="images/sidebar_header.jpg" style="padding-left:5px">
-                                <a href="http://www.maseniorcare.org" target="_blank" style="color:#FFFFFF; text-decoration:none">Visit our website</a>
-                            </td></tr>
+                                    <a href="http://www.maseniorcare.org" target="_blank" style="color:#FFFFFF; text-decoration:none">Visit our website</a>
+                                </td></tr>
                             <tr><td height="23" bgcolor="#37567B" style="padding-left:5px">In This Issue</td></tr>
                             <tr><td align="center" valign="top" style="padding:10px 0px">
                                     <table class="sidebar" width="90%" cellpadding="3" cellspacing="0"  style="color:#333333; font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:12px">
@@ -59,7 +59,7 @@
                                             <tr>
                                                 <td width="9" valign="top">
                                                     <img src="http://newsmanager.commpartners.com/mecf/images/bullet.jpg" width="9" height="9"></td>
-                                                <td align="left"><p class="menu-item"><a href="#{{ item.entity.nid.value }}" style="text-decoration:none" target="_blank">{{ item.entity.label }}</a></p></td>
+                                                <td align="left"><p class="menu-item"><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></p></td>
                                             </tr>
                                             <!--tocend -->
                                         {% endfor %}
@@ -97,7 +97,30 @@
                                 <tr><td colspan="2" align="left" valign="top" bgcolor="#FFFFFF">
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             {% set logopath = item.entity.field_logo.entity.fileuri %}
-                                            <tr><td align="left" valign="top" bgcolor="#FFFFFF" style="font-family: Arial, Helvetica, sans-serif; padding: 10px; font-size: 12px; line-height: 16px;"><img src="http://{{ base_path }}{{ file_url(logopath) }}" class="logo" width="200px">{{ item.entity.body.value|raw }}</td></tr>
+                                            {% set logostyle = logopath|image_style('logo') %}
+                                            <tr>
+                                                <td align="left" valign="top" bgcolor="#FFFFFF" style="font-family: Arial, Helvetica, sans-serif; padding: 10px; font-size: 12px; line-height: 16px;">
+                                                    {% if logopath is defined and logopath is not empty %}
+                                                        <img src="http://{{ base_path }}{{ file_url(logostyle) }}" class="logo" width="200px">
+                                                    {% endif %}
+                                                    {{ item.entity.body.value|raw }}
+                                                    {% set website = item.entity.field_web_address.uri %}
+                                                    {% set webtitle = item.entity.field_web_address.title %}
+                                                    {% if website is defined and website is not empty %}
+                                                        <strong>Website: </strong> <a href="{{ website }}" target="_blank">{{ webtitle }}</a><br />
+                                                    {% endif %}
+                                                    {% set facebook = item.entity.field_facebook.uri %}
+                                                    {% set facebooktitle = item.entity.field_facebook.title %}
+                                                    {% if facebook is defined and facebook is not empty %}
+                                                        <strong>Facebook: </strong> <a href="{{ facebook }}" target="_blank">{{ facebooktitle }}</a><br />
+                                                    {% endif %}
+                                                    {% set twitter = item.entity.field_twitter.uri %}
+                                                    {% set twittertitle = item.entity.field_twitter.title %}
+                                                    {% if twitter is defined and twitter is not empty %}
+                                                        <strong>Twitter: </strong> <a href="{{ twitter }}" target="_blank">{{ twittertitle }}</a><br />
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td></tr>
                             {% endfor %}
@@ -117,11 +140,12 @@
                                     <td style="line-height:16px; font-size:12px; font-family:Arial, Helvetica, sans-serif; padding: 5px 25px;">
                                         {% set text = item.entity.body.value|render|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
                                         {% set imagepath = item.entity.field_newsletter_image.entity.fileuri %}
+                                        {% set imagestyle = imagepath|image_style('logo') %}
                                         {% if imagepath is defined and imagepath is not empty %}
-                                            <img src="http://{{ base_path }}{{ file_url(imagepath) }}" class="newsletter-image" width="200px">
+                                            <img src="http://{{ base_path }}{{ file_url(imagestyle) }}" class="newsletter-image" width="200px">
                                         {% endif %}
                                         <span class=""article-body">
-                                            {{ text|length > 500 ? text|slice(0, 500)|raw ~ '...' : text|raw }}
+                                        {{ text|length > 500 ? text|slice(0, 500)|raw ~ '...' : text|raw }}
                                         </span>
                                         <span class="read-more">
                                             <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">Read more</a>

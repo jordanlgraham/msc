@@ -6,6 +6,13 @@ dependencies:
     - filter.format.basic_html
   module:
     - ckeditor
+    - editor_file
+third_party_settings:
+  editor_file:
+    status: true
+    scheme: public
+    directory: inline-files
+    extensions: txt
 _core:
   default_config_hash: AqlPmO16LvJI4D0Ih6u4GFQIzqr5OnLgAUSjcUGWk2g
 format: basic_html
@@ -34,6 +41,7 @@ settings:
           items:
             - Blockquote
             - DrupalImage
+            - DrupalFile
         -
           name: 'Block Formatting'
           items:
@@ -43,6 +51,8 @@ settings:
           items:
             - Source
   plugins:
+    language:
+      language_list: un
     stylescombo:
       styles: ''
 image_upload:
@@ -51,5 +61,5 @@ image_upload:
   directory: inline-images
   max_size: ''
   max_dimensions:
-    width: 0
-    height: 0
+    width: null
+    height: null
