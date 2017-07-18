@@ -33,6 +33,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  field_facebook:
+    type: link_default
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_logo:
     weight: 1
     settings:
@@ -41,6 +49,14 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
+  field_twitter:
+    type: link_default
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_web_address:
     weight: 3
     settings:
@@ -60,11 +76,9 @@ content:
 hidden:
   created: true
   field_address: true
-  field_facebook: true
   field_phone: true
   field_primary_services: true
   field_related_event: true
-  field_twitter: true
   path: true
   promote: true
   sticky: true
