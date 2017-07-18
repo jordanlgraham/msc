@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_newsletter_byline
     - field.field.node.newsletter_article.field_newsletter_image
+    - image.style.crop_test
     - node.type.newsletter_article
   module:
     - entity_print
@@ -42,9 +43,9 @@ content:
     third_party_settings: {  }
   field_newsletter_image:
     weight: 0
-    label: above
+    label: hidden
     settings:
-      image_style: ''
+      image_style: crop_test
       image_link: ''
     third_party_settings: {  }
     type: image

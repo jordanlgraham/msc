@@ -29,3 +29,7 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_event_category: true
+  field_tags: true
+  field_video_date: true
+  field_youtube_id: true
