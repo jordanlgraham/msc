@@ -153,7 +153,7 @@ class RealMagnetSend extends FormBase {
     // Capture the current date and time for use in MessageName to satisfy Real Magnet's unique MessageName constraint.
     $now = date("m-d-y h:i");
     // Concatenate title and date for unique MessageName.
-    $full_message_name = $message_name . $now;
+    $full_message_name = $message_name . ' ' . $now;
     // Now we post the newsletter to Real Magnet
     try {
       $request = $this->client->post('https://dna.magnetmail.net/ApiAdapter/Rest/CreateMessage/', [

@@ -1,0 +1,32 @@
+uuid: 8489bcb3-8dd2-4147-b434-7a5b34f65fb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_youtube_id
+    - node.type.video
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.video.field_youtube_id
+field_name: field_youtube_id
+entity_type: node
+bundle: video
+label: 'YouTube ID'
+description: 'Enter the ID of the YouTube video (e.g., enter 5XAaGZ5VCWM if the video link is https://youtu.be/5XAaGZ5VCWM).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
