@@ -6,7 +6,19 @@ dependencies:
     - field.storage.node.body
     - node.type.newsletter_article
   module:
+    - geocoder_field
     - text
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
 _core:
   default_config_hash: y94vilyQOO0gun4LGhfFaLSlaQ1Vf2A6BClHbQZ-tcA
 id: node.newsletter_article.body
