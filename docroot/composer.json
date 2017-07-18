@@ -56,8 +56,7 @@
         "drupal/image_widget_crop": "2.0",
         "drupal/twig_tweak": "1.8",
         "drupal/editor_advanced_link": "1.4",
-        "drupal/editor_file": "1.2",
-        "drupal/ckeditor_media_embed": "1.1"
+        "drupal/editor_file": "1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"
