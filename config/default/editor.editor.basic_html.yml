@@ -42,6 +42,7 @@ settings:
             - Blockquote
             - DrupalImage
             - DrupalFile
+            - EmbedSemantic
         -
           name: 'Block Formatting'
           items:
@@ -55,6 +56,8 @@ settings:
       language_list: un
     stylescombo:
       styles: ''
+    autoembed:
+      status: embedsemantic
 image_upload:
   status: true
   scheme: public
