@@ -99,7 +99,8 @@ class UninstallCommand extends Command
                 null,
                 InputOption::VALUE_NONE,
                 $this->trans('commands.module.uninstall.options.composer')
-            );
+            )
+            ->setAliases(['mou']);
     }
     /**
      * {@inheritdoc}
@@ -171,6 +172,7 @@ class UninstallCommand extends Command
         }
 
         if (!$force = $input->getOption('force')) {
+            $profile = drupal_get_profile();
             $dependencies = [];
             while (list($module) = each($moduleList)) {
                 foreach (array_keys($moduleData[$module]->required_by) as $dependency) {

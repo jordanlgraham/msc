@@ -89,7 +89,8 @@ class ExportViewCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 $this->trans('commands.config.export.view.options.include-module-dependencies')
-            );
+            )
+            ->setAliases(['cev']);
     }
 
     /**
@@ -171,6 +172,6 @@ class ExportViewCommand extends Command
             }
         }
 
-        $this->exportConfigToModule($module, $io, $this->trans('commands.views.export.messages.view_exported'));
+        $this->exportConfigToModule($module, $io, $this->trans('commands.views.export.messages.view-exported'));
     }
 }

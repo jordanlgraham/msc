@@ -22,7 +22,14 @@ use Drupal\migrate\Plugin\MigrationInterface;
 use Drupal\State\StateInterface;
 use Symfony\Component\Console\Command\Command;
 use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
+use Drupal\Console\Annotations\DrupalCommand;
 
+/**
+ * @DrupalCommand(
+ *     extension = "migrate",
+ *     extensionType = "module"
+ * )
+ */
 class ExecuteCommand extends Command
 {
     use DatabaseTrait;
@@ -41,8 +48,9 @@ class ExecuteCommand extends Command
      *
      * @param MigrationPluginManagerInterface $pluginManagerMigration
      */
-    public function __construct(MigrationPluginManagerInterface $pluginManagerMigration)
-    {
+    public function __construct(
+        MigrationPluginManagerInterface $pluginManagerMigration
+    ) {
         $this->pluginManagerMigration = $pluginManagerMigration;
         parent::__construct();
     }
@@ -112,8 +120,9 @@ class ExecuteCommand extends Command
                 'source-base_path',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                $this->trans('commands.migrate.execute.options.source-base_path')
-            );
+                $this->trans('commands.migrate.execute.options.source-base-path')
+            )
+            ->setAliases(['mie']);
         ;
     }
 
@@ -265,7 +274,7 @@ class ExecuteCommand extends Command
         $sourceBasepath = $input->getOption('source-base_path');
         if (!$sourceBasepath) {
             $sourceBasepath = $io->ask(
-                $this->trans('commands.migrate.setup.questions.source-base_path'),
+                $this->trans('commands.migrate.setup.questions.source-base-path'),
                 ''
             );
             $input->setOption('source-base_path', $sourceBasepath);

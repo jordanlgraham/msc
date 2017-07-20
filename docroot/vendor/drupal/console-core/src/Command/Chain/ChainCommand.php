@@ -130,17 +130,32 @@ class ChainCommand extends Command
 
         if ($missingInlinePlaceHolders) {
             foreach ($inlinePlaceHolders as $inlinePlaceHolder => $inlinePlaceHolderValue) {
-                $placeholder[] = sprintf(
-                    '%s:%s',
-                    $inlinePlaceHolder,
-                    $io->ask(
-                        sprintf(
-                            'Enter value for %s placeholder',
-                            $inlinePlaceHolder
-                        ),
-                        $inlinePlaceHolderValue
-                    )
-                );
+                if (is_array($inlinePlaceHolderValue)) {
+                    $placeholder[] = sprintf(
+                        '%s:%s',
+                        $inlinePlaceHolder,
+                        $io->choice(
+                            sprintf(
+                                $this->trans('commands.chain.message.select-value-for-placeholder'),
+                                $inlinePlaceHolder
+                            ),
+                            $inlinePlaceHolderValue,
+                            current($inlinePlaceHolderValue)
+                        )
+                    );
+                } else {
+                    $placeholder[] = sprintf(
+                        '%s:%s',
+                        $inlinePlaceHolder,
+                        $io->ask(
+                            sprintf(
+                                $this->trans('commands.chain.message.enter-value-for-placeholder'),
+                                $inlinePlaceHolder
+                            ),
+                            $inlinePlaceHolderValue
+                        )
+                    );
+                }
             }
             $input->setOption('placeholder', $placeholder);
         }
@@ -158,7 +173,7 @@ class ChainCommand extends Command
 
         $file = $input->getOption('file');
         if (!$file) {
-            $io->error($this->trans('commands.chain.messages.missing_file'));
+            $io->error($this->trans('commands.chain.messages.missing-file'));
 
             return 1;
         }
@@ -169,7 +184,7 @@ class ChainCommand extends Command
         if (!$fileSystem->exists($file)) {
             $io->error(
                 sprintf(
-                    $this->trans('commands.chain.messages.invalid_file'),
+                    $this->trans('commands.chain.messages.invalid-file'),
                     $file
                 )
             );
@@ -180,6 +195,12 @@ class ChainCommand extends Command
         // Resolve inlinePlaceHolders
         $chainContent = $this->chainDiscovery->getFileContents($file);
         $inlinePlaceHolders = $this->chainDiscovery->extractInlinePlaceHolders($chainContent);
+
+        foreach ($inlinePlaceHolders as $inlinePlaceHolder => $inlinePlaceHolderValue) {
+            if (is_array($inlinePlaceHolderValue)) {
+                $inlinePlaceHolders[$inlinePlaceHolder] = current($inlinePlaceHolderValue);
+            }
+        }
 
         $placeholder = $input->getOption('placeholder');
         if ($placeholder) {

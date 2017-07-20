@@ -61,13 +61,17 @@ class InstallCommand extends Command
         $this
             ->setName('theme:install')
             ->setDescription($this->trans('commands.theme.install.description'))
-            ->addArgument('theme', InputArgument::IS_ARRAY, $this->trans('commands.theme.install.options.module'))
+            ->addArgument(
+                'theme',
+                InputArgument::IS_ARRAY,
+                $this->trans('commands.theme.install.options.module')
+            )
             ->addOption(
                 'set-default',
                 null,
                 InputOption::VALUE_NONE,
                 $this->trans('commands.theme.install.options.set-default')
-            );
+            )->setAliases(['thi']);
     }
 
     /**
