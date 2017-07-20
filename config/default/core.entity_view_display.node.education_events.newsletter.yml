@@ -35,6 +35,9 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
   field_call_to_action: true
   field_end_date: true
   field_event_category: true
