@@ -1,1 +1,4 @@
 netforum_soap:
+  wsdl_address: 'https://netforum.avectra.com/xWeb/netForumXMLOnDemand.asmx?WSDL'
+  api_username: ''
+  api_password: ''

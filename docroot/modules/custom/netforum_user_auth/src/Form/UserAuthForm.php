@@ -91,13 +91,10 @@ class UserAuthForm extends FormBase {
         $user->enforceIsNew();
         $user->setEmail($email);
         $user->setUsername($email);
-
-        //todo: pull role list from config, which is already set up.
         $user->activate();
 
         // Save user account.
         $result = $user->save();
-        //todo: verify result
       }
       //whether they exist or have just been created, log the user in.
       user_login_finalize($user);
