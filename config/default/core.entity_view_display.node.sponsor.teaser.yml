@@ -25,4 +25,15 @@ content:
   links:
     weight: 100
     region: content
-hidden: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_address: true
+  field_facebook: true
+  field_logo: true
+  field_phone: true
+  field_primary_services: true
+  field_related_event: true
+  field_twitter: true
+  field_web_address: true
