@@ -1,5 +1,5 @@
-name: NetForum Authentication
+name: NetForum SOAP
 type: module
-description: NetForum Authentication
+description: NetForum SOAP
 core: 8.x
 package: NetForum

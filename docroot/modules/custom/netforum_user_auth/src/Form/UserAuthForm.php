@@ -5,7 +5,9 @@ namespace Drupal\netforum_user_auth\Form;
 use Exception;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\User\Entity\User;
+use Drupal\user\UserStorageInterface;
+use Drupal\netforum_soap\GetClient;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class UserAuthForm.
@@ -14,6 +16,23 @@ use Drupal\User\Entity\User;
  */
 class UserAuthForm extends FormBase {
 
+
+  //Typical Drupal $user object
+  protected $user;
+
+  //Netforum SOAP client from netforum_soap module.
+  protected $get_client;
+
+  public function __construct(UserStorageInterface $userStorage, GetClient $getClient) {
+    $this->user = $userStorage;
+    $this->get_client = $getClient;
+  }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity.manager')->getStorage('user'),
+      $container->get('netforum_soap.get_client')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -78,23 +97,27 @@ class UserAuthForm extends FormBase {
     }
   }
 
+  private function createUserFromNetForumUser($email, $password) {
+    $this->user->create();
+
+    // Mandatory fields.
+    $this->user->setPassword($password);
+    $this->user->enforceIsNew();
+    $this->user->setEmail($email);
+    $this->user->setUsername($email);
+    $this->user->activate();
+
+    // Save user account.
+    $this->user->save();
+  }
+
   private function Auth($email, $password) {
 
     $netforum_soap_result = $this->CheckEWebUser($email, $password);
     if($netforum_soap_result) {
       $user = user_load_by_mail($email);
       if(!$user) {
-        $user = User::create();
-
-        // Mandatory fields.
-        $user->setPassword($password);
-        $user->enforceIsNew();
-        $user->setEmail($email);
-        $user->setUsername($email);
-        $user->activate();
-
-        // Save user account.
-        $result = $user->save();
+        $user = $this->createUserFromNetForumUser($email, $password);
       }
       //whether they exist or have just been created, log the user in.
       user_login_finalize($user);
@@ -105,15 +128,15 @@ class UserAuthForm extends FormBase {
     }
   }
   private function CheckEWebUser($email, $password) {
-    $netforum_service = \Drupal::service('netforum_soap.get_token');
-    $client = $netforum_service->GetClient();
-    $responseHeaders = '';
+    $client = $this->get_client->GetClient();
     $params = array(
       'szEmail' => $email,
       'szPassword' => $password,
     );
+    $auth_headers = $this->get_client->getAuthHeaders();
+    $response_headers = $this->get_client->getResponseHeaders();
     try {
-      $response = $client->__soapCall('CheckEWebUser', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $responseHeaders);
+      $response = $client->__soapCall('CheckEWebUser', array('parameters' => $params), NULL, $auth_headers, $response_headers);
       if (!empty($response->CheckEWebUserResult->any)) {
         $xml = simplexml_load_string($response->CheckEWebUserResult->any);
         $json = json_encode($xml);

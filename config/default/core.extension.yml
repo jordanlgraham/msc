@@ -54,6 +54,8 @@ module:
   metatag_facebook: 0
   metatag_google_plus: 0
   metatag_open_graph: 0
+  netforum_soap: 0
+  netforum_user_auth: 0
   node: 0
   options: 0
   page_cache: 0
