@@ -1,4 +1,5 @@
 module:
+  abt: 0
   acquia_connector: 0
   address: 0
   admin_toolbar: 0
