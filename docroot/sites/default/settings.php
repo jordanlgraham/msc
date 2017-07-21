@@ -266,7 +266,7 @@ $config_directories = array();
  *
  * @see install_select_profile()
  */
-$settings['install_profile'] = 'standard';
+# $settings['install_profile'] = '';
 
 /**
  * Salt for one-time login links, cancel links, form tokens, etc.
@@ -532,6 +532,13 @@ if ($settings['hash_salt']) {
  */
 # $settings['file_private_path'] = '';
 
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  $settings['file_private_path'] = '/mnt/files/' . $_ENV['AH_SITE_GROUP'] . '.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
+}
+else {
+  $settings['file_private_path'] = '{path}';
+}
+
 /**
  * Session write interval:
  *
@@ -772,3 +779,11 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/cld_devcloud_msca_dev_default.inc';
 }
 // </DDSETTINGS>
+
+// Real Magnet API credentials config override
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  //set private_path
+  $private_path = '/mnt/files/' . $_ENV['AH_SITE_GROUP'] . '.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
+  require($private_path . '/real_magnet_settings.php');
+}
+
