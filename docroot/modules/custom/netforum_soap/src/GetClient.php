@@ -25,6 +25,7 @@ class GetClient {
     $client = $this->getClient();
 
     $params = array(
+
       'userName' => \Drupal::config('netforum_soap.netforumconfig')->get('api_username'),
       'password' => \Drupal::config('netforum_soap.netforumconfig')->get('api_password'),
     );

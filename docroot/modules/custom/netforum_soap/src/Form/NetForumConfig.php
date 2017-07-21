@@ -4,6 +4,9 @@ namespace Drupal\netforum_soap\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\user\UserStorageInterface;
+use Drupal\netforum_soap\GetClient;
 
 /**
  * Class NetForumConfig.
