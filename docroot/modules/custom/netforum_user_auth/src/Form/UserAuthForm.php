@@ -97,16 +97,16 @@ class UserAuthForm extends FormBase {
   //in which case this module should be updated to include a $params array as
   //the last argument so we can easily loop through it and create the user account
   //with those fields.
-  private function createUserFromNetForumUser($email, $password) {
+  private function createUserFromNetForumUser($email, $password, $user_attributes) {
     $created_user = $this->userStorage->create([
-      'email' => $email,
+      'mail' => $email,
       'password' => $password,
       'username' => $email,
-      'name' => $email,
+      'name' => $user_attributes['name'],
     ]);
     $created_user->enforceIsNew(TRUE);
     $created_user->activate();
-    $created_user->save();
+    
     $this->userStorage->save($created_user);
 
 //    exit();
@@ -115,11 +115,11 @@ class UserAuthForm extends FormBase {
 
   private function Auth($email, $password) {
 
-    $netforum_soap_result = $this->CheckEWebUser($email, $password);
-    if($netforum_soap_result) {
+    $user_attributes = $this->CheckEWebUser($email, $password);
+    if(!empty($user_attributes)) {
       $user = $this->userStorage->loadByProperties(['mail' => $email]);
       if(!$user) {
-        $user = $this->createUserFromNetForumUser($email, $password);
+        $user = $this->createUserFromNetForumUser($email, $password, $user_attributes);
       }
       //whether they exist or have just been created, log the user in.
       user_login_finalize($user);
@@ -146,7 +146,10 @@ class UserAuthForm extends FormBase {
         $json = json_encode($xml);
         $array = json_decode($json, TRUE);
         if (!empty($array['@attributes']['recordReturn']) && $array['@attributes']['recordReturn'] == '1') {
-          return true;
+          $attributes = array(
+            'name' => $array['Result']['cst_name_cp'],
+          );
+          return $attributes;
         }
         return false;
       }
