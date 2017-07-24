@@ -6,6 +6,7 @@ use Exception;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\UserStorageInterface;
+use Drupal\user\UserInterface;
 use Drupal\netforum_soap\GetClient;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -18,18 +19,18 @@ class UserAuthForm extends FormBase {
 
 
   //Typical Drupal $user object
-  protected $user;
+  protected $userStorage;
 
   //Netforum SOAP client from netforum_soap module.
   protected $get_client;
 
   public function __construct(UserStorageInterface $userStorage, GetClient $getClient) {
-    $this->user = $userStorage;
+    $this->userStorage = $userStorage;
     $this->get_client = $getClient;
   }
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager')->getStorage('user'),
+      $container->get('entity_type.manager')->getStorage('user'),
       $container->get('netforum_soap.get_client')
     );
   }
@@ -98,24 +99,26 @@ class UserAuthForm extends FormBase {
   }
 
   private function createUserFromNetForumUser($email, $password) {
-    $this->user->create();
+    $created_user = $this->userStorage->create([
+      'email' => $email,
+      'password' => $password,
+      'username' => $email,
+      'name' => $email,
+    ]);
+    $created_user->enforceIsNew(TRUE);
+    $created_user->activate();
+    $created_user->save();
+    $this->userStorage->save($created_user);
 
-    // Mandatory fields.
-    $this->user->setPassword($password);
-    $this->user->enforceIsNew();
-    $this->user->setEmail($email);
-    $this->user->setUsername($email);
-    $this->user->activate();
-
-    // Save user account.
-    $this->user->save();
+//    exit();
+    return $created_user;
   }
 
   private function Auth($email, $password) {
 
     $netforum_soap_result = $this->CheckEWebUser($email, $password);
     if($netforum_soap_result) {
-      $user = user_load_by_mail($email);
+      $user = $this->userStorage->loadByProperties(['mail' => $email]);
       if(!$user) {
         $user = $this->createUserFromNetForumUser($email, $password);
       }
