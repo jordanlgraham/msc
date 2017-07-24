@@ -1,0 +1,24 @@
+uuid: 45a42c1e-dc38-46b0-8397-ebc08168cccf
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - masquerade
+  theme:
+    - msca
+third_party_settings:
+  block_class:
+    classes: ''
+id: masquerade
+theme: msca
+region: sidebar_second
+weight: 0
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: Masquerade
+  provider: masquerade
+  label_display: visible
+visibility: {  }

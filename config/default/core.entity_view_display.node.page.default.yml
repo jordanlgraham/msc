@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_restrict_to_groups
     - node.type.page
   module:
     - text
@@ -22,7 +23,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_restrict_to_groups:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   links:
     weight: 101
     region: content
-hidden: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
