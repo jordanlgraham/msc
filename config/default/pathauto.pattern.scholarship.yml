@@ -1,0 +1,22 @@
+uuid: da080b5e-6979-4ab3-aa42-8b0f7602cea1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: scholarship
+label: Scholarship
+type: 'canonical_entities:node'
+pattern: 'foundation-scholarship-program/[node:title]'
+selection_criteria:
+  d17c3a3f-7e97-466b-947c-fc5abec7d37e:
+    id: node_type
+    bundles:
+      scholarships: scholarships
+    negate: false
+    context_mapping:
+      node: node
+    uuid: d17c3a3f-7e97-466b-947c-fc5abec7d37e
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,8 +1,9 @@
-uuid: 87950639-3b57-4fbd-84f2-1d38c155e33d
+uuid: 1a902a09-73e0-45ba-ae0b-f71a918ec1bf
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_edit
     - field.field.node.scholarship_recipient.field_current_title
     - field.field.node.scholarship_recipient.field_first_name
     - field.field.node.scholarship_recipient.field_hometown
@@ -11,19 +12,12 @@ dependencies:
     - field.field.node.scholarship_recipient.field_school
     - node.type.scholarship_recipient
   module:
-    - path
     - text
-id: node.scholarship_recipient.default
+id: node.scholarship_recipient.inline_edit
 targetEntityType: node
 bundle: scholarship_recipient
-mode: default
+mode: inline_edit
 content:
-  created:
-    type: datetime_timestamp
-    weight: 8
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_current_title:
     weight: 5
     settings:
@@ -72,26 +66,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  path:
-    type: path
-    weight: 11
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  promote:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 9
-    region: content
-    third_party_settings: {  }
-  sticky:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 10
-    region: content
-    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -100,13 +74,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  uid:
-    type: entity_reference_autocomplete
-    weight: 7
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    region: content
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

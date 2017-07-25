@@ -10,8 +10,8 @@ third_party_settings:
     parent: ''
 name: 'Scholarship Recipient'
 type: scholarship_recipient
-description: 'Used to fill in information about the scholarship recipient. To be used in the Scholarship Content Type.'
-help: ''
+description: 'Use <em>Scholarship Recipient</em> to fill in information about the scholarship recipient. To be used in the Scholarship Content Type.'
+help: 'Use <em>Scholarship Recipient</em> to fill in information about the scholarship recipient. To be used in the Scholarship Content Type.'
 new_revision: true
 preview_mode: 1
 display_submitted: false

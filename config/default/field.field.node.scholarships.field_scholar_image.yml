@@ -1,0 +1,28 @@
+uuid: b935e968-3de2-4534-b5d1-7d38559ce33f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_scholar_image
+    - media_entity.bundle.image
+    - node.type.scholarships
+id: node.scholarships.field_scholar_image
+field_name: field_scholar_image
+entity_type: node
+bundle: scholarships
+label: 'Scholarship Image'
+description: 'Upload or select an image.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

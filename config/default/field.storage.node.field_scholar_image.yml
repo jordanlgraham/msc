@@ -1,17 +1,16 @@
-uuid: adfb610a-431e-4b37-8512-47f07c453023
+uuid: 1ad362d0-e811-4b5c-902c-c03d42b28ecc
 langcode: en
 status: true
 dependencies:
   module:
+    - media_entity
     - node
-id: node.field_scholars_name
-field_name: field_scholars_name
+id: node.field_scholar_image
+field_name: field_scholar_image
 entity_type: node
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
+  target_type: media
 module: core
 locked: false
 cardinality: 1
