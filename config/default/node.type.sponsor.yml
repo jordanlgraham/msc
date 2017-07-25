@@ -10,8 +10,8 @@ third_party_settings:
     parent: ''
 name: Sponsor
 type: sponsor
-description: ''
-help: ''
-new_revision: false
+description: 'Use <em>Sponsor</em> for Gold, Silver and Bronze Event Sponsors.'
+help: 'Use <em>Sponsor</em> for Gold, Silver and Bronze Event Sponsors.'
+new_revision: true
 preview_mode: 1
 display_submitted: false

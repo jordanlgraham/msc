@@ -1,0 +1,14 @@
+uuid: 785494ac-da0f-4dd4-b9fd-e062064bfd31
+langcode: en
+status: true
+dependencies: {  }
+name: sponsor_logo_large_190x110_
+label: 'Sponsor logo large (190x110)'
+effects:
+  3a03b127-8fcd-4b6d-9cbe-3e198071a46a:
+    uuid: 3a03b127-8fcd-4b6d-9cbe-3e198071a46a
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 190
+      height: 110

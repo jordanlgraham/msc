@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_phone
     - field.field.node.sponsor.field_primary_services
     - field.field.node.sponsor.field_related_event
+    - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
     - node.type.sponsor
@@ -17,6 +19,7 @@ dependencies:
     - address
     - image
     - link
+    - options
     - text
     - user
 id: node.sponsor.default
@@ -40,6 +43,18 @@ content:
     region: content
   field_facebook:
     weight: 4
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_linkedin:
+    weight: 11
     label: above
     settings:
       trim_length: 80
@@ -82,6 +97,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_sponsorship_level:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_twitter:
     weight: 5

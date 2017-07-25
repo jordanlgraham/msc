@@ -1,0 +1,14 @@
+uuid: 416d2994-19cf-4a5b-91e0-9896d0a9e2a3
+langcode: en
+status: true
+dependencies: {  }
+name: sponsor_logo_small_140x87_
+label: 'Sponsor logo small (140x87)'
+effects:
+  ec9b1128-ccb0-4c27-a8a3-abcf78b413f9:
+    uuid: ec9b1128-ccb0-4c27-a8a3-abcf78b413f9
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 140
+      height: 87

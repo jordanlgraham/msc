@@ -41,7 +41,7 @@ forward_entity_file: false
 forward_file_file: false
 forward_entity_flagging: false
 forward_node_article: false
-forward_node_education_events: false
+forward_node_education_events: 0
 forward_node_facility: false
 forward_node_job_listings: false
 forward_node_newsletter: false
@@ -51,7 +51,7 @@ forward_node_page: false
 forward_node_resources: false
 forward_node_scholarships: 0
 forward_node_scholarship_recipient: 0
-forward_node_sponsor: false
+forward_node_sponsor: 0
 forward_node_vendor: false
 forward_entity_redirect: false
 forward_redirect_redirect: false

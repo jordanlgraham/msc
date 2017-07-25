@@ -1,0 +1,30 @@
+uuid: 7d00fbc5-fee7-4461-9e8d-6b25ebc99fa8
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_sponsorship_level
+field_name: field_sponsorship_level
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: gold
+      label: Gold
+    -
+      value: solver
+      label: Silver
+    -
+      value: bronze
+      label: Bronze
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

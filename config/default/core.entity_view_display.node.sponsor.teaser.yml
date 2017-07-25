@@ -5,8 +5,19 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.sponsor.body
+    - field.field.node.sponsor.field_address
+    - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_linkedin
+    - field.field.node.sponsor.field_logo
+    - field.field.node.sponsor.field_phone
+    - field.field.node.sponsor.field_primary_services
+    - field.field.node.sponsor.field_related_event
+    - field.field.node.sponsor.field_twitter
+    - field.field.node.sponsor.field_web_address
     - node.type.sponsor
   module:
+    - image
+    - link
     - text
     - user
 id: node.sponsor.teaser
@@ -17,23 +28,78 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 6
     settings:
-      trim_length: 600
+      trim_length: 300
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
+  field_facebook:
+    type: link_separate
+    weight: 2
     region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_linkedin:
+    type: link_separate
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_logo:
+    type: image
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+  field_twitter:
+    type: link_separate
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_web_address:
+    type: link_separate
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_address: true
-  field_facebook: true
-  field_logo: true
   field_phone: true
   field_primary_services: true
   field_related_event: true
-  field_twitter: true
-  field_web_address: true
