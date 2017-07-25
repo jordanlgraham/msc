@@ -106,10 +106,9 @@ class UserAuthForm extends FormBase {
     ]);
     $created_user->enforceIsNew(TRUE);
     $created_user->activate();
-    
+
     $this->userStorage->save($created_user);
 
-//    exit();
     return $created_user;
   }
 
@@ -120,7 +119,11 @@ class UserAuthForm extends FormBase {
       $user = $this->userStorage->loadByProperties(['mail' => $email]);
       if(!$user) {
         $user = $this->createUserFromNetForumUser($email, $password, $user_attributes);
+      } else {
+        $uid = key($user);
+        $user = $this->userStorage->load($uid);
       }
+
       //whether they exist or have just been created, log the user in.
       user_login_finalize($user);
       return true;
