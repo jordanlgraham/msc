@@ -1,0 +1,29 @@
+uuid: 38d725c4-c78b-452e-b7ea-c92cc5e655a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gold_sponsor
+    - node.type.education_events
+    - node.type.sponsor
+id: node.education_events.field_gold_sponsor
+field_name: field_gold_sponsor
+entity_type: node
+bundle: education_events
+label: 'Gold Sponsor'
+description: 'Add or select one or more Gold Sponsors for this event. These are the sponsors displayed on this Event page. Once added you can drag and drop to establish relative display order. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      sponsor: sponsor
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,20 +1,20 @@
-uuid: 3a893a56-6d56-4083-afc2-1b31993aacb1
+uuid: 73d01442-15ee-4593-b690-decaf3d691fa
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_web_address
+    - field.storage.node.field_linkedin
     - node.type.sponsor
   module:
     - link
-id: node.sponsor.field_web_address
-field_name: field_web_address
+id: node.sponsor.field_linkedin
+field_name: field_linkedin
 entity_type: node
 bundle: sponsor
-label: 'Web Address'
-description: ''
+label: LinkedIn
+description: 'Optional. Add a LinkedIn URL.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

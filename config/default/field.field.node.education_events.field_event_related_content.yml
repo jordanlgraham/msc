@@ -1,22 +1,20 @@
-uuid: 744d6024-2e75-4183-a0bd-1739dc22f66e
+uuid: 9debee11-f65b-4885-a801-19a72e831be1
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_related_event
+    - field.storage.node.field_event_related_content
     - node.type.education_events
     - node.type.newsletter_article
     - node.type.newsroom
     - node.type.resources
-    - node.type.sponsor
-    - node.type.video
-id: node.sponsor.field_related_event
-field_name: field_related_event
+id: node.education_events.field_event_related_content
+field_name: field_event_related_content
 entity_type: node
-bundle: sponsor
-label: 'Related Event'
-description: 'Required: Add or select a related event or, if no event is available, please add or select some other node of content (e.g., Resource, News Article, etc.)'
-required: true
+bundle: education_events
+label: 'Event Related Content'
+description: 'Add or select one node of related content to be displayed in sidebar on this Event page.'
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -28,9 +26,9 @@ settings:
       newsletter_article: newsletter_article
       newsroom: newsroom
       resources: resources
-      video: video
     sort:
-      field: _none
+      field: nid
+      direction: DESC
     auto_create: false
-    auto_create_bundle: education_events
+    auto_create_bundle: newsroom
 field_type: entity_reference

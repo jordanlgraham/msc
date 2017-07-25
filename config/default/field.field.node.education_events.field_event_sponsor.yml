@@ -1,0 +1,29 @@
+uuid: c25bbb69-6988-469f-b583-5f9e31731b5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_sponsor
+    - node.type.education_events
+    - node.type.sponsor
+id: node.education_events.field_event_sponsor
+field_name: field_event_sponsor
+entity_type: node
+bundle: education_events
+label: Sponsor
+description: 'Add or select one or more non-gold Sponsors for this event. These are the non-gold sponsors displayed when visitor clicks on "View all." Once added you can drag and drop to establish relative display order. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      sponsor: sponsor
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -11,8 +11,8 @@ third_party_settings:
     parent: 'main:'
 name: 'Education & Events'
 type: education_events
-description: ''
-help: ''
+description: 'Use <em>Education & Events</em> for upcoming events displayed throughout site (and in exported newsletters).'
+help: 'Use <em>Education & Events</em> for upcoming events displayed throughout site (and in exported newsletters).'
 new_revision: true
 preview_mode: 1
 display_submitted: false

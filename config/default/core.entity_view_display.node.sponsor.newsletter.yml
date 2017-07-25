@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_phone
     - field.field.node.sponsor.field_primary_services
@@ -36,6 +37,18 @@ content:
   field_facebook:
     type: link
     weight: 4
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_linkedin:
+    type: link
+    weight: 6
     region: content
     label: hidden
     settings:
