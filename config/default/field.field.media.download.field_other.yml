@@ -1,0 +1,27 @@
+uuid: 1199421d-1205-4c8e-85e2-7ff23b0ae9a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_other
+    - media_entity.bundle.download
+id: media.download.field_other
+field_name: field_other
+entity_type: media
+bundle: download
+label: Other
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      download: download
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

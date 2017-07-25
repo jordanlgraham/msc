@@ -1,0 +1,20 @@
+uuid: 7eb44d11-999b-4911-bd56-bf270f1a2a09
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_entity_image
+third_party_settings:
+  crop:
+    image_field: field_image
+id: image
+label: Image
+description: 'For Image files.'
+type: image
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  source_field: field_image
+  gather_exif: false
+field_map: {  }

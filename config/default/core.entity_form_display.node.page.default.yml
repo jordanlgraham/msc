@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_related_content
     - field.field.node.page.field_restrict_to_groups
     - node.type.page
   module:
@@ -18,7 +19,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 7
+    weight: 1
     settings:
       rows: 9
       summary_rows: 3
@@ -27,12 +28,21 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 3
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     region: content
+  field_related_content:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_restrict_to_groups:
-    weight: 1
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -42,7 +52,7 @@ content:
     region: content
   path:
     type: path
-    weight: 6
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -50,14 +60,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 4
+    weight: 6
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 5
+    weight: 7
     third_party_settings: {  }
     region: content
   title:
@@ -70,7 +80,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
