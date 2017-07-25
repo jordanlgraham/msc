@@ -1,0 +1,12 @@
+uuid: 089fa811-94a0-446f-88d1-5d6448badab0
+langcode: en
+status: true
+dependencies: {  }
+label: 'Body image'
+id: body_image
+description: 'Crop type for use with embedded images in Body fields.'
+aspect_ratio: ''
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

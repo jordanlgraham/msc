@@ -26,6 +26,11 @@ module:
   editor: 0
   editor_advanced_link: 0
   editor_file: 0
+  embed: 0
+  entity: 0
+  entity_browser: 0
+  entity_browser_entity_form: 0
+  entity_embed: 0
   entity_print: 0
   entityqueue: 0
   facility_search: 0
@@ -50,6 +55,9 @@ module:
   insert: 0
   link: 0
   masquerade: 0
+  media_entity: 0
+  media_entity_browser: 0
+  media_entity_image: 0
   menu_ui: 0
   metatag: 0
   metatag_facebook: 0

@@ -1,0 +1,17 @@
+uuid: fe513162-d8a4-4775-b444-05f1a4a9779f
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: null
+id: download
+label: Download
+description: 'Files in formats like PDF and DOC.'
+type: generic
+queue_thumbnail_downloads: false
+new_revision: true
+type_configuration: {  }
+field_map: {  }

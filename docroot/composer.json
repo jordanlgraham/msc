@@ -56,7 +56,12 @@
         "drupal/image_widget_crop": "2.0",
         "drupal/twig_tweak": "1.8",
         "drupal/editor_advanced_link": "1.4",
-        "drupal/editor_file": "1.2"
+        "drupal/editor_file": "1.2",
+        "drupal/media_entity": "1.6",
+        "drupal/media_entity_browser": "1.0-beta3",
+        "drupal/media_entity_image": "1.2",
+        "drupal/embed": "1.0",
+        "drupal/entity_embed": "1.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"

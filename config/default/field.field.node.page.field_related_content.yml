@@ -1,0 +1,37 @@
+uuid: 61cf2376-8c29-44eb-8a11-ed8ca7b37f03
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_content
+    - node.type.article
+    - node.type.education_events
+    - node.type.facility
+    - node.type.newsletter_article
+    - node.type.page
+    - node.type.resources
+id: node.page.field_related_content
+field_name: field_related_content
+entity_type: node
+bundle: page
+label: 'Related Content'
+description: 'Select up to 3 nodes of related content (e.g., events, resources, articles). These will display beneath the main body text. Enter part of the node title and autocomplete will suggest possible options. Tip: if you don''t see a node you need, make sure it is published.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      article: article
+      education_events: education_events
+      facility: facility
+      newsletter_article: newsletter_article
+      resources: resources
+    sort:
+      field: nid
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: facility
+field_type: entity_reference
