@@ -1,0 +1,7 @@
+netforum_event_sync.event_sync_form:
+  title: 'Event Sync Form'
+  route_name: netforum_event_sync.event_sync_form
+  description: 'Event Sync Form'
+  parent: system.admin_config_services
+  weight: 99
+

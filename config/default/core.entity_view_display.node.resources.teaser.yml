@@ -56,3 +56,4 @@ hidden:
   field_external_resource: true
   field_file: true
   field_related_content: true
+  field_resource_category: true

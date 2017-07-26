@@ -4,8 +4,12 @@ namespace Drupal\netforum_org_sync\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\netforum_soap\GetClient;
 use Drupal\node\Entity\Node;
-use SoapClient;
+use Drupal\node\NodeStorageInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 use Exception;
 
 /**
@@ -13,8 +17,22 @@ use Exception;
  *
  * @package Drupal\netforum_org_sync\Form
  */
-class OrganizationSyncForm extends ConfigFormBase {
 
+class OrganizationSyncForm extends ConfigFormBase {
+  protected $node_storage;
+
+  protected $get_client;
+
+  public function __construct(NodeStorageInterface $nodeStorage, GetClient $getClient) {
+    $this->node_storage = $nodeStorage;
+    $this->get_client = $getClient;
+  }
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('entity.manager')->getStorage('node'),
+      $container->get('netforum_soap.get_client')->getClient()
+    );
+  }
   /**
    * {@inheritdoc}
    */
@@ -48,25 +66,18 @@ class OrganizationSyncForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
     $this->config('netforum_org_sync.organizationsync')
       ->set('org_types', $form_state->getValue('org_types'))
       ->save();
-    $syncOrganizations = $this->syncOrganizations();
+    $this->syncOrganizations();
   }
   
   private function loadOrgNode($cst_key = false, $type = false) {
     if(!empty($cst_key)) {
-      $query = \Drupal::entityQuery('node');
+      $query = $this->node_storage->getQuery();
       $query->condition('status', 1);
       $query->condition('type', $type);
       $query->condition('field_customer_key', $cst_key);
@@ -88,61 +99,78 @@ class OrganizationSyncForm extends ConfigFormBase {
         //If the API returns an organization as an "associate,"
         //the organization should be in the vendor content type,
         //not the facility content type.
-        if($this->cleanField($organization['OrgCode']) == 'Associate') {
+        if($this->cleanSoapField($organization['OrgCode']) == 'Associate') {
           $org_type = 'vendor';
         } else {
           $org_type = 'facility';
         }
         $existing_node = $this->loadOrgNode($cst_key, $org_type);
         if(empty($existing_node)) {
-          $node = Node::create(['type' => $org_type]);
+          $node = $this->node_storage->create(['type' => $org_type]);
         } else {
-          $node = Node::load($existing_node);
+          $node = $this->node_storage->load($existing_node);
         }
 
-        if($org_type == 'vendor' && !empty($organization['SortName'])) {
-          //field_primary_services
-          //field_additional_services
-          //field_contact
-          //field_contact_title
-          //field_facebook
-          //field_phone
-          $node->set('title', $this->cleanField($organization['SortName']));
-          $node->field_web_address = $this->cleanField($organization['CstWebSite']);
-          $node->field_address->country_code = 'US';
-          $node->field_address->administrative_area = $this->cleanField($organization['AddressState']);
-          $node->field_address->locality = $this->cleanField($organization['AddressCity']);
-          $node->field_address->postal_code = $this->cleanField($organization['AddressZip']);
-          $node->field_address->address_line1 = $this->cleanField($organization['AddressLine1']);
-          $node->field_address->address_line2 = $this->cleanField($organization['AddressLine2']);
-          $node->set('field_twitter', $this->cleanField($organization['TwitterName']));
-          $node->set('field_email', $this->cleanField($organization['EmailAddress']));
-          $node->save();
+        if($org_type == 'vendor' && !empty($organization['org_name'])) {
+          try {
+            $node->set('title', $this->cleanSoapField($organization['org_name']));
+
+            //todo: test address fields
+            $node->field_address->country_code = 'US';
+            $node->field_address->administrative_area = $this->cleanSoapField($organization['adr_state']);
+            $node->field_address->locality = $this->cleanSoapField($organization['adr_city']);
+            $node->field_address->postal_code = $this->cleanSoapField($organization['adr_post_code']);
+            $node->field_address->address_line1 = $this->cleanSoapField($organization['adr_line_1']);
+            $node->field_address->address_line2 = $this->cleanSoapField($organization['adr_line_2']);
+
+            //todo: lookup saving taxonomy
+            //todo: parse primary services field
+            //todo: check for existing taxonomy, if it doesn't exist, create it
+
+            //$node->set('field_primary_services');
+            //$node->set('field_additional_services');
+
+            //todo: Need an example of an org that has a Twitter and Facebook filled out
+            //todo: Load these ancillary contact info fields
+            //$node->set('field_contact');
+            //$node->set('field_contact_title');
+            //$node->set('field_email');
+            //$node->set('field_phone');
+            //$node->set('field_web_address');
+            //$node->set('field_facebook');
+            //$node->set('field_twitter');
+            //$node->set('field_web_address', $this->cleanSoapField($organization['CstWebSite']));
+            $node->set('field_email', $this->cleanSoapField($organization['EmailAddress']));
+            $node->validate();
+            $node->save();
 //          $node->set('field_')
-          //todo: handle vendors
+            //todo: handle vendors
+          } catch (Exception $e) {
+
+          }
         }
 
         //We definitely need a title or this function will cause a fatal error,
-        //thus we check for $organization['SortName'].
+        //thus we check for $organization['org_name'].
 
-        elseif(!empty($organization['SortName'])) {
-          $node->set('title', $this->cleanField($organization['SortName']));
-          $node->set('field_customer_key', $this->cleanField($organization['cst_key']));
+        elseif(!empty($organization['org_name'])) {
+          $node->set('title', $this->cleanSoapField($organization['org_name']));
+          $node->set('field_customer_key', $this->cleanSoapField($organization['cst_key']));
           $node->field_address->country_code = 'US';
-          $node->field_address->administrative_area = $this->cleanField($organization['AddressState']);
-          $node->field_address->locality = $this->cleanField($organization['AddressCity']);
-          $node->field_address->postal_code = $this->cleanField($organization['AddressZip']);
-          $node->field_address->address_line1 = $this->cleanField($organization['AddressLine1']);
-          $node->field_address->address_line2 = $this->cleanField($organization['AddressLine2']);
-          $node->set('field_customer_type', $this->cleanField($organization['CustomerType']));
-          $node->set('field_member_flag', $this->cleanField($organization['MemberFlag']));
-          $node->set('field_customer_id', $this->cleanField($organization['CustomerID']));
-          $node->set('field_customer_web_site', $this->cleanField($organization['CstWebSite']));
-          $node->set('field_customer_phone_number', $this->cleanField($organization['PhoneNumber']));
-          $node->set('field_customer_fax_number', $this->cleanField($organization['FaxNumber']));
+          $node->field_address->administrative_area = $this->cleanSoapField($organization['AddressState']);
+          $node->field_address->locality = $this->cleanSoapField($organization['AddressCity']);
+          $node->field_address->postal_code = $this->cleanSoapField($organization['AddressZip']);
+          $node->field_address->address_line1 = $this->cleanSoapField($organization['AddressLine1']);
+          $node->field_address->address_line2 = $this->cleanSoapField($organization['AddressLine2']);
+          $node->set('field_customer_type', $this->cleanSoapField($organization['CustomerType']));
+          $node->set('field_member_flag', $this->cleanSoapField($organization['MemberFlag']));
+          $node->set('field_customer_id', $this->cleanSoapField($organization['CustomerID']));
+          $node->set('field_customer_web_site', $this->cleanSoapField($organization['CstWebSite']));
+          $node->set('field_customer_phone_number', $this->cleanSoapField($organization['PhoneNumber']));
+          $node->set('field_customer_fax_number', $this->cleanSoapField($organization['FaxNumber']));
           $node->save();
         } else {
-          $message = t('Facility with customer key @cst_key returned from API with no facility name (SortName).', array('@cst_key' => $organization['cst_key']));
+          $message = $this->t('Facility with customer key @cst_key returned from API with no facility name (SortName).', array('@cst_key' => $organization['cst_key']));
           \Drupal::logger('NetForum Organization Sync')->error($message);
         }
       }
@@ -151,8 +179,8 @@ class OrganizationSyncForm extends ConfigFormBase {
 
   private function getOrganizations() {
     $responseHeaders = '';
-    $facility_types= explode("\n", str_replace("\r", "", \Drupal::config('netforum_org_sync.organizationsync')->get('org_types')));
-    $netforum_service = \Drupal::service('netforum_soap.get_token');
+    $facility_types = explode("\n", str_replace("\r", "", $this->config('netforum_org_sync.organizationsync')->get('org_types')));
+    $netforum_service = $this->get_client;
     $client = $netforum_service->getClient();
     //todo: handle more than 300 records
     
@@ -183,11 +211,14 @@ class OrganizationSyncForm extends ConfigFormBase {
     //an associative, multi-level array that will include all the
     $orgs = array();
     foreach($facility_cst_keys as $cst_key) {
-      $params = array('szCstKey' => $cst_key);
+      $params = array(
+        'szObjectKey' => $cst_key,
+        'ns:szObjectName' => 'organization',
+      );
 
       try {
-        $response = $client->__soapCall('GetCustomerByKey', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $responseHeaders);
-        if(!empty($response->GetCustomerByKeyResult->any)) {
+        $response = $client->__soapCall('GetFacadeObject', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $responseHeaders);
+        if(!empty($response->GetFacadeObjectResult->OrganizationObject)) {
           $xml = simplexml_load_string($response->GetCustomerByKeyResult->any);
           $json = json_encode($xml);
           $array = json_decode($json, TRUE);
@@ -208,7 +239,7 @@ class OrganizationSyncForm extends ConfigFormBase {
    * If an XML field returns a value, it simply returns back the value. If the value is empty,
    * it returns an empty string.
    */
-  private function cleanField($field) {
+  private function cleanSoapField($field) {
     if(!empty($field)) {
       return $field;
     } else {

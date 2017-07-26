@@ -1,0 +1,20 @@
+uuid: 6d439166-610b-4bd0-bc8b-80cb300a5085
+langcode: en
+status: true
+dependencies:
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: msca_theme_page_title
+theme: msca_theme
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

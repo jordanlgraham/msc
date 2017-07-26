@@ -1,0 +1,11 @@
+
+netforum_event_sync.event_sync_form:
+  path: '/admin/config/netforum_event_sync/eventsync'
+  defaults:
+    _form: '\Drupal\netforum_event_sync\Form\EventSyncForm'
+    _title: 'EventSyncForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

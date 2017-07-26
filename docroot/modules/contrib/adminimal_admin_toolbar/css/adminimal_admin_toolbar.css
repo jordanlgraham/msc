@@ -372,47 +372,65 @@
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-admin-toolbar-tools-help:before,
-.adminimal-admin-toolbar .toolbar-icon-admin-toolbar-tools-help:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-admin-toolbar-tools-help:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-admin-toolbar-tools-help:active:before,
+.adminimal-admin-toolbar .toolbar-icon-admin-toolbar-tools-help.is-active:before {
   background-image: url(../images/ffffff/drupal-8.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-admin-content:before,
-.adminimal-admin-toolbar .toolbar-icon-system-admin-content:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-admin-content:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-content:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-content.is-active:before {
   background-image: url(../images/ffffff/file.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-admin-structure:before,
-.adminimal-admin-toolbar .toolbar-icon-system-admin-structure:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-admin-structure:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-structure:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-structure.is-active:before {
   background-image: url(../images/ffffff/orgchart.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-themes-page:before,
-.adminimal-admin-toolbar .toolbar-icon-system-themes-page:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-themes-page:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-themes-page:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-themes-page.is-active:before {
   background-image: url(../images/ffffff/paintbrush.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-entity-user-collection:before,
-.adminimal-admin-toolbar .toolbar-icon-entity-user-collection:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-entity-user-collection:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-entity-user-collection:active:before,
+.adminimal-admin-toolbar .toolbar-icon-entity-user-collection.is-active:before {
   background-image: url(../images/ffffff/people.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-modules-list:before,
-.adminimal-admin-toolbar .toolbar-icon-system-modules-list:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-modules-list:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-modules-list:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-modules-list.is-active:before {
   background-image: url(../images/ffffff/puzzlepiece.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-admin-config:before,
-.adminimal-admin-toolbar .toolbar-icon-system-admin-config:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-admin-config:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-config:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-config.is-active:before {
   background-image: url(../images/ffffff/wrench.svg);
 }
 
 .adminimal-admin-toolbar .toolbar-tray-horizontal .menu-item--expanded:hover .toolbar-icon-system-admin-reports:before,
-.adminimal-admin-toolbar .toolbar-icon-system-admin-reports:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-system-admin-reports:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-reports:active:before,
+.adminimal-admin-toolbar .toolbar-icon-system-admin-reports.is-active:before {
   background-image: url(../images/ffffff/barchart.svg);
 }
 
 .adminimal-admin-toolbar .menu-item--expanded:hover .toolbar-icon-help-main:before,
-.adminimal-admin-toolbar .toolbar-icon-help-main:hover:before {
+.adminimal-admin-toolbar .toolbar-icon-help-main:hover:before,
+.adminimal-admin-toolbar .toolbar-icon-help-main:active:before,
+.adminimal-admin-toolbar .toolbar-icon-help-main.is-active:before {
   background-image: url(../images/ffffff/questionmark-disc.svg);
 }
 

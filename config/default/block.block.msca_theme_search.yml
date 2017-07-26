@@ -1,0 +1,22 @@
+uuid: 67b063f8-a7a5-4a9e-9982-7782cbfab8cb
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: za-39d5WDUg6XvbyqSnuVYEeq6QM4qKJxW8MnoAha5A
+id: msca_theme_search
+theme: msca_theme
+region: content
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: visible
+visibility: {  }

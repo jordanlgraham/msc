@@ -1,5 +1,5 @@
 (function ($, Drupal) {
-  Drupal.behaviors.msca_menu = {
+  Drupal.behaviors.biodex_menu = {
     attach: function attach(context, settings) {
 
       // Mainmenu object
