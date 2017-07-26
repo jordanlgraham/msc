@@ -1,0 +1,28 @@
+uuid: 76868c16-4b61-4015-8d7f-0c49e5d7895c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vendor_logo
+    - media_entity.bundle.image
+    - node.type.vendor
+id: node.vendor.field_vendor_logo
+field_name: field_vendor_logo
+entity_type: node
+bundle: vendor
+label: 'Vendor Logo'
+description: 'Optional. Add or select a logo image to display for this vendor.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
