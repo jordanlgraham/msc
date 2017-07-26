@@ -1,0 +1,10 @@
+base:
+  version: VERSION
+  css:
+    theme:
+      style.css: {}
+      //fonts.googleapis.com/css?family=Roboto:300,400,700: { type: external }
+  js:
+    scripts.js: {}
+  dependencies:
+    - core/jquery

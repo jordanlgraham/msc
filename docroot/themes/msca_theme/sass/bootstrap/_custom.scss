@@ -1,0 +1,52 @@
+// Bootstrap overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+
+// Colors
+$purple: #654f6f;
+$purple-light: #8c7c92;
+$blue: #495e87;
+$blue-gray: #7c8aa7;
+$blue-lighter: #a4aec3;
+$blue-lightest: #d1d7e1;
+$gray: #99a1a6;
+$gray-lightest: #eceef3;
+$gray-dark: #535257;
+
+$gray-bg: #f6f6f6;
+
+$orange: #e9ab45;
+
+$white-translucent: rgba($white, .7);
+
+// Fonts
+$font-family-sans-serif: 'Roboto', sans-serif;
+$font-family-base: 'Roboto', sans-serif;
+
+$font-size-h1: 40/16 * 1rem; // 40px
+$font-size-h2: 30/16 * 1rem; // 30px
+
+$font-size-medium: 22/16 * 1rem; // 24px
+$font-size-base: 18/16 * 1rem; // 18px
+$font-size-small: 14/16 * 1rem; // 14px
+$font-size-xs: 12/16 * 1rem; // 12px
+
+$font-weight-base: 200;
+
+// General
+$border-radius: 0;
+$border-radius-lg: 10px;
+$border-radius-sm: 0;
+
+// Button
+$btn-primary-bg: $purple;
+$btn-padding-y: 10px;
+$btn-padding-x: 10px;
+$input-btn-border-width: 0;
+$btn-padding-y-sm: 5px;
+$btn-border-radius-sm: 0;
+$btn-border-radius: 0;
+
+$btn-secondary-color: #fff; // dev
+$btn-secondary-bg: $orange;
