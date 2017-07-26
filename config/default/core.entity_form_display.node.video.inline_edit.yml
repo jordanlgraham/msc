@@ -1,8 +1,9 @@
-uuid: 73ab0610-250d-4d50-90b4-3c94a01caa85
+uuid: 3a2407cc-3183-49a5-ad9e-0acc8982da37
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_edit
     - field.field.node.video.body
     - field.field.node.video.field_event_category
     - field.field.node.video.field_related_content
@@ -13,67 +14,64 @@ dependencies:
   module:
     - datetime
     - text
-    - user
-id: node.video.default
+id: node.video.inline_edit
 targetEntityType: node
 bundle: video
-mode: default
+mode: inline_edit
 content:
   body:
-    label: hidden
-    type: text_default
-    weight: 5
-    settings: {  }
+    type: text_textarea_with_summary
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
     third_party_settings: {  }
     region: content
   field_event_category:
-    weight: 1
-    label: hidden
+    weight: 3
     settings:
-      link: true
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_related_content:
-    weight: 6
-    label: above
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: entity_reference_autocomplete
     region: content
   field_tags:
-    weight: 3
-    label: inline
+    weight: 5
     settings:
-      link: true
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_autocomplete
     region: content
   field_video_date:
-    weight: 2
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: direct
+    weight: 4
+    settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_youtube_id:
-    weight: 4
-    label: hidden
+    weight: 2
     settings:
-      link_to_entity: false
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: string
+    type: string_textfield
     region: content
-  links:
+  title:
+    type: string_textfield
     weight: 0
     region: content
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
 hidden:
-  entity_print_view_epub: true
-  entity_print_view_pdf: true
-  entity_print_view_word_docx: true
+  created: true
+  field_related_content: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

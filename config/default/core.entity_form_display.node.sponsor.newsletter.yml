@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.sponsor.field_facebook
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
-    - field.field.node.sponsor.field_phone
     - field.field.node.sponsor.field_primary_services
     - field.field.node.sponsor.field_related_event
     - field.field.node.sponsor.field_sponsorship_level
@@ -92,7 +91,6 @@ content:
 hidden:
   created: true
   field_address: true
-  field_phone: true
   field_primary_services: true
   field_related_event: true
   path: true

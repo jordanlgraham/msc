@@ -12,16 +12,16 @@ field_name: field_file
 entity_type: node
 bundle: resources
 label: 'Upload Document'
-description: ''
+description: 'Upload one or more files in downloadable formats (txt, pdf, doc, docx)'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: resources
   file_extensions: 'txt pdf doc docx'
-  max_filesize: ''
-  description_field: false
+  max_filesize: 20MB
+  description_field: true
   handler: 'default:file'
   handler_settings: {  }
 field_type: file

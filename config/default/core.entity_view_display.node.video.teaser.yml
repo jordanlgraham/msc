@@ -5,6 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.video.body
+    - field.field.node.video.field_event_category
+    - field.field.node.video.field_related_content
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video_date
+    - field.field.node.video.field_youtube_id
     - node.type.video
   module:
     - text
@@ -17,19 +22,29 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 2
     settings:
-      trim_length: 600
+      trim_length: 300
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
+  field_tags:
+    type: entity_reference_label
+    weight: 1
     region: content
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_event_category: true
-  field_tags: true
+  field_related_content: true
   field_video_date: true
   field_youtube_id: true

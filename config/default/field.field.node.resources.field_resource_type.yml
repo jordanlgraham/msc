@@ -1,0 +1,28 @@
+uuid: c94ccda1-ceef-421e-aff0-5e7d34d82701
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_resource_type
+    - node.type.resources
+    - taxonomy.vocabulary.resource_type
+id: node.resources.field_resource_type
+field_name: field_resource_type
+entity_type: node
+bundle: resources
+label: 'Resource Type'
+description: 'Select the type of resource (e.g., Fact sheet, Report, etc.).'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      resource_type: resource_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

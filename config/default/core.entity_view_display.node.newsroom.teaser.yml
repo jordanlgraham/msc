@@ -5,6 +5,12 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.newsroom.body
+    - field.field.node.newsroom.field_news_release_date
+    - field.field.node.newsroom.field_news_source
+    - field.field.node.newsroom.field_news_subtitle
+    - field.field.node.newsroom.field_news_teaser_image
+    - field.field.node.newsroom.field_newsroom_category
+    - field.field.node.newsroom.field_related_content
     - node.type.newsroom
   module:
     - text
@@ -19,15 +25,21 @@ content:
     type: text_summary_or_trimmed
     weight: 101
     settings:
-      trim_length: 600
+      trim_length: 300
     third_party_settings: {  }
     region: content
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_news_release_date: true
   field_news_source: true
+  field_news_subtitle: true
+  field_news_teaser_image: true
   field_newsroom_category: true
+  field_related_content: true

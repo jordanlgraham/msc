@@ -12,12 +12,12 @@ field_name: field_news_source
 entity_type: node
 bundle: newsroom
 label: 'News Source'
-description: ''
+description: 'Enter URL of original source of this item.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 17
-  title: 1
+  link_type: 16
+  title: 2
 field_type: link
