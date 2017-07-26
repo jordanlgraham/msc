@@ -4,15 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.node.resources.body
-    - field.field.node.resources.field_accessible_by
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
+    - field.field.node.resources.field_related_content
+    - field.field.node.resources.field_resource_category
+    - field.field.node.resources.field_resource_type
     - field.field.node.resources.field_tags
     - node.type.resources
   module:
     - file
     - link
-    - options
     - text
     - user
 id: node.resources.default
@@ -23,20 +24,13 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 3
     settings: {  }
     third_party_settings: {  }
-    region: content
-  field_accessible_by:
-    weight: 104
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
   field_external_resource:
-    weight: 105
-    label: above
+    weight: 5
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -47,24 +41,43 @@ content:
     type: link
     region: content
   field_file:
-    weight: 103
-    label: above
+    weight: 4
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: file_default
     region: content
-  field_tags:
-    weight: 102
+  field_related_content:
+    weight: 6
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  links:
-    weight: 100
+  field_resource_type:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
+  field_tags:
+    weight: 2
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_resource_category: true

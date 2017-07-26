@@ -12,12 +12,12 @@ field_name: field_facebook
 entity_type: node
 bundle: vendor
 label: Facebook
-description: ''
+description: 'Enter full URL for vendor''s Facebook page (e.g., https://www.facebook.com/example).'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  link_type: 17
+  link_type: 16
   title: 0
 field_type: link

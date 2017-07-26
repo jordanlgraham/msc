@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_email
     - field.field.node.vendor.field_facebook
+    - field.field.node.vendor.field_linkedin
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
@@ -24,96 +25,113 @@ bundle: vendor
 mode: default
 content:
   field_additional_services:
-    weight: 112
-    label: above
+    weight: 11
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_address:
-    weight: 102
-    label: above
+    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_contact:
-    weight: 103
-    label: above
+    weight: 5
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_contact_title:
-    weight: 104
-    label: above
+    weight: 6
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_email:
-    weight: 105
-    label: above
+    weight: 3
+    label: inline
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: email_mailto
     region: content
   field_facebook:
-    weight: 106
-    label: above
+    weight: 7
+    label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_linkedin:
+    weight: 9
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
     third_party_settings: {  }
     type: link
     region: content
   field_phone:
-    weight: 107
-    label: above
+    weight: 2
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_primary_services:
-    weight: 111
-    label: above
+    weight: 10
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_twitter:
-    weight: 110
-    label: above
+    weight: 8
+    label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
     third_party_settings: {  }
     type: link
     region: content
   field_web_address:
-    weight: 108
-    label: above
+    weight: 4
+    label: hidden
     settings:
       trim_length: 80
+      target: _blank
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
     third_party_settings: {  }
-    type: link
+    type: link_separate
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
-hidden: {  }
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

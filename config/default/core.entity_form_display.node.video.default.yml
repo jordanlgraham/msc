@@ -3,14 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_edit
     - field.field.node.video.body
     - field.field.node.video.field_event_category
+    - field.field.node.video.field_related_content
     - field.field.node.video.field_tags
     - field.field.node.video.field_video_date
     - field.field.node.video.field_youtube_id
     - node.type.video
   module:
     - datetime
+    - entity_browser_entity_form
+    - inline_entity_form
     - path
     - text
 id: node.video.default
@@ -20,7 +24,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 5
+    weight: 1
     settings:
       rows: 9
       summary_rows: 3
@@ -29,12 +33,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_event_category:
-    weight: 2
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
@@ -42,8 +46,23 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_related_content:
+    weight: 6
+    settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   field_tags:
-    weight: 4
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -52,13 +71,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_video_date:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_youtube_id:
-    weight: 1
+    weight: 2
     settings:
       size: 60
       placeholder: ''
@@ -67,7 +86,7 @@ content:
     region: content
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -75,14 +94,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     region: content
     third_party_settings: {  }
   title:
@@ -95,7 +114,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

@@ -10,7 +10,7 @@ id: node.vendor.field_primary_services
 field_name: field_primary_services
 entity_type: node
 bundle: vendor
-label: 'Primary Services'
+label: 'Primary Service'
 description: ''
 required: false
 translatable: false

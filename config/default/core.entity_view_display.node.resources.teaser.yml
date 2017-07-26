@@ -5,6 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.resources.body
+    - field.field.node.resources.field_external_resource
+    - field.field.node.resources.field_file
+    - field.field.node.resources.field_related_content
+    - field.field.node.resources.field_resource_type
+    - field.field.node.resources.field_tags
     - node.type.resources
   module:
     - text
@@ -17,14 +22,32 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 101
+    weight: 3
     settings:
-      trim_length: 600
+      trim_length: 300
     third_party_settings: {  }
     region: content
-  links:
-    weight: 100
+  field_resource_type:
+    type: entity_reference_label
+    weight: 1
     region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -32,4 +55,4 @@ hidden:
   field_accessible_by: true
   field_external_resource: true
   field_file: true
-  field_tags: true
+  field_related_content: true

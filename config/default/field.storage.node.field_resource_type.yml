@@ -1,12 +1,12 @@
-uuid: 4a6c6089-1ce6-4dc6-b80b-afbbf4e8acd5
+uuid: 7bc21bf5-de25-422c-bbd1-94a187a993f0
 langcode: en
 status: true
 dependencies:
   module:
     - node
     - taxonomy
-id: node.field_primary_services
-field_name: field_primary_services
+id: node.field_resource_type
+field_name: field_resource_type
 entity_type: node
 type: entity_reference
 settings:

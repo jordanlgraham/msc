@@ -9,9 +9,9 @@ dependencies:
     - field.field.node.sponsor.field_facebook
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
-    - field.field.node.sponsor.field_phone
     - field.field.node.sponsor.field_primary_services
     - field.field.node.sponsor.field_related_event
+    - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
     - node.type.sponsor
@@ -100,6 +100,6 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_address: true
-  field_phone: true
   field_primary_services: true
   field_related_event: true
+  field_sponsorship_level: true

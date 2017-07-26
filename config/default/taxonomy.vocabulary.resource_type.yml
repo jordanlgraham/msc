@@ -1,0 +1,9 @@
+uuid: 18d3c354-6a49-44c5-b21a-bf51d5ad3a21
+langcode: en
+status: true
+dependencies: {  }
+name: 'Resource Type'
+vid: resource_type
+description: 'e.g., Fact Sheet, Report, etc.'
+hierarchy: 0
+weight: 0

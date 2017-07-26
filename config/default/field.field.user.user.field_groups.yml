@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.user.field_groups
     - taxonomy.vocabulary.group
+  content:
+    - 'taxonomy_term:group:9cf5079c-fb07-48d8-9675-7afcff4f0470'
   module:
     - user
 id: user.user.field_groups
@@ -15,7 +17,9 @@ label: Group(s)
 description: 'Select groups user belongs to. This controls which content user can view and edit.'
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: 9cf5079c-fb07-48d8-9675-7afcff4f0470
 default_value_callback: ''
 settings:
   handler: 'default:taxonomy_term'
