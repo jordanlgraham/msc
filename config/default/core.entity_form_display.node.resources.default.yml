@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_edit
     - field.field.node.resources.body
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
@@ -12,7 +13,9 @@ dependencies:
     - field.field.node.resources.field_tags
     - node.type.resources
   module:
+    - entity_browser_entity_form
     - file
+    - inline_entity_form
     - link
     - path
     - text
@@ -54,11 +57,17 @@ content:
   field_related_content:
     weight: 7
     settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
     region: content
   field_resource_category:
     weight: 2
