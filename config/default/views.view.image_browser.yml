@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.media_entity_browser_thumbnail
+    - image.style.cropped_preview_thumbnail
     - media_entity.bundle.image
   module:
     - entity_browser
@@ -72,7 +72,7 @@ display:
         type: grid
         options:
           grouping: {  }
-          columns: 4
+          columns: 5
           automatic_width: true
           alignment: horizontal
           col_class_default: true
@@ -188,7 +188,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: media_entity_browser_thumbnail
+            image_style: cropped_preview_thumbnail
             image_link: ''
           group_column: ''
           group_columns: {  }

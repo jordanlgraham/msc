@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.cropped_thumbnail
+    - image.style.cropped_preview_thumbnail
   module:
     - image
     - media_entity
@@ -241,7 +241,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: cropped_thumbnail
+            image_style: cropped_preview_thumbnail
             image_link: ''
           group_column: ''
           group_columns: {  }
