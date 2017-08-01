@@ -8,7 +8,7 @@ dependencies:
     - field.field.node.scholarships.field_recipient
     - field.field.node.scholarships.field_related_content
     - field.field.node.scholarships.field_scholar_image
-    - image.style.cropped_body_image
+    - image.style.c
     - node.type.scholarships
   module:
     - media_entity
@@ -54,7 +54,7 @@ content:
     weight: 1
     label: hidden
     settings:
-      image_style: cropped_body_image
+      image_style: c
       image_link: ''
     third_party_settings: {  }
     type: media_thumbnail
