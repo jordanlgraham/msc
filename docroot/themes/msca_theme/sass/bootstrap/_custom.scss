@@ -3,44 +3,62 @@
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
 
+// Animation
+* {
+  transition: all 0.1s ease;
+}
+
+
+
 // Colors
-$purple: #654f6f;
-$purple-light: #8c7c92;
-$blue: #495e87;
-$blue-gray: #7c8aa7;
-$blue-lighter: #a4aec3;
-$blue-lightest: #d1d7e1;
-$gray: #99a1a6;
-$gray-lightest: #eceef3;
-$gray-dark: #535257;
+$darker-blue: #003e66;
+$dark-blue: #005a84;
+$blue: #2378cb;
+$light-blue: #83b7be;
 
-$gray-bg: #f6f6f6;
+$dark-gray: #3a3a3a;
+$gray: #999999;
+$light-gray: #ececec;
 
-$orange: #e9ab45;
+$body-color: $gray;
+$headings-color: $dark-gray;
 
-$white-translucent: rgba($white, .7);
+$orange: #ff7e00;
+$green: #14674d;
+
+$twitter-blue: #00aced;
+$facebook-blue: #3a589a;
+$foundation-green: #3e846c;
 
 // Fonts
-$font-family-sans-serif: 'Roboto', sans-serif;
-$font-family-base: 'Roboto', sans-serif;
+$lato: 'Lato', sans-serif;
+$font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-$font-size-h1: 40/16 * 1rem; // 40px
-$font-size-h2: 30/16 * 1rem; // 30px
+$font-size-h1: 28/16 * 1rem; // 28px
+$font-size-h2: 1rem; // 16px
+$font-size-h3: 1rem; // 16px
+$font-size-h4: 1rem; // 16px
+$font-size-h5: 1rem; // 16px
 
-$font-size-medium: 22/16 * 1rem; // 24px
-$font-size-base: 18/16 * 1rem; // 18px
+$headings-font-family: $lato;
+
+$font-size-medium: 22/16 * 1rem; // 22px
+$font-size-base: 1rem; // 16px
 $font-size-small: 14/16 * 1rem; // 14px
 $font-size-xs: 12/16 * 1rem; // 12px
 
-$font-weight-base: 200;
+$headings-margin-bottom: 1rem;
 
 // General
-$border-radius: 0;
+/*$border-radius: 0;
 $border-radius-lg: 10px;
-$border-radius-sm: 0;
+$border-radius-sm: 0;*/
 
 // Button
-$btn-primary-bg: $purple;
+
+
+/*$btn-primary-bg: $purple;
 $btn-padding-y: 10px;
 $btn-padding-x: 10px;
 $input-btn-border-width: 0;
@@ -49,4 +67,4 @@ $btn-border-radius-sm: 0;
 $btn-border-radius: 0;
 
 $btn-secondary-color: #fff; // dev
-$btn-secondary-bg: $orange;
+$btn-secondary-bg: $orange;*/

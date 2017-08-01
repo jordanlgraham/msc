@@ -8,19 +8,6 @@ img {
   box-sizing: border-box;
 }
 
-a {
-  color: $blue;
-}
-
-.section-padding {
-  padding-top: $grid-gutter-width-base;
-  padding-bottom: $grid-gutter-width-base;
-}
-
-.img-border {
-  border: solid $gray-bg 1px;
-}
-
 // Hidden but still available for accessibility
 .visually-hidden {
   position: absolute;
@@ -29,3 +16,4 @@ a {
   height: 1px; width: 1px;
   margin: -1px; padding: 0; border: 0;
 }
+

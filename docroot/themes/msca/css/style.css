@@ -1,0 +1,19 @@
+.facility-search .views-exposed-form label,
+.facility-search .views-exposed-form .form-type-select.form-item-proximity label {
+  display: none; }
+
+.facility-search .views-exposed-form .form-type-select label {
+  display: inline-block; }
+
+.facility-search .views-exposed-form .form-item {
+  margin: 0 15px 15px 0;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.facility-search .views-row {
+  margin-bottom: 20px; }
+  .facility-search .views-row .organization {
+    font-weight: bold;
+    font-size: 20px; }

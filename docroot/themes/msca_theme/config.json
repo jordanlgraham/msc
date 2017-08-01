@@ -1,7 +1,7 @@
 {
-  "name": "biodex",
-  "description": "A theme based on Radix.",
-  "browserSyncProxy" : "http://panopoly.dev",
+  "name": "msca_theme",
+  "description": "A theme based on Bootstrap 4.",
+  "browserSyncProxy" : "https://www.getbootstrap.com",
   "bowerDir": "./bower_components",
   "css": {
     "file" : "scrumorg.style.scss",
