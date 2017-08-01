@@ -1,0 +1,96 @@
+/*
+  IMPORTANT: This file is only intended to handle a few special items on the Style Guide page itself at /msca-style-guide-documentation
+  These classes should not be used elsewhere.
+*/
+.style-guide-font-stack {
+  font-size: $font-size-base * 1.5;
+}
+
+.style-guide-font-stack p {
+  margin-top: 2rem;
+}
+
+.lato {
+  font-family: 'Lato', sans-serif;
+}
+
+.lato-bold {
+  font-weight: 700
+}
+
+.lato-black {
+  font-weight: 900
+}
+
+.italic {
+  font-style: italic;
+}
+
+.helvetica {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.helvetica-bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.small-link {
+  font-weight: normal;
+}
+
+.swatch {
+  border: 1px solid $light-gray;
+  width: 150px;
+  height: 150px;
+  padding: .25rem;
+  display: inline-block;
+}
+
+.swatch.swatch-small {
+  width: 100px;
+  height: 100px;
+}
+
+.swatch div {
+  width: 100%;
+  height: 100%;
+}
+.swatch-1 {
+  background-color: $darker-blue;
+}
+
+.swatch-2 {
+  background-color: $dark-blue;
+}
+
+.swatch-3 {
+  background-color: $blue;
+}
+
+.swatch-4 {
+  background-color: $light-blue;
+}
+
+.swatch-5 {
+  background-color: $dark-gray;
+}
+
+.swatch-6 {
+  background-color: $gray;
+}
+
+.swatch-7 {
+  background-color: $light-gray;
+}
+
+.swatch-complementary-1 {
+  background-color: $orange;
+}
+
+.swatch-complementary-2 {
+  background-color: $green;
+}

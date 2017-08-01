@@ -13,14 +13,11 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
-    - field.field.node.vendor.field_vendor_logo
     - field.field.node.vendor.field_web_address
-    - image.style.sponsor_logo_large_190x110_
     - node.type.vendor
   module:
     - address
     - link
-    - media_entity
     - user
 id: node.vendor.default
 targetEntityType: node
@@ -28,7 +25,7 @@ bundle: vendor
 mode: default
 content:
   field_additional_services:
-    weight: 12
+    weight: 11
     label: inline
     settings:
       link: false
@@ -36,14 +33,14 @@ content:
     type: entity_reference_label
     region: content
   field_address:
-    weight: 2
+    weight: 1
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_contact:
-    weight: 6
+    weight: 5
     label: inline
     settings:
       link_to_entity: false
@@ -51,7 +48,7 @@ content:
     type: string
     region: content
   field_contact_title:
-    weight: 7
+    weight: 6
     label: inline
     settings:
       link_to_entity: false
@@ -59,14 +56,14 @@ content:
     type: string
     region: content
   field_email:
-    weight: 4
+    weight: 3
     label: inline
     settings: {  }
     third_party_settings: {  }
     type: email_mailto
     region: content
   field_facebook:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       trim_length: 80
@@ -78,34 +75,6 @@ content:
     type: link
     region: content
   field_linkedin:
-    weight: 10
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: true
-      url_plain: true
-      target: _blank
-      rel: '0'
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_phone:
-    weight: 3
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_primary_services:
-    weight: 11
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_twitter:
     weight: 9
     label: hidden
     settings:
@@ -117,17 +86,36 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  field_vendor_logo:
-    weight: 1
+  field_phone:
+    weight: 2
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_primary_services:
+    weight: 10
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_twitter:
+    weight: 8
     label: hidden
     settings:
-      image_style: sponsor_logo_large_190x110_
-      image_link: ''
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
     third_party_settings: {  }
-    type: media_thumbnail
+    type: link
     region: content
   field_web_address:
-    weight: 5
+    weight: 4
     label: hidden
     settings:
       trim_length: 80

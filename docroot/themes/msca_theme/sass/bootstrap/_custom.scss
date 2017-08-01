@@ -1,0 +1,70 @@
+// Bootstrap overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+
+// Animation
+* {
+  transition: all 0.1s ease;
+}
+
+
+
+// Colors
+$darker-blue: #003e66;
+$dark-blue: #005a84;
+$blue: #2378cb;
+$light-blue: #83b7be;
+
+$dark-gray: #3a3a3a;
+$gray: #999999;
+$light-gray: #ececec;
+
+$body-color: $gray;
+$headings-color: $dark-gray;
+
+$orange: #ff7e00;
+$green: #14674d;
+
+$twitter-blue: #00aced;
+$facebook-blue: #3a589a;
+$foundation-green: #3e846c;
+
+// Fonts
+$lato: 'Lato', sans-serif;
+$font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-size-h1: 28/16 * 1rem; // 28px
+$font-size-h2: 1rem; // 16px
+$font-size-h3: 1rem; // 16px
+$font-size-h4: 1rem; // 16px
+$font-size-h5: 1rem; // 16px
+
+$headings-font-family: $lato;
+
+$font-size-medium: 22/16 * 1rem; // 22px
+$font-size-base: 1rem; // 16px
+$font-size-small: 14/16 * 1rem; // 14px
+$font-size-xs: 12/16 * 1rem; // 12px
+
+$headings-margin-bottom: 1rem;
+
+// General
+/*$border-radius: 0;
+$border-radius-lg: 10px;
+$border-radius-sm: 0;*/
+
+// Button
+
+
+/*$btn-primary-bg: $purple;
+$btn-padding-y: 10px;
+$btn-padding-x: 10px;
+$input-btn-border-width: 0;
+$btn-padding-y-sm: 5px;
+$btn-border-radius-sm: 0;
+$btn-border-radius: 0;
+
+$btn-secondary-color: #fff; // dev
+$btn-secondary-bg: $orange;*/

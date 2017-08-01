@@ -1,0 +1,25 @@
+uuid: a23ffb33-d577-4186-bda9-7212ff3a4e7f
+langcode: en
+status: true
+dependencies:
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: msca_theme_local_tasks
+theme: msca_theme
+region: content
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

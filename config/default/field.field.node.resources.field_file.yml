@@ -12,7 +12,7 @@ field_name: field_file
 entity_type: node
 bundle: resources
 label: 'Upload Document'
-description: 'Upload one or more files in downloadable formats (txt, pdf, doc, docx). Once you add the first file, you will see widget to "Add a new file." Alternatively, you can upload multiple files in a single operation, by shift-clicking when file browsing.'
+description: 'Upload one or more files in downloadable formats (txt, pdf, doc, docx)'
 required: false
 translatable: false
 default_value: {  }

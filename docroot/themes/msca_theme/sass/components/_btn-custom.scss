@@ -1,0 +1,91 @@
+.btn {
+  border-radius: 0;
+  border: none;
+  position: relative;
+  padding-left: 3rem;
+  padding-right: 5rem;
+  font-size: $font-size-small;
+  line-height: 1.6;
+  &:after {
+    content: '>';
+    position: absolute;
+    width: 2rem;
+    background-color: #000;
+    opacity: 0.2;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &.disabled {
+    background-color: inherit;
+    opacity: 0.8;
+  }
+}
+
+.btn-primary {
+  background-color: $orange;
+  &:hover {
+    background-color: lighten($orange, 10%)
+  }
+}
+
+.btn-secondary {
+  background-color: $blue;
+  color: $white;
+  &:hover {
+    background-color: lighten($blue, 10%);
+    color: $white;
+  }
+}
+
+.btn-outline-primary {
+  background-color: $white;
+  border: 2px solid $dark-gray;
+  color: $dark-gray;
+  &:after {
+    background-color: $white;
+    color: $dark-gray;
+    border-left: 2px solid $dark-gray;
+    opacity: 1;
+    &:hover {
+      background-color: $dark-gray;
+      color: $white;
+    }
+  }
+  &:hover {
+    background-color: $dark-gray;
+    color: $white;
+    border: 2px solid $dark-gray;
+  }
+
+}
+
+.btn-twitter {
+  background-color: $twitter-blue;
+  color: $white;
+  &:hover {
+    background-color: lighten($twitter-blue, 10%);
+    color: $white;
+  }
+}
+
+.btn-facebook {
+  background-color: $facebook-blue;
+  color: $white;
+  &:hover {
+    color: $white;
+    background-color: lighten($facebook-blue, 10%)
+  }
+}
+
+.btn-foundation {
+  background-color: $foundation-green;
+  color: $white;
+  &:hover {
+    background-color: lighten($foundation-green, 10%);
+    color: $white;
+  }
+}
