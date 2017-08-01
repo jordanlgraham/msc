@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_related_content
-    - node.type.article
     - node.type.education_events
     - node.type.facility
     - node.type.newsletter_article
@@ -24,7 +23,6 @@ settings:
   handler: 'default:node'
   handler_settings:
     target_bundles:
-      article: article
       education_events: education_events
       facility: facility
       newsletter_article: newsletter_article
