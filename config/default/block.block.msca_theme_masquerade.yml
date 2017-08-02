@@ -1,6 +1,6 @@
 uuid: eaec1b63-364d-49d7-9ddd-cb4347486392
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - block_class
@@ -13,7 +13,7 @@ third_party_settings:
 id: msca_theme_masquerade
 theme: msca_theme
 region: content
-weight: 0
+weight: -3
 provider: null
 plugin: masquerade
 settings:

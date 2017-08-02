@@ -1,6 +1,6 @@
 uuid: 7422eaf0-6bdb-4e20-bba5-e0bebbddef78
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - system.menu.main
@@ -12,8 +12,8 @@ _core:
   default_config_hash: rx9IrdDv7Ldc4kpalZAxdhIPZfYIeOMh1N-qKoQZwHo
 id: msca_theme_main_menu
 theme: msca_theme
-region: content
-weight: -6
+region: navigation
+weight: -8
 provider: null
 plugin: 'system_menu_block:main'
 settings:
