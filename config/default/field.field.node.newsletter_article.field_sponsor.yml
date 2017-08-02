@@ -1,21 +1,19 @@
-uuid: af95c1df-f742-4e6d-a266-aa2724dec2ef
+uuid: 51644aec-45ca-4e19-a530-40e8c4a4ea34
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_sponsor
-    - node.type.newsletter
+    - node.type.newsletter_article
     - node.type.sponsor
-_core:
-  default_config_hash: 4vcJ7r0vmUH0t6CYjqDUgD3JwoEXo2dhUR4FZ7PBJYQ
-id: node.newsletter.field_sponsor
+id: node.newsletter_article.field_sponsor
 field_name: field_sponsor
 entity_type: node
-bundle: newsletter
+bundle: newsletter_article
 label: 'Sponsored By'
-description: 'Select or add a sponsor for this issue of the Newsletter.'
+description: 'Optional. Add or select one Sponsor for this newsletter article.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

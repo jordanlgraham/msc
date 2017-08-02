@@ -7,16 +7,16 @@ dependencies:
 id: newsletter
 label: Newsletter
 type: 'canonical_entities:node'
-pattern: 'newsletter/[node:title]'
+pattern: 'member-resources/e-news-updates/[node:title]'
 selection_criteria:
-  49933374-3332-4f08-aef8-da29cde9f172:
+  ce7c95a5-6738-4645-af16-dc3064e6a03b:
     id: node_type
     bundles:
       newsletter_article: newsletter_article
     negate: false
     context_mapping:
       node: node
-    uuid: 49933374-3332-4f08-aef8-da29cde9f172
+    uuid: ce7c95a5-6738-4645-af16-dc3064e6a03b
 selection_logic: and
 weight: -5
 relationships: {  }

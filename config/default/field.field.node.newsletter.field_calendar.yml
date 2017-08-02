@@ -12,7 +12,7 @@ id: node.newsletter.field_calendar
 field_name: field_calendar
 entity_type: node
 bundle: newsletter
-label: Calendar
+label: 'Upcoming Education & Events'
 description: 'Select or add events for the Calendar section of this issue of the Newsletter.'
 required: false
 translatable: false

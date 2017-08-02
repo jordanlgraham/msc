@@ -1,0 +1,28 @@
+uuid: 9a758c9a-85ca-4bfa-9212-591e44c9a8d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic
+    - node.type.newsletter_article
+    - taxonomy.vocabulary.tags
+id: node.newsletter_article.field_topic
+field_name: field_topic
+entity_type: node
+bundle: newsletter_article
+label: Topic
+description: 'Optional. Add Topic for this article.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
