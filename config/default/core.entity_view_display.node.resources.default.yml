@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.resources.body
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
+    - field.field.node.resources.field_gated
     - field.field.node.resources.field_related_content
     - field.field.node.resources.field_resource_category
     - field.field.node.resources.field_resource_type
@@ -80,4 +81,5 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
   field_resource_category: true

@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_email
     - field.field.node.vendor.field_facebook
+    - field.field.node.vendor.field_gated
     - field.field.node.vendor.field_linkedin
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
@@ -26,12 +27,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 13
     settings: {  }
     third_party_settings: {  }
     region: content
   field_additional_services:
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -40,21 +41,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_address:
-    weight: 5
+    weight: 6
     settings:
       default_country: null
     third_party_settings: {  }
     type: address_default
     region: content
   field_contact:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_contact_title:
     weight: 7
     settings:
       size: 60
@@ -62,31 +55,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_email:
-    weight: 9
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: email_default
-    region: content
-  field_facebook:
-    weight: 1
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
-  field_linkedin:
-    weight: 3
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: link_default
-    region: content
-  field_phone:
+  field_contact_title:
     weight: 8
     settings:
       size: 60
@@ -94,8 +63,47 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_primary_services:
+  field_email:
     weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_facebook:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_gated:
+    weight: 1
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_linkedin:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_phone:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_primary_services:
+    weight: 11
     settings:
       match_operator: CONTAINS
       size: 60
@@ -104,7 +112,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_twitter:
-    weight: 2
+    weight: 3
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -112,7 +120,7 @@ content:
     type: link_default
     region: content
   field_web_address:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -121,7 +129,7 @@ content:
     region: content
   path:
     type: path
-    weight: 14
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -129,14 +137,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 16
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 17
     third_party_settings: {  }
     region: content
   title:
@@ -149,7 +157,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 14
     settings:
       match_operator: CONTAINS
       size: 60

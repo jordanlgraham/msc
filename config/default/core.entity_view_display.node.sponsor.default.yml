@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_gated
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
@@ -114,5 +115,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
   field_related_event: true
   field_sponsorship_level: true

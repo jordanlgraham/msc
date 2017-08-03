@@ -6,6 +6,7 @@ dependencies:
     - core.entity_form_mode.node.inline_edit
     - entity_browser.browser.image_browser
     - field.field.node.scholarships.body
+    - field.field.node.scholarships.field_gated
     - field.field.node.scholarships.field_past_recipient_s_
     - field.field.node.scholarships.field_recipient
     - field.field.node.scholarships.field_related_content
@@ -33,41 +34,18 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_gated:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_past_recipient_s_:
-    weight: 4
-    settings:
-      form_mode: inline_edit
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
-  field_recipient:
-    weight: 3
-    settings:
-      form_mode: inline_edit
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
-  field_related_content:
     weight: 5
     settings:
       form_mode: inline_edit
@@ -82,8 +60,38 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
+  field_recipient:
+    weight: 4
+    settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_related_content:
+    weight: 6
+    settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   field_scholar_image:
-    weight: 2
+    weight: 3
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
@@ -98,7 +106,7 @@ content:
     region: content
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -106,14 +114,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     region: content
     third_party_settings: {  }
   title:
@@ -126,7 +134,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

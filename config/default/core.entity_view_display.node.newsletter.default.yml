@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_featured_article
+    - field.field.node.newsletter.field_gated
     - field.field.node.newsletter.field_newsletter_article
     - field.field.node.newsletter.field_newsletter_date
     - field.field.node.newsletter.field_sponsor
@@ -73,3 +74,4 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
