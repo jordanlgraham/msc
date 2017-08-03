@@ -1,0 +1,31 @@
+input {
+  @extend .form-control;
+}
+
+table {
+  @extend .table;
+  @extend .table-hover;
+}
+
+.nav-tabs li {
+  @extend .nav-item;
+}
+.nav-tabs li a {
+  @extend .nav-link;
+}
+
+//Theme the local tasks tabs for admins
+#block-msca-theme-local-tasks ul {
+  @extend .nav;
+  @extend .nav-tabs;
+  margin-bottom: 1rem;
+}
+#block-msca-theme-local-tasks li {
+  @extend .nav-item;
+}
+#block-msca-theme-local-tasks li a {
+  @extend .nav-link;
+}
+#block-msca-theme-local-tasks .is-active {
+  @extend .active;
+}
