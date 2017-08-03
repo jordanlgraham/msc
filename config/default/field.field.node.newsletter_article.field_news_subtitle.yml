@@ -1,0 +1,32 @@
+uuid: 36b53a80-c617-4a2f-ae98-5f4470a3c252
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_subtitle
+    - node.type.newsletter_article
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.newsletter_article.field_news_subtitle
+field_name: field_news_subtitle
+entity_type: node
+bundle: newsletter_article
+label: 'News Subtitle'
+description: 'Optional. Add subtitle to be displayed beneath article''s title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
