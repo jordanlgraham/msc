@@ -1,0 +1,23 @@
+uuid: 7d24c3d6-4ba7-425d-8998-f42c10aef09c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gated
+    - node.type.scholarships
+id: node.scholarships.field_gated
+field_name: field_gated
+entity_type: node
+bundle: scholarships
+label: 'Gated?'
+description: 'Enable this if you want only authenticated members to see this full content. All visitors will still be able to see Title and excerpt of text.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Gated
+  off_label: Public
+field_type: boolean

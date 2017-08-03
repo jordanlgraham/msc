@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.resources.body
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
+    - field.field.node.resources.field_gated
     - field.field.node.resources.field_related_content
     - field.field.node.resources.field_resource_category
     - field.field.node.resources.field_resource_type
@@ -31,7 +32,7 @@ content:
     third_party_settings: {  }
     region: content
   field_external_resource:
-    weight: 5
+    weight: 6
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -39,15 +40,22 @@ content:
     type: link_default
     region: content
   field_file:
-    weight: 4
+    weight: 5
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_resource_category:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -55,7 +63,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_resource_type:
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
@@ -64,7 +72,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_tags:
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60

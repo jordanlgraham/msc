@@ -6,6 +6,7 @@ dependencies:
     - core.entity_form_mode.node.inline_edit
     - field.field.node.video.body
     - field.field.node.video.field_event_category
+    - field.field.node.video.field_gated
     - field.field.node.video.field_related_content
     - field.field.node.video.field_tags
     - field.field.node.video.field_video_date
@@ -29,7 +30,7 @@ content:
     third_party_settings: {  }
     region: content
   field_event_category:
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
@@ -37,8 +38,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_tags:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -47,13 +55,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_video_date:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_youtube_id:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''

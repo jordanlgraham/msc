@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_gated
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
@@ -36,15 +37,22 @@ content:
     region: content
   field_facebook:
     type: link_default
-    weight: 5
+    weight: 6
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_gated:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_linkedin:
     type: link_default
-    weight: 7
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
@@ -66,14 +74,14 @@ content:
     third_party_settings: {  }
   field_twitter:
     type: link_default
-    weight: 6
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
   field_web_address:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.newsroom.body
+    - field.field.node.newsroom.field_gated
     - field.field.node.newsroom.field_news_release_date
     - field.field.node.newsroom.field_news_source
     - field.field.node.newsroom.field_news_subtitle
@@ -94,3 +95,4 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
