@@ -13,7 +13,6 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
-    - field.field.node.vendor.field_vendor_logo
     - field.field.node.vendor.field_web_address
     - image.style.sponsor_logo_large_190x110_
     - node.type.vendor
@@ -116,15 +115,6 @@ content:
       rel: '0'
     third_party_settings: {  }
     type: link
-    region: content
-  field_vendor_logo:
-    weight: 1
-    label: hidden
-    settings:
-      image_style: sponsor_logo_large_190x110_
-      image_link: ''
-    third_party_settings: {  }
-    type: media_thumbnail
     region: content
   field_web_address:
     weight: 5

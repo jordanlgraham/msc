@@ -1,6 +1,6 @@
 uuid: 657fd7a1-8277-4bff-98fe-f537389c48b2
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - system.menu.footer
@@ -12,8 +12,8 @@ _core:
   default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
 id: msca_theme_footer
 theme: msca_theme
-region: content
-weight: -6
+region: footer
+weight: -8
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

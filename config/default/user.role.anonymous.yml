@@ -15,7 +15,5 @@ permissions:
   - 'access site-wide contact form'
   - 'entity print access bundle newsletter'
   - 'entity print access bundle newsletter_article'
-  - 'flag bookmark'
   - 'search content'
-  - 'unflag bookmark'
   - 'use text format restricted_html'

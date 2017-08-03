@@ -24,11 +24,13 @@ settings:
         -
           name: Formatting
           items:
+            - Format
             - Bold
             - Italic
             - Strike
             - Superscript
             - Subscript
+            - Blockquote
             - '-'
             - RemoveFormat
         -
@@ -41,19 +43,23 @@ settings:
           items:
             - BulletedList
             - NumberedList
+            - Table
         -
           name: Media
           items:
-            - Blockquote
             - DrupalImage
             - media_entity_embed
             - DrupalFile
-            - Table
             - HorizontalRule
         -
           name: 'Block Formatting'
           items:
-            - Format
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - Outdent
+            - Indent
         -
           name: Tools
           items:
