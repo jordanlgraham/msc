@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.education_events.field_event_category
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
     - node.type.education_events
@@ -77,6 +78,16 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
+  field_gated:
+    weight: 9
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_gold_sponsor:
     weight: 7

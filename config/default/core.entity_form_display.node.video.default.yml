@@ -6,6 +6,7 @@ dependencies:
     - core.entity_form_mode.node.inline_edit
     - field.field.node.video.body
     - field.field.node.video.field_event_category
+    - field.field.node.video.field_gated
     - field.field.node.video.field_related_content
     - field.field.node.video.field_tags
     - field.field.node.video.field_video_date
@@ -33,12 +34,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   field_event_category:
-    weight: 3
+    weight: 4
     settings:
       match_operator: CONTAINS
       size: 60
@@ -46,8 +47,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_gated:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_related_content:
-    weight: 6
+    weight: 7
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -62,7 +70,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_tags:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       size: 60
@@ -71,13 +79,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_video_date:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_youtube_id:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -86,7 +94,7 @@ content:
     region: content
   path:
     type: path
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -94,14 +102,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 10
+    weight: 11
     region: content
     third_party_settings: {  }
   title:
@@ -114,7 +122,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 7
+    weight: 8
     settings:
       match_operator: CONTAINS
       size: 60

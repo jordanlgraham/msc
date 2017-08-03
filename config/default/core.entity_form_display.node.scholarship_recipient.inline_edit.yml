@@ -6,6 +6,7 @@ dependencies:
     - core.entity_form_mode.node.inline_edit
     - field.field.node.scholarship_recipient.field_current_title
     - field.field.node.scholarship_recipient.field_first_name
+    - field.field.node.scholarship_recipient.field_gated
     - field.field.node.scholarship_recipient.field_hometown
     - field.field.node.scholarship_recipient.field_last_name
     - field.field.node.scholarship_recipient.field_past_facilities
@@ -19,7 +20,7 @@ bundle: scholarship_recipient
 mode: inline_edit
 content:
   field_current_title:
-    weight: 5
+    weight: 6
     settings:
       size: 60
       placeholder: ''
@@ -27,22 +28,6 @@ content:
     type: string_textfield
     region: content
   field_first_name:
-    weight: 1
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_hometown:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_last_name:
     weight: 2
     settings:
       size: 60
@@ -50,8 +35,31 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_hometown:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_last_name:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_past_facilities:
-    weight: 6
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -59,7 +67,7 @@ content:
     type: text_textfield
     region: content
   field_school:
-    weight: 3
+    weight: 4
     settings:
       size: 60
       placeholder: ''

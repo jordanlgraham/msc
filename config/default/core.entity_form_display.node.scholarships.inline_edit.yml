@@ -6,6 +6,7 @@ dependencies:
     - core.entity_form_mode.node.inline_edit
     - entity_browser.browser.image_browser
     - field.field.node.scholarships.body
+    - field.field.node.scholarships.field_gated
     - field.field.node.scholarships.field_past_recipient_s_
     - field.field.node.scholarships.field_recipient
     - field.field.node.scholarships.field_related_content
@@ -29,8 +30,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_past_recipient_s_:
-    weight: 4
+    weight: 5
     settings:
       form_mode: default
       override_labels: false
@@ -40,7 +48,7 @@ content:
     type: inline_entity_form_simple
     region: content
   field_recipient:
-    weight: 3
+    weight: 4
     settings:
       form_mode: default
       label_singular: ''
@@ -50,7 +58,7 @@ content:
     type: inline_entity_form_simple
     region: content
   field_related_content:
-    weight: 5
+    weight: 6
     settings:
       match_operator: CONTAINS
       form_mode: default
@@ -63,7 +71,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_scholar_image:
-    weight: 2
+    weight: 3
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity

@@ -9,6 +9,10 @@ dependencies:
     - field.field.node.education_events.field_date
     - field.field.node.education_events.field_end_date
     - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
     - node.type.education_events
   module:
@@ -22,7 +26,7 @@ mode: newsletter
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -30,19 +34,26 @@ content:
     third_party_settings: {  }
     region: content
   field_date:
-    weight: 1
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_end_date:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
+  field_end_date:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_location:
-    weight: 4
+    weight: 5
     settings:
       default_country: null
     third_party_settings: {  }
@@ -60,6 +71,9 @@ hidden:
   created: true
   field_call_to_action: true
   field_event_category: true
+  field_event_related_content: true
+  field_event_sponsor: true
+  field_gold_sponsor: true
   path: true
   promote: true
   sticky: true

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.scholarships.body
+    - field.field.node.scholarships.field_gated
     - field.field.node.scholarships.field_past_recipient_s_
     - field.field.node.scholarships.field_recipient
     - field.field.node.scholarships.field_related_content
@@ -68,3 +69,4 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
