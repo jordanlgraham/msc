@@ -12,7 +12,7 @@ third_party_settings:
     status: true
     scheme: public
     directory: inline-files
-    extensions: txt
+    extensions: 'txt pdf doc'
 _core:
   default_config_hash: AqlPmO16LvJI4D0Ih6u4GFQIzqr5OnLgAUSjcUGWk2g
 format: basic_html
@@ -24,8 +24,12 @@ settings:
         -
           name: Formatting
           items:
+            - Format
             - Bold
             - Italic
+            - Subscript
+            - Superscript
+            - Blockquote
         -
           name: Linking
           items:
@@ -36,16 +40,21 @@ settings:
           items:
             - BulletedList
             - NumberedList
+            - Table
         -
           name: Media
           items:
-            - Blockquote
             - media_entity_embed
             - DrupalFile
         -
           name: 'Block Formatting'
           items:
-            - Format
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+            - Outdent
+            - Indent
         -
           name: Tools
           items:
