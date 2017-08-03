@@ -1,0 +1,13 @@
+This project is setup in a multisite configuration, where the main site is "default" in the sites directory
+and the secondary is "foundation." A few notes:
+
+1) In order to access the sites locally, you should create a sites/sites.local.php and map a local development URL
+to the "foundation" folder.
+
+2) The sites/foundation/settings.php file includes the entirety of the sites/default/settings.php file. Any
+overrides can be done in foundation/settings.php.
+
+3) The config_split module is used to separate exported configurations between the main site and the foundation site.
+The "graylist" feature is used to split configurations that differ between sites into the config/foundation folder.
+In order to prevent mistakenly overwriting configuration on the foundation site, a drush policy file exists to enforce
+correct Drush usage.
