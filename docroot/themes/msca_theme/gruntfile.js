@@ -57,11 +57,10 @@ module.exports = function(grunt) {
             'js/dist/constants.js',
             'js/dist/base.js',
             'js/dist/bootstrap/tab.js',
-            'js/dist/stickybits.js',
             'js/dist/scripts.js',
-            'js/dist/menu.js',
             'js/dist/bootstrap/util.js',
             'js/dist/bootstrap/collapse.js',
+            'js/src/bootstrap/carousel.js'
           ],
           dest: 'scripts.js'
 
