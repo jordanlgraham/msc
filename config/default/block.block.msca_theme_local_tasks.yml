@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - block_class
+    - user
   theme:
     - msca_theme
 third_party_settings:
@@ -24,4 +25,13 @@ settings:
   label_display: '0'
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      content_author: content_author
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
