@@ -1,0 +1,24 @@
+uuid: be21537f-0035-485f-9f4b-f7bb5490b4df
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraph
+    - node.type.paragraph_assembler
+  module:
+    - entity_reference_revisions
+id: node.paragraph_assembler.field_paragraph
+field_name: field_paragraph
+entity_type: node
+bundle: paragraph_assembler
+label: Paragraph
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles: null
+field_type: entity_reference_revisions

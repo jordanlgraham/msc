@@ -1,0 +1,17 @@
+.header-menu nav[role="navigation"] {
+  @extend .navbar;
+  //@extend .collapse;
+  @extend .navbar-collapse;
+}
+
+.header-menu ul {
+  @extend .navbar-nav;
+}
+
+.header-menu li {
+  @extend .nav-item;
+}
+
+.header-menu li a {
+  @extend .nav-link;
+}
