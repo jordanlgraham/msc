@@ -10,13 +10,11 @@ base theme: stable
 # Put regions here
 regions:
   navigation: 'Navigation'
-  header: 'Top Bar'
+  navigation_utility: 'Utility Navigation'
+  header: 'Header'
   content: 'Content'
-  sidebar_first: 'Primary'
-  sidebar_second: 'Secondary'
+  sidebar: 'Sidebar'
   footer: 'Footer'
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
 
 libraries:
   - msca_theme/base
