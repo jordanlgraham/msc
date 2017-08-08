@@ -5,40 +5,93 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.facility.field_address
+    - field.field.node.facility.field_administrator
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
     - field.field.node.facility.field_customer_phone_number
     - field.field.node.facility.field_customer_type
     - field.field.node.facility.field_customer_web_site
-    - field.field.node.facility.field_ge
+    - field.field.node.facility.field_facebook
+    - field.field.node.facility.field_facility_image
     - field.field.node.facility.field_languages_spoken
+    - field.field.node.facility.field_licensed_nursing_facility_
+    - field.field.node.facility.field_linkedin
+    - field.field.node.facility.field_medicaid
+    - field.field.node.facility.field_medicare
     - field.field.node.facility.field_member_flag
+    - field.field.node.facility.field_pace_program
     - field.field.node.facility.field_populations_served
+    - field.field.node.facility.field_related_content
     - field.field.node.facility.field_service_type
     - field.field.node.facility.field_specialized_unit
+    - field.field.node.facility.field_twitter
+    - field.field.node.facility.field_va_contract
     - node.type.facility
   module:
+    - address
     - user
 id: node.facility.teaser
 targetEntityType: node
 bundle: facility
 mode: teaser
 content:
-  links:
-    weight: 100
+  field_address:
+    type: address_default
+    weight: 1
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_customer_fax_number:
+    type: string
+    weight: 3
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_customer_phone_number:
+    type: string
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_customer_web_site:
+    type: string
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  field_address: true
-  field_customer_fax_number: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_administrator: true
   field_customer_id: true
   field_customer_key: true
-  field_customer_phone_number: true
   field_customer_type: true
-  field_customer_web_site: true
-  field_ge: true
+  field_facebook: true
+  field_facility_image: true
   field_languages_spoken: true
+  field_licensed_nursing_facility_: true
+  field_linkedin: true
+  field_medicaid: true
+  field_medicare: true
   field_member_flag: true
+  field_pace_program: true
   field_populations_served: true
+  field_related_content: true
   field_service_type: true
   field_specialized_unit: true
+  field_twitter: true
+  field_va_contract: true

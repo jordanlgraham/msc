@@ -1,16 +1,15 @@
-uuid: 62ae7207-f995-4196-af19-daff8ea6f876
+uuid: f04de301-5f01-4615-a829-23a337cb7377
 langcode: en
 status: true
 dependencies:
   module:
-    - geolocation
     - node
-id: node.field_ge
-field_name: field_ge
+id: node.field_pace_program
+field_name: field_pace_program
 entity_type: node
-type: geolocation
+type: boolean
 settings: {  }
-module: geolocation
+module: core
 locked: false
 cardinality: 1
 translatable: true
