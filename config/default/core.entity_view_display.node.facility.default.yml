@@ -4,22 +4,34 @@ status: true
 dependencies:
   config:
     - field.field.node.facility.field_address
+    - field.field.node.facility.field_administrator
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
     - field.field.node.facility.field_customer_phone_number
     - field.field.node.facility.field_customer_type
     - field.field.node.facility.field_customer_web_site
+    - field.field.node.facility.field_facebook
+    - field.field.node.facility.field_facility_image
     - field.field.node.facility.field_ge
     - field.field.node.facility.field_languages_spoken
+    - field.field.node.facility.field_licensed_nursing_facility_
+    - field.field.node.facility.field_linkedin
+    - field.field.node.facility.field_medicaid
+    - field.field.node.facility.field_medicare
     - field.field.node.facility.field_member_flag
+    - field.field.node.facility.field_pace_program
     - field.field.node.facility.field_populations_served
+    - field.field.node.facility.field_related_content
     - field.field.node.facility.field_service_type
     - field.field.node.facility.field_specialized_unit
+    - field.field.node.facility.field_twitter
+    - field.field.node.facility.field_va_contract
     - node.type.facility
   module:
     - address
-    - geolocation
+    - image
+    - link
     - options
     - user
 id: node.facility.default
@@ -28,59 +40,64 @@ bundle: facility
 mode: default
 content:
   field_address:
-    weight: 118
-    label: above
+    weight: 5
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
-  field_customer_fax_number:
-    weight: 109
-    label: above
+  field_administrator:
+    weight: 9
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-  field_customer_id:
-    weight: 117
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_customer_key:
-    weight: 111
-    label: above
+  field_customer_fax_number:
+    weight: 7
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_customer_phone_number:
-    weight: 112
-    label: above
+    weight: 6
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
-    region: content
-  field_customer_type:
-    weight: 113
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
   field_customer_web_site:
-    weight: 114
-    label: above
+    weight: 8
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_facebook:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_facility_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   field_ge:
     weight: 119
@@ -90,15 +107,56 @@ content:
     type: geolocation_latlng
     region: content
   field_languages_spoken:
-    weight: 121
-    label: above
+    weight: 11
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
-  field_member_flag:
-    weight: 116
-    label: above
+  field_licensed_nursing_facility_:
+    weight: 10
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_linkedin:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_medicaid:
+    weight: 14
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_medicare:
+    weight: 15
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pace_program:
+    weight: 17
+    label: hidden
     settings:
       format: default
       format_custom_false: ''
@@ -107,27 +165,61 @@ content:
     type: boolean
     region: content
   field_populations_served:
-    weight: 123
-    label: above
+    weight: 13
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
-  field_service_type:
-    weight: 120
+  field_related_content:
+    weight: 18
     label: above
-    settings: {  }
+    settings:
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: list_default
+    type: entity_reference_entity_view
     region: content
   field_specialized_unit:
-    weight: 122
-    label: above
+    weight: 12
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
-  links:
-    weight: 100
+  field_twitter:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
     region: content
-hidden: {  }
+  field_va_contract:
+    weight: 16
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_customer_id: true
+  field_customer_key: true
+  field_customer_type: true
+  field_member_flag: true
+  field_service_type: true

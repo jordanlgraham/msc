@@ -11,7 +11,7 @@ id: node.facility.field_languages_spoken
 field_name: field_languages_spoken
 entity_type: node
 bundle: facility
-label: 'Languages Spoken'
+label: Languages
 description: ''
 required: false
 translatable: false
