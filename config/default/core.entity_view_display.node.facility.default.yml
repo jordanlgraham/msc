@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.facility.field_customer_web_site
     - field.field.node.facility.field_facebook
     - field.field.node.facility.field_facility_image
+    - field.field.node.facility.field_ge
     - field.field.node.facility.field_languages_spoken
     - field.field.node.facility.field_licensed_nursing_facility_
     - field.field.node.facility.field_linkedin
@@ -97,6 +98,13 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
+  field_ge:
+    weight: 119
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
     region: content
   field_languages_spoken:
     weight: 11

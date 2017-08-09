@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.facility.field_customer_web_site
     - field.field.node.facility.field_facebook
     - field.field.node.facility.field_facility_image
+    - field.field.node.facility.field_ge
     - field.field.node.facility.field_languages_spoken
     - field.field.node.facility.field_licensed_nursing_facility_
     - field.field.node.facility.field_linkedin
@@ -34,6 +35,7 @@ dependencies:
     - entity_browser
     - entity_browser_entity_form
     - field_group
+    - geolocation
     - inline_entity_form
     - link
     - path
@@ -61,6 +63,7 @@ third_party_settings:
         - field_facebook
         - field_twitter
         - field_linkedin
+        - field_ge
       parent_name: group_netforum_data_auto_synchro
       weight: 27
       format_type: details
@@ -206,6 +209,12 @@ content:
       view_mode: default
     third_party_settings: {  }
     type: entity_browser_file
+    region: content
+  field_ge:
+    weight: 17
+    settings: {  }
+    third_party_settings: {  }
+    type: geolocation_latlng
     region: content
   field_languages_spoken:
     weight: 23
