@@ -3,24 +3,121 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.node.inline_edit
+    - entity_browser.browser.image_browser
     - field.field.node.facility.field_address
+    - field.field.node.facility.field_administrator
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
     - field.field.node.facility.field_customer_phone_number
     - field.field.node.facility.field_customer_type
     - field.field.node.facility.field_customer_web_site
+    - field.field.node.facility.field_facebook
+    - field.field.node.facility.field_facility_image
     - field.field.node.facility.field_ge
     - field.field.node.facility.field_languages_spoken
+    - field.field.node.facility.field_licensed_nursing_facility_
+    - field.field.node.facility.field_linkedin
+    - field.field.node.facility.field_medicaid
+    - field.field.node.facility.field_medicare
     - field.field.node.facility.field_member_flag
+    - field.field.node.facility.field_pace_program
     - field.field.node.facility.field_populations_served
+    - field.field.node.facility.field_related_content
     - field.field.node.facility.field_service_type
     - field.field.node.facility.field_specialized_unit
+    - field.field.node.facility.field_twitter
+    - field.field.node.facility.field_va_contract
     - node.type.facility
   module:
     - address
+    - entity_browser
+    - entity_browser_entity_form
+    - field_group
     - geolocation
+    - inline_entity_form
+    - link
     - path
+third_party_settings:
+  field_group:
+    group_facility_participates_in:
+      children:
+        - field_medicaid
+        - field_medicare
+        - field_va_contract
+        - field_pace_program
+      parent_name: group_netforum_data_auto_synchro
+      weight: 26
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+        open: false
+      label: 'Facility Participates in'
+      region: content
+    group_social_links:
+      children:
+        - field_facebook
+        - field_twitter
+        - field_linkedin
+        - field_ge
+      parent_name: group_netforum_data_auto_synchro
+      weight: 27
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+        open: false
+      label: 'Social Links'
+      region: content
+    group_manually_entered_informati:
+      children:
+        - field_facility_image
+        - field_related_content
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        label: 'Manually Entered Information'
+        open: true
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Manually Entered Information'
+      region: content
+    group_netforum_data_auto_synchro:
+      children:
+        - field_customer_id
+        - field_customer_key
+        - field_customer_type
+        - field_service_type
+        - field_member_flag
+        - field_address
+        - field_customer_phone_number
+        - field_customer_fax_number
+        - field_customer_web_site
+        - field_administrator
+        - field_licensed_nursing_facility_
+        - field_languages_spoken
+        - field_specialized_unit
+        - field_populations_served
+        - group_facility_participates_in
+        - group_social_links
+      parent_name: ''
+      weight: 2
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: true
+      label: 'NetForum Data (Auto-synchronized)'
+      region: content
 id: node.facility.default
 targetEntityType: node
 bundle: facility
@@ -28,19 +125,27 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 19
     settings: {  }
     third_party_settings: {  }
     region: content
   field_address:
-    weight: 2
+    weight: 17
     settings:
       default_country: null
     third_party_settings: {  }
     type: address_default
     region: content
+  field_administrator:
+    weight: 21
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_customer_fax_number:
-    weight: 4
+    weight: 19
     settings:
       size: 60
       placeholder: ''
@@ -48,14 +153,14 @@ content:
     type: string_textfield
     region: content
   field_customer_id:
-    weight: 8
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_customer_key:
-    weight: 5
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -63,7 +168,7 @@ content:
     type: string_textfield
     region: content
   field_customer_phone_number:
-    weight: 3
+    weight: 18
     settings:
       size: 60
       placeholder: ''
@@ -71,59 +176,146 @@ content:
     type: string_textfield
     region: content
   field_customer_type:
-    weight: 6
+    weight: 14
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_customer_web_site:
-    weight: 14
+    weight: 20
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_facebook:
+    weight: 14
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_facility_image:
+    weight: 2
+    settings:
+      entity_browser: image_browser
+      field_widget_remove: true
+      selection_mode: selection_append
+      preview_image_style: cropped_preview_thumbnail
+      field_widget_edit: true
+      open: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_browser_file
+    region: content
   field_ge:
-    weight: 26
+    weight: 17
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
     region: content
   field_languages_spoken:
-    weight: 28
+    weight: 23
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_licensed_nursing_facility_:
+    weight: 22
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_linkedin:
+    weight: 16
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_medicaid:
+    weight: 18
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_medicare:
+    weight: 19
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_member_flag:
-    weight: 7
+    weight: 16
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_pace_program:
+    weight: 22
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_populations_served:
-    weight: 30
+    weight: 25
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_related_content:
+    weight: 3
+    settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   field_service_type:
-    weight: 27
+    weight: 15
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_specialized_unit:
-    weight: 29
+    weight: 24
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_twitter:
+    weight: 15
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_va_contract:
+    weight: 21
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   path:
     type: path
-    weight: 13
+    weight: 22
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -131,14 +323,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 20
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 21
     third_party_settings: {  }
     region: content
   title:
@@ -151,7 +343,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 9
+    weight: 18
     settings:
       match_operator: CONTAINS
       size: 60

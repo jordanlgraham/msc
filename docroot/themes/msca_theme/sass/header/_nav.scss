@@ -1,0 +1,29 @@
+.header-menu nav[role="navigation"] {
+  @extend .navbar;
+  //@extend .collapse;
+  @extend .navbar-toggleable-md;
+  @extend .navbar-collapse;
+  @extend .justify-content-end;
+}
+
+.header-menu ul {
+  @extend .navbar-nav;
+}
+
+.header-menu li {
+  @extend .nav-item;
+  border-left: 1px solid $light-gray;
+  &:first-child {
+    border-left: none;
+  }
+}
+
+.header-menu li a {
+  @extend .nav-link;
+  text-transform: uppercase;
+  font-size: .8rem;
+  color: $dark-blue;
+  &:hover {
+    color: $orange;
+  }
+}

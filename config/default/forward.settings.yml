@@ -42,7 +42,7 @@ forward_file_file: false
 forward_entity_flagging: false
 forward_node_article: false
 forward_node_education_events: 0
-forward_node_facility: false
+forward_node_facility: 0
 forward_node_job_listings: false
 forward_node_newsletter: false
 forward_node_newsletter_article: true

@@ -11,7 +11,7 @@ id: node.facility.field_populations_served
 field_name: field_populations_served
 entity_type: node
 bundle: facility
-label: 'Populations Served'
+label: 'Specialized Populations Served'
 description: ''
 required: false
 translatable: false

@@ -1,0 +1,23 @@
+uuid: 41f572dc-ef31-465d-8ee0-6ff5ff614bc3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_facebook
+    - node.type.facility
+  module:
+    - link
+id: node.facility.field_facebook
+field_name: field_facebook
+entity_type: node
+bundle: facility
+label: Facebook
+description: 'Optional. Enter URL of the facility''s facebook page (e.g., https://facebook.com/example).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

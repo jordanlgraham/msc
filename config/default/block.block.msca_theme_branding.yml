@@ -1,11 +1,15 @@
 uuid: e5166a4d-a9bc-4c75-aac9-0e46301989f1
 langcode: en
-status: true
+status: false
 dependencies:
   module:
+    - block_class
     - system
   theme:
     - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
 _core:
   default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
 id: msca_theme_branding
@@ -20,6 +24,6 @@ settings:
   provider: system
   label_display: '0'
   use_site_logo: true
-  use_site_name: true
-  use_site_slogan: true
+  use_site_name: false
+  use_site_slogan: false
 visibility: {  }

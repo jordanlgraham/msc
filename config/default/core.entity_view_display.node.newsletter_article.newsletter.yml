@@ -5,8 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.newsletter
     - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_gated
     - field.field.node.newsletter_article.field_news_release_date
     - field.field.node.newsletter_article.field_news_source
+    - field.field.node.newsletter_article.field_news_subtitle
     - field.field.node.newsletter_article.field_news_teaser_image
     - field.field.node.newsletter_article.field_newsletter_byline
     - field.field.node.newsletter_article.field_related_content
@@ -16,6 +18,7 @@ dependencies:
   module:
     - datetime
     - entity_print
+    - link
     - text
     - user
 third_party_settings:
@@ -31,26 +34,46 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     region: content
   entity_print_view_pdf:
-    weight: 4
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_news_release_date:
     type: datetime_default
-    weight: 1
+    weight: 2
     region: content
     label: hidden
     settings:
       timezone_override: ''
       format_type: direct
     third_party_settings: {  }
+  field_news_source:
+    type: link
+    weight: 4
+    region: content
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_news_subtitle:
+    type: string
+    weight: 1
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
   flag_bookmark:
-    weight: 3
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -62,7 +85,7 @@ content:
 hidden:
   entity_print_view_epub: true
   entity_print_view_word_docx: true
-  field_news_source: true
+  field_gated: true
   field_news_teaser_image: true
   field_newsletter_byline: true
   field_newsletter_image: true

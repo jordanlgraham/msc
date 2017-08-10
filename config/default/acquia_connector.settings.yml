@@ -179,9 +179,9 @@ subscription_data:
   active: true
   href: 'https://insight.acquia.com/node/uuid/a885e6ad-3b1c-4c0f-835b-3c06735e1875/dashboard'
   uuid: a885e6ad-3b1c-4c0f-835b-3c06735e1875
-  subscription_name: msca
+  subscription_name: 'Mass Senior Care'
   expiration_date:
-    value: '2017-08-01T00:00:00'
+    value: '2018-08-01T00:00:00'
   product:
     view: 'Acquia Network'
   derived_key_salt: 571e441f9b5b0286cc7342e9b8b27e03
