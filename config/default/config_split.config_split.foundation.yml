@@ -1,0 +1,15 @@
+uuid: fb2a7fc4-d355-4f3f-aa61-1991e8116b24
+langcode: en
+status: false
+dependencies: {  }
+id: foundation
+label: Foundation
+folder: ../config/foundation
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+  - system.site
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

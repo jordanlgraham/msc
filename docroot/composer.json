@@ -63,6 +63,8 @@
         "drupal/embed": "1.0",
         "drupal/entity_embed": "1.x-dev",
         "drupal/paragraphs": "^1.1",
+        "drupal/config_installer": "1.4",
+        "drupal/config_split": "1.0-beta6"
         "drupal/field_group": "3.x-dev"
     },
     "require-dev": {
