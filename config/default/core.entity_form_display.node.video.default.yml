@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.inline_edit
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - field.field.node.video.body
     - field.field.node.video.field_event_category
     - field.field.node.video.field_gated
@@ -41,11 +41,17 @@ content:
   field_event_category:
     weight: 4
     settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
     region: content
   field_gated:
     weight: 2
@@ -72,11 +78,17 @@ content:
   field_tags:
     weight: 6
     settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
     region: content
   field_video_date:
     weight: 5

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.newsletter
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - entity_browser.browser.image_browser
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_gated
@@ -142,14 +142,20 @@ content:
       entity_browser_entity_form:
         entity_browser_id: _none
   field_topic:
-    type: entity_reference_autocomplete
+    type: inline_entity_form_complex
     weight: 10
     region: content
     settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
   path:
     type: path
     weight: 11

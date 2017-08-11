@@ -12,26 +12,14 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: 'ABI/TBI Unit'
+      value: 'ABITBI Unit'
       label: 'ABI/TBI Unit'
     -
-      value: 'Alzheimer''s Unit'
-      label: 'Alzheimer''s Unit'
-    -
-      value: 'Dementia Special Care Unit'
-      label: 'Dementia Special Care Unit'
-    -
-      value: 'Geri-Psychiatric Unit'
-      label: 'Geri-Psychiatric Unit'
-    -
-      value: 'Peritoneal Dialysis Unit'
-      label: 'Peritoneal Dialysis Unit'
+      value: 'Dementia Care'
+      label: 'Dementia Care'
     -
       value: 'Subacute Unit'
       label: 'Subacute Unit'
-    -
-      value: 'Ventilator Unit'
-      label: 'Ventilator Unit'
   allowed_values_function: ''
 module: options
 locked: false

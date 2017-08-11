@@ -11,8 +11,8 @@ third_party_settings:
     parent: 'main:'
 name: Newsroom
 type: newsroom
-description: ''
-help: ''
+description: 'Use <em>Newsroom</em> content type for Press Releases. These can be included in Newsletters (online and email).'
+help: 'Use <em>Newsroom</em> content type for Press Releases. These can be included in Newsletters (online and email).'
 new_revision: true
 preview_mode: 1
 display_submitted: false

@@ -27,6 +27,7 @@ settings:
             - Format
             - Bold
             - Italic
+            - Underline
             - Subscript
             - Superscript
             - Blockquote
@@ -45,6 +46,7 @@ settings:
           name: Media
           items:
             - media_entity_embed
+            - node
             - DrupalFile
         -
           name: 'Block Formatting'
@@ -59,6 +61,8 @@ settings:
           name: Tools
           items:
             - Source
+            - Undo
+            - Redo
   plugins:
     language:
       language_list: un

@@ -15,35 +15,11 @@ settings:
       value: 'Acquired Brain Injury'
       label: 'Acquired Brain Injury'
     -
-      value: AIDS/HIV
+      value: AIDSHIV
       label: AIDS/HIV
     -
       value: Bariatric
       label: Bariatric
-    -
-      value: Children/Pediatrics
-      label: Children/Pediatrics
-    -
-      value: 'Huntington''s Disease'
-      label: 'Huntington''s Disease'
-    -
-      value: 'Mental Illness'
-      label: 'Mental Illness'
-    -
-      value: 'Mental Retardation'
-      label: 'Mental Retardation'
-    -
-      value: 'Multiple Sclerosis'
-      label: 'Multiple Sclerosis'
-    -
-      value: 'Peritoneal or Renal Dialysis'
-      label: 'Peritoneal or Renal Dialysis'
-    -
-      value: 'Traumatic Brain Injury'
-      label: 'Traumatic Brain Injury'
-    -
-      value: 'Younger Residents (21-65)'
-      label: 'Younger Residents (21-65)'
   allowed_values_function: ''
 module: options
 locked: false

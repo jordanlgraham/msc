@@ -46,13 +46,13 @@ forward_node_facility: 0
 forward_node_job_listings: false
 forward_node_newsletter: false
 forward_node_newsletter_article: true
-forward_node_newsroom: false
+forward_node_newsroom: 0
 forward_node_page: false
 forward_node_resources: 0
 forward_node_scholarships: 0
 forward_node_scholarship_recipient: 0
 forward_node_sponsor: 0
-forward_node_vendor: false
+forward_node_vendor: 0
 forward_entity_redirect: false
 forward_redirect_redirect: false
 forward_entity_shortcut: false
