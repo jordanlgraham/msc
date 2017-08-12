@@ -1,0 +1,28 @@
+uuid: 3584efb4-8dfb-4eea-80ff-1e65e7948354
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.masthead
+  module:
+    - block_class
+    - system
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: masthead
+theme: msca_theme
+region: navigation
+weight: -8
+provider: null
+plugin: 'system_menu_block:masthead'
+settings:
+  id: 'system_menu_block:masthead'
+  label: Masthead
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

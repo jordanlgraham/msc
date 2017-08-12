@@ -5,6 +5,6 @@ features:
   favicon: 1
 logo:
   use_default: 0
-  path: 'public://msc_logo_1.png'
+  path: 'public://msca-logo-wide_0.png'
 favicon:
   use_default: 1

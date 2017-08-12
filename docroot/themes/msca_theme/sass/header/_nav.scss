@@ -27,3 +27,37 @@
     color: $orange;
   }
 }
+
+// Mastehead menu
+#block-masthead {
+  padding: 0;
+  .memberlogin, .joinmassseniorcare {
+    background-color: $orange;
+    &:hover {
+        background-color: #CC7928;
+    }
+  }
+  .contact, .search {
+    background-color: $dark-blue;
+    &:hover {
+        background-color: $darker-blue;
+    }
+  }
+  li a {
+    color: white;
+    font-family: 'Lato' Sans-Serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: .7rem;
+  }
+}
+
+// Main menu
+#block-msca-theme-main-menu {
+  padding: 1.5rem 0 0;
+  .foundation a {
+    padding-right: 0;
+  }
+}
+
+

@@ -1,6 +1,6 @@
-uuid: e5166a4d-a9bc-4c75-aac9-0e46301989f1
+uuid: 274927a6-2be4-460f-9cbe-5a07d9ed844d
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - block_class
@@ -10,12 +10,10 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-_core:
-  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
-id: msca_theme_branding
+id: sitebranding
 theme: msca_theme
-region: content
-weight: -6
+region: navigation
+weight: -9
 provider: null
 plugin: system_branding_block
 settings:

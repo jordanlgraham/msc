@@ -1,0 +1,49 @@
+.header.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+  .header-region.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+//.header-region {
+//  max-height: 170px;
+//}
+// Page title hero
+#block-msca-theme-page-title {
+  background-color: $blue;
+  padding: 2.3rem 0 1.6rem;
+  clear: left;
+  h1 {
+    color: white;
+    text-align: center;
+    letter-spacing: 1px;
+    @extend .container;
+  }
+}
+
+#block-sitebranding {
+  width: 260px;
+  float: left;
+  padding: 15px 0 10px;
+}
+
+.title-underline {
+  display: inline;
+  margin: 0 5%;
+}
+
+.title-line {
+  border-top: solid 2px white;
+  width: 42.5%;
+  height: 25px;
+  display: inline-block;
+}
+
+.title-icon {
+  background-image: url('/themes/msca_theme/images/heart-icon.png');
+  width: 90px;
+  height: 55px;
+  display: inline-block;
+}
+

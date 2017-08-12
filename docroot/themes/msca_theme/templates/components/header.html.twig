@@ -5,13 +5,23 @@
  */
 #}
 
-<header class="header">
-    <nav class="header-menu" id="js-header-menu">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div>
+<header class="header container-fluid">
+    {% if page.navigation %}
+        <nav class="header-menu container" id="js-header-menu">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             {{ page.navigation }}
+        </nav>
+    {% endif %}
+
+    {% if page.navigation_utility %}
+        {{ page.navigation_utility }}
+    {% endif %}
+
+    {% if page.header %}
+        <div class="header-region container-fluid">
+            {{ page.header }}
         </div>
-    </nav>
+    {% endif %}
 </header>
