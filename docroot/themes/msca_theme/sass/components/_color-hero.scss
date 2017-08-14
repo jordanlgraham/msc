@@ -6,9 +6,7 @@
     padding-right: 0;
   }
 }
-//.header-region {
-//  max-height: 170px;
-//}
+
 // Page title hero
 #block-msca-theme-page-title {
   background-color: $blue;
@@ -29,19 +27,18 @@
 }
 
 .title-underline {
-  display: inline;
-  margin: 0 5%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .title-line {
   border-top: solid 2px white;
-  width: 42.5%;
   height: 25px;
   display: inline-block;
 }
 
 .title-icon {
-  background-image: url('/themes/msca_theme/images/heart-icon.png');
+  background: url('/themes/msca_theme/images/heart-pulse-white.svg') no-repeat center;
   width: 90px;
   height: 55px;
   display: inline-block;
