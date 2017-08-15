@@ -20,25 +20,41 @@ class GetClient {
     return $auth_headers;
   }
 
-  public function getAuthHeaders() {
-
-    $client = $this->getClient();
-
-    $params = array(
-
-      'userName' => \Drupal::config('netforum_soap.netforumconfig')->get('api_username'),
-      'password' => \Drupal::config('netforum_soap.netforumconfig')->get('api_password'),
-    );
-    try {
-      $response_headers = '';
-      $response = $client->__soapCall('Authenticate', array('parameters' => $params), NULL, NULL, $response_headers);
-      $token = $response_headers['AuthorizationToken']->Token;
-      $xwebNamespace = $response->AuthenticateResult;
-
-      return new SoapHeader($xwebNamespace, 'AuthorizationToken', array('Token' => $token), TRUE);
+  public function getAuthHeaders($token = false) {
+    if(!$token) {
+      $client = $this->getClient();
+      if($client) {
+        $params = array(
+          'userName' => \Drupal::config('netforum_soap.netforumconfig')
+            ->get('api_username'),
+          'password' => \Drupal::config('netforum_soap.netforumconfig')
+            ->get('api_password'),
+        );
+        try {
+          $response_headers = '';
+          $response = $client->__soapCall('Authenticate', array('parameters' => $params), NULL, NULL, $response_headers);
+          $token = $response_headers['AuthorizationToken']->Token;
+        } catch (Exception $e) {
+          $message = t('Failed to retrieve token.');
+          \Drupal::logger('msc_netforum_soap')->error($message);
+          return FALSE;
+        }
+      } else {
+        $message = t('Cannot get client');
+        \Drupal::logger('msc_netforum_soap')->error($message);
+        die();
+      }
     }
-    catch(Exception $e) {
-      $message = t('Failed to retrieve token.');
+    return new SoapHeader('http://www.avectra.com/OnDemand/2005/', 'AuthorizationToken', array('Token' => $token), TRUE);
+  }
+
+  private function getClientFromLocalWSDL() {
+    try {
+      $client = new SoapClient('netForumXMLOnDemand.xml', array('trace' => 1));
+      return $client;
+    }
+    catch (Exception $e) {
+      $message = t('Unable to create SoapClient from local WSDL');
       \Drupal::logger('msc_netforum_soap')->error($message);
       return false;
     }
@@ -55,7 +71,8 @@ class GetClient {
     catch(Exception $e) {
       $message = t('Unable to connect to WSDL file.');
       \Drupal::logger('msc_netforum_soap')->error($message);
-      return false;
+      $client = $this->getClientFromLocalWSDL();
+      return $client;
     }
   }
 

@@ -22,3 +22,12 @@ function netforum_org_sync_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+
+/**
+ * Implements hook_cron().
+ */
+function netforum_org_sync_cron() {
+  $form = \Drupal::formBuilder()->getForm('Drupal\netforum_org_sync\Form\OrganizationSyncForm');
+
+}
