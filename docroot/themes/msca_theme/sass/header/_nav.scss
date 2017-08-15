@@ -1,9 +1,13 @@
 .header-menu nav[role="navigation"] {
+  padding: .5rem 0 .5rem 1rem;
   @extend .navbar;
   //@extend .collapse;
   @extend .navbar-toggleable-md;
   @extend .navbar-collapse;
   @extend .justify-content-end;
+  ul li.foundation a {
+    padding-right: 0;
+  }
 }
 
 .header-menu ul {
@@ -12,7 +16,6 @@
 
 .header-menu li {
   @extend .nav-item;
-  border-left: 1px solid $light-gray;
   &:first-child {
     border-left: none;
   }
@@ -20,6 +23,7 @@
 
 .header-menu li a {
   @extend .nav-link;
+  padding-top: .2rem;
   text-transform: uppercase;
   font-size: .8rem;
   color: $dark-blue;
@@ -31,6 +35,9 @@
 // Mastehead menu
 #block-masthead {
   padding: 0;
+  ul {
+    font-family: 'Lato', sans-serif;
+  }
   .memberlogin, .joinmassseniorcare {
     background-color: $orange;
     &:hover {
@@ -43,21 +50,52 @@
         background-color: $darker-blue;
     }
   }
-  li a {
-    color: white;
-    font-family: 'Lato' Sans-Serif;
-    font-weight: 300;
-    letter-spacing: 1px;
-    font-size: .7rem;
+  li {
+    font-family: $font-family-sans-serif;
+    border-left: 1px solid $light-gray;
+    a {
+      color: white;
+      font-weight: 300;
+      letter-spacing: 1px;
+      font-size: .7rem;
+    }
   }
 }
 
 // Main menu
 #block-msca-theme-main-menu {
-  padding: 1.5rem 0 0;
-  .foundation a {
+  li {
+    font-family: $font-family-sans-serif;
+    padding: 1.5rem 0 0;
+    a {
+      letter-spacing: .5px;
+      @extend .lato-bold;
+    }
+  }
+  .foundation li {
     padding-right: 0;
+    a {
+      padding-right: 0;
+    }
   }
 }
 
-
+// Breadcrumbs
+.inner-breadcrumb {
+  @extend .container;
+  list-style: none;
+  padding-left: 6em;
+}
+.breadcrumb-item {
+  float: left;
+  @extend .lato;
+  font-weight: 300;
+  a {
+    font-weight: 300;
+    font-size: .9rem;
+    letter-spacing: .7px;
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}

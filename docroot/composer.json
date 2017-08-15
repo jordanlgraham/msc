@@ -65,7 +65,9 @@
         "drupal/paragraphs": "^1.1",
         "drupal/config_installer": "1.4",
         "drupal/config_split": "1.0-beta6",
-        "drupal/field_group": "3.x-dev"
+        "drupal/field_group": "3.x-dev",
+        "drupal/current_page_crumb": "1.1",
+        "drupal/easy_breadcrumb": "1.6"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"

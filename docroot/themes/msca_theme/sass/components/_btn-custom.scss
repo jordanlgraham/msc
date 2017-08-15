@@ -89,3 +89,10 @@
     color: $white;
   }
 }
+
+// Print, bookmark and email buttons for nodes.
+.print__link, .flag-bookmark a, .forward-page {
+  @extend .btn;
+  @extend .btn-primary;
+  margin: 1rem 0;
+}

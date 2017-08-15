@@ -1,0 +1,11 @@
+main {
+  >.container {
+    padding: 2rem 0 0 2rem;
+    >.col-md-8 {
+      float: left;
+    }
+    >.col-md-4 {
+      float: right;
+    }
+  }
+}
