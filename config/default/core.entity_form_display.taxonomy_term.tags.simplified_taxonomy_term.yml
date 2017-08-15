@@ -1,0 +1,23 @@
+uuid: 1b65e2d5-a004-4349-8eb9-8521988b6d59
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - taxonomy.vocabulary.tags
+id: taxonomy_term.tags.simplified_taxonomy_term
+targetEntityType: taxonomy_term
+bundle: tags
+mode: simplified_taxonomy_term
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true

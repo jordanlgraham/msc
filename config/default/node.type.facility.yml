@@ -10,8 +10,8 @@ third_party_settings:
     parent: ''
 name: Facility
 type: facility
-description: ''
-help: ''
+description: 'The <em>Facility</em> content type is populated by NetForum synchronization, but images and related content can be added manually.'
+help: 'The <em>Facility</em> content type is populated by NetForum synchronization, but images and related content can be added manually.'
 new_revision: false
 preview_mode: 1
 display_submitted: false

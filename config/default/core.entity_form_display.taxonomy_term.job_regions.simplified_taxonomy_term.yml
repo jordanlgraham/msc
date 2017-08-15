@@ -1,0 +1,23 @@
+uuid: 1283ee94-9bd4-446c-b553-5041075623e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - taxonomy.vocabulary.job_regions
+id: taxonomy_term.job_regions.simplified_taxonomy_term
+targetEntityType: taxonomy_term
+bundle: job_regions
+mode: simplified_taxonomy_term
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true

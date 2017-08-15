@@ -27,6 +27,7 @@ settings:
             - Format
             - Bold
             - Italic
+            - Underline
             - Strike
             - Superscript
             - Subscript
@@ -47,10 +48,9 @@ settings:
         -
           name: Media
           items:
-            - DrupalImage
             - media_entity_embed
+            - node
             - DrupalFile
-            - HorizontalRule
         -
           name: 'Block Formatting'
           items:
@@ -64,7 +64,10 @@ settings:
           name: Tools
           items:
             - ShowBlocks
+            - HorizontalRule
             - Source
+            - Undo
+            - Redo
   plugins:
     language:
       language_list: un
