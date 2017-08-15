@@ -30,6 +30,9 @@
   &:hover {
     color: $orange;
   }
+  &.is-active {
+    color: $orange;
+  }
 }
 
 // Mastehead menu
