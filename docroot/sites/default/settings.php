@@ -1,6 +1,9 @@
 <?php
 
 require $app_root . '/sites/settings.common.php';
+
+
+$settings['install_profile'] = 'standard';
 // On Acquia Cloud, this include file configures Drupal to use the correct
 // database in each site environment (Dev, Stage, or Prod). To use this
 // settings.php for development on your local workstation, set $db_url
