@@ -30,13 +30,14 @@
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes }}>
+      <ul{{ attributes.addClass('navbar-nav','nav') }}>
     {% else %}
-      <ul>
+      <ul class="navbar-nav nav">
     {% endif %}
     {% for item in items %}
+        {# Create lowercase variable with no spaces or ampersands so we can assign unique class to each menu li. #}
         {% set titleclass = item.title|replace({' ':'','&':''})|lower %}
-      <li{{ item.attributes.addClass(titleclass) }}>
+      <li{{ item.attributes.addClass(titleclass, 'nav-item') }}>
         {{ link(item.title, item.url) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}

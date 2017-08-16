@@ -46,23 +46,8 @@
 
 <main role="main" class="container-fluid">
   <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-  {{ messages }}
-  {% if page.sidebar %}
-    <div class="container">
-      <div class="col-md-8">
-        {{ page.content }}
-      </div>
-      <div class="col-md-4">
-        {{ page.sidebar }}
-      </div>
-    </div>
-  {% else %}
-    <div class="container">
-      <div class="col-md-12 ">
-        {{ page.content }}
-      </div>
-    </div>
-  {% endif %}
+    {{ messages }}
+    {{ page.content }}
 </main>
 
 {% include  directory ~ '/templates/components/footer.html.twig' %}

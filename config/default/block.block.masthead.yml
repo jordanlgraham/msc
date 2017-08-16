@@ -15,7 +15,7 @@ third_party_settings:
 id: masthead
 theme: msca_theme
 region: navigation
-weight: -8
+weight: -9
 provider: null
 plugin: 'system_menu_block:masthead'
 settings:
