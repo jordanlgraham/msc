@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\msca_discourse\DiscourseHelper;
+
+/**
+ * Implements hook_install().
+ */
+function msca_discourse_install() {
+  $sso_key = \Drupal\msca_discourse\Form\DiscourseAdmin::generateSsoSecret();
+  \Drupal::state()->set(DiscourseHelper::SSO_SECRET_STATE_KEY, $sso_key);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function msca_discourse_uninstall() {
+  \Drupal::state()->delete(DiscourseHelper::SSO_SECRET_STATE_KEY);
+}

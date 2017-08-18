@@ -1,0 +1,63 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\msca_discourse\DiscourseHelper;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_discourse_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'msca_discourse_user_login_submit';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_discourse_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'msca_discourse_user_login_submit';
+}
+
+/**
+ * Extra login form submit function.
+ */
+function msca_discourse_user_login_submit($form, FormStateInterface $form_state) {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    return;
+  }
+  // Check if there's any discourse session data.
+  $discourse_data = \Drupal::request()->getSession()->get(DiscourseHelper::SESSION_DATA_KEY);
+  if (!$discourse_data) {
+    return;
+  }
+  // Check if the session data is still valid.
+  if (strtotime('+10 minutes', $discourse_data['time']) <= \Drupal::time()->getCurrentTime()) {
+    return;
+  }
+  // Finally, prepare and redirect.
+  $redirect_url = \Drupal::service('msca_discourse.sso_helper')->getRedirect(
+    $discourse_data['payload'],
+    $discourse_data['nonce'],
+    \Drupal::currentUser()
+  );
+  $redirect_response = new TrustedRedirectResponse($redirect_url);
+  $form_state->setResponse($redirect_response);
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function msca_discourse_user_logout(\Drupal\Core\Session\AccountInterface $account) {
+  $config = \Drupal::config('msca_discourse.config');
+  if ($config->get('logout')) {
+    try {
+      /** @var DiscourseHelper $helper */
+      $helper = \Drupal::service('msca_discourse.sso_helper');
+      $helper->logoutUser($account);
+    }
+    catch (Exception $exception) {
+      \Drupal::logger('msca_discourse')->error('Unable to log out user @uid. Error: %err',
+        ['@uid' => $account->id(), '%err' => $exception->getMessage()]);
+    }
+  }
+}
