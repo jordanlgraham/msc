@@ -10446,5 +10446,119 @@
         "support": {
             "source": "http://cgit.drupalcode.org/field_group"
         }
+    },
+    {
+        "name": "drupal/current_page_crumb",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/current_page_crumb",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1491328082",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "rakesh.gectcr",
+                "homepage": "https://www.drupal.org/user/1177822"
+            }
+        ],
+        "description": "Adds the current page title to the breadcrumb.",
+        "homepage": "https://www.drupal.org/project/current_page_crumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/current_page_crumb"
+        }
+    },
+    {
+        "name": "drupal/easy_breadcrumb",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/easy_breadcrumb",
+            "reference": "8.x-1.6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/easy_breadcrumb-8.x-1.6.zip",
+            "reference": "8.x-1.6",
+            "shasum": "d7e4fcbb76a65bc33230d45c3bf41c4689b8e1a2"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.6",
+                "datestamp": "1487359983",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "RenatoG",
+                "homepage": "https://www.drupal.org/user/3326031"
+            },
+            {
+                "name": "sonemonu",
+                "homepage": "https://www.drupal.org/user/1667988"
+            },
+            {
+                "name": "tatarbj",
+                "homepage": "https://www.drupal.org/user/649590"
+            }
+        ],
+        "description": "Adds configuration to the system breadcrumbs.",
+        "homepage": "https://www.drupal.org/project/easy_breadcrumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/easy_breadcrumb"
+        }
     }
 ]
