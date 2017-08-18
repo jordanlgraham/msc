@@ -4,14 +4,29 @@
  * Template for the site header.
  */
 #}
+<header class="container-fluid">
+    <div class="header-menu col-sm-12 col-md-12 col-lg-12">
+       <nav class="navbar navbar-toggleable-md navbar-light bg-light" role="navigation">
+           <div class="navbar-header">
+                <a class="navbar-brand" href="/"><img src="/themes/msca_theme/images/msca-logo-wide.png"></a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    {#<i class="fa fa-bars" aria-hidden="true"></i>#}
+                    <span class="hamburger"></span>
+                </button>
+           </div>
 
-<header class="header">
-    <nav class="header-menu" id="js-header-menu">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div>
-            {{ page.navigation }}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{ page.navigation }}
+            </div>
+        </nav>
+    </div>
+    {% if page.navigation_utility %}
+        {{ page.navigation_utility }}
+    {% endif %}
+
+    {% if page.header %}
+        <div class="header-region container-fluid">
+            {{ page.header }}
         </div>
-    </nav>
+    {% endif %}
 </header>

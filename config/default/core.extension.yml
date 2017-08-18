@@ -25,6 +25,7 @@ module:
   datetime: 0
   dblog: 0
   dynamic_page_cache: 0
+  easy_breadcrumb: 0
   editor: 0
   editor_advanced_link: 0
   editor_file: 0
@@ -57,6 +58,7 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   insert: 0
+  kint: 0
   link: 0
   masquerade: 0
   media_entity: 0

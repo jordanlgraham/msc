@@ -8,8 +8,6 @@
   transition: all 0.1s ease;
 }
 
-
-
 // Colors
 $darker-blue: #003e66;
 $dark-blue: #005a84;
@@ -32,7 +30,7 @@ $foundation-green: #3e846c;
 
 // Fonts
 $lato: 'Lato', sans-serif;
-$font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Lato', Helvetica, Arial, sans-serif;
 $font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $font-size-h1: 28/16 * 1rem; // 28px
@@ -50,13 +48,15 @@ $font-size-xs: 12/16 * 1rem; // 12px
 
 $headings-margin-bottom: 1rem;
 
+// Icons
+$heart-pulse: url('/themes/msca_theme/images/heart-pulse-white.svg') no-repeat center;
+
 // General
 /*$border-radius: 0;
 $border-radius-lg: 10px;
 $border-radius-sm: 0;*/
 
 // Button
-
 
 /*$btn-primary-bg: $purple;
 $btn-padding-y: 10px;
