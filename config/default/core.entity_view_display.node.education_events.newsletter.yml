@@ -9,6 +9,10 @@ dependencies:
     - field.field.node.education_events.field_date
     - field.field.node.education_events.field_end_date
     - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
     - node.type.education_events
   module:
@@ -20,7 +24,7 @@ bundle: education_events
 mode: newsletter
 content:
   field_date:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       timezone_override: ''
@@ -29,7 +33,7 @@ content:
     type: datetime_custom
     region: content
   links:
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -41,4 +45,8 @@ hidden:
   field_call_to_action: true
   field_end_date: true
   field_event_category: true
+  field_event_related_content: true
+  field_event_sponsor: true
+  field_gated: true
+  field_gold_sponsor: true
   field_location: true

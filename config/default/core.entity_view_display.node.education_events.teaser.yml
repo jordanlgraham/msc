@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.education_events.field_event_category
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
     - node.type.education_events
@@ -26,14 +27,14 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 3
+    weight: 2
     settings:
       trim_length: 300
     third_party_settings: {  }
     region: content
   field_date:
     type: datetime_custom
-    weight: 1
+    weight: 0
     region: content
     label: hidden
     settings:
@@ -42,14 +43,14 @@ content:
     third_party_settings: {  }
   field_event_category:
     type: entity_reference_label
-    weight: 2
+    weight: 1
     region: content
     label: hidden
     settings:
       link: true
     third_party_settings: {  }
   links:
-    weight: 0
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -61,5 +62,6 @@ hidden:
   field_end_date: true
   field_event_related_content: true
   field_event_sponsor: true
+  field_gated: true
   field_gold_sponsor: true
   field_location: true

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_gated
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
@@ -28,14 +29,14 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 6
+    weight: 5
     settings:
       trim_length: 300
     third_party_settings: {  }
     region: content
   field_facebook:
     type: link_separate
-    weight: 2
+    weight: 1
     region: content
     label: hidden
     settings:
@@ -47,7 +48,7 @@ content:
     third_party_settings: {  }
   field_linkedin:
     type: link_separate
-    weight: 4
+    weight: 3
     region: content
     label: hidden
     settings:
@@ -59,7 +60,7 @@ content:
     third_party_settings: {  }
   field_logo:
     type: image
-    weight: 1
+    weight: 0
     region: content
     label: hidden
     settings:
@@ -68,7 +69,7 @@ content:
     third_party_settings: {  }
   field_twitter:
     type: link_separate
-    weight: 3
+    weight: 2
     region: content
     label: hidden
     settings:
@@ -80,7 +81,7 @@ content:
     third_party_settings: {  }
   field_web_address:
     type: link_separate
-    weight: 5
+    weight: 4
     region: content
     label: hidden
     settings:
@@ -91,7 +92,7 @@ content:
       target: ''
     third_party_settings: {  }
   links:
-    weight: 0
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -100,6 +101,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_address: true
+  field_gated: true
   field_primary_services: true
   field_related_event: true
   field_sponsorship_level: true

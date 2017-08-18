@@ -10,10 +10,12 @@ dependencies:
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_email
     - field.field.node.vendor.field_facebook
+    - field.field.node.vendor.field_gated
     - field.field.node.vendor.field_linkedin
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
+    - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
     - node.type.vendor
   module:
@@ -26,7 +28,7 @@ mode: teaser
 content:
   field_additional_services:
     type: entity_reference_label
-    weight: 5
+    weight: 4
     region: content
     label: inline
     settings:
@@ -34,14 +36,14 @@ content:
     third_party_settings: {  }
   field_email:
     type: email_mailto
-    weight: 2
+    weight: 1
     region: content
     label: inline
     settings: {  }
     third_party_settings: {  }
   field_phone:
     type: string
-    weight: 1
+    weight: 0
     region: content
     label: inline
     settings:
@@ -49,7 +51,7 @@ content:
     third_party_settings: {  }
   field_primary_services:
     type: entity_reference_label
-    weight: 4
+    weight: 3
     region: content
     label: inline
     settings:
@@ -57,7 +59,7 @@ content:
     third_party_settings: {  }
   field_web_address:
     type: link
-    weight: 3
+    weight: 2
     region: content
     label: hidden
     settings:
@@ -68,7 +70,7 @@ content:
       rel: '0'
     third_party_settings: {  }
   links:
-    weight: 0
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -80,5 +82,7 @@ hidden:
   field_contact: true
   field_contact_title: true
   field_facebook: true
+  field_gated: true
   field_linkedin: true
   field_twitter: true
+  field_vendor_image: true

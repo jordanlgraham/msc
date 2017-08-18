@@ -23,27 +23,11 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
   field_past_recipient_s_:
-    weight: 5
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_recipient:
-    weight: 3
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_related_content:
     weight: 4
     label: above
     settings:
@@ -51,8 +35,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_recipient:
+    weight: 2
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_related_content:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_scholar_image:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       image_style: c
@@ -60,13 +60,9 @@ content:
     third_party_settings: {  }
     type: media_thumbnail
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  links: true

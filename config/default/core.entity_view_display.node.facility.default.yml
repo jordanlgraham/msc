@@ -30,6 +30,7 @@ dependencies:
     - node.type.facility
   module:
     - address
+    - geolocation
     - image
     - link
     - options
@@ -40,14 +41,14 @@ bundle: facility
 mode: default
 content:
   field_address:
-    weight: 5
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_administrator:
-    weight: 9
+    weight: 8
     label: inline
     settings:
       link_to_entity: false
@@ -55,14 +56,6 @@ content:
     type: string
     region: content
   field_customer_fax_number:
-    weight: 7
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_customer_phone_number:
     weight: 6
     label: inline
     settings:
@@ -70,8 +63,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_customer_phone_number:
+    weight: 5
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_customer_web_site:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
@@ -79,7 +80,7 @@ content:
     type: string
     region: content
   field_facebook:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       trim_length: 80
@@ -91,7 +92,7 @@ content:
     type: link
     region: content
   field_facility_image:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       image_style: ''
@@ -100,21 +101,21 @@ content:
     type: image
     region: content
   field_ge:
-    weight: 119
+    weight: 18
     label: above
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
     region: content
   field_languages_spoken:
-    weight: 11
+    weight: 10
     label: inline
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_licensed_nursing_facility_:
-    weight: 10
+    weight: 9
     label: inline
     settings:
       thousand_separator: ''
@@ -123,71 +124,6 @@ content:
     type: number_integer
     region: content
   field_linkedin:
-    weight: 4
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_medicaid:
-    weight: 14
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_medicare:
-    weight: 15
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_pace_program:
-    weight: 17
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_populations_served:
-    weight: 13
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_related_content:
-    weight: 18
-    label: above
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
-  field_specialized_unit:
-    weight: 12
-    label: inline
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_twitter:
     weight: 3
     label: hidden
     settings:
@@ -199,7 +135,27 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  field_va_contract:
+  field_medicaid:
+    weight: 13
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_medicare:
+    weight: 14
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_pace_program:
     weight: 16
     label: hidden
     settings:
@@ -209,11 +165,51 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  links:
-    weight: 0
-    region: content
+  field_populations_served:
+    weight: 12
+    label: inline
     settings: {  }
     third_party_settings: {  }
+    type: list_default
+    region: content
+  field_related_content:
+    weight: 17
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_specialized_unit:
+    weight: 11
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_twitter:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_va_contract:
+    weight: 15
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -223,3 +219,4 @@ hidden:
   field_customer_type: true
   field_member_flag: true
   field_service_type: true
+  links: true
