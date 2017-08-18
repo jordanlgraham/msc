@@ -1,0 +1,5 @@
+name: MSCA Discourse
+type: module
+description: MSCA Discourse integration.
+core: 8.x
+package: MSCA

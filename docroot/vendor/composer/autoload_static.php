@@ -142,6 +142,7 @@ class ComposerStaticInitDrupal8
         ),
         'C' => 
         array (
+            'Cviebrock\\DiscoursePHP\\' => 23,
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
             'CommerceGuys\\Intl\\' => 18,
@@ -449,6 +450,10 @@ class ComposerStaticInitDrupal8
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
+        'Cviebrock\\DiscoursePHP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cviebrock/discourse-php/src',
         ),
         'Composer\\Semver\\' => 
         array (
