@@ -23,7 +23,7 @@
         "drupal/devel": "^1.0@RC",
         "drupal/entityqueue": "^1.0@alpha",
         "drupal/external_entities": "^1.0@alpha",
-        "drupal/externalauth": "^1.0",
+        "drupal/externalauth": "1.0",
         "drupal/fast_404": "^1.0@alpha",
         "drupal/field_formatter": "^1.0",
         "drupal/geocoder": "2.x-dev",
