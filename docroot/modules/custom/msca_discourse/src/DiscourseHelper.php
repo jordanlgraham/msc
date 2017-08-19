@@ -9,6 +9,7 @@ use Drupal\Core\Http\ClientFactory;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\State\StateInterface;
 use Cviebrock\DiscoursePHP\SSOHelper;
+use Drupal\user\UserDataInterface;
 use GuzzleHttp\ClientInterface;
 
 class DiscourseHelper {
@@ -33,14 +34,18 @@ class DiscourseHelper {
    */
   protected $config;
 
+  protected $userData;
+
   const SSO_SECRET_STATE_KEY = 'msca_discourse.sso_secret';
 
   const SESSION_DATA_KEY = 'msca_discourse.sso';
 
-  public function __construct(StateInterface $state, ClientFactory $factory, ConfigFactoryInterface $config) {
+  public function __construct(StateInterface $state, ClientFactory $factory, ConfigFactoryInterface $config,
+                              UserDataInterface $userData) {
     $this->config = $config->get('msca_discourse.config');
     $this->state = $state;
     $this->http = $factory->fromOptions(['base_uri' => $this->config->get('url')]);
+    $this->userData = $userData;
   }
 
   /**
@@ -89,7 +94,10 @@ class DiscourseHelper {
    * @throws \Exception
    */
   public function logoutUser(AccountInterface $account) {
-    $id = $this->getIdByEmail($account->getEmail());
+    $id = $this->userData->get('msca_discourse', $account->id(), 'discourse_id');
+    if (!$id) {
+      $id = $this->getDiscourseId($account);
+    }
     if (!$id) {
       throw new \Exception("Discourse ID not found for user {$account->id()}");
     }
@@ -99,27 +107,32 @@ class DiscourseHelper {
   /**
    * Get the Discourse user ID by email address.
    *
-   * @param $email
+   * @param AccountInterface $account
    *
    * @return bool|int
    */
-  protected function getIdByEmail($email) {
+  protected function getDiscourseId(AccountInterface $account) {
+    $email = $account->getEmail();
     $users = $this->request('GET', "/admin/users/list/active.json",
       ['query' => ["filter" => $email, 'show_emails' => TRUE]]);
     $users = Json::decode($users);
+    $id = FALSE;
     if (!empty($users)) {
       if (count($users) === 1) {
-        return end($users)['id'];
+        $id = end($users)['id'];
       }
       else {
         foreach($users as $user) {
           if ($user['email'] === $email) {
-            return $user['id'];
+            $id = $user['id'];
           }
         }
       }
     }
-    return false;
+    if ($id) {
+      $this->userData->set('msca_discourse', $account->id(), 'discourse_id', $id);
+    }
+    return $id;
   }
 
   /**
