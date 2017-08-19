@@ -19,6 +19,13 @@ function msca_discourse_form_user_register_form_alter(&$form, \Drupal\Core\Form\
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_discourse_form_user_login_block_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'msca_discourse_user_login_submit';
+}
+
+/**
  * Extra login form submit function.
  */
 function msca_discourse_user_login_submit($form, FormStateInterface $form_state) {
