@@ -1,9 +1,9 @@
-uuid: aa8edae6-ecaf-4d58-a570-597d42d2997b
+uuid: ba37a412-6696-49bc-9320-bc5294dd5756
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.newsletter
+    - core.entity_view_mode.node.teaser
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_gated
     - field.field.node.newsletter_article.field_news_release_date
@@ -14,69 +14,56 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_topic
+    - image.style.featured_image_130x190_
     - node.type.newsletter_article
   module:
     - datetime
     - entity_print
-    - link
+    - media_entity
     - text
     - user
 third_party_settings:
   entity_print:
     pdf_label: 'Print this Article'
-_core:
-  default_config_hash: 49LnrNEv0P4u19AXAjxbpdrvDA2EPia6ZXchmDBZiO4
-id: node.newsletter_article.newsletter
+id: node.newsletter_article.teaser
 targetEntityType: node
 bundle: newsletter_article
-mode: newsletter
+mode: teaser
 content:
   body:
+    type: text_summary_or_trimmed
+    weight: 3
+    region: content
     label: hidden
-    type: text_default
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  entity_print_view_pdf:
-    weight: 6
-    region: content
-    settings: {  }
+    settings:
+      trim_length: 300
     third_party_settings: {  }
   field_news_release_date:
-    type: datetime_default
     weight: 1
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       format_type: direct
     third_party_settings: {  }
-  field_news_source:
-    type: link
-    weight: 3
+    type: datetime_default
     region: content
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
   field_news_subtitle:
-    type: string
     weight: 0
-    region: content
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  flag_bookmark:
-    weight: 5
+    type: string
     region: content
-    settings: {  }
+  field_news_teaser_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: featured_image_130x190_
+      image_link: ''
     third_party_settings: {  }
+    type: media_thumbnail
+    region: content
   links:
     weight: 4
     region: content
@@ -84,11 +71,12 @@ content:
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
+  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
-  field_news_teaser_image: true
+  field_news_source: true
   field_newsletter_byline: true
-  field_newsletter_image: true
   field_related_content: true
   field_sponsor: true
   field_topic: true
+  flag_bookmark: true

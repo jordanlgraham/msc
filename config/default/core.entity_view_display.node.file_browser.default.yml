@@ -18,14 +18,14 @@ bundle: file_browser
 mode: default
 content:
   body:
-    weight: 3
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_file_browser_image:
-    weight: 4
+    weight: 2
     label: above
     settings:
       image_style: ''
@@ -34,10 +34,10 @@ content:
     type: image
     region: content
   links:
-    weight: 2
+    weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
