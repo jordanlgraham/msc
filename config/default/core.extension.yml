@@ -37,6 +37,7 @@ module:
   entity_print: 0
   entity_reference_revisions: 0
   entityqueue: 0
+  externalauth: 0
   facility_search: 0
   fast404: 0
   field: 0
