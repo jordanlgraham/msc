@@ -1,0 +1,16 @@
+msca_discourse.config:
+  type: config_object
+  label: 'Discourse settings'
+  mapping:
+    api_key:
+      type: string
+      label: 'API Key'
+    api_user:
+      type: string
+      label: 'API User'
+    url:
+      type: uri
+      label: 'Discourse URL'
+    logout:
+      type: boolean
+      label: 'Log users out of Discourse when they log out of Drupal'

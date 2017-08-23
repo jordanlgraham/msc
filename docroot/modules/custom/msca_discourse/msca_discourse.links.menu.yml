@@ -1,0 +1,5 @@
+msca_discourse.admin:
+  route_name: msca_discourse.admin
+  title: Discourse
+  description: 'Configuration for the Discourse module.'
+  parent: system.admin_config_services

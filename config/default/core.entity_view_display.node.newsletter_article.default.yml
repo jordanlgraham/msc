@@ -32,18 +32,18 @@ mode: default
 content:
   body:
     type: text_default
-    weight: 4
+    weight: 3
     region: content
     label: hidden
     settings: {  }
     third_party_settings: {  }
   entity_print_view_pdf:
-    weight: 9
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_news_release_date:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       timezone_override: ''
@@ -52,7 +52,7 @@ content:
     type: datetime_default
     region: content
   field_news_source:
-    weight: 6
+    weight: 5
     label: hidden
     settings:
       trim_length: 80
@@ -64,7 +64,7 @@ content:
     type: link
     region: content
   field_news_subtitle:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       link_to_entity: false
@@ -72,7 +72,7 @@ content:
     type: string
     region: content
   field_news_teaser_image:
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       image_style: featured_image_130x190_
@@ -82,22 +82,13 @@ content:
     region: content
   field_newsletter_byline:
     type: string
-    weight: 5
+    weight: 4
     region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
   field_related_content:
-    weight: 8
-    label: above
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
-  field_sponsor:
     weight: 7
     label: above
     settings:
@@ -106,13 +97,17 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  flag_bookmark:
-    weight: 10
-    region: content
-    settings: {  }
+  field_sponsor:
+    weight: 6
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-  links:
-    weight: 0
+    type: entity_reference_entity_view
+    region: content
+  flag_bookmark:
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -121,3 +116,4 @@ hidden:
   entity_print_view_word_docx: true
   field_gated: true
   field_topic: true
+  links: true

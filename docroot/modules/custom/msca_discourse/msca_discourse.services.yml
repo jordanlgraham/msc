@@ -1,0 +1,9 @@
+services:
+  msca_discourse.sso_helper:
+    class: '\Drupal\msca_discourse\DiscourseHelper'
+    arguments: ['@state', '@http_client_factory', '@config.factory', '@user.data']
+  msca_discourse.valid_payload:
+    class: '\Drupal\msca_discourse\Access\ValidPayload'
+    arguments: ['@msca_discourse.sso_helper']
+    tags:
+      - {name: access_check, applies_to: _valid_discourse_payload}

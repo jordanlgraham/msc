@@ -24,7 +24,6 @@ id: node.vendor.teaser
 targetEntityType: node
 bundle: vendor
 mode: teaser
-content: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

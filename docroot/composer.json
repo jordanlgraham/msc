@@ -23,7 +23,7 @@
         "drupal/devel": "^1.0@RC",
         "drupal/entityqueue": "^1.0@alpha",
         "drupal/external_entities": "^1.0@alpha",
-        "drupal/externalauth": "^1.0",
+        "drupal/externalauth": "1.0",
         "drupal/fast_404": "^1.0@alpha",
         "drupal/field_formatter": "^1.0",
         "drupal/geocoder": "2.x-dev",
@@ -65,10 +65,11 @@
         "drupal/paragraphs": "^1.1",
         "drupal/config_installer": "1.4",
         "drupal/config_split": "1.0-beta6",
-        "drupal/field_group": "3.x-dev",
         "drupal/current_page_crumb": "1.1",
         "drupal/easy_breadcrumb": "1.6",
-        "drupal/button_link": "^1.0"
+        "drupal/button_link": "^1.0",
+        "drupal/field_group": "3.x-dev",
+        "cviebrock/discourse-php": "0.9.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"

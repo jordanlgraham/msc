@@ -1,9 +1,0 @@
-
-netforum_user_auth.user_auth_form:
-  path: '/nflogin'
-  defaults:
-    _form: '\Drupal\netforum_user_auth\Form\UserAuthForm'
-    _title: 'NetForum Login'
-  requirements:
-    _access: 'TRUE'
-  

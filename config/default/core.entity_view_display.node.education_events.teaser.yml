@@ -41,6 +41,7 @@ content:
       timezone_override: ''
       date_format: 'F d'
     third_party_settings: {  }
+
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

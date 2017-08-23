@@ -1,0 +1,17 @@
+msca_discourse.sso:
+  path: '/discourse/sso'
+  defaults:
+    _controller: '\Drupal\msca_discourse\Controller\DiscourseSso::sso'
+  requirements:
+    _access: 'TRUE'
+    _valid_discourse_payload: 'TRUE'
+  options:
+    no_cache: 'TRUE'
+
+msca_discourse.admin:
+  path: '/admin/config/services/discourse'
+  defaults:
+    _title: Discourse
+    _form: \Drupal\msca_discourse\Form\DiscourseAdmin
+  requirements:
+    _permission: 'administer site configuration'

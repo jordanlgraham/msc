@@ -10342,6 +10342,53 @@
         }
     },
     {
+        "name": "cviebrock/discourse-php",
+        "version": "0.9.3",
+        "version_normalized": "0.9.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cviebrock/discourse-php.git",
+            "reference": "9a56e2afec067ee7441663eb82db3d4446c25bc2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cviebrock/discourse-php/zipball/9a56e2afec067ee7441663eb82db3d4446c25bc2",
+            "reference": "9a56e2afec067ee7441663eb82db3d4446c25bc2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-07-07T16:02:16+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Cviebrock\\DiscoursePHP\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Colin Viebrock",
+                "email": "colin@viebrock.ca"
+            },
+            {
+                "name": "Johan Jatko",
+                "homepage": "https://xr.gs/"
+            }
+        ],
+        "description": "Helper class for building a single sign-on source for Discourse forums",
+        "homepage": "https://github.com/cviebrock/discourse-php",
+        "keywords": [
+            "discourse",
+            "forum"
+        ]
+    },
+    {
         "name": "drupal/field_group",
         "version": "dev-3.x",
         "version_normalized": "dev-3.x",
@@ -10398,59 +10445,6 @@
         "homepage": "https://www.drupal.org/project/field_group",
         "support": {
             "source": "http://cgit.drupalcode.org/field_group"
-        }
-    },
-    {
-        "name": "drupal/current_page_crumb",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/current_page_crumb",
-            "reference": "8.x-1.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
-            "reference": "8.x-1.1",
-            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
-        },
-        "require": {
-            "drupal/core": "~8.0"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.1",
-                "datestamp": "1491328082",
-                "security-coverage": {
-                    "status": "covered",
-                    "message": "Covered by Drupal's security advisory policy"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Greg Boggs",
-                "homepage": "https://www.drupal.org/user/153069"
-            },
-            {
-                "name": "rakesh.gectcr",
-                "homepage": "https://www.drupal.org/user/1177822"
-            }
-        ],
-        "description": "Adds the current page title to the breadcrumb.",
-        "homepage": "https://www.drupal.org/project/current_page_crumb",
-        "support": {
-            "source": "http://cgit.drupalcode.org/current_page_crumb"
         }
     },
     {
@@ -10561,6 +10555,59 @@
         "homepage": "https://www.drupal.org/project/button_link",
         "support": {
             "source": "http://cgit.drupalcode.org/button_link"
+        }
+    },
+    {
+        "name": "drupal/current_page_crumb",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/current_page_crumb",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1491328082",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "rakesh.gectcr",
+                "homepage": "https://www.drupal.org/user/1177822"
+            }
+        ],
+        "description": "Adds the current page title to the breadcrumb.",
+        "homepage": "https://www.drupal.org/project/current_page_crumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/current_page_crumb"
         }
     }
 ]

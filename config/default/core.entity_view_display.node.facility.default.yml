@@ -30,6 +30,7 @@ dependencies:
     - node.type.facility
   module:
     - address
+    - geolocation
     - image
     - link
     - options
@@ -40,7 +41,7 @@ bundle: facility
 mode: default
 content:
   field_address:
-    weight: 5
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -71,7 +72,7 @@ content:
     type: string
     region: content
   field_customer_web_site:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
@@ -79,7 +80,7 @@ content:
     type: string
     region: content
   field_facebook:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       trim_length: 80
@@ -91,7 +92,7 @@ content:
     type: link
     region: content
   field_facility_image:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       image_style: ''
@@ -116,7 +117,7 @@ content:
     type: number_integer
     region: content
   field_linkedin:
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       trim_length: 80
@@ -128,7 +129,7 @@ content:
     type: link
     region: content
   field_medicaid:
-    weight: 14
+    weight: 13
     label: hidden
     settings:
       format: default
@@ -138,7 +139,7 @@ content:
     type: boolean
     region: content
   field_medicare:
-    weight: 15
+    weight: 14
     label: hidden
     settings:
       format: default
@@ -148,7 +149,7 @@ content:
     type: boolean
     region: content
   field_pace_program:
-    weight: 17
+    weight: 16
     label: hidden
     settings:
       format: default
@@ -165,7 +166,7 @@ content:
     type: list_default
     region: content
   field_related_content:
-    weight: 18
+    weight: 17
     label: above
     settings:
       view_mode: teaser
@@ -181,7 +182,7 @@ content:
     type: list_default
     region: content
   field_twitter:
-    weight: 3
+    weight: 2
     label: hidden
     settings:
       trim_length: 80
@@ -193,7 +194,7 @@ content:
     type: link
     region: content
   field_va_contract:
-    weight: 16
+    weight: 15
     label: hidden
     settings:
       format: default
@@ -202,11 +203,6 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  links:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -217,3 +213,4 @@ hidden:
   field_ge: true
   field_member_flag: true
   field_service_type: true
+  links: true

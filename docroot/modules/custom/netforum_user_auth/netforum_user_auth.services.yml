@@ -1,0 +1,4 @@
+services:
+  netforum_user_auth.auth:
+    class: '\Drupal\netforum_user_auth\Auth'
+    arguments: ['@entity_type.manager', '@netforum_soap.get_client', '@externalauth.externalauth']

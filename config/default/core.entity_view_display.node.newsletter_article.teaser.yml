@@ -17,6 +17,8 @@ dependencies:
     - node.type.newsletter_article
   module:
     - entity_print
+    - datetime
+    - media_entity
     - text
     - user
 third_party_settings:
@@ -35,6 +37,7 @@ content:
     settings:
       trim_length: 300
     third_party_settings: {  }
+
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
