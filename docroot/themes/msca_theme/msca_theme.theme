@@ -35,4 +35,55 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
 
     $suggestions[] = 'page__' . $content_type;
   }
+
  }
+
+function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variables) {
+  $field = $variables['element'];
+  if ($field['#entity_type'] !== 'node') {
+    return;
+  }
+  $inline_fields = [
+    'template' => 'field__node__inline',
+    'fields' => [
+      'field_event_category',
+      'field_administrator',
+      'field_customer_fax_number',
+      'field_customer_phone_number',
+      'field_date',
+      'field_end_date',
+      'field_licensed_nursing_facility',
+      'field_resource_category',
+      'field_video_date',
+    ],
+  ];
+  $multiple_inline = [
+    'template' => 'field__node__multiple_inline',
+    'fields' => [
+      'field_contact_title',
+      'field_contact',
+      'field_email',
+      'field_phone',
+    ],
+  ];
+  $inline_comma = [
+    'template' => 'field__node__inline_comma',
+    'fields' => [
+      'field_languages_spoken',
+      'field_populations_served',
+      'field_specialized_unit',
+    ],
+  ];
+  $services = [
+    'template' => 'field__node__services',
+    'fields' => [
+      'field_primary_services',
+      'field_additional_services',
+    ],
+  ];
+  foreach ([$inline_fields, $multiple_inline, $inline_comma, $services] as $field_list) {
+    if (in_array($field['#field_name'], $field_list['fields'])) {
+      $suggestions[] = $field_list['template'];
+    }
+  }
+}
