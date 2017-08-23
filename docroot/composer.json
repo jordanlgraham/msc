@@ -54,7 +54,7 @@
         "drupal/adminimal_admin_toolbar": "^1.4",
         "drupal/insert": "1.0-beta1",
         "drupal/image_widget_crop": "2.0",
-        "drupal/twig_tweak": "1.8",
+        "drupal/twig_tweak": "^1.8",
         "drupal/editor_advanced_link": "1.4",
         "drupal/editor_file": "1.2",
         "drupal/media_entity": "1.6",
@@ -67,7 +67,8 @@
         "drupal/config_split": "1.0-beta6",
         "drupal/field_group": "3.x-dev",
         "drupal/current_page_crumb": "1.1",
-        "drupal/easy_breadcrumb": "1.6"
+        "drupal/easy_breadcrumb": "1.6",
+        "drupal/button_link": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"
