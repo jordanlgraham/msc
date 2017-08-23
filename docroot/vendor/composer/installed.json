@@ -10295,7 +10295,7 @@
         "dist": {
             "type": "zip",
             "url": "https://ftp.drupal.org/files/projects/config_split-8.x-1.0-beta6.zip",
-            "reference": null,
+            "reference": "8.x-1.0-beta6",
             "shasum": "c816e0e24375b697daeacd36d2112b48ed857ae2"
         },
         "require": {
@@ -10339,6 +10339,228 @@
         "support": {
             "source": "http://cgit.drupalcode.org/config_split",
             "issues": "https://www.drupal.org/project/issues/config_split"
+        }
+    },
+    {
+        "name": "drupal/field_group",
+        "version": "dev-3.x",
+        "version_normalized": "dev-3.x",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/field_group",
+            "reference": "83c00b5e61056940745e9c37ba4bbac9a1124d75"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-3.x": "3.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-3.x-dev",
+                "datestamp": "1499985844",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Dev releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "source",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Hydra",
+                "homepage": "https://www.drupal.org/user/647364"
+            },
+            {
+                "name": "Stalski",
+                "homepage": "https://www.drupal.org/user/322618"
+            },
+            {
+                "name": "jyve",
+                "homepage": "https://www.drupal.org/user/591438"
+            },
+            {
+                "name": "swentel",
+                "homepage": "https://www.drupal.org/user/107403"
+            },
+            {
+                "name": "zuuperman",
+                "homepage": "https://www.drupal.org/user/361625"
+            }
+        ],
+        "description": "Provides the field_group module.",
+        "homepage": "https://www.drupal.org/project/field_group",
+        "support": {
+            "source": "http://cgit.drupalcode.org/field_group"
+        }
+    },
+    {
+        "name": "drupal/current_page_crumb",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/current_page_crumb",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1491328082",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "rakesh.gectcr",
+                "homepage": "https://www.drupal.org/user/1177822"
+            }
+        ],
+        "description": "Adds the current page title to the breadcrumb.",
+        "homepage": "https://www.drupal.org/project/current_page_crumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/current_page_crumb"
+        }
+    },
+    {
+        "name": "drupal/easy_breadcrumb",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/easy_breadcrumb",
+            "reference": "8.x-1.6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/easy_breadcrumb-8.x-1.6.zip",
+            "reference": "8.x-1.6",
+            "shasum": "d7e4fcbb76a65bc33230d45c3bf41c4689b8e1a2"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.6",
+                "datestamp": "1487359983",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "RenatoG",
+                "homepage": "https://www.drupal.org/user/3326031"
+            },
+            {
+                "name": "sonemonu",
+                "homepage": "https://www.drupal.org/user/1667988"
+            },
+            {
+                "name": "tatarbj",
+                "homepage": "https://www.drupal.org/user/649590"
+            }
+        ],
+        "description": "Adds configuration to the system breadcrumbs.",
+        "homepage": "https://www.drupal.org/project/easy_breadcrumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/easy_breadcrumb"
+        }
+    },
+    {
+        "name": "drupal/button_link",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/button_link",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "54c8bdca11d7741a8815ac2f5047affdc7d5bb9b"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1480343880",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "hatuhay",
+                "homepage": "https://www.drupal.org/user/827704"
+            }
+        ],
+        "description": "Provides a simple button link field formatter.",
+        "homepage": "https://www.drupal.org/project/button_link",
+        "support": {
+            "source": "http://cgit.drupalcode.org/button_link"
         }
     }
 ]

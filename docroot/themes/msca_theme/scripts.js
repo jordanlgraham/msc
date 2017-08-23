@@ -315,11 +315,12 @@ var Tab = function ($) {
 }(jQuery);
 
 // Custom scripts go here
-(function ($) {
+
+(function ($, Drupal) {
   Drupal.behaviors.msca_theme = {
     attach: function attach(context, settings) {}
   };
-})(jQuery);
+})(jQuery, Drupal);
 
 /**
  * --------------------------------------------------------------------------
