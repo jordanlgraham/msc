@@ -64,8 +64,9 @@
 }
 
 .btn-twitter {
-  background-color: $twitter-blue;
+  background: $twitter-blue url($twitter-svg) 15px no-repeat;
   color: $white;
+  background-size: 15px;
   &:hover {
     background-color: lighten($twitter-blue, 10%);
     color: $white;
@@ -73,11 +74,22 @@
 }
 
 .btn-facebook {
-  background-color: $facebook-blue;
+  background: $facebook-blue url($fb-svg) 15px no-repeat;
   color: $white;
+  background-size: 15px;
   &:hover {
     color: $white;
     background-color: lighten($facebook-blue, 10%)
+  }
+}
+
+.btn-linkedin {
+  background: $linkedin-blue url($linkedin-svg) 15px no-repeat;
+  color: $white;
+  background-size: 15px;
+  &:hover {
+    color: $white;
+    background-color: lighten($linkedin-blue, 10%);
   }
 }
 
@@ -87,6 +99,38 @@
   &:hover {
     background-color: lighten($foundation-green, 10%);
     color: $white;
+  }
+}
+
+//Social Media icons without text
+.icon-social {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  display: inline-block;
+
+}
+.icon-facebook {
+  background: $facebook-blue url($fb-svg) 10px no-repeat;
+  background-size: 20px;
+  &:hover {
+    background-color: lighten($facebook-blue, 10%);
+  }
+}
+
+.icon-linkedin {
+  background: $linkedin-blue url($linkedin-svg) 5px no-repeat;
+  background-size: 20px;
+  &:hover {
+    background-color: lighten($linkedin-blue, 10%);
+  }
+}
+
+.icon-twitter {
+  background: $twitter-blue url($twitter-svg) 5px no-repeat;
+  background-size: 20px;
+  &:hover {
+    background-color: lighten($twitter-blue, 10%);
   }
 }
 
