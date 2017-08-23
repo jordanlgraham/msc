@@ -49,18 +49,18 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      format_type: direct
+      date_format: 'M d, Y h:ia'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   field_end_date:
     weight: 4
     label: hidden
     settings:
       timezone_override: ''
-      format_type: direct
+      date_format: 'M d, Y h:ia'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   field_event_category:
     weight: 1

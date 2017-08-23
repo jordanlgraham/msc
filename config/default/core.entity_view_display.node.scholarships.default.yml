@@ -31,17 +31,19 @@ content:
     weight: 5
     label: above
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_recipient:
     weight: 3
-    label: hidden
+    label: above
     settings:
-      link: true
+      view_mode: teaser
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_related_content:
     weight: 4

@@ -19,6 +19,7 @@ dependencies:
     - node.type.vendor
   module:
     - address
+    - button_link
     - image
     - link
     - user
@@ -130,13 +131,15 @@ content:
     weight: 4
     label: hidden
     settings:
-      trim_length: 80
+      link_text: Website
+      btn_type: btn-primary
+      trim_length: '80'
       target: _blank
-      url_only: false
-      url_plain: false
-      rel: '0'
+      url_only: ''
+      url_plain: ''
+      rel: 0
     third_party_settings: {  }
-    type: link_separate
+    type: button_link
     region: content
   links:
     weight: 0

@@ -1,8 +1,0 @@
-uuid: cda23b18-10c5-4c14-aa6f-d4658eb2d916
-langcode: en
-status: true
-dependencies: {  }
-id: masthead
-label: Masthead
-description: 'For login, search, etc.'
-locked: false
