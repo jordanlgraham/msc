@@ -1,5 +1,5 @@
 netforum_org_sync.org_sync_form:
-  title: 'NetForum Sync Form'
+  title: 'NetForum Organization Sync'
   route_name: netforum_org_sync.org_sync_form
   description: 'For manually syncing an organization through the NetForum API'
   parent: system.admin_config_services
