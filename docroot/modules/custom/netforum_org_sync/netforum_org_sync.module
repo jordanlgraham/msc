@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\netforum_org_sync\OrgSync;
 
 /**
  * Implements hook_help().
@@ -28,6 +29,19 @@ function netforum_org_sync_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_cron().
  */
 function netforum_org_sync_cron() {
-  $form = \Drupal::formBuilder()->getForm('Drupal\netforum_org_sync\Form\OrganizationSyncForm');
-
+  /** @var \Drupal\Core\State\StateInterface $state */
+  $state = \Drupal::service('state');
+  $last = strtotime('-3 weeks');
+  try {
+    $current_time = \Drupal::time()->getRequestTime();
+    /** @var \Drupal\Core\Datetime\DateFormatterInterface $formatter */
+    $formatter = \Drupal::service('date.formatter');
+    $count = \Drupal::service(OrgSync::CRON_STATE_KEY)->syncOrganizationChanges($last, $current_time);
+    $state->set(OrgSync::CRON_STATE_KEY, $current_time);
+    \Drupal::logger('netforum_org_sync')->notice('Synced @count organization changes from @start to @end',
+      ['@start' => $formatter->format($last), '@end' => $formatter->format($current_time), '@count' => $count]);
+  }
+  catch (Exception $exception) {
+    watchdog_exception('netforum_org_sync', $exception, 'Unable to sync events during cron.');
+  }
 }
