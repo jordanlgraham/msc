@@ -1,0 +1,7 @@
+netforum_user_auth.config:
+  type: config_object
+  label: 'Netforum User Auth'
+  mapping:
+    password_reset:
+      type: uri
+      label: 'URL for password reset redirect'
