@@ -2,3 +2,7 @@ services:
   netforum_user_auth.auth:
     class: '\Drupal\netforum_user_auth\Auth'
     arguments: ['@entity_type.manager', '@netforum_soap.get_client', '@externalauth.externalauth']
+  netforum_user_auth.route_subscriber:
+    class: 'Drupal\netforum_user_auth\Routing\RouteSubscriber'
+    tags:
+      - {name: event_subscriber}

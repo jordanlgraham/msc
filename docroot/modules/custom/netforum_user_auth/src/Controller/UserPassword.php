@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 class UserPassword extends ControllerBase {
 
   /**
+   * Redirect the user to a different password reset page if
+   *  the config is available.
+   *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
    * @return array|\Drupal\Core\Routing\TrustedRedirectResponse
@@ -17,7 +20,7 @@ class UserPassword extends ControllerBase {
   public function netforumPass(Request $request) {
     $url = $this->config('netforum_user_auth.config')->get('password_reset');
     if (UrlHelper::isValid($url, TRUE) && ($request->get('redirect') !== 'false')) {
-      return new TrustedRedirectResponse('https://netforum.avectra.com/eWeb/DynamicPage.aspx?WebCode=ForgotPassword&Site=MSCA');
+      return new TrustedRedirectResponse($url);
     }
     return $this->formBuilder()->getForm('\Drupal\user\Form\UserPasswordForm');
   }
