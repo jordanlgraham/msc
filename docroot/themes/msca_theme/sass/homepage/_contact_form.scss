@@ -1,0 +1,64 @@
+.paragraph--type--map-and-contact .contact-message-feedback-form h2 {
+  @extend .thin-heading;
+  color: $blue;
+}
+
+.paragraph--type--map-and-contact .homepage-contact {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+//this entire section is container-fluid to accommodate the large Google Map on the left side. However, we don't want
+//the contact form to do the same, so for large-ish displays, we're limiting it with max-width: 540px, which is half
+//of the .container width. So it's like the left side is container-fluid but the right side is container.
+.paragraph--type--map-and-contact .contact-message-feedback-form {
+  max-width: 540px;
+}
+
+//form elements shouldn't have borders or curved corners at all
+.paragraph--type--map-and-contact .contact-message-feedback-form input,
+.paragraph--type--map-and-contact .contact-message-feedback-form .form-select,
+.paragraph--type--map-and-contact .contact-message-feedback-form .form-textarea{
+  border-radius: 0;
+  border-width: 0;
+}
+
+//give some breathing room to each form element
+.paragraph--type--map-and-contact .form-item {
+  margin-bottom: 1rem;
+}
+
+//make labels a little tighter with the form elements themselves
+.paragraph--type--map-and-contact label {
+  margin-bottom: 0;
+}
+
+.paragraph--type--map-and-contact .form-submit {
+  @extend .btn;
+  @extend .btn-secondary;
+  cursor: pointer;
+}
+
+.paragraph--type--map-and-contact .form-select {
+  @extend .form-control;
+}
+
+.paragraph--type--map-and-contact .form-textarea {
+  width: 100%;
+  border: 1px solid rgba(0,0,0,0.15);
+  resize: none;
+  max-height: 60px;
+}
+
+.paragraph--type--map-and-contact input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+}
+
+.homepage-contact, .homepage-map {
+  background-color: $light-gray;
+}
+
+.homepage-map {
+  padding-left: 0;
+}

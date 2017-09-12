@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function msca_contact_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  exit();
+  var_dump($form);
+  var_dump($form_id);
+  switch($form_id) {
+    case 'contact_message_feedback_form':
+      var_dump($form);
+      //do nothing
+  }
+}

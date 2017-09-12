@@ -48,3 +48,37 @@ a {
 .fa {
   font-family: 'FontAwesome';
 }
+
+//This is mostly for use on the homepage, where the heading style is different than on the rest of the site.
+//When you reference it, you'll likely want to explicitly set a color on the element.
+.thin-heading {
+  font-size: 2rem;
+  font-weight: 300;
+  font-family: $lato;
+  text-align: center;
+}
+
+//For headings that have a horizontal line to the left and right of the text or icon
+//You'll want to use @extend .line-heading and then specify a background-color attribute on that element's :before
+//and :after.
+.line-heading {
+  overflow: hidden;
+  @extend .container;
+}
+.line-heading:before,
+.line-heading:after {
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+.line-heading:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+.line-heading:after {
+  left: 0.5em;
+  margin-right: -50%;
+}

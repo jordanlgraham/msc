@@ -1,0 +1,5 @@
+name: MSCA Theme Tweaks
+type: module
+description: Tweaks for the MSCA Theme
+core: 8.x
+package: Custom

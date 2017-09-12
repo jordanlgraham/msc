@@ -1,0 +1,56 @@
+.carousel-item img {
+  @extend .img-fluid;
+}
+
+.carousel-caption {
+  background-color: rgba(255,255,255,0.9);
+  right: 5%;
+  left: 5%;
+  //The bottom padding is always set to 0 to accommodate buttons which in the design need
+  //to sit centered on the border
+  padding: 20px 5px 0 5px;
+
+  @include media-breakpoint-up(md) {
+    right: 10%;
+    left: 10%;
+    padding: 30px 10px 0 10px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    right: 15%;
+    left: 15%;
+    padding: 30px 30px 0 30px;
+  }
+  @include media-breakpoint-up(xl) {
+    right: 25%;
+    left: 25%;
+    padding: 50px 50px 0 50px;
+  }
+  bottom: initial;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-caption p {
+  color: $gray;
+}
+
+.carousel-caption h2 div {
+  color: $blue;
+  font-size: 1.2rem;
+  font-weight: 700;
+  @include media-breakpoint-up(md) {
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+  @include media-breakpoint-up(lg) {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+}
+
+.carousel-caption .btn {
+  position: relative;
+  top: 20px;
+}

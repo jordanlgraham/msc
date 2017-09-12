@@ -58,6 +58,12 @@ class ButtonLinkFormatter extends LinkFormatter {
         'btn-info' => $this->t('Info'),
         'btn-warning' => $this->t('Warning'),
         'btn-danger' => $this->t('Danger'),
+        'btn-outline-default' => $this->t('Outline Default'),
+        'btn-outline-primary' => $this->t('Outline Primary'),
+        'btn-outline-success' => $this->t('Outline Success'),
+        'btn-outline-info' => $this->t('Outline Info'),
+        'btn-outline-warning' => $this->t('Outline Warning'),
+        'btn-outline-danger' => $this->t('Outline Danger'),
       ],
       '#required' => TRUE,
     ];

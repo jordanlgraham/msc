@@ -7,6 +7,7 @@
 @import "components/blocks";
 @import "components/btn-custom";
 @import "components/events";
+@import "homepage/carousel";
 @import "components/cta";
 @import "components/color-hero";
 @import "components/form";
@@ -17,6 +18,7 @@
 @import "components/tables";
 @import "components/tabs";
 @import "components/youtube";
+@import "components/date_square";
 
 // Layout
 @import "layout/layout";
@@ -28,5 +30,11 @@
 // Footer
 @import "footer/footer";
 
-// Paragraphs
-@import "paragraphs/hero-slide";
+// Homepage
+@import "homepage/foundation";
+@import "homepage/join-msca";
+@import "homepage/recent-news";
+@import "homepage/upcoming-events";
+@import "homepage/video";
+@import "homepage/contact_form";
+@import "homepage/headings";

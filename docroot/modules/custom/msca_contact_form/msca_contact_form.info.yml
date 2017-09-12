@@ -1,0 +1,5 @@
+name: MSCA Contact Form
+type: module
+description: Modifies the standard Drupal contact form.
+core: 8.x
+package: MSCA

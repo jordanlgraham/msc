@@ -1,0 +1,60 @@
+.home-recent-news {
+  background-color: $white;
+  @extend .container;
+  padding: 4rem 0;
+}
+
+.home-recent-news h2 {
+  @extend .thin-heading;
+  color: $blue;
+}
+
+.home-recent-news .views-field-view-node a {
+  @extend .read-more;
+}
+
+//unfortunately the Stable theme produces a lot of these divs without classes,
+//which in most cases is fine, but here we need to do this silly thing to
+//get this to view to show up as columns
+.home-recent-news > div > div {
+  @extend .row;
+}
+
+.home-recent-news .views-row {
+  @extend .col-md-4;
+  @extend .col-sm-6;
+  @extend .col-12;
+  &:last-child {
+    @extend .hidden-sm-down;
+  }
+}
+
+.home-recent-news img {
+  @extend .img-fluid;
+}
+
+.home-recent-news .news-date-with-image {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+//if a news item contains an image, we need to have the date square sit in the bottom left corner of it
+.home-recent-news .news-date-with-image .date-square {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.home-recent-news .news-date-without-image {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.home-recent-news .news-date-without-image .date-square {
+  margin-right: 1rem;
+  flex: 0 0 5rem;
+}
+.home-recent-news h3 span {
+  text-transform: initial;
+}

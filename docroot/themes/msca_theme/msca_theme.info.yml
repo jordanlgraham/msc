@@ -16,6 +16,11 @@ regions:
   sidebar: 'Sidebar'
   footer: 'Footer'
 
+  # The purpose of the gutter is to be able to place blocks but not have them appear.
+  # The reason we want that is so that we can place them in twig files via Twig Tweaks
+  # and also so we can embed blocks in a Paragraph using the Embed Block paragraph type,
+  # which requires that blocks be placed before they can be referenced.
+  gutter: 'Gutter'
 libraries:
   - msca_theme/base
 
