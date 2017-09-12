@@ -80,6 +80,9 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  links:
+    weight: 100
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

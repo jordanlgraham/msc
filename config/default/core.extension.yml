@@ -19,6 +19,7 @@ module:
   config_filter: 0
   config_split: 0
   contact: 0
+  contact_block: 0
   contact_storage: 0
   contextual: 0
   crop: 0
@@ -59,6 +60,8 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   insert: 0
+  jquery_colorpicker: 0
+  kint: 0
   link: 0
   masquerade: 0
   media_entity: 0
@@ -71,6 +74,7 @@ module:
   metatag_open_graph: 0
   msc_button_link_social: 0
   msca_discourse: 0
+  msca_theme_tweaks: 0
   netforum_soap: 0
   netforum_user_auth: 0
   node: 0
@@ -88,6 +92,7 @@ module:
   seckit: 0
   shield: 0
   shortcut: 0
+  svg_image: 0
   system: 0
   taxonomy: 0
   telephone: 0

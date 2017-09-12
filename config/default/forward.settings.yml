@@ -69,3 +69,4 @@ forward_user_user: false
 forward_entity_menu_link_content: false
 forward_menu_link_content_menu_link_content: false
 forward_flagging_bookmark: false
+forward_node_paragraph_assembler: 0

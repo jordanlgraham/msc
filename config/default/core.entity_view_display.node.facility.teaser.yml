@@ -36,7 +36,6 @@ targetEntityType: node
 bundle: facility
 mode: teaser
 content: {  }
-
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

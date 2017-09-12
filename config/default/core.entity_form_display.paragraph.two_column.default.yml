@@ -1,0 +1,39 @@
+uuid: c32abed5-eeab-43ff-9002-8ee3a2c6b757
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.two_column.field_background_color
+    - field.field.paragraph.two_column.field_two_column_paragraphs
+    - paragraphs.paragraphs_type.two_column
+  module:
+    - jquery_colorpicker
+    - paragraphs
+id: paragraph.two_column.default
+targetEntityType: paragraph
+bundle: two_column
+mode: default
+content:
+  field_background_color:
+    weight: 1
+    settings:
+      color: FFFFFF
+    third_party_settings: {  }
+    type: jquery_colorpicker
+    region: content
+  field_two_column_paragraphs:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

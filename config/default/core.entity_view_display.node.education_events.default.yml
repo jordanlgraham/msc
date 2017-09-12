@@ -39,8 +39,8 @@ content:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     type: link
     region: content
@@ -49,7 +49,7 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      date_format: 'M d, Y h:ia'
+      date_format: U
     third_party_settings: {  }
     type: datetime_custom
     region: content

@@ -1,0 +1,21 @@
+uuid: b228fc2d-046e-4950-b851-f7d95eb46554
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_youtube_id
+field_name: field_youtube_id
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
