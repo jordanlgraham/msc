@@ -20,7 +20,11 @@
 }
 
 .paragraph--type--foundation-highlights .container > div > div {
-  @extend .col-md-4;
+  @extend .col-lg-4;
+  @extend .col-sm-12;
+  @include media-breakpoint-down(md) {
+    margin-bottom: 1rem;
+  }
 }
 
 .homepage-foundation-header h2 {
@@ -43,4 +47,7 @@
 .homepage-foundation-icon {
   max-width: 100%;
   width: 200px;
+  @include media-breakpoint-down(md) {
+    width: 100px;
+  }
 }

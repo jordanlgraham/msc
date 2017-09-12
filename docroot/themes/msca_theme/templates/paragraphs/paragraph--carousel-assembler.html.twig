@@ -55,11 +55,13 @@ set captionClasses = [
 ]
 %}
 {% block paragraph %}
-    <div{{ attributes.addClass(classes) }} data-ride="carousel">
+    <div{{ attributes.addClass(classes) }} data-ride="carousel" id="homepage-carousel">
         <ol class="carousel-indicators">
-            <li class="" data-slide-to="0" data-target="#carouselExampleIndicators">&nbsp;</li>
-            <li data-slide-to="1" data-target="#carouselExampleIndicators" class="">&nbsp;</li>
-            <li data-slide-to="2" data-target="#carouselExampleIndicators" class="active">&nbsp;</li>
+            {# each slide of the carousel needs an indicator of its very own #}
+            {% set slide_count = content.field_carousel_slides.getvalue|length %}
+            {% for i in 0 .. slide_count-1 %}
+                <li {% if loop.first %} class="active" {% endif %} data-slide-to="{{ loop.index0 }}" data-target="#homepage-carousel">&nbsp;</li>
+            {% endfor %}
         </ol>
 
         {% if content.field_carousel_slides|render %}
@@ -68,7 +70,7 @@ set captionClasses = [
             </div>
         {% endif %}
 
-        <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleControls" role="button"><span class="sr-only">Previous</span></a>
-        <a class="carousel-control-next" data-slide="next" href="#carouselExampleControls" role="button"><span class="sr-only">Next</span></a>
+        <a class="carousel-control-prev" data-slide="prev" href="#homepage-carousel" role="button"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>
+        <a class="carousel-control-next" data-slide="next" href="#homepage-carousel" role="button"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>
     </div>
 {% endblock paragraph %}

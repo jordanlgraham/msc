@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
 /**
  * Implements hook_help().
@@ -25,8 +27,11 @@ function msca_theme_tweaks_help($route_name, RouteMatchInterface $route_match) {
 
 /**
  * Implements hook_entity_view().
+ * @todo: put this in the theme itself.
+ * This was done in haste because I wasn't able to get it to work in the .theme
+ * file, but that's where it should live.
  */
-function msca_theme_tweaks_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if($view_mode == 'homepage' && !empty($build['field_date'][0]['#markup'])) {
     $timestamp = $build['field_date'][0]['#markup'];
     $build['month'] = date('M', $timestamp);

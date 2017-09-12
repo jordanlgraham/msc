@@ -16,10 +16,16 @@
 //unfortunately the Stable theme produces a lot of these divs without classes,
 //which in most cases is fine, but here we need to do this silly thing to
 //get this to view to show up as columns
+.home-recent-news > div {
+  @extend .container;
+}
 .home-recent-news > div > div {
   @extend .row;
 }
 
+//3 across on medium and up
+//2 across on small displays (with the third article hidden)
+//stacked
 .home-recent-news .views-row {
   @extend .col-md-4;
   @extend .col-sm-6;
