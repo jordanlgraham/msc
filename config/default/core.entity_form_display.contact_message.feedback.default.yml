@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - contact.form.feedback
+    - field.field.contact_message.feedback.field_area_of_interest
     - field.field.contact_message.feedback.field_phone_number
   module:
     - telephone
@@ -14,6 +15,12 @@ mode: default
 content:
   copy:
     weight: 50
+    region: content
+  field_area_of_interest:
+    weight: 52
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_phone_number:
     weight: 51

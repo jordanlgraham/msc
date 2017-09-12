@@ -1,0 +1,53 @@
+.paragraph--type--foundation-highlights-column {
+  @extend .text-center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background: rgba(255,255,255,0.8);
+}
+
+.paragraph--type--foundation-highlights-column p {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.paragraph--type--foundation-highlights-column a {
+  @extend .btn;
+  @extend .btn-foundation;
+}
+
+.paragraph--type--foundation-highlights .container > div {
+  @extend .row;
+}
+
+.paragraph--type--foundation-highlights .container > div > div {
+  @extend .col-lg-4;
+  @extend .col-sm-12;
+  @include media-breakpoint-down(md) {
+    margin-bottom: 1rem;
+  }
+}
+
+.homepage-foundation-header h2 {
+  @extend .thin-heading;
+  color: $white;
+}
+
+.homepage-foundation-header {
+  background-color: $foundation-green;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.paragraph--type--foundation-highlights {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.homepage-foundation-icon {
+  max-width: 100%;
+  width: 200px;
+  @include media-breakpoint-down(md) {
+    width: 100px;
+  }
+}

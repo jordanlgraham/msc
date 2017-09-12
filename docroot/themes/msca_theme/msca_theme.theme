@@ -10,13 +10,31 @@ foreach (glob($includes_path) as $filename) {
   require_once dirname(__FILE__) . '/includes/' . basename($filename);
 }
 
+function msca_theme_preprocess_node(&$variables) {
+  //Upcoming Education and Events section needs field_date and field_end_date to
+  //appear in a couple different formats.
+
+  if($variables['view_mode'] == 'homepage'
+    && !empty($variables['content']['field_date'][0]['#markup'])) {
+    $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
+    $variables['content']['square_month'] = date('M', $field_date);
+    $variables['content']['square_day'] = date('j', $field_date);
+    $variables['content']['full_start_date'] = date('F j \a\t g:iA', $field_date);
+    if(!empty($variables['content']['field_end_date'][0]['#markup'])) {
+      $field_end_date = strtotime($variables['content']['field_end_date'][0]['#markup']);
+      $variables['content']['full_end_date'] = date('F j \a\t g:iA', $field_end_date);
+    }
+  }
+
+}
+
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  * Adds per content type template suggestions for page.html.twig.
  */
 function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
 
-  $node     = \Drupal::routeMatch()->getParameter('node');
+  $node = \Drupal::routeMatch()->getParameter('node');
   $revision = \Drupal::routeMatch()->getRawParameter('node_revision');
 
   //revision IDs are strings and node ids are strings when a revision is loaded.
@@ -24,8 +42,8 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
   if ($node) {
     if ($revision) {
       $revised_node = \Drupal::entityTypeManager()
-                             ->getStorage('node')
-                             ->loadRevision($revision);
+        ->getStorage('node')
+        ->loadRevision($revision);
 
       $content_type = $revised_node->bundle();
     }
@@ -35,4 +53,54 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
 
     $suggestions[] = 'page__' . $content_type;
   }
- }
+}
+
+function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variables) {
+  $field = $variables['element'];
+  if ($field['#entity_type'] !== 'node') {
+    return;
+  }
+  $inline_fields = [
+    'template' => 'field__node__inline',
+    'fields' => [
+      'field_event_category',
+      'field_administrator',
+      'field_customer_fax_number',
+      'field_customer_phone_number',
+      'field_date',
+      'field_end_date',
+      'field_licensed_nursing_facility',
+      'field_resource_category',
+      'field_video_date',
+    ],
+  ];
+  $multiple_inline = [
+    'template' => 'field__node__multiple_inline',
+    'fields' => [
+      'field_contact_title',
+      'field_contact',
+      'field_email',
+      'field_phone',
+    ],
+  ];
+  $inline_comma = [
+    'template' => 'field__node__inline_comma',
+    'fields' => [
+      'field_languages_spoken',
+      'field_populations_served',
+      'field_specialized_unit',
+    ],
+  ];
+  $services = [
+    'template' => 'field__node__services',
+    'fields' => [
+      'field_primary_services',
+      'field_additional_services',
+    ],
+  ];
+  foreach ([$inline_fields, $multiple_inline, $inline_comma, $services] as $field_list) {
+    if (in_array($field['#field_name'], $field_list['fields'])) {
+      $suggestions[] = $field_list['template'];
+    }
+  }
+}

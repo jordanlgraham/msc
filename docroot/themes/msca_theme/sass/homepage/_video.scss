@@ -1,0 +1,23 @@
+.paragraph--type--video {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: $darker-blue;
+  @extend .text-center;
+}
+.paragraph--type--video > div {
+  @extend .container;
+}
+
+.paragraph--type--video h2 {
+  color: $white;
+  @extend .thin-heading;
+
+}
+
+.paragraph--type--video p {
+  color: #999;
+}
+
+.paragraph--type--video iframe {
+  //width: 500px;
+}

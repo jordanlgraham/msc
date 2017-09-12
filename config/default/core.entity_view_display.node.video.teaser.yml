@@ -23,7 +23,7 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 1
+    weight: 0
     settings:
       trim_length: 300
     third_party_settings: {  }

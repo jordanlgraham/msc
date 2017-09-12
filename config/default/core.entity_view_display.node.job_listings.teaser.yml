@@ -35,11 +35,6 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
-  links:
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -57,3 +52,4 @@ hidden:
   field_region: true
   field_salary_range: true
   field_shift: true
+  links: true

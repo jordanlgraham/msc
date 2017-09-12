@@ -48,24 +48,24 @@ content:
     type: address_default
     region: content
   field_administrator:
-    weight: 8
-    label: inline
+    weight: 9
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_customer_fax_number:
-    weight: 6
-    label: inline
+    weight: 7
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_customer_phone_number:
-    weight: 5
-    label: inline
+    weight: 6
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -84,10 +84,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     type: link
     region: content
@@ -100,23 +100,16 @@ content:
     third_party_settings: {  }
     type: image
     region: content
-  field_ge:
-    weight: 18
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: geolocation_latlng
-    region: content
   field_languages_spoken:
-    weight: 10
-    label: inline
+    weight: 11
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_licensed_nursing_facility_:
-    weight: 9
-    label: inline
+    weight: 10
+    label: hidden
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -128,10 +121,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     type: link
     region: content
@@ -166,8 +159,8 @@ content:
     type: boolean
     region: content
   field_populations_served:
-    weight: 12
-    label: inline
+    weight: 13
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
@@ -182,8 +175,8 @@ content:
     type: entity_reference_entity_view
     region: content
   field_specialized_unit:
-    weight: 11
-    label: inline
+    weight: 12
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
@@ -193,10 +186,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     type: link
     region: content
@@ -217,6 +210,7 @@ hidden:
   field_customer_id: true
   field_customer_key: true
   field_customer_type: true
+  field_ge: true
   field_member_flag: true
   field_service_type: true
   links: true

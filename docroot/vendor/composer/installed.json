@@ -2076,68 +2076,6 @@
         }
     },
     {
-        "name": "drupal/contact_storage",
-        "version": "1.0.0-beta8",
-        "version_normalized": "1.0.0.0-beta8",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/contact_storage",
-            "reference": "8.x-1.0-beta8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0-beta8.zip",
-            "reference": "8.x-1.0-beta8",
-            "shasum": "01e9bd402351f02cf6519b841d355a61138e0d0f"
-        },
-        "require": {
-            "drupal/core": "*",
-            "drupal/token": "*"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.0-beta8",
-                "datestamp": "1497478742"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Arla",
-                "homepage": "https://www.drupal.org/user/226712"
-            },
-            {
-                "name": "Berdir",
-                "homepage": "https://www.drupal.org/user/214652"
-            },
-            {
-                "name": "andypost",
-                "homepage": "https://www.drupal.org/user/118908"
-            },
-            {
-                "name": "jibran",
-                "homepage": "https://www.drupal.org/user/1198144"
-            },
-            {
-                "name": "larowlan",
-                "homepage": "https://www.drupal.org/user/395439"
-            }
-        ],
-        "description": "Provides storage and edit capability for contact messages.",
-        "homepage": "https://www.drupal.org/project/contact_storage",
-        "support": {
-            "source": "http://cgit.drupalcode.org/contact_storage"
-        }
-    },
-    {
         "name": "igorw/get-in",
         "version": "v1.0.3",
         "version_normalized": "1.0.3.0",
@@ -10448,59 +10386,6 @@
         }
     },
     {
-        "name": "drupal/current_page_crumb",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://git.drupal.org/project/current_page_crumb",
-            "reference": "8.x-1.1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
-            "reference": "8.x-1.1",
-            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
-        },
-        "require": {
-            "drupal/core": "~8.0"
-        },
-        "type": "drupal-module",
-        "extra": {
-            "branch-alias": {
-                "dev-1.x": "1.x-dev"
-            },
-            "drupal": {
-                "version": "8.x-1.1",
-                "datestamp": "1491328082",
-                "security-coverage": {
-                    "status": "covered",
-                    "message": "Covered by Drupal's security advisory policy"
-                }
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packages.drupal.org/8/downloads",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Greg Boggs",
-                "homepage": "https://www.drupal.org/user/153069"
-            },
-            {
-                "name": "rakesh.gectcr",
-                "homepage": "https://www.drupal.org/user/1177822"
-            }
-        ],
-        "description": "Adds the current page title to the breadcrumb.",
-        "homepage": "https://www.drupal.org/project/current_page_crumb",
-        "support": {
-            "source": "http://cgit.drupalcode.org/current_page_crumb"
-        }
-    },
-    {
         "name": "drupal/easy_breadcrumb",
         "version": "1.6.0",
         "version_normalized": "1.6.0.0",
@@ -10559,6 +10444,325 @@
         "homepage": "https://www.drupal.org/project/easy_breadcrumb",
         "support": {
             "source": "http://cgit.drupalcode.org/easy_breadcrumb"
+        }
+    },
+    {
+        "name": "drupal/button_link",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/button_link",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "54c8bdca11d7741a8815ac2f5047affdc7d5bb9b"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1480343880",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "hatuhay",
+                "homepage": "https://www.drupal.org/user/827704"
+            }
+        ],
+        "description": "Provides a simple button link field formatter.",
+        "homepage": "https://www.drupal.org/project/button_link",
+        "support": {
+            "source": "http://cgit.drupalcode.org/button_link"
+        }
+    },
+    {
+        "name": "drupal/current_page_crumb",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/current_page_crumb",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/current_page_crumb-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "b31fc6915b18bb80f4bec2836be299ecfe95b230"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1491328082",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Greg Boggs",
+                "homepage": "https://www.drupal.org/user/153069"
+            },
+            {
+                "name": "rakesh.gectcr",
+                "homepage": "https://www.drupal.org/user/1177822"
+            }
+        ],
+        "description": "Adds the current page title to the breadcrumb.",
+        "homepage": "https://www.drupal.org/project/current_page_crumb",
+        "support": {
+            "source": "http://cgit.drupalcode.org/current_page_crumb"
+        }
+    },
+    {
+        "name": "drupal/jquery_colorpicker",
+        "version": "1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/jquery_colorpicker",
+            "reference": "8.x-1.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/jquery_colorpicker-8.x-1.3.zip",
+            "reference": "8.x-1.3",
+            "shasum": "45d073e840dcceef9600998a1c5ac5a87d8b0c24"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.3",
+                "datestamp": "1486115582",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Jaypan",
+                "homepage": "https://www.drupal.org/user/324696"
+            },
+            {
+                "name": "plopesc",
+                "homepage": "https://www.drupal.org/user/282415"
+            }
+        ],
+        "description": "Creates a jQuery colorpicker field and form element",
+        "homepage": "https://www.drupal.org/project/jquery_colorpicker",
+        "support": {
+            "source": "http://cgit.drupalcode.org/jquery_colorpicker"
+        }
+    },
+    {
+        "name": "drupal/svg_image",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/svg_image",
+            "reference": "8.x-1.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/svg_image-8.x-1.2.zip",
+            "reference": "8.x-1.2",
+            "shasum": "37c634f4ce3e767cc3e76f4176ab7a396ec19e76"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.2",
+                "datestamp": "1503124445",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "zvse",
+                "homepage": "https://www.drupal.org/user/2870933"
+            }
+        ],
+        "description": "Overrides standard image formater and widget to add a support of the SVG files.",
+        "homepage": "https://www.drupal.org/project/svg_image",
+        "support": {
+            "source": "http://cgit.drupalcode.org/svg_image"
+        }
+    },
+    {
+        "name": "drupal/contact_block",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/contact_block",
+            "reference": "8.x-1.4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.4.zip",
+            "reference": "8.x-1.4",
+            "shasum": "0e10326e33c02f821c0f20885a3662f8c3e34c64"
+        },
+        "require": {
+            "drupal/core": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.4",
+                "datestamp": "1493036943",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Sutharsan",
+                "homepage": "https://www.drupal.org/user/73854"
+            }
+        ],
+        "description": "Provides blocks for Contact form module.",
+        "homepage": "https://www.drupal.org/project/contact_block",
+        "support": {
+            "source": "http://cgit.drupalcode.org/contact_block"
+        }
+    },
+    {
+        "name": "drupal/contact_storage",
+        "version": "1.0.0-beta9",
+        "version_normalized": "1.0.0.0-beta9",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupal.org/project/contact_storage",
+            "reference": "8.x-1.0-beta9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0-beta9.zip",
+            "reference": "8.x-1.0-beta9",
+            "shasum": "42b12d6f755485617e949aaf1b2c9aae09eb0e3e"
+        },
+        "require": {
+            "drupal/core": "*",
+            "drupal/token": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0-beta9",
+                "datestamp": "1497478742",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Beta releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Arla",
+                "homepage": "https://www.drupal.org/user/226712"
+            },
+            {
+                "name": "Berdir",
+                "homepage": "https://www.drupal.org/user/214652"
+            },
+            {
+                "name": "andypost",
+                "homepage": "https://www.drupal.org/user/118908"
+            },
+            {
+                "name": "jibran",
+                "homepage": "https://www.drupal.org/user/1198144"
+            },
+            {
+                "name": "larowlan",
+                "homepage": "https://www.drupal.org/user/395439"
+            }
+        ],
+        "description": "Provides storage and edit capability for contact messages.",
+        "homepage": "https://www.drupal.org/project/contact_storage",
+        "support": {
+            "source": "http://cgit.drupalcode.org/contact_storage"
         }
     }
 ]

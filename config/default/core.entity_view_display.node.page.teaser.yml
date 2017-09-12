@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
+    - field.field.node.page.field_gated
     - field.field.node.page.field_related_content
     - field.field.node.page.field_restrict_to_groups
     - node.type.page
@@ -23,7 +24,7 @@ content:
     type: text_summary_or_trimmed
     weight: 100
     settings:
-      trim_length: 600
+      trim_length: 300
     third_party_settings: {  }
     region: content
   links:
@@ -35,5 +36,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
   field_related_content: true
   field_restrict_to_groups: true

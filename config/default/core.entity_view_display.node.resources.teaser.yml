@@ -24,32 +24,11 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 2
+    weight: 0
     settings:
       trim_length: 300
     third_party_settings: {  }
     region: content
-  field_resource_type:
-    type: entity_reference_label
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-  field_tags:
-    type: entity_reference_label
-    weight: 1
-    region: content
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-  links:
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -60,3 +39,6 @@ hidden:
   field_gated: true
   field_related_content: true
   field_resource_category: true
+  field_resource_type: true
+  field_tags: true
+  links: true

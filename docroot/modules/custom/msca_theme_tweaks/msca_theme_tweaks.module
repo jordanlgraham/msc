@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains msca_theme_tweaks.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+/**
+ * Implements hook_help().
+ */
+function msca_theme_tweaks_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the msca_theme_tweaks module.
+    case 'help.page.msca_theme_tweaks':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Tweaks for the MSCA Theme') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_entity_view().
+ * @todo: put this in the theme itself.
+ * This was done in haste because I wasn't able to get it to work in the .theme
+ * file, but that's where it should live.
+ */
+function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if($view_mode == 'homepage' && !empty($build['field_date'][0]['#markup'])) {
+    $timestamp = $build['field_date'][0]['#markup'];
+    $build['month'] = date('M', $timestamp);
+    $build['day'] = date('j', $timestamp);
+  }
+
+  //On the Recent News view on the homepage, if no teaser image is loaded,
+  //increase the length of the text summary to make up for all the white space.
+  if($view_mode == 'homepage' && empty($build['field_news_teaser_image'][0])) {
+    $build['body'][0]['#text_summary_trim_length'] = 1200;
+  }
+}

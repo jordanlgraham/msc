@@ -1,0 +1,59 @@
+uuid: 0bb6ae83-ba9e-4cd3-afca-49669b523808
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.foundation_highlights.field_background_image
+    - field.field.paragraph.foundation_highlights.field_heading_background_color
+    - field.field.paragraph.foundation_highlights.field_highlight_column
+    - field.field.paragraph.foundation_highlights.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.foundation_highlights
+  module:
+    - image
+    - jquery_colorpicker
+    - paragraphs
+id: paragraph.foundation_highlights.default
+targetEntityType: paragraph
+bundle: foundation_highlights
+mode: default
+content:
+  field_background_image:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_heading_background_color:
+    weight: 1
+    settings:
+      color: FFFFFF
+    third_party_settings: {  }
+    type: jquery_colorpicker
+    region: content
+  field_highlight_column:
+    type: entity_reference_paragraphs
+    weight: 3
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

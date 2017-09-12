@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - block_class
-    - system
+    - ctools
   theme:
     - msca_theme
 third_party_settings:
@@ -15,7 +15,7 @@ _core:
 id: msca_theme_page_title
 theme: msca_theme
 region: header
-weight: -9
+weight: -6
 provider: null
 plugin: page_title_block
 settings:
@@ -24,8 +24,10 @@ settings:
   provider: core
   label_display: '0'
 visibility:
-  request_path:
-    id: request_path
-    pages: '<front>'
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      paragraph_assembler: paragraph_assembler
     negate: true
-    context_mapping: {  }
+    context_mapping:
+      node: '@node.node_route_context:node'

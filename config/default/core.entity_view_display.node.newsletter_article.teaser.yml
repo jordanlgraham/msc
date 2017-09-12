@@ -1,4 +1,4 @@
-uuid: ba37a412-6696-49bc-9320-bc5294dd5756
+uuid: bc8c5d3a-5101-4cc0-b3a1-ff482ae5c7ba
 langcode: en
 status: true
 dependencies:
@@ -14,11 +14,10 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_topic
-    - image.style.featured_image_130x190_
     - node.type.newsletter_article
   module:
-    - datetime
     - entity_print
+    - datetime
     - media_entity
     - text
     - user
@@ -32,51 +31,24 @@ mode: teaser
 content:
   body:
     type: text_summary_or_trimmed
-    weight: 3
+    weight: 0
     region: content
     label: hidden
     settings:
       trim_length: 300
-    third_party_settings: {  }
-  field_news_release_date:
-    weight: 1
-    label: hidden
-    settings:
-      timezone_override: ''
-      format_type: direct
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_news_subtitle:
-    weight: 0
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_news_teaser_image:
-    weight: 2
-    label: hidden
-    settings:
-      image_style: featured_image_130x190_
-      image_link: ''
-    third_party_settings: {  }
-    type: media_thumbnail
-    region: content
-  links:
-    weight: 4
-    region: content
-    settings: {  }
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_news_release_date: true
   field_news_source: true
+  field_news_subtitle: true
+  field_news_teaser_image: true
   field_newsletter_byline: true
   field_related_content: true
   field_sponsor: true
   field_topic: true
   flag_bookmark: true
+  links: true

@@ -3,6 +3,26 @@
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
 
+//Path Variables
+$theme-path: '/themes/msca_theme';
+$svg-path: '#{$theme-path}/svg';
+$images-path: '#{$theme-path}/images';
+
+$fb-svg: '#{$svg-path}/facebook.svg';
+$twitter-svg: '#{$svg-path}/twitter.svg';
+$linkedin-svg: '#{$svg-path}/linkedin.svg';
+$calendar-full-svg: '#{$svg-path}/calendar-full.svg';
+$file-svg: '#{$svg-path}/file.svg';
+$film-svg: '#{$svg-path}/film.svg';
+$grad-cap-svg: '#{$svg-path}/grad-cap.svg';
+$heart-pulse-svg: '#{$svg-path}/heart-pulse.svg';
+$house-svg: '#{$svg-path}/house.svg';
+$mail-svg: '#{$svg-path}/mail.svg';
+$news-svg: '#{$svg-path}/news.svg';
+$search-svg: '#{$svg-path}/search.svg';
+$user-svg: '#{$svg-path}/user.svg';
+
+
 // Animation
 * {
   transition: all 0.1s ease;
@@ -26,6 +46,7 @@ $green: #14674d;
 
 $twitter-blue: #00aced;
 $facebook-blue: #3a589a;
+$linkedin-blue: #0077B5;
 $foundation-green: #3e846c;
 
 // Fonts
@@ -48,8 +69,10 @@ $font-size-xs: 12/16 * 1rem; // 12px
 
 $headings-margin-bottom: 1rem;
 
+
+
 // Icons
-$heart-pulse: url('/themes/msca_theme/images/heart-pulse-white.svg') no-repeat center;
+$heart-pulse: url('#{$images-path}/heart-pulse-white.svg') no-repeat center;
 
 // General
 /*$border-radius: 0;

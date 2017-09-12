@@ -1,0 +1,31 @@
+$date-square-month-size: 1.4rem;
+$date-square-day-size: 2rem;
+.date-square {
+  background-color: $orange;
+  height: 5rem;
+  width: 5rem;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.date-square-month, .date-square-day {
+  display: block;
+  font-family: $lato;
+  font-weight: 700;
+}
+
+.date-square-month {
+  font-size: $date-square-month-size;
+  //there should be almost no space between the top and bottom,
+  //so we're setting the line-height to be the same as the font-size
+  line-height: $date-square-month-size;
+  text-transform: uppercase;
+}
+
+.date-square-day {
+  font-size: $date-square-day-size;
+  //as with .date-square-month, line-height should equal font-size
+  line-height: $date-square-day-size;
+}

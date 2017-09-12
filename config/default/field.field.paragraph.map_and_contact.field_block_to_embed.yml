@@ -1,0 +1,26 @@
+uuid: b3d90fd1-3e63-461e-ae41-90285bf03bcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - block.block.contactblock
+    - field.storage.paragraph.field_block_to_embed
+    - paragraphs.paragraphs_type.map_and_contact
+id: paragraph.map_and_contact.field_block_to_embed
+field_name: field_block_to_embed
+entity_type: paragraph
+bundle: map_and_contact
+label: 'Block to Embed'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    target_uuid: 65699a59-3c0a-4c00-9230-95464ed61e21
+default_value_callback: ''
+settings:
+  handler: 'default:block'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

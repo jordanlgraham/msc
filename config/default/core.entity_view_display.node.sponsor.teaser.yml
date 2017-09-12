@@ -17,8 +17,6 @@ dependencies:
     - field.field.node.sponsor.field_web_address
     - node.type.sponsor
   module:
-    - image
-    - link
     - text
     - user
 id: node.sponsor.teaser
@@ -34,74 +32,18 @@ content:
       trim_length: 300
     third_party_settings: {  }
     region: content
-  field_facebook:
-    type: link_separate
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-  field_linkedin:
-    type: link_separate
-    weight: 3
-    region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-  field_logo:
-    type: image
-    weight: 0
-    region: content
-    label: hidden
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-  field_twitter:
-    type: link_separate
-    weight: 2
-    region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-  field_web_address:
-    type: link_separate
-    weight: 4
-    region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-  links:
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_address: true
+  field_facebook: true
   field_gated: true
+  field_linkedin: true
+  field_logo: true
   field_primary_services: true
   field_related_event: true
   field_sponsorship_level: true
+  field_twitter: true
+  field_web_address: true
+  links: true

@@ -1,0 +1,28 @@
+uuid: 6f3dbc71-3b01-45b8-b2aa-56272d3deefc
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.upcoming_education_and_events
+  module:
+    - block_class
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: upcoming-events
+id: views_block__upcoming_education_and_events_block_upcoming_events
+theme: msca_theme
+region: gutter
+weight: 0
+provider: null
+plugin: 'views_block:upcoming_education_and_events-block_upcoming_events'
+settings:
+  id: 'views_block:upcoming_education_and_events-block_upcoming_events'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }

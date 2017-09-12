@@ -1,0 +1,59 @@
+uuid: 5a947e17-09f1-4b04-a972-760422aceec2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video.field_call_to_action
+    - field.field.paragraph.video.field_subtitle
+    - field.field.paragraph.video.field_title
+    - field.field.paragraph.video.field_youtube_id
+    - paragraphs.paragraphs_type.video
+  module:
+    - button_link
+    - text
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_call_to_action:
+    weight: 4
+    label: hidden
+    settings:
+      link_text: ''
+      btn_type: btn-primary
+      trim_length: '80'
+      url_only: false
+      url_plain: false
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: button_link
+    region: content
+  field_subtitle:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_youtube_id:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

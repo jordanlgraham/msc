@@ -1,0 +1,61 @@
+uuid: 17f108fd-a723-4686-9185-a387548b0181
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.map_and_contact.field_block_to_embed
+    - field.field.paragraph.map_and_contact.field_location
+    - paragraphs.paragraphs_type.map_and_contact
+  module:
+    - geolocation
+id: paragraph.map_and_contact.default
+targetEntityType: paragraph
+bundle: map_and_contact
+mode: default
+content:
+  field_block_to_embed:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_location:
+    weight: 0
+    label: hidden
+    settings:
+      set_marker: '1'
+      title: 'Massachusetts Senior Care'
+      info_text: "<a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a><br />\n+1 (617) 558-0202<br />\n+1 (800) CARE-FOR<br />\nFax (617) 558-3546"
+      google_map_settings:
+        height: 750px
+        width: 100%
+        type: ROADMAP
+        zoom: '10'
+        maxZoom: 18
+        minZoom: 0
+        zoomControl: 1
+        scrollwheel: 1
+        gestureHandling: cooperative
+        draggable: 1
+        style: ''
+        info_auto_display: 1
+        marker_icon_path: ''
+        mapTypeControl: 0
+        streetViewControl: 0
+        rotateControl: 0
+        fullscreenControl: 0
+        preferScrollingToZooming: 0
+        disableDoubleClickZoom: 0
+        disableAutoPan: 0
+      use_overridden_map_settings: 0
+      common_map: ''
+    third_party_settings: {  }
+    type: geolocation_map
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

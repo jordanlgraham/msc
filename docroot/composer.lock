@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dbf971d5fc2e4201c7a67d970704c741",
+    "content-hash": "b322be44f248fb91d46c6e858a56c441",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1565,6 +1565,53 @@
             }
         },
         {
+            "name": "drupal/button_link",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/button_link",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "54c8bdca11d7741a8815ac2f5047affdc7d5bb9b"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1480343880",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "hatuhay",
+                    "homepage": "https://www.drupal.org/user/827704"
+                }
+            ],
+            "description": "Provides a simple button link field formatter.",
+            "homepage": "https://www.drupal.org/project/button_link",
+            "support": {
+                "source": "http://cgit.drupalcode.org/button_link"
+            }
+        },
+        {
             "name": "drupal/config_filter",
             "version": "1.0.0-rc1",
             "source": {
@@ -2037,18 +2084,65 @@
             "time": "2017-07-07T05:12:50+00:00"
         },
         {
-            "name": "drupal/contact_storage",
-            "version": "1.0.0-beta8",
+            "name": "drupal/contact_block",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://git.drupal.org/project/contact_storage",
-                "reference": "8.x-1.0-beta8"
+                "url": "https://git.drupal.org/project/contact_block",
+                "reference": "8.x-1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0-beta8.zip",
-                "reference": "8.x-1.0-beta8",
-                "shasum": "01e9bd402351f02cf6519b841d355a61138e0d0f"
+                "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "0e10326e33c02f821c0f20885a3662f8c3e34c64"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.4",
+                    "datestamp": "1493036943",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Sutharsan",
+                    "homepage": "https://www.drupal.org/user/73854"
+                }
+            ],
+            "description": "Provides blocks for Contact form module.",
+            "homepage": "https://www.drupal.org/project/contact_block",
+            "support": {
+                "source": "http://cgit.drupalcode.org/contact_block"
+            }
+        },
+        {
+            "name": "drupal/contact_storage",
+            "version": "1.0.0-beta9",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/contact_storage",
+                "reference": "8.x-1.0-beta9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/contact_storage-8.x-1.0-beta9.zip",
+                "reference": "8.x-1.0-beta9",
+                "shasum": "42b12d6f755485617e949aaf1b2c9aae09eb0e3e"
             },
             "require": {
                 "drupal/core": "*",
@@ -2060,8 +2154,12 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta8",
-                    "datestamp": "1497478742"
+                    "version": "8.x-1.0-beta9",
+                    "datestamp": "1497478742",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3392,7 +3490,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
             },
-            "time": "2017-07-13 22:41:32"
+            "time": "2017-07-13T22:41:32+00:00"
         },
         {
             "name": "drupal/flag",
@@ -3971,6 +4069,57 @@
             "homepage": "https://www.drupal.org/project/insert",
             "support": {
                 "source": "http://cgit.drupalcode.org/insert"
+            }
+        },
+        {
+            "name": "drupal/jquery_colorpicker",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/jquery_colorpicker",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/jquery_colorpicker-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "45d073e840dcceef9600998a1c5ac5a87d8b0c24"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1486115582",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Jaypan",
+                    "homepage": "https://www.drupal.org/user/324696"
+                },
+                {
+                    "name": "plopesc",
+                    "homepage": "https://www.drupal.org/user/282415"
+                }
+            ],
+            "description": "Creates a jQuery colorpicker field and form element",
+            "homepage": "https://www.drupal.org/project/jquery_colorpicker",
+            "support": {
+                "source": "http://cgit.drupalcode.org/jquery_colorpicker"
             }
         },
         {
@@ -4704,6 +4853,53 @@
             "homepage": "https://www.drupal.org/project/shield",
             "support": {
                 "source": "http://cgit.drupalcode.org/shield"
+            }
+        },
+        {
+            "name": "drupal/svg_image",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/svg_image",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/svg_image-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "37c634f4ce3e767cc3e76f4176ab7a396ec19e76"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1503124445",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "zvse",
+                    "homepage": "https://www.drupal.org/user/2870933"
+                }
+            ],
+            "description": "Overrides standard image formater and widget to add a support of the SVG files.",
+            "homepage": "https://www.drupal.org/project/svg_image",
+            "support": {
+                "source": "http://cgit.drupalcode.org/svg_image"
             }
         },
         {
@@ -10221,6 +10417,7 @@
     "stability-flags": {
         "drupal/better_exposed_filters": 15,
         "drupal/block_class": 15,
+        "drupal/contact_storage": 10,
         "drupal/devel": 5,
         "drupal/entityqueue": 15,
         "drupal/external_entities": 15,

@@ -4,38 +4,49 @@ status: true
 dependencies:
   config:
     - contact.form.feedback
+    - field.field.contact_message.feedback.field_area_of_interest
     - field.field.contact_message.feedback.field_phone_number
+  module:
+    - options
+    - telephone
 id: contact_message.feedback.default
 targetEntityType: contact_message
 bundle: feedback
 mode: default
 content:
-  field_phone_number:
-    weight: 1
+  field_area_of_interest:
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    type: list_default
+    region: content
+  field_phone_number:
+    weight: 1
+    label: inline
+    settings:
+      title: ''
+    third_party_settings: {  }
+    type: telephone_link
     region: content
   mail:
     weight: -2
     region: content
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: basic_string
   message:
-    type: string
+    type: basic_string
     weight: 0
-    label: above
+    label: inline
     region: content
-    settings:
-      link_to_entity: false
+    settings: {  }
     third_party_settings: {  }
   name:
     weight: -3
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -43,7 +54,7 @@ content:
   subject:
     weight: -1
     region: content
-    label: above
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
