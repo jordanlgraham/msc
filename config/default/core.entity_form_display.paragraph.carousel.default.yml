@@ -10,7 +10,7 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.carousel
   module:
-    - image
+    - insert
     - link
     - text
 id: paragraph.carousel.default
@@ -31,8 +31,15 @@ content:
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
+      insert_absolute: false
+      insert_styles:
+        - icon_link
+        - link
+      insert_default: link
+      insert_width: null
+      insert_rotate: false
     third_party_settings: {  }
-    type: image_image
+    type: insert_image
     region: content
   field_subtitle:
     weight: 1
