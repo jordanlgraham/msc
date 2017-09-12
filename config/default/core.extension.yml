@@ -75,6 +75,8 @@ module:
   msc_button_link_social: 0
   msca_discourse: 0
   msca_theme_tweaks: 0
+  netforum_event_sync: 0
+  netforum_org_sync: 0
   netforum_soap: 0
   netforum_user_auth: 0
   node: 0

@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\netforum_event_sync\EventSync;
+
+/**
+ * Implements hook_cron().
+ */
+function netforum_event_sync_cron() {
+  $last = \Drupal::state()->get(EventSync::LAST_SYNC_STATE_KEY, strtotime('1/1/2017'));
+  try {
+    $count = \Drupal::service('netforum_event_sync.event_sync')->syncEvents($last);
+    \Drupal::logger('netforum_event_sync')->notice('Synced @count events.', ['@count' => $count]);
+    \Drupal::state()->set(EventSync::LAST_SYNC_STATE_KEY, \Drupal::time()->getRequestTime());
+  }
+  catch (Exception $exception) {
+    watchdog_exception('netforum_event_sync', $exception, 'Unable to sync events during cron.');
+  }
+}

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.education_events.field_date
     - field.field.node.education_events.field_end_date
     - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
     - field.field.node.education_events.field_gated
@@ -109,5 +110,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_event_key: true
   field_event_sponsor: true
   links: true

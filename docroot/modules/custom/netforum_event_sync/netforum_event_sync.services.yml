@@ -1,0 +1,7 @@
+services:
+  netforum_event_sync.event_sync:
+    class: Drupal\netforum_event_sync\EventSync
+    arguments: ['@entity_type.manager', '@config.factory', '@netforum_soap.get_client', '@logger.channel.netforum_event_sync', '@date.formatter', '@state']
+  logger.channel.netforum_event_sync:
+        parent: logger.channel_base
+        arguments: ['netforum_event_sync']

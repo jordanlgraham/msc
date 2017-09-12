@@ -2,30 +2,30 @@
 
 namespace Drupal\netforum_event_sync\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\NodeStorageInterface;
-use Drupal\netforum_soap\GetClient;
+use Drupal\netforum_event_sync\EventSync;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Exception;
 
 /**
  * Class EventSyncForm.
  */
 class EventSyncForm extends ConfigFormBase {
 
-  protected $node_storage;
+  /**
+   * @var \Drupal\netforum_event_sync\EventSync
+   */
+  protected $sync;
 
-  protected $get_client;
-
-  public function __construct(NodeStorageInterface $nodeStorage, GetClient $getClient) {
-    $this->node_storage = $nodeStorage;
-    $this->get_client = $getClient;
+  public function __construct(ConfigFactoryInterface $configFactory, EventSync $sync) {
+    $this->sync = $sync;
+    parent::__construct($configFactory);
   }
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager')->getStorage('node'),
-      $container->get('netforum_soap.get_client')
+      $container->get('config.factory'),
+      $container->get('netforum_event_sync.event_sync')
     );
   }
 
@@ -56,6 +56,13 @@ class EventSyncForm extends ConfigFormBase {
       '#description' => $this->t('A list of event types to pull'),
       '#default_value' => $config->get('event_types'),
     ];
+
+    $form['sync_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Sync date'),
+      '#description' => $this->t('A date to manually sync events from. This will not affect future sync operations.'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -68,27 +75,19 @@ class EventSyncForm extends ConfigFormBase {
     $this->config('netforum_event_sync.eventsync')
       ->set('event_types', $form_state->getValue('event_types'))
       ->save();
-    $this->syncEvents();
-  }
-
-  private function syncEvents() {
-    //get stored
-    $event_types = explode("\n", str_replace("\r", "", $this->config('netforum_event_sync.eventsync')->get('event_types')));
-    $netforum_service = $this->get_client;
-    $client = $netforum_service->getClient();
-    //store all the customer keys from the GetOrganizationByType calls
-    if(!empty($event_types)) {
-      foreach ($event_types as $type) {
-        $params = array(
-          'typeCode' => $type,
-        );
-        try {
-          $response = $client->__soapCall('GetEventListByType', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $netforum_service->getResponseHeaders());
-          var_dump($response);
-        } catch (Exception $e) {
-
-        }
+    try {
+      $timestamp = NULL;
+      if ($date = $form_state->getValue('sync_date')) {
+        $dateObj = date_create($date);
+        $timestamp = $dateObj->getTimestamp();
       }
+      $count = $this->sync->syncEvents($timestamp);
+      drupal_set_message($this->t('Synced @count events.', ['@count' => $count]));
+    }
+    catch (\Exception $exception) {
+      drupal_set_message($this->t('Error syncing events: @err',
+        ['@err' => $exception->getMessage()]), 'error');
+      watchdog_exception('netforum_event_sync', $exception, 'Error syncing events');
     }
   }
 }
