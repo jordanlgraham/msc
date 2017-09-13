@@ -34,8 +34,14 @@ function msca_theme_tweaks_help($route_name, RouteMatchInterface $route_match) {
 function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if($view_mode == 'homepage' && !empty($build['field_date'][0]['#markup'])) {
     $timestamp = $build['field_date'][0]['#markup'];
-    $build['month'] = date('M', $timestamp);
-    $build['day'] = date('j', $timestamp);
+    $build['month'] = [
+      '#markup' => date('M', strtotime($timestamp)),
+      '#theme' => 'string',
+    ];
+    $build['day'] = [
+      '#markup' => date('j', strtotime($timestamp)),
+      '#theme' => 'string',
+    ];
   }
 
   //On the Recent News view on the homepage, if no teaser image is loaded,
