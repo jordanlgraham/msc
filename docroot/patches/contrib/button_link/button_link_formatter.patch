@@ -1,8 +1,25 @@
 diff --git a/docroot/modules/contrib/button_link/src/Plugin/Field/FieldFormatter/ButtonLinkFormatter.php b/docroot/modules/contrib/button_link/src/Plugin/Field/FieldFormatter/ButtonLinkFormatter.php
-index 99335d78..778c5648 100644
+index 99335d78..a6cbadb0 100644
 --- a/docroot/modules/contrib/button_link/src/Plugin/Field/FieldFormatter/ButtonLinkFormatter.php
 +++ b/docroot/modules/contrib/button_link/src/Plugin/Field/FieldFormatter/ButtonLinkFormatter.php
-@@ -58,6 +58,12 @@ public function settingsForm(array $parentForm, FormStateInterface $form_state)
+@@ -34,6 +34,7 @@ public static function defaultSettings() {
+       'target' => '',
+       'link_text' => '',
+       'btn_type' => 'btn-default',
++      'btn_size' => '',
+     ) + parent::defaultSettings();
+   }
+ 
+@@ -46,7 +47,7 @@ public function settingsForm(array $parentForm, FormStateInterface $form_state)
+       '#title' => $this->t('Link text, leave empty for default'),
+       '#default_value' => $settings['link_text'],
+     ];
+-	
++
+     $form['btn_type'] = [
+       '#type' => 'select',
+       '#title' => $this->t('Button type'),
+@@ -58,6 +59,12 @@ public function settingsForm(array $parentForm, FormStateInterface $form_state)
          'btn-info' => $this->t('Info'),
          'btn-warning' => $this->t('Warning'),
          'btn-danger' => $this->t('Danger'),
