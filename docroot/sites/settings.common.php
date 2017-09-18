@@ -774,7 +774,14 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   //set private_path
   $private_path = '/mnt/files/' . $_ENV['AH_SITE_GROUP'] . '.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
-  require($private_path . '/real_magnet_settings.php');
-  require($private_path . '/netforum_soap_settings.php');
+  if (file_exists($private_path . '/real_magnet_settings.php')) {
+    require($private_path . '/real_magnet_settings.php');
+  }
+  if (file_exists($private_path . '/netforum_soap_settings.php')) {
+    require($private_path . '/netforum_soap_settings.php');
+  }
+  if (file_exists($private_path . '/discourse_settings.php')) {
+    require $private_path . '/discourse_settings.php';
+  }
 }
 
