@@ -43,6 +43,20 @@ function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, Ent
       '#theme' => 'string',
     ];
   }
+  //We need a rather complexly formatted, short version of addresses for display
+  //on the education and events content type.
+  if($view_mode == 'full' && !empty($build['field_location']) && $build['field_location']['#bundle'] == 'education_events') {
+
+    //Get address parts
+    $parts = $build['field_location'][0];
+    //Build a short address. Note that these always exist of the field as a
+    //whole is not empty (which we check for above).
+    $build['short_address'] = [
+      '#markup' => $build['field_location'][0]['address_line1']['#value'] . ', '
+        . $build['field_location'][0]['locality']['#value'],
+      '#theme' => 'string',
+    ];
+  }
 
   //On the Recent News view on the homepage, if no teaser image is loaded,
   //increase the length of the text summary to make up for all the white space.
