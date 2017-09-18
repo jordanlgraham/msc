@@ -6,6 +6,7 @@ source_branch="$3"
 deployed_tag="$4"
 repo_url="$5"
 repo_type="$6"
+drush_alias = "$site.$target_env"
 
 if [ "$target_env" != "prod" ]; then
     drush @${drush_alias} cr --strict=0
