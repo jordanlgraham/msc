@@ -12,12 +12,9 @@ mode: default
 content:
   field_block_to_embed:
     weight: 0
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
 hidden:
   created: true
