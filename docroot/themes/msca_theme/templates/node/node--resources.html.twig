@@ -110,6 +110,11 @@
                 {% if content.body|render %}
                     {{ content.body}}
                 {% endif %}
+                {% if content.field_file|render %}
+                    <div class="resource-file">
+                    {{ content.field_file }}
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-4">
                 {{ drupal_region('sidebar') }}

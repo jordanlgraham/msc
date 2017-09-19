@@ -140,3 +140,8 @@
   @extend .btn-primary;
   margin: 1rem 0;
 }
+
+.resource-file .file a {
+  @extend .btn;
+  @extend .btn-primary;
+}
