@@ -123,14 +123,19 @@
                 {% endif %}
             </div>
             <div class="col-md-4">
-                {% if content.field_related_content|render %}
-                    {{ content.field_related_content }}
+                {% if content.field_event_related_content|render %}
+                    {{ content.field_event_related_content }}
                 {% endif %}
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                {# Add  #}
+                <h2>GOLD SPONSORS | <a href="">View All ></a></h2>
+                {# foreach  #}
+                    {% if content.field_gold_sponsor|render %}
+                        {{ content.field_gold_sponsor }}
+                    {% endif %}
+                {# endeach #}
             </div>
         </div>
     </div>
