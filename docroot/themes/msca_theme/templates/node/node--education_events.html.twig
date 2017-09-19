@@ -92,14 +92,14 @@
         {% endif %}
         <div class="row">
             <div{{ content_attributes }} class="col-md-8">
-                {% if content.field_location|render or content.event_category|render %}
+                {% if content.short_address|render or content.event_category|render %}
                     <div class="event-category-location">
                         {% if content.field_event_category|render %}
                             {{ content.field_event_category }}
                         {% endif %}
-                        {% if content.field_location|render and content.event_category|render %} | {% endif %}
-                        {% if content.field_location|render%}
-                            {{ content.field_location }}
+                        |
+                        {% if content.short_address|render %}
+                            {{ content.short_address }}
                         {% endif %}
                     </div>
                 {% endif %}
@@ -116,16 +116,21 @@
                         {{ content.body }}
                     </div>
                 {% endif %}
+                {% if content.field_call_to_action|render %}
+                    <div class="event-call-to-action">
+                        {{ content.field_call_to_action }}
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-4">
-                {{ drupal_region('sidebar') }}
+                {% if content.field_related_content|render %}
+                    {{ content.field_related_content }}
+                {% endif %}
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                {% if content.field_related_content|render %}
-                    {{ content.field_related_content }}
-                {% endif %}
+                {# Add  #}
             </div>
         </div>
     </div>

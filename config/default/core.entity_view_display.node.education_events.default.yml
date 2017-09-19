@@ -16,8 +16,8 @@ dependencies:
     - node.type.education_events
   module:
     - address
+    - button_link
     - datetime
-    - link
     - text
     - user
 id: node.education_events.default
@@ -36,20 +36,23 @@ content:
     weight: 5
     label: hidden
     settings:
-      trim_length: 80
+      link_text: ''
+      btn_type: btn-primary
+      btn_size: ''
+      trim_length: '80'
       url_only: false
       url_plain: false
-      rel: '0'
-      target: '0'
+      rel: 0
+      target: 0
     third_party_settings: {  }
-    type: link
+    type: button_link
     region: content
   field_date:
     weight: 2
     label: hidden
     settings:
       timezone_override: ''
-      date_format: U
+      date_format: 'M d, Y h:ia'
     third_party_settings: {  }
     type: datetime_custom
     region: content
