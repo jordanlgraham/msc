@@ -20,8 +20,8 @@ dependencies:
   module:
     - address
     - button_link
-    - image
     - link
+    - svg_image
     - user
 id: node.vendor.default
 targetEntityType: node
@@ -120,7 +120,7 @@ content:
     region: content
   field_vendor_image:
     weight: 11
-    label: above
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -138,6 +138,7 @@ content:
       url_only: ''
       url_plain: ''
       rel: 0
+      btn_size: ''
     third_party_settings: {  }
     type: button_link
     region: content
