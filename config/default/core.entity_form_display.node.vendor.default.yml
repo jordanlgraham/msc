@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
     - field.field.node.vendor.field_contact
@@ -17,13 +16,14 @@ dependencies:
     - field.field.node.vendor.field_twitter
     - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
+    - image.style.thumbnail
     - node.type.vendor
   module:
     - address
-    - entity_browser
     - field_group
     - link
     - path
+    - svg_image
 third_party_settings:
   field_group:
     group_netforum_data_auto_synchro:
@@ -166,15 +166,10 @@ content:
   field_vendor_image:
     weight: 3
     settings:
-      entity_browser: image_browser
-      field_widget_remove: true
-      selection_mode: selection_append
       preview_image_style: thumbnail
-      field_widget_edit: true
-      open: false
-      view_mode: default
+      progress_indicator: throbber
     third_party_settings: {  }
-    type: entity_browser_file
+    type: image_image
     region: content
   field_web_address:
     weight: 6

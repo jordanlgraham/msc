@@ -93,7 +93,9 @@
         <div class="row">
             <div{{ content_attributes }} class="col-md-8">
                 {% if content.field_vendor_image|render  %}
-                    {{ content.field_vendor_image }}
+                    <div class="float-md-left">
+                        {{ content.field_vendor_image }}
+                    </div>
                 {% endif %}
                 {% if content.field_address|render %}
                     {{ content.field_address }}
