@@ -106,13 +106,22 @@
                         {{ content.field_tags }}
                     </div>
                 {% endif %}
+
+                {% if content.body|render %}
+                    {{ content.body}}
+                {% endif %}
+                {% if content.field_file|render %}
+                    <div class="resource-file">
+                    {{ content.field_file }}
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-4">
                 {{ drupal_region('sidebar') }}
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12">
                 {% if content.field_related_content|render %}
                     {{ content.field_related_content }}
                 {% endif %}
