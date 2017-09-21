@@ -125,7 +125,6 @@ class EventSync {
       $node->field_end_date = $this->formatNetForumDateTime($event['end_date'], $event['end_time']); //date w/time 2017-08-15T18:00:00
       $node->field_event_category = $this->loadOrCreateEventTermsByName(array($event['event_category'])); //taxonomy
       $node->field_event_key = $evt_key; //text
-      $node->field_event_location = $event['location'];
       $node->status = 1;
       $node->save();
     }
@@ -188,7 +187,6 @@ class EventSync {
                   }
                   $events[(string) $result['evt_key']] = [
                     'name' => (string) $result['prd_name'],
-                    'location' => $location,
                     'start_date' => (string) $result['evt_start_date'],
                     'end_date' => (string) $result['evt_end_date'],
                     'start_time' => (string) $result['evt_start_time'],
