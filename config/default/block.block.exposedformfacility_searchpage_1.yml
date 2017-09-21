@@ -1,6 +1,6 @@
-uuid: 2361141a-ac57-4676-be15-8e3283bb7765
+uuid: 9454f21f-71b4-4f27-8be3-98fc0ebd48d5
 langcode: en
-status: false
+status: true
 dependencies:
   config:
     - views.view.facility_search
@@ -13,22 +13,21 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: msca_theme_views_block__facility_search_block_1
+id: exposedformfacility_searchpage_1
 theme: msca_theme
-region: content
-weight: 5
+region: sidebar
+weight: 0
 provider: null
-plugin: 'views_block:facility_search-block_1'
+plugin: 'views_exposed_filter_block:facility_search-page_1'
 settings:
-  id: 'views_block:facility_search-block_1'
+  id: 'views_exposed_filter_block:facility_search-page_1'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
-  items_per_page: none
 visibility:
   request_path:
     id: request_path
-    pages: /facilities
+    pages: /find-a-facility
     negate: false
     context_mapping: {  }

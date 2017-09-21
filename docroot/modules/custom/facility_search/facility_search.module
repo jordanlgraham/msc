@@ -24,6 +24,23 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     $form['proximity']['#options'][$i*5] = $i*5 . ' miles';
   }
 
+  // Turn the city filter into a dropdown.
+  $cities = \Drupal::database()->select('node__field_address', 'address')
+    ->fields('address', ['field_address_locality'])
+    ->condition('bundle', 'facility')
+    ->condition('field_address_locality', '', '<>')
+    ->orderBy('field_address_locality', 'ASC')
+    ->distinct()
+    ->execute()->fetchCol();
+  if (!empty($cities)) {
+    $city_filter = $form['#info']['filter-field_address_locality']['value'];
+    $cities = array_combine(array_values($cities), $cities);
+    $form[$city_filter]['#type'] = 'select';
+    $form[$city_filter]['#size'] = 1;
+    $form[$city_filter]['#empty_option'] = t('-Select-');
+    $form[$city_filter]['#options'] = $cities;
+  }
+
   // Add placeholders to all text fields. Uses label values so they're editable in interface
   foreach($form['#info'] as $key => $form_info_item) {
     foreach ($form as $form_item_key => $form_item_value) {
@@ -35,6 +52,7 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     }
   }
 }
+
 /**
  * Implements hook_geocoder_provider_info_alter().
 */
