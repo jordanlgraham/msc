@@ -44,7 +44,7 @@ display:
           query_comment: ''
           query_tags: {  }
       exposed_form:
-        type: input_required
+        type: basic
         options:
           submit_button: Apply
           reset_button: false
@@ -53,8 +53,6 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: basic_html
       pager:
         type: mini
         options:
