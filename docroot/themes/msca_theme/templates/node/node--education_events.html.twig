@@ -57,7 +57,7 @@
                 {% endif %}
             </div>
             <aside class="col-md-4">
-                {% if content.field_event_related_content %}
+                {% if content.field_event_related_content|render %}
                     <h2>Related Content</h2>
                     {{ content.field_event_related_content }}
                 {% endif %}
