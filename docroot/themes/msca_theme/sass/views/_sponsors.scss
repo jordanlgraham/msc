@@ -1,0 +1,44 @@
+.events-sponsors .views-row {
+  padding-left: 75px;
+  padding-right: 75px;
+  @extend .container;
+  @extend .col-md-6;
+}
+
+.events-sponsors header h2,
+.events-sponsors header p {
+  padding-left: 75px;
+  padding-right: 75px;
+  @extend .container;
+}
+
+.events-sponsors .views-element-container {
+  display: block;
+  clear: both;
+  padding-top: 4rem;
+  @extend .container;
+}
+
+.events-sponsors #block-msca-theme-page-title {
+  padding: 2rem 0 1.2rem;
+}
+
+.events-sponsors .social-links {
+  margin: 1rem auto;
+}
+
+.thin-heading.sponsors {
+  color: $blue;
+}
+
+.header-image.sponsors:before,
+.header-image.sponsors:after {
+  background-color: $blue;
+  width: 47%;
+}
+
+.header-image.sponsors {
+  margin-bottom: 2rem;
+  padding-left: 75px;
+  padding-right: 75px;
+}

@@ -1,8 +1,9 @@
-uuid: fce2c25c-cfb1-45c9-bda4-937a5e87e764
+uuid: fb06b112-abfb-4e7b-a480-08c059208f9f
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.gold_sponsors
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
@@ -17,30 +18,23 @@ dependencies:
     - image.style.sponsor_logo_large_190x110_
     - node.type.sponsor
   module:
-    - address
     - link
     - svg_image
     - text
     - user
-id: node.sponsor.default
+id: node.sponsor.gold_sponsors
 targetEntityType: node
 bundle: sponsor
-mode: default
+mode: gold_sponsors
 content:
   body:
-    label: hidden
-    type: text_default
+    type: text_trimmed
     weight: 5
-    settings: {  }
-    third_party_settings: {  }
     region: content
-  field_address:
-    weight: 6
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 200
     third_party_settings: {  }
-    type: address_default
-    region: content
   field_facebook:
     weight: 1
     label: hidden
@@ -74,14 +68,6 @@ content:
       image_style: sponsor_logo_large_190x110_
       image_link: ''
     third_party_settings: {  }
-  field_primary_services:
-    weight: 7
-    label: inline
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_twitter:
     weight: 2
     label: hidden
@@ -110,7 +96,9 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_address: true
   field_gated: true
+  field_primary_services: true
   field_related_event: true
   field_sponsorship_level: true
   links: true
