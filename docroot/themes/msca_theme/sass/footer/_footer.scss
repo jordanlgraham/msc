@@ -1,0 +1,51 @@
+.site-footer {
+  background: $light-gray;
+  padding-top: $grid-gutter-width-base;
+  padding-bottom: $grid-gutter-width-base;
+  font-size: $font-size-sm;
+  font-family: $font-family-sans-serif; // Lato
+  text-transform: uppercase;
+}
+
+.site-footer-container {
+  @extend .container;
+  display: flex;
+  justify-content: space-between;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+}
+
+.site-footer-left {
+  @include media-breakpoint-down(md) {
+    margin-bottom: $grid-gutter-width-base;
+  }
+}
+
+// Footer menu
+.site-footer-left .navbar-nav {
+  flex-direction: row;
+  li {
+    padding-right: $grid-gutter-width-base;
+    a {
+      color: $gray-text;
+    }
+  }
+}
+
+// Block title for logos
+.site-footer-right h2 {
+  font-size: $font-size-xs;
+  color: $gray;
+  @include media-breakpoint-up(lg) {
+    padding-left: $grid-gutter-width-base * 2; // per designs
+  }
+}
+
+.site-footer-logos img {
+  margin-right: $grid-gutter-width-base;
+  height: 40px; // should be the same in source files anyway, but just in case
+  @include media-breakpoint-down(sm) {
+    margin-bottom: $grid-gutter-width-base;
+  }
+}

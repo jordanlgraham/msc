@@ -64,3 +64,16 @@ function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, Ent
     $build['body'][0]['#text_summary_trim_length'] = 1200;
   }
 }
+
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function msca_theme_tweaks_preprocess_page(&$vars) {
+  // Sets year and text for copyright to use in footer
+  $vars['footer_date'] = t("&copy; Copyright @year, All Rights Reserved",
+    [
+      '@year' => date('Y'),
+    ]
+  );
+}
