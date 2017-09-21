@@ -1,0 +1,23 @@
+<footer class="site-footer">
+  <div class="site-footer-container">
+    <div class="site-footer-left">
+      {{page.footer}}
+      {# From msca_theme_tweaks hook_preprocess_page #}
+      {{ footer_date }}
+    </div>
+    <div class="site-footer-right">
+      <h2>{{ 'State Affiliate Of' }}</h2>
+      <div class="site-footer-logos">
+        <a href="http://www.ahcancal.org/Pages/Default.aspx">
+          <img src="{{ base_path ~ directory }}/images/ahca-logo.png" />
+        </a>
+        <a href="http://www.ahcancal.org/Pages/Default.aspx">
+          <img src="{{ base_path ~ directory }}/images/ncal-logo.png" />
+        </a>
+        <a href="https://careconversations.org/">
+          <img src="{{ base_path ~ directory }}/images/care-logo.png" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
