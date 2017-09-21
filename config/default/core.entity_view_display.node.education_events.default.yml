@@ -112,5 +112,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_event_key: true
   field_event_sponsor: true
   links: true

@@ -3,9 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.teaser
     - field.storage.node.field_address
-    - field.storage.node.field_customer_fax_number
-    - field.storage.node.field_customer_phone_number
     - field.storage.node.field_ge
     - node.type.facility
   module:
@@ -45,7 +44,7 @@ display:
           query_comment: ''
           query_tags: {  }
       exposed_form:
-        type: input_required
+        type: basic
         options:
           submit_button: Apply
           reset_button: false
@@ -54,26 +53,159 @@ display:
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
-          text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: basic_html
       pager:
-        type: none
+        type: mini
         options:
-          items_per_page: 0
+          items_per_page: 15
           offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
       style:
         type: default
       row:
-        type: fields
+        type: 'entity:node'
         options:
-          default_field_elements: true
-          inline:
-            field_customer_address_city: field_customer_address_city
-            field_customer_address_state: field_customer_address_state
-            field_customer_address_zip: field_customer_address_zip
-          separator: ', '
-          hide_empty: true
+          relationship: none
+          view_mode: teaser
       fields:
+        field_ge:
+          id: field_ge
+          table: node__field_ge
+          field: field_ge
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: ''
+          type: geolocation_latlng
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: geolocation_field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
         field_address:
           id: field_address
           table: node__field_address
@@ -136,200 +268,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_customer_phone_number:
-          id: field_customer_phone_number
-          table: node__field_customer_phone_number
-          field: field_customer_phone_number
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Phone
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_customer_fax_number:
-          id: field_customer_fax_number
-          table: node__field_customer_fax_number
-          field: field_customer_fax_number
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Fax
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_ge_proximity:
-          proximity_source: filter
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: km
-          proximity_filter: field_ge_proximity
-          proximity_argument: ''
-          entity_id_argument: ''
-          boundary_filter: ''
-          proximity_geocoder: 0
-          proximity_geocoder_plugin_settings:
-            plugin_id: msc_geocoder
-          id: field_ge_proximity
-          table: node__field_ge
-          field: field_ge_proximity
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ''
-          format_plural: false
-          format_plural_string: "1\x03@count"
-          prefix: ''
-          suffix: ''
-          plugin_id: geolocation_field_proximity
       filters:
         status:
           value: '1'
@@ -406,7 +344,7 @@ display:
           exposed: true
           expose:
             operator_id: field_ge_proximity_op
-            label: Distance
+            label: Radius
             description: ''
             use_operator: false
             operator: field_ge_proximity_op
@@ -418,6 +356,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+              content_author: '0'
             input_by_geocoding_widget: 1
             geocoder_plugin_settings:
               plugin_id: msc_geocoder
@@ -434,10 +373,10 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: geolocation_filter_proximity
-        field_address_organization:
-          id: field_address_organization
-          table: node__field_address
-          field: field_address_organization
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
@@ -446,12 +385,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_address_organization_op
+            operator_id: title_op
             label: 'Facility Name'
             description: ''
             use_operator: false
-            operator: field_address_organization_op
-            identifier: field_address_organization
+            operator: title_op
+            identifier: title
             required: false
             remember: false
             multiple: false
@@ -459,6 +398,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+              content_author: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -471,25 +411,27 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+          entity_type: node
+          entity_field: title
           plugin_id: string
-        field_address_administrative_area:
-          id: field_address_administrative_area
+        field_address_locality:
+          id: field_address_locality
           table: node__field_address
-          field: field_address_administrative_area
+          field: field_address_locality
           relationship: none
           group_type: group
           admin_label: ''
-          operator: contains
+          operator: '='
           value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: field_address_administrative_area_op
+            operator_id: field_address_locality_op
             label: City/Town
             description: ''
             use_operator: false
-            operator: field_address_administrative_area_op
-            identifier: field_address_administrative_area
+            operator: field_address_locality_op
+            identifier: city
             required: false
             remember: false
             multiple: false
@@ -497,23 +439,27 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+              content_author: '0'
           is_grouped: false
           group_info:
-            label: ''
-            description: ''
-            identifier: ''
+            label: 'Address (field_address:locality)'
+            description: null
+            identifier: field_address_locality
             optional: true
             widget: select
             multiple: false
             remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items: {  }
+            group_items:
+              1: {  }
+              2: {  }
+              3: {  }
           plugin_id: string
-        field_customer_type_value:
-          id: field_customer_type_value
-          table: node__field_customer_type
-          field: field_customer_type_value
+        field_languages_spoken_value:
+          id: field_languages_spoken_value
+          table: node__field_languages_spoken
+          field: field_languages_spoken_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -522,12 +468,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_customer_type_value_op
-            label: 'Customer Type'
+            operator_id: field_languages_spoken_value_op
+            label: 'Languages Spoken'
             description: ''
             use_operator: false
-            operator: field_customer_type_value_op
-            identifier: field_customer_type_value
+            operator: field_languages_spoken_value_op
+            identifier: field_languages_spoken_value
             required: false
             remember: false
             multiple: true
@@ -590,46 +536,6 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-        field_specialized_unit_value:
-          id: field_specialized_unit_value
-          table: node__field_specialized_unit
-          field: field_specialized_unit_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_specialized_unit_value_op
-            label: 'Specialized Units'
-            description: ''
-            use_operator: false
-            operator: field_specialized_unit_value_op
-            identifier: field_specialized_unit_value
-            required: false
-            remember: false
-            multiple: true
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          plugin_id: list_field
         field_populations_served_value:
           id: field_populations_served_value
           table: node__field_populations_served
@@ -670,10 +576,10 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-        field_languages_spoken_value:
-          id: field_languages_spoken_value
-          table: node__field_languages_spoken
-          field: field_languages_spoken_value
+        field_specialized_unit_value:
+          id: field_specialized_unit_value
+          table: node__field_specialized_unit
+          field: field_specialized_unit_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -682,12 +588,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_languages_spoken_value_op
-            label: 'Languages Spoken'
+            operator_id: field_specialized_unit_value_op
+            label: 'Specialized Units'
             description: ''
             use_operator: false
-            operator: field_languages_spoken_value_op
-            identifier: field_languages_spoken_value
+            operator: field_specialized_unit_value_op
+            identifier: field_specialized_unit_value
             required: false
             remember: false
             multiple: true
@@ -710,7 +616,34 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-      sorts: {  }
+      sorts:
+        field_ge_proximity:
+          proximity_field: field_ge_proximity
+          id: field_ge_proximity
+          table: node__field_ge
+          field: field_ge_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: geolocation_sort_proximity
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
       title: 'Facility Search'
       header: {  }
       footer: {  }
@@ -731,7 +664,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      use_ajax: true
+      use_ajax: false
       filter_groups:
         operator: AND
         groups:
@@ -743,31 +676,35 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_address'
-        - 'config:field.storage.node.field_customer_fax_number'
-        - 'config:field.storage.node.field_customer_phone_number'
+        - 'config:field.storage.node.field_ge'
   attachment_1:
     display_plugin: attachment
     id: attachment_1
-    display_title: Attachment
-    position: 3
+    display_title: Map
+    position: 2
     display_options:
       display_extenders: {  }
+      displays:
+        page_1: page_1
+      display_description: ''
+      inherit_exposed_filters: true
       style:
         type: maps_common
         options:
           geolocation_field: field_ge
-          title_field: none
+          title_field: title
           centre:
             fit_bounds:
               enable: true
               weight: 0
             first_row:
+              enable: true
               weight: 0
-              enable: false
             fixed_value:
               weight: 0
               settings:
@@ -780,7 +717,7 @@ display:
               settings:
                 update_map: '0'
           show_raw_locations: 0
-          even_empty: 1
+          even_empty: 0
           context_popup_content: ''
           marker_clusterer: 0
           marker_clusterer_image_path: ''
@@ -805,279 +742,17 @@ display:
             style: ''
             info_auto_display: 1
             marker_icon_path: ''
-            disableAutoPan: 1
+            disableAutoPan: 0
       defaults:
         style: false
         row: false
-        fields: false
       row:
         type: fields
         options:
-          default_field_elements: true
-          inline:
-            field_customer_address_city: field_customer_address_city
-            field_customer_address_state: field_customer_address_state
-            field_customer_address_zip: field_customer_address_zip
-          separator: ', '
-          hide_empty: true
-      fields:
-        field_address:
-          id: field_address
-          table: node__field_address
-          field: field_address
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: langcode
-          type: address_default
-          settings: {  }
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_customer_phone_number:
-          id: field_customer_phone_number
-          table: node__field_customer_phone_number
-          field: field_customer_phone_number
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_ge_proximity:
-          proximity_source: filter
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: km
-          proximity_filter: field_ge_proximity
-          proximity_argument: ''
-          entity_id_argument: ''
-          boundary_filter: ''
-          proximity_geocoder: 0
-          proximity_geocoder_plugin_settings:
-            plugin_id: msc_geocoder
-          id: field_ge_proximity
-          table: node__field_ge
-          field: field_ge_proximity
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
+          inline: {  }
           separator: ''
-          format_plural: false
-          format_plural_string: "1\x03@count"
-          prefix: ''
-          suffix: ''
-          plugin_id: geolocation_field_proximity
-        field_ge:
-          id: field_ge
-          table: node__field_ge
-          field: field_ge
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
           hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: ''
-          type: geolocation_latlng
-          settings: {  }
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: geolocation_field
-      displays:
-        page_1: page_1
+          default_field_elements: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1088,30 +763,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_address'
-        - 'config:field.storage.node.field_customer_phone_number'
         - 'config:field.storage.node.field_ge'
-  block_1:
-    display_plugin: block
-    id: block_1
-    display_title: Block
-    position: 2
-    display_options:
-      display_extenders: {  }
-      use_ajax: true
-      defaults:
-        use_ajax: false
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_address'
-        - 'config:field.storage.node.field_customer_fax_number'
-        - 'config:field.storage.node.field_customer_phone_number'
   page_1:
     display_plugin: page
     id: page_1
@@ -1119,14 +771,14 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: facilities
-      exposed_block: false
+      path: find-a-facility
+      exposed_block: true
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Search
           reset_button: true
-          reset_button_label: Reset
+          reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
           sort_asc_label: Asc
@@ -1139,9 +791,9 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_address'
-        - 'config:field.storage.node.field_customer_fax_number'
-        - 'config:field.storage.node.field_customer_phone_number'
+        - 'config:field.storage.node.field_ge'

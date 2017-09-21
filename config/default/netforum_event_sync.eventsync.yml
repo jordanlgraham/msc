@@ -2,3 +2,4 @@ netforum_event_sync:
   event_types: ''
 _core:
   default_config_hash: E_EkA1Op1lL97ZbB9WaBAfdWrJ8ZVkUTAPSgOIoDoVE
+event_types: "Committee\r\nConference\r\nEducation\r\nFundraising\r\nMembership\r\nPublic\r\nSocial\r\nWebinar"
