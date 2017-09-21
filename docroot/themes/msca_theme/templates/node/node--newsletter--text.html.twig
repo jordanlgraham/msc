@@ -1,0 +1,34 @@
+Mass Senior Care Association
+
+E-News Update:
+{% if content.field_newsletter_date|render %}
+{{ content.field_newsletter_date.value|date('F jS, Y') }}
+{% endif %}
+
+{% for item in node.field_sponsor %}
+This Week's E-News is Sponsored By:
+{{ item.entity.body.value|raw }}
+{% endfor %}
+
+{% for item in node.field_newsletter_article %}
+{% set text = item.entity.body.value|render|striptags %}
+{{ text|length > 1200 ? text|slice(0, 1200)|raw ~ '...' : text|raw }}
+{% endfor %}
+
+Mass Senior Care Calendar
+{{ 'now'|date('Y') }}
+
+{% for item in node.field_calendar %}
+{{ item.entity.field_date.value|date('n/j') }}, {{ item.entity.label }}
+{% set text = item.entity.body.value|render|striptags %}
+{{ text|length > 900 ? text|slice(0, 900)|raw ~ '...' : text|raw }}
+{% endfor %}
+
+Massachusetts Senior Care Association
+
+800 South Street - Suite 280,
+Waltham, MA 02453
+
+info@maseniorcare.org
+phone: 617.558.0202
+fax: 617.558.354

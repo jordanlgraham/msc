@@ -12,7 +12,7 @@ id: node.education_events.field_event_related_content
 field_name: field_event_related_content
 entity_type: node
 bundle: education_events
-label: 'Event Related Content'
+label: 'Related Content'
 description: 'Add or select one node of related content to be displayed in sidebar on this Event page.'
 required: false
 translatable: false

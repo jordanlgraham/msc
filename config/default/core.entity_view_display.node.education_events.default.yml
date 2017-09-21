@@ -52,9 +52,9 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      date_format: 'M d, Y h:ia'
+      format_type: short_month_and_day
     third_party_settings: {  }
-    type: datetime_custom
+    type: datetime_default
     region: content
   field_end_date:
     weight: 3
@@ -75,7 +75,7 @@ content:
     region: content
   field_event_related_content:
     weight: 7
-    label: above
+    label: hidden
     settings:
       view_mode: teaser
       link: false
@@ -94,9 +94,9 @@ content:
     region: content
   field_gold_sponsor:
     weight: 6
-    label: above
+    label: hidden
     settings:
-      view_mode: teaser
+      view_mode: gold_sponsors
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view

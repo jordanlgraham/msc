@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Theme override to display a Sponsor node Gold Sponsors display.
+ *
+ */
+#}
+<div class="col-md-6 float-left">
+  <article{{ attributes.addClass(container) }}>
+
+      {% if display_submitted %}
+        <footer>
+          {{ author_picture }}
+          <div{{ author_attributes }}>
+            {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+            {{ metadata }}
+          </div>
+        </footer>
+      {% endif %}
+
+      <div{{ content_attributes }}>
+
+        <div class="col-md-6 pull-left">
+          <div class="sponsor-logo">
+              {% if content.field_logo|render %}
+                  {{ content.field_logo }}
+              {% endif %}
+          </div>
+          <div class="social-links">
+              {% if content.field_facebook|render %}
+                  {{ content.field_facebook }}
+              {% endif %}
+              {% if content.field_twitter|render %}
+                  {{ content.field_twitter }}
+              {% endif %}
+              {% if content.field_linkedin|render %}
+                  {{ content.field_linkedin }}
+              {% endif %}
+              {% if content.field_website_address|render %}
+                  {{ content.field_website_address }}
+              {% endif %}
+          </div>
+        </div>
+        <div class="col-md-6 pull-right">
+            {% set text =  content.body|render|striptags %}
+            {{ text|length > 200 ? text|slice(0, 200)|raw ~ '...' : text|raw }}
+        </div>
+
+
+      </div>
+  </article>
+</div>

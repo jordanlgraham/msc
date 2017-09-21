@@ -125,7 +125,9 @@
             </div>
         {% endif %}
         {% if content.body|render %}
-            {{ content.body }}
+            {% set text = content.body|render|striptags %}
+            {{ text|length > 300 ? text|slice(0, 300)|raw ~ '...' : text|raw }}
+            <a href="/node/{{ content.nid }}">Read more</a>
         {% endif %}
     </div>
 
