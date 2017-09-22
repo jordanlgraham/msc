@@ -108,8 +108,8 @@
   height: 30px;
   border-radius: 5px;
   display: inline-block;
-
 }
+
 .icon-facebook {
   background: $facebook-blue url($fb-svg) 10px no-repeat;
   background-size: 20px;
@@ -131,6 +131,15 @@
   background-size: 20px;
   &:hover {
     background-color: lighten($twitter-blue, 10%);
+  }
+}
+
+.icon-website {
+  color: black;
+  background: transparent url($website-svg) -5px no-repeat;
+  background-size: 37px;
+  &:hover {
+    color: $gray;
   }
 }
 

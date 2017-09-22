@@ -33,13 +33,13 @@ content:
     third_party_settings: {  }
     region: content
   field_date:
-    type: datetime_custom
+    type: datetime_default
     weight: 0
     region: content
     label: hidden
     settings:
       timezone_override: ''
-      date_format: 'F d'
+      format_type: short_month_and_day
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true

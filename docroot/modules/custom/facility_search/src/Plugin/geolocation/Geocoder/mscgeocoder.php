@@ -41,18 +41,20 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
   }
 
   public function formAttachGeocoder(array &$render_array, $element_name) {
+    $proximity = $render_array['proximity'];
+    unset($render_array['proximity']);
+
     $render_array['geocode_postal'] = array(
       '#type' => 'textfield',
-      '#title' => t('Postal code'),
-      '#attributes' => array(
-        'placeholder' => t('Postal code'),
-      ),
+      '#title' => t('Zip Code'),
     );
 
     $render_array['geocode_state'] = array(
       '#type' => 'hidden',
       '#default_value' => 1,
     );
+
+    $render_array['proximity'] = $proximity;
   }
 
   /**
@@ -105,7 +107,7 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
    * @inheritdoc
    */
   public function geocode($address) {
-    $plugins = ['googlemaps'];
+    $plugins = ['googlemaps' => 'googlemaps'];
     /** @var AddressCollection $addressCollection */
     $addressCollection = $this->geocoder->geocode($address, $plugins, []);
     if (!$addressCollection) {

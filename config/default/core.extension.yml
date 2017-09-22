@@ -62,7 +62,6 @@ module:
   inline_entity_form: 0
   insert: 0
   jquery_colorpicker: 0
-  kint: 0
   link: 0
   masquerade: 0
   media_entity: 0

@@ -19,7 +19,7 @@ third_party_settings:
     failure:
       handling: empty
       status_message: false
-      log: false
+      log: true
 id: node.facility.field_ge
 field_name: field_ge
 entity_type: node

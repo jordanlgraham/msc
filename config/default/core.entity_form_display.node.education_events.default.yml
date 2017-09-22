@@ -96,7 +96,7 @@ content:
   field_event_sponsor:
     weight: 9
     settings:
-      form_mode: default
+      form_mode: inline_edit
       label_singular: ''
       label_plural: ''
       allow_new: true
@@ -174,4 +174,5 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_event_key: true

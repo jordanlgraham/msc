@@ -125,7 +125,11 @@
             </div>
         {% endif %}
         {% if content.body|render %}
-            {{ content.body }}
+            {% set text = content.body|render|striptags %}
+            {{ text|length > 400 ? text|slice(0, 400)|raw ~ '...' : text|raw }}
+            {% if text|length > 400 %}
+                <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
+            {% endif %}
         {% endif %}
     </div>
 

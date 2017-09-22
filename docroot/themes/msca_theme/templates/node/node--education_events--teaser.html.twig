@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme override to display an Education and Events node teaser display.
+ *
+ */
+#}
+<article{{ attributes }}>
+
+  <div{{ content_attributes }}>
+      {# Todo - get Matthew's date solution working here - tricky #}
+      <div class="date-square">
+          <div class="date-square-month">{{ content.field_date }}</div>
+      </div>
+      <div class="event-teaser-text">
+          <h4>Event</h4>
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {% set text =  content.body|render|striptags %}
+          <p>{{ text|length > 200 ? text|slice(0, 200)|raw ~ '...' : text|raw }}</p>
+      </div>
+
+  </div>
+
+</article>
