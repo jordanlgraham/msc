@@ -71,6 +71,14 @@ class OrganizationSyncForm extends ConfigFormBase {
       '#description' => $this->t('A list of Organization Types to search for in the GetOrganizationByType API call (i.e. Assisted Living)'),
       '#default_value' => $config->get('org_types'),
     ];
+    $form['start_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Sync Start Date'),
+    ];
+    $form['end_date'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Sync End Date'),
+    ];
     return parent::buildForm($form, $form_state);
   }
 
@@ -83,8 +91,15 @@ class OrganizationSyncForm extends ConfigFormBase {
     $this->config('netforum_org_sync.organizationsync')
       ->set('org_types', $form_state->getValue('org_types'))
       ->save();
+    $start_date = false;
+    $end_date = false;
+    if(!empty($form_state->getValue('start_date'))
+      && !empty($form_state->getValue('end_date'))){
+      $start_date = strtotime($form_state->getValue('start_date'));
+      $end_date = strtotime($form_state->getValue('end_date'));
+    }
     try {
-      $this->sync->syncOrganizations();
+      $this->sync->syncOrganizations($start_date, $end_date);
       $this->state->set(OrgSync::CRON_STATE_KEY, $this->time->getRequestTime());
       drupal_set_message($this->t('Organizations successfully synced.'));
     }

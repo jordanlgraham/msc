@@ -48,6 +48,7 @@ hidden:
   field_call_to_action: true
   field_end_date: true
   field_event_category: true
+  field_event_key: true
   field_event_related_content: true
   field_event_sponsor: true
   field_gated: true

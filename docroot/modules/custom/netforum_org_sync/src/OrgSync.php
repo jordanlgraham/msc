@@ -56,8 +56,13 @@ class OrgSync {
     $this->dateFormatter = $dateFormatter;
   }
 
-  public function syncOrganizations() {
-    $organizations = $this->getOrganizations();
+  public function syncOrganizations($start_date = false, $end_date = false) {
+    if($start_date && $end_date) {
+      $organizations = $this->syncOrganizationChanges($start_date, $end_date);
+    }
+    else {
+      $organizations = $this->getOrganizations();
+    }
     if ($organizations) {
       foreach ($organizations as $cst_key => $organization) {
         $node = $this->loadOrCreateOrgNode($organization);
