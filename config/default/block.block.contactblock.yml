@@ -20,7 +20,7 @@ provider: null
 plugin: contact_block
 settings:
   id: contact_block
-  label: 'Contact block'
+  label: 'Contact Us'
   provider: contact_block
   label_display: visible
   contact_form: feedback
