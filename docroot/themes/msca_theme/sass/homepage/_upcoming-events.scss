@@ -18,6 +18,9 @@
   @extend .container;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
 }
 
 .upcoming-events .event-start-date {
@@ -40,8 +43,6 @@
 .upcoming-events .event-category-location {
   @extend .col-lg-3;
   @extend .col-6;
-  display: flex;
-  align-items: center;
 }
 
 //this helps center the address vertically
@@ -75,5 +76,21 @@
 //make sure the call to action buttons are as wide as the container div
 .upcoming-events .event-call-to-action a {
   display: block;
+  background-color: transparent;
+  &:hover {
+    background-color: $dark-gray;
+    &:after {
+      color: $white;
+    }
+  }
+}
+.upcoming-events .event-call-to-action a:after {
+  background-color: transparent;
+  &:hover{
+    color: $white;
+  }
 }
 
+.event-map-icon img {
+  width: 16px;
+}

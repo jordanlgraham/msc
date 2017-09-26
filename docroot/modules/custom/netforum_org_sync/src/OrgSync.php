@@ -56,8 +56,13 @@ class OrgSync {
     $this->dateFormatter = $dateFormatter;
   }
 
-  public function syncOrganizations() {
-    $organizations = $this->getOrganizations();
+  public function syncOrganizations($start_date = false, $end_date = false) {
+    if($start_date && $end_date) {
+      $organizations = $this->syncOrganizationChanges($start_date, $end_date);
+    }
+    else {
+      $organizations = $this->getOrganizations();
+    }
     if ($organizations) {
       foreach ($organizations as $cst_key => $organization) {
         $node = $this->loadOrCreateOrgNode($organization);
@@ -149,12 +154,12 @@ class OrgSync {
     $node->field_facebook = SoapHelper::cleanSoapField($organization['cel_facebook_name']);//  Link
     $node->field_linkedin = SoapHelper::cleanSoapField($organization['cel_linkedin_name']);//  Link
     $node->field_twitter = SoapHelper::cleanSoapField($organization['cel_twitter_name']);//  Link
+    $node->field_customer_key = SoapHelper::cleanSoapField($organization['org_cst_key']);//  Text (plain)
 
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
       $node->field_administrator = SoapHelper::cleanSoapField($organization['con__cst_ind_full_name_dn']);// Text (plain)
       $node->field_customer_fax_number = SoapHelper::cleanSoapField($organization['fax_number']);// Text (plain)
-      $node->field_customer_key = SoapHelper::cleanSoapField($organization['org_cst_key']);//  Text (plain)
       $node->field_customer_phone_number = SoapHelper::cleanSoapField($organization['phn_number_complete']);// Text (plain)
       $node->field_customer_type = SoapHelper::cleanSoapField($organization['cst_type'], 'array');// List (text)
       $node->field_customer_web_site = SoapHelper::cleanSoapField($organization['cst_web_site']);// Text (plain)

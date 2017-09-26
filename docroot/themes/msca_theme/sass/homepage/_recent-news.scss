@@ -64,3 +64,10 @@
 .home-recent-news h3 span {
   text-transform: initial;
 }
+
+.home-recent-news h3 a {
+  color: $dark-gray;
+  &:hover {
+    color: $orange;
+  }
+}
