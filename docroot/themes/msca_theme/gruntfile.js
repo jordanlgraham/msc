@@ -57,6 +57,7 @@ module.exports = function(grunt) {
             'js/dist/constants.js',
             'js/dist/base.js',
             'js/dist/bootstrap/tab.js',
+            'js/dist/menu.js',
             'js/dist/scripts.js',
             'js/dist/bootstrap/util.js',
             'js/dist/bootstrap/collapse.js',
@@ -112,6 +113,7 @@ module.exports = function(grunt) {
    grunt.registerTask('default', ['babel', 'concat', 'sass', 'autoprefixer', 'watch']);
 
    // Sets up task so that typing "grunt compile" will compile CSS without watching
-   grunt.registerTask('compile', ['sass', 'autoprefixer']);
+   grunt.registerTask('compile', ['sass']);
+   grunt.registerTask('js', ['babel', 'concat']);
 
 };

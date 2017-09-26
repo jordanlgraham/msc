@@ -1,0 +1,159 @@
+
+// Top level menu items
+ul.menu-level-1 > li > a {
+  text-transform: uppercase;
+}
+
+// Second level menus
+// Restricting to desktop for now
+ul.menu-level-1 > li {
+  position: relative;
+}
+
+ul.menu-level-1 > li:hover > ul.nav,
+ul.menu-level-2 > li:hover > ul.nav {
+  @include media-breakpoint-up(md) {
+    display: flex;
+  }
+}
+
+ul.menu-level-2,
+ul.menu-level-3{
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    top: 100%;
+  }
+}
+
+// Applies to second and third level menus
+ul.menu-level-2  li {
+  padding: 0;
+  @include media-breakpoint-up(md) {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.navbar-nav ul.menu-level-2 > li > a {
+  padding: 10px 10px 10px 20px;
+  @include media-breakpoint-up(md) {
+    padding: 20px 25px;
+    display: flex;
+    min-width: 200px;
+    &:hover {
+      background: $blue;
+    }
+  }
+}
+
+// Applies only to second level menus
+
+// Last two menu items right align so they don't go off edge of screen
+ul.menu-level-1 > li:last-child > ul.nav,
+ul.menu-level-1 > li:last-child(2) > ul.nav {
+  right: 0;
+}
+
+.header-menu .navbar-toggleable-md ul.menu-level-2 {
+  flex-direction: column;
+  display: none; // hidden and shown on hover
+}
+
+.header-menu .navbar-toggleable-md  ul.menu-level-2 > li {
+  @include media-breakpoint-up(md) {
+    position: relative;
+    &:first-of-type {
+      border-top: solid $blue 5px;
+    }
+    &:hover {
+      background: $blue; // This is also set on the link, but we want it to stay blue when we're further down the subnav
+      > a {
+        background-color: transparent;
+        color: #fff;
+      }
+    }
+  }
+}
+
+// Second and third level menus
+// Extra specificity to override some navbar styles that are set somewhere mysterious (maybe in the bootstrap css)
+.navbar-nav ul.menu-level-2 > li a {
+  background-color: #fff;
+  color: $gray-text;
+  border-bottom: solid 1px $gray;
+  font-weight: 200;
+  @include media-breakpoint-up(md) {
+    &:hover {
+      color: #fff;
+      background: $blue;
+    }
+  }
+}
+
+// Show third level on hover
+ul.menu-level-3 {
+  display: none;
+  left: 100%;
+  bottom: 0;
+  top: unset;
+}
+
+.navbar-nav ul.menu-level-2 > li:hover > a {
+  @include media-breakpoint-up(md) {
+    background-color: $blue;
+  }
+}
+
+ul.menu-level-2 > li:hover > ul.nav {
+  @include media-breakpoint-up(md) {
+    display: flex;
+  }
+}
+
+ul.menu-level-2.subnav-active,
+ul.menu-level-3.subnav-active {
+  @include media-breakpoint-down(md) {
+    display: flex;
+  }
+}
+
+// The first child in the third level needs that little arrow thing
+ul.menu-level-3 >li:first-of-type {
+  @include media-breakpoint-up(md) {
+    position: relative;
+    &:after {
+      position: absolute;
+      left: 0;
+      top: 0;
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 32px solid transparent;
+      border-bottom: 32px solid transparent;
+      border-left: 15px solid $blue;
+    }
+  }
+}
+
+.navbar-nav ul.menu-level-3 a {
+  @include media-breakpoint-down(md) {
+    padding: 10px 10px 10px 30px;
+  }
+  padding: 20px;
+  white-space: nowrap;
+}
+
+ul li.has-submenu > a {
+   @include media-breakpoint-down(md) {
+     background-image: url('svg/plus.svg');
+     background-position: 90% 50%;
+     background-size: 20px;
+     background-repeat: no-repeat
+   }
+ }
+
+ul li.has-submenu.submenu-open > a {
+  @include media-breakpoint-down(md) {
+    background-image: url('svg/minus.svg');
+  }
+}

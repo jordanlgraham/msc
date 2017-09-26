@@ -22,3 +22,19 @@
     text-decoration: none;
   }
 }
+
+header.container-fluid {
+  z-index: 99; // so dropdown menus aren't hidden
+}
+
+header .navbar-collapse > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+header .navbar-toggleable-md {
+  @include media-breakpoint-up(md) {
+    align-items: stretch;
+  }
+}
