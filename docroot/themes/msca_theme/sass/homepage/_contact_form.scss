@@ -62,3 +62,17 @@
 .homepage-map {
   padding-left: 0;
 }
+
+// Inputs can't have pseudo elements, so the pseudo arrow is applied to the input wrapper
+.paragraph--type--map-and-contact .contact-message-feedback-form .form-actions {
+  position: relative;
+  &:after {
+    @extend %button-arrow-after;
+  }
+}
+
+.paragraph--type--map-and-contact .contact-message-feedback-form input.form-submit {
+  @extend .btn;
+  @extend .btn-lg;
+  @extend .btn-secondary;
+}
