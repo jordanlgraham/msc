@@ -18,6 +18,9 @@
   @extend .container;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
 }
 
 .upcoming-events .event-start-date {
