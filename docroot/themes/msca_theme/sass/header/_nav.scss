@@ -194,9 +194,6 @@
   &.is-active {
     color: $orange;
   }
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
-  }
 }
 
 
