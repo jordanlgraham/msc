@@ -38,8 +38,26 @@
 .site-footer-right h2 {
   font-size: $font-size-xs;
   color: $gray;
-  @include media-breakpoint-up(lg) {
-    padding-left: $grid-gutter-width-base * 2; // per designs
+}
+
+.site-footer-logos {
+  display: flex;
+  align-items: flex-end;
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.site-footer-affiliates {
+  flex-direction: column;
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    text-align: center;
+    margin-right: $grid-gutter-width-base;
+  }
+  a {
+    display: inline-flex;
   }
 }
 
@@ -49,4 +67,8 @@
   @include media-breakpoint-down(sm) {
     margin-bottom: $grid-gutter-width-base;
   }
+}
+
+.site-footer-logos a:last-of-type img {
+  margin-right: 0;
 }
