@@ -31,7 +31,7 @@ bundle: newsletter_article
 mode: homepage
 content:
   body:
-    type: text_trimmed
+    type: text_summary_or_trimmed
     weight: 2
     region: content
     label: hidden
