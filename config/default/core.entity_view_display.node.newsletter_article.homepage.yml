@@ -36,7 +36,7 @@ content:
     region: content
     label: hidden
     settings:
-      trim_length: 600
+      trim_length: 400
     third_party_settings: {  }
   field_news_release_date:
     weight: 0
