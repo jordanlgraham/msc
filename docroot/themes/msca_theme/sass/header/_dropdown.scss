@@ -82,6 +82,7 @@ ul.menu-level-1 > li:last-child(2) > ul.nav {
   border-bottom: solid 1px $gray;
   font-weight: 200;
   @include media-breakpoint-up(md) {
+    white-space: nowrap; // Makes links stay on one line
     &:hover {
       color: #fff;
       background: $blue;
