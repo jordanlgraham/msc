@@ -1,15 +1,15 @@
-uuid: ead1cb83-a282-40e0-a50e-d58c3935748d
+uuid: 7d311a98-1564-48a0-b1c9-369f9e6d460b
 langcode: en
 status: true
 dependencies:
   theme:
     - msca_theme
-id: homepage_login_block
+id: join_mscblock
 theme: msca_theme
 region: gutter
-weight: -13
+weight: null
 provider: null
-plugin: homepage_login_block
+plugin: join_mscblock
 settings:
   id: broken
   label: ''
