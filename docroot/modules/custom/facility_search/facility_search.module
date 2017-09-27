@@ -16,6 +16,9 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     return;
   }
 
+  // Hide the "keys" filter.
+  $form['keys']['#type'] = 'hidden';
+
   // Turn the proximity filter into a dropdown.
   $form['proximity']['#type'] = 'select';
   $form['proximity']['#size'] = 1;
