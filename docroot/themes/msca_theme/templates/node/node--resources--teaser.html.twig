@@ -18,9 +18,9 @@
           <h2{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
-          {% if content.field_resource_category|render %}
+          {% if content.field_resource_type|render %}
               {# Display just the first one in case there are multiple categories. #}
-              <h6>{{ content.field_resource_category.0 }}</h6>
+              <h6>{{ content.field_resource_type.0 }}</h6>
           {% endif %}
           {{ content.body }}
           <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
