@@ -16,9 +16,8 @@ dependencies:
     - field.field.node.newsletter_article.field_topic
     - node.type.newsletter_article
   module:
-    - entity_print
     - datetime
-    - media_entity
+    - entity_print
     - text
     - user
 third_party_settings:
@@ -37,12 +36,20 @@ content:
     settings:
       trim_length: 300
     third_party_settings: {  }
+  field_news_release_date:
+    type: datetime_custom
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: n/j
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
-  field_news_release_date: true
   field_news_source: true
   field_news_subtitle: true
   field_news_teaser_image: true

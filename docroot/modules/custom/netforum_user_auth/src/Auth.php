@@ -23,9 +23,7 @@ class Auth {
    */
   private $externalAuth;
 
-  const AUTH_PROVIDER = 'netform';
-
-  const AUTH_NAME = 'eweb';
+  const AUTH_PROVIDER = 'netforum';
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager, GetClient $getClient,
                               ExternalAuthInterface $externalAuth) {
@@ -47,11 +45,11 @@ class Auth {
       // User already has an MSCA account, link it with Netforum via email address.
       if ($existing) {
         $account = end($existing);
-        $this->externalAuth->linkExistingAccount(self::AUTH_NAME, self::AUTH_PROVIDER, $account);
-        return $this->externalAuth->userLoginFinalize($account, self::AUTH_NAME, self::AUTH_PROVIDER);
+        $this->externalAuth->linkExistingAccount($email, self::AUTH_PROVIDER, $account);
+        return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
       }
       else {
-        return $this->externalAuth->loginRegister(self::AUTH_NAME, self::AUTH_PROVIDER, [
+        return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
           'name' => $email,
           'mail' => $email,
           'pass' => $password,

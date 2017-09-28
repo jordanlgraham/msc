@@ -30,7 +30,7 @@ content:
     region: content
   field_youtube_id:
     type: string
-    weight: 0
+    weight: 1
     region: content
     label: hidden
     settings:

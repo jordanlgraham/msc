@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Theme override to display an Education and Events node newsletter display.
+ *
+ */
+#}
+<article{{ attributes.addClass('pb-5') }}>
+
+  <div{{ content_attributes }}>
+      <div class="date-square float-left mr-3">
+          <div class="date-square-month">{{ content.square_month }}</div>
+          <div class="date-square-day">{{ content.square_day }}</div>
+      </div>
+      <div class="event-teaser-text">
+          {% if content.field_event_category|render %}
+              <h4>{{ content.field_event_category.0 }}</h4>
+          {% endif %}
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {% if node.field_location.organization %}
+            {{ node.field_location.organization }},
+          {% endif %}
+          {% if node.field_location.locality %}
+            {{ node.field_location.locality }},
+          {% endif %}
+          {% if node.field_location.administrative_area %}
+            {{ node.field_location.administrative_area }}
+          {% endif %}
+          {{ content.body }}
+          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
+      </div>
+
+  </div>
+
+</article>
