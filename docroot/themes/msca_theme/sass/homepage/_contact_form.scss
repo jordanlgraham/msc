@@ -23,6 +23,9 @@
 //of the .container width. So it's like the left side is container-fluid but the right side is container.
 .paragraph--type--map-and-contact .contact-message-feedback-form {
   max-width: 540px;
+  @include media-breakpoint-down(md) {
+    max-width: none;
+  }
 }
 
 //form elements shouldn't have borders or curved corners at all
@@ -71,6 +74,9 @@
 
 .homepage-map {
   padding-left: 0;
+  @include media-breakpoint-down(md) {
+    padding-right: 0;
+  }
 }
 
 // Inputs can't have pseudo elements, so the pseudo arrow is applied to the input wrapper
