@@ -12,14 +12,14 @@
 
         <!--featured-article-start -->
         {% if content.field_featured_article|render %}
-            <h2>Featured Article</h2>
+            <h2> {{ 'Featured Article'|t }}</h2>
              {{ content.field_featured_article }}
         {% endif %}
         <!--featured-article-end -->
 
         <!--articles-start -->
         {% if content.field_newsletter_article|render %}
-            <h2>Latest News & Resources</h2>
+            <h2>{{ 'Latest News & Resources'|t }}</h2>
             {{ content.field_newsletter_article }}
         {% endif %}
         <!--articles-end -->
@@ -27,7 +27,7 @@
         <!--custom-calendar-start -->
         {% if content.field_calendar|render %}
             <a name="calendar"></a>
-            <h2>Upcoming Education & Events</h2>
+            <h2>{{ 'Upcoming Education & Events'|t }}</h2>
             {{ content.field_calendar }}
         {% endif %}
         <!--custom-calendar-end -->
@@ -54,8 +54,8 @@
             {% endfor %}
         </ul>
 
-        <p><a class="btn btn-primary" href="/newsletter/issues/" target="_blank" style="text-decoration:none">See Previous Issues</a></p>
-        <p><a class="btn btn-primary" href="/member-resources/preferred-vendors/" target="_blank" style="text-decoration:none">Find a Preferred Vendor</a></p>
+        <p><a class="btn btn-primary" href="/newsletter/issues/" target="_blank">See Previous Issues</a></p>
+        <p><a class="btn btn-primary" href="/member-resources/preferred-vendors/" target="_blank">Find a Preferred Vendor</a></p>
     </aside>
     <!--right-sidebar-end -->
 
