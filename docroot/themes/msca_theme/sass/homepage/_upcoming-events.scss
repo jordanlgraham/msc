@@ -16,6 +16,7 @@
 .upcoming-events .views-row {
   background-color: rgba(255,255,255,0.8);
   @extend .container;
+  //todo: find a way to do this with flexbox
   padding-top: 2rem;
   padding-bottom: 2rem;
   &:not(:last-of-type) {
@@ -25,13 +26,15 @@
 
 .upcoming-events .event-start-date {
   @extend .col-xl-1;
-  @extend .col-2;
+  @extend .col-md-2;
+  @extend .hidden-sm-down;
 }
 
 .upcoming-events .event-date-and-title {
   @extend .col-xl-5;
   @extend .col-lg-4;
-  @extend .col-10;
+  @extend .col-md-10;
+  @extend .col-12;
   border-right: 1px solid $gray;
 
   @include media-breakpoint-down(md){
@@ -42,7 +45,8 @@
 //need to vertically align content, also need to rearrange items for anything smaller than a large screen
 .upcoming-events .event-category-location {
   @extend .col-lg-3;
-  @extend .col-6;
+  @extend .col-md-6;
+  @extend .col-12;
 }
 
 //this helps center the address vertically
@@ -52,7 +56,8 @@
 
 .upcoming-events .event-call-to-action {
   @extend .col-lg-3;
-  @extend .col-6;
+  @extend .col-md-6;
+  @extend .col-12;
   //need to vertically center CTAs
   //todo: do this using bootstrap 4 classes
   display: flex;
@@ -70,7 +75,11 @@
 
 //make sure the call to action buttons are all the same width
 .upcoming-events .event-call-to-action > div {
-  width: 100%
+  width: 100%;
+  @include media-breakpoint-down(sm) {
+    //when this goes to full-width on mobile devices, give it some space on top
+    margin-top: 1rem;
+  }
 }
 
 //make sure the call to action buttons are as wide as the container div

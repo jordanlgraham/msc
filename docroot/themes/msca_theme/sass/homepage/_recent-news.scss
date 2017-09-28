@@ -27,15 +27,18 @@
   @extend .row;
 }
 
-//3 across on medium and up
-//2 across on small displays (with the third article hidden)
-//stacked
+//3 across on large displays and up
+//2 across on medium displays (with the third article hidden)
+//stacked on small displays and down
 .home-recent-news .views-row {
-  @extend .col-md-4;
-  @extend .col-sm-6;
+  @extend .col-lg-4;
+  @extend .col-md-6;
   @extend .col-12;
-  &:last-child {
-    @extend .hidden-sm-down;
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 2rem;
+  }
+  &:last-of-type {
+    @extend .hidden-md-down;
   }
 }
 
