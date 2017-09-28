@@ -3,6 +3,16 @@
   color: $blue;
 }
 
+.paragraph--type--map-and-contact {
+  //as far as I can tell, the Google Map is breaking the bootstrap grid, causing a horizontal scroll. So in this one
+  //instance, a .row will have no margin on the left and right. This section also has some special formatting where
+  //there is no padding on the left side, but on the right side (where the contact form is) we treat it as a .col-6
+  //in a .container (not .container-fluid). It's very confusing but it seems to be working okay without a bunch of
+  //hacks to the padding and margins of bootstrap, except for this one.
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .paragraph--type--map-and-contact .homepage-contact {
   padding-top: 2rem;
   padding-bottom: 2rem;
