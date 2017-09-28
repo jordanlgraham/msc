@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b322be44f248fb91d46c6e858a56c441",
+    "content-hash": "3909f7f3117fe605d0269615e9fc71f0",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3489,8 +3489,7 @@
             "homepage": "https://www.drupal.org/project/field_group",
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
-            },
-            "time": "2017-07-13T22:41:32+00:00"
+            }
         },
         {
             "name": "drupal/flag",
@@ -3703,7 +3702,8 @@
                 "source": "https://cgit.drupalcode.org/geocoder",
                 "issues": "https://drupal.org/project/issues/geocoder",
                 "irc": "irc://irc.freenode.org/drupal-geo"
-            }
+            },
+            "time": "2017-01-12 17:39:36"
         },
         {
             "name": "drupal/geofield",
@@ -5115,6 +5115,57 @@
             }
         },
         {
+            "name": "drupal/views_infinite_scroll",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/views_infinite_scroll",
+                "reference": "8.x-1.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/views_infinite_scroll-8.x-1.5.zip",
+                "reference": "8.x-1.5",
+                "shasum": "fa19d65a9f6421fe64463b8b64169c6f13d423c3"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.5",
+                    "datestamp": "1503109444",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Remon",
+                    "homepage": "https://www.drupal.org/user/143827"
+                },
+                {
+                    "name": "Sam152",
+                    "homepage": "https://www.drupal.org/user/1485048"
+                }
+            ],
+            "description": "A pager which allows an infinite scroll effect for views.",
+            "homepage": "https://www.drupal.org/project/views_infinite_scroll",
+            "support": {
+                "source": "http://cgit.drupalcode.org/views_infinite_scroll"
+            }
+        },
+        {
             "name": "drupal/xmlsitemap",
             "version": "1.0.0-alpha2",
             "source": {
@@ -6089,7 +6140,7 @@
             ],
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/phayes/geoPHP",
-            "time": "2016-03-04T05:42:29+00:00"
+            "time": "2016-03-04 05:42:29"
         },
         {
             "name": "phenx/php-font-lib",

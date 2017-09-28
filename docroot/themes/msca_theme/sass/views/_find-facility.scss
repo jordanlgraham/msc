@@ -1,0 +1,42 @@
+.facility-search-container {
+  @extend .container;
+  padding-top: $grid-gutter-width-base;
+  padding-bottom: $grid-gutter-width-base;
+}
+
+.facility-search-row {
+  @extend .row;
+}
+
+.facility-search-filters {
+  @extend .col-md-3;
+}
+
+.facility-search-results {
+  @extend .col-md-9;
+}
+
+.facility-search-filters label {
+  font-weight: bold;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.facility-search-filters select {
+  @extend .form-control;
+  width: 100%;
+}
+
+.facility-search-filters .form-actions {
+  position: relative;
+  margin-top: $grid-gutter-width-base;
+  &:after {
+    @extend %button-arrow-after;
+  }
+}
+
+.facility-search-filters .button {
+  @extend .btn;
+  @extend .btn-primary;
+  width: 100%;
+}
