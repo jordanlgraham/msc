@@ -19,7 +19,7 @@
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
           {% if content.field_resource_type|render %}
-              {# Display just the first one in case there are multiple categories. #}
+              {# Display just the first one in case there are multiple types. #}
               <h6>{{ content.field_resource_type.0 }}</h6>
           {% endif %}
           {{ content.body }}
