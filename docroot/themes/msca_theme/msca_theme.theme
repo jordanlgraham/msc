@@ -26,6 +26,13 @@ function msca_theme_preprocess_node(&$variables) {
     }
   }
 
+  if($variables['view_mode'] == 'newsletter'
+      && !empty($variables['content']['field_date'][0]['#markup'])) {
+      $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
+      $variables['content']['square_month'] = date('M', $field_date);
+      $variables['content']['square_day'] = date('j', $field_date);
+    }
+
 }
 
 /**

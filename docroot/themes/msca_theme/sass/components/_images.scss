@@ -2,3 +2,18 @@
   @extend .float-md-left;
 }
 
+.icon-square {
+  height: 5rem;
+  width: 5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+
+// Teaser icons
+.icon-square svg {
+  fill: $blue;
+}

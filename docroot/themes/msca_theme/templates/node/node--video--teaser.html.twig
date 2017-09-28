@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override to display a Video node teaser display.
+ *
+ */
+#}
+<article{{ attributes.addClass('pb-5') }}>
+
+  <div{{ content_attributes }}>
+      <div class="icon-square float-left">
+          {# It's important to render it as an svg so sass fill property can control color. #}
+          {{ source(directory ~ '/svg/youtube-play.svg') }}
+      </div>
+      <div class="video-teaser-title">
+          {# Render the content type this is #}
+          <h4>{{ node.type.entity.label }}</h4>
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+      </div>
+      <div class="video-thumbnail-text teaser-text">
+          {% if content.field_youtube_id|render %}
+              {% set youtube_thumbnail = 'http://img.youtube.com/vi/' ~ node.field_youtube_id.value  ~ '/1.jpg' %}
+              <img class="float-left mr-3" src="{{ youtube_thumbnail }}">
+          {% endif %}
+          {{ content.body }}
+          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      </div>
+
+  </div>
+
+</article>

@@ -31,9 +31,9 @@ content:
     region: content
   field_featured_article:
     weight: 1
-    label: above
+    label: hidden
     settings:
-      view_mode: newsletter
+      view_mode: teaser
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
@@ -42,7 +42,7 @@ content:
     weight: 2
     label: hidden
     settings:
-      view_mode: newsletter
+      view_mode: teaser
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view

@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Theme override to display a Newsroom node teaser display.
+ *
+ */
+#}
+<article{{ attributes.addClass('pb-5') }}>
+
+  <div{{ content_attributes }}>
+      <div class="icon-square float-left">
+          {# It's important to render it as an svg so sass fill property can control color. #}
+          {{ source(directory ~ '/svg/news.svg') }}
+      </div>
+      <div class="newsroom-teaser-text teaser-text">
+          {% if content.field_newsroom_category|render %}
+              {# Display just the first one in case there are multiple categories. #}
+              <h4>{{ content.field_newsroom_category.0 }}</h4>
+          {% endif %}
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {% if content.field_news_source|render %}
+              <h6>{{ content.field_news_source.text }}</h6>
+          {% endif %}
+          {{ content.body }}
+          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      </div>
+
+  </div>
+
+</article>
