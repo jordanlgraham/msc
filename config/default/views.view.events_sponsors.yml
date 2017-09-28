@@ -437,7 +437,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<h2 class=\"thin-heading sponsors\">Silver Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/news.svg\" /></div>"
+            value: "<h2 class=\"thin-heading sponsors\">Silver Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/logo-blue.svg\" /></div>"
             format: basic_html
           plugin_id: text
       pager:
@@ -507,7 +507,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: div
-          element_class: 'col-md-3 float-left'
+          element_class: 'col-md-2 float-left'
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -653,7 +653,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<h2 class=\"thin-heading sponsors\">Bronze Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/news.svg\" /></div>"
+            value: "<h2 class=\"thin-heading sponsors\">Bronze Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/logo-blue.svg\" /></div>"
             format: basic_html
           plugin_id: text
       pager:
@@ -1042,7 +1042,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: "<h2 class=\"thin-heading sponsors\">Gold Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/news.svg\" /></div>"
+            value: "<h2 class=\"thin-heading sponsors\">Gold Sponsors</h2>\n<div class=\"header-image sponsors\"><img src=\"/themes/msca_theme/svg/logo-blue.svg\" /></div>"
             format: basic_html
           plugin_id: text
       title: 'Event Sponsors'
