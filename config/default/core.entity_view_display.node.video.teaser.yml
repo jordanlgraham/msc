@@ -28,8 +28,16 @@ content:
       trim_length: 300
     third_party_settings: {  }
     region: content
-  links:
+  field_youtube_id:
+    type: string
     weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -42,4 +50,3 @@ hidden:
   field_related_content: true
   field_tags: true
   field_video_date: true
-  field_youtube_id: true

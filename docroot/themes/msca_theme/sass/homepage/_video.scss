@@ -15,9 +15,12 @@
 }
 
 .paragraph--type--video p {
-  color: #999;
+  //this is lighter than the design calls for, but it's much more readable.
+  color: $light-gray;
 }
 
-.paragraph--type--video iframe {
-  //width: 500px;
+//breathing room for the CTA
+.paragraph--type--video .btn {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }

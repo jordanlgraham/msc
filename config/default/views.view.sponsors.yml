@@ -207,7 +207,20 @@ display:
             value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius nulla pretium, sodales dolor et, maximus lacus. Integer feugiat ipsum a massa tincidunt sollicitudin.'
             format: basic_html
           plugin_id: text
-      footer: {  }
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<a href="/sponsors" class="btn btn-primary">View All Sponsors</a>'
+            format: full_html
+          plugin_id: text
       empty: {  }
       relationships: {  }
       arguments: {  }
