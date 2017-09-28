@@ -29,6 +29,14 @@ content:
       trim_length: 300
     third_party_settings: {  }
     region: content
+  field_resource_category:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -38,7 +46,6 @@ hidden:
   field_file: true
   field_gated: true
   field_related_content: true
-  field_resource_category: true
   field_resource_type: true
   field_tags: true
   links: true
