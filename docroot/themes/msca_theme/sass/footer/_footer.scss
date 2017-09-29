@@ -26,10 +26,12 @@
 // Footer menu
 .site-footer-left .navbar-nav {
   flex-direction: row;
+  flex-wrap: wrap;
   li {
     padding-right: $grid-gutter-width-base;
     a {
       color: $gray-text;
+      padding-right: 10px;
     }
   }
 }
