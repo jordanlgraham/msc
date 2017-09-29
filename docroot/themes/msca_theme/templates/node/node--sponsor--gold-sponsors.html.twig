@@ -20,7 +20,7 @@
 
       <div{{ content_attributes }}>
 
-        <div class="col-md-5 pull-left">
+        <div class="col-md-6 pull-left">
           <div class="sponsor-logo">
               {% if content.field_logo|render %}
                   {{ content.field_logo }}
@@ -41,7 +41,7 @@
               {% endif %}
           </div>
         </div>
-        <div class="col-md-7 pull-right">
+        <div class="col-md-6 pull-right">
             {% set text =  content.body|render|striptags %}
             {{ text|length > 200 ? text|slice(0, 200)|raw ~ '...' : text|raw }}
         </div>
