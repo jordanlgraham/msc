@@ -288,7 +288,6 @@ class OrgSync {
         }
         $facility_types = $this->typesToSync();
         foreach ($orgs['Result'] as $key => $org) {
-          //call GetFacadeObject
 
           // This API method doesn't allow filtering by facility type, so do it here.
           if (!in_array($org['org_ogt_code'], $facility_types)) {
