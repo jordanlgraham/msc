@@ -13,6 +13,7 @@ dependencies:
     - node
     - options
     - user
+    - views_infinite_scroll
 id: facility_search
 label: 'Facility Search'
 module: views
@@ -777,7 +778,7 @@ display:
         type: basic
         options:
           submit_button: Search
-          reset_button: true
+          reset_button: false
           reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -785,6 +786,28 @@ display:
           sort_desc_label: Desc
       defaults:
         exposed_form: false
+        pager: false
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 15
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Load More'
+            automatically_load_content: false
     cache_metadata:
       max-age: -1
       contexts:

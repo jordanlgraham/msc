@@ -8,6 +8,8 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
  * Implements hook_help().
@@ -62,6 +64,18 @@ function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, Ent
   //increase the length of the text summary to make up for all the white space.
   if($view_mode == 'homepage' && empty($build['field_news_teaser_image'][0])) {
     $build['body'][0]['#text_summary_trim_length'] = 600;
+  }
+
+
+  if($view_mode == 'teaser' && $entity->getType() == 'facility') {
+
+    // Facility websites are stored as text for some reason, so this converts them to a link
+    $website_field = $entity->get('field_customer_web_site');
+    if(!$website_field->isEmpty()) {
+      $uri = $website_field->getValue()[0]['value'];
+      $link = Link::fromTextAndUrl(t('Click Here'), Url::fromUri($uri));
+      $build['facility_link'] = $link->toRenderable();
+    }
   }
 }
 
