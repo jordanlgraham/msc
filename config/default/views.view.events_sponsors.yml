@@ -291,7 +291,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: div
-          element_class: 'col-md-3 float-left'
+          element_class: 'col-md-3 float-left logo-social'
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -507,7 +507,7 @@ display:
             preserve_tags: ''
             html: false
           element_type: div
-          element_class: 'col-md-2 float-left'
+          element_class: 'col-md-2 float-left logo-social'
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -521,7 +521,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_entity_view
           settings:
-            view_mode: silver_sponsor
+            view_mode: bronze_sponsors
           group_column: target_id
           group_columns: {  }
           group_rows: false
@@ -1029,7 +1029,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<p>We are grateful for the support of our sponsors, who''s generous support made this event possible. We encourage you to learn more bout them and engage with them on social media.</p>'
+            value: '<p>We are grateful for the support of our sponsors: their generous support made this event possible. We encourage you to learn more about them and engage with them on social media.</p>'
             format: basic_html
           plugin_id: text
         area:

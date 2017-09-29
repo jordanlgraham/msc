@@ -43,3 +43,21 @@
   padding-left: 75px;
   padding-right: 75px;
 }
+
+.sponsor-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.events-sponsors .col-md-2 {
+  flex: 0 0 20%;
+  max-width: 20%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+// Centers sponsor blocks regardless of how many per row.
+.events-sponsors .container .logo-social {
+  display: flex;
+  justify-content: center;
+}
