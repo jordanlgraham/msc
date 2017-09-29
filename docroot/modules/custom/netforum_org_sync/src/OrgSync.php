@@ -286,13 +286,18 @@ class OrgSync {
         if (empty($orgs['Result'])) {
           return 0;
         }
-        $i = 0;
         $facility_types = $this->typesToSync();
-        foreach ($orgs['Result'] as $key => $organization) {
+        foreach ($orgs['Result'] as $key => $org) {
+
           // This API method doesn't allow filtering by facility type, so do it here.
-          if (!in_array($organization['org_ogt_code'], $facility_types)) {
+          if (!in_array($org['org_ogt_code'], $facility_types)) {
             continue;
           }
+
+          //We need to get the GetFacadeObject version of this, which returns
+          //more fields than GetOrganizationChangesByDate. Silly, but necessary.
+          $organization = $this->getOrganization($org['org_cst_key']);
+
           $node = $this->loadOrCreateOrgNode($organization);
           $this->saveOrgNode($organization, $node);
           // Save some memory.
