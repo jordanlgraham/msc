@@ -47,11 +47,11 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
+          submit_button: Search
+          reset_button: true
+          reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
@@ -75,10 +75,12 @@ display:
       style:
         type: default
       row:
-        type: 'entity:node'
+        type: fields
         options:
-          relationship: none
-          view_mode: teaser
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       fields:
         field_ge:
           id: field_ge
@@ -142,71 +144,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: geolocation_field
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
         field_address:
           id: field_address
           table: node__field_address
@@ -269,6 +206,288 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_address_locality:
+          id: field_address_locality
+          table: node__field_address
+          field: field_address_locality
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          plugin_id: subdivision
+        field_address_postal_code:
+          id: field_address_postal_code
+          table: node__field_address
+          field: field_address_postal_code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          plugin_id: standard
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_ge_proximity:
+          proximity_source: filter
+          proximity_lat: ''
+          proximity_lng: ''
+          proximity_units: km
+          proximity_filter: field_ge_proximity
+          proximity_argument: ''
+          entity_id_argument: ''
+          boundary_filter: ''
+          proximity_geocoder: 0
+          proximity_geocoder_plugin_settings:
+            plugin_id: msc_geocoder
+          id: field_ge_proximity
+          table: node__field_ge
+          field: field_ge_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ','
+          format_plural: false
+          format_plural_string: "1\x03@count"
+          prefix: ''
+          suffix: ''
+          plugin_id: geolocation_field_proximity
+        rendered_entity:
+          id: rendered_entity
+          table: node
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: default
+          entity_type: node
+          plugin_id: rendered_entity
       filters:
         status:
           value: '1'
@@ -617,6 +836,49 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
+        combine:
+          id: combine
+          table: views
+          field: combine
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: combine_op
+            label: 'Search keys'
+            description: ''
+            use_operator: false
+            operator: combine_op
+            identifier: keys
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_author: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          fields:
+            field_address_locality: field_address_locality
+            field_address_postal_code: field_address_postal_code
+            title: title
+          plugin_id: combine
       sorts:
         field_ge_proximity:
           proximity_field: field_ge_proximity
@@ -681,6 +943,47 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.education_events.default'
+        - 'config:core.entity_view_display.node.education_events.homepage'
+        - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.teaser'
+        - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.teaser'
+        - 'config:core.entity_view_display.node.file_browser.default'
+        - 'config:core.entity_view_display.node.forum.default'
+        - 'config:core.entity_view_display.node.forum.teaser'
+        - 'config:core.entity_view_display.node.job_listings.default'
+        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.newsletter.default'
+        - 'config:core.entity_view_display.node.newsletter.email'
+        - 'config:core.entity_view_display.node.newsletter.teaser'
+        - 'config:core.entity_view_display.node.newsletter.text'
+        - 'config:core.entity_view_display.node.newsletter_article.default'
+        - 'config:core.entity_view_display.node.newsletter_article.homepage'
+        - 'config:core.entity_view_display.node.newsletter_article.newsletter'
+        - 'config:core.entity_view_display.node.newsletter_article.teaser'
+        - 'config:core.entity_view_display.node.newsroom.default'
+        - 'config:core.entity_view_display.node.newsroom.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.paragraph_assembler.default'
+        - 'config:core.entity_view_display.node.paragraph_assembler.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
+        - 'config:core.entity_view_display.node.scholarships.default'
+        - 'config:core.entity_view_display.node.scholarships.teaser'
+        - 'config:core.entity_view_display.node.sponsor.bronze_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.default'
+        - 'config:core.entity_view_display.node.sponsor.gold_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.newsletter'
+        - 'config:core.entity_view_display.node.sponsor.silver_sponsor'
+        - 'config:core.entity_view_display.node.sponsor.teaser'
+        - 'config:core.entity_view_display.node.vendor.default'
+        - 'config:core.entity_view_display.node.vendor.teaser'
+        - 'config:core.entity_view_display.node.video.default'
+        - 'config:core.entity_view_display.node.video.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
   attachment_1:
@@ -700,9 +1003,6 @@ display:
           geolocation_field: field_ge
           title_field: title
           centre:
-            fit_bounds:
-              enable: true
-              weight: 0
             first_row:
               enable: true
               weight: 0
@@ -717,6 +1017,9 @@ display:
               enable: false
               settings:
                 update_map: '0'
+            fit_bounds:
+              enable: true
+              weight: 0
           show_raw_locations: 0
           even_empty: 0
           context_popup_content: ''
@@ -754,15 +1057,79 @@ display:
           separator: ''
           hide_empty: false
           default_field_elements: true
+      pager:
+        type: infinite_scroll
+        options:
+          items_per_page: 15
+          offset: 0
+          id: 0
+          total_pages: null
+          tags:
+            previous: '‹ Previous'
+            next: 'Next ›'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          views_infinite_scroll:
+            button_text: 'Load More'
+            automatically_load_content: false
+      inherit_pager: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url
+        - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.education_events.default'
+        - 'config:core.entity_view_display.node.education_events.homepage'
+        - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.teaser'
+        - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.teaser'
+        - 'config:core.entity_view_display.node.file_browser.default'
+        - 'config:core.entity_view_display.node.forum.default'
+        - 'config:core.entity_view_display.node.forum.teaser'
+        - 'config:core.entity_view_display.node.job_listings.default'
+        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.newsletter.default'
+        - 'config:core.entity_view_display.node.newsletter.email'
+        - 'config:core.entity_view_display.node.newsletter.teaser'
+        - 'config:core.entity_view_display.node.newsletter.text'
+        - 'config:core.entity_view_display.node.newsletter_article.default'
+        - 'config:core.entity_view_display.node.newsletter_article.homepage'
+        - 'config:core.entity_view_display.node.newsletter_article.newsletter'
+        - 'config:core.entity_view_display.node.newsletter_article.teaser'
+        - 'config:core.entity_view_display.node.newsroom.default'
+        - 'config:core.entity_view_display.node.newsroom.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.paragraph_assembler.default'
+        - 'config:core.entity_view_display.node.paragraph_assembler.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
+        - 'config:core.entity_view_display.node.scholarships.default'
+        - 'config:core.entity_view_display.node.scholarships.teaser'
+        - 'config:core.entity_view_display.node.sponsor.bronze_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.default'
+        - 'config:core.entity_view_display.node.sponsor.gold_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.newsletter'
+        - 'config:core.entity_view_display.node.sponsor.silver_sponsor'
+        - 'config:core.entity_view_display.node.sponsor.teaser'
+        - 'config:core.entity_view_display.node.vendor.default'
+        - 'config:core.entity_view_display.node.vendor.teaser'
+        - 'config:core.entity_view_display.node.video.default'
+        - 'config:core.entity_view_display.node.video.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
   page_1:
@@ -778,15 +1145,18 @@ display:
         type: basic
         options:
           submit_button: Search
-          reset_button: false
+          reset_button: true
           reset_button_label: Clear
           exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
+          expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
       defaults:
         exposed_form: false
         pager: false
+        style: false
+        row: false
+        fields: false
       pager:
         type: infinite_scroll
         options:
@@ -808,6 +1178,423 @@ display:
           views_infinite_scroll:
             button_text: 'Load More'
             automatically_load_content: false
+      style:
+        type: default
+        options: {  }
+      row:
+        type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      fields:
+        field_ge:
+          id: field_ge
+          table: node__field_ge
+          field: field_ge
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: ''
+          type: geolocation_latlng
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: geolocation_field
+        field_address:
+          id: field_address
+          table: node__field_address
+          field: field_address
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: langcode
+          type: address_default
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_address_locality:
+          id: field_address_locality
+          table: node__field_address
+          field: field_address_locality
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          plugin_id: subdivision
+        field_address_postal_code:
+          id: field_address_postal_code
+          table: node__field_address
+          field: field_address_postal_code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          plugin_id: standard
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_ge_proximity:
+          proximity_source: filter
+          proximity_lat: ''
+          proximity_lng: ''
+          proximity_units: km
+          proximity_filter: field_ge_proximity
+          proximity_argument: ''
+          entity_id_argument: ''
+          boundary_filter: ''
+          proximity_geocoder: 0
+          proximity_geocoder_plugin_settings:
+            plugin_id: msc_geocoder
+          id: field_ge_proximity
+          table: node__field_ge
+          field: field_ge_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ','
+          format_plural: false
+          format_plural_string: "1\x03@count"
+          prefix: ''
+          suffix: ''
+          plugin_id: geolocation_field_proximity
+        rendered_entity:
+          id: rendered_entity
+          table: node
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: teaser
+          entity_type: node
+          plugin_id: rendered_entity
     cache_metadata:
       max-age: -1
       contexts:
@@ -818,5 +1605,46 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:core.entity_view_display.node.education_events.default'
+        - 'config:core.entity_view_display.node.education_events.homepage'
+        - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.teaser'
+        - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.teaser'
+        - 'config:core.entity_view_display.node.file_browser.default'
+        - 'config:core.entity_view_display.node.forum.default'
+        - 'config:core.entity_view_display.node.forum.teaser'
+        - 'config:core.entity_view_display.node.job_listings.default'
+        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.newsletter.default'
+        - 'config:core.entity_view_display.node.newsletter.email'
+        - 'config:core.entity_view_display.node.newsletter.teaser'
+        - 'config:core.entity_view_display.node.newsletter.text'
+        - 'config:core.entity_view_display.node.newsletter_article.default'
+        - 'config:core.entity_view_display.node.newsletter_article.homepage'
+        - 'config:core.entity_view_display.node.newsletter_article.newsletter'
+        - 'config:core.entity_view_display.node.newsletter_article.teaser'
+        - 'config:core.entity_view_display.node.newsroom.default'
+        - 'config:core.entity_view_display.node.newsroom.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.paragraph_assembler.default'
+        - 'config:core.entity_view_display.node.paragraph_assembler.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
+        - 'config:core.entity_view_display.node.scholarships.default'
+        - 'config:core.entity_view_display.node.scholarships.teaser'
+        - 'config:core.entity_view_display.node.sponsor.bronze_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.default'
+        - 'config:core.entity_view_display.node.sponsor.gold_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.newsletter'
+        - 'config:core.entity_view_display.node.sponsor.silver_sponsor'
+        - 'config:core.entity_view_display.node.sponsor.teaser'
+        - 'config:core.entity_view_display.node.vendor.default'
+        - 'config:core.entity_view_display.node.vendor.teaser'
+        - 'config:core.entity_view_display.node.video.default'
+        - 'config:core.entity_view_display.node.video.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
