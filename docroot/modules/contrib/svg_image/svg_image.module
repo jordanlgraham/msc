@@ -42,7 +42,8 @@ function svg_image_get_image_file_dimensions(File $file) {
     $variables['height'] = $image->getHeight();
   }
   else {
-    $variables['width'] = $variables['height'] = NULL;
+    // Set default width and height values.
+    $variables['width'] = $variables['height'] = 64;
     // We can find out only dimensions of the SVG files.
     if (svg_image_is_file_svg($file)) {
       // Parse SVG as XML.

@@ -27,6 +27,9 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->storage = new FilteredStorage($this->storage, [new TransparentFilter()]);
   }
 
+  /**
+   * Test that the storage is set on the filters.
+   */
   public function testSettingStorages() {
     $filterReflection = new \ReflectionClass(FilteredStorage::class);
     $filtersProperty = $filterReflection->getProperty('filters');
@@ -41,7 +44,7 @@ class FilteredStorageTest extends CachedStorageTest {
       $this->assertInstanceOf(ReadOnlyStorage::class, $readonly);
       $readonlyReflection = new \ReflectionClass(ReadOnlyStorage::class);
       $storageProperty = $readonlyReflection->getProperty('storage');
-      $storageProperty->setAccessible(true);
+      $storageProperty->setAccessible(TRUE);
       $source = $storageProperty->getValue($readonly);
       $this->assertInstanceOf(CachedStorage::class, $source);
 
@@ -51,6 +54,8 @@ class FilteredStorageTest extends CachedStorageTest {
   }
 
   /**
+   * Test the read methods invokes the correct filter methods.
+   *
    * @dataProvider readFilterProvider
    */
   public function testReadFilter($name, $storageMethod, $filterMethod, $data, $expected) {
@@ -67,7 +72,11 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->assertEquals($expected, $storage->$storageMethod($name));
   }
 
+  /**
+   * Data provider for testReadFilter.
+   */
   public function readFilterProvider() {
+    // @codingStandardsIgnoreStart
     return [
       [$this->randomString(), 'exists', 'filterExists', TRUE, TRUE],
       [$this->randomString(), 'exists', 'filterExists', TRUE, FALSE],
@@ -101,9 +110,12 @@ class FilteredStorageTest extends CachedStorageTest {
         ['a' . $this->randomString(), 'b' . $this->randomString()],
       ],
     ];
+    // @codingStandardsIgnoreEnd
   }
 
   /**
+   * Test the write method invokes the filterWrite in filters.
+   *
    * @dataProvider writeFilterProvider
    */
   public function testWriteFilter($interim, $expected, $exists = TRUE) {
@@ -133,6 +145,9 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->assertTrue($storage->write($name, $data));
   }
 
+  /**
+   * Data provider for testWriteFilter.
+   */
   public function writeFilterProvider() {
     return [
       [$this->randomArray(), $this->randomArray()],
@@ -145,6 +160,8 @@ class FilteredStorageTest extends CachedStorageTest {
   }
 
   /**
+   * Test the delete method invokes the filterDelete in filters.
+   *
    * @dataProvider deleteFilterProvider
    */
   public function testDeleteFilter($interim, $expected) {
@@ -167,6 +184,9 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->assertEquals($expected, $storage->delete($name));
   }
 
+  /**
+   * Data provider for testDeleteFilter.
+   */
   public function deleteFilterProvider() {
     return [
       [TRUE, TRUE],
@@ -177,6 +197,8 @@ class FilteredStorageTest extends CachedStorageTest {
   }
 
   /**
+   * Test the rename method invokes the filterRename in filters.
+   *
    * @dataProvider renameFilterProvider
    */
   public function testRenameFilter($interim, $expected) {
@@ -200,6 +222,9 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->assertEquals($expected, $storage->rename($name, $name2));
   }
 
+  /**
+   * Data provider for testRenameFilter.
+   */
   public function renameFilterProvider() {
     return [
       [TRUE, TRUE],
@@ -210,6 +235,8 @@ class FilteredStorageTest extends CachedStorageTest {
   }
 
   /**
+   * Test the deleteAll method invokes the filterDeleteAll in filters.
+   *
    * @dataProvider deleteAllFilterProvider
    */
   public function testDeleteAllFilter($interim, $expected) {
@@ -239,6 +266,9 @@ class FilteredStorageTest extends CachedStorageTest {
     $this->assertTrue($storage->deleteAll($name));
   }
 
+  /**
+   * Data provider for testDeleteAllFilter.
+   */
   public function deleteAllFilterProvider() {
     return [
       [TRUE, TRUE],
@@ -248,6 +278,9 @@ class FilteredStorageTest extends CachedStorageTest {
     ];
   }
 
+  /**
+   * Prophesize a StorageFilter.
+   */
   protected function prophesizeFilter() {
     $filter = $this->prophesize(StorageFilterInterface::class);
     $filter->setSourceStorage(Argument::type(ReadOnlyStorage::class))->shouldBeCalledTimes(1);
@@ -255,6 +288,9 @@ class FilteredStorageTest extends CachedStorageTest {
     return $filter;
   }
 
+  /**
+   * Create a random array.
+   */
   protected function randomArray($size = 4) {
     return (array) $this->randomObject($size);
   }

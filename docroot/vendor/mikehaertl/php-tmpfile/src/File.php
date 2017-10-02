@@ -28,7 +28,7 @@ class File
      *
      * @param string $content the tmp file content
      * @param string|null $suffix the optional suffix for the tmp file
-     * @param string|null $suffix the optional prefix for the tmp file. If null 'php_tmpfile_' is used.
+     * @param string|null $prefix the optional prefix for the tmp file. If null 'php_tmpfile_' is used.
      * @param string|null $directory directory where the file should be created. Autodetected if not provided.
      */
     public function __construct($content, $suffix = null, $prefix = null, $directory = null)
@@ -64,21 +64,26 @@ class File
      * Send tmp file to client, either inline or as download
      *
      * @param string|null $filename the filename to send. If empty, the file is streamed inline.
-     * @param string the Content-Type header
+     * @param string $contentType the Content-Type header
      * @param bool $inline whether to force inline display of the file, even if filename is present.
      */
-    public function send($name = null, $contentType, $inline = false)
+    public function send($filename = null, $contentType, $inline = false)
     {
         header('Pragma: public');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Content-Type: '.$contentType);
         header('Content-Transfer-Encoding: binary');
-        header('Content-Length: '.filesize($this->_fileName));
 
-        if ($name!==null || $inline) {
+        // #84: Content-Length leads to "network connection was lost" on iOS
+        $isIOS = preg_match('/i(phone|pad|pod)/i', $_SERVER['HTTP_USER_AGENT']);
+        if (!$isIOS) {
+            header('Content-Length: '.filesize($this->_fileName));
+        }
+
+        if ($filename!==null || $inline) {
             $disposition = $inline ? 'inline' : 'attachment';
-            header("Content-Disposition: $disposition; filename=\"$name\"");
+            header("Content-Disposition: $disposition; filename=\"$filename\"");
         }
 
         readfile($this->_fileName);
