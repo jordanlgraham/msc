@@ -2,7 +2,7 @@ description: 'Generate field type, widget and formatter plugins.'
 help: 'The <info>generate:plugin:field</info> command helps you generate a full set of field plugin: field type, field formatter and field widget.'
 welcome: 'Welcome to the Drupal Field Plugin generator'
 options:
-  module: common.options.module
+  module: 'The Module name.'
   type-class: 'Field type plugin class name'
   type-label: 'Field type plugin label'
   type-plugin-id: 'Field type plugin id'
@@ -17,7 +17,7 @@ options:
   default-widget: 'Default field widget of the field type plugin'
   default-formatter: 'Default field formatter of field type plugin'
 questions:
-  module: common.questions.module
+  module: 'Enter the module name'
   type-class: 'Field type plugin class name'
   type-label: 'Enter the field type plugin label'
   type-plugin-id: 'Enter the field type plugin id'
@@ -31,6 +31,8 @@ questions:
   field-type: 'Enter the field type the formatter and widget plugin can be used with'
   default-widget: 'Enter the default field widget of the field type plugin'
   default-formatter: 'Enter the default field formatter of field type plugin'
+suggestions:
+  my-field-type: 'My Field Type'
 examples:
   - description: 'Generate field type, widget and formatter plugins specifying the module name, the type (class, label, plugin id and description), the formatter (class, label, plugin id) and the widget (class, label and plugin id)'
     execution: |

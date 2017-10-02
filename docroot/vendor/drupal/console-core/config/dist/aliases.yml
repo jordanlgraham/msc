@@ -8,8 +8,6 @@ commands:
       - cre
     cron:release:
       - crr
-    database:log:clear:
-      - dbc
     debug:module:
       - mod
     debug:multisite:
@@ -28,10 +26,14 @@ commands:
       - uslca
     user:login:url:
       - usli
+      - uli
     user:password:hash:
       - usph
     user:password:reset:
       - upsr
     views:disable:
       - vdi
-
+    cache:rebuild:
+      - cc
+    update:execute:
+      - updb
