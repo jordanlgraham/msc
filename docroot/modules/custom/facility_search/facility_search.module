@@ -57,6 +57,16 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function facility_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if($form_id == 'user_login_form' ) {
+    $form['name']['#placeholder'] = t('Username');
+    $form['pass']['#placeholder'] = t('Password');
+  }
+}
+
+/**
  * Implements hook_geocoder_provider_info_alter().
 */
 function facility_search_geocoder_provider_info_alter(&$providers) {

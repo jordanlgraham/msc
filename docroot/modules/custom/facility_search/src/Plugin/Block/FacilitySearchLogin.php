@@ -48,13 +48,13 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
 
   public function build() {
     $build = [];
-
+    $build['#prefix'] = '<div class="facility-and-login container"><div class="row">';
+    $build['#suffix'] = '</div></div>';
     $build['status_messages'] = [
       '#type' => 'status_messages',
     ];
-
     $build['facility_search'] = [
-      '#prefix' => '<div class="facility-search search-login-section">',
+      '#prefix' => '<div class="facility-search search-login-section col-12 col-md-6">',
       'header' => [
         '#type' => 'markup',
         '#markup' => '<h3>' . $this->t('Find A Member Facility Nearby')  . '</h3>',
@@ -71,21 +71,21 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
     ];
 
     $build['login'] = [
-      '#prefix' => '<div class="login search-login-section">',
+      '#prefix' => '<div class="login search-login-section col-12 col-md-6">',
       '#suffix' => '</div>',
     ];
 
     if ($this->currentUser->isAuthenticated()) {
       $build['login']['content'] = [
         '#type' => 'markup',
-        '#markup' => '<p>' . t('You are currently logged in.') . '</p>',
+        '#markup' => '<h3>' . $this->t('Member Login') . '</h3><p>' . t('You are currently logged in.') . '</p>',
       ];
     }
     else {
       $build['login']['content'] = [
         'header' => [
           '#type' => 'markup',
-          '#markup' => $this->t('Member Login'),
+          '#markup' => '<h3>' . $this->t('Member Login') . '</h3>',
         ],
         'form' => $this->formBuilder->getForm(\Drupal\user\Form\UserLoginForm::class),
         'links' => [

@@ -29,6 +29,8 @@ class SimpleFacilitySearch extends FormBase {
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Search'),
+      '#prefix' => '<div class="facility-search-submit">',
+      '#suffix' => '</div>',
     ];
 
     return $form;
