@@ -1,0 +1,102 @@
+#block-findafacilityuserlogin {
+  background-color: $dark-blue;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+#block-findafacilityuserlogin h3 {
+  @extend .line-heading;
+  color: $white;
+  text-align: center;
+}
+#block-findafacilityuserlogin h3:before,
+#block-findafacilityuserlogin h3:after {
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+  background-color: $white;
+}
+#block-findafacilityuserlogin h3:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+#block-findafacilityuserlogin h3:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+#block-findafacilityuserlogin .facility-search-simple .form-text,
+#block-findafacilityuserlogin .search-login-section .form-text {
+  border-radius: 0;
+  border-width: 0;
+  border-bottom: 3px solid $blue;
+  height: 44px;
+  margin-top: 0;
+
+}
+
+.facility-search-simple {
+  display: flex;
+}
+
+.facility-search-simple .facility-search-submit {
+  @extend .btn;
+  padding: 0;
+}
+
+.facility-search-simple .facility-search-submit input,
+#block-findafacilityuserlogin .user-login-form .form-actions input{
+  background-color: $blue;
+  color: $white;
+  border: none;
+  padding: .7rem 3rem .7rem 1rem;
+  text-transform: uppercase;
+}
+
+.search-login-section p {
+  text-align: center;
+  color: $white;
+}
+
+#block-findafacilityuserlogin .bottom-link {
+  text-align: right;
+  margin-top: .5rem;
+}
+#block-findafacilityuserlogin .bottom-link a {
+  color: $white;
+  font-weight: normal;
+}
+
+#block-findafacilityuserlogin .search-login-section .links {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#block-findafacilityuserlogin .search-login-section .links li {
+  display: inline-block;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  &:first-of-type {
+    border-right: 1px solid $white;
+  }
+}
+
+#block-findafacilityuserlogin .user-login-form .form-item {
+  margin-right: 1rem;
+}
+
+//we just want to show the placeholders in this context.
+#block-findafacilityuserlogin .user-login-form label,
+#block-findafacilityuserlogin .user-login-form .description {
+  @extend .visually-hidden;
+}
+#block-findafacilityuserlogin .user-login-form {
+  display: flex;
+}
+
+#block-findafacilityuserlogin .user-login-form .form-actions {
+  @extend .btn;
+  padding: 0;
+}
