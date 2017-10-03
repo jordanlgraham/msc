@@ -19,14 +19,6 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
   // Hide the "keys" filter.
   $form['keys']['#type'] = 'hidden';
 
-  // Turn the proximity filter into a dropdown.
-  $form['proximity']['#type'] = 'select';
-  $form['proximity']['#size'] = 1;
-  $form['proximity']['#empty_option'] = t('-Distance-');
-  for ($i = 1; $i < 21; $i++) {
-    $form['proximity']['#options'][$i*5] = $i*5 . ' miles';
-  }
-
   // Turn the city filter into a dropdown.
   $cities = \Drupal::database()->select('node__field_address', 'address')
     ->fields('address', ['field_address_locality'])
