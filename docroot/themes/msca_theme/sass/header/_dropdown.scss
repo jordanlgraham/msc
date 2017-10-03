@@ -95,7 +95,11 @@ ul.menu-level-3 {
   display: none;
   left: 100%;
   bottom: 0;
-  top: unset;
+  top: 0;
+  @include media-breakpoint-up(md) {
+    //I went 6 months in this project without using !important once, so I think I'm allowed one.
+    flex-direction: column !important;
+  }
 }
 
 .navbar-nav ul.menu-level-2 > li:hover > a {
