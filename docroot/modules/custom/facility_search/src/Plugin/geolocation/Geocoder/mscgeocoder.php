@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\geolocation\GeocoderBase;
 use Geocoder\Model\AddressCollection;
+use Drupal\Core\Config\Config;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\geocoder\GeocoderInterface;
 
@@ -25,8 +26,8 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
   /** @var GeocoderInterface */
   protected $geocoder;
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, GeocoderInterface $geocoder) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Config $config, GeocoderInterface $geocoder) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $config);
     $this->geocoder = $geocoder;
   }
 
@@ -36,14 +37,12 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
       $configuration,
       $plugin_id,
       $plugin_definition,
+      $container->get('config.factory')->get('geolocation.settings'),
       $container->get('geocoder')
     );
   }
 
   public function formAttachGeocoder(array &$render_array, $element_name) {
-    $proximity = $render_array['proximity'];
-    unset($render_array['proximity']);
-
     $render_array['geocode_postal'] = array(
       '#type' => 'textfield',
       '#title' => t('Zip Code'),
@@ -54,7 +53,17 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
       '#default_value' => 1,
     );
 
-    $render_array['proximity'] = $proximity;
+    $options = [];
+    for ($i = 1; $i < 21; $i++) {
+      $options[$i*5] = $this->t('@num miles', ['@num' => $i*5]);
+    }
+
+    $render_array['proximity'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Proximity'),
+      '#empty_option' => $this->t('-Distance-'),
+      '#options' => $options,
+    );
   }
 
   /**
