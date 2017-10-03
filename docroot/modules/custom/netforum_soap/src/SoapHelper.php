@@ -38,4 +38,17 @@ class SoapHelper {
       }
     }
   }
+
+  /*
+   * A helper function that validates a url received from a NetForum SOAP
+   * transaction before
+   */
+  public static function checkURLValidity($url) {
+    if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+      return '';
+    }
+    else {
+      return $url;
+    }
+  }
 }

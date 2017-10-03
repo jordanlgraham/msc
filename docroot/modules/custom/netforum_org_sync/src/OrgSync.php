@@ -151,9 +151,9 @@ class OrgSync {
     $node->email = ''; //not in GetFacadeObject
     $node->field_phone = SoapHelper::cleanSoapField($organization['phn_number_complete']);; //not in GetFacadeObject
     $node->field_web_address = SoapHelper::cleanSoapField($organization['cst_web_site']);
-    $node->field_facebook = SoapHelper::cleanSoapField($organization['cel_facebook_name']);//  Link
-    $node->field_linkedin = SoapHelper::cleanSoapField($organization['cel_linkedin_name']);//  Link
-    $node->field_twitter = SoapHelper::cleanSoapField($organization['cel_twitter_name']);//  Link
+    $node->field_facebook = SoapHelper::checkURLValidity($organization['cel_facebook_name']);//  Link
+    $node->field_linkedin = SoapHelper::checkURLValidity($organization['cel_linkedin_name']);//  Link
+    $node->field_twitter = SoapHelper::checkURLValidity($organization['cel_twitter_name']);//  Link
     $node->field_customer_key = SoapHelper::cleanSoapField($organization['org_cst_key']);//  Text (plain)
 
     //fields specific to facility nodes
@@ -162,7 +162,7 @@ class OrgSync {
       $node->field_customer_fax_number = SoapHelper::cleanSoapField($organization['fax_number']);// Text (plain)
       $node->field_customer_phone_number = SoapHelper::cleanSoapField($organization['phn_number_complete']);// Text (plain)
       $node->field_customer_type = SoapHelper::cleanSoapField($organization['cst_type'], 'array');// List (text)
-      $node->field_customer_web_site = SoapHelper::cleanSoapField($organization['cst_web_site']);// Text (plain)
+      $node->field_customer_web_site = SoapHelper::checkURLValidity($organization['cst_web_site']);// Text (plain)
       $node->field_languages_spoken = SoapHelper::cleanSoapField($organization['org_custom_text_08'], 'array');//  List (text)
       $node->field_licensed_nursing_facility_ = SoapHelper::cleanSoapField($organization['org_custom_integer_10']);//  Number (integer)
       $node->field_medicaid = SoapHelper::cleanSoapField($organization['org_custom_flag_05'], 'boolean');//  Boolean
