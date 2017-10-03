@@ -73,12 +73,12 @@
 
 {# if the field_news_release_date is populated, load that. Otherwise, load the standard authored on date#}
 {% if content.field_news_release_date|render %}
-    {% set month = content.field_news_release_date|format_date('short_month') %}
-    {% set day = content.field_news_release_date|format_date('day') %}
+    {#{% set month = content.field_news_release_date|format_date('short_month') %}#}
+    {#{% set day = content.field_news_release_date|format_date('day') %}#}
 {% else %}
     {# It's safe to assume this field will exist, so no defensive needed. #}
-    {% set month = node.createdtime|format_date('short_month') %}
-    {% set day = node.createdtime|format_date('day') %}
+    {#{% set month = node.createdtime|format_date('short_month') %}#}
+    {#{% set day = node.createdtime|format_date('day') %}#}
 {% endif %}
 
 <article{{ attributes.addClass(container) }}>
@@ -94,10 +94,12 @@
     <div{{ content_attributes }}>
         {% if content.field_news_teaser_image|render %}
             <div class="news-date-with-image">
-                <div class="date-square">
-                    <div class="date-square-month">{{ month }}</div>
-                    <div class="date-square-day">{{ day }}</div>
-                </div>
+                {% if content.square_month|render and content.square_day|render %}
+                    <div class="date-square">
+                        <div class="date-square-month">{{ content.square_month }}</div>
+                        <div class="date-square-day">{{ content.square_day }}</div>
+                    </div>
+                {% endif %}
                 {{ content.field_news_teaser_image }}
             </div>
             <div>
@@ -112,8 +114,8 @@
         {% else %}
             <div class="news-date-without-image">
                 <div class="date-square">
-                    <div class="date-square-month">{{ month }}</div>
-                    <div class="date-square-day">{{ day }}</div>
+                    <div class="date-square-month">{{ content.square_month }}</div>
+                    <div class="date-square-day">{{ content.square_day }}</div>
                 </div>
                 {{ title_prefix }}
                 {% if not page %}

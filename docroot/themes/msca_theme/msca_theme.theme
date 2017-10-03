@@ -14,24 +14,31 @@ function msca_theme_preprocess_node(&$variables) {
   //Upcoming Education and Events section needs field_date and field_end_date to
   //appear in a couple different formats.
 
-  if($variables['view_mode'] == 'homepage'
-    && !empty($variables['content']['field_date'][0]['#markup'])) {
-    $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
-    $variables['content']['square_month'] = date('M', $field_date);
-    $variables['content']['square_day'] = date('j', $field_date);
-    $variables['content']['full_start_date'] = date('F j \a\t g:iA', $field_date);
-    if(!empty($variables['content']['field_end_date'][0]['#markup'])) {
-      $field_end_date = strtotime($variables['content']['field_end_date'][0]['#markup']);
-      $variables['content']['full_end_date'] = date('F j \a\t g:iA', $field_end_date);
+  if($variables['view_mode'] == 'homepage') {
+    if(!empty($variables['content']['field_date'][0]['#markup'])) {
+      $date_field = $variables['content']['field_date'][0]['#markup'];
+    }
+    elseif(!empty($variables['content']['field_news_release_date'])) {
+      $date_field = $variables['content']['field_news_release_date'];
+    }
+    if(!empty($date_field)) {
+      $field_date = strtotime($date_field);
+      $variables['content']['square_month'] = date('M', $field_date);
+      $variables['content']['square_day'] = date('j', $field_date);
+      $variables['content']['full_start_date'] = date('F j \a\t g:iA', $field_date);
+      if (!empty($variables['content']['field_end_date'][0]['#markup'])) {
+        $field_end_date = strtotime($variables['content']['field_end_date'][0]['#markup']);
+        $variables['content']['full_end_date'] = date('F j \a\t g:iA', $field_end_date);
+      }
     }
   }
 
   if($variables['view_mode'] == 'newsletter'
-      && !empty($variables['content']['field_date'][0]['#markup'])) {
-      $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
-      $variables['content']['square_month'] = date('M', $field_date);
-      $variables['content']['square_day'] = date('j', $field_date);
-    }
+    && !empty($variables['content']['field_date'][0]['#markup'])) {
+    $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
+    $variables['content']['square_month'] = date('M', $field_date);
+    $variables['content']['square_day'] = date('j', $field_date);
+  }
 
 }
 
