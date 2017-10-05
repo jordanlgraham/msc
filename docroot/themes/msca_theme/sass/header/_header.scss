@@ -27,6 +27,18 @@ header.container-fluid {
   z-index: 99; // so dropdown menus aren't hidden
 }
 
+//basic fixed header
+header.container-fluid {
+  background-color: $white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+body {
+  margin-top: 94px;
+}
+
 header .navbar-collapse > div {
   display: flex;
   flex-wrap: wrap;
