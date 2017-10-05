@@ -28,7 +28,7 @@ content:
     settings:
       set_marker: '1'
       title: 'Massachusetts Senior Care'
-      info_text: "<div class=\"map-address\">800 South Street - Suite 280<br />\nWaltham, MA 02453<br />\n<a href=\"/\">Directions/Parking</a>\n</div>\n<br /><a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a><br />\n+1 (617) 558-0202<br />\n+1 (800) CARE-FOR<br />\nFax (617) 558-3546"
+      info_text: "<div class=\"location-content\">\n  <div class=\"map-address\">800 South Street - Suite 280<br>\nWaltham, MA 02453<br>\n<a href=\"/\">Directions/Parking</a>\n</div>\n<br>\n  <table>\n    <tbody>\n      <tr>\n        <td><i class=\"fa fa-envelope-o\" aria-hidden=\"true\"></i></td>\n        <td><a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a></td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-phone\" aria-hidden=\"true\"></i></td>\n        <td>+1 (617) 558-0202<br>\n            +1 (800) CARE-FOR</td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-fax\" aria-hidden=\"true\"></i></td>\n        <td>Fax (617) 558-3546</td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
       google_map_settings:
         height: 750px
         width: 100%

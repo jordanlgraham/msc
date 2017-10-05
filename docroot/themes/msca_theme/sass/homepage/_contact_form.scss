@@ -93,3 +93,9 @@
   @extend .btn-secondary;
   width: 100%;
 }
+
+//Styles for the Google Maps info window.
+.paragraph--type--map-and-contact .homepage-map h2 {
+  text-transform: initial;
+  color: $blue;
+}
