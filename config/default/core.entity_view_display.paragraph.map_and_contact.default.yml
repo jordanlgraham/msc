@@ -28,7 +28,7 @@ content:
     settings:
       set_marker: '1'
       title: 'Massachusetts Senior Care'
-      info_text: "<a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a><br />\n+1 (617) 558-0202<br />\n+1 (800) CARE-FOR<br />\nFax (617) 558-3546"
+      info_text: "<div class=\"map-address\">800 South Street - Suite 280<br />\nWaltham, MA 02453<br />\n<a href=\"/\">Directions/Parking</a>\n</div>\n<br /><a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a><br />\n+1 (617) 558-0202<br />\n+1 (800) CARE-FOR<br />\nFax (617) 558-3546"
       google_map_settings:
         height: 750px
         width: 100%
