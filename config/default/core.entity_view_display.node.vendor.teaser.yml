@@ -33,6 +33,7 @@ hidden:
   field_address: true
   field_contact: true
   field_contact_title: true
+  field_customer_key: true
   field_email: true
   field_facebook: true
   field_gated: true
