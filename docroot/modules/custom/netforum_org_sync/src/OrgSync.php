@@ -63,7 +63,7 @@ class OrgSync {
     else {
       $organizations = $this->getOrganizations();
     }
-    if ($organizations) {
+    if ($organizations && is_array($organizations)) {
       foreach ($organizations as $cst_key => $organization) {
         $node = $this->loadOrCreateOrgNode($organization);
         $saved_node = $this->saveOrgNode($organization, $node);
@@ -147,7 +147,7 @@ class OrgSync {
     $node->field_address->address_line2 = SoapHelper::cleanSoapField($organization['adr_line2']);
 
     //todo: find these in API
-    $node->field_contact = '';
+    $node->field_contact = SoapHelper::cleanSoapField($this->getIndividual($organization['con__cst_key']));
     $node->email = ''; //not in GetFacadeObject
     $node->field_phone = SoapHelper::cleanSoapField($organization['phn_number_complete']);; //not in GetFacadeObject
     $node->field_web_address = SoapHelper::cleanSoapField($organization['cst_web_site']);
@@ -244,7 +244,7 @@ class OrgSync {
 
     $orgs = array();
     foreach ($facility_cst_keys as $cst_key) {
-      if ($org = $this->getOrganization($cst_key)) {
+      if ($org = $this->getObject($cst_key)) {
         $orgs[$cst_key] = $org;
       }
     }
@@ -296,7 +296,7 @@ class OrgSync {
 
           //We need to get the GetFacadeObject version of this, which returns
           //more fields than GetOrganizationChangesByDate. Silly, but necessary.
-          $organization = $this->getOrganization($org['org_cst_key']);
+          $organization = $this->getObject($org['org_cst_key']);
 
           $node = $this->loadOrCreateOrgNode($organization);
           $this->saveOrgNode($organization, $node);
@@ -316,11 +316,30 @@ class OrgSync {
     }
   }
 
-  public function getOrganization($cst_key) {
+  private function getIndividual($cst_key) {
+    if (empty($cst_key)) {
+      return '';
+    }
+    $record = $this->getObject($cst_key, 'individual');
+    $name = '';
+    if ($record && !empty($record['ind_full_name_cp'])) {
+      $name = $record['ind_full_name_cp'];
+    }
+    return $name;
+  }
+
+  public function getObject($cst_key, $object_type = 'organization') {
     $params = array(
       'szObjectKey' => $cst_key,
-      'szObjectName' => 'organization',
+      'szObjectName' => $object_type,
     );
+    $schemas = [
+      'organization' => 'http://www.avectra.com/OnDemand/2005/ Organization.xsd',
+      'individual' => 'http://www.avectra.com/OnDemand/2005/ Individual.xsd'
+    ];
+    if (!isset($schemas[$object_type])) {
+      return FALSE;
+    }
     $responseHeaders = $this->get_client->getResponseHeaders();
 
     try {
@@ -333,7 +352,7 @@ class OrgSync {
           //this is silly code that fixes an issue where the xsi namespace is incorrectly set to an invalid URL.
           //for simplicity's sake, we're simply removing all references to the namespace since the xml is still valid
           //without it.
-          $xmlstring = str_replace(' xsi:schemaLocation="http://www.avectra.com/OnDemand/2005/ Organization.xsd"', '', $response->GetFacadeObjectResult->any);
+          $xmlstring = str_replace(' xsi:schemaLocation="' . $schemas[$object_type] . '"', '', $response->GetFacadeObjectResult->any);
           $xmlstring = str_replace('xsi:nil="true"', '', $xmlstring);
 
           $xml = simplexml_load_string($xmlstring);
@@ -351,8 +370,8 @@ class OrgSync {
       }
 
     } catch (Exception $e) {
-      $this->logger->error('Unable to retrieve organization @key from Netforum. Error: @err',
-        ['@key' => $cst_key, '@err' => $e->getMessage()]);
+      $this->logger->error('Unable to retrieve @type @key from Netforum. Error: @err',
+        ['@type' => $object_type, '@key' => $cst_key, '@err' => $e->getMessage()]);
     }
   }
 
