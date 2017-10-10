@@ -15,14 +15,12 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
-    - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
     - node.type.vendor
   module:
     - address
     - button_link
     - link
-    - svg_image
     - user
 id: node.vendor.default
 targetEntityType: node
@@ -126,15 +124,6 @@ content:
       rel: '0'
     third_party_settings: {  }
     type: link
-    region: content
-  field_vendor_image:
-    weight: 11
-    label: hidden
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
     region: content
   field_web_address:
     weight: 3

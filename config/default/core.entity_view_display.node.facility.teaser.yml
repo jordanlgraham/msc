@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.facility.field_address
     - field.field.node.facility.field_administrator
+    - field.field.node.facility.field_contact
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
@@ -13,7 +14,6 @@ dependencies:
     - field.field.node.facility.field_customer_type
     - field.field.node.facility.field_customer_web_site
     - field.field.node.facility.field_facebook
-    - field.field.node.facility.field_facility_image
     - field.field.node.facility.field_ge
     - field.field.node.facility.field_languages_spoken
     - field.field.node.facility.field_licensed_nursing_facility_
@@ -82,11 +82,11 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_administrator: true
+  field_contact: true
   field_customer_id: true
   field_customer_key: true
   field_customer_type: true
   field_facebook: true
-  field_facility_image: true
   field_ge: true
   field_languages_spoken: true
   field_linkedin: true
