@@ -15,16 +15,13 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
-    - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
-    - image.style.thumbnail
     - node.type.vendor
   module:
     - address
     - field_group
     - link
     - path
-    - svg_image
 third_party_settings:
   field_group:
     group_netforum_data_auto_synchro:
@@ -171,14 +168,6 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
-    region: content
-  field_vendor_image:
-    weight: 3
-    settings:
-      preview_image_style: thumbnail
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: image_image
     region: content
   field_web_address:
     weight: 6

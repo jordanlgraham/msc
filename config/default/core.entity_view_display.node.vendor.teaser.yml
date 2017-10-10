@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.vendor.field_address
     - field.field.node.vendor.field_contact
     - field.field.node.vendor.field_contact_title
+    - field.field.node.vendor.field_customer_key
     - field.field.node.vendor.field_email
     - field.field.node.vendor.field_facebook
     - field.field.node.vendor.field_gated
@@ -15,7 +16,6 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
-    - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
     - node.type.vendor
   module:
@@ -41,6 +41,5 @@ hidden:
   field_phone: true
   field_primary_services: true
   field_twitter: true
-  field_vendor_image: true
   field_web_address: true
   links: true
