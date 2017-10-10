@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.facility.field_address
     - field.field.node.facility.field_administrator
+    - field.field.node.facility.field_contact
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
@@ -30,10 +31,9 @@ dependencies:
     - node.type.facility
   module:
     - address
-    - geolocation
-    - image
     - link
     - options
+    - svg_image
     - user
 id: node.facility.default
 targetEntityType: node
@@ -50,6 +50,14 @@ content:
   field_administrator:
     weight: 9
     label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact:
+    weight: 18
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }

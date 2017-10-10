@@ -7,6 +7,7 @@ dependencies:
     - entity_browser.browser.image_browser
     - field.field.node.facility.field_address
     - field.field.node.facility.field_administrator
+    - field.field.node.facility.field_contact
     - field.field.node.facility.field_customer_fax_number
     - field.field.node.facility.field_customer_id
     - field.field.node.facility.field_customer_key
@@ -48,7 +49,7 @@ third_party_settings:
         - field_va_contract
         - field_pace_program
       parent_name: group_netforum_data_auto_synchro
-      weight: 26
+      weight: 43
       format_type: details
       format_settings:
         id: ''
@@ -65,7 +66,7 @@ third_party_settings:
         - field_linkedin
         - field_ge
       parent_name: group_netforum_data_auto_synchro
-      weight: 27
+      weight: 44
       format_type: details
       format_settings:
         id: ''
@@ -92,6 +93,7 @@ third_party_settings:
       region: content
     group_netforum_data_auto_synchro:
       children:
+        - field_contact
         - field_customer_id
         - field_customer_key
         - field_customer_type
@@ -130,14 +132,22 @@ content:
     third_party_settings: {  }
     region: content
   field_address:
-    weight: 17
+    weight: 34
     settings:
       default_country: null
     third_party_settings: {  }
     type: address_default
     region: content
   field_administrator:
-    weight: 21
+    weight: 38
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contact:
+    weight: 28
     settings:
       size: 60
       placeholder: ''
@@ -145,7 +155,7 @@ content:
     type: string_textfield
     region: content
   field_customer_fax_number:
-    weight: 19
+    weight: 36
     settings:
       size: 60
       placeholder: ''
@@ -153,14 +163,14 @@ content:
     type: string_textfield
     region: content
   field_customer_id:
-    weight: 12
+    weight: 29
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_customer_key:
-    weight: 13
+    weight: 30
     settings:
       size: 60
       placeholder: ''
@@ -168,7 +178,7 @@ content:
     type: string_textfield
     region: content
   field_customer_phone_number:
-    weight: 18
+    weight: 35
     settings:
       size: 60
       placeholder: ''
@@ -176,13 +186,13 @@ content:
     type: string_textfield
     region: content
   field_customer_type:
-    weight: 14
+    weight: 31
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_customer_web_site:
-    weight: 20
+    weight: 37
     settings:
       size: 60
       placeholder: ''
@@ -217,13 +227,13 @@ content:
     type: geolocation_latlng
     region: content
   field_languages_spoken:
-    weight: 23
+    weight: 40
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_licensed_nursing_facility_:
-    weight: 22
+    weight: 39
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -252,7 +262,7 @@ content:
     type: boolean_checkbox
     region: content
   field_member_flag:
-    weight: 16
+    weight: 33
     settings:
       display_label: true
     third_party_settings: {  }
@@ -266,7 +276,7 @@ content:
     type: boolean_checkbox
     region: content
   field_populations_served:
-    weight: 25
+    weight: 42
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -287,13 +297,13 @@ content:
     type: inline_entity_form_complex
     region: content
   field_service_type:
-    weight: 15
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_specialized_unit:
-    weight: 24
+    weight: 41
     settings: {  }
     third_party_settings: {  }
     type: options_select
