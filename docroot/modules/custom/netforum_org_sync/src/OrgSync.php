@@ -136,7 +136,8 @@ class OrgSync {
    * @return \Drupal\node\NodeInterface
    */
   private function saveOrgNode(array $organization, NodeInterface $node) {
-
+    //for non-static functions from the SoapHelper class.
+    $soaphelper = new SoapHelper;
     //first handle fields that exist in both the Facility and Vendor content types
     $node->set('title', SoapHelper::cleanSoapField($organization['org_name']));
     $node->field_address->country_code = 'US';
@@ -151,9 +152,9 @@ class OrgSync {
     $node->email = ''; //not in GetFacadeObject
     $node->field_phone = SoapHelper::cleanSoapField($organization['phn_number_complete']);; //not in GetFacadeObject
     $node->field_web_address = SoapHelper::cleanSoapField($organization['cst_web_site']);
-    $node->field_facebook = SoapHelper::checkURLValidity($organization['cel_facebook_name']);//  Link
-    $node->field_linkedin = SoapHelper::checkURLValidity($organization['cel_linkedin_name']);//  Link
-    $node->field_twitter = SoapHelper::checkURLValidity($organization['cel_twitter_name']);//  Link
+    $node->field_facebook = $soaphelper->URLfromSocialHandle($organization['cel_facebook_name'], 'facebook');//  Link
+    $node->field_linkedin = $soaphelper->URLfromSocialHandle($organization['cel_linkedin_name'], 'linkedin');//  Link
+    $node->field_twitter = $soaphelper->URLfromSocialHandle($organization['cel_twitter_name'], 'twitter');//  Link
     $node->field_customer_key = SoapHelper::cleanSoapField($organization['org_cst_key']);//  Text (plain)
 
     //fields specific to facility nodes

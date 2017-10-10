@@ -51,4 +51,29 @@ class SoapHelper {
       return $url;
     }
   }
+
+  /*
+   * A helper function that makes a full social media url from a handle.
+   * Possible values for $type are:
+   *   facebook
+   *   twitter
+   *   linkedin
+   */
+  public function URLfromSocialHandle($handle, $type) {
+    if(!empty($handle)) {
+      switch($type) {
+        case 'facebook':
+          //as a precaution, we still want to make sure this is a legit url
+          return $this->checkURLValidity('https://www.facebook.com/' . $handle);
+          //no "break;" because return kicks us out of this function.
+        case 'twitter':
+          return $this->checkURLValidity('https://www.twitter.com/' . $handle);
+        case 'linkedin':
+          return $this->checkURLValidity('https://www.linkedin.com/in/' . $handle);
+      }
+    }
+    else {
+      return '';
+    }
+  }
 }
