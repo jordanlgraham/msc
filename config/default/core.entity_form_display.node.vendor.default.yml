@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.image_browser
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
     - field.field.node.vendor.field_contact
@@ -15,10 +16,12 @@ dependencies:
     - field.field.node.vendor.field_phone
     - field.field.node.vendor.field_primary_services
     - field.field.node.vendor.field_twitter
+    - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
     - node.type.vendor
   module:
     - address
+    - entity_browser
     - field_group
     - link
     - path
@@ -168,6 +171,20 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_vendor_image:
+    weight: 27
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: default
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
     region: content
   field_web_address:
     weight: 6
