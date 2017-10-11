@@ -73,8 +73,19 @@ function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, Ent
     $website_field = $entity->get('field_customer_web_site');
     if(!$website_field->isEmpty()) {
       $uri = $website_field->getValue()[0]['value'];
-      $link = Link::fromTextAndUrl(t('Click Here'), Url::fromUri($uri));
-      $build['facility_link'] = $link->toRenderable();
+      if (!\Drupal\Component\Utility\UrlHelper::isValid($uri, TRUE)) {
+        $parsed = \Drupal\Component\Utility\UrlHelper::parse($uri);
+        if (empty($parsed['scheme'])) {
+          $uri = 'http://' . $uri;
+        }
+        else {
+          $uri = FALSE;
+        }
+      }
+      if ($uri) {
+        $link = Link::fromTextAndUrl(t('Click Here'), Url::fromUri($uri));
+        $build['facility_link'] = $link->toRenderable();
+      }
     }
   }
 }

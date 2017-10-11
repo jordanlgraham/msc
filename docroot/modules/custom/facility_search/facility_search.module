@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -74,4 +75,19 @@ function facility_search_geocoder_provider_info_alter(&$providers) {
       $providers['googlemaps']['arguments']['apiKey'] = $config->get('google_map_api_key');
     }
   };
+}
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function facility_search_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  $input = $view->getExposedInput();
+  // If other filters are being used, don't use the "keys" filter.
+  foreach ($input as $key => $value) {
+    if ($key !== 'keys' && !empty($value)) {
+      $input['keys'] = '';
+      break;
+    }
+  }
+  $view->setExposedInput($input);
 }
