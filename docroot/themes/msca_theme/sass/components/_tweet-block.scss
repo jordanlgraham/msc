@@ -1,0 +1,112 @@
+// Shared style for a few SVGs here
+%tweet-svg {
+  width: 25px;
+  height: 25px;
+  fill: $icon-gray;
+  margin-right: 5px;
+  path {
+    fill: $icon-gray;
+  }
+}
+
+.tweet-block-wrapper {
+  padding: 4rem 0; // Same as home-recent-news
+}
+
+.tweet-block-wrapper h2 {
+  @extend .thin-heading;
+  color: $blue;
+}
+
+.tweet-block-wrapper .header-image {
+  // Centers SVGs and pseudo elements
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tweet-block-wrapper .header-image:before,
+.tweet-block-wrapper .header-image:after {
+  background-color: $blue; // For some reason this isn't part of the "header-image" class.
+}
+
+.tweet-block-wrapper .header-image svg {
+  width: 50px;
+  height: 50px;
+  fill: $blue;
+  path {
+    fill: $blue;
+  }
+}
+
+.tweet-block-tweet {
+  border: solid 1px $light-gray;
+}
+
+.tweet-block-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+.tweet-block-twitter svg {
+  width: 30px;
+  height: 30px;
+  fill: $twitter-blue;
+  path {
+    fill: $twitter-blue;
+  }
+}
+
+.tweet-block-text {
+  padding: 0 40px 80px 40px;
+  line-height: 2;
+  color: $gray-text;
+}
+
+
+.tweet-block-time {
+  display: flex;
+  align-items: center;
+}
+
+.tweet-block-time svg {
+  @extend %tweet-svg;
+}
+
+.tweet-block-bottom {
+  border-top: solid 1px $light-gray;
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tweet-block-bottom > div {
+  display: flex;
+  align-items: center;
+}
+
+.tweet-block-bottom svg {
+  @extend %tweet-svg;
+}
+
+.tweet-block-btns a {
+  @extend .btn;
+  width: 100%;
+  margin-top: 20px;
+  color: #fff;
+  // Positioning for SVG background icons
+  background-position: 10px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.tweet-block-btns .twitter-btn {
+  background-color: $twitter-blue;
+  background-image: url('/themes/msca_theme/svg/twitter.svg');
+}
+
+.tweet-block-btns .facebook-btn {
+  background-color: $facebook-blue;
+  background-image: url('/themes/msca_theme/svg/facebook.svg');
+}

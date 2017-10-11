@@ -7,7 +7,7 @@ dependencies:
 id: homepage_login_block
 theme: msca_theme
 region: gutter
-weight: -13
+weight: -14
 provider: null
 plugin: homepage_login_block
 settings:

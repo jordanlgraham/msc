@@ -1,7 +1,6 @@
 .home-recent-news {
   //this was a paragraph I felt did not need to have background color configurable.
   background-color: $white;
-  @extend .container;
   //padding for the entire paragraph row
   padding: 4rem 0;
 }
@@ -27,18 +26,13 @@
   @extend .row;
 }
 
-//3 across on large displays and up
-//2 across on medium displays (with the third article hidden)
-//stacked on small displays and down
+// 2 across on medium and up
+// stacked on small displays and down
 .home-recent-news .views-row {
-  @extend .col-lg-4;
   @extend .col-md-6;
   @extend .col-12;
   @include media-breakpoint-down(sm) {
     margin-bottom: 2rem;
-  }
-  &:last-of-type {
-    @extend .hidden-md-down;
   }
 }
 

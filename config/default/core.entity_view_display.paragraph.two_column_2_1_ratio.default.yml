@@ -1,0 +1,37 @@
+uuid: e263993e-cd5f-4a2a-91ec-2f31377ec315
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.two_column_2_1_ratio.field_1_3_column
+    - field.field.paragraph.two_column_2_1_ratio.field_2_3_column
+    - paragraphs.paragraphs_type.two_column_2_1_ratio
+  module:
+    - entity_reference_revisions
+id: paragraph.two_column_2_1_ratio.default
+targetEntityType: paragraph
+bundle: two_column_2_1_ratio
+mode: default
+content:
+  field_1_3_column:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_2_3_column:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

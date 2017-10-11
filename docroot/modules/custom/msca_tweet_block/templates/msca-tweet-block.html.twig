@@ -1,0 +1,37 @@
+{# Template for tweet block #}
+<div class="tweet-block-wrapper">
+  <h2>{{ 'Follow Us'|t }}</h2>
+  <div class="header-image">
+    {{ source('/themes/msca_theme/svg/twitter.svg') }}
+    {{ source('/themes/msca_theme/svg/facebook.svg') }}
+  </div>
+  <div class="tweet-block-tweet">
+    <div class="tweet-block-top">
+      <a href="{{ twitter_url }}" class="tweet-block-twitter">
+        {{ source('/themes/msca_theme/svg/twitter.svg') }}
+      </a>
+      <div class="tweet-block-time">
+        {{ source('/themes/msca_theme/svg/clock.svg') }}
+        {{ time_ago }}
+      </div>
+    </div>
+    <div class="tweet-block-text">
+      {{ text }}
+    </div>
+    <div class="tweet-block-bottom">
+      <div>
+        {{ source('/themes/msca_theme/svg/retweet.svg') }}
+        {{ retweets }}
+      </div>
+      <div>
+        {{ source('/themes/msca_theme/svg/star.svg') }}
+        {{ favs }}
+      </div>
+    </div>
+  </div>
+
+  <div class="tweet-block-btns">
+    <a href="{{ twitter_url }}" class="twitter-btn">{{ 'Follow Us On Twitter'|t }}</a>
+    <a href="{{ facebook_url }}" class="facebook-btn">{{ 'Follow Us On Facebook'|t }}</a>
+  </div>
+</div>

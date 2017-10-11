@@ -13,7 +13,7 @@ third_party_settings:
 id: findafacilityuserlogin
 theme: msca_theme
 region: gutter
-weight: -6
+weight: -12
 provider: null
 plugin: facility_search_login
 settings:

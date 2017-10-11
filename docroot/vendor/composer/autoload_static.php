@@ -162,6 +162,7 @@ class ComposerStaticInitDrupal8
         array (
             'Asm89\\Stack\\' => 12,
             'Alchemy\\Zippy\\' => 14,
+            'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
 
@@ -511,6 +512,10 @@ class ComposerStaticInitDrupal8
         'Alchemy\\Zippy\\' => 
         array (
             0 => __DIR__ . '/..' . '/alchemy/zippy/src',
+        ),
+        'Abraham\\TwitterOAuth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/abraham/twitteroauth/src',
         ),
     );
 

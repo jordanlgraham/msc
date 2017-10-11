@@ -7,7 +7,7 @@ dependencies:
 id: join_mscblock
 theme: msca_theme
 region: gutter
-weight: null
+weight: -11
 provider: null
 plugin: join_mscblock
 settings:

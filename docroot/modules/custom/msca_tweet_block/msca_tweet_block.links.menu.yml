@@ -1,0 +1,7 @@
+msca_tweet_block.twitter_form:
+  title: 'Twitter Block Settings'
+  route_name: msca_tweet_block.twitter_form
+  description: 'Connection info and URLs for tweet block'
+  parent: system.admin_config_services
+  weight: 101
+
