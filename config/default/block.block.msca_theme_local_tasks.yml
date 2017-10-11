@@ -15,7 +15,7 @@ _core:
 id: msca_theme_local_tasks
 theme: msca_theme
 region: content
-weight: -5
+weight: -14
 provider: null
 plugin: local_tasks_block
 settings:
