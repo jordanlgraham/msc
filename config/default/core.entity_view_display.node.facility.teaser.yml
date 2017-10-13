@@ -87,6 +87,7 @@ hidden:
   field_customer_key: true
   field_customer_type: true
   field_facebook: true
+  field_facility_image: true
   field_ge: true
   field_languages_spoken: true
   field_linkedin: true

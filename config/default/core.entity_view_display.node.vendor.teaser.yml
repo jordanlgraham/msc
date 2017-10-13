@@ -41,5 +41,6 @@ hidden:
   field_phone: true
   field_primary_services: true
   field_twitter: true
+  field_vendor_image: true
   field_web_address: true
   links: true

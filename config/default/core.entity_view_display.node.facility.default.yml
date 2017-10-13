@@ -32,6 +32,7 @@ dependencies:
   module:
     - address
     - link
+    - media_entity
     - options
     - user
 id: node.facility.default
@@ -100,11 +101,12 @@ content:
     region: content
   field_facility_image:
     weight: 19
-    label: above
+    label: hidden
     settings:
-      link: true
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: entity_reference_label
+    type: media_thumbnail
     region: content
   field_languages_spoken:
     weight: 11
