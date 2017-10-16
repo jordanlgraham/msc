@@ -138,6 +138,7 @@ class OrgSync {
   private function saveOrgNode(array $organization, NodeInterface $node) {
     //for non-static functions from the SoapHelper class.
     $soaphelper = new SoapHelper;
+    $individual = $this->getIndividual($organization['con__cst_key']);
     //first handle fields that exist in both the Facility and Vendor content types
     $node->set('title', SoapHelper::cleanSoapField($organization['org_name']));
     $node->field_address->country_code = 'US';
@@ -146,10 +147,8 @@ class OrgSync {
     $node->field_address->postal_code = SoapHelper::cleanSoapField($organization['adr_post_code']);
     $node->field_address->address_line1 = SoapHelper::cleanSoapField($organization['adr_line1']);
     $node->field_address->address_line2 = SoapHelper::cleanSoapField($organization['adr_line2']);
-
-    //todo: find these in API
-    $node->field_contact = SoapHelper::cleanSoapField($this->getIndividual($organization['con__cst_key']));
-    $node->email = ''; //not in GetFacadeObject
+    $node->field_contact = SoapHelper::cleanSoapField($individual['name']);
+    $node->field_contact_title = SoapHelper::cleanSoapField($individual['title']);
     $node->field_phone = SoapHelper::cleanSoapField($organization['phn_number_complete']);; //not in GetFacadeObject
     $node->field_web_address = SoapHelper::cleanSoapField($organization['cst_web_site']);
     $node->field_facebook = $soaphelper->URLfromSocialHandle($organization['cel_facebook_name'], 'facebook');//  Link
@@ -322,11 +321,18 @@ class OrgSync {
       return '';
     }
     $record = $this->getObject($cst_key, 'individual');
-    $name = '';
-    if ($record && !empty($record['ind_full_name_cp'])) {
-      $name = $record['ind_full_name_cp'];
+    $individual = '';
+    if ($record) {
+      if(!empty($record['ind_full_name_cp'])) {
+        $individual['name'] = $record['ind_full_name_cp'];
+      }
+      if(!empty($record['ind_title'])) {
+        $individual['title'] = $record['ind_title'];
+      }
     }
-    return $name;
+
+
+    return $individual;
   }
 
   public function getObject($cst_key, $object_type = 'organization') {
