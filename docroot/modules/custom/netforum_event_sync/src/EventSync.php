@@ -2,8 +2,8 @@
 
 namespace Drupal\netforum_event_sync;
 
+use DateTimeZone;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\State\StateInterface;
 use Psr\Log\LoggerInterface;
@@ -46,15 +46,16 @@ class EventSync {
 
   const LAST_SYNC_STATE_KEY = 'netforum_event_sync.last_sync';
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory,
-                              GetClient $getClient, LoggerInterface $logger, DateFormatterInterface $dateFormatter,
+  public function __construct(EntityTypeManagerInterface $entityTypeManager,
+                              ConfigFactoryInterface $configFactory,
+                              GetClient $getClient,
+                              LoggerInterface $logger,
                               StateInterface $state) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
     $this->config = $configFactory->get('netforum_event_sync.eventsync');
     $this->logger = $logger;
     $this->get_client = $getClient;
-    $this->dateFormatter = $dateFormatter;
     $this->state = $state;
   }
 
@@ -88,11 +89,23 @@ class EventSync {
     }
     return $node;
   }
-  //
+  /*
+   * This function cleans up the formatting that you get back from NetForum.
+   * Here's the format you get:
+   * <evt_start_date>3/23/2017 12:00:00 AM</evt_start_date>
+   * <evt_start_time>09:30am</evt_start_time>
+   *
+   * So this function takes the date itself from the front of the evt_start_date
+   * and appends the evt_start_time to it, then returns that as a formatted
+   * date object
+   */
+
   private function formatNetForumDateTime($date, $time) {
+    //todo: use DateFormatter to handle this
     $raw_date = new DateTime($date);
     $timestamp = $raw_date->format('Y-m-d') . ' ' . $time;
-    return date('Y-m-d\TH:i:s', strtotime($timestamp));
+    $date = new DateTime($timestamp, new DateTimeZone('UTC'));
+    return date('Y-m-d\TH:i:s', $date->format('U'));
   }
 
   private function loadOrCreateEventTermsByName($terms) {
@@ -118,7 +131,6 @@ class EventSync {
   private function createOrUpdateEvents(array $events) {
     foreach($events as $evt_key => $event) {
       $node = $this->loadOrCreateEventNode($evt_key);
-      //todo: body field
       $node->body->value = $event['description']; //formatted text
       $node->title = $event['name'];
       $node->field_date = $this->formatNetForumDateTime($event['start_date'], $event['start_time']); //date w/time 2017-08-15T18:00:00
@@ -168,7 +180,9 @@ class EventSync {
         try {
           $response = $client->__soapCall('GetEventListByType', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $response_headers);
           if(!empty($response->GetEventListByTypeResult->any)) {
-            //Let's make things easy on ourselves and turn this XML into an array.
+            //Let's make things easy on ourselves and turn this XML into an
+            //array. Note that this should be replaced with the Serialization
+            //API since it handles this sort of thing.
             $xml = simplexml_load_string($response->GetEventListByTypeResult->any);
             $json = json_encode($xml);
             $array = json_decode($json, TRUE);
