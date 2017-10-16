@@ -296,13 +296,17 @@ class OrgSync {
 
           //We need to get the GetFacadeObject version of this, which returns
           //more fields than GetOrganizationChangesByDate. Silly, but necessary.
-          $organization = $this->getObject($org['org_cst_key']);
 
-          $node = $this->loadOrCreateOrgNode($organization);
-          $this->saveOrgNode($organization, $node);
-          // Save some memory.
-          unset($node);
-          unset($orgs['Result'][$key]);
+          $organization = $this->getObject($org['org_cst_key']);
+          //make sure the organization is a member
+          if(!empty($organization['cst_member_flag']) && $organization['cst_member_flag'] == '1') {
+            $node = $this->loadOrCreateOrgNode($organization);
+            $this->saveOrgNode($organization, $node);
+            // Save some memory.
+            unset($node);
+            unset($orgs['Result'][$key]);
+          }
+
         }
         return count($orgs['Result']);
       }
