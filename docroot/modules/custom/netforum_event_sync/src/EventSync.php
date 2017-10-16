@@ -53,7 +53,7 @@ class EventSync {
                               StateInterface $state) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
-    $this->config = $configFactory->get('system.date');
+    $this->config = $configFactory->get('netforum_event_sync.eventsync');
     $this->logger = $logger;
     $this->get_client = $getClient;
     $this->state = $state;
