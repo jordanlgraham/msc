@@ -1,7 +1,9 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\LocalRedirectResponse;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
 use Drupal\msca_discourse\DiscourseHelper;
 
 /**
@@ -35,6 +37,10 @@ function msca_discourse_user_login_submit($form, FormStateInterface $form_state)
   // Check if there's any discourse session data.
   $discourse_data = \Drupal::request()->getSession()->get(DiscourseHelper::SESSION_DATA_KEY);
   if (!$discourse_data) {
+    //If this isn't discourse a discourse-related login, we should redirect home
+    $front_page = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $redirect_response = new LocalRedirectResponse($front_page);
+    $form_state->setResponse($redirect_response);
     return;
   }
   // Check if the session data is still valid.
