@@ -134,7 +134,8 @@ class OrganizationSyncForm extends ConfigFormBase {
         //make a unix timestamp from yyyy-mm-dd
         $start_date = strtotime($i . '-' . $k . '-' . '1');
         $end_date = $start_date + (86400 * 31);
-        $this->logger->info('Syncing Organizations from ' . date('Y-m-d', $start_date) . ' to ' . date('Y-m-d', $end_date));
+        $this->logger->info('Syncing Organizations from @start to @end',
+          ['@start' => date('Y-m-d', $start_date), '@end' => date('Y-m-d', $end_date)]);
         $this->sync->syncOrganizations($start_date, $end_date);
         $k++;
       }
