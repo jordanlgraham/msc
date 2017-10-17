@@ -21,7 +21,7 @@ function msca_theme_preprocess_node(&$variables) {
     elseif(!empty($variables['content']['field_news_release_date'])) {
       $date_field = $variables['content']['field_news_release_date'];
     }
-    if(!empty($date_field)) {
+    if(!empty($date_field) && is_string($date_field)) {
       $field_date = strtotime($date_field);
       $variables['content']['square_month'] = date('M', $field_date);
       $variables['content']['square_day'] = date('j', $field_date);

@@ -105,7 +105,8 @@ class OrganizationSyncForm extends ConfigFormBase {
       ->save();
     //if we sync all, we want to start cycling
     if(!empty($form_state->getValue('sync_all')) && $form_state->getValue('sync_all') == 1) {
-
+      $this->syncAll();
+      return;
     }
     $start_date = false;
     $end_date = false;

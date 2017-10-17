@@ -291,7 +291,7 @@ class OrgSync {
         foreach ($orgs['Result'] as $key => $org) {
 
           // This API method doesn't allow filtering by facility type, so do it here.
-          if (!in_array($org['org_ogt_code'], $facility_types)) {
+          if (!empty($org['org_ogt_code']) && !in_array($org['org_ogt_code'], $facility_types)) {
             continue;
           }
 
