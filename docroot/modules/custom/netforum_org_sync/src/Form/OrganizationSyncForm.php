@@ -6,6 +6,7 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
+use Psr\Log\LoggerInterface;
 use Drupal\netforum_org_sync\OrgSync;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -26,12 +27,17 @@ class OrganizationSyncForm extends ConfigFormBase {
   protected $state;
 
   protected $time;
+  /**
+   * @var LoggerInterface
+   */
+  private $logger;
 
   public function __construct(ConfigFactoryInterface $config_factory, OrgSync $orgSync,
-                              StateInterface $state, TimeInterface $time) {
+                              StateInterface $state, TimeInterface $time, LoggerInterface $logger) {
     $this->sync = $orgSync;
     $this->state = $state;
     $this->time = $time;
+    $this->logger = $logger;
     parent::__construct($config_factory);
   }
 
@@ -40,7 +46,8 @@ class OrganizationSyncForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('netforum_org_sync.org_sync'),
       $container->get('state'),
-      $container->get('datetime.time')
+      $container->get('datetime.time'),
+      $container->get('logger.factory')->get('netforum_org_sync')
     );
   }
 
@@ -79,6 +86,11 @@ class OrganizationSyncForm extends ConfigFormBase {
       '#type' => 'date',
       '#title' => $this->t('Sync End Date'),
     ];
+    $form['sync_all'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Sync Everything'),
+      '#description' => $this->t('Ignore Dates Above and Completely Re-sync'),
+    ];
     return parent::buildForm($form, $form_state);
   }
 
@@ -91,6 +103,11 @@ class OrganizationSyncForm extends ConfigFormBase {
     $this->config('netforum_org_sync.organizationsync')
       ->set('org_types', $form_state->getValue('org_types'))
       ->save();
+    //if we sync all, we want to start cycling
+    if(!empty($form_state->getValue('sync_all')) && $form_state->getValue('sync_all') == 1) {
+      $this->syncAll();
+      return;
+    }
     $start_date = false;
     $end_date = false;
     if(!empty($form_state->getValue('start_date'))
@@ -108,4 +125,24 @@ class OrganizationSyncForm extends ConfigFormBase {
     }
   }
 
+  protected function syncAll() {
+    $i = 2008;
+    $this_year = date('Y');
+    while($i <= $this_year) {
+      $k = 1;
+      while($k <= 12) {
+        //make a unix timestamp from yyyy-mm-dd
+        $start_date = strtotime($i . '-' . $k . '-' . '1');
+        $end_date = $start_date + (86400 * 31);
+        $this->logger->info('Syncing Organizations from @start to @end',
+          ['@start' => date('Y-m-d', $start_date), '@end' => date('Y-m-d', $end_date)]);
+        $this->sync->syncOrganizations($start_date, $end_date);
+        $k++;
+      }
+      $i++;
+    }
+
+  }
+
 }
+

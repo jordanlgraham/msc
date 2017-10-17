@@ -130,53 +130,54 @@ class OrgSync {
   }
 
   /**
-   * @param $organization
+   * @param $org
    * @param \Drupal\node\NodeInterface $node
    *
    * @return \Drupal\node\NodeInterface
    */
-  private function saveOrgNode(array $organization, NodeInterface $node) {
+  private function saveOrgNode(array $org, NodeInterface $node) {
     //for non-static functions from the SoapHelper class.
     $soaphelper = new SoapHelper;
-    $individual = $this->getIndividual($organization['con__cst_key']);
+    $individual = $this->getIndividual($org['con__cst_key']);
     //first handle fields that exist in both the Facility and Vendor content types
-    $node->set('title', SoapHelper::cleanSoapField($organization['org_name']));
+    $node->set('title', SoapHelper::cleanSoapField($org['org_name']));
     $node->field_address->country_code = 'US';
-    $node->field_address->administrative_area = SoapHelper::cleanSoapField($organization['adr_state']);
-    $node->field_address->locality = SoapHelper::cleanSoapField($organization['adr_city']);
-    $node->field_address->postal_code = SoapHelper::cleanSoapField($organization['adr_post_code']);
-    $node->field_address->address_line1 = SoapHelper::cleanSoapField($organization['adr_line1']);
-    $node->field_address->address_line2 = SoapHelper::cleanSoapField($organization['adr_line2']);
-    $node->field_contact = SoapHelper::cleanSoapField($individual['name']);
-    $node->field_contact_title = SoapHelper::cleanSoapField($individual['title']);
-    $node->field_phone = SoapHelper::cleanSoapField($organization['phn_number_complete']);; //not in GetFacadeObject
-    $node->field_web_address = SoapHelper::cleanSoapField($organization['cst_web_site']);
-    $node->field_facebook = $soaphelper->URLfromSocialHandle($organization['cel_facebook_name'], 'facebook');//  Link
-    $node->field_linkedin = $soaphelper->URLfromSocialHandle($organization['cel_linkedin_name'], 'linkedin');//  Link
-    $node->field_twitter = $soaphelper->URLfromSocialHandle($organization['cel_twitter_name'], 'twitter');//  Link
-    $node->field_customer_key = SoapHelper::cleanSoapField($organization['org_cst_key']);//  Text (plain)
+    $node->field_address->administrative_area = SoapHelper::cleanSoapField($org['adr_state']);
+    $node->field_address->locality = SoapHelper::cleanSoapField($org['adr_city']);
+    $node->field_address->postal_code = SoapHelper::cleanSoapField($org['adr_post_code']);
+    $node->field_address->address_line1 = SoapHelper::cleanSoapField($org['adr_line1']);
+    $node->field_address->address_line2 = SoapHelper::cleanSoapField($org['adr_line2']);
+    $node->field_contact = isset($individual['name']) ? SoapHelper::cleanSoapField($individual['name']) : '';
+    $node->field_contact_title = isset($individual['title']) ? SoapHelper::cleanSoapField($individual['title']) : '';
+    $node->field_email = isset($individual['email']) ? SoapHelper::cleanSoapField($individual['email']) : '';
+    $node->field_phone = SoapHelper::cleanSoapField($org['phn_number_complete']);; //not in GetFacadeObject
+    $node->field_web_address = SoapHelper::cleanSoapField($org['cst_web_site']);
+    $node->field_facebook = $soaphelper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
+    $node->field_linkedin = $soaphelper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
+    $node->field_twitter = $soaphelper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
+    $node->field_customer_key = SoapHelper::cleanSoapField($org['org_cst_key']); //Text (plain)
 
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
-      $node->field_administrator = SoapHelper::cleanSoapField($organization['con__cst_ind_full_name_dn']);// Text (plain)
-      $node->field_customer_fax_number = SoapHelper::cleanSoapField($organization['fax_number']);// Text (plain)
-      $node->field_customer_phone_number = SoapHelper::cleanSoapField($organization['phn_number_complete']);// Text (plain)
-      $node->field_customer_type = SoapHelper::cleanSoapField($organization['cst_type'], 'array');// List (text)
-      $node->field_customer_web_site = SoapHelper::checkURLValidity($organization['cst_web_site']);// Text (plain)
-      $node->field_languages_spoken = SoapHelper::cleanSoapField($organization['org_custom_text_08'], 'array');//  List (text)
-      $node->field_licensed_nursing_facility_ = SoapHelper::cleanSoapField($organization['org_custom_integer_10']);//  Number (integer)
-      $node->field_medicaid = SoapHelper::cleanSoapField($organization['org_custom_flag_05'], 'boolean');//  Boolean
-      $node->field_medicare = SoapHelper::cleanSoapField($organization['org_custom_flag_09'], 'boolean');//  Boolean
-      $node->field_member_flag = SoapHelper::cleanSoapField($organization['cst_member_flag'], 'boolean');// Boolean
-      $node->field_pace_program = SoapHelper::cleanSoapField($organization['org_custom_flag_02'], 'boolean');//  Boolean
-      $node->field_service_type = SoapHelper::cleanSoapField($organization['org_custom_text_09'], 'array');//  List (text)
-      $node->field_populations_served = SoapHelper::cleanSoapField($organization['org_custom_text_11'], 'array');//  List (text)
-      $node->field_specialized_unit = SoapHelper::cleanSoapField($organization['org_custom_text_10'], 'array');//  List (text)
-      $node->field_va_contract = SoapHelper::cleanSoapField($organization['org_custom_flag_01'], 'boolean');// Boolean
+      $node->field_administrator = SoapHelper::cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
+      $node->field_customer_fax_number = SoapHelper::cleanSoapField($org['fax_number']);// Text (plain)
+      $node->field_customer_phone_number = SoapHelper::cleanSoapField($org['phn_number_complete']);// Text (plain)
+      $node->field_customer_type = SoapHelper::cleanSoapField($org['cst_type'], 'array');// List (text)
+      $node->field_customer_web_site = SoapHelper::checkURLValidity($org['cst_web_site']);// Text (plain)
+      $node->field_languages_spoken = SoapHelper::cleanSoapField($org['org_custom_text_08'], 'array');//  List (text)
+      $node->field_licensed_nursing_facility_ = SoapHelper::cleanSoapField($org['org_custom_integer_10']);//  Number (integer)
+      $node->field_medicaid = SoapHelper::cleanSoapField($org['org_custom_flag_05'], 'boolean');//  Boolean
+      $node->field_medicare = SoapHelper::cleanSoapField($org['org_custom_flag_09'], 'boolean');//  Boolean
+      $node->field_member_flag = SoapHelper::cleanSoapField($org['cst_member_flag'], 'boolean');// Boolean
+      $node->field_pace_program = SoapHelper::cleanSoapField($org['org_custom_flag_02'], 'boolean');//  Boolean
+      $node->field_service_type = SoapHelper::cleanSoapField($org['org_custom_text_09'], 'array');//  List (text)
+      $node->field_populations_served = SoapHelper::cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
+      $node->field_specialized_unit = SoapHelper::cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
+      $node->field_va_contract = SoapHelper::cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
     }
     //fields specific to vendor nodes
-    $primary_services = SoapHelper::cleanSoapField($organization['org_custom_text_03'], 'array');
-    $additional_services = SoapHelper::cleanSoapField($organization['org_custom_text_04'], 'array');
+    $primary_services = SoapHelper::cleanSoapField($org['org_custom_text_03'], 'array');
+    $additional_services = SoapHelper::cleanSoapField($org['org_custom_text_04'], 'array');
 
     if (!empty($primary_services)) {
       $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services);
@@ -290,7 +291,7 @@ class OrgSync {
         foreach ($orgs['Result'] as $key => $org) {
 
           // This API method doesn't allow filtering by facility type, so do it here.
-          if (!in_array($org['org_ogt_code'], $facility_types)) {
+          if (!empty($org['org_ogt_code']) && !in_array($org['org_ogt_code'], $facility_types)) {
             continue;
           }
 
@@ -332,6 +333,9 @@ class OrgSync {
       }
       if(!empty($record['ind_title'])) {
         $individual['title'] = $record['ind_title'];
+      }
+      if(!empty($record['eml_address'])) {
+        $individual['email'] = $record['eml_address'];
       }
     }
 
