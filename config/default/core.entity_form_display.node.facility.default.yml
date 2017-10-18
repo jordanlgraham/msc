@@ -91,7 +91,7 @@ third_party_settings:
         - field_linkedin
         - field_ge
       parent_name: group_netforum_data_auto_synchro
-      weight: 44
+      weight: 56
       format_type: details
       format_settings:
         id: ''
@@ -134,6 +134,17 @@ third_party_settings:
         - field_specialized_unit
         - field_populations_served
         - group_facility_participates_in
+        - field_dph_region
+        - field_hospital_affiliation
+        - field_retirement_community_aff
+        - field_ep_region
+        - field_representative_district
+        - field_senate_district
+        - field_name_of_assisted_living
+        - field_network
+        - field_manager
+        - field_previous_manager
+        - field_wib_region
         - group_social_links
       parent_name: ''
       weight: 2
@@ -145,6 +156,32 @@ third_party_settings:
         required_fields: true
       label: 'NetForum Data (Auto-synchronized)'
       region: content
+    group_miscellaneous:
+      children:
+        - field_companion_units
+        - field_studio
+        - field_one_bedroom
+        - field_two_bedroom
+        - field_assisted_living_beds
+        - field_dementia_care_beds
+        - field_hospital_based_nf_tcu_beds
+        - field_independent_living_beds
+        - field_licensed_rest_home_beds
+        - field_medicaid_occupancy
+        - field_medicare_occupancy_percent
+        - field_number_of_beds_oos
+        - field_number_of_residents
+        - field_total_annual_admissions
+      parent_name: ''
+      weight: 21
+      format_type: details
+      format_settings:
+        id: ''
+        classes: ''
+        open: false
+        required_fields: true
+      label: Miscellaneous
+      region: content
 id: node.facility.default
 targetEntityType: node
 bundle: facility
@@ -152,7 +189,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 19
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -172,14 +209,14 @@ content:
     type: string_textfield
     region: content
   field_assisted_living_beds:
-    weight: 53
+    weight: 8
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_companion_units:
-    weight: 49
+    weight: 4
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -239,14 +276,14 @@ content:
     type: string_textfield
     region: content
   field_dementia_care_beds:
-    weight: 57
+    weight: 9
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_dph_region:
-    weight: 58
+    weight: 45
     settings:
       size: 60
       placeholder: ''
@@ -254,7 +291,7 @@ content:
     type: string_textfield
     region: content
   field_ep_region:
-    weight: 63
+    weight: 48
     settings:
       size: 60
       placeholder: ''
@@ -290,7 +327,7 @@ content:
     type: geolocation_latlng
     region: content
   field_hospital_affiliation:
-    weight: 61
+    weight: 46
     settings:
       size: 60
       placeholder: ''
@@ -298,14 +335,14 @@ content:
     type: string_textfield
     region: content
   field_hospital_based_nf_tcu_beds:
-    weight: 54
+    weight: 10
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_independent_living_beds:
-    weight: 55
+    weight: 11
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -325,7 +362,7 @@ content:
     type: number
     region: content
   field_licensed_rest_home_beds:
-    weight: 56
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -340,7 +377,7 @@ content:
     type: link_default
     region: content
   field_manager:
-    weight: 69
+    weight: 53
     settings:
       size: 60
       placeholder: ''
@@ -355,7 +392,7 @@ content:
     type: boolean_checkbox
     region: content
   field_medicaid_occupancy:
-    weight: 47
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -370,7 +407,7 @@ content:
     type: boolean_checkbox
     region: content
   field_medicare_occupancy_percent:
-    weight: 59
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -385,7 +422,7 @@ content:
     type: boolean_checkbox
     region: content
   field_name_of_assisted_living:
-    weight: 68
+    weight: 51
     settings:
       size: 60
       placeholder: ''
@@ -393,7 +430,7 @@ content:
     type: string_textfield
     region: content
   field_network:
-    weight: 67
+    weight: 52
     settings:
       size: 60
       placeholder: ''
@@ -401,7 +438,7 @@ content:
     type: string_textfield
     region: content
   field_number_of_beds_oos:
-    weight: 66
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -409,7 +446,7 @@ content:
     type: string_textfield
     region: content
   field_number_of_residents:
-    weight: 46
+    weight: 16
     settings:
       size: 60
       placeholder: ''
@@ -417,7 +454,7 @@ content:
     type: string_textfield
     region: content
   field_one_bedroom:
-    weight: 51
+    weight: 6
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -437,7 +474,7 @@ content:
     type: options_select
     region: content
   field_previous_manager:
-    weight: 70
+    weight: 54
     settings:
       size: 60
       placeholder: ''
@@ -460,7 +497,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_representative_district:
-    weight: 64
+    weight: 49
     settings:
       size: 60
       placeholder: ''
@@ -468,7 +505,7 @@ content:
     type: string_textfield
     region: content
   field_retirement_community_aff:
-    weight: 62
+    weight: 47
     settings:
       size: 60
       placeholder: ''
@@ -476,7 +513,7 @@ content:
     type: string_textfield
     region: content
   field_senate_district:
-    weight: 65
+    weight: 50
     settings:
       size: 60
       placeholder: ''
@@ -496,14 +533,14 @@ content:
     type: options_select
     region: content
   field_studio:
-    weight: 50
+    weight: 5
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_total_annual_admissions:
-    weight: 60
+    weight: 17
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -518,7 +555,7 @@ content:
     type: link_default
     region: content
   field_two_bedroom:
-    weight: 52
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -532,7 +569,7 @@ content:
     type: boolean_checkbox
     region: content
   field_wib_region:
-    weight: 71
+    weight: 55
     settings:
       size: 60
       placeholder: ''
@@ -541,7 +578,7 @@ content:
     region: content
   path:
     type: path
-    weight: 22
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -549,14 +586,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 20
+    weight: 7
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 21
+    weight: 9
     third_party_settings: {  }
     region: content
   title:
@@ -569,7 +606,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 3
     settings:
       match_operator: CONTAINS
       size: 60
