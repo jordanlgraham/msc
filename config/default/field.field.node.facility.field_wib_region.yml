@@ -1,0 +1,32 @@
+uuid: f5125759-f58d-46b0-9824-0da4617dd1c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_wib_region
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_wib_region
+field_name: field_wib_region
+entity_type: node
+bundle: facility
+label: 'WIB Region'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

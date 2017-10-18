@@ -1,0 +1,32 @@
+uuid: aa93e474-6f6d-46e0-9555-f938f7f27e3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_number_of_residents
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_number_of_residents
+field_name: field_number_of_residents
+entity_type: node
+bundle: facility
+label: 'Number of Residents Aged 21-65'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

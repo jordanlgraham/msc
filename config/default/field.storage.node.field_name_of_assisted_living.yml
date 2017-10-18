@@ -1,0 +1,21 @@
+uuid: b9aa6c61-5bc2-4fc7-8c49-797e214f038b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_name_of_assisted_living
+field_name: field_name_of_assisted_living
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
