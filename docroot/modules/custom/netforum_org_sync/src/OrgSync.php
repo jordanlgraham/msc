@@ -160,7 +160,6 @@ class OrgSync {
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
       $node->field_administrator = SoapHelper::cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
-      $node->field_assisted_living_beds = SoapHelper::cleanSoapField($org['org_custom_integer_07']); // Number (Integer)
       $node->field_customer_fax_number = SoapHelper::cleanSoapField($org['fax_number']);// Text (plain)
       $node->field_customer_phone_number = SoapHelper::cleanSoapField($org['phn_number_complete']);// Text (plain)
       $node->field_customer_type = SoapHelper::cleanSoapField($org['cst_type'], 'array');// List (text)
