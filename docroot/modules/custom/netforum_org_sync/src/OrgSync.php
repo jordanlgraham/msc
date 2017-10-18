@@ -174,6 +174,32 @@ class OrgSync {
       $node->field_populations_served = SoapHelper::cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
       $node->field_specialized_unit = SoapHelper::cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
       $node->field_va_contract = SoapHelper::cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
+
+      $node->field_assisted_living_beds = SoapHelper::cleanSoapField($org['org_custom_integer_07']);
+      $node->field_companion_units = SoapHelper::cleanSoapField($org['org_custom_integer_04']);
+      $node->field_dementia_care_beds = SoapHelper::cleanSoapField($org['org_custom_integer_12']);
+      $node->field_dph_region = SoapHelper::cleanSoapField($org['org_custom_integer_13']);
+      $node->field_ep_region = SoapHelper::cleanSoapField($org['org_custom_string_04']);
+      $node->field_hospital_affiliation = SoapHelper::cleanSoapField($org['org_custom_string_01']);
+      $node->field_hospital_based_nf_tcu_beds = SoapHelper::cleanSoapField($org['org_custom_integer_08']);
+      $node->field_independent_living_beds = SoapHelper::cleanSoapField($org['org_custom_integer_09']);
+      $node->field_licensed_rest_home_beds = SoapHelper::cleanSoapField($org['org_custom_integer_11']);
+      $node->field_manager = SoapHelper::cleanSoapField($org['org_custom_string_12']);
+      $node->field_medicaid_occupancy = SoapHelper::cleanSoapField($org['org_custom_integer_02']);
+      $node->field_medicare_occupancy_percent = SoapHelper::cleanSoapField($org['org_custom_integer_14']);
+      $node->field_name_of_assisted_living = SoapHelper::cleanSoapField($org['org_custom_string_11']);
+      $node->field_network = SoapHelper::cleanSoapField($org['org_custom_string_09']);
+      $node->field_number_of_beds_oos = SoapHelper::cleanSoapField($org['org_custom_string_08']);
+      $node->field_number_of_residents = SoapHelper::cleanSoapField($org['org_custom_integer_01']);
+      $node->field_one_bedroom = SoapHelper::cleanSoapField($org['org_custom_integer_05']);
+      $node->field_previous_manager = SoapHelper::cleanSoapField($org['org_custom_string_13']);
+      $node->field_representative_district = SoapHelper::cleanSoapField($org['org_custom_string_06']);
+      $node->field_retirement_community_aff = SoapHelper::cleanSoapField($org['org_custom_string_02']);
+      $node->field_senate_district = SoapHelper::cleanSoapField($org['org_custom_string_07']);
+      $node->field_studio = SoapHelper::cleanSoapField($org['org_custom_integer_03']);
+      $node->field_total_annual_admissions = SoapHelper::cleanSoapField($org['org_custom_integer_15']);
+      $node->field_two_bedroom = SoapHelper::cleanSoapField($org['org_custom_integer_06']);
+      $node->field_wib_region = SoapHelper::cleanSoapField($org['org_custom_text_01']);
     }
     //fields specific to vendor nodes
     $primary_services = SoapHelper::cleanSoapField($org['org_custom_text_03'], 'array');

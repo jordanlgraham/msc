@@ -1,0 +1,32 @@
+uuid: 41a6cfe8-aab5-445c-a6ed-34732dd9a676
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medicaid_occupancy
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_medicaid_occupancy
+field_name: field_medicaid_occupancy
+entity_type: node
+bundle: facility
+label: 'Medicaid Occupancy Percentage'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
