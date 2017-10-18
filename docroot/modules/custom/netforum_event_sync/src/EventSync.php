@@ -4,6 +4,7 @@ namespace Drupal\netforum_event_sync;
 
 use DateTimeZone;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\State\StateInterface;
 use Psr\Log\LoggerInterface;
@@ -50,10 +51,12 @@ class EventSync {
                               ConfigFactoryInterface $configFactory,
                               GetClient $getClient,
                               LoggerInterface $logger,
+                              DateFormatterInterface $dateFormatter,
                               StateInterface $state) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
     $this->config = $configFactory->get('netforum_event_sync.eventsync');
+    $this->dateFormatter = $dateFormatter;
     $this->logger = $logger;
     $this->get_client = $getClient;
     $this->state = $state;
