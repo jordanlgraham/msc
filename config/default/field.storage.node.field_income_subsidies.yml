@@ -1,0 +1,18 @@
+uuid: 96d0618b-2a95-4d00-8edc-454397c33178
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_income_subsidies
+field_name: field_income_subsidies
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

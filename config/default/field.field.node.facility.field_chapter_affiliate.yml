@@ -1,0 +1,21 @@
+uuid: 47e1fff0-3390-4482-95a1-2c66a8e7a83b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_chapter_affiliate
+    - node.type.facility
+  module:
+    - options
+id: node.facility.field_chapter_affiliate
+field_name: field_chapter_affiliate
+entity_type: node
+bundle: facility
+label: Chapter/Affiliate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

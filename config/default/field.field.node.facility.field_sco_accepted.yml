@@ -1,0 +1,28 @@
+uuid: cccbcebb-3c1c-498d-96d7-c790feed3285
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sco_accepted
+    - node.type.facility
+    - taxonomy.vocabulary.sco_accepted
+id: node.facility.field_sco_accepted
+field_name: field_sco_accepted
+entity_type: node
+bundle: facility
+label: 'SCO Accepted'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sco_accepted: sco_accepted
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
