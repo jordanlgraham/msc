@@ -1,29 +1,36 @@
 // Body
 
 body {
-  font-family: 'Lato' Sans-Serif;
+  font-family: 'Lato' sans-serif;
 }
 
 //HEADERS
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5,
+.h1, .h2,.h3, .h4, .h5 {
   margin-top: 1rem;
   &:first-child {
     margin-top: 0;
   }
 }
 
-h1, h2, h3, h5 {
+h1, h2, h3, h5,
+.h1, .h2, .h3, .h5 {
   text-transform: uppercase;
 }
 
-h1 {
+h1,
+.h1 {
   font-weight: $font-weight-base;
 }
-h2 {
+
+h2,
+.h2{
   font-weight: 900;
 }
-h3, h4, h5 {
+
+h3, h4, h5,
+.h3, .h4, .h5 {
   font-weight: 700;
 }
 
@@ -38,7 +45,8 @@ a {
   }
 }
 
-.node-readmore a::after, .read-more::after {
+.node-readmore a::after,
+.read-more::after {
   content: ' »';
   color: $orange;
 }

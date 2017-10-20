@@ -1,0 +1,45 @@
+.newsletter-article-top-row {
+  @extend .row;
+}
+
+.newsletter-article-date {
+  display: flex;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.newsletter-article-left {
+  @extend .col-md-8;
+}
+
+.newsletter-article-subtitle {
+  display: inline-block; // So that bottom margin works
+  @extend .h2; //Semantically this shouldn't be an h2, but we want it to look like one
+}
+
+.newsletter-article-right {
+  @extend .col-md-4;
+}
+
+
+.newsletter-article-bottom-row {
+  margin-top: 40px;
+}
+
+.newsletter-article-bottom-row > div > div {
+  @extend .row;
+}
+
+.newsletter-article-bottom-row h2 {
+  border-bottom: solid 1px $dark-gray;
+  padding-bottom: 10px;
+}
+
+.newsletter-article-bottom-row article {
+  @extend .col-md-4;
+}
+
+// Sidebar recent news
+.newsletter-article-right .views-row {
+  margin-bottom: 20px;
+}

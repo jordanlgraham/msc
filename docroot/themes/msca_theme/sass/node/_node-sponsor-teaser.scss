@@ -1,0 +1,16 @@
+.sponsor-teaser {
+  border: solid 1px $gray;
+  padding: 20px;
+}
+
+.sponsor-teaser-interior {
+  @extend .row;
+}
+
+.sponsor-teaser-left {
+  @extend .col-md-3;
+}
+
+.sponsor-teaser-right {
+  @extend .col-md-9;
+}
