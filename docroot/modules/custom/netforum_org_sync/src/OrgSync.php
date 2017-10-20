@@ -45,15 +45,21 @@ class OrgSync {
   protected $dateFormatter;
 
   const CRON_STATE_KEY = 'netforum_org_sync.org_sync';
+  /**
+   * @var \Drupal\netforum_soap\SoapHelper
+   */
+  private $helper;
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory,
-                              GetClient $getClient, LoggerInterface $logger, DateFormatterInterface $dateFormatter) {
+                              GetClient $getClient, LoggerInterface $logger, DateFormatterInterface $dateFormatter,
+                              SoapHelper $helper) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
     $this->config = $configFactory->get('netforum_org_sync.organizationsync');
     $this->logger = $logger;
     $this->get_client = $getClient;
     $this->dateFormatter = $dateFormatter;
+    $this->helper = $helper;
   }
 
   public function syncOrganizations($start_date = false, $end_date = false) {
@@ -137,73 +143,105 @@ class OrgSync {
    */
   private function saveOrgNode(array $org, NodeInterface $node) {
     //for non-static functions from the SoapHelper class.
-    $soaphelper = new SoapHelper;
     $individual = $this->getIndividual($org['con__cst_key']);
     //first handle fields that exist in both the Facility and Vendor content types
-    $node->set('title', SoapHelper::cleanSoapField($org['org_name']));
+    $node->set('title', $this->helper->cleanSoapField($org['org_name']));
     $node->field_address->country_code = 'US';
-    $node->field_address->administrative_area = SoapHelper::cleanSoapField($org['adr_state']);
-    $node->field_address->locality = SoapHelper::cleanSoapField($org['adr_city']);
-    $node->field_address->postal_code = SoapHelper::cleanSoapField($org['adr_post_code']);
-    $node->field_address->address_line1 = SoapHelper::cleanSoapField($org['adr_line1']);
-    $node->field_address->address_line2 = SoapHelper::cleanSoapField($org['adr_line2']);
-    $node->field_contact = isset($individual['name']) ? SoapHelper::cleanSoapField($individual['name']) : '';
-    $node->field_contact_title = isset($individual['title']) ? SoapHelper::cleanSoapField($individual['title']) : '';
-    $node->field_email = isset($individual['email']) ? SoapHelper::cleanSoapField($individual['email']) : '';
-    $node->field_phone = SoapHelper::cleanSoapField($org['phn_number_complete']);; //not in GetFacadeObject
-    $node->field_web_address = SoapHelper::cleanSoapField($org['cst_web_site']);
-    $node->field_facebook = $soaphelper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
-    $node->field_linkedin = $soaphelper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
-    $node->field_twitter = $soaphelper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
-    $node->field_customer_key = SoapHelper::cleanSoapField($org['org_cst_key']); //Text (plain)
+    $node->field_address->administrative_area = $this->helper->cleanSoapField($org['adr_state']);
+    $node->field_address->locality = $this->helper->cleanSoapField($org['adr_city']);
+    $node->field_address->postal_code = $this->helper->cleanSoapField($org['adr_post_code']);
+    $node->field_address->address_line1 = $this->helper->cleanSoapField($org['adr_line1']);
+    $node->field_address->address_line2 = $this->helper->cleanSoapField($org['adr_line2']);
+    $node->field_contact = isset($individual['name']) ? $this->helper->cleanSoapField($individual['name']) : '';
+    $node->field_contact_title = isset($individual['title']) ? $this->helper->cleanSoapField($individual['title']) : '';
+    $node->field_email = isset($individual['email']) ? $this->helper->cleanSoapField($individual['email']) : '';
+    $node->field_phone = $this->helper->cleanSoapField($org['phn_number_complete']);; //not in GetFacadeObject
+    $node->field_web_address = $this->helper->cleanSoapField($org['cst_web_site'], 'url');
+    $node->field_facebook = $this->helper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
+    $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
+    $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
+    $node->field_customer_key = $this->helper->cleanSoapField($org['org_cst_key']); //Text (plain)
 
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
-      $node->field_administrator = SoapHelper::cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
-      $node->field_customer_fax_number = SoapHelper::cleanSoapField($org['fax_number']);// Text (plain)
-      $node->field_customer_phone_number = SoapHelper::cleanSoapField($org['phn_number_complete']);// Text (plain)
-      $node->field_customer_type = SoapHelper::cleanSoapField($org['cst_type'], 'array');// List (text)
-      $node->field_customer_web_site = SoapHelper::checkURLValidity($org['cst_web_site']);// Text (plain)
-      $node->field_languages_spoken = SoapHelper::cleanSoapField($org['org_custom_text_08'], 'array');//  List (text)
-      $node->field_licensed_nursing_facility_ = SoapHelper::cleanSoapField($org['org_custom_integer_10']);//  Number (integer)
-      $node->field_medicaid = SoapHelper::cleanSoapField($org['org_custom_flag_05'], 'boolean');//  Boolean
-      $node->field_medicare = SoapHelper::cleanSoapField($org['org_custom_flag_09'], 'boolean');//  Boolean
-      $node->field_member_flag = SoapHelper::cleanSoapField($org['cst_member_flag'], 'boolean');// Boolean
-      $node->field_pace_program = SoapHelper::cleanSoapField($org['org_custom_flag_02'], 'boolean');//  Boolean
-      $node->field_service_type = SoapHelper::cleanSoapField($org['org_custom_text_09'], 'array');//  List (text)
-      $node->field_populations_served = SoapHelper::cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
-      $node->field_specialized_unit = SoapHelper::cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
-      $node->field_va_contract = SoapHelper::cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
+      $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
+      $node->field_customer_fax_number = $this->helper->cleanSoapField($org['fax_number']);// Text (plain)
+      $node->field_customer_phone_number = $this->helper->cleanSoapField($org['phn_number_complete']);// Text (plain)
+      $node->field_customer_type = $this->helper->cleanSoapField($org['cst_type'], 'array');// List (text)
+      $node->field_customer_web_site = $this->helper->checkURLValidity($org['cst_web_site']);// Text (plain)
+      $node->field_languages_spoken = $this->helper->cleanSoapField($org['org_custom_text_08'], 'array');//  List (text)
+      $node->field_licensed_nursing_facility_ = $this->helper->cleanSoapField($org['org_custom_integer_10']);//  Number (integer)
+      $node->field_medicaid = $this->helper->cleanSoapField($org['org_custom_flag_05'], 'boolean');//  Boolean
+      $node->field_medicare = $this->helper->cleanSoapField($org['org_custom_flag_09'], 'boolean');//  Boolean
+      $node->field_member_flag = $this->helper->cleanSoapField($org['cst_member_flag'], 'boolean');// Boolean
+      $node->field_pace_program = $this->helper->cleanSoapField($org['org_custom_flag_02'], 'boolean');//  Boolean
+      $node->field_service_type = $this->helper->cleanSoapField($org['org_custom_text_09'], 'array');//  List (text)
+      $node->field_populations_served = $this->helper->cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
+      $node->field_specialized_unit = $this->helper->cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
+      $node->field_va_contract = $this->helper->cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
 
-      $node->field_assisted_living_beds = SoapHelper::cleanSoapField($org['org_custom_integer_07']);
-      $node->field_companion_units = SoapHelper::cleanSoapField($org['org_custom_integer_04']);
-      $node->field_dementia_care_beds = SoapHelper::cleanSoapField($org['org_custom_integer_12']);
-      $node->field_dph_region = SoapHelper::cleanSoapField($org['org_custom_integer_13']);
-      $node->field_ep_region = SoapHelper::cleanSoapField($org['org_custom_string_04']);
-      $node->field_hospital_affiliation = SoapHelper::cleanSoapField($org['org_custom_string_01']);
-      $node->field_hospital_based_nf_tcu_beds = SoapHelper::cleanSoapField($org['org_custom_integer_08']);
-      $node->field_independent_living_beds = SoapHelper::cleanSoapField($org['org_custom_integer_09']);
-      $node->field_licensed_rest_home_beds = SoapHelper::cleanSoapField($org['org_custom_integer_11']);
-      $node->field_manager = SoapHelper::cleanSoapField($org['org_custom_string_12']);
-      $node->field_medicaid_occupancy = SoapHelper::cleanSoapField($org['org_custom_integer_02']);
-      $node->field_medicare_occupancy_percent = SoapHelper::cleanSoapField($org['org_custom_integer_14']);
-      $node->field_name_of_assisted_living = SoapHelper::cleanSoapField($org['org_custom_string_11']);
-      $node->field_network = SoapHelper::cleanSoapField($org['org_custom_string_09']);
-      $node->field_number_of_beds_oos = SoapHelper::cleanSoapField($org['org_custom_string_08']);
-      $node->field_number_of_residents = SoapHelper::cleanSoapField($org['org_custom_integer_01']);
-      $node->field_one_bedroom = SoapHelper::cleanSoapField($org['org_custom_integer_05']);
-      $node->field_previous_manager = SoapHelper::cleanSoapField($org['org_custom_string_13']);
-      $node->field_representative_district = SoapHelper::cleanSoapField($org['org_custom_string_06']);
-      $node->field_retirement_community_aff = SoapHelper::cleanSoapField($org['org_custom_string_02']);
-      $node->field_senate_district = SoapHelper::cleanSoapField($org['org_custom_string_07']);
-      $node->field_studio = SoapHelper::cleanSoapField($org['org_custom_integer_03']);
-      $node->field_total_annual_admissions = SoapHelper::cleanSoapField($org['org_custom_integer_15']);
-      $node->field_two_bedroom = SoapHelper::cleanSoapField($org['org_custom_integer_06']);
-      $node->field_wib_region = SoapHelper::cleanSoapField($org['org_custom_text_01']);
+      $node->field_acronym = $this->helper->cleanSoapField($org['org_acronym']);
+      $node->field_state_id = $this->helper->cleanSoapField($org['org_custom_string_03']);
+      $node->field_congressional_district = $this->helper->cleanSoapField($org['org_custom_string_10']);
+      $pref_acos = $this->helper->cleanSoapField($org['org_custom_text_12'], 'array');
+      $node->field_preferred_provider_acos = $this->loadOrCreateTermsByName($pref_acos);
+      $contract_acos = $this->helper->cleanSoapField($org['org_custom_text_13'], 'array');
+      $node->field_contracted_acos = $this->loadOrCreateTermsByName($contract_acos);
+      $node->field_county = $this->helper->cleanSoapField($org['org_custom_text_14'], 'array');
+      $node->field_owner = $this->helper->cleanSoapField($org['org_custom_string_05']);
+      $node->field_number_of_employees = $this->helper->cleanSoapField($org['org_num_employee']);
+      $node->field_chapter_affiliate = $this->helper->cleanSoapField($org['org_chapter_affiliate'], 'array');
+      $node->field_social_worker = $this->helper->cleanSoapField($org['org_custom_flag_03'], 'boolean');
+      $node->field_massmap_member = $this->helper->cleanSoapField($org['org_custom_flag_04'], 'boolean');
+      $node->field_for_profit = $this->helper->cleanSoapField($org['org_custom_flag_06'], 'boolean');
+      $node->field_income_subsidies = $this->helper->cleanSoapField($org['org_custom_flag_07'], 'boolean');
+      $node->field_ahca_member = $this->helper->cleanSoapField($org['org_custom_flag_08'], 'boolean');
+      $node->field_preferred_provider_of_aco = $this->helper->cleanSoapField($org['org_custom_flag_10'], 'boolean');
+      $node->field_contract_with_aco = $this->helper->cleanSoapField($org['org_custom_flag_11'], 'boolean');
+      $node->field_cna_training_site = $this->helper->cleanSoapField($org['org_custom_flag_12'], 'boolean');
+      $node->field_administrator_in_training = $this->helper->cleanSoapField($org['org_custom_flag_13'], 'boolean');
+      $node->field_assisted_living_on_campus = $this->helper->cleanSoapField($org['org_custom_flag_14'], 'boolean');
+      $node->field_ncal_member = $this->helper->cleanSoapField($org['org_custom_flag_15'], 'boolean');
+
+      $hmo = $this->helper->cleanSoapField($org['org_custom_text_05'], 'array');
+      $node->field_hmo_accepted = $this->loadOrCreateTermsByName($hmo);
+      $sco = $this->helper->cleanSoapField($org['org_custom_text_06'], 'array');
+      $node->field_sco_accepted = $this->loadOrCreateTermsByName($sco);
+      $ltc = $this->helper->cleanSoapField($org['org_custom_text_07'], 'array');
+      $node->field_private_ltc_insurance = $this->loadOrCreateTermsByName($ltc);
+      $oasis = $this->helper->cleanSoapField($org['org_custom_text_15'], 'array');
+      $node->field_oasis_participation = $this->loadOrCreateTermsByName($oasis);
+
+
+      $node->field_assisted_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_07']);
+      $node->field_companion_units = $this->helper->cleanSoapField($org['org_custom_integer_04']);
+      $node->field_dementia_care_beds = $this->helper->cleanSoapField($org['org_custom_integer_12']);
+      $node->field_dph_region = $this->helper->cleanSoapField($org['org_custom_integer_13']);
+      $node->field_ep_region = $this->helper->cleanSoapField($org['org_custom_string_04']);
+      $node->field_hospital_affiliation = $this->helper->cleanSoapField($org['org_custom_string_01']);
+      $node->field_hospital_based_nf_tcu_beds = $this->helper->cleanSoapField($org['org_custom_integer_08']);
+      $node->field_independent_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_09']);
+      $node->field_licensed_rest_home_beds = $this->helper->cleanSoapField($org['org_custom_integer_11']);
+      $node->field_manager = $this->helper->cleanSoapField($org['org_custom_string_12']);
+      $node->field_medicaid_occupancy = $this->helper->cleanSoapField($org['org_custom_integer_02']);
+      $node->field_medicare_occupancy_percent = $this->helper->cleanSoapField($org['org_custom_integer_14']);
+      $node->field_name_of_assisted_living = $this->helper->cleanSoapField($org['org_custom_string_11']);
+      $node->field_network = $this->helper->cleanSoapField($org['org_custom_string_09']);
+      $node->field_number_of_beds_oos = $this->helper->cleanSoapField($org['org_custom_string_08']);
+      $node->field_number_of_residents = $this->helper->cleanSoapField($org['org_custom_integer_01']);
+      $node->field_one_bedroom = $this->helper->cleanSoapField($org['org_custom_integer_05']);
+      $node->field_previous_manager = $this->helper->cleanSoapField($org['org_custom_string_13']);
+      $node->field_representative_district = $this->helper->cleanSoapField($org['org_custom_string_06']);
+      $node->field_retirement_community_aff = $this->helper->cleanSoapField($org['org_custom_string_02']);
+      $node->field_senate_district = $this->helper->cleanSoapField($org['org_custom_string_07']);
+      $node->field_studio = $this->helper->cleanSoapField($org['org_custom_integer_03']);
+      $node->field_total_annual_admissions = $this->helper->cleanSoapField($org['org_custom_integer_15']);
+      $node->field_two_bedroom = $this->helper->cleanSoapField($org['org_custom_integer_06']);
+      $node->field_wib_region = $this->helper->cleanSoapField($org['org_custom_text_01']);
     }
     //fields specific to vendor nodes
-    $primary_services = SoapHelper::cleanSoapField($org['org_custom_text_03'], 'array');
-    $additional_services = SoapHelper::cleanSoapField($org['org_custom_text_04'], 'array');
+    $primary_services = $this->helper->cleanSoapField($org['org_custom_text_03'], 'array');
+    $additional_services = $this->helper->cleanSoapField($org['org_custom_text_04'], 'array');
 
     if (!empty($primary_services)) {
       $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services);
@@ -326,18 +364,15 @@ class OrgSync {
           $organization = $this->getObject($org['org_cst_key']);
 
           //If it's a facility, make sure it's a member facility, or move on.
-          if($org['org_ogt_code'] != 'associate' &&
-            (empty($organization['cst_member_flag'])
-              || $organization['cst_member_flag'] != '1')) {
+          if($this->getOrganizationType($org) == 'facility' &&
+            $this->helper->cleanSoapField('cst_member_flag') != '1') {
             continue;
           }
-          if(!empty($organization['cst_member_flag']) && $organization['cst_member_flag'] == '1') {
-            $node = $this->loadOrCreateOrgNode($organization);
-            $this->saveOrgNode($organization, $node);
-            // Save some memory.
-            unset($node);
-            unset($orgs['Result'][$key]);
-          }
+          $node = $this->loadOrCreateOrgNode($organization);
+          $this->saveOrgNode($organization, $node);
+          // Save some memory.
+          unset($node);
+          unset($orgs['Result'][$key]);
 
         }
         return count($orgs['Result']);
@@ -357,8 +392,9 @@ class OrgSync {
       return '';
     }
     $record = $this->getObject($cst_key, 'individual');
-    $individual = '';
+
     if ($record) {
+      $individual = array();
       if(!empty($record['ind_full_name_cp'])) {
         $individual['name'] = $record['ind_full_name_cp'];
       }
@@ -368,10 +404,12 @@ class OrgSync {
       if(!empty($record['eml_address'])) {
         $individual['email'] = $record['eml_address'];
       }
+      return $individual;
     }
-
-
-    return $individual;
+    else {
+      //return an empty string so that
+      return '';
+    }
   }
 
   public function getObject($cst_key, $object_type = 'organization') {
