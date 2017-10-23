@@ -43,3 +43,12 @@
 .newsletter-article-right .views-row {
   margin-bottom: 20px;
 }
+
+// the col-md-6 class is assigned in the markup instead of using extends, and I'm not sure what contexts it's used in
+// hence this terrible bit of hackery to remove the col-md-6 in this context
+.newsletter-article-right .facility-and-login .col-md-6 {
+  width: 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
