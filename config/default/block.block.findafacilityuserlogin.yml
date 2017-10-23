@@ -1,4 +1,4 @@
-uuid: 7fcebf65-0409-4133-a86a-88a8ad0a1a88
+uuid: 3b61c8c6-a3dd-47df-949a-04463a56a6cd
 langcode: en
 status: true
 dependencies:
@@ -13,7 +13,7 @@ third_party_settings:
 id: findafacilityuserlogin
 theme: msca_theme
 region: gutter
-weight: -12
+weight: 0
 provider: null
 plugin: facility_search_login
 settings:
