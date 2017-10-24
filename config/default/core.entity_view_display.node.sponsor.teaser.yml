@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
-    - field.field.node.sponsor.field_related_event
     - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
@@ -99,6 +98,5 @@ hidden:
   field_address: true
   field_gated: true
   field_primary_services: true
-  field_related_event: true
   field_sponsorship_level: true
   links: true
