@@ -36,26 +36,30 @@
     <!--main-section-end -->
 
     <!--right-sidebar-start -->
-    <aside class="col-md-4 float-right">
+    <aside class="col-md-4 float-right newsletter">
 
         <!--custom-top ad space-start -->
         {% if content.field_sponsor|render %}
-            <h2>Sponsored By</h2>
-            {{ content.field_sponsor }}
+            <div class="sidebar-block">
+                <h2>Sponsored By</h2>
+                {{ content.field_sponsor }}
+            </div>
         {% endif %}
         <!--custom-top ad space-end -->
+        <div class="sidebar-block">
 
-        <h2>In This Issue</h2>
-        <ul class="list-unstyled">
-            {% for item in node.field_newsletter_article %}
-                <!--tocstart -->
-                <li><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></li>
-                <!--tocend -->
-            {% endfor %}
-        </ul>
+            <h2>In This Issue</h2>
+            <ul class="list-unstyled issue-toc">
+                {% for item in node.field_newsletter_article %}
+                    <!--tocstart -->
+                    <li><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></li>
+                    <!--tocend -->
+                {% endfor %}
+            </ul>
 
-        <p><a class="btn btn-primary" href="/newsletter/issues/" target="_blank">See Previous Issues</a></p>
-        <p><a class="btn btn-primary" href="/member-resources/preferred-vendors/" target="_blank">Find a Preferred Vendor</a></p>
+            <p><a class="btn btn-primary" href="/newsletter/issues/" target="_blank">See Previous Issues</a></p>
+            <p><a class="btn btn-primary" href="/member-resources/preferred-vendors/" target="_blank">Find a Preferred Vendor</a></p>
+        </div>
     </aside>
     <!--right-sidebar-end -->
 
