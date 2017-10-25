@@ -12,23 +12,29 @@
 
         <!--featured-article-start -->
         {% if content.field_featured_article|render %}
-            <h2> {{ 'Featured Article'|t }}</h2>
-             {{ content.field_featured_article }}
+            <div class="featured-article">
+                <h2> {{ 'Featured Article'|t }}</h2>
+                {{ content.field_featured_article }}
+            </div>
         {% endif %}
         <!--featured-article-end -->
 
         <!--articles-start -->
         {% if content.field_newsletter_article|render %}
-            <h2>{{ 'Latest News & Resources'|t }}</h2>
-            {{ content.field_newsletter_article }}
+            <div class="latest-articles">
+                <h2>{{ 'Latest News & Resources'|t }}</h2>
+                {{ content.field_newsletter_article }}
+            </div>
         {% endif %}
         <!--articles-end -->
 
         <!--custom-calendar-start -->
         {% if content.field_calendar|render %}
-            <a name="calendar"></a>
-            <h2>{{ 'Upcoming Education & Events'|t }}</h2>
-            {{ content.field_calendar }}
+            <div class="calendar">
+                <a name="calendar"></a>
+                <h2>{{ 'Upcoming Education & Events'|t }}</h2>
+                {{ content.field_calendar }}
+            </div>
         {% endif %}
         <!--custom-calendar-end -->
 

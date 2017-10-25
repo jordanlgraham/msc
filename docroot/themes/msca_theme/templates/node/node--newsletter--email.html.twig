@@ -125,14 +125,46 @@
                                     </td></tr>
                             {% endfor %}
                             <!--custom-top ad space-end -->
-                            <tr><td colspan="2" height="25" bgcolor="#000000">&nbsp;</td></tr>
                         </table>
                         <br />
+
+                        <!--featured-article-start -->
+                        {% for item.field_featured_article %}
+                            <table cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px">
+                                <tr><td colspan="2" height="25" bgcolor="#000000">FEATURED ARTICLE</td></tr>
+                                <tr>
+                                    <td valign="bottom" align="left" style="color:#6D89AA; font-weight:bold; font-size:14px; padding: 0 0 0 25px;"><a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" class="article-title" target="_blank">{{ item.entity.label }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height:16px; font-size:12px; font-family:Arial, Helvetica, sans-serif; padding: 5px 25px;">
+                                        {% set text = item.entity.body.value|render|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
+                                        {% set imagepath = item.entity.field_newsletter_image.entity.fileuri %}
+                                        {% set imagestyle = imagepath|image_style('logo') %}
+                                        {% if imagepath is defined and imagepath is not empty %}
+                                            <img src="http://{{ base_path }}{{ file_url(imagestyle) }}" class="newsletter-image" width="200px">
+                                        {% endif %}
+                                        <span class=""article-body">
+                                        {{ text|length > 500 ? text|slice(0, 500)|raw ~ '...' : text|raw }}
+                                        </span>
+                                        <span class="read-more">
+                                            <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">Read more</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr><td valign="top" style="font-size:10px; padding: 5px 25px 0px 25px;">
+                                        <img src="http://{{ base_path }}/sites/default/files/inline-images/email_article.gif" width="18" height="16">
+                                        <a href="http://{{ base_path }}/forward/node/{{ item.entity.nid.value }}" style="margin:5px; position:relative; top:-4px; color: #37567b;" target="_blank">E-mail This Article</a>
+                                        <img src="http://{{ base_path }}/sites/default/files/inline-images/print_article.gif" width="18" height="16">
+                                        <a href="http://{{ base_path }}/print/pdf/node/{{ item.entity.nid.value }}" style="margin:5px; position:relative; top:-4px; color: #37567b;" target="_blank">Print This Article</a></td></tr>
+                            </table><br>
+                        {% endfor %}
+                        <!--featured-article-end -->
 
                         {% for item in node.field_newsletter_article %}
                             <!--articlestart -->
                             <a name="{{ item.entity.nid.value }}"></a>
                             <table cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px">
+                                <tr><td colspan="2" height="25" bgcolor="#000000">LATEST NEWS & RESOURCES</td></tr>
                                 <tr>
                                     <td valign="bottom" align="left" style="color:#6D89AA; font-weight:bold; font-size:14px; padding: 0 0 0 25px;"><a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" class="article-title" target="_blank">{{ item.entity.label }}</a></td>
                                 </tr>
