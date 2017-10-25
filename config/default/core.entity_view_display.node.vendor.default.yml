@@ -22,6 +22,7 @@ dependencies:
     - address
     - button_link
     - link
+    - media_entity
     - user
 id: node.vendor.default
 targetEntityType: node
@@ -128,11 +129,12 @@ content:
     region: content
   field_vendor_image:
     weight: 13
-    label: above
+    label: hidden
     settings:
-      link: true
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
-    type: entity_reference_label
+    type: media_thumbnail
     region: content
   field_web_address:
     weight: 3

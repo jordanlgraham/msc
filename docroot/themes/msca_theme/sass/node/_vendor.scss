@@ -1,0 +1,15 @@
+.vendor-content-interior {
+  @extend .row;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.vendor-logo {
+  @extend .col-md-3;
+  display: flex;
+  justify-content: center;
+}
+
+.vendor-info {
+  @extend .col-md-9;
+}
