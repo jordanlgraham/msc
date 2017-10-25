@@ -5,10 +5,11 @@ dependencies: {  }
 name: sponsor_logo_large_190x110_
 label: 'Sponsor logo large (190x110)'
 effects:
-  3a03b127-8fcd-4b6d-9cbe-3e198071a46a:
-    uuid: 3a03b127-8fcd-4b6d-9cbe-3e198071a46a
-    id: image_scale_and_crop
-    weight: 1
+  65a163cc-1bd0-477d-b17d-eaced229d968:
+    uuid: 65a163cc-1bd0-477d-b17d-eaced229d968
+    id: image_scale
+    weight: 2
     data:
       width: 190
-      height: 110
+      height: null
+      upscale: false
