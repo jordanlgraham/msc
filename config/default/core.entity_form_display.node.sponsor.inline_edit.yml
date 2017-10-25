@@ -11,15 +11,14 @@ dependencies:
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
-    - field.field.node.sponsor.field_related_event
     - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
     - image.style.thumbnail
     - node.type.sponsor
   module:
-    - image
     - link
+    - svg_image
     - text
 id: node.sponsor.inline_edit
 targetEntityType: node
@@ -100,7 +99,6 @@ hidden:
   created: true
   field_address: true
   field_primary_services: true
-  field_related_event: true
   path: true
   promote: true
   sticky: true

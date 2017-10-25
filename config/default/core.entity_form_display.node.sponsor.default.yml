@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - field.field.node.sponsor.body
     - field.field.node.sponsor.field_address
     - field.field.node.sponsor.field_facebook
@@ -10,7 +11,6 @@ dependencies:
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
-    - field.field.node.sponsor.field_related_event
     - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
@@ -18,10 +18,11 @@ dependencies:
     - node.type.sponsor
   module:
     - address
-    - image
+    - entity_browser_entity_form
     - inline_entity_form
     - link
     - path
+    - svg_image
     - text
 id: node.sponsor.default
 targetEntityType: node
@@ -94,19 +95,6 @@ content:
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
-  field_related_event:
-    weight: 11
-    settings:
-      match_operator: CONTAINS
-      form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: false
-    third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
   field_sponsorship_level:
