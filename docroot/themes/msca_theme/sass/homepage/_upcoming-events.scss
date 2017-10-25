@@ -44,7 +44,7 @@
 
 //need to vertically align content, also need to rearrange items for anything smaller than a large screen
 .upcoming-events .event-category-location {
-  @extend .col-lg-3;
+  @extend .col-lg-2;
   @extend .col-md-6;
   @extend .col-12;
 }
@@ -55,7 +55,7 @@
 }
 
 .upcoming-events .event-call-to-action {
-  @extend .col-lg-3;
+  @extend .col-lg-4;
   @extend .col-md-6;
   @extend .col-12;
   //need to vertically center CTAs
