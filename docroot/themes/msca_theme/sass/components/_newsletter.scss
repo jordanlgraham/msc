@@ -5,3 +5,17 @@
   display: inline-block;
   margin-top: 1rem;
 }
+
+.issue-toc li {
+  margin-bottom: 1.5rem;
+}
+
+aside.newsletter {
+  border: solid 0 lightgrey;
+  padding: 0;
+}
+aside.newsletter .sidebar-block {
+  border: solid 1px lightgrey;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}

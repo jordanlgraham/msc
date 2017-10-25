@@ -5,10 +5,11 @@ dependencies: {  }
 name: sponsor_logo_small_140x87_
 label: 'Sponsor logo small (140x87)'
 effects:
-  ec9b1128-ccb0-4c27-a8a3-abcf78b413f9:
-    uuid: ec9b1128-ccb0-4c27-a8a3-abcf78b413f9
-    id: image_scale_and_crop
+  9fcbf0a5-29b6-4f47-bb65-c3d2be8e681a:
+    uuid: 9fcbf0a5-29b6-4f47-bb65-c3d2be8e681a
+    id: image_scale
     weight: 1
     data:
       width: 140
-      height: 87
+      height: null
+      upscale: false
