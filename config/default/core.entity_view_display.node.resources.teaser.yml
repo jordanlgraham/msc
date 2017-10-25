@@ -41,9 +41,14 @@ content:
     type: entity_reference_label
     weight: 2
     region: content
-    label: above
+    label: hidden
     settings:
       link: false
+    third_party_settings: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
@@ -55,4 +60,3 @@ hidden:
   field_gated: true
   field_related_content: true
   field_tags: true
-  links: true

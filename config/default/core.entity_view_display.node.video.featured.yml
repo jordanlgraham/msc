@@ -1,0 +1,52 @@
+uuid: 2aadf2bf-e663-4dcd-beb8-b40c817fb9fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.video.body
+    - field.field.node.video.field_event_category
+    - field.field.node.video.field_gated
+    - field.field.node.video.field_related_content
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video_date
+    - field.field.node.video.field_youtube_id
+    - node.type.video
+  module:
+    - text
+    - user
+id: node.video.featured
+targetEntityType: node
+bundle: video
+mode: featured
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    region: content
+  field_youtube_id:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_event_category: true
+  field_gated: true
+  field_related_content: true
+  field_tags: true
+  field_video_date: true
