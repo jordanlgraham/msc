@@ -9,6 +9,9 @@
 
 .sponsor-teaser-left {
   @extend .col-md-3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sponsor-teaser-right {
