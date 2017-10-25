@@ -18,8 +18,9 @@ function msca_theme_preprocess_node(&$variables) {
     if(!empty($variables['content']['field_date'][0]['#markup'])) {
       $date_field = $variables['content']['field_date'][0]['#markup'];
     }
-    elseif(!empty($variables['content']['field_news_release_date'])) {
-      $date_field = $variables['content']['field_news_release_date'];
+    // If no date set for event, display node's standard authored date
+    else {
+      $date_field = $variables['date'];
     }
     if(!empty($date_field) && is_string($date_field)) {
       $field_date = strtotime($date_field);
