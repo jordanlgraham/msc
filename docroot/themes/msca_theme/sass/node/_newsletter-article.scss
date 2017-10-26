@@ -4,7 +4,6 @@
 
 .newsletter-article-date {
   display: flex;
-  font-style: italic;
   margin-bottom: 10px;
 }
 
@@ -21,22 +20,32 @@
   @extend .col-md-4;
 }
 
+// Related Content
 
 .newsletter-article-bottom-row {
   margin-top: 40px;
 }
 
-.newsletter-article-bottom-row > div > div {
-  @extend .row;
-}
-
-.newsletter-article-bottom-row h2 {
-  border-bottom: solid 1px $dark-gray;
-  padding-bottom: 10px;
+.row-eq-height {
+  padding: 1rem 0 3rem;
+  display: flex;
 }
 
 .newsletter-article-bottom-row article {
-  @extend .col-md-4;
+  padding: 2rem;
+  border: solid 1px $dark-gray;
+  height: 100%;
+}
+
+.newsletter-article-bottom-row .row .col-lg-4 {
+  float: none;
+  vertical-align: top;
+  margin-bottom: 1rem;
+}
+
+.newsletter-article-bottom-row > h2 {
+  border-bottom: solid 1px $dark-gray;
+  padding-bottom: 10px;
 }
 
 // Sidebar recent news
