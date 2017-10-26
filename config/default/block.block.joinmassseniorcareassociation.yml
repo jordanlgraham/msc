@@ -2,8 +2,11 @@ uuid: 9fb723d1-3e0f-4961-9527-4bf05f4695ab
 langcode: en
 status: true
 dependencies:
+  content:
+    - 'block_content:basic:0536f0ad-e64b-4fba-97a2-2c2c4f33037e'
   module:
     - block_class
+    - block_content
   theme:
     - msca_theme
 third_party_settings:
