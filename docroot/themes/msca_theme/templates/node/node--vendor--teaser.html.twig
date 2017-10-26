@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Theme override to display a Vendor node full display.
+ *
+ */
+#}
+<article{{ attributes }}>
+  {% if not page %}
+    <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ content.field_primary_services }}
+
+  {{ content.field_additional_services }}
+
+  <p><a href="{{ url }}">{{ 'Read More'|t }}</a></p>
+</article>

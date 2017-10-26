@@ -35,20 +35,67 @@
   width: 100%;
 }
 
+
+
+.path-preferred-vendors .views-infinite-scroll-content-wrapper {
+  @extend .row;
+  .views-row {
+    @extend .col-md-6;
+    margin-bottom: $grid-gutter-width-base;
+
+    article {
+      height: 100%;
+    }
+  }
+}
+
 .facility-search-filters form > div:first-of-type label{
   margin-top: 0;
 }
 
+
+.path-preferred-vendors .views-exposed-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+
+.path-preferred-vendors .views-exposed-form label {
+  display: none;
+}
+
+.path-preferred-vendors .views-exposed-form select,
 .facility-search-filters select {
   @extend .form-control;
   width: 100%;
 }
 
 
-
+.path-preferred-vendors .views-exposed-form .form-actions,
 .facility-search-filters .form-actions {
   position: relative;
-  margin-top: $grid-gutter-width-base;
+  input:nth-child(2) {
+    margin-top: 10px;
+  }
+}
+
+.path-preferred-vendors .views-exposed-form .form-actions {
+  margin: 0 0 0 $grid-gutter-width-base;
+  @include media-breakpoint-down(md) {
+    margin: $grid-gutter-width-base 0 0 0;
+  }
+}
+
+.path-preferred-vendors .views-exposed-form .form-item {
+  margin: 0 $grid-gutter-width-base 0 0;
+  @include media-breakpoint-down(md) {
+    margin: $grid-gutter-width-base 0 0 0;
+  }
 }
 
 .facility-search-filters .form-actions input {
@@ -57,12 +104,14 @@
   padding-right: 0;
 }
 
-.facility-search-results article {
+.facility-search-results article,
+.vendor-search-results article {
   margin-top: $grid-gutter-width-base;
   background: $light-gray;
   padding: $grid-gutter-width-base;
 }
 
+.path-preferred-vendors .views-exposed-form .button,
 .facility-search-filters .button {
   @extend .btn;
   &:first-of-type {
@@ -110,6 +159,7 @@
   @extend .btn-primary;
 }
 
+.vendor-search-results .pager,
 .facility-search-results .pager {
   margin: $grid-gutter-width-base*2 0 0 0;
   text-align: center;
