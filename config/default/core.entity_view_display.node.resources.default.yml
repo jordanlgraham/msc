@@ -50,7 +50,7 @@ content:
     region: content
   field_related_content:
     weight: 5
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
