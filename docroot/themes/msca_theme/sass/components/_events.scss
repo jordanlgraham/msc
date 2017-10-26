@@ -1,5 +1,9 @@
 .event-call-to-action div {
   display: inline-block;
+  max-width: 100%;
+  a {
+    white-space: normal;
+  }
 }
 
 aside .date-square {

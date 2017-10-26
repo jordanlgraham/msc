@@ -62,6 +62,7 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
       '#type' => 'select',
       '#title' => $this->t('Proximity'),
       '#empty_option' => $this->t('-Distance-'),
+      '#default_value' => 5,
       '#options' => $options,
     );
   }
@@ -73,17 +74,11 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
     $input = $form_state->getUserInput();
     if (
       (!empty($input['geocode_postal']) || !empty($input['proximity']))
-      && (!isset($input['op']) || $input['op'] != 'Reset')
+      && (!isset($input['op']) || $input['op'] !== 'Reset')
     ) {
-      $geocode = TRUE;
-      // Validate the user has entered a postal code.
-      if (empty($input['geocode_postal'])) {
-        $form_state->setErrorByName('geocode_postal', t('Please enter a valid postal code.'));
-        $geocode = FALSE;
-      }
-      if (empty($input['proximity'])) {
-        $form_state->setErrorByName('proximity', t('Please select a radius to search within.'));
-        $geocode = FALSE;
+      $geocode = FALSE;
+      if (!empty($input['proximity']) && !empty($input['geocode_postal'])) {
+        $geocode = TRUE;
       }
       if (!$geocode) {
         return FALSE;

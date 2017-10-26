@@ -6,6 +6,11 @@
   margin-top: 1rem;
 }
 
+// Todo: address through config if client decides to really eliminate these icons.
+.page-node-type-newsletter .icon-square {
+  display: none;
+}
+
 .issue-toc li {
   margin-bottom: 1.5rem;
 }
@@ -18,4 +23,22 @@ aside.newsletter .sidebar-block {
   border: solid 1px lightgrey;
   padding: 2rem;
   margin-bottom: 2rem;
+}
+.featured-article {
+  padding-bottom: 10px;
+}
+.featured-article > h2 {
+  background-color: $orange;
+  color: white;
+  padding: 1rem;
+}
+.latest-articles > h2 {
+  background-color: $green;
+  color: white;
+  padding: 1rem;
+}
+.calendar > h2 {
+  background-color: $dark-blue;
+  color: white;
+  padding: 1rem;
 }
