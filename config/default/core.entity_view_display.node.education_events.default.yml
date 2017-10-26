@@ -83,16 +83,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  field_gated:
-    weight: 8
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_gold_sponsor:
     weight: 6
     label: hidden
@@ -115,4 +105,5 @@ hidden:
   entity_print_view_word_docx: true
   field_event_key: true
   field_event_sponsor: true
+  field_gated: true
   links: true
