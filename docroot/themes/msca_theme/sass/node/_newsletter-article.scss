@@ -4,7 +4,6 @@
 
 .newsletter-article-date {
   display: flex;
-  font-style: italic;
   margin-bottom: 10px;
 }
 
@@ -20,7 +19,6 @@
 .newsletter-article-right {
   @extend .col-md-4;
 }
-
 
 .newsletter-article-bottom-row {
   margin-top: 40px;
