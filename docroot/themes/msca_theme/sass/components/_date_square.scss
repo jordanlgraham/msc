@@ -9,6 +9,8 @@ $date-square-day-size: 2rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  float: left;
+  margin-right: 1rem;
 }
 .date-square-month, .date-square-day {
   display: block;
