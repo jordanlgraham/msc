@@ -42,7 +42,18 @@ class SimpleFacilitySearch extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Redirect the user to the view with the exposed filter set.
     $keys = $form_state->getValue('keys');
-    $form_state->setRedirect('view.facility_search.page_1', [], ['query' => ['keys' => $keys]]);
+    // Set the query string depending on the user's input
+    if (!is_numeric($keys)) {
+      $query = ['keys' => $keys];
+    }
+    else {
+      $query = [
+        'proximity' => 5,
+        'geocode_postal' => $keys,
+        'geocode_state' => 1,
+      ];
+    }
+    $form_state->setRedirect('view.facility_search.page_1', [], ['query' => $query]);
   }
 
 }
