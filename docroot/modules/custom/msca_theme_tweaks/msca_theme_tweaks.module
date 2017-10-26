@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -100,4 +101,20 @@ function msca_theme_tweaks_preprocess_page(&$vars) {
       '@year' => date('Y'),
     ]
   );
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_theme_tweaks_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = $form_state->get('view');
+  if ($view->id() !== 'preferred_vendors') {
+    return;
+  }
+
+  // Change the placeholders
+  $form['title']['#placeholder'] = t('Vendor Name');
+  $form['field_primary_services_target_id']['#options']['All'] = t('Filter by Service');
 }
