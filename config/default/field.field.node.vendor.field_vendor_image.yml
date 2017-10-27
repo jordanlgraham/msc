@@ -11,7 +11,7 @@ field_name: field_vendor_image
 entity_type: node
 bundle: vendor
 label: 'Vendor Image'
-description: ''
+description: 'Image will be resized proportionally to be 250px wide.'
 required: false
 translatable: false
 default_value: {  }
