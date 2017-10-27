@@ -19,11 +19,13 @@ aside.newsletter {
   border: solid 0 lightgrey;
   padding: 0;
 }
+
 aside.newsletter .sidebar-block {
   border: solid 1px lightgrey;
   padding: 2rem;
   margin-bottom: 2rem;
 }
+
 .featured-article {
   padding-bottom: 10px;
 }
@@ -32,11 +34,13 @@ aside.newsletter .sidebar-block {
   color: white;
   padding: 1rem;
 }
+
 .latest-articles > h2 {
   background-color: $green;
   color: white;
   padding: 1rem;
 }
+
 .calendar > h2 {
   background-color: $dark-blue;
   color: white;

@@ -8,6 +8,7 @@ dependencies:
     - field.storage.node.field_news_teaser_image
     - node.type.newsletter_article
   module:
+    - datetime
     - media_entity
     - node
     - text
@@ -509,6 +510,19 @@ display:
           entity_type: node
           entity_field: promote
           plugin_id: standard
+        field_news_release_date_value:
+          id: field_news_release_date_value
+          table: node__field_news_release_date
+          field: field_news_release_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: hour
+          plugin_id: datetime
         created:
           id: created
           table: node_field_data
