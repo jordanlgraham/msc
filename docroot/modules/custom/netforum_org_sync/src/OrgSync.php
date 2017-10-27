@@ -45,6 +45,7 @@ class OrgSync {
   protected $dateFormatter;
 
   const CRON_STATE_KEY = 'netforum_org_sync.org_sync';
+  const DATE_FORMAT = 'm/d/Y H:i:s A';
   /**
    * @var \Drupal\netforum_soap\SoapHelper
    */
@@ -273,7 +274,7 @@ class OrgSync {
     }
   }
 
-  private function getOrganizations() {
+  public function getOrganizations() {
     $facility_types = $this->typesToSync();
     $client = $this->get_client->getClient();
     $responseHeaders = $this->get_client->getResponseHeaders();
@@ -464,8 +465,62 @@ class OrgSync {
    *
    * @return array
    */
-  private function typesToSync() {
+  public function typesToSync() {
     return explode("\n", str_replace("\r", "", $this->config->get('org_types')));
+  }
+
+  public function getOrganizationChanges($startDate, $endDate) {
+    $format = 'm/d/Y H:i:s A';
+    $client = $this->get_client->getClient();
+    $responseHeaders = $this->get_client->getResponseHeaders();
+    $params = [
+      'szStartDate' => date($format, $startDate),
+      'szEndDate' => date($format, $endDate),
+    ];
+      if(!empty($responseHeaders['AuthorizationToken']->Token)) {
+        $authHeaders = $this->get_client->getAuthHeaders($responseHeaders['AuthorizationToken']->Token);
+      } else {
+        $authHeaders = $this->get_client->getAuthHeaders();
+      }
+      $response = $client->__soapCall('GetOrganizationChangesByDate', array('parameters' => $params), NULL, $authHeaders, $responseHeaders);
+      if (!empty($response->GetOrganizationChangesByDateResult->any)) {
+        $xmlstring = str_replace(' xsi:schemaLocation="http://www.avectra.com/OnDemand/2005/ Organization.xsd"', '', $response->GetOrganizationChangesByDateResult->any);
+        $xmlstring = str_replace('xsi:nil="true"', '', $xmlstring);
+        $xml = simplexml_load_string($xmlstring);
+        $json = json_encode($xml);
+        $orgs = json_decode($json, TRUE);
+        if (empty($orgs['Result'])) {
+          return 0;
+        }
+        // If one result is returned, it won't be an array of results.
+        // Change to an array of results so return is consistent.
+        if (isset($orgs['Result']['org_cst_key'])) {
+          return [$orgs['Result']];
+        }
+        return $orgs['Result'];
+      }
+    throw new Exception('Empty organizations response.');
+  }
+
+  public function syncOrganization($org, $facility_types) {
+
+    // This API method doesn't allow filtering by facility type, so do it here.
+    if (!empty($org['org_ogt_code']) && !in_array($org['org_ogt_code'], $facility_types)) {
+      return FALSE;
+    }
+
+    //We need to get the GetFacadeObject version of this, which returns
+    //more fields than GetOrganizationChangesByDate. Silly, but necessary.
+    $organization = $this->getObject($org['org_cst_key']);
+
+    //If it's a facility, make sure it's a member facility, or move on.
+    if($this->getOrganizationType($org) === 'facility' &&
+      $this->helper->cleanSoapField($org['cst_member_flag']) !== '1') {
+      return FALSE;
+    }
+    $node = $this->loadOrCreateOrgNode($organization);
+    $this->saveOrgNode($organization, $node);
+    return $node;
   }
 
 }

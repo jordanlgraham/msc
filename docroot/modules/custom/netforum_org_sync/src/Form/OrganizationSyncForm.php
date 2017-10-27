@@ -2,7 +2,10 @@
 
 namespace Drupal\netforum_org_sync\Form;
 
+use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Component\Utility\Html;
+use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
@@ -105,8 +108,7 @@ class OrganizationSyncForm extends ConfigFormBase {
       ->save();
     //if we sync all, we want to start cycling
     if(!empty($form_state->getValue('sync_all')) && $form_state->getValue('sync_all') == 1) {
-      $this->syncAll();
-      return;
+      return $this->syncAll();
     }
     $start_date = false;
     $end_date = false;
@@ -126,22 +128,85 @@ class OrganizationSyncForm extends ConfigFormBase {
   }
 
   protected function syncAll() {
-    $i = 2008;
-    $this_year = date('Y');
-    while($i <= $this_year) {
-      $k = 1;
-      while($k <= 12) {
-        //make a unix timestamp from yyyy-mm-dd
-        $start_date = strtotime($i . '-' . $k . '-' . '1');
-        $end_date = $start_date + (86400 * 31);
-        $this->logger->info('Syncing Organizations from @start to @end',
-          ['@start' => date('Y-m-d', $start_date), '@end' => date('Y-m-d', $end_date)]);
-        $this->sync->syncOrganizations($start_date, $end_date);
-        $k++;
+    $ops = [];
+    $types = $this->sync->typesToSync();
+    $start = new \DateTime('2008-01-01');
+    $end = new \DateTime('12AM tomorrow');
+    $interval = \DateInterval::createFromDateString('1 month');
+    $period = new \DatePeriod($start, $interval, $end);
+    /** @var \DateTime $dt */
+    foreach ($period as $dt) {
+      $ops[] = [self::class . '::importOrgsBatch', [$types, $dt->getTimeStamp(), $dt->modify('+1 month')->getTimestamp()]];
+    }
+    $batch = [
+      'title' => $this->t('Sync organizations'),
+      'finished' => self::class . '::importFinished',
+      'operations' => $ops,
+    ];
+    batch_set($batch);
+  }
+
+  /*******************
+   * Batch functions *
+   *******************/
+
+  public static function importOrgsBatch($facility_types, $start_date, $end_date, &$context) {
+    /** @var OrgSync $sync */
+    $sync = \Drupal::service('netforum_org_sync.org_sync');
+    $start_formatted = date(OrgSync::DATE_FORMAT, $start_date);
+    $end_formatted = date(OrgSync::DATE_FORMAT, $end_date);
+    $context['message'] = Html::escape("Syncing $start_formatted to $end_formatted");
+    try {
+      $orgs = $sync->getOrganizationChanges($start_date, $end_date);
+      if (empty($orgs)) {
+        return TRUE;
       }
-      $i++;
+    }
+    catch (\Exception $exception) {
+      $msg = $exception->getMessage();
+      $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period $start_formatted to $end_formatted: $msg";
+      return TRUE;
+    }
+    $sandbox_key = $start_date.$end_date;
+    if (!isset($context['sandbox'][$sandbox_key]['pointer'])) {
+      $context['sandbox'][$sandbox_key]['pointer'] = 0;
+      $context['sandbox'][$sandbox_key]['count'] = count($orgs);
+    }
+    // Process the organizations 50 at a time.
+    $start = $context['sandbox'][$sandbox_key]['pointer'];
+    $end = $context['sandbox'][$sandbox_key]['pointer'] + 50;
+    for ($i = $start; $i < $end; $i++) {
+      if (!isset($orgs[$i])) {
+        break;
+      }
+      $organization = $orgs[$i];
+      try {
+        $node = $sync->syncOrganization($organization, $facility_types);
+        if (is_object($node)) {
+          $context['results']['success'][] = $node->id();
+        }
+      }
+      catch (\Exception $exception) {
+        $context['results']['errors']['sync'][] = "Error syncing organization {$organization['org_cst_key']}: " .
+          $exception->getMessage();
+        $debug = TRUE;
+      }
+      $context['sandbox'][$sandbox_key]['pointer']++;
     }
 
+    if ($context['sandbox'][$sandbox_key]['pointer'] === $context['sandbox'][$sandbox_key]['count'] || $sandbox_key === '13596948001362114000') {
+      $context['finished'] = 1;
+      unset($context['sandbox'][$sandbox_key]);
+    }
+    else {
+      $context['message'] = $context['message'] . ": Completed {$context['sandbox'][$sandbox_key]['pointer']} of {$context['sandbox'][$sandbox_key]['count']}";
+      $context['finished'] = $context['sandbox'][$sandbox_key]['pointer']/$context['sandbox'][$sandbox_key]['count'];
+    }
+  }
+
+  public static function importFinished() {
+    $q = func_get_args();
+    $debug = TRUE;
   }
 
 }
