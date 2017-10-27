@@ -17,6 +17,7 @@ dependencies:
     - field.field.node.vendor.field_twitter
     - field.field.node.vendor.field_vendor_image
     - field.field.node.vendor.field_web_address
+    - image.style.vendor_logo
     - node.type.vendor
   module:
     - address
@@ -131,7 +132,7 @@ content:
     weight: 13
     label: hidden
     settings:
-      image_style: ''
+      image_style: vendor_logo
       image_link: ''
     third_party_settings: {  }
     type: media_thumbnail
