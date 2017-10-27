@@ -2,10 +2,8 @@
 
 namespace Drupal\netforum_org_sync\Form;
 
-use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
@@ -194,7 +192,7 @@ class OrganizationSyncForm extends ConfigFormBase {
       $context['sandbox'][$sandbox_key]['pointer']++;
     }
 
-    if ($context['sandbox'][$sandbox_key]['pointer'] === $context['sandbox'][$sandbox_key]['count'] || $sandbox_key === '13596948001362114000') {
+    if ($context['sandbox'][$sandbox_key]['pointer'] === $context['sandbox'][$sandbox_key]['count']) {
       $context['finished'] = 1;
       unset($context['sandbox'][$sandbox_key]);
     }
@@ -204,9 +202,25 @@ class OrganizationSyncForm extends ConfigFormBase {
     }
   }
 
-  public static function importFinished() {
-    $q = func_get_args();
-    $debug = TRUE;
+  /**
+   * Batch finished callback.
+   *
+   * @param $success
+   * @param $results
+   * @param $operations
+   * @param $timer
+   */
+  public static function importFinished($success, $results, $operations, $timer) {
+    if (!$success) {
+      drupal_set_message(t('Sync failed.'));
+      return;
+    }
+    drupal_set_message(t('Synced @count organizations in @time', ['@count' => count($results['success']), '@time' => $timer]));
+    if (!empty($results['error'])) {
+      foreach ($results['error'] as $err) {
+        drupal_set_message(t('Error: %err', ['%err' => $err]), 'error');
+      }
+    }
   }
 
 }
