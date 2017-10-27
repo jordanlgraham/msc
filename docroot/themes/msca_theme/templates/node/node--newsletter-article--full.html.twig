@@ -70,21 +70,18 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes.addClass('container') }}>
+<article{{ attributes.addClass('container newsletter-article') }}>
   <div class="newsletter-article-top-row">
     <div class="newsletter-article-left">
       {% if content.field_news_subtitle|render %}
         <span class="newsletter-article-subtitle">{{ content.field_news_subtitle }}</span>
       {% endif %}
       <div class="newsletter-article-date">
-        {{ 'E-News'|t }}
-        {% if content.field_news_release_date|render %}
-          &nbsp;|&nbsp;
-          {{ content.field_news_release_date }}
-        {% endif %}
+         {{ content.field_news_release_date }}
       </div>
 
       {{ content.body }}
+      {{ content.field_news_source }}
       {% if content.field_sponsor|render %}
         <h2>{{ 'Sponsored By'|t }}</h2>
         {{ content.field_sponsor }}
