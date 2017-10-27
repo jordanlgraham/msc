@@ -7,36 +7,8 @@
 #}
 <article{{ attributes.addClass('container') }}>
 
-        {{ title_prefix }}
-        {% if not page %}
-            <h2{{ title_attributes }}>
-                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-        {% endif %}
-        {{ title_suffix }}
-        
-        {% if display_submitted %}
-            <footer>
-                {{ author_picture }}
-                <div{{ author_attributes }}>
-                    {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-                    {{ metadata }}
-                </div>
-            </footer>
-        {% endif %}
-
         <div class="row">
             <div{{ content_attributes }} class="col-md-6">
-
-
-                <div class="node-facility-teaser-top">
-                    <div class="node-facility-teaser-svg">
-                        {% include(directory ~ "/svg/house.svg") %}
-                    </div>
-                    <div class="node-facility-teaser-title">
-                        <h2><a href="{{ url }}">{{ label }}</a></h2>
-                    </div>
-                </div>
 
                 <div class="node-facility-teaser-bottom">
                     {% if content.field_address|render %}
