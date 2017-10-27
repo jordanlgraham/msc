@@ -7,78 +7,101 @@
 #}
 <article{{ attributes.addClass('container') }}>
 
-        {{ title_prefix }}
-        {% if not page %}
-            <h2{{ title_attributes }}>
-                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-            </h2>
-        {% endif %}
-        {{ title_suffix }}
-        
-        {% if display_submitted %}
-            <footer>
-                {{ author_picture }}
-                <div{{ author_attributes }}>
-                    {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-                    {{ metadata }}
-                </div>
-            </footer>
-        {% endif %}
         <div class="row">
             <div{{ content_attributes }} class="col-md-6">
-                {% if content.field_address|render %}
-                    {{ content.field_address }}
-                {% endif %}
-                {% if content.field_customer_phone_number|render %}
-                    <strong>{% trans %}Phone: {% endtrans %}</strong>{{ content.field_customer_phone_number }}
-                {% endif %}
-                {% if content.field_customer_phone_number|render and content.field_customer_fax_number|render %}
-                    |
-                {% endif %}
-                {% if content.field_customer_fax_number|render %}
-                    <strong>{% trans %}Fax: {% endtrans %}</strong>{{ content.field_customer_fax_number }}
-                {% endif %}
-                {% if content.field_customer_web_site|render %}
-                    {{ content.field_customer_web_site }}
-                {% endif %}
-                {% if content.field_administrator|render %}
-                    <div class="facility-administrator"><strong>{% trans %}Administrator: {% endtrans %}</strong>{{ content.field_administrator }}</div>
-                {% endif %}
-                {% if content.field_licensed_nursing_facility_|render %}
-                    <div class="facility-nursing-beds"><strong>{% trans %}Licensed Nursing Facility Beds: {% endtrans %}</strong>{{ content.field_licensed_nursing_facility_ }}</div>
-                {% endif %}
-                {% if content.field_languages_spoken|render %}
-                    <div class="facility-languages"><strong>{% trans %}Languages Spokens: {% endtrans %}</strong>{{ content.field_languages_spoken }}</div>
-                {% endif %}
-                {% if content.field_specialized_unit|render %}
-                    <div class="facility-specialized-units"><strong>{% trans %}Specialized Units: {% endtrans %}</strong>{{ content.field_specialized_unit }}</div>
-                {% endif %}
-                {% if content.field_populations_served|render %}
-                    <div class="facility-populations"><strong>{% trans %}Specialty Populations Served: {% endtrans %}</strong>{{ content.field_populations_served }}</div>
-                {% endif %}
 
-                {% if content.field_medicaid['0']['#markup'] == 'Medicaid' or content.field_medicare['0']['#markup'] == 'Medicare' or content.field_va_contract['0']['#markup'] == 'VA Contract' or content.field_pace_program['0']['#markup'] == 'On' %}
-                    <strong>{% trans %}Facility Participates in: {% endtrans %}</strong>
-                    <ul>
-                    {% if content.field_medicaid['0']['#markup'] == 'Medicaid' %}
-                        <li>{{ content.field_medicaid }}</li>
+                <div class="node-facility-teaser-bottom">
+                    {% if content.field_address|render %}
+                        <div>
+                            <h3>{{ 'Address'|t }}</h3>
+                            {{ content.field_address }}
+                        </div>
                     {% endif %}
-                    {% if content.field_medicare['0']['#markup'] == 'Medicare' %}
-                        <li>{{ content.field_medicare }}</li>
+
+                    {% if content.field_customer_phone_number %}
+                        <div>
+                            <h3>{{ 'Phone Number'|t }}</h3>
+                            {{ content.field_customer_phone_number }}
+                        </div>
                     {% endif %}
-                    {% if content.field_va_contract['0']['#markup'] == 'VA Contract' %}
-                        <li>{{ content.field_va_contract }}</li>
+
+                    {% if content.field_customer_fax_number %}
+                        <div>
+                            <h3>{{ 'Fax Number'|t }}</h3>
+                            {{ content.field_customer_fax_number|render }}
+                        </div>
                     {% endif %}
-                    {% if content.field_pace_program['0']['#markup'] == 'On' %}
-                        <li>{% trans %}PACE program{% endtrans %}</li>
+
+                    {% if content.field_licensed_nursing_facility_|render %}
+                        <div>
+                            <h3>{{ 'Total Number of Beds'|t }}</h3>
+
+                        </div>
                     {% endif %}
-                    </ul>
-                {% endif %}
+
+                    {% if content.field_licensed_nursing_facility_|render %}
+                        <div>
+                            <h3>{{ 'Licensed Nursing Facility Beds'|t }}</h3>
+                            {{ content.field_licensed_nursing_facility_ }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.field_administrator|render %}
+                        <div>
+                            <h3>{{ 'Administrator'|t }}</h3>
+                            {{ content.field_administrator }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.field_languages_spoken|render %}
+                        <div>
+                            <h3>{{ 'Languages Spoken'|t }}</h3>
+                            {{ content.field_languages_spoken }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.field_specialized_unit|render %}
+                        <div>
+                            <h3>{{ 'Specialized Units'|t }}</h3>
+                            {{ content.field_specialized_unit }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.field_populations_served|render %}
+                        <div>
+                            <h3>{{ 'Specialty Populations Served'|t }}</h3>
+                            {{ content.field_populations_served }}
+                        </div>
+                    {% endif %}
+
+                    {% if content.field_medicaid['0']['#markup'] == 'Medicaid' or content.field_medicare['0']['#markup'] == 'Medicare' or content.field_va_contract['0']['#markup'] == 'VA Contract' or content.field_pace_program['0']['#markup'] == 'On' %}
+                        <div>
+                            <h3>{{ 'Facility Participates in'|t }}</h3>
+                            <ul>
+                                {% if content.field_medicaid['0']['#markup'] == 'Medicaid' %}
+                                    <li>{{ content.field_medicaid }}</li>
+                                {% endif %}
+                                {% if content.field_medicare['0']['#markup'] == 'Medicare' %}
+                                    <li>{{ content.field_medicare }}</li>
+                                {% endif %}
+                                {% if content.field_va_contract['0']['#markup'] == 'VA Contract' %}
+                                    <li>{{ content.field_va_contract }}</li>
+                                {% endif %}
+                                {% if content.field_pace_program['0']['#markup'] == 'On' %}
+                                    <li>{{ 'PACE program'|t }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
             <div{{ content_attributes }} class="col-md-6 text-center">
 
                 {% if content.field_facility_image|render %}
                     {{ content.field_facility_image }}
+                {% endif %}
+                {% if content.field_customer_web_site|render %}
+                    {{ content.field_customer_web_site }}
                 {% endif %}
                 {% if content.field_facebook|render %}
                     {{ content.field_facebook }}
@@ -95,7 +118,10 @@
         <div class="row">
             <div class="col-xs-12">
                 {% if content.field_related_content|render %}
-                    {{ content.field_related_content }}
+                    <div class="newsletter-article-bottom-row">
+                        <h2>{{ 'Related Content'|t }}</h2>
+                        {{ content.field_related_content }}
+                    </div>
                 {% endif %}
             </div>
         </div>
