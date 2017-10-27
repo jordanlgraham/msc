@@ -41,10 +41,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
   field_linkedin:
     type: link
@@ -53,10 +53,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
   field_logo:
     type: image
@@ -74,10 +74,10 @@ content:
     label: hidden
     settings:
       trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
   field_web_address:
     type: link

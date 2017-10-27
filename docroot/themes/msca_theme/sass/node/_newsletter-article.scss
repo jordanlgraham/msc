@@ -1,10 +1,14 @@
+.newsletter-article {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .newsletter-article-top-row {
   @extend .row;
 }
 
 .newsletter-article-date {
   display: flex;
-  font-style: italic;
   margin-bottom: 10px;
 }
 
