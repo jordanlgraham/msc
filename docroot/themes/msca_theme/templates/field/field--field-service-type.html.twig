@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Theme override to display Services as an unordered list.
+ *
+ */
+#}
+<ul{{ attributes }}>
+    {% for item in items %}
+      <li>{{ item.content }}</li>
+    {% endfor %}
+</ul>
