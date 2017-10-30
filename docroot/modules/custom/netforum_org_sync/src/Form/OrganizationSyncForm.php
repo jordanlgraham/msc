@@ -116,12 +116,11 @@ class OrganizationSyncForm extends ConfigFormBase {
       $end_date = strtotime($form_state->getValue('end_date'));
     }
     try {
-      $this->sync->syncOrganizations($start_date, $end_date);
-      $this->state->set(OrgSync::CRON_STATE_KEY, $this->time->getRequestTime());
-      drupal_set_message($this->t('Organizations successfully synced.'));
+      $this->syncByDate($start_date, $end_date);
     }
     catch (\Exception $exception) {
       drupal_set_message($this->t('Unable to complete organization sync. See logs for error.'), 'error');
+      $form_state->setRebuild(TRUE);
     }
   }
 
@@ -136,6 +135,38 @@ class OrganizationSyncForm extends ConfigFormBase {
     foreach ($period as $dt) {
       $ops[] = [self::class . '::importOrgsBatch', [$types, $dt->getTimeStamp(), $dt->modify('+1 month')->getTimestamp()]];
     }
+    $batch = [
+      'title' => $this->t('Sync organizations'),
+      'finished' => self::class . '::importFinished',
+      'operations' => $ops,
+    ];
+    batch_set($batch);
+  }
+
+  protected function syncByDate($start_date, $end_date) {
+    $ops = [];
+    $types = $this->sync->typesToSync();
+    $start = new \DateTime();
+    $start->setTimestamp($start_date);
+    $start->setTime('0', '0', '0');
+    $end = new \DateTime();
+    $end->setTimestamp($end_date);
+    $end->setTime('23', '59', '59');
+    $diff = $start->diff($end);
+    if ($diff->m === 0) {
+      $ops[] = [self::class . '::importOrgsBatch', [$types, $start->getTimestamp(), $end->getTimestamp()]];
+    }
+    else {
+      // For each month difference, add an operation.
+      for ($i = 0; $i < $diff->m; $i++) {
+        $ops[] = [self::class . '::importOrgsBatch', [$types, $start->getTimeStamp(), $start->modify('+1 month')->getTimestamp()]];
+      }
+      // If there are extra days, fill in the remainder of the days in one last op.
+      // Otherwise, fill in the last day (the object will be set to 12AM that morning).
+      $ops[] = [self::class . '::importOrgsBatch', [$types, $start->getTimestamp(), $end->getTimestamp()]];
+
+    }
+    // Set the cron key.
     $batch = [
       'title' => $this->t('Sync organizations'),
       'finished' => self::class . '::importFinished',
