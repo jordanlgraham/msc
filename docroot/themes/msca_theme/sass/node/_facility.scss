@@ -1,4 +1,4 @@
-.page-node-type-facility  .title-icon {
+.page-node-type-facility .title-icon {
   background: url("/themes/msca_theme/svg/house-white.svg") no-repeat center;
 }
 
@@ -6,6 +6,12 @@
   line-height: 1.4;
   margin-bottom: 0;
 }
+
+.page-node-type-facility .node-facility-teaser-bottom {
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
 
 .page-node-type-facility .node-facility-teaser-bottom .address {
   @extend .col-md-12;

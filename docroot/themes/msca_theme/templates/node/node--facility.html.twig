@@ -226,7 +226,7 @@
             {% endif %}
 
             {%  set participation = participates_medicare ~ ', ' ~ participates_medicaid ~ ', ' ~ participates_va ~ ', ' ~ participates_pace %}
-            {% if content.field_medicare|render %}
+            {% if content.field_medicare|render or content.field_medicaid|render or content.field_va_contract|render or content.field_pace_program|render %}
                 <div class="mt-5">
                     <h3 class="float-left mr-2">{{ 'Facility Participates In:'|t }}</h3>
                     {{ participation|trim(', ') }}
@@ -238,7 +238,7 @@
             </div>
         </div>
         <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
-            <h3 class="mt-5">{{ 'Additional Details'|t }}</h3>
+            <h3>{{ 'Additional Details'|t }}</h3>
 
             {# We only want to display this if 'Yes' so we're handling it differently #}
             {% if content.field_specialized_unit|render %}
@@ -297,6 +297,15 @@
                     <div class="row mb-3">
                         <span class="col-md-9 ">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
                         <span class="col-md-3">Yes</span>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if content.field_facility_price_range_min|render or content.field_facility_price_range_max %}
+                <div col-md-12>
+                    <div class="row mb-3">
+                        <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>
+                        <span class="col-md-3">{{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
                     </div>
                 </div>
             {% endif %}
