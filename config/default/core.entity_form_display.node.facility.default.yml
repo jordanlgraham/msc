@@ -31,6 +31,9 @@ dependencies:
     - field.field.node.facility.field_ep_region
     - field.field.node.facility.field_facebook
     - field.field.node.facility.field_facility_image
+    - field.field.node.facility.field_facility_price_range_max
+    - field.field.node.facility.field_facility_price_range_min
+    - field.field.node.facility.field_facility_type
     - field.field.node.facility.field_for_profit
     - field.field.node.facility.field_ge
     - field.field.node.facility.field_hmo_accepted
@@ -221,6 +224,9 @@ third_party_settings:
         - field_sco_accepted
         - field_private_ltc_insurance
         - field_oasis_participation
+        - field_facility_type
+        - field_facility_price_range_min
+        - field_facility_price_range_max
       parent_name: group_netforum_data_auto_synchro
       weight: 56
       format_type: details
@@ -440,6 +446,29 @@ content:
       open: false
     third_party_settings: {  }
     type: entity_browser_entity_reference
+    region: content
+  field_facility_price_range_max:
+    weight: 44
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_facility_price_range_min:
+    weight: 43
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_facility_type:
+    weight: 42
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_for_profit:
     weight: 29
