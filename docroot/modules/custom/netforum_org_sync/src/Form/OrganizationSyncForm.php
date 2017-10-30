@@ -124,6 +124,9 @@ class OrganizationSyncForm extends ConfigFormBase {
     }
   }
 
+  /**
+   * Set a batch to sync all dates.
+   */
   protected function syncAll() {
     $ops = [];
     $types = $this->sync->typesToSync();
@@ -143,6 +146,12 @@ class OrganizationSyncForm extends ConfigFormBase {
     batch_set($batch);
   }
 
+  /**
+   * Set a batch for syncing between two dates.
+   *
+   * @param $start_date
+   * @param $end_date
+   */
   protected function syncByDate($start_date, $end_date) {
     $ops = [];
     $types = $this->sync->typesToSync();
@@ -166,7 +175,6 @@ class OrganizationSyncForm extends ConfigFormBase {
       $ops[] = [self::class . '::importOrgsBatch', [$types, $start->getTimestamp(), $end->getTimestamp()]];
 
     }
-    // Set the cron key.
     $batch = [
       'title' => $this->t('Sync organizations'),
       'finished' => self::class . '::importFinished',
