@@ -224,6 +224,9 @@ third_party_settings:
         - field_sco_accepted
         - field_private_ltc_insurance
         - field_oasis_participation
+        - field_facility_type
+        - field_facility_price_range_min
+        - field_facility_price_range_max
       parent_name: group_netforum_data_auto_synchro
       weight: 56
       format_type: details
@@ -445,21 +448,21 @@ content:
     type: entity_browser_entity_reference
     region: content
   field_facility_price_range_max:
-    weight: 59
+    weight: 44
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_facility_price_range_min:
-    weight: 58
+    weight: 43
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
     region: content
   field_facility_type:
-    weight: 57
+    weight: 42
     settings:
       match_operator: CONTAINS
       size: 60
