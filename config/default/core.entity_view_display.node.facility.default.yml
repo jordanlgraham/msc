@@ -90,7 +90,7 @@ bundle: facility
 mode: default
 content:
   field_acronym:
-    weight: 46
+    weight: 44
     label: hidden
     settings:
       link_to_entity: false
@@ -98,14 +98,14 @@ content:
     type: string
     region: content
   field_address:
-    weight: 4
+    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_administrator:
-    weight: 9
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
@@ -113,87 +113,6 @@ content:
     type: string
     region: content
   field_administrator_in_training:
-    weight: 63
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_ahca_member:
-    weight: 59
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_assisted_living_beds:
-    weight: 27
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_assisted_living_on_campus:
-    weight: 64
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_chapter_affiliate:
-    weight: 54
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_cna_training_site:
-    weight: 62
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_companion_units:
-    weight: 23
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_congressional_district:
-    weight: 48
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_contact:
-    weight: 18
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_contract_with_aco:
     weight: 61
     label: hidden
     settings:
@@ -203,8 +122,89 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
+  field_ahca_member:
+    weight: 57
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_assisted_living_beds:
+    weight: 25
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_assisted_living_on_campus:
+    weight: 62
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_chapter_affiliate:
+    weight: 52
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_cna_training_site:
+    weight: 60
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_companion_units:
+    weight: 21
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_congressional_district:
+    weight: 46
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact:
+    weight: 17
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contract_with_aco:
+    weight: 59
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
   field_contracted_acos:
-    weight: 50
+    weight: 48
     label: hidden
     settings:
       link: true
@@ -212,21 +212,13 @@ content:
     type: entity_reference_label
     region: content
   field_county:
-    weight: 51
+    weight: 49
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_customer_fax_number:
-    weight: 7
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_customer_phone_number:
     weight: 6
     label: hidden
     settings:
@@ -234,8 +226,16 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_customer_phone_number:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_customer_web_site:
-    weight: 7
+    weight: 5
     label: hidden
     settings:
       link_to_entity: false
@@ -243,7 +243,7 @@ content:
     type: string
     region: content
   field_dementia_care_beds:
-    weight: 31
+    weight: 29
     label: hidden
     settings:
       thousand_separator: ''
@@ -252,7 +252,7 @@ content:
     type: number_integer
     region: content
   field_dph_region:
-    weight: 32
+    weight: 30
     label: hidden
     settings:
       link_to_entity: false
@@ -260,7 +260,7 @@ content:
     type: string
     region: content
   field_ep_region:
-    weight: 37
+    weight: 35
     label: hidden
     settings:
       link_to_entity: false
@@ -268,7 +268,7 @@ content:
     type: string
     region: content
   field_facebook:
-    weight: 1
+    weight: 0
     label: hidden
     settings:
       trim_length: 80
@@ -280,7 +280,7 @@ content:
     type: link
     region: content
   field_facility_image:
-    weight: 19
+    weight: 18
     label: hidden
     settings:
       image_style: ''
@@ -289,318 +289,6 @@ content:
     type: media_thumbnail
     region: content
   field_for_profit:
-    weight: 57
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_hmo_accepted:
-    weight: 66
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_hospital_affiliation:
-    weight: 35
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_hospital_based_nf_tcu_beds:
-    weight: 28
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_income_subsidies:
-    weight: 58
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_independent_living_beds:
-    weight: 29
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_languages_spoken:
-    weight: 11
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_licensed_nursing_facility_:
-    weight: 10
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_licensed_rest_home_beds:
-    weight: 30
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_linkedin:
-    weight: 3
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: true
-      url_plain: true
-      rel: '0'
-      target: '0'
-    third_party_settings: {  }
-    type: link
-    region: content
-  field_manager:
-    weight: 43
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_massmap_member:
-    weight: 56
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_medicaid:
-    weight: 13
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_medicaid_occupancy:
-    weight: 21
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_medicare:
-    weight: 14
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_medicare_occupancy_percent:
-    weight: 33
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_name_of_assisted_living:
-    weight: 42
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_ncal_member:
-    weight: 65
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_network:
-    weight: 41
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_number_of_beds_oos:
-    weight: 40
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_number_of_employees:
-    weight: 53
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_number_of_residents:
-    weight: 20
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_oasis_participation:
-    weight: 69
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_one_bedroom:
-    weight: 25
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_owner:
-    weight: 52
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_pace_program:
-    weight: 16
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_populations_served:
-    weight: 13
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_preferred_provider_acos:
-    weight: 49
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_preferred_provider_of_aco:
-    weight: 60
-    label: hidden
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
-  field_previous_manager:
-    weight: 44
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_private_ltc_insurance:
-    weight: 68
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_related_content:
-    weight: 17
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
-  field_representative_district:
-    weight: 38
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_retirement_community_aff:
-    weight: 36
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_sco_accepted:
-    weight: 67
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_senate_district:
-    weight: 39
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_social_worker:
     weight: 55
     label: hidden
     settings:
@@ -610,23 +298,24 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_specialized_unit:
-    weight: 12
+  field_hmo_accepted:
+    weight: 64
     label: hidden
-    settings: {  }
+    settings:
+      link: true
     third_party_settings: {  }
-    type: list_default
+    type: entity_reference_label
     region: content
-  field_state_id:
-    weight: 47
+  field_hospital_affiliation:
+    weight: 33
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-  field_studio:
-    weight: 24
+  field_hospital_based_nf_tcu_beds:
+    weight: 26
     label: hidden
     settings:
       thousand_separator: ''
@@ -634,8 +323,18 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
-  field_total_annual_admissions:
-    weight: 34
+  field_income_subsidies:
+    weight: 56
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_independent_living_beds:
+    weight: 27
     label: hidden
     settings:
       thousand_separator: ''
@@ -643,7 +342,32 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
-  field_twitter:
+  field_languages_spoken:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_licensed_nursing_facility_:
+    weight: 8
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_licensed_rest_home_beds:
+    weight: 28
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_linkedin:
     weight: 2
     label: hidden
     settings:
@@ -655,8 +379,120 @@ content:
     third_party_settings: {  }
     type: link
     region: content
-  field_two_bedroom:
-    weight: 26
+  field_manager:
+    weight: 41
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_massmap_member:
+    weight: 54
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_medicaid:
+    weight: 11
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_medicaid_occupancy:
+    weight: 20
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_medicare:
+    weight: 13
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_medicare_occupancy_percent:
+    weight: 31
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_name_of_assisted_living:
+    weight: 40
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_ncal_member:
+    weight: 63
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_network:
+    weight: 39
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_number_of_beds_oos:
+    weight: 38
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_number_of_employees:
+    weight: 51
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_number_of_residents:
+    weight: 19
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_oasis_participation:
+    weight: 68
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_one_bedroom:
+    weight: 23
     label: hidden
     settings:
       thousand_separator: ''
@@ -664,7 +500,15 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
-  field_va_contract:
+  field_owner:
+    weight: 50
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_pace_program:
     weight: 15
     label: hidden
     settings:
@@ -674,8 +518,171 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_wib_region:
+  field_populations_served:
+    weight: 12
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_preferred_provider_acos:
+    weight: 47
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_preferred_provider_of_aco:
+    weight: 58
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_previous_manager:
+    weight: 42
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_private_ltc_insurance:
+    weight: 67
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_related_content:
+    weight: 16
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_representative_district:
+    weight: 36
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_retirement_community_aff:
+    weight: 34
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_sco_accepted:
+    weight: 65
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_senate_district:
+    weight: 37
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_service_type:
+    type: list_default
+    weight: 66
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_social_worker:
+    weight: 53
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_specialized_unit:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_state_id:
     weight: 45
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_studio:
+    weight: 22
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_total_annual_admissions:
+    weight: 32
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_twitter:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_two_bedroom:
+    weight: 24
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_va_contract:
+    weight: 14
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_wib_region:
+    weight: 43
     label: hidden
     settings:
       link_to_entity: false
@@ -691,5 +698,4 @@ hidden:
   field_customer_type: true
   field_ge: true
   field_member_flag: true
-  field_service_type: true
   links: true
