@@ -33,10 +33,10 @@ content:
     region: content
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_email:
-    type: basic_string
+    type: email_mailto
     weight: 3
     region: content
     label: above
@@ -56,13 +56,13 @@ content:
     region: content
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_web_address:
     type: link
     weight: 4
     region: content
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
