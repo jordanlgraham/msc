@@ -47,6 +47,10 @@ class SoapHelper {
         }
           break;
 
+      case 'currency':
+        return (int)str_replace(',', '', $field);
+        break;
+
       default:
         if (!empty($field)) {
           return $field;

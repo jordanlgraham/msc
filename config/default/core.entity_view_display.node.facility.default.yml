@@ -29,6 +29,9 @@ dependencies:
     - field.field.node.facility.field_ep_region
     - field.field.node.facility.field_facebook
     - field.field.node.facility.field_facility_image
+    - field.field.node.facility.field_facility_price_range_max
+    - field.field.node.facility.field_facility_price_range_min
+    - field.field.node.facility.field_facility_type
     - field.field.node.facility.field_for_profit
     - field.field.node.facility.field_ge
     - field.field.node.facility.field_hmo_accepted
@@ -287,6 +290,36 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: media_thumbnail
+    region: content
+  field_facility_price_range_max:
+    weight: 72
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_facility_price_range_min:
+    weight: 71
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_facility_type:
+    weight: 70
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_for_profit:
     weight: 55
