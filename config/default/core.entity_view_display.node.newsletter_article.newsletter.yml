@@ -32,9 +32,10 @@ mode: newsletter
 content:
   body:
     label: hidden
-    type: text_default
+    type: text_summary_or_trimmed
     weight: 0
-    settings: {  }
+    settings:
+      trim_length: 300
     third_party_settings: {  }
     region: content
   field_news_release_date:
