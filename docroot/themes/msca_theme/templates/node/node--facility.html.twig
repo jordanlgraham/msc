@@ -301,11 +301,11 @@
                 </div>
             {% endif %}
 
-            {% if content.field_facility_price_range_min|render or content.field_facility_price_range_max %}
+            {% if content.field_facility_price_range_min|render or content.field_facility_price_range_max|render %}
                 <div col-md-12>
                     <div class="row mb-3">
                         <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>
-                        <span class="col-md-3">{{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
+                        <span class="col-md-3">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
                     </div>
                 </div>
             {% endif %}
