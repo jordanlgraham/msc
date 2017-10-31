@@ -27,8 +27,8 @@ header.container-fluid {
   z-index: 99; // so dropdown menus aren't hidden
 }
 
-//basic fixed header
-header.container-fluid {
+// basic fixed header
+#site-header {
   background-color: $white;
   position: fixed;
   left: 0;
@@ -37,6 +37,8 @@ header.container-fluid {
 }
 body {
   margin-top: 94px;
+  // Adjust fixed header offset when admin menu is present
+  &.adminimal-admin-toolbar #site-header { top: 80px; }
 }
 
 header .navbar-collapse > div {
