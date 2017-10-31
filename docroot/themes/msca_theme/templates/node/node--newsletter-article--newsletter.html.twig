@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Theme override to display a Newsletter Article node teaser display.
+ *
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a name="{{ node.id }}"></a>
+<article{{ attributes.addClass('pb-5') }}>
+
+  <div{{ content_attributes }}>
+      <div class="icon-square float-left">
+          {# It's important to render it as an svg so sass fill property can control color. #}
+          {{ source(directory ~ '/svg/mail.svg') }}
+      </div>
+      <div class="newsletter-article-teaser-text teaser-text">
+          {# Render the content type this is #}
+          <h4>{{ node.type.entity.label }}</h4>
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {{ content.body }}
+          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      </div>
+
+  </div>
+
+</article>
