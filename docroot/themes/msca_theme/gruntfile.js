@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             files: {
                 'style.css': 'sass/style.scss'
             }
-        } 
+        }
     },
 
     // Autoprefixer to rewrite file with vendor prefixes
@@ -30,17 +30,17 @@ module.exports = function(grunt) {
       // Watcher with live reload. With this on, you can use live reload in your browser to see live CSS changes.
       // See theme readme for details
       watch: {
-      css: {
-          files: ['sass/*.scss', 'sass/*/*.scss', 'sass/*/*/*.scss', 'sass/*/*/*/*.scss'],
-          tasks: ['autoprefixer', 'sass'],
-          options: {
-            spawn: false,
-            livereload: true
-          }
-        },
-      js: {
-        files: ['js/src/*.js'],
-        tasks: ['concat', 'babel']
+        css: {
+            files: ['sass/*.scss', 'sass/*/*.scss', 'sass/*/*/*.scss', 'sass/*/*/*/*.scss'],
+            tasks: ['autoprefixer', 'sass'],
+            options: {
+              spawn: false,
+              livereload: true
+            }
+          },
+        js: {
+          files: ['js/src/*.js'],
+          tasks: ['concat', 'babel']
         }
       },
 
@@ -114,6 +114,7 @@ module.exports = function(grunt) {
 
    // Sets up task so that typing "grunt compile" will compile CSS without watching
    grunt.registerTask('compile', ['sass']);
+   grunt.registerTask('css', ['sass', 'autoprefixer']);
    grunt.registerTask('js', ['babel', 'concat']);
 
 };
