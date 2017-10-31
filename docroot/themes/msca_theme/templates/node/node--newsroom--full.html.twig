@@ -12,7 +12,12 @@
         <span class="newsletter-article-subtitle">{{ content.field_news_subtitle }}</span>
       {% endif %}
       <div class="newsletter-article-date">
-        {{ 'News'|t }}
+        {% if content.field_newsroom_category|render %}
+          {# Display just the first one in case there are multiple categories. #}
+          <p>{{ content.field_newsroom_category.0 }}</p>
+        {% else %}
+          {{ 'News'|t }}
+        {% endif %}
         {% if content.field_news_release_date|render %}
           &nbsp;|&nbsp;
           {{ content.field_news_release_date }}
