@@ -18,7 +18,6 @@ dependencies:
   module:
     - datetime
     - entity_print
-    - link
     - text
     - user
 third_party_settings:
@@ -34,61 +33,31 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 2
+    weight: 0
     settings: {  }
     third_party_settings: {  }
     region: content
-  entity_print_view_pdf:
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_news_release_date:
-    type: datetime_default
+    type: datetime_custom
     weight: 1
     region: content
     label: hidden
     settings:
       timezone_override: ''
-      format_type: direct
-    third_party_settings: {  }
-  field_news_source:
-    type: link
-    weight: 3
-    region: content
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-  field_news_subtitle:
-    type: string
-    weight: 0
-    region: content
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  flag_bookmark:
-    weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  links:
-    weight: 4
-    region: content
-    settings: {  }
+      date_format: M/j
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
+  entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_news_source: true
+  field_news_subtitle: true
   field_news_teaser_image: true
   field_newsletter_byline: true
   field_newsletter_image: true
   field_related_content: true
   field_sponsor: true
   field_topic: true
+  flag_bookmark: true
+  links: true

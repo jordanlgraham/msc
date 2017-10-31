@@ -12,12 +12,10 @@ dependencies:
     - field.field.node.newsroom.field_news_teaser_image
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
-    - image.style.featured_image_130x190_
     - node.type.newsroom
   module:
     - datetime
     - link
-    - media_entity
     - text
     - user
 id: node.newsroom.newsletter
@@ -27,9 +25,10 @@ mode: newsletter
 content:
   body:
     label: hidden
-    type: text_default
-    weight: 4
-    settings: {  }
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 300
     third_party_settings: {  }
     region: content
   field_news_release_date:
@@ -37,12 +36,12 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      format_type: direct
+      date_format: M/j
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   field_news_source:
-    weight: 5
+    weight: 1
     label: hidden
     settings:
       trim_length: 80
@@ -51,45 +50,22 @@ content:
       url_plain: false
       rel: '0'
     third_party_settings: {  }
-    type: link
-    region: content
-  field_news_subtitle:
-    weight: 0
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_news_teaser_image:
-    weight: 3
-    label: hidden
-    settings:
-      image_style: featured_image_130x190_
-      image_link: ''
-    third_party_settings: {  }
-    type: media_thumbnail
+    type: link_separate
     region: content
   field_newsroom_category:
     type: entity_reference_label
-    weight: 1
+    weight: 3
     region: content
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-  field_related_content:
-    weight: 6
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_news_subtitle: true
+  field_news_teaser_image: true
+  field_related_content: true
   links: true
