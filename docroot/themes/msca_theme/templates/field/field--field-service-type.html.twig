@@ -7,6 +7,9 @@
 #}
 <ul{{ attributes }}>
     {% for item in items %}
-      <li>{{ item.content }}</li>
+        {{ item.content }},
+        {% if loop.last %}
+            {{ item.content }}
+        {%  endif %}
     {% endfor %}
 </ul>
