@@ -37,6 +37,7 @@ class GetClient {
         } catch (Exception $e) {
           $message = t('Failed to retrieve token.');
           \Drupal::logger('msc_netforum_soap')->error($message);
+          watchdog_exception('msc_netforum_soap', $e);
           return FALSE;
         }
       } else {

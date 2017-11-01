@@ -71,31 +71,13 @@ class OrgSync {
    * @return \Drupal\Core\Entity\EntityInterface|null
    */
   private function loadOrCreateOrgNode(array $organization) {
-    //search for a node with the $cst_key so we can perform an update action.
-    $type = $this->getOrganizationType($organization);
-    $query = $this->node_storage->getQuery();
-    $query->condition('status', 1);
-    $query->condition('type', $type);
-    $query->condition('field_customer_key', $organization['org_cst_key']);
-    $entity_ids = $query->execute();
-
-    //This function simply returns the first node found.
-    //Couple notes:
-    // 1) This function should only ever return one node, since it's checking
-    //    using the $cst_key UUID
-    // 2) This function uses array_values to get the first nid, since the nid
-    //    is used as the array index, so it could be anything.
-
-    if (!empty(array_values($entity_ids)[0])) {
-      $nid = array_values($entity_ids)[0];
-    }
-    if(!empty($nid)) {
-      $node = $this->node_storage->load($nid);
-    } else {
+    if (!$node = $this->loadOrgNode($organization)) {
+      $type = $this->getOrganizationType($organization);
       $node = $this->node_storage->create(['type' => $type]);
     }
     return $node;
   }
+
   private function loadOrCreateTermsByName($terms, $vocabulary = 'vendor_services_offered') {
     $tids = array();
     foreach ($terms as $term_name) {
@@ -114,6 +96,51 @@ class OrgSync {
       }
     }
     return $tids;
+  }
+
+  /**
+   * @param array $organization
+   *
+   * @return bool|NodeInterface
+   */
+  private function loadOrgNode(array $organization) {
+    //search for a node with the $cst_key so we can perform an update action.
+    $type = $this->getOrganizationType($organization);
+    $query = $this->node_storage->getQuery();
+    $query->condition('status', 1);
+    $query->condition('type', $type);
+    $query->condition('field_customer_key', $organization['org_cst_key']);
+    $entity_ids = $query->execute();
+
+    //This function simply returns the first node found.
+    //Couple notes:
+    // 1) This function should only ever return one node, since it's checking
+    //    using the $cst_key UUID
+    // 2) This function uses array_values to get the first nid, since the nid
+    //    is used as the array index, so it could be anything.
+
+    if (!empty(array_values($entity_ids)[0])) {
+      $nid = array_values($entity_ids)[0];
+      return $this->node_storage->load($nid);
+    }
+    return FALSE;
+  }
+
+  /**
+   * Unpublish a sync org node.
+   *
+   * @param array $organization
+   *
+   * @return bool|\Drupal\node\NodeInterface
+   */
+  private function unpublishOrgNode(array $organization) {
+    $node = $this->loadOrgNode($organization);
+    if ($node) {
+      $node->set('status', NodeInterface::NOT_PUBLISHED);
+      $node->save();
+      return $node;
+    }
+    return FALSE;
   }
 
 
@@ -450,8 +477,14 @@ class OrgSync {
       return FALSE;
     }
 
-    // Make sure the member is an organization.
+    // Make sure the organization is a member.
     if ($this->helper->cleanSoapField($org['cst_member_flag']) !== '1') {
+      // A synced node may no longer be a member.
+      // Check for any nodes with this key and unpublish them.
+      $node = $this->unpublishOrgNode($org);
+      if ($node) {
+        return $node;
+      }
       return FALSE;
     }
 
