@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.video.body
     - field.field.node.video.field_event_category
     - field.field.node.video.field_gated
+    - field.field.node.video.field_newsletter_topic
     - field.field.node.video.field_related_content
     - field.field.node.video.field_tags
     - field.field.node.video.field_video_date
@@ -74,4 +75,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_newsletter_topic: true
   links: true

@@ -1,0 +1,28 @@
+uuid: c6e7cc6d-baea-4df6-96ca-ce98642d5c59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_newsletter_topic
+    - node.type.education_events
+    - taxonomy.vocabulary.newsletter_topic
+id: node.education_events.field_newsletter_topic
+field_name: field_newsletter_topic
+entity_type: node
+bundle: education_events
+label: 'Newsletter Topic'
+description: 'This setting determines the topical header this content will appear under when included in the newsletter (E-News).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      newsletter_topic: newsletter_topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

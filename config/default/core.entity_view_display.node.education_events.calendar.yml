@@ -1,8 +1,9 @@
-uuid: 618ddaa4-1726-4636-8d11-d2e8efd84f35
+uuid: 23a3fbfc-7102-4370-86df-2213610221e3
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.calendar
     - field.field.node.education_events.body
     - field.field.node.education_events.field_call_to_action
     - field.field.node.education_events.field_date
@@ -14,87 +15,44 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
-    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - address
-    - button_link
     - datetime
     - text
     - user
-id: node.education_events.default
+id: node.education_events.calendar
 targetEntityType: node
 bundle: education_events
-mode: default
+mode: calendar
 content:
   body:
     label: hidden
-    type: text_default
-    weight: 4
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-  field_call_to_action:
-    weight: 5
-    label: hidden
+    type: text_summary_or_trimmed
+    weight: 3
     settings:
-      link_text: ''
-      btn_type: btn-primary
-      btn_size: ''
-      trim_length: '80'
-      url_only: false
-      url_plain: false
-      rel: 0
-      target: 0
+      trim_length: 200
     third_party_settings: {  }
-    type: button_link
     region: content
   field_date:
-    weight: 2
+    weight: 0
     label: hidden
     settings:
       timezone_override: ''
-      format_type: short_month_and_day
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_end_date:
-    weight: 3
-    label: hidden
-    settings:
-      timezone_override: ''
-      date_format: 'M d, Y h:ia'
+      date_format: n/j
     third_party_settings: {  }
     type: datetime_custom
     region: content
   field_event_category:
-    weight: 0
+    weight: 1
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_event_related_content:
-    weight: 7
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
-  field_gold_sponsor:
-    weight: 6
-    label: hidden
-    settings:
-      view_mode: gold_sponsors
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_location:
-    weight: 1
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -104,8 +62,11 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_call_to_action: true
+  field_end_date: true
   field_event_key: true
+  field_event_related_content: true
   field_event_sponsor: true
   field_gated: true
-  field_newsletter_topic: true
+  field_gold_sponsor: true
   links: true

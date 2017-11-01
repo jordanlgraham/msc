@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.newsletter_article.field_news_subtitle
     - field.field.node.newsletter_article.field_news_teaser_image
     - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_newsletter_topic
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_topic
@@ -33,19 +34,27 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    weight: 1
     settings:
       trim_length: 300
     third_party_settings: {  }
     region: content
   field_news_release_date:
     type: datetime_custom
-    weight: 1
+    weight: 2
     region: content
     label: hidden
     settings:
       timezone_override: ''
       date_format: M/j
+    third_party_settings: {  }
+  field_newsletter_topic:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: false
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true

@@ -31,20 +31,22 @@ content:
   field_calendar:
     weight: 6
     settings:
-      form_mode: newsletter
+      form_mode: inline_edit
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
   field_featured_article:
     weight: 4
     settings:
-      form_mode: newsletter
+      form_mode: inline_edit
       label_singular: ''
       label_plural: ''
       allow_new: true
@@ -66,14 +68,16 @@ content:
   field_newsletter_article:
     weight: 5
     settings:
-      form_mode: newsletter
+      form_mode: inline_edit
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
       override_labels: false
-    third_party_settings: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
   field_newsletter_date:

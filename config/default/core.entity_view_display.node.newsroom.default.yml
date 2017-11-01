@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.newsroom.field_news_source
     - field.field.node.newsroom.field_news_subtitle
     - field.field.node.newsroom.field_news_teaser_image
+    - field.field.node.newsroom.field_newsletter_topic
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
     - image.style.featured_image_130x190_
@@ -91,4 +92,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_newsletter_topic: true
   links: true

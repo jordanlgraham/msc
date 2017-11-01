@@ -4,9 +4,11 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_edit
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - field.field.node.video.body
     - field.field.node.video.field_event_category
     - field.field.node.video.field_gated
+    - field.field.node.video.field_newsletter_topic
     - field.field.node.video.field_related_content
     - field.field.node.video.field_tags
     - field.field.node.video.field_video_date
@@ -14,6 +16,8 @@ dependencies:
     - node.type.video
   module:
     - datetime
+    - entity_browser_entity_form
+    - inline_entity_form
     - text
 id: node.video.inline_edit
 targetEntityType: node
@@ -32,11 +36,17 @@ content:
   field_event_category:
     weight: 4
     settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
     region: content
   field_gated:
     type: boolean_checkbox
@@ -45,14 +55,35 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_tags:
+  field_newsletter_topic:
+    type: inline_entity_form_complex
     weight: 6
+    region: content
     settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
       match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_tags:
+    weight: 7
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
     region: content
   field_video_date:
     weight: 5

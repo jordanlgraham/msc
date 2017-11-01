@@ -1,20 +1,23 @@
-uuid: 522ba436-b9ec-4f6f-b095-0b7232e9c434
+uuid: 2485063f-deb3-40b2-87e3-e3e58e3a3ff4
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_edit
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - entity_browser.browser.image_browser
-    - field.field.node.newsroom.body
-    - field.field.node.newsroom.field_gated
-    - field.field.node.newsroom.field_news_release_date
-    - field.field.node.newsroom.field_news_source
-    - field.field.node.newsroom.field_news_subtitle
-    - field.field.node.newsroom.field_news_teaser_image
-    - field.field.node.newsroom.field_newsletter_topic
-    - field.field.node.newsroom.field_newsroom_category
-    - field.field.node.newsroom.field_related_content
-    - node.type.newsroom
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_gated
+    - field.field.node.newsletter_article.field_news_release_date
+    - field.field.node.newsletter_article.field_news_source
+    - field.field.node.newsletter_article.field_news_subtitle
+    - field.field.node.newsletter_article.field_news_teaser_image
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_newsletter_topic
+    - field.field.node.newsletter_article.field_related_content
+    - field.field.node.newsletter_article.field_sponsor
+    - field.field.node.newsletter_article.field_topic
+    - node.type.newsletter_article
   module:
     - datetime
     - entity_browser
@@ -22,14 +25,16 @@ dependencies:
     - inline_entity_form
     - link
     - text
-id: node.newsroom.default
+_core:
+  default_config_hash: EyvIYzPlqIJWJXlnkeY2_TjPEpFjGzhKaARK_DbOGBI
+id: node.newsletter_article.inline_edit
 targetEntityType: node
-bundle: newsroom
-mode: default
+bundle: newsletter_article
+mode: inline_edit
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -37,26 +42,26 @@ content:
     third_party_settings: {  }
     region: content
   field_gated:
-    weight: 7
+    weight: 3
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_news_release_date:
-    weight: 3
+    type: datetime_default
+    weight: 2
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_news_source:
+    type: link_default
     weight: 8
+    region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
-    region: content
   field_news_subtitle:
     weight: 1
     settings:
@@ -66,7 +71,9 @@ content:
     type: string_textfield
     region: content
   field_news_teaser_image:
-    weight: 4
+    type: entity_browser_entity_reference
+    weight: 5
+    region: content
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
@@ -77,26 +84,31 @@ content:
         view_mode: default
       open: false
     third_party_settings: {  }
-    type: entity_browser_entity_reference
-    region: content
-  field_newsletter_topic:
-    weight: 5
+  field_newsletter_byline:
+    weight: 7
     settings:
-      form_mode: simplified_taxonomy_term
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
-    type: inline_entity_form_complex
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
-  field_newsroom_category:
+  field_newsletter_image:
     weight: 2
     settings:
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: thumbnail
+      crop_preview_image_style: crop_thumbnail
+      crop_list:
+        - test
+      progress_indicator: throbber
+      show_crop_area: false
+    third_party_settings: {  }
+    type: image_widget_crop
+    region: content
+  field_newsletter_topic:
+    weight: 6
+    settings:
       form_mode: simplified_taxonomy_term
       label_singular: ''
       label_plural: ''
@@ -109,12 +121,12 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
-  field_related_content:
+  field_topic:
     type: inline_entity_form_complex
     weight: 9
     region: content
     settings:
-      form_mode: inline_edit
+      form_mode: simplified_taxonomy_term
       label_singular: ''
       label_plural: ''
       allow_new: true
@@ -134,6 +146,8 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_related_content: true
+  field_sponsor: true
   path: true
   promote: true
   sticky: true

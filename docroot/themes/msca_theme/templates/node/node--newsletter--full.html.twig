@@ -6,7 +6,17 @@
  */
 #}
 <article{{ attributes.addClass('container') }}>
-
+    <header>
+        <div class="header-top">
+            <h2>{{ 'E-News Update'|t }}</h2>
+        </div>
+        <div class="header-bottom">
+            <span class="float-left">{{ 'Your Link to Long Term Care news in Massachusetts'|t }}</span>
+            {% if content.field_newsletter_date|render %}
+                <span class="float-right">{{ content.field_newsletter_date }}</span>
+            {%  endif %}
+        </div>
+    </header>
     <!--main-section-start -->
     <section class="col-md-8 float-left">
 
@@ -47,14 +57,14 @@
         <!--custom-top ad space-start -->
         {% if content.field_sponsor|render %}
             <div class="sidebar-block">
-                <h2>Sponsored By</h2>
+                <h2>{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
                 {{ content.field_sponsor }}
             </div>
         {% endif %}
         <!--custom-top ad space-end -->
         <div class="sidebar-block">
 
-            <h2>In This Issue</h2>
+            <h2>{{ 'In This Issue'|t }}</h2>
             <ul class="list-unstyled issue-toc">
                 {% for item in node.field_newsletter_article %}
                     <!--tocstart -->
@@ -63,8 +73,18 @@
                 {% endfor %}
             </ul>
 
-            <p><a class="btn btn-primary" href="/newsletter/issues/" target="_blank">See Previous Issues</a></p>
-            <p><a class="btn btn-primary" href="/member-resources/preferred-vendors/" target="_blank">Find a Preferred Vendor</a></p>
+
+        </div>
+
+        <div class="sidebar-block">
+            <h2>{{ 'Resources'|t }}</h2>
+            <ul class="list-unstyled issue-toc newsletter-resources">
+                <li><a class="btn btn-secondary" href="/newsletter/issues/" target="_blank">{{ 'See Previous Issues'|t }}</a></li>
+                <li><a class="btn btn-secondary" href="/preferred-vendors" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></li>
+                <li><a class="btn btn-secondary" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></li>
+                <li><a class="btn btn-secondary" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></li>
+                <li><a class="btn btn-secondary" href="http://www.maseniorcare.org/Job_Seekers/Job_Seekers.aspx" target="_blank">{{ 'Careers'|t }}</a></li>
+            </ul>
         </div>
     </aside>
     <!--right-sidebar-end -->

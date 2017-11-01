@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.newsroom.field_news_source
     - field.field.node.newsroom.field_news_subtitle
     - field.field.node.newsroom.field_news_teaser_image
+    - field.field.node.newsroom.field_newsletter_topic
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
     - node.type.newsroom
@@ -52,6 +53,14 @@ content:
     third_party_settings: {  }
     type: link_separate
     region: content
+  field_newsletter_topic:
+    type: entity_reference_label
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
   field_newsroom_category:
     type: entity_reference_label
     weight: 3

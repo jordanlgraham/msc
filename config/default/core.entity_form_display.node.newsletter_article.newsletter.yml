@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.newsletter
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - entity_browser.browser.image_browser
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_gated
@@ -12,6 +13,7 @@ dependencies:
     - field.field.node.newsletter_article.field_news_subtitle
     - field.field.node.newsletter_article.field_news_teaser_image
     - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_newsletter_topic
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_topic
@@ -19,6 +21,8 @@ dependencies:
   module:
     - datetime
     - entity_browser
+    - entity_browser_entity_form
+    - inline_entity_form
     - link
     - text
 _core:
@@ -88,6 +92,21 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_newsletter_topic:
+    type: inline_entity_form_complex
+    weight: 8
+    region: content
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
   title:
     type: string_textfield
     weight: 0
