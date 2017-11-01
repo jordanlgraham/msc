@@ -96,14 +96,14 @@ class OrgSync {
     }
     return $node;
   }
-  private function loadOrCreateTermsByName($terms) {
+  private function loadOrCreateTermsByName($terms, $vocabulary = 'vendor_services_offered') {
     $tids = array();
     foreach ($terms as $term_name) {
-      $term = $this->term_storage->loadByProperties(['vid' => 'vendor_services_offered', 'name' => $term_name]);
+      $term = $this->term_storage->loadByProperties(['vid' => $vocabulary, 'name' => $term_name]);
       if(!empty($term)) {
         $tids[] = array_pop($term);
       } else {
-        $new_term = $this->term_storage->create(['name' => $term_name, 'vid' => 'vendor_services_offered']);
+        $new_term = $this->term_storage->create(['name' => $term_name, 'vid' => $vocabulary]);
         try {
           $new_term->save();
           $tids[] = $new_term->id();
@@ -186,9 +186,9 @@ class OrgSync {
       $node->field_populations_served = $this->helper->cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
       $node->field_specialized_unit = $this->helper->cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
       $node->field_va_contract = $this->helper->cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
-      $facility_type_id = $this->helper->cleanSoapField($org['mbr_mbt_key'], 'array');
-      if ($facility_type = $this->getFacilityType($facility_type_id)) {
-        $node->field_facility_type = $this->loadOrCreateTermsByName([$facility_type]);
+      $facility_type_id = $this->helper->cleanSoapField($org['mbr_mbt_key']);
+      if ($facility_types = $this->getFacilityType([$facility_type_id])) {
+        $node->field_facility_type = $this->loadOrCreateTermsByName($facility_types, 'facility_type');
       }
       $node->field_acronym = $this->helper->cleanSoapField($org['org_acronym']);
       $node->field_state_id = $this->helper->cleanSoapField($org['org_custom_string_03']);
