@@ -6,6 +6,8 @@
  */
 #}
 <article{{ attributes.addClass('container') }}>
+
+    <!--header-start -->
     <header>
         <div class="header-top">
             <h2>{{ 'E-News Update'|t }}</h2>
@@ -17,23 +19,23 @@
             {%  endif %}
         </div>
     </header>
+    <!--header-end -->
+
     <!--main-section-start -->
     <section class="col-md-8 float-left">
 
         <!--featured-article-start -->
         {% if content.field_featured_article|render %}
             <div class="featured-article">
-                <h2> {{ 'Featured Article'|t }}</h2>
                 {{ content.field_featured_article }}
             </div>
         {% endif %}
         <!--featured-article-end -->
 
         <!--articles-start -->
-        {% if content.field_newsletter_article|render %}
+        {% if content.field_newsletter_section|render %}
             <div class="latest-articles">
-                <h2>{{ 'Latest News & Resources'|t }}</h2>
-                {{ content.field_newsletter_article }}
+                {{ content.field_newsletter_section }}
             </div>
         {% endif %}
         <!--articles-end -->
@@ -66,13 +68,12 @@
 
             <h2>{{ 'In This Issue'|t }}</h2>
             <ul class="list-unstyled issue-toc">
-                {% for item in node.field_newsletter_article %}
+                {% for item in node.field_newsletter_section %}
                     <!--tocstart -->
-                    <li><a href="#{{ item.entity.nid.value }}" style="text-decoration:none">{{ item.entity.label }}</a></li>
+                    <li><a href="#{{ item.entity.id.value }}" style="text-decoration:none">{{ item.entity.label }}</a></li>
                     <!--tocend -->
                 {% endfor %}
             </ul>
-
 
         </div>
 
@@ -86,6 +87,7 @@
                 <li><a class="btn btn-secondary" href="http://www.maseniorcare.org/Job_Seekers/Job_Seekers.aspx" target="_blank">{{ 'Careers'|t }}</a></li>
             </ul>
         </div>
+
     </aside>
     <!--right-sidebar-end -->
 

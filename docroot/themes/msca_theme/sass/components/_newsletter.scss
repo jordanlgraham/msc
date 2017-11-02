@@ -48,6 +48,7 @@ aside.newsletter .sidebar-block {
 
 .featured-article {
   padding-bottom: 10px;
+  margin-bottom: 1rem;
 }
 .featured-article > h2 {
   background-color: $orange;
@@ -71,9 +72,28 @@ aside.newsletter .sidebar-block {
   padding: 1rem;
 }
 
-.newsletter-resources .btn .btn-secondary {
+.newsletter-resources .btn.btn-secondary {
   width: 100%;
   padding-left: 1rem;
   padding-right: 0;
   text-align: left;
+}
+.paragraph--type--newsletter-section > div:first-of-type {
+  color: white;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0 0 1rem;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+1) > div:first-of-type {
+  background-color: $green;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+2) > div:first-of-type {
+  background-color: $blue;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+3) > div:first-of-type {
+  background-color: $dark-blue;
 }
