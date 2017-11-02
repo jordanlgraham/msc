@@ -104,11 +104,13 @@ class EventSync {
    */
 
   private function formatNetForumDateTime($date, $time) {
-    //todo: use DateFormatter to handle this
-    $raw_date = new DateTime($date);
-    $timestamp = $raw_date->format('Y-m-d') . ' ' . $time;
-    $date = new DateTime($timestamp, new DateTimeZone('UTC'));
-    return date('Y-m-d\TH:i:s', $date->format('U'));
+    $date_obj = new DateTime($date);
+    $utc = new DateTimeZone('UTC');
+    $time_obj = DateTime::createFromFormat('g:ia', $time);
+    $date_obj->setTime($time_obj->format('H'), $time_obj->format('i'));
+    $date_obj->setTimezone($utc);
+    $formatted = $date_obj->format(DATETIME_DATETIME_STORAGE_FORMAT);
+    return $formatted;
   }
 
   private function loadOrCreateEventTermsByName($terms) {
