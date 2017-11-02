@@ -66,14 +66,16 @@
         <!--custom-top ad space-end -->
         <div class="sidebar-block">
 
-            <h2>{{ 'In This Issue'|t }}</h2>
-            <ul class="list-unstyled issue-toc">
-                {% for item in node.field_newsletter_section %}
-                    <!--tocstart -->
-                    <li><a href="#{{ item.entity.id.value }}" style="text-decoration:none">{{ item.entity.label }}</a></li>
-                    <!--tocend -->
+        <!--tocstart -->
+        <h2>{{ 'In This Issue'|t }}</h2>
+        <ul class="list-unstyled issue-toc">
+            {% for item in node.field_newsletter_section %}
+                {% for article in item.entity.fields.field_featured_articles %}
+                    <li><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></li>
                 {% endfor %}
-            </ul>
+            {% endfor %}
+        </ul>
+        <!--tocend -->
 
         </div>
 

@@ -7,8 +7,8 @@ dependencies:
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_featured_article
     - field.field.node.newsletter.field_gated
-    - field.field.node.newsletter.field_newsletter_article
     - field.field.node.newsletter.field_newsletter_date
+    - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
     - node.type.newsletter
   module:
@@ -32,6 +32,6 @@ hidden:
   field_calendar: true
   field_featured_article: true
   field_gated: true
-  field_newsletter_article: true
   field_newsletter_date: true
+  field_newsletter_section: true
   field_sponsor: true

@@ -97,3 +97,10 @@ aside.newsletter .sidebar-block {
 .paragraph--type--newsletter-section:nth-child(3n+3) > div:first-of-type {
   background-color: $dark-blue;
 }
+
+.anchor:before {
+  content: "";
+  display: block;
+  height: 120px;
+  margin: -120px 0 0;
+}

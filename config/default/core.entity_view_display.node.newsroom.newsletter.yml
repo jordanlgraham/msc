@@ -13,10 +13,12 @@ dependencies:
     - field.field.node.newsroom.field_newsletter_topic
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
+    - image.style.thumbnail
     - node.type.newsroom
   module:
     - datetime
     - link
+    - media_entity
     - text
     - user
 id: node.newsroom.newsletter
@@ -33,7 +35,7 @@ content:
     third_party_settings: {  }
     region: content
   field_news_release_date:
-    weight: 2
+    weight: 3
     label: hidden
     settings:
       timezone_override: ''
@@ -42,7 +44,7 @@ content:
     type: datetime_custom
     region: content
   field_news_source:
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       trim_length: 80
@@ -53,9 +55,18 @@ content:
     third_party_settings: {  }
     type: link_separate
     region: content
+  field_news_teaser_image:
+    type: media_thumbnail
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
   field_newsletter_topic:
     type: entity_reference_label
-    weight: 4
+    weight: 5
     region: content
     label: hidden
     settings:
@@ -63,7 +74,7 @@ content:
     third_party_settings: {  }
   field_newsroom_category:
     type: entity_reference_label
-    weight: 3
+    weight: 4
     region: content
     label: hidden
     settings:
@@ -75,6 +86,5 @@ hidden:
   entity_print_view_word_docx: true
   field_gated: true
   field_news_subtitle: true
-  field_news_teaser_image: true
   field_related_content: true
   links: true

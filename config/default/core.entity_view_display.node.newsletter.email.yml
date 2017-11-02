@@ -6,8 +6,9 @@ dependencies:
     - core.entity_view_mode.node.email
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_featured_article
-    - field.field.node.newsletter.field_newsletter_article
+    - field.field.node.newsletter.field_gated
     - field.field.node.newsletter.field_newsletter_date
+    - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
     - node.type.newsletter
   module:
@@ -36,15 +37,6 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-  field_newsletter_article:
-    weight: 3
-    label: hidden
-    settings:
-      link: true
-      view_mode: default
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_newsletter_date:
     weight: 1
     label: hidden
@@ -71,3 +63,5 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_gated: true
+  field_newsletter_section: true

@@ -6,9 +6,14 @@
  */
 #}
 {# For Newsletter TOC anchor links. #}
-<a name="{{ node.id }}"></a>
+<a class="anchor" name="{{ node.id }}"></a>
 <article{{ attributes.addClass('pb-5') }}>
   <div{{ content_attributes }}>
+      {% if content.field_news_teaser_image|render %}
+          <div class="float-left mr-3">
+              {{ content.field_news_teaser_image }}
+          </div>
+      {% endif %}
       <h2{{ title_attributes }}>
         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
       </h2>
