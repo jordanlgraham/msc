@@ -182,8 +182,8 @@
             {% endif %}
 
             {% if content.field_service_type|render %}
-                <div>
-                    <h3 class="mt-5">{{ 'Services'|t }}</h3>
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Services:'|t }}</h3>
                     {{ content.field_service_type }}
                 </div>
             {% endif %}
@@ -226,7 +226,7 @@
             {% endif %}
 
             {%  set participation = participates_medicare ~ ', ' ~ participates_medicaid ~ ', ' ~ participates_va ~ ', ' ~ participates_pace %}
-            {% if content.field_medicare|render or content.field_medicaid|render or content.field_va_contract|render or content.field_pace_program|render %}
+            {% if participates_medicare =='Medicare' or participates_medicaid =='Medicaid' or participates_va =='Veterans Administration Contract' or participates_pace =='PACE Program Contracts' %}
                 <div class="mt-5">
                     <h3 class="float-left mr-2">{{ 'Facility Participates In:'|t }}</h3>
                     {{ participation|trim(', ') }}
@@ -242,7 +242,8 @@
 
             {# We only want to display this if 'Yes' so we're handling it differently #}
             {% if content.field_specialized_unit|render %}
-                {% if content.field_specialized_unit['0']['#markup'] == 'Dementia Care' %}
+                {% set dcu = 'Dementia Care' %}
+                {% if dcu in content.field_specialized_unit|keys %}
                     <div col-md-12>
                         <div class="row mb-3">
                             <span class="col-md-9 ">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
@@ -301,7 +302,7 @@
                 </div>
             {% endif %}
 
-            {% if content.field_facility_price_range_min|render or content.field_facility_price_range_max|render %}
+            {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
                 <div col-md-12>
                     <div class="row mb-3">
                         <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>

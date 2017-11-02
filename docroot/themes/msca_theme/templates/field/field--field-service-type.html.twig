@@ -5,8 +5,9 @@
  *
  */
 #}
-<ul{{ attributes }}>
-    {% for item in items %}
-      <li>{{ item.content }}</li>
-    {% endfor %}
-</ul>
+{% for item in items %}
+    {{ item.content }},
+    {% if loop.last %}
+        {{ item.content }}
+    {%  endif %}
+{% endfor %}
