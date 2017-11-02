@@ -1,14 +1,13 @@
-uuid: 31e21cb3-780f-4de4-adf6-b5caaf011d49
+uuid: e45dc9c8-a985-4cce-ae4f-d250a239cb2c
 langcode: en
 status: true
 dependencies:
   module:
     - node
-_core:
-  default_config_hash: kcu7NOTsMu3fuWzXQAjYq5fpccxfVJTqIGVSCQjX3zA
-id: node.field_newsletter_article
-field_name: field_newsletter_article
-entity_type: node
+    - paragraphs
+id: paragraph.field_featured_articles
+field_name: field_featured_articles
+entity_type: paragraph
 type: entity_reference
 settings:
   target_type: node

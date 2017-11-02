@@ -6,12 +6,13 @@ dependencies:
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_featured_article
     - field.field.node.newsletter.field_gated
-    - field.field.node.newsletter.field_newsletter_article
     - field.field.node.newsletter.field_newsletter_date
+    - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
     - node.type.newsletter
   module:
     - datetime
+    - entity_reference_revisions
     - user
 _core:
   default_config_hash: ORjAk1_Ogfeh0YtUrEJaFfEE6NC_4zB7tt2KbWcaWf8
@@ -21,10 +22,10 @@ bundle: newsletter
 mode: default
 content:
   field_calendar:
-    weight: 5
+    weight: 6
     label: hidden
     settings:
-      view_mode: newsletter
+      view_mode: calendar
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
@@ -38,17 +39,8 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-  field_newsletter_article:
-    weight: 2
-    label: hidden
-    settings:
-      view_mode: newsletter
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_newsletter_date:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       timezone_override: ''
@@ -56,8 +48,17 @@ content:
     third_party_settings: {  }
     type: datetime_custom
     region: content
+  field_newsletter_section:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_sponsor:
-    weight: 4
+    weight: 5
     label: hidden
     settings:
       view_mode: newsletter

@@ -1,0 +1,28 @@
+uuid: 43cf29d8-1fb0-432d-9431-ba4b51072363
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_newsletter_topic
+    - node.type.newsroom
+    - taxonomy.vocabulary.newsletter_topic
+id: node.newsroom.field_newsletter_topic
+field_name: field_newsletter_topic
+entity_type: node
+bundle: newsroom
+label: 'Newsletter Topic'
+description: 'This setting determines the topical header this content will appear under when included in the newsletter (E-News).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      newsletter_topic: newsletter_topic
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -3,17 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.inline_edit
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - field.field.node.education_events.body
     - field.field.node.education_events.field_call_to_action
     - field.field.node.education_events.field_date
     - field.field.node.education_events.field_end_date
     - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - address
@@ -30,7 +32,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 7
     settings:
       rows: 9
       summary_rows: 3
@@ -39,12 +41,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   field_call_to_action:
-    weight: 7
+    weight: 8
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -79,7 +81,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_event_related_content:
-    weight: 10
+    weight: 11
     settings:
       form_mode: default
       label_singular: ''
@@ -94,7 +96,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_event_sponsor:
-    weight: 9
+    weight: 10
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -116,7 +118,7 @@ content:
     type: boolean_checkbox
     region: content
   field_gold_sponsor:
-    weight: 8
+    weight: 9
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -137,9 +139,24 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_newsletter_topic:
+    weight: 6
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   path:
     type: path
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -147,14 +164,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 14
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 15
     region: content
     third_party_settings: {  }
   title:
@@ -167,7 +184,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60

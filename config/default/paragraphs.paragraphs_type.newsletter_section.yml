@@ -1,0 +1,11 @@
+uuid: d41e04bf-c9e5-43c6-b4fd-417aeafcf475
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:1404f0c7-8fb4-4698-9ce1-5665caf51cc3'
+id: newsletter_section
+label: 'Newsletter Section'
+icon_uuid: 1404f0c7-8fb4-4698-9ce1-5665caf51cc3
+description: 'For adding topical sections to the Newsletter (E-News).'
+behavior_plugins: {  }

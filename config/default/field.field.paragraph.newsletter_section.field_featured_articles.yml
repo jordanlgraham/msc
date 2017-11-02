@@ -1,0 +1,36 @@
+uuid: b070b9c4-90ec-4ff3-a95c-d9cc76b934c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_articles
+    - node.type.education_events
+    - node.type.newsletter_article
+    - node.type.newsroom
+    - node.type.resources
+    - node.type.video
+    - paragraphs.paragraphs_type.newsletter_section
+id: paragraph.newsletter_section.field_featured_articles
+field_name: field_featured_articles
+entity_type: paragraph
+bundle: newsletter_section
+label: 'Featured Articles'
+description: 'Add and select any number of pieces of content for this topical section of the newsletter (E-News). Content can be nodes of types: Education & Events, Newsletter Articles, Newsroom, Resources and Video.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      education_events: education_events
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      resources: resources
+      video: video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: education_events
+field_type: entity_reference

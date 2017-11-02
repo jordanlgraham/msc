@@ -1,14 +1,34 @@
+.page-node-type-newsletter header {
+  margin-left: 1rem;
+}
+
+.page-node-type-newsletter .header-top {
+  background-color: $light-gray;
+  padding: 1rem;
+  min-height: 5rem;
+}
+
+.page-node-type-newsletter .header-top h2 {
+  color: $blue;
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+.page-node-type-newsletter .header-bottom {
+  background-color: $blue;
+  color: $light-gray;
+  padding: 1rem;
+  min-height: 4rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
 .page-node-type-newsletter .icon-social {
   width: 30px;
   height: 30px;
   border-radius: 5px;
   display: inline-block;
   margin-top: 1rem;
-}
-
-// Todo: address through config if client decides to really eliminate these icons.
-.page-node-type-newsletter .icon-square {
-  display: none;
 }
 
 .issue-toc li {
@@ -28,6 +48,7 @@ aside.newsletter .sidebar-block {
 
 .featured-article {
   padding-bottom: 10px;
+  margin-bottom: 1rem;
 }
 .featured-article > h2 {
   background-color: $orange;
@@ -41,8 +62,45 @@ aside.newsletter .sidebar-block {
   padding: 1rem;
 }
 
+.latest-articles {
+  margin-top: 1rem;
+}
+
 .calendar > h2 {
   background-color: $dark-blue;
   color: white;
   padding: 1rem;
+}
+
+.newsletter-resources .btn.btn-secondary {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 0;
+  text-align: left;
+}
+.paragraph--type--newsletter-section > div:first-of-type {
+  color: white;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0 0 1rem;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+1) > div:first-of-type {
+  background-color: $green;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+2) > div:first-of-type {
+  background-color: $blue;
+}
+
+.paragraph--type--newsletter-section:nth-child(3n+3) > div:first-of-type {
+  background-color: $dark-blue;
+}
+
+.anchor:before {
+  content: "";
+  display: block;
+  height: 120px;
+  margin: -120px 0 0;
 }

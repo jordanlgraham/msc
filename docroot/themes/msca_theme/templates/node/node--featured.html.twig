@@ -14,14 +14,6 @@
           </div>
       {% endif %}
       <div class="newsletter-article-teaser-text teaser-text">
-          {# If this is a Newsroom node, we want to display the category. #}
-          {% if content.field_newsroom_category|render %}
-              {# Display just the first one in case there are multiple categories. #}
-              <h4>{{ content.field_newsroom_category.0 }}</h4>
-          {# Otherwise display type of node this is. #}
-          {% else %}
-              <h4>{{ node.type.entity.label }}</h4>
-          {% endif %}
           <h2{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>

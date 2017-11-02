@@ -9,8 +9,7 @@ _core:
   default_config_hash: FzsbWf8iNn1S7RwhYITqQQWA8Sy9geFb7z5DcT8PsEM
 id: bookmark
 label: Bookmark
-bundles:
-  - newsletter_article
+bundles: {  }
 entity_type: node
 global: false
 weight: 0
@@ -24,9 +23,8 @@ unflag_denied_text: ''
 flag_type: 'entity:node'
 link_type: ajax_link
 flagTypeConfig:
-  show_in_links:
-    full: full
-  show_as_field: true
+  show_in_links: {  }
+  show_as_field: false
   show_on_form: false
   show_contextual_link: false
   extra_permissions:

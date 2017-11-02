@@ -14,7 +14,7 @@ function msca_theme_preprocess_node(&$variables) {
   //Upcoming Education and Events section needs field_date and field_end_date to
   //appear in a couple different formats.
 
-  if($variables['view_mode'] == 'homepage') {
+  if($variables['view_mode'] == 'homepage' || $variables['view_mode'] == 'calendar') {
     if(!empty($variables['content']['field_date'][0]['#markup'])) {
       $date_field = $variables['content']['field_date'][0]['#markup'];
     }
@@ -33,14 +33,6 @@ function msca_theme_preprocess_node(&$variables) {
       }
     }
   }
-
-  if($variables['view_mode'] == 'newsletter'
-    && !empty($variables['content']['field_date'][0]['#markup'])) {
-    $field_date = strtotime($variables['content']['field_date'][0]['#markup']);
-    $variables['content']['square_month'] = date('M', $field_date);
-    $variables['content']['square_day'] = date('j', $field_date);
-  }
-
 }
 
 /**
