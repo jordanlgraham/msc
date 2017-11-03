@@ -69,4 +69,5 @@ hidden:
   field_event_sponsor: true
   field_gated: true
   field_gold_sponsor: true
+  field_newsletter_topic: true
   links: true

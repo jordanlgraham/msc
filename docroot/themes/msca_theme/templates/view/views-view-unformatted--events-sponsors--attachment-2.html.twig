@@ -18,7 +18,7 @@
 {% set number_of_values = rows|length %}
 <div class="container">
     {% for row in rows %}
-        {%  set view_classes = 'col-md-6' %}
+        {%  set view_classes = 'col-md-3' %}
         {% if number_of_values > 1 %}
             <div{{ attributes.addClass(view_classes ~ ' float-left logo-social') }}>
                 {{ row.content }}
