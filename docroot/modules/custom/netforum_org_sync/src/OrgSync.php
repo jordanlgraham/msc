@@ -78,7 +78,7 @@ class OrgSync {
     return $node;
   }
 
-  private function loadOrCreateTermsByName($terms, $vocabulary = 'vendor_services_offered') {
+  private function loadOrCreateTermsByName($terms, $vocabulary) {
     $tids = array();
     foreach ($terms as $term_name) {
       $term = $this->term_storage->loadByProperties(['vid' => $vocabulary, 'name' => $term_name]);
@@ -221,9 +221,9 @@ class OrgSync {
       $node->field_state_id = $this->helper->cleanSoapField($org['org_custom_string_03']);
       $node->field_congressional_district = $this->helper->cleanSoapField($org['org_custom_string_10']);
       $pref_acos = $this->helper->cleanSoapField($org['org_custom_text_12'], 'array');
-      $node->field_preferred_provider_acos = $this->loadOrCreateTermsByName($pref_acos);
+      $node->field_preferred_provider_acos = $this->loadOrCreateTermsByName($pref_acos, 'preferred_provider_acos');
       $contract_acos = $this->helper->cleanSoapField($org['org_custom_text_13'], 'array');
-      $node->field_contracted_acos = $this->loadOrCreateTermsByName($contract_acos);
+      $node->field_contracted_acos = $this->loadOrCreateTermsByName($contract_acos, 'contracted_acos');
       $node->field_county = $this->helper->cleanSoapField($org['org_custom_text_14'], 'array');
       $node->field_owner = $this->helper->cleanSoapField($org['org_custom_string_05']);
       $node->field_number_of_employees = $this->helper->cleanSoapField($org['org_num_employee']);
@@ -243,13 +243,13 @@ class OrgSync {
       $node->field_facility_price_range_max = $this->helper->cleanSoapField($org['org_custom_currency_02'], 'currency');
 
       $hmo = $this->helper->cleanSoapField($org['org_custom_text_05'], 'array');
-      $node->field_hmo_accepted = $this->loadOrCreateTermsByName($hmo);
+      $node->field_hmo_accepted = $this->loadOrCreateTermsByName($hmo, 'hmo_accepted');
       $sco = $this->helper->cleanSoapField($org['org_custom_text_06'], 'array');
-      $node->field_sco_accepted = $this->loadOrCreateTermsByName($sco);
+      $node->field_sco_accepted = $this->loadOrCreateTermsByName($sco, 'sco_accepted');
       $ltc = $this->helper->cleanSoapField($org['org_custom_text_07'], 'array');
-      $node->field_private_ltc_insurance = $this->loadOrCreateTermsByName($ltc);
+      $node->field_private_ltc_insurance = $this->loadOrCreateTermsByName($ltc, 'private_ltc_insurance_accepted');
       $oasis = $this->helper->cleanSoapField($org['org_custom_text_15'], 'array');
-      $node->field_oasis_participation = $this->loadOrCreateTermsByName($oasis);
+      $node->field_oasis_participation = $this->loadOrCreateTermsByName($oasis, 'oasis_participation');
 
 
       $node->field_assisted_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_07']);
@@ -283,10 +283,10 @@ class OrgSync {
     $additional_services = $this->helper->cleanSoapField($org['org_custom_text_04'], 'array');
 
     if (!empty($primary_services)) {
-      $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services);
+      $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services, 'vendor_services_offered');
     }
     if (!empty($additional_services)) {
-      $node->field_additional_services = $this->loadOrCreateTermsByName($additional_services);
+      $node->field_additional_services = $this->loadOrCreateTermsByName($additional_services, 'vendor_services_offered');
     }
 
     $node->save();
