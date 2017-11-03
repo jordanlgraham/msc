@@ -17,3 +17,12 @@
 .sponsor-teaser-right {
   @extend .col-md-9;
 }
+
+// Center sponsors if there's only one
+.sponsor-wrapper {
+  margin: 15px auto;
+}
+
+.multi-sponsor-wrapper {
+  min-height: 200px;
+}
