@@ -10,10 +10,11 @@
     <!--header-start -->
     <header>
         <div class="header-top">
-            <h2>{{ 'E-News Update'|t }}</h2>
+            <h2 class="float-left">{{ 'E-News Update'|t }}</h2>
+            <div class="float-right"><img src="/themes/msca_theme/images/msca-logo-wide.png"/></div>
         </div>
         <div class="header-bottom">
-            <span class="float-left">{{ 'Your Link to Long Term Care news in Massachusetts'|t }}</span>
+            <span class="float-left">{{ 'Your Link to Long Term Care News in Massachusetts'|t }}</span>
             {% if content.field_newsletter_date|render %}
                 <span class="float-right">{{ content.field_newsletter_date }}</span>
             {%  endif %}
@@ -66,16 +67,16 @@
         <!--custom-top ad space-end -->
         <div class="sidebar-block">
 
-        <!--tocstart -->
-        <h2>{{ 'In This Issue'|t }}</h2>
-        <ul class="list-unstyled issue-toc">
-            {% for item in node.field_newsletter_section %}
-                {% for article in item.entity.fields.field_featured_articles %}
-                    <li><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></li>
+            <!--tocstart -->
+            <h2>{{ 'In This Issue'|t }}</h2>
+            <ul class="list-unstyled issue-toc">
+                {% for item in node.field_newsletter_section %}
+                    {% for article in item.entity.fields.field_featured_articles %}
+                        <li><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></li>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-        </ul>
-        <!--tocend -->
+            </ul>
+            <!--tocend -->
 
         </div>
 
