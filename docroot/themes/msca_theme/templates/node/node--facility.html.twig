@@ -237,81 +237,87 @@
 
             </div>
         </div>
-        <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
-            <h3>{{ 'Additional Details'|t }}</h3>
+        {% if dcu in content.field_specialized_unit|keys or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (node.field_facility_type.value != 'Nursing Facility' and node.field_facility_price_range_min.value > 0) or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
+            <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
+                <h3>{{ 'Additional Details'|t }}</h3>
 
-            {# We only want to display this if 'Yes' so we're handling it differently #}
-            {% if content.field_specialized_unit|render %}
-                {% set dcu = 'Dementia Care' %}
-                {% if dcu in content.field_specialized_unit|keys %}
+                {# We only want to display this if 'Yes' so we're handling it differently #}
+                {% if content.field_specialized_unit|render %}
+                    {% set dcu = 'Dementia Care' %}
+                    {% if dcu in content.field_specialized_unit|keys %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-9 ">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
+                                <span class="col-md-3">Yes</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if content.field_assisted_living_on_campus|render %}
+                    {% if content.field_assisted_living_on_campus['0']['#markup'] == 'On' %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-9 ">{{ 'Has Assisted Living Residence on-campus'|t }}</span>
+                                <span class="col-md-3">Yes</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if content.field_name_of_assisted_living|render %}
                     <div col-md-12>
                         <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
-                            <span class="col-md-3">Yes</span>
+                            <span class="col-md-9 ">{{ 'Name of Assisted Living Residence'|t }}</span>
+                            <span class="col-md-3">{{ node.field_name_of_assisted_living.value }}</span>
                         </div>
                     </div>
                 {% endif %}
-            {% endif %}
 
-            {% if content.field_assisted_living_on_campus|render %}
-                {% if content.field_assisted_living_on_campus['0']['#markup'] == 'On' %}
-                    <div col-md-12>
-                        <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Has Assisted Living Residence on-campus'|t }}</span>
-                            <span class="col-md-3">Yes</span>
+                {% if content.field_service_type|render %}
+                    {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-9 ">{{ 'Part of a Continuing Care Retirement Community'|t }}</span>
+                                <span class="col-md-3">Yes</span>
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
 
-            {% if content.field_name_of_assisted_living|render %}
-                <div col-md-12>
-                    <div class="row mb-3">
-                        <span class="col-md-9 ">{{ 'Name of Assisted Living Residence'|t }}</span>
-                        <span class="col-md-3">{{ node.field_name_of_assisted_living.value }}</span>
-                    </div>
-                </div>
-            {% endif %}
-
-            {% if content.field_service_type|render %}
                 {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
                     <div col-md-12>
                         <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Part of a Continuing Care Retirement Community'|t }}</span>
+                            <span class="col-md-9 ">{{ 'Name of Retirement Community'|t }}</span>
+                            <span class="col-md-3">{{ node.field_retirement_community_aff.value }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1 %}
+                    <div col-md-12>
+                        <div class="row mb-3">
+                            <span class="col-md-9 ">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
                             <span class="col-md-3">Yes</span>
                         </div>
                     </div>
                 {% endif %}
-            {% endif %}
 
-            {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
-                <div col-md-12>
-                    <div class="row mb-3">
-                        <span class="col-md-9 ">{{ 'Name of Retirement Community'|t }}</span>
-                        <span class="col-md-3">{{ node.field_retirement_community_aff.value }}</span>
-                    </div>
-                </div>
-            {% endif %}
+                {%  if node.field_facility_type.value != 'Nursing Facility' %}
+                    {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>
+                                <span class="col-md-3">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
 
-            {% if node.field_hospital_based_nf_tcu_beds.value > 0 %}
-                <div col-md-12>
-                    <div class="row mb-3">
-                        <span class="col-md-9 ">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
-                        <span class="col-md-3">Yes</span>
-                    </div>
-                </div>
-            {% endif %}
+            </div>
+        {% endif %}
 
-            {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
-                <div col-md-12>
-                    <div class="row mb-3">
-                        <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>
-                        <span class="col-md-3">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
-                    </div>
-                </div>
-            {% endif %}
 
-        </div>
         <div class="col-12 text-center mt-5">
             <p>The above facility information is self-reported</p>
             <a href="/find-a-facility" class="btn btn-primary mb-5">Return to Facility Search Results</a>
