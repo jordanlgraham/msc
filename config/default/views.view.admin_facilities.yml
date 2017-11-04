@@ -29,6 +29,7 @@ dependencies:
     - field.storage.node.field_ep_region
     - field.storage.node.field_facebook
     - field.storage.node.field_facility_image
+    - field.storage.node.field_facility_type
     - field.storage.node.field_for_profit
     - field.storage.node.field_ge
     - field.storage.node.field_hmo_accepted
@@ -77,6 +78,7 @@ dependencies:
     - field.storage.node.field_va_contract
     - field.storage.node.field_wib_region
     - node.type.facility
+    - taxonomy.vocabulary.facility_type
     - user.role.administrator
   module:
     - address
@@ -84,6 +86,7 @@ dependencies:
     - link
     - node
     - options
+    - taxonomy
     - user
 id: admin_facilities
 label: 'Admin Facilities'
@@ -163,12 +166,7 @@ display:
             title: title
             status: status
             field_acronym: field_acronym
-            field_address_address_line1: field_address_address_line1
-            field_address_address_line2: field_address_address_line2
-            field_address_administrative_area: field_address_administrative_area
-            field_address_country_code: field_address_country_code
-            field_address_locality: field_address_locality
-            field_address_postal_code: field_address_postal_code
+            field_address: field_address
             field_administrator: field_administrator
             field_administrator_in_training: field_administrator_in_training
             field_ahca_member: field_ahca_member
@@ -243,6 +241,7 @@ display:
             field_va_contract: field_va_contract
             field_wib_region: field_wib_region
             counter: counter
+            field_facility_type: field_facility_type
           info:
             nid:
               sortable: true
@@ -272,42 +271,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_address_address_line1:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_address_address_line2:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_address_administrative_area:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_address_country_code:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_address_locality:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_address_postal_code:
+            field_address:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -798,6 +762,13 @@ display:
               empty_column: false
               responsive: ''
             counter:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_facility_type:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -5810,6 +5781,69 @@ display:
           hide_alter_empty: true
           counter_start: 1
           plugin_id: counter
+        field_facility_type:
+          id: field_facility_type
+          table: node__field_facility_type
+          field: field_facility_type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Facility type'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       filters:
         type:
           id: type
@@ -5903,6 +5937,52 @@ display:
           plugin_id: boolean
           entity_type: node
           entity_field: status
+        field_facility_type_target_id:
+          id: field_facility_type_target_id
+          table: node__field_facility_type
+          field: field_facility_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_facility_type_target_id_op
+            label: 'Facility type'
+            description: ''
+            use_operator: false
+            operator: field_facility_type_target_id_op
+            identifier: field_facility_type_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_author: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: textfield
+          limit: true
+          vid: facility_type
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts:
         created:
           id: created
@@ -5947,6 +6027,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.roles
       tags:
@@ -5976,6 +6057,7 @@ display:
         - 'config:field.storage.node.field_ep_region'
         - 'config:field.storage.node.field_facebook'
         - 'config:field.storage.node.field_facility_image'
+        - 'config:field.storage.node.field_facility_type'
         - 'config:field.storage.node.field_for_profit'
         - 'config:field.storage.node.field_ge'
         - 'config:field.storage.node.field_hmo_accepted'
@@ -6039,6 +6121,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
         - user.roles
       tags:
@@ -6068,6 +6151,7 @@ display:
         - 'config:field.storage.node.field_ep_region'
         - 'config:field.storage.node.field_facebook'
         - 'config:field.storage.node.field_facility_image'
+        - 'config:field.storage.node.field_facility_type'
         - 'config:field.storage.node.field_for_profit'
         - 'config:field.storage.node.field_ge'
         - 'config:field.storage.node.field_hmo_accepted'
