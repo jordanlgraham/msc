@@ -62,7 +62,7 @@ content:
     type: link
     weight: 4
     region: content
-    label: hidden
+    label: above
     settings:
       trim_length: 80
       url_only: false

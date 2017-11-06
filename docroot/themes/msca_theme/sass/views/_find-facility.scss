@@ -35,81 +35,8 @@
   width: 100%;
 }
 
-
-
-.path-preferred-vendors .views-infinite-scroll-content-wrapper {
-  @extend .row;
-  .views-row {
-    @extend .col-md-6;
-    margin-bottom: $grid-gutter-width-base;
-
-    article {
-      height: 100%;
-    }
-  }
-}
-
 .facility-search-filters form > div:first-of-type label{
   margin-top: 0;
-}
-
-
-.path-preferred-vendors .views-exposed-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-  }
-}
-
-.path-preferred-vendors .views-exposed-form label {
-  display: none;
-}
-
-.path-preferred-vendors .views-exposed-form select,
-.facility-search-filters select {
-  @extend .form-control;
-  width: 100%;
-}
-
-
-.path-preferred-vendors .views-exposed-form .form-actions,
-.facility-search-filters .form-actions {
-  position: relative;
-  input:nth-child(2) {
-    margin-top: 10px;
-  }
-}
-
-.path-preferred-vendors .views-exposed-form .form-actions {
-  display: flex;
-  > div:last-child:nth-child(2) {
-    padding-left: 15px;
-  }
-}
-
-.path-preferred-vendors .views-exposed-form .form-actions .submit-input-wrapper {
-  position: relative;
-  &:after {
-    @extend %button-arrow-after;
-  }
-}
-
-.path-preferred-vendors .views-exposed-form .form-actions {
-  margin: 0 0 0 $grid-gutter-width-base;
-  @include media-breakpoint-down(md) {
-    margin: $grid-gutter-width-base 0 0 0;
-  }
-}
-
-.path-preferred-vendors .views-exposed-form .form-item {
-  margin: 0 $grid-gutter-width-base 0 0;
-  @include media-breakpoint-down(md) {
-    margin: $grid-gutter-width-base 0 0 0;
-  }
 }
 
 .facility-search-filters .form-actions input {
@@ -139,20 +66,6 @@
   }
   width: 100%;
 }
-
-.path-preferred-vendors .views-exposed-form  {
-  .submit-input-wrapper:first-of-type .button {
-    @extend .btn-primary;
-    @extend .btn;
-    width: 100%;
-  }
-  .submit-input-wrapper:last-of-type:nth-child(2) .button {
-    @extend .btn-secondary;
-    @extend .btn;
-    width: 100%;
-  }
-}
-
 
 .node-facility-teaser-top {
   @extend .row;
