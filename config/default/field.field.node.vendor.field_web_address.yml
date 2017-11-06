@@ -11,7 +11,7 @@ id: node.vendor.field_web_address
 field_name: field_web_address
 entity_type: node
 bundle: vendor
-label: 'Web Address'
+label: Website
 description: 'Enter the full URL of the vendor''s website (e.g., https://example.com). Value will become link for "Website" button.'
 required: false
 translatable: false
