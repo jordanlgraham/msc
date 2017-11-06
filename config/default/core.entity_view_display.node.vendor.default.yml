@@ -43,7 +43,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: address_default
+    type: address_plain
     region: content
   field_contact:
     weight: 4
@@ -141,14 +141,14 @@ content:
     weight: 3
     label: hidden
     settings:
-      link_text: Website
+      link_text: 'Visit Our Website'
       btn_type: btn-primary
+      btn_size: ''
       trim_length: '80'
       target: _blank
       url_only: ''
       url_plain: ''
       rel: 0
-      btn_size: ''
     third_party_settings: {  }
     type: button_link
     region: content

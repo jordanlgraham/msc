@@ -106,6 +106,9 @@
     "patches": {
       "drupal/button_link": {
         "Adding missing outline styles, adding unset array key": "patches/contrib/button_link/button_link_formatter.patch"
+      },
+      "drupal/address": {
+        "The locality.name data is missed in PlainFormater": "patches/contrib/address/locality-name-data-missed-plainformater-2881391-1.patch"
       }
     }
   },

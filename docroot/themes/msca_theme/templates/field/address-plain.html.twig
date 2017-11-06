@@ -45,14 +45,10 @@
   {% if address_line2 %}
     {{ address_line2 }} <br>
   {% endif %}
-  {% if locality.name %}
-    {{ locality.name }} <br>
-  {% endif %}
   {% if dependent_locality.code %}
     {{ dependent_locality.code }} <br>
   {% endif %}
-  {% if locality.code or postal_code or administrative_area.code %}
-    {{ locality.code }} {{ postal_code }} {{ administrative_area.code }} <br>
+  {% if locality.name or postal_code or administrative_area.code %}
+    {{ locality.name }}, {{ administrative_area.code }} {{ postal_code }}  <br>
   {% endif %}
-  {{ country.name }}
 </p>
