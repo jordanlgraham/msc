@@ -182,18 +182,22 @@ class AddressPlainFormatter extends FormatterBase implements ContainerFactoryPlu
       $value = $values[$field];
       // The template needs access to both the subdivision code and name.
       $values[$field] = [
-        'code' => $value,
-        'name' => '',
+        'code' => '',
+        'name' => $value,
       ];
 
       if (empty($value)) {
         // This level is empty, so there can be no sublevels.
-        break;
+        continue;
       }
-      $parents[] = $index ? $original_values[$subdivision_fields[$index - 1]] : $address->getCountryCode();
+
+      $parents[] = ($index && $original_values[$subdivision_fields[$index - 1]] !== NULL)
+        ? $original_values[$subdivision_fields[$index - 1]]
+        : $address->getCountryCode();
+
       $subdivision = $this->subdivisionRepository->get($value, $parents);
       if (!$subdivision) {
-        break;
+        continue;
       }
 
       // Remember the original value so that it can be used for $parents.
@@ -214,7 +218,7 @@ class AddressPlainFormatter extends FormatterBase implements ContainerFactoryPlu
 
       if (!$subdivision->hasChildren()) {
         // The current subdivision has no children, stop.
-        break;
+        continue;
       }
     }
 
