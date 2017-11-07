@@ -15,16 +15,21 @@
 }
 
 .paragraph--type--foundation-highlights .container > div {
-  @extend .row;
+  margin-bottom: 0;
 }
 
 .paragraph--type--foundation-highlights .container > div > div {
   @extend .col-lg-4;
   @extend .col-sm-12;
+  margin-bottom: 0;
   @include media-breakpoint-down(md) {
     margin-bottom: 1rem;
   }
 }
+
+//.paragraph {
+//  margin-bottom: 0!important;
+//}
 
 .homepage-foundation-header h2 {
   @extend .thin-heading;
@@ -41,11 +46,11 @@
 .paragraph--type--foundation-highlights {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: 0;
   @include media-breakpoint-down(md) {
     padding-top: 0;
   }
 }
-
 .homepage-foundation-icon {
   max-width: 100%;
   width: 200px;
