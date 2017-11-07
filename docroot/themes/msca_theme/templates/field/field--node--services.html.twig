@@ -56,7 +56,7 @@
         <span>
             {% endif %}
             {% for item in items %}
-                <span{{ item.attributes }}>{{ item.content }}{% if not loop.last %}, {% endif %}</span>
+                {{ item.content }}{% if not loop.last %}, {% endif %}
             {% endfor %}
             {% if multiple %}
         </span>

@@ -19,15 +19,18 @@
           <h2{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
-          {% if node.field_location.organization %}
-            {{ node.field_location.organization }},
-          {% endif %}
-          {% if node.field_location.locality %}
-            {{ node.field_location.locality }},
-          {% endif %}
-          {% if node.field_location.administrative_area %}
-            {{ node.field_location.administrative_area }}
-          {% endif %}
+          <div class="event-location">
+            {% if node.field_location.organization %}
+              {{ node.field_location.organization }},
+            {% endif %}
+            {% if node.field_location.locality %}
+              {{ node.field_location.locality }},
+            {% endif %}
+            {% if node.field_location.administrative_area %}
+              {{ node.field_location.administrative_area }}
+            {% endif %}
+          </div>
+
           {{ content.body }}
           <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
       </div>

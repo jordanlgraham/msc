@@ -33,29 +33,39 @@
                   </div>
                 {% endif %}
                 <div class="vendor-info">
-
-                  {{content.field_address }}
-
-                  {{ content.field_web_address }}
-
-                  {{ content.field_contact }}
-
-                  {{ content.field_contact_title }}
-
-                  {{ content.field_phone }}
-
-                  {{ content.field_email }}
-
+                  {% if content.field_address|render %}
+                    {{content.field_address }}
+                  {% endif %}
+                  {% if content.field_web_address|render %}
+                    {{ content.field_web_address }}
+                  {% endif %}
+                  {% if content.field_contact|render %}
+                    {{ content.field_contact }}
+                  {% endif %}
+                  {% if content.field_contact_title|render %}
+                    {{ content.field_contact_title }}
+                  {% endif %}
+                  {% if content.field_phone|render %}
+                    {{ content.field_phone }}
+                  {% endif %}
+                  {% if content.field_email|render %}
+                    {{ content.field_email }}
+                  {% endif %}
+                  {% if content.field_primary_services|render %}
                   {{ content.field_primary_services }}
-
+                    {% endif %}
+                  {% if content.field_additional_services|render %}
                   {{ content.field_additional_services }}
-
+                    {% endif %}
+                  {% if content.field_facebook|render %}
                   {{ content.field_facebook }}
-
+                  {% endif %}
+                    {% if content.field_twitter|render %}
                   {{ content.field_twitter }}
-
-                  {{ content.field_linkedin }}
-
+                  {% endif %}
+                  {% if content.field_linkedin|render %}
+                    {{ content.field_linkedin }}
+                  {% endif %}
                 </div>
               </div>
             </div>
