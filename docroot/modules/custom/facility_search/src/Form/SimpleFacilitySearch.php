@@ -22,7 +22,7 @@ class SimpleFacilitySearch extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Facility Search by Name, City, or Zip Code'),
       '#title_display' => 'invisible',
-      '#placeholder' => $this->t('Facility Search by Name, City, or Zip Code'),
+      '#placeholder' => $this->t('Facility Name, City, or Zip Code'),
       '#required' => TRUE,
     ];
 

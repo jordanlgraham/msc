@@ -58,6 +58,10 @@ ul.menu-level-1 > li:last-child(2) > ul.nav {
   display: none; // hidden and shown on hover
 }
 
+.header-menu .navbar-toggleable-md ul.menu-level-2.subnav-active {
+  display: block;
+}
+
 .header-menu .navbar-toggleable-md  ul.menu-level-2 > li {
   @include media-breakpoint-up(md) {
     position: relative;
