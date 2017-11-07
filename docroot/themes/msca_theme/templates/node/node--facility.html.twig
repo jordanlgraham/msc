@@ -247,8 +247,8 @@
                     {% if dcu in content.field_specialized_unit|keys %}
                         <div col-md-12>
                             <div class="row mb-3">
-                                <span class="col-md-9 ">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
-                                <span class="col-md-3">Yes</span>
+                                <span class="col-md-7">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
+                                <span class="col-md-5">Yes</span>
                             </div>
                         </div>
                     {% endif %}
@@ -258,8 +258,8 @@
                     {% if content.field_assisted_living_on_campus['0']['#markup'] == 'On' %}
                         <div col-md-12>
                             <div class="row mb-3">
-                                <span class="col-md-9 ">{{ 'Has Assisted Living Residence on-campus'|t }}</span>
-                                <span class="col-md-3">Yes</span>
+                                <span class="col-md-7">{{ 'Has Assisted Living Residence on-campus'|t }}</span>
+                                <span class="col-md-5">Yes</span>
                             </div>
                         </div>
                     {% endif %}
@@ -268,8 +268,8 @@
                 {% if content.field_name_of_assisted_living|render %}
                     <div col-md-12>
                         <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Name of Assisted Living Residence'|t }}</span>
-                            <span class="col-md-3">{{ node.field_name_of_assisted_living.value }}</span>
+                            <span class="col-md-7">{{ 'Name of Assisted Living Residence'|t }}</span>
+                            <span class="col-md-5">{{ node.field_name_of_assisted_living.value }}</span>
                         </div>
                     </div>
                 {% endif %}
@@ -278,8 +278,8 @@
                     {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
                         <div col-md-12>
                             <div class="row mb-3">
-                                <span class="col-md-9 ">{{ 'Part of a Continuing Care Retirement Community'|t }}</span>
-                                <span class="col-md-3">Yes</span>
+                                <span class="col-md-7">{{ 'Part of a Continuing Care Retirement Community'|t }}</span>
+                                <span class="col-md-5">Yes</span>
                             </div>
                         </div>
                     {% endif %}
@@ -288,8 +288,8 @@
                 {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
                     <div col-md-12>
                         <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Name of Retirement Community'|t }}</span>
-                            <span class="col-md-3">{{ node.field_retirement_community_aff.value }}</span>
+                            <span class="col-md-7">{{ 'Name of Retirement Community'|t }}</span>
+                            <span class="col-md-5">{{ node.field_retirement_community_aff.value }}</span>
                         </div>
                     </div>
                 {% endif %}
@@ -297,8 +297,8 @@
                 {% if content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1 %}
                     <div col-md-12>
                         <div class="row mb-3">
-                            <span class="col-md-9 ">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
-                            <span class="col-md-3">Yes</span>
+                            <span class="col-md-7">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
+                            <span class="col-md-5">Yes</span>
                         </div>
                     </div>
                 {% endif %}
@@ -307,8 +307,8 @@
                     {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
                         <div col-md-12>
                             <div class="row mb-3">
-                                <span class="col-md-9 ">{{ 'Monthly Fee Range'|t }}</span>
-                                <span class="col-md-3">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
+                                <span class="col-md-7">{{ 'Monthly Fee Range'|t }}</span>
+                                <span class="col-md-5">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
                             </div>
                         </div>
                     {% endif %}
