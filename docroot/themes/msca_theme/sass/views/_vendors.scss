@@ -1,22 +1,23 @@
 .path-preferred-vendors .facility-search-wrapper {
-  position: relative;
-  top: 190px;
+  @include media-breakpoint-down(sm) {
+    .btn-outline {
+      padding-left: 1rem;
+      padding-right: 3rem;
+    }
+  }
 }
-.path-preferred-vendors .facility-search-header {
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 9;
-}
-.path-preferred-vendors .facility-search-header + nav {
-  position: relative;
-  top: 210px;
-}
-
-.path-preferred-vendors footer {
-  position: relative;
-  top: 190px;
-}
+//@include media-breakpoint-down(sm) {
+//  .facility-search-header, .facility-search-container section {
+//    max-width: 375px;
+//  }
+//  #site-header {
+//    width: 375px;
+//    margin: 0;
+//  }
+//  .vendor-view-header {
+//    padding: 2rem;
+//  }
+//}
 
 .path-preferred-vendors .views-exposed-form  {
   .submit-input-wrapper:first-of-type .button {
@@ -50,14 +51,16 @@
 .facility-search-filters select {
   @extend .form-control;
   width: 100%;
+  @include media-breakpoint-down(sm) {
+    width: 340px;
+  }
 }
 
-.path-preferred-vendors .views-element-container > .contextual-region {
+.path-preferred-vendors .views-element-container > div {
   @extend .row;
   .views-row {
-    @extend .col-md-6;
     margin-bottom: $grid-gutter-width-base;
-
+    min-height: 260px;
     article {
       height: 100%;
     }
