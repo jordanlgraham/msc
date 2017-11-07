@@ -52,7 +52,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
                 {% if content.field_title|render %}
                 <h2>{{ content.field_title }}</h2>
                 {% endif %}
-                <div class="header-image"><img src="/{{ directory }}/svg/film.svg" /></div>
+                <div class="header-image">
+                  {# It's important to render it as an svg so sass fill property can control color. #}
+                  {{ source(directory ~ '/svg/film.svg') }}
+                </div>
                 <div class="row">
                     <div class="col-md-2 hidden-md-down">&nbsp;</div>
                     <div class="col">

@@ -1,7 +1,6 @@
 .paragraph--type--foundation-highlights-column {
   @extend .text-center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
   background: rgba(255,255,255,0.8);
 }
 
@@ -42,6 +41,9 @@
 .paragraph--type--foundation-highlights {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  @include media-breakpoint-down(md) {
+    padding-top: 0;
+  }
 }
 
 .homepage-foundation-icon {

@@ -33,6 +33,9 @@
 
 .carousel-caption p {
   color: $gray;
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
 }
 
 .carousel-caption h2 div {
@@ -54,3 +57,13 @@
   position: relative;
   top: 20px;
 }
+
+@include media-breakpoint-down(sm) {
+  .carousel-caption > div {
+    position: relative;
+    top: -30px;
+  }
+}
+
+
+

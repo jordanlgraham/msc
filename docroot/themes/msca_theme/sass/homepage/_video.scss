@@ -24,3 +24,19 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.paragraph--type--video .header-image {
+  height: 5rem;
+}
+
+.paragraph--type--video h2 {
+  margin-bottom: 0;
+}
+
+.paragraph--type--video svg {
+  width: 50px;
+  fill: white;
+  height: 50px;
+  position: relative;
+  top: 15px;
+}

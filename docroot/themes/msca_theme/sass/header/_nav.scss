@@ -203,8 +203,10 @@
   border-right: 0 solid $dark-gray;
 }
 
-#block-msca-theme-main-menu .menu-level-1 > li > a {
-  border-right: 2px solid $dark-gray;
+@include media-breakpoint-up(sm) {
+  #block-msca-theme-main-menu .menu-level-1 > li > a {
+    border-right: 2px solid $dark-gray;
+  }
 }
 
 #block-msca-theme-main-menu .foundation li {
