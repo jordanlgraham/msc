@@ -13,7 +13,8 @@ regions:
   navigation_utility: 'Utility Navigation'
   header: 'Header'
   content: 'Content'
-  sidebar: 'Sidebar'
+  sidebar_first: 'Sidebar First'
+  sidebar_second: 'Sidebar Second'
   footer: 'Footer'
 
   # The purpose of the gutter is to be able to place blocks but not have them appear.

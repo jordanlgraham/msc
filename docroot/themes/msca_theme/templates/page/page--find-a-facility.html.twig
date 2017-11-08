@@ -56,10 +56,10 @@
   <div class="facility-search-container">
     <div class="facility-search-row">
       {# Sidebar First #}
-      {% if page.sidebar %}
-        {% block sidebar %}
+      {% if page.sidebar_first %}
+        {% block sidebar_first %}
             <aside role="complementary" class="facility-search-filters">
-              {{ page.sidebar }}
+              {{ page.sidebar_first }}
             </aside>
         {% endblock %}
       {% endif %}

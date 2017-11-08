@@ -1,6 +1,58 @@
 // Sidebar blocks.
-aside.col-md-4 {
-    border: solid 1px lightgrey;
-    padding: 2rem;
+aside > div > div {
+  border: solid 1px $gray-lighter;
+  padding: 1rem 0 0;
+  margin: 1.5rem 0;
 }
 
+// Find-a-facility and member login sidebar block.
+aside .facility-search.search-login-section.col-12.col-md-6 {
+  max-width: 100%;
+}
+aside .login.search-login-section.col-12.col-md-6 {
+  max-width: 100%;
+}
+
+// Block Title Icons.
+aside svg {
+  width: 50px;
+}
+aside h2 {
+  color: $blue;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: "Lato",sans-serif;
+  text-align: center;
+  padding: 0 2rem;
+}
+aside .header-image:before,
+aside .header-image:after {
+  border-top: solid 1px $gray-lighter;
+}
+
+aside .header-image + div {
+  padding: 1em;
+}
+
+aside .event-teaser-text h2 {
+  text-align: left;
+  text-transform: none;
+  font-size: 1rem;
+  padding: 0;
+}
+
+aside .event-teaser-text h2 a {
+  color: $gray-dark;
+}
+
+aside .event-teaser-text h4 {
+  font-weight: 400;
+}
+
+aside .date-square {
+  background-color: $blue;
+}
+
+aside .btn {
+  width: 100%;
+}

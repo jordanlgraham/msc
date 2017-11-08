@@ -12,8 +12,8 @@ third_party_settings:
     classes: ''
 id: findafacilityuserlogin
 theme: msca_theme
-region: gutter
-weight: 0
+region: sidebar_second
+weight: -6
 provider: null
 plugin: facility_search_login
 settings:

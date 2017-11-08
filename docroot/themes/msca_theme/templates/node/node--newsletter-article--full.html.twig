@@ -71,8 +71,6 @@
  */
 #}
 <article{{ attributes.addClass('container newsletter-article') }}>
-  <div class="newsletter-article-top-row">
-    <div class="newsletter-article-left">
       {% if content.field_news_subtitle|render %}
         <span class="newsletter-article-subtitle">{{ content.field_news_subtitle }}</span>
       {% endif %}
@@ -88,13 +86,7 @@
         <h2>{{ 'Sponsored By'|t }}</h2>
         {{ content.field_sponsor }}
       {% endif %}
-    </div>
-    <div class="newsletter-article-right">
-      <h2>{{ 'Recent News'|t }}</h2>
-      {{ drupal_block('views_block__news_block_2') }}
-      {{ drupal_block('findafacilityuserlogin') }}
-    </div>
-  </div>
+
     {% if content.field_related_content|render %}
     <div class="newsletter-article-bottom-row">
       <h2>{{ 'Related Content'|t }}</h2>

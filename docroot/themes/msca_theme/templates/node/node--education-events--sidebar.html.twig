@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Theme override to display an Education and Events node newsletter display.
+ *
+ */
+#}
+<article{{ attributes.addClass('pb-5') }}>
+
+  <div{{ content_attributes }}>
+      <div class="date-square float-left mr-3">
+          <div class="date-square-month">{{ content.square_month }}</div>
+          <div class="date-square-day">{{ content.square_day }}</div>
+      </div>
+      <div class="event-teaser-text">
+          {% if content.field_date|render %}
+              <h4>{{ content.full_start_date }}
+                {% if content.full_end_date %}
+                  - {{ content.full_end_date }}
+                {% endif %}
+              </h4>
+          {% endif %}
+        {# This may seem odd, but requirements call for two-line truncated text for the event title #}
+          <h2{{ title_attributes }}>
+            {% set text = label|render|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
+            <a href="{{ url }}" rel="bookmark">{{ text|length > 58 ? text|slice(0, 58)|raw ~ '[...]' : text|raw }}</a>
+          </h2>
+      </div>
+
+  </div>
+
+</article>
