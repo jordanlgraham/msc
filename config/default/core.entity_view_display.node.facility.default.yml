@@ -106,7 +106,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: address_default
+    type: address_plain
     region: content
   field_administrator:
     weight: 7
