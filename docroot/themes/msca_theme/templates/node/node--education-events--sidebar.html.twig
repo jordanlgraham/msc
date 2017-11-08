@@ -23,7 +23,7 @@
         {# This may seem odd, but requirements call for two-line truncated text for the event title #}
           <h2{{ title_attributes }}>
             {% set text = label|render|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
-            <a href="{{ url }}" rel="bookmark">{{ text|length > 58 ? text|slice(0, 58)|raw ~ '[...]' : text|raw }}</a>
+            <a href="{{ url }}" rel="bookmark">{{ text|length > 50 ? text|slice(0, 50)|raw ~ '[...]' : text|raw }}</a>
           </h2>
       </div>
 
