@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - block_class
+    - ctools
     - facility_search
   theme:
     - msca_theme
@@ -21,4 +22,15 @@ settings:
   label: 'Find a Facility/User login'
   provider: facility_search
   label_display: '0'
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      resources: resources
+      video: video
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

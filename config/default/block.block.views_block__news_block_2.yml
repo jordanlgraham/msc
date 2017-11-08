@@ -6,6 +6,7 @@ dependencies:
     - views.view.news
   module:
     - block_class
+    - ctools
     - views
   theme:
     - msca_theme
@@ -25,4 +26,15 @@ settings:
   label_display: visible
   views_label: ''
   items_per_page: none
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      resources: resources
+      video: video
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
