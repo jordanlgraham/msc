@@ -242,7 +242,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec varius nulla pretium, sodales dolor et, maximus lacus. Integer feugiat ipsum a massa tincidunt sollicitudin.'
+            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2017 Annual Meeting & Trade Show.'
             format: basic_html
           plugin_id: text
       footer:
