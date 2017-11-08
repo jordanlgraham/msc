@@ -59,10 +59,14 @@
             </div>
         </div>
         <div{{ content_attributes }} class="col-md-6 text-center">
-
+          {# If there is an image we'll display that - otherwise we'll display google map #}
             {% if content.field_facility_image|render %}
                 <div class="pb-2">
                     {{ content.field_facility_image }}
+                </div>
+            {% else %}
+                <div class="pb-2">
+                  {{ content.field_ge }}
                 </div>
             {% endif %}
             {% if content.field_facebook|render %}
