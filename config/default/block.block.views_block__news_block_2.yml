@@ -14,15 +14,15 @@ third_party_settings:
     classes: ''
 id: views_block__news_block_2
 theme: msca_theme
-region: gutter
-weight: 0
+region: sidebar_second
+weight: -12
 provider: null
 plugin: 'views_block:news-block_2'
 settings:
   id: 'views_block:news-block_2'
   label: ''
   provider: views
-  label_display: '0'
+  label_display: visible
   views_label: ''
   items_per_page: none
 visibility: {  }

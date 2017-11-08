@@ -15,7 +15,7 @@ third_party_settings:
 id: joinmassseniorcareassociation
 theme: msca_theme
 region: gutter
-weight: -8
+weight: -10
 provider: null
 plugin: 'block_content:0536f0ad-e64b-4fba-97a2-2c2c4f33037e'
 settings:

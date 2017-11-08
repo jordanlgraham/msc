@@ -15,7 +15,7 @@ third_party_settings:
 id: contactblock
 theme: msca_theme
 region: gutter
-weight: -10
+weight: -12
 provider: null
 plugin: contact_block
 settings:

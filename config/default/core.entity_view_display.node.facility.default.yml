@@ -83,7 +83,6 @@ dependencies:
     - node.type.facility
   module:
     - address
-    - geolocation
     - link
     - media_entity
     - options
@@ -106,7 +105,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: address_plain
+    type: address_default
     region: content
   field_administrator:
     weight: 7
@@ -293,7 +292,7 @@ content:
     type: media_thumbnail
     region: content
   field_facility_price_range_max:
-    weight: 71
+    weight: 72
     label: above
     settings:
       thousand_separator: ''
@@ -304,7 +303,7 @@ content:
     type: number_decimal
     region: content
   field_facility_price_range_min:
-    weight: 70
+    weight: 71
     label: above
     settings:
       thousand_separator: ''
@@ -315,7 +314,7 @@ content:
     type: number_decimal
     region: content
   field_facility_type:
-    weight: 69
+    weight: 70
     label: above
     settings:
       link: true
@@ -332,39 +331,6 @@ content:
     third_party_settings: {  }
     type: boolean
     region: content
-  field_ge:
-    type: geolocation_map
-    weight: 72
-    region: content
-    label: hidden
-    settings:
-      title: ''
-      set_marker: '1'
-      common_map: ''
-      info_text: ''
-      use_overridden_map_settings: 0
-      google_map_settings:
-        type: ROADMAP
-        zoom: '10'
-        minZoom: 0
-        maxZoom: 18
-        rotateControl: 0
-        mapTypeControl: 1
-        streetViewControl: 1
-        zoomControl: 1
-        fullscreenControl: 0
-        scrollwheel: 1
-        disableDoubleClickZoom: 0
-        draggable: 1
-        height: 400px
-        width: 100%
-        info_auto_display: 1
-        marker_icon_path: ''
-        disableAutoPan: 1
-        style: ''
-        preferScrollingToZooming: 0
-        gestureHandling: auto
-    third_party_settings: {  }
   field_hmo_accepted:
     weight: 64
     label: hidden
@@ -763,5 +729,6 @@ hidden:
   field_customer_id: true
   field_customer_key: true
   field_customer_type: true
+  field_ge: true
   field_member_flag: true
   links: true

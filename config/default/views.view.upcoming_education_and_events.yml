@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.homepage
+    - core.entity_view_mode.node.sidebar
     - field.storage.node.field_call_to_action
     - field.storage.node.field_date
     - field.storage.node.field_end_date
@@ -58,7 +59,7 @@ display:
       pager:
         type: some
         options:
-          items_per_page: 3
+          items_per_page: 2
           offset: 0
       style:
         type: default
@@ -516,13 +517,54 @@ display:
         - 'config:field.storage.node.field_date'
         - 'config:field.storage.node.field_end_date'
         - 'config:field.storage.node.field_location'
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: 'Sidebar Events block'
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      style:
+        type: default
+        options: {  }
+      defaults:
+        style: false
+        row: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: sidebar
+      block_description: 'Sidebar Events block'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_call_to_action'
+        - 'config:field.storage.node.field_date'
+        - 'config:field.storage.node.field_end_date'
+        - 'config:field.storage.node.field_location'
   block_upcoming_events:
     display_plugin: block
     id: block_upcoming_events
-    display_title: Block
+    display_title: 'Homepage Events block'
     position: 1
     display_options:
       display_extenders: {  }
+      pager:
+        type: some
+        options:
+          items_per_page: 3
+          offset: 0
+      defaults:
+        pager: false
+      display_description: ''
+      block_description: 'Homepage Events block'
     cache_metadata:
       max-age: -1
       contexts:
