@@ -32,10 +32,11 @@
     {% endif %}
     {{ title_suffix }}
     <div class="header-image">
-        <img src="/{{ directory }}/svg/news.svg" />
+        <img alt="{{ 'newspaper icon'|t }}" src="/{{ directory }}/svg/news.svg" />
     </div>
     {% block content %}
         {{ content }}
     {% endblock %}
-    <a class="btn btn-primary" href="/calendar">View All Recent News</a>
+    {# Todo use proper route syntax for this link once it's destination is created #}
+    <a class="btn btn-primary" href="/news">{{ 'View All Recent News'|t }}</a>
 </div>
