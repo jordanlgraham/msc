@@ -41,6 +41,7 @@ aside .header-image + div {
   padding: 1em;
 }
 
+// Upcoming Education and Events block.
 aside .event-teaser-text h2 {
   text-align: left;
   text-transform: none;
@@ -62,4 +63,33 @@ aside .date-square {
 
 aside .btn {
   width: 100%;
+}
+
+#block-views-block-upcoming-education-and-events-block-1 .views-row article {
+  padding-bottom: 3rem;
+}
+
+#block-views-block-upcoming-education-and-events-block-1 .views-row:last-child article {
+  padding-bottom: 1rem;
+}
+
+// Recent News block.
+#block-views-block-news-block-2 .views-field-field-news-release-date {
+  color: gray;
+  text-transform: uppercase;
+}
+
+#block-views-block-news-block-2 .views-row {
+  margin-bottom: 1rem;
+  border-bottom: solid 1px $gray-lighter;
+  padding-bottom: 1rem;
+}
+
+#block-views-block-news-block-2 .views-row:last-child {
+  border-bottom: solid 0 $gray-lighter;
+}
+
+#block-views-block-news-block-2  .views-field-title {
+  border-left: solid 2px $orange;
+  padding-left: .5rem;
 }
