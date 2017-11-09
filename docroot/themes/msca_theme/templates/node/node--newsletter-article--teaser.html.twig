@@ -21,7 +21,7 @@
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
           {{ content.body }}
-          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
       </div>
 
   </div>

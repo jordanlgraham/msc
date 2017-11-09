@@ -9,8 +9,8 @@
 
   <div{{ content_attributes }}>
       <div class="date-square">
-          <div class="date-square-month">{{ content.field_date.value|date('M') }}</div>
-          <div class="date-square-day">{{ content.field_date.value|date('j') }}</div>
+          <div class="date-square-month">{{ content.square_month }}</div>
+          <div class="date-square-day">{{ content.square_day }}</div>
       </div>
       <div class="event-teaser-text">
           {% if content.field_event_category|render %}
@@ -21,9 +21,7 @@
           </h2>
           {{ content.body }}
           {% set text = content.body|render|striptags %}
-          {% if text|length > 350 %}
-              <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
-          {% endif %}
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
       </div>
 
   </div>

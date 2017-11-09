@@ -25,7 +25,7 @@
               <h6>{{ content.field_resource_type.0 }}</h6>
           {% endif %}
           {{ content.body }}
-          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
       </div>
 
   </div>

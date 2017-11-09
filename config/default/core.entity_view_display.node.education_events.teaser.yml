@@ -9,11 +9,13 @@ dependencies:
     - field.field.node.education_events.field_date
     - field.field.node.education_events.field_end_date
     - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - datetime
@@ -33,13 +35,13 @@ content:
     third_party_settings: {  }
     region: content
   field_date:
-    type: datetime_default
+    type: datetime_custom
     weight: 0
     region: content
     label: hidden
     settings:
       timezone_override: ''
-      format_type: short_month_and_day
+      date_format: n/j
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
@@ -54,4 +56,5 @@ hidden:
   field_gated: true
   field_gold_sponsor: true
   field_location: true
+  field_newsletter_topic: true
   links: true
