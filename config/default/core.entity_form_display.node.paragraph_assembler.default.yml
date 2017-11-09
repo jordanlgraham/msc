@@ -20,15 +20,17 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_paragraph:
-    type: entity_reference_paragraphs
+    type: paragraphs
     weight: 31
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: open
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: ''
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   path:

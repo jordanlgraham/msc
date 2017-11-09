@@ -93,3 +93,23 @@ aside .btn {
   border-left: solid 2px $orange;
   padding-left: .5rem;
 }
+
+// Find a facility sidebar block.
+aside .facility-search-simple {
+  display: block;
+}
+
+aside .facility-search-simple #edit-keys {
+  width: 90%;
+  margin: 0 auto 1rem;
+  border-radius: 0;
+}
+
+aside .facility-search-simple #edit-submit {
+  @extend .btn;
+  @extend .btn-secondary;
+  padding-left: 3rem;
+  padding-right: 5rem;
+  line-height: 1.6;
+}
+
