@@ -50,6 +50,9 @@ class SoapHelper {
       case 'currency':
         return (int)str_replace(',', '', $field);
         break;
+      case 'postal':
+        return rtrim($field, '-');
+        break;
 
       default:
         if (!empty($field)) {
