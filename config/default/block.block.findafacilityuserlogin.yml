@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - block_class
-    - ctools
     - facility_search
   theme:
     - msca_theme
@@ -13,8 +12,8 @@ third_party_settings:
     classes: ''
 id: findafacilityuserlogin
 theme: msca_theme
-region: sidebar_second
-weight: -11
+region: gutter
+weight: -6
 provider: null
 plugin: facility_search_login
 settings:
@@ -22,15 +21,4 @@ settings:
   label: 'Find a Facility/User login'
   provider: facility_search
   label_display: '0'
-visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      newsletter_article: newsletter_article
-      newsroom: newsroom
-      page: page
-      resources: resources
-      video: video
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+visibility: {  }
