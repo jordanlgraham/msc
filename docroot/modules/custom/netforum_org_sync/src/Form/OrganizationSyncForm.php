@@ -226,7 +226,6 @@ class OrganizationSyncForm extends ConfigFormBase {
       catch (\Exception $exception) {
         $context['results']['errors']['sync'][] = "Error syncing organization {$organization['org_cst_key']}: " .
           $exception->getMessage();
-        $debug = TRUE;
       }
       $context['sandbox'][$sandbox_key]['pointer']++;
     }

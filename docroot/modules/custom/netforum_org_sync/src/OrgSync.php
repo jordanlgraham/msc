@@ -183,7 +183,7 @@ class OrgSync {
     $node->field_address->country_code = 'US';
     $node->field_address->administrative_area = $this->helper->cleanSoapField($org['adr_state']);
     $node->field_address->locality = $this->helper->cleanSoapField($org['adr_city']);
-    $node->field_address->postal_code = $this->helper->cleanSoapField($org['adr_post_code']);
+    $node->field_address->postal_code = $this->helper->cleanSoapField($org['adr_post_code'], 'postal');
     $node->field_address->address_line1 = $this->helper->cleanSoapField($org['adr_line1']);
     $node->field_address->address_line2 = $this->helper->cleanSoapField($org['adr_line2']);
     $node->field_contact = isset($individual['name']) ? $this->helper->cleanSoapField($individual['name']) : '';
