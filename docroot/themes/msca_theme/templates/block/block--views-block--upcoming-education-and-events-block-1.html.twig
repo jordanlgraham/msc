@@ -32,7 +32,7 @@
     {% endif %}
     {{ title_suffix }}
     <div class="header-image">
-        <img alt="calendar icon" src="/{{ directory }}/svg/calendar-blue.svg" />
+        <img alt="{{ 'calendar icon'|t }}" src="/{{ directory }}/svg/calendar-blue.svg" />
     </div>
     {% block content %}
         {{ content }}

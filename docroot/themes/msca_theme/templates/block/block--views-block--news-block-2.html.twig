@@ -32,7 +32,7 @@
     {% endif %}
     {{ title_suffix }}
     <div class="header-image">
-        <img alt="newspaper icon" src="/{{ directory }}/svg/news.svg" />
+        <img alt="{{ 'newspaper icon'|t }}" src="/{{ directory }}/svg/news.svg" />
     </div>
     {% block content %}
         {{ content }}
