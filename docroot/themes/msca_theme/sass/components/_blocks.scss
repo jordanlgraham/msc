@@ -5,6 +5,10 @@ aside > div > div {
   margin: 1.5rem 0;
 }
 
+aside.newsletter > div > div {
+  border: solid 0 $gray-lighter;
+}
+
 // Find-a-facility and member login sidebar block.
 aside .facility-search.search-login-section.col-12.col-md-6 {
   max-width: 100%;
