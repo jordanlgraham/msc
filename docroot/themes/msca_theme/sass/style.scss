@@ -2,47 +2,48 @@
 @import "base";
 
 // Components
-@import "components/typography";
+@import "components/2-3-paragraph";
 @import "components/blocks";
 @import "components/btn-custom";
-@import "components/events";
-@import "homepage/carousel";
-@import "components/cta";
 @import "components/color-hero";
+@import "components/cta";
+@import "components/date_square";
+@import "components/events";
 @import "components/form";
 @import "components/images";
-@import "components/style-guide";
-@import "components/progress-bars";
 @import "components/local-tasks";
 @import "components/newsletter";
+@import "components/progress-bars";
+@import "components/related_content";
+@import "components/style-guide";
 @import "components/tables";
 @import "components/tabs";
-@import "components/youtube";
-@import "components/date_square";
 @import "components/tweet-block";
-@import "components/2-3-paragraph";
+@import "components/typography";
+@import "components/youtube";
 
 // Layout
 @import "layout/layout";
 
 // Header
+@import "header/dropdown";
 @import "header/header";
 @import "header/nav";
-@import "header/dropdown";
 
 // Footer
 @import "footer/footer";
 
 // Homepage
+@import "homepage/carousel";
+@import "homepage/contact_form";
+@import "homepage/facility-and-login";
 @import "homepage/foundation";
+@import "homepage/headings";
 @import "homepage/join-msca";
 @import "homepage/recent-news";
+@import "homepage/sponsors";
 @import "homepage/upcoming-events";
 @import "homepage/video";
-@import "homepage/contact_form";
-@import "homepage/headings";
-@import "homepage/sponsors";
-@import "homepage/facility-and-login";
 
 // Nodes
 @import "node/facility";
@@ -51,6 +52,6 @@
 @import "node/vendor.scss";
 
 // Views
-@import "views/sponsors";
 @import "views/find-facility";
+@import "views/sponsors";
 @import "views/vendors";

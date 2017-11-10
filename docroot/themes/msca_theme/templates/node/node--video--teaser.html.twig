@@ -27,7 +27,7 @@
               <img class="float-left mr-3" src="{{ youtube_thumbnail }}">
           {% endif %}
           {{ content.body }}
-          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
       </div>
 
   </div>
