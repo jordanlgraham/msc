@@ -74,6 +74,7 @@ module:
   metatag_open_graph: 0
   msc_button_link_social: 0
   msca_discourse: 0
+  msca_donate: 0
   msca_theme_tweaks: 0
   msca_tweet_block: 0
   netforum_event_sync: 0

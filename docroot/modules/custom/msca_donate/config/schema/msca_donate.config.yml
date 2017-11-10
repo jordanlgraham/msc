@@ -1,0 +1,13 @@
+msca_donate.config:
+  type: config_object
+  label: 'MSCA donate configuration'
+  mapping:
+    sandbox_key:
+      type: text
+      label: 'PayPal sandbox key'
+    production_key:
+      type: text
+      label: 'PayPal production key'
+    mode:
+      type: text
+      label: 'PayPal transaction mode'
