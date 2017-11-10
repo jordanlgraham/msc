@@ -12,4 +12,3 @@ donate:
     - core/jquery.once
     - core/drupalSettings
     - msca_donate/paypal
-    
