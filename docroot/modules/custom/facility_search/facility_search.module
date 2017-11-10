@@ -81,6 +81,9 @@ function facility_search_geocoder_provider_info_alter(&$providers) {
  * Implements hook_views_pre_view().
  */
 function facility_search_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() !== 'facility_search') {
+    return;
+  }
   $input = $view->getExposedInput();
   // If other filters are being used, don't use the "keys" filter.
   foreach ($input as $key => $value) {
@@ -91,3 +94,31 @@ function facility_search_views_pre_view(ViewExecutable $view, $display_id, array
   }
   $view->setExposedInput($input);
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function facility_search_preprocess_views_view(&$variables) {
+  /** @var ViewExecutable $view */
+  $view = $variables['view'];
+  if ($view->current_display !== 'page_1' ||
+      $view->id() !== 'facility_search') {
+    return;
+  }
+  $input = $view->getExposedInput();
+  if (empty($input['geocode_state']) || !$input['geocode_state']) {
+    return;
+  }
+  $variables['header']['zip'] = [
+    '#type' => 'html_tag',
+    '#tag' => 'h2',
+    '#value' => t('Searching within @rad miles of @zip', ['@rad' => $input['proximity'], '@zip' => $input['geocode_postal']]),
+    '#cache' => [
+      'contexts' => [
+        'url.query_args',
+      ],
+      'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
+    ],
+  ];
+}
+
