@@ -57,13 +57,11 @@
 
 {# Main #}
 {% block main %}
-<div role="main" class="main-container {{ container }} js-quickedit-main-content">
-  <div class="row">
-
+<main role="main" class="container-fluid events-sponsors-container">
     {# Sidebar First #}
     {% if page.sidebar_first %}
     {% block sidebar_first %}
-    <aside class="col-sm-3 sidebar_first" role="complementary">
+    <aside class="col-sm-3" role="complementary">
       {{ page.sidebar_first }}
     </aside>
     {% endblock %}
@@ -104,13 +102,12 @@
     {# Sidebar Second #}
     {% if page.sidebar_second %}
     {% block sidebar_second %}
-    <aside class="col-sm-4 sidebar_second" role="complementary">
+    <aside class="col-sm-4" role="complementary">
       {{ page.sidebar_second }}
     </aside>
     {% endblock %}
     {% endif %}
-  </div>
-</div>
+</main>
 {% endblock %}
 
 {% include  directory ~ '/templates/components/footer.html.twig' %}
