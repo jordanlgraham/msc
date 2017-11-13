@@ -340,7 +340,11 @@ var Tab = function ($) {
 
 (function ($, Drupal) {
   Drupal.behaviors.msca_theme = {
-    attach: function attach(context, settings) {}
+    attach: function attach(context, settings) {
+
+      // Todo: implement panels for this.
+      $('div.newsletter-article-bottom-row').appendTo('.main-container > .row');
+    }
   };
 })(jQuery, Drupal);
 
