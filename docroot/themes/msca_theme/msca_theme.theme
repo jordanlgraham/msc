@@ -33,6 +33,14 @@ function msca_theme_preprocess_node(&$variables) {
       }
     }
   }
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  	if ($node) {
+  		$nid = $node->id();
+
+  	  	$allContent = views_embed_view('all_content', 'embed_1', $nid);
+  	  	$variables["all_content"] = drupal_render($allContent);
+  	}
 }
 
 /**
