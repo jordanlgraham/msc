@@ -1,0 +1,6 @@
+name: MSC Vendor Search
+description: Functionality for vendor search
+package: MSC
+
+type: module
+core: 8.x

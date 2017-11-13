@@ -1,0 +1,37 @@
+uuid: 99af1461-94fc-4dde-bf78-5260c8fae2e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - ctools
+    - vendor_search
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: findapreferredvendor
+theme: msca_theme
+region: sidebar_second
+weight: 0
+provider: null
+plugin: vendor_search
+settings:
+  id: vendor_search
+  label: 'Find a Vendor'
+  provider: vendor_search
+  label_display: visible
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      resources: resources
+      scholarships: scholarships
+      video: video
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

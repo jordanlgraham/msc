@@ -105,6 +105,7 @@ module:
   tour: 0
   twig_tweak: 0
   user: 0
+  vendor_search: 0
   views_infinite_scroll: 0
   views_ui: 0
   xmlsitemap: 0

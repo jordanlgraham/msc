@@ -100,22 +100,44 @@ aside .btn {
   padding-left: .5rem;
 }
 
-// Find a facility sidebar block.
+// Find a facility and Find a vendor sidebar blocks.
 aside .facility-search-simple {
   display: block;
 }
 
-aside .facility-search-simple #edit-keys {
+aside .facility-search-simple #edit-keys,
+aside .vendor-search-simple #edit-keys--2 {
   width: 90%;
   margin: 0 auto 1rem;
   border-radius: 0;
 }
 
-aside .facility-search-simple #edit-submit {
+aside .facility-search-simple .form-submit {
   @extend .btn;
   @extend .btn-secondary;
-  padding-left: 3rem;
-  padding-right: 5rem;
-  line-height: 1.6;
 }
+
+aside .facility-search-simple .facility-search-submit input {
+  padding: .5rem 3rem .5rem 1rem;
+}
+
+aside .vendor-search-simple .vendor-search-submit input {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+aside .vendor-search-simple .vendor-search-submit::after {
+  content: '>';
+  color: #fff;
+  position: absolute;
+  width: 2rem;
+  background-color: rgba(0,0,0,0.2);
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+}
+
 
