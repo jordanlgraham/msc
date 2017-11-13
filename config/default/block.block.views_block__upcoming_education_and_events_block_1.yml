@@ -31,8 +31,11 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       newsletter_article: newsletter_article
+      newsroom: newsroom
       page: page
-      vendor: vendor
+      resources: resources
+      scholarships: scholarships
+      video: video
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.newsletter_article.field_newsletter_topic
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
+    - field.field.node.newsletter_article.field_tags
     - field.field.node.newsletter_article.field_topic
     - node.type.newsletter_article
   module:
@@ -34,7 +35,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -43,12 +44,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 15
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
   field_gated:
-    weight: 4
+    weight: 5
     settings:
       display_label: true
     third_party_settings: {  }
@@ -56,13 +57,13 @@ content:
     region: content
   field_news_release_date:
     type: datetime_default
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   field_news_source:
     type: link_default
-    weight: 8
+    weight: 9
     region: content
     settings:
       placeholder_url: ''
@@ -78,7 +79,7 @@ content:
     region: content
   field_news_teaser_image:
     type: entity_browser_entity_reference
-    weight: 5
+    weight: 6
     region: content
     settings:
       entity_browser: image_browser
@@ -91,7 +92,7 @@ content:
       open: false
     third_party_settings: {  }
   field_newsletter_byline:
-    weight: 7
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -129,7 +130,7 @@ content:
     region: content
   field_related_content:
     type: inline_entity_form_complex
-    weight: 9
+    weight: 10
     region: content
     settings:
       form_mode: newsletter
@@ -144,7 +145,7 @@ content:
         entity_browser_id: _none
   field_sponsor:
     type: inline_entity_form_complex
-    weight: 10
+    weight: 11
     region: content
     settings:
       form_mode: newsletter
@@ -157,9 +158,24 @@ content:
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
+  field_tags:
+    weight: 3
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
   field_topic:
     type: inline_entity_form_complex
-    weight: 11
+    weight: 12
     region: content
     settings:
       form_mode: simplified_taxonomy_term
@@ -174,20 +190,20 @@ content:
         entity_browser_id: _none
   path:
     type: path
-    weight: 12
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 14
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 13
+    weight: 14
     region: content
     settings:
       display_label: true
@@ -202,7 +218,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 16
+    weight: 17
     region: content
     settings:
       match_operator: CONTAINS

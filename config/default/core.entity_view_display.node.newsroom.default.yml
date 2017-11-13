@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.newsroom.field_newsletter_topic
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
+    - field.field.node.newsroom.field_tags
     - image.style.featured_image_130x190_
     - node.type.newsroom
   module:
@@ -86,6 +87,14 @@ content:
       link: false
     third_party_settings: {  }
     type: entity_reference_entity_view
+    region: content
+  field_tags:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
 hidden:
   entity_print_view_epub: true
