@@ -8,3 +8,6 @@ docroot/vendor/phayes/geophp/.gitignore
 
 docroot/sites/*/settings.local.php
 docroot/sites/sites.local.php
+
+# Remove donate blocks
+config/default/block.block.donateform*
