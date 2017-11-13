@@ -1,0 +1,8 @@
+msca_donate.config:
+  path: '/admin/config/services/donate'
+  defaults:
+    _form: '\Drupal\msca_donate\Form\DonateConfigForm'
+    _title: 'Configure donation settings'
+  requirements:
+    _permission: 'administer site configuration'
+

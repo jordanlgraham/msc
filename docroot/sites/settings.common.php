@@ -783,5 +783,8 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   if (file_exists($private_path . '/discourse_settings.php')) {
     require $private_path . '/discourse_settings.php';
   }
+  if (file_exists($private_path . '/paypal_settings.php')) {
+    require $private_path . '/paypal_settings.php';
+  }
 }
 

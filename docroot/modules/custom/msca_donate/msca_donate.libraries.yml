@@ -1,0 +1,14 @@
+paypal:
+  version: VERSION
+  js:
+    https://www.paypalobjects.com/api/checkout.min.js: { type: external, minified: true}
+
+donate:
+  version: VERSION
+  js:
+    js/donate.js: {minified: false}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings
+    - msca_donate/paypal
