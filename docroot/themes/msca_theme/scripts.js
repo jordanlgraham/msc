@@ -343,7 +343,15 @@ var Tab = function ($) {
     attach: function attach(context, settings) {
 
       // Todo: implement panels for this.
-      $('div.newsletter-article-bottom-row').appendTo('.main-container > .row');
+      var node_classes = ['page-node-type-facility', 'page-node-type-newsletter-article', 'page-node-type-newsroom', 'page-node-type-page', 'page-node-type-resources', 'page-node-type-scholarships', 'page-node-type-video'];
+
+      $(node_classes).once().each(function () {
+        var body = $('body');
+
+        if ($(body, node_classes).hasClass(this)) {
+          $('div.newsletter-article-bottom-row').appendTo('.main-container > .row');
+        }
+      });
     }
   };
 })(jQuery, Drupal);
