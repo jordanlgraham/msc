@@ -24,11 +24,5 @@
 
       {{ content.body }}
       {{ content.field_news_source }}
-  
-    {% if content.field_related_content|render %}
-    <div class="newsletter-article-bottom-row">
-      <h2>{{ 'Related Content'|t }}</h2>
-      {{ content.field_related_content }}
-    </div>
-    {% endif %}
+
 </article>

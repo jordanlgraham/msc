@@ -1,9 +1,9 @@
-uuid: d59e4ada-9813-471b-8546-3a61ec0c7753
+uuid: 738c753a-c2e9-4d3c-9da9-6468ea579c46
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.upcoming_education_and_events
+    - views.view.scholars
   module:
     - block_class
     - ctools
@@ -13,29 +13,25 @@ dependencies:
 third_party_settings:
   block_class:
     classes: ''
-id: views_block__upcoming_education_and_events_block_1
+id: views_block__scholars_block_1
 theme: msca_theme
 region: sidebar_second
-weight: -14
+weight: -15
 provider: null
-plugin: 'views_block:upcoming_education_and_events-block_1'
+plugin: 'views_block:scholars-block_1'
 settings:
-  id: 'views_block:upcoming_education_and_events-block_1'
-  label: 'Upcoming Education & Events'
+  id: 'views_block:scholars-block_1'
+  label: ''
   provider: views
   label_display: visible
-  views_label: 'Upcoming Education & Events'
+  views_label: ''
   items_per_page: none
+  context_mapping: {  }
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
-      newsletter_article: newsletter_article
-      newsroom: newsroom
-      page: page
-      resources: resources
       scholarships: scholarships
-      video: video
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'

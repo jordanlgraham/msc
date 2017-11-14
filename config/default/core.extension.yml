@@ -17,7 +17,6 @@ module:
   comment: 0
   config: 0
   config_filter: 0
-  config_ignore: 0
   config_split: 0
   contact: 0
   contact_block: 0
@@ -75,6 +74,7 @@ module:
   metatag_open_graph: 0
   msc_button_link_social: 0
   msca_discourse: 0
+  msca_donate: 0
   msca_theme_tweaks: 0
   msca_tweet_block: 0
   netforum_event_sync: 0
