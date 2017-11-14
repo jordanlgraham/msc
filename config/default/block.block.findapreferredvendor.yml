@@ -14,7 +14,7 @@ third_party_settings:
 id: findapreferredvendor
 theme: msca_theme
 region: sidebar_second
-weight: 0
+weight: -11
 provider: null
 plugin: vendor_search
 settings:

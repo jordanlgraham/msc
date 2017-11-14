@@ -1,0 +1,40 @@
+uuid: 87fd4116-6876-44bc-bbb0-cb6a2003eb85
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.sidebar
+    - field.field.node.scholarship_recipient.field_current_title
+    - field.field.node.scholarship_recipient.field_first_name
+    - field.field.node.scholarship_recipient.field_gated
+    - field.field.node.scholarship_recipient.field_hometown
+    - field.field.node.scholarship_recipient.field_last_name
+    - field.field.node.scholarship_recipient.field_past_facilities
+    - field.field.node.scholarship_recipient.field_school
+    - node.type.scholarship_recipient
+  module:
+    - user
+id: node.scholarship_recipient.sidebar
+targetEntityType: node
+bundle: scholarship_recipient
+mode: sidebar
+content:
+  field_current_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_first_name: true
+  field_gated: true
+  field_hometown: true
+  field_last_name: true
+  field_past_facilities: true
+  field_school: true
+  links: true

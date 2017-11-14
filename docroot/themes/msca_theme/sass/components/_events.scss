@@ -19,3 +19,30 @@ aside .date-square {
   margin: 1rem auto;
   display: table;
 }
+
+.page-node-type-education-events aside.col-md-4 {
+  border: solid 1px $gray-lighter;
+  padding: 1rem 0 0;
+  margin: 1.5rem 0;
+}
+
+.page-node-type-education-events aside.col-md-4 > div {
+  padding: 0 2rem 0;
+}
+
+aside .teaser-text h2 {
+    font-size: 1rem;
+    text-align: left;
+    padding: 0 2rem;
+    margin: .5rem 0;
+}
+
+aside .event-teaser-text h4 {
+  margin-bottom: 0;
+}
+
+.page-node-type-education-events aside .icon-square,
+.page-node-type-education-events aside .date-square {
+  height: 3rem;
+  width: 3rem;
+}

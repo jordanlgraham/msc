@@ -25,7 +25,7 @@
             </footer>
         {% endif %}
         <div class="row">
-            <div{{ content_attributes }} class="col-md-8">
+            <div{{ content_attributes }} class="col-md-12">
                 {% if content.field_resource_category|render or content.field_video_date|render %}
                     <div class="resource-category-and-date">
                         {% if content.field_resource_category|render %}
@@ -44,21 +44,19 @@
                 {% if content.body|render %}
                     {{ content.body}}
                 {% endif %}
+              <div>
                 {% if content.field_file|render %}
-                    <div class="resource-file">
+                  <div class="resource-file">
                     {{ content.field_file }}
-                    </div>
+                  </div>
                 {% endif %}
-            </div>
-            <div class="col-md-4">
-                {{ drupal_region('sidebar') }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                {% if content.field_related_content|render %}
-                    {{ content.field_related_content }}
+                {% if content.field_external_resource|render %}
+                  <div class="resource-file external">
+                    {{ content.field_external_resource }}
+                  </div>
                 {% endif %}
+              </div>
+
             </div>
         </div>
 

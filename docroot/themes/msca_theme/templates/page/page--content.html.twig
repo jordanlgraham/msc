@@ -57,59 +57,65 @@
 
 {# Main #}
 {% block main %}
-<main role="main" class="container-fluid events-sponsors-container">
-    {# Sidebar First #}
-    {% if page.sidebar_first %}
-    {% block sidebar_first %}
-    <aside class="col-sm-3" role="complementary">
-      {{ page.sidebar_first }}
-    </aside>
-    {% endblock %}
-    {% endif %}
+    <main role="main" class="container-fluid events-sponsors-container">
+        {# Sidebar First #}
+        {% if page.sidebar_first %}
+        {% block sidebar_first %}
+        <aside class="col-sm-3" role="complementary">
+          {{ page.sidebar_first }}
+        </aside>
+        {% endblock %}
+        {% endif %}
 
-    {# Content #}
-    {%
-    set content_classes = [
-    page.sidebar_first and page.sidebar_second ? 'col-sm-4',
-    page.sidebar_first and page.sidebar_second is empty ? 'col-sm-8',
-    page.sidebar_second and page.sidebar_first is empty ? 'col-sm-8',
-    page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
-    ]
-    %}
-    <section{{ content_attributes.addClass(content_classes) }}>
+        {# Content #}
+        {%
+        set content_classes = [
+        page.sidebar_first and page.sidebar_second ? 'col-sm-4',
+        page.sidebar_first and page.sidebar_second is empty ? 'col-sm-8',
+        page.sidebar_second and page.sidebar_first is empty ? 'col-sm-8',
+        page.sidebar_first is empty and page.sidebar_second is empty ? 'col-sm-12'
+        ]
+        %}
+        <section{{ content_attributes.addClass(content_classes) }}>
 
-    {# Highlighted #}
-    {% if page.highlighted %}
-    {% block highlighted %}
-    <div class="highlighted">{{ page.highlighted }}</div>
-    {% endblock %}
-    {% endif %}
+        {# Highlighted #}
+        {% if page.highlighted %}
+        {% block highlighted %}
+        <div class="highlighted">{{ page.highlighted }}</div>
+        {% endblock %}
+        {% endif %}
 
-    {# Help #}
-    {% if page.help %}
-    {% block help %}
-    {{ page.help }}
-    {% endblock %}
-    {% endif %}
+        {# Help #}
+        {% if page.help %}
+        {% block help %}
+        {{ page.help }}
+        {% endblock %}
+        {% endif %}
 
-    {# Content #}
-    {% block content %}
-    <a id="main-content"></a>
-    {{ page.content }}
-    {% endblock %}
-    </section>
+        {# Content #}
+        {% block content %}
+        <a id="main-content"></a>
+        {{ page.content }}
+        {% endblock %}
+        </section>
 
-    {# Sidebar Second #}
-    {% if page.sidebar_second %}
-    {% block sidebar_second %}
-    <aside class="col-sm-4" role="complementary">
-      {{ page.sidebar_second }}
-    </aside>
-    {% endblock %}
-    {% endif %}
-</main>
+        {# Sidebar Second #}
+        {% if page.sidebar_second %}
+        {% block sidebar_second %}
+        <aside class="col-sm-4" role="complementary">
+          {{ page.sidebar_second }}
+        </aside>
+        {% endblock %}
+        {% endif %}
+    </main>
+      {% if page.footer %}
+          <footer class="site-footer">
+              <div class="site-footer-container">
+                {{page.footer}}
+              </div>
+          </footer>
+      {% endif %}
 {% endblock %}
 
-{% include  directory ~ '/templates/components/footer.html.twig' %}
 
 
