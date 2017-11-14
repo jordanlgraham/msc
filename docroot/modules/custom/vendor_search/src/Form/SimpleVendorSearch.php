@@ -18,11 +18,20 @@ class SimpleVendorSearch extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['keys'] = [
+    $form['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Preferred Vendor Search'),
       '#title_display' => 'invisible',
       '#placeholder' => $this->t('Vendor Name'),
+      '#required' => TRUE,
+    ];
+
+    // We need to provide this hidden field so the exposed filters on the destination view function properly.
+    $form['field_primary_services_target_id'] = [
+      '#type' => 'hidden',
+      '#title' => $this->t('Primary Service'),
+      '#title_display' => 'invisible',
+      '#default_value' => $this->t('All'),
       '#required' => TRUE,
     ];
 
@@ -41,8 +50,10 @@ class SimpleVendorSearch extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Redirect the user to the view with the exposed filter set.
-    $keys = $form_state->getValue('keys');
-    $query = ['keys' => $keys];
+    $title = $form_state->getValue('title');
+    $services = $form_state->getValue('field_primary_services_target_id');
+
+    $query = ['title' => $title, 'field_primary_services_target_id' => $services];
 
     $form_state->setRedirect('view.preferred_vendors.page_1', [], ['query' => $query]);
   }

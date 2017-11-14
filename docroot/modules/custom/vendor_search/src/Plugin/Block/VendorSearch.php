@@ -25,6 +25,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class VendorSearch extends BlockBase implements ContainerFactoryPluginInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $formBuilder;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, FormBuilderInterface $formBuilder) {
@@ -32,6 +35,9 @@ class VendorSearch extends BlockBase implements ContainerFactoryPluginInterface 
     $this->formBuilder = $formBuilder;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
@@ -41,13 +47,16 @@ class VendorSearch extends BlockBase implements ContainerFactoryPluginInterface 
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
     $build = [];
-    $build['status_messages'] = [
-      '#type' => 'status_messages',
-    ];
     $build['vendor_search'] = [
       'form' => $this->formBuilder->getForm(\Drupal\vendor_search\Form\SimpleVendorSearch::class),
+      '#cache' => [
+        'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
+      ],
     ];
 
     return $build;
