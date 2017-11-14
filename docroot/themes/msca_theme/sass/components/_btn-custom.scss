@@ -156,7 +156,8 @@
   margin: 1rem 0;
 }
 
-.resource-file .file a {
+.resource-file a {
   @extend .btn;
   @extend .btn-primary;
+  margin-bottom: 2rem;
 }

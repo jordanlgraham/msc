@@ -48,6 +48,12 @@
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     {{ messages }}
     {{ page.content }}
+  {% if page.footer %}
+      <footer class="site-footer">
+          <div class="site-footer-container">
+            {{page.footer}}
+          </div>
+      </footer>
+  {% endif %}
 </main>
 
-{% include  directory ~ '/templates/components/footer.html.twig' %}

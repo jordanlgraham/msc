@@ -36,30 +36,32 @@
  * @see template_preprocess_field()
  */
 #}
-
+<div class="header-image">
+  <img alt="{{ 'msca logo'|t }}" src="/{{ directory }}/svg/logo-blue.svg" />
+</div>
 {% if label_hidden %}
-    {% if multiple %}
-        <div{{ attributes }}>
-            {% for item in items %}
-                <div{{ item.attributes }}>{{ item.content }}</div>
-            {% endfor %}
-        </div>
-    {% else %}
-        {% for item in items %}
-            <div{{ attributes }}>{{ item.content }}</div>
-        {% endfor %}
-    {% endif %}
-{% else %}
+  {% if multiple %}
     <div{{ attributes }}>
-        <h2{{ title_attributes }}>{{ label }}</h2>
-        {% if multiple %}
-        <div class="row">
-            {% endif %}
-            {% for item in items %}
-                <div{{ item.attributes.addClass('col-md-6') }}>{{ item.content }}</div>
-            {% endfor %}
-            {% if multiple %}
-        </div>
-        {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes }}>{{ item.content }}</div>
+      {% endfor %}
     </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes }}>
+    <div{{ title_attributes }}>{{ label }}</div>
+    {% if multiple %}
+      <div>
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
 {% endif %}

@@ -111,8 +111,14 @@
     {% endif %}
   </div>
 </div>
+  {% if page.footer %}
+<footer class="site-footer">
+  <div class="site-footer-container">
+    {{page.footer}}
+  </div>
+</footer>
+  {% endif %}
 {% endblock %}
 
-{% include  directory ~ '/templates/components/footer.html.twig' %}
 
 

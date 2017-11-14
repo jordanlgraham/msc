@@ -1,31 +1,27 @@
-uuid: d59e4ada-9813-471b-8546-3a61ec0c7753
+uuid: 99af1461-94fc-4dde-bf78-5260c8fae2e8
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.upcoming_education_and_events
   module:
     - block_class
     - ctools
-    - views
+    - vendor_search
   theme:
     - msca_theme
 third_party_settings:
   block_class:
     classes: ''
-id: views_block__upcoming_education_and_events_block_1
+id: findapreferredvendor
 theme: msca_theme
 region: sidebar_second
-weight: -14
+weight: -11
 provider: null
-plugin: 'views_block:upcoming_education_and_events-block_1'
+plugin: vendor_search
 settings:
-  id: 'views_block:upcoming_education_and_events-block_1'
-  label: 'Upcoming Education & Events'
-  provider: views
+  id: vendor_search
+  label: 'Find a Vendor'
+  provider: vendor_search
   label_display: visible
-  views_label: 'Upcoming Education & Events'
-  items_per_page: none
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
