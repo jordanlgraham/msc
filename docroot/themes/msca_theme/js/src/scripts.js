@@ -15,8 +15,9 @@
         'page-node-type-video'
       ];
 
+      var body = $('body');
+
       $(node_classes).once().each(function() {
-        var body = $('body');
 
         if (body.hasClass(this)) {
           $('div.newsletter-article-bottom-row').appendTo('.main-container > .row');
