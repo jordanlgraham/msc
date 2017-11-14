@@ -348,7 +348,7 @@ var Tab = function ($) {
       $(node_classes).once().each(function () {
         var body = $('body');
 
-        if ($(body, node_classes).hasClass(this)) {
+        if (body.hasClass(this)) {
           $('div.newsletter-article-bottom-row').appendTo('.main-container > .row');
         }
       });
