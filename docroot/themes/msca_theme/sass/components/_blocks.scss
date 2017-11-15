@@ -103,7 +103,7 @@ aside .facility-search-simple {
 }
 
 aside .facility-search-simple #edit-keys,
-aside .vendor-search-simple #edit-keys--2 {
+aside .vendor-search-simple #edit-title {
   width: 90%;
   margin: 0 auto 1rem;
   border-radius: 0;
@@ -126,15 +126,15 @@ aside .vendor-search-simple .vendor-search-submit input {
 aside .vendor-search-simple .vendor-search-submit::after {
   content: '>';
   color: #fff;
-  position: absolute;
+  position: relative;
   width: 2rem;
   background-color: rgba(0,0,0,0.2);
-  right: 0;
-  bottom: 0;
+  bottom: 38px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 38px;
+  float: right;
 }
 
 

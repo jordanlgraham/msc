@@ -20,14 +20,32 @@ aside .date-square {
   display: table;
 }
 
-.page-node-type-education-events aside.col-md-4 {
+.page-node-type-education-events aside .related-content {
   border: solid 1px $gray-lighter;
   padding: 1rem 0 0;
   margin: 1.5rem 0;
 }
 
-.page-node-type-education-events aside.col-md-4 > div {
-  padding: 0 2rem 0;
+.page-node-type-education-events aside .related-content h2 {
+  margin-bottom: 0;
+}
+
+.page-node-type-education-events aside > div > div {
+  border: solid 0 $gray-lighter;
+  margin-top: 0;
+}
+
+.page-node-type-education-events .event-description {
+  margin-top: 2rem;
+}
+
+.page-node-type-education-events aside .date-square-month {
+  font-size: 1rem;
+  line-height: .8rem;
+}
+
+.page-node-type-education-events .event-call-to-action > div > div {
+  margin-bottom: 1rem;
 }
 
 aside .teaser-text h2 {

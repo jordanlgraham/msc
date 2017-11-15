@@ -37,6 +37,7 @@ hidden:
   field_job_posting_category: true
   field_job_posting_contact_email: true
   field_job_posting_contact_fax: true
+  field_job_posting_contact_loc: true
   field_job_posting_contact_name: true
   field_job_posting_description: true
   field_job_posting_hours: true
