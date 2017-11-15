@@ -20,7 +20,7 @@ aside .date-square {
   display: table;
 }
 
-.page-node-type-education-events aside .related-content {
+.page-node-type-education-events aside > div > div {
   border: solid 1px $gray-lighter;
   padding: 1rem 0 0;
   margin: 1.5rem 0;
@@ -28,11 +28,6 @@ aside .date-square {
 
 .page-node-type-education-events aside .related-content h2 {
   margin-bottom: 0;
-}
-
-.page-node-type-education-events aside > div > div {
-  border: solid 0 $gray-lighter;
-  margin-top: 0;
 }
 
 .page-node-type-education-events .event-description {
@@ -63,8 +58,4 @@ aside .event-teaser-text h4 {
 .page-node-type-education-events aside .date-square {
   height: 3rem;
   width: 3rem;
-}
-
-.page-node-type-education-events aside article {
-  margin-bottom: 3rem;
 }
