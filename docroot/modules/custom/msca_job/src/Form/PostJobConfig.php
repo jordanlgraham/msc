@@ -85,7 +85,11 @@ class PostJobConfig extends FormBase {
       }
     }
 
-    $form['submit'] = [
+    $form['actions'] = [
+      '#type' => 'actions',
+    ];
+
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
@@ -98,7 +102,7 @@ class PostJobConfig extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $form_state->setValueForElement($form['redirect'], $this->aliasManager->getPathByAlias($form_state->getValue('redirect')));
-    // Validate front page path.
+    // Validate redirect path.
     if (($value = $form_state->getValue('redirect')) && $value[0] !== '/') {
       $form_state->setErrorByName('redirect', $this->t("The path '%path' has to start with a slash.", ['%path' => $form_state->getValue('redirect')]));
 
@@ -118,6 +122,7 @@ class PostJobConfig extends FormBase {
       'msca_job_config_redirect' => $form_state->getValue('redirect'),
       'msca_job_config_notify' => $form_state->getValue('notify'),
     ]);
+    \Drupal\Core\Form\drupal_set_message($this->t('The configuration options have been savaed.'));
   }
 
 }
