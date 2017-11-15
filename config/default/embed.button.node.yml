@@ -5,7 +5,7 @@ dependencies:
   config:
     - node.type.education_events
     - node.type.facility
-    - node.type.job_listings
+    - node.type.job_posting
     - node.type.newsletter_article
     - node.type.newsroom
     - node.type.page
@@ -29,7 +29,7 @@ type_settings:
     - page
     - education_events
     - facility
-    - job_listings
+    - job_posting
     - newsletter_article
     - newsroom
     - resources
