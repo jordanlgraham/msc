@@ -16,7 +16,7 @@ third_party_settings:
 id: views_block__scholars_block_1
 theme: msca_theme
 region: sidebar_second
-weight: -16
+weight: -15
 provider: null
 plugin: 'views_block:scholars-block_1'
 settings:

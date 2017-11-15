@@ -1,22 +1,25 @@
-uuid: fbfdf37d-60bc-46a6-9eec-643867259fbf
+uuid: 660998b9-ad99-49b1-99a3-92e98bed43f9
 langcode: en
 status: true
 dependencies:
+  content:
+    - 'block_content:basic:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
   module:
     - block_class
+    - block_content
   theme:
     - msca_theme
 third_party_settings:
   block_class:
-    classes: 'site-footer-right col-md-6'
-id: footerlogos
+    classes: site-footer-right
+id: footerlogos_2
 theme: msca_theme
 region: footer
-weight: -14
+weight: 0
 provider: null
-plugin: 'block_content:c23a1e4e-911a-49ad-bcb1-81d2cd9606f5'
+plugin: 'block_content:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
 settings:
-  id: 'block_content:c23a1e4e-911a-49ad-bcb1-81d2cd9606f5'
+  id: 'block_content:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
   label: 'Footer Logos'
   provider: block_content
   label_display: '0'

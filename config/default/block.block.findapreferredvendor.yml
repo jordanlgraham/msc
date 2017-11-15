@@ -14,7 +14,7 @@ third_party_settings:
 id: findapreferredvendor
 theme: msca_theme
 region: sidebar_second
-weight: -13
+weight: -11
 provider: null
 plugin: vendor_search
 settings:
@@ -29,6 +29,7 @@ visibility:
       newsletter_article: newsletter_article
       newsroom: newsroom
       page: page
+      resources: resources
       scholarships: scholarships
       video: video
     negate: false
