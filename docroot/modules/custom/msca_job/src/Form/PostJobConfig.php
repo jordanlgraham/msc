@@ -122,7 +122,7 @@ class PostJobConfig extends FormBase {
       'msca_job_config_redirect' => $form_state->getValue('redirect'),
       'msca_job_config_notify' => $form_state->getValue('notify'),
     ]);
-    \Drupal\Core\Form\drupal_set_message($this->t('The configuration options have been savaed.'));
+    drupal_set_message($this->t('The configuration options have been saved.'));
   }
 
 }
