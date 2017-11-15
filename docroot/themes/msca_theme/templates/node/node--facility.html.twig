@@ -11,8 +11,10 @@
         <div{{ content_attributes }} class="col-md-6">
 
             <div class="node-facility-teaser-bottom">
+
                 {% if content.field_address|render or content.field_customer_web_site|render %}
                     <div class="address">
+                      <h3>{{ label }}</h3>
                         {% if content.field_address|render %}
                             <h3>{{ 'Address'|t }}</h3>
                             {{ content.field_address }}
