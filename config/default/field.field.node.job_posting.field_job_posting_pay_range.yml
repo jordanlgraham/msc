@@ -1,10 +1,10 @@
-uuid: 24222c3b-4639-45bf-a956-dc04ac0e3980
+uuid: d587a41b-06b5-4835-a842-cacba777df3a
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_shift
-    - node.type.job_listings
+    - field.storage.node.field_job_posting_pay_range
+    - node.type.job_posting
   module:
     - geocoder_field
 third_party_settings:
@@ -18,11 +18,11 @@ third_party_settings:
       handling: preserve
       status_message: true
       log: true
-id: node.job_listings.field_shift
-field_name: field_shift
+id: node.job_posting.field_job_posting_pay_range
+field_name: field_job_posting_pay_range
 entity_type: node
-bundle: job_listings
-label: Shift
+bundle: job_posting
+label: 'Pay Range'
 description: ''
 required: false
 translatable: false

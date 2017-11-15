@@ -1,0 +1,21 @@
+uuid: 19570700-ef27-4a42-9c60-9e8fe900c0c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_contact_telephone
+    - node.type.job_posting
+  module:
+    - telephone
+id: node.job_posting.field_job_contact_telephone
+field_name: field_job_contact_telephone
+entity_type: node
+bundle: job_posting
+label: Phone
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

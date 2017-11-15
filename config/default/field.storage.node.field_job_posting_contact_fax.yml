@@ -1,18 +1,16 @@
-uuid: 96001aee-2ee6-4e4c-a4b1-54285f5b03a1
+uuid: a650af11-66d0-48ec-9d6e-ce37a019ddde
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_job_title
-field_name: field_job_title
+    - telephone
+id: node.field_job_posting_contact_fax
+field_name: field_job_posting_contact_fax
 entity_type: node
-type: string
-settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
-module: core
+type: telephone
+settings: {  }
+module: telephone
 locked: false
 cardinality: 1
 translatable: true
