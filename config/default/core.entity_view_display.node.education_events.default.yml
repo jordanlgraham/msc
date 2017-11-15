@@ -56,9 +56,9 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      format_type: short_month_and_day
+      date_format: 'M d, Y h:ia'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   field_end_date:
     weight: 3

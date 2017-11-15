@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_file
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
@@ -30,7 +31,7 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      date_format: n/j
+      date_format: 'F j \a\t ga'
     third_party_settings: {  }
     type: datetime_custom
     region: content
@@ -45,6 +46,7 @@ hidden:
   field_event_key: true
   field_event_related_content: true
   field_event_sponsor: true
+  field_file: true
   field_gated: true
   field_gold_sponsor: true
   field_location: true
