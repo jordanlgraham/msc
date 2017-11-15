@@ -55,6 +55,11 @@
                         {{ content.field_call_to_action }}
                     </div>
                 {% endif %}
+                {% if content.field_file|render %}
+                  <div class="resource-file">
+                    {{ content.field_file }}
+                  </div>
+                {% endif %}
             </div>
             <aside class="col-md-4">
                 {% if content.field_event_related_content|render %}

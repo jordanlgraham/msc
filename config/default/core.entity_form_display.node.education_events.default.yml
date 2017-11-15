@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_file
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
@@ -21,6 +22,7 @@ dependencies:
     - address
     - datetime
     - entity_browser_entity_form
+    - file
     - inline_entity_form
     - link
     - path
@@ -41,7 +43,7 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 13
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -81,7 +83,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_event_related_content:
-    weight: 11
+    weight: 12
     settings:
       form_mode: default
       label_singular: ''
@@ -96,7 +98,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_event_sponsor:
-    weight: 10
+    weight: 11
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -110,6 +112,13 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
+  field_file:
+    weight: 9
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
   field_gated:
     weight: 1
     settings:
@@ -118,7 +127,7 @@ content:
     type: boolean_checkbox
     region: content
   field_gold_sponsor:
-    weight: 9
+    weight: 10
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -156,7 +165,7 @@ content:
     region: content
   path:
     type: path
-    weight: 16
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -164,14 +173,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 14
+    weight: 15
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 16
     region: content
     third_party_settings: {  }
   title:
@@ -184,7 +193,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 12
+    weight: 13
     settings:
       match_operator: CONTAINS
       size: 60
