@@ -20,7 +20,7 @@
                             {{ content.field_address }}
                         {% endif %}
                         {% if content.field_customer_web_site|render %}
-                            <a class="btn btn-primary website mb-5" href="{{ node.field_customer_web_site.value }}" target="_blank">Website</a>
+                            <a class="btn btn-primary website mb-5" href="{{ node.field_customer_web_site.value }}" target="_blank">{{ 'Visit Our Website'|t }}</a>
                         {% endif %}
                     </div>
                 {% endif %}

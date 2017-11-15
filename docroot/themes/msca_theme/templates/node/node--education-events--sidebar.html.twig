@@ -9,16 +9,12 @@
 
   <div{{ content_attributes }}>
       <div class="date-square float-left mr-3">
-          <div class="date-square-month">{{ content.square_month }}</div>
-          <div class="date-square-day">{{ content.square_day }}</div>
+          <div class="date-square-month">{{ node.field_date.value|date('M') }}</div>
+          <div class="date-square-day">{{ node.field_date.value|date('j') }}</div>
       </div>
       <div class="event-teaser-text">
           {% if content.field_date|render %}
-              <h4>{{ content.full_start_date }}
-                {% if content.full_end_date %}
-                  - {{ content.full_end_date }}
-                {% endif %}
-              </h4>
+            <h4>{{ content.field_date }}</h4>
           {% endif %}
           <h2{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
