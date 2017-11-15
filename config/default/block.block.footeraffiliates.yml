@@ -1,9 +1,9 @@
-uuid: 660998b9-ad99-49b1-99a3-92e98bed43f9
+uuid: 6b90954b-bb72-4d51-bd08-099ddf2d3de9
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
+    - 'block_content:basic:8147e3ed-952e-46d8-ba48-196709c933fa'
   module:
     - block_class
     - block_content
@@ -12,15 +12,15 @@ dependencies:
 third_party_settings:
   block_class:
     classes: 'site-footer-right col-md-6'
-id: footerlogos_2
+id: footeraffiliates
 theme: msca_theme
 region: footer
 weight: 0
 provider: null
-plugin: 'block_content:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
+plugin: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
 settings:
-  id: 'block_content:25c1e450-2fb5-4670-97cf-fc4ffe644d92'
-  label: 'Footer Logos'
+  id: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
+  label: FooterAffiliates
   provider: block_content
   label_display: '0'
   status: true

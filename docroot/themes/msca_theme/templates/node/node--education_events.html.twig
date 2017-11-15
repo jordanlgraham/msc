@@ -25,7 +25,7 @@
             </footer>
         {% endif %}
         <div class="row">
-            <div{{ content_attributes }} class="col-md-8">
+            <div{{ content_attributes }} class="col-md-12">
                 {% if content.short_address|render or content.event_category|render %}
                     <div class="event-category-location">
                         {% if content.field_event_category|render %}
@@ -61,14 +61,6 @@
                   </div>
                 {% endif %}
             </div>
-            <aside class="col-md-4">
-                {% if content.field_event_related_content|render %}
-                  <div class="related-content">
-                    <h2>Related Content</h2>
-                    {{ content.field_event_related_content }}
-                  </div>
-                {% endif %}
-            </aside>
         </div>
         {% if content.field_gold_sponsor|render %}
         <div class="row">
