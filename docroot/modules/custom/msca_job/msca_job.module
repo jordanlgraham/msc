@@ -1,0 +1,62 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+function msca_job_form_node_job_posting_form_alter(&$form, FormStateInterface $form_state) {
+  // Add the AJAX callback to the org field.
+  $form['field_job_posting_org']['widget'][0]['target_id']['#ajax'] = [
+    'event' => 'change',
+    'wrapper' => 'job-form-ajax',
+    'callback' => 'msca_job_org_ajax_callback',
+  ];
+  // Add the ajax wrapper to the address field.
+  $form['#prefix'] = '<div id="job-form-ajax">';
+  $form['#suffix'] = '</div>';
+  $org_nid = $form_state->getValue('field_job_posting_org');
+  if (!empty($org_nid[0]['target_id'])) {
+    $org_nid = $org_nid[0]['target_id'];
+    $org_node = \Drupal::entityTypeManager()->getStorage('node')->load($org_nid);
+    if (empty($org_node)) {
+      return;
+    }
+    // Set the defaults of the org address field based on the address of the org.
+    $input = $form_state->getUserInput();
+    $address = $org_node->get('field_address')->get(0)->getValue();
+    $address_defaults = &$form['field_job_posting_org_address']['widget'][0]['address']['#default_value'];
+    foreach ($address as $key => $value) {
+      if (array_key_exists($key, $address_defaults))  {
+        $address_defaults[$key] = $value;
+      }
+    }
+    // FAPI detects blank user input so it won't set the defaults
+    // without removing that input.
+    unset($input['field_job_posting_org_address']);
+
+    // Set the other org info defaults.
+    $website = $org_node->field_customer_web_site->value;
+    if (!empty($website)) {
+      $form['field_job_posting_org_website']['widget'][0]['uri']['#default_value'] = $website;
+      unset($input['field_job_posting_org_website']);
+    }
+
+    $fax = $org_node->field_customer_fax_number->value;
+    if (!empty($fax)) {
+      $form['field_job_posting_org_fax']['widget'][0]['value']['#default_value'] = $fax;
+      unset($input['field_job_posting_org_fax']);
+    }
+
+    $phone = $org_node->field_customer_phone_number->value;
+    if (!empty($fax)) {
+      $form['field_job_posting_org_phone']['widget'][0]['value']['#default_value'] = $phone;
+      unset($input['field_job_posting_org_phone']);
+    }
+    $form_state->setUserInput($input);
+  }
+}
+
+/**
+ * Organization ajax callback.
+ */
+function msca_job_org_ajax_callback($form, FormStateInterface $formState) {
+  return $form;
+}

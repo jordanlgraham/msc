@@ -1,0 +1,5 @@
+name: MSCA Job
+type: module
+description: Job posting workflow and functionality
+core: 8.x
+package: Custom
