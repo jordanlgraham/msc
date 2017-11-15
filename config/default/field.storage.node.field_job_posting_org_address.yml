@@ -1,17 +1,16 @@
-uuid: 7bbc3244-bca5-489a-9a31-951fb0879452
+uuid: ec76c16d-bbb6-448d-8f69-6c90efb12abb
 langcode: en
 status: true
 dependencies:
   module:
+    - address
     - node
-id: node.field_reference_number
-field_name: field_reference_number
+id: node.field_job_posting_org_address
+field_name: field_job_posting_org_address
 entity_type: node
-type: integer
-settings:
-  unsigned: false
-  size: normal
-module: core
+type: address
+settings: {  }
+module: address
 locked: false
 cardinality: 1
 translatable: true

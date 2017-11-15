@@ -1,13 +1,13 @@
-uuid: 9adeb6ce-173a-44f6-a740-d034a3659cfc
+uuid: 45229697-5cb3-4ae0-8a41-b457a9104ec2
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.job_listings
-id: node.job_listings.promote
+    - node.type.job_posting
+id: node.job_posting.promote
 field_name: promote
 entity_type: node
-bundle: job_listings
+bundle: job_posting
 label: 'Promoted to front page'
 description: ''
 required: false

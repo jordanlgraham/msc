@@ -1,0 +1,21 @@
+uuid: d5533b9f-d898-4011-99f8-eb801b3e719d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_posting_contact_fax
+    - node.type.job_posting
+  module:
+    - telephone
+id: node.job_posting.field_job_posting_contact_fax
+field_name: field_job_posting_contact_fax
+entity_type: node
+bundle: job_posting
+label: Fax
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

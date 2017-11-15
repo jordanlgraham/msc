@@ -1,17 +1,16 @@
-uuid: 4ca4c194-bdac-4494-ab02-7a57fc61f0f3
+uuid: 1221b9d4-c940-4cfa-a070-3fa6486b497c
 langcode: en
 status: true
 dependencies:
   module:
+    - link
     - node
-    - taxonomy
-id: node.field_region
-field_name: field_region
+id: node.field_job_posting_org_website
+field_name: field_job_posting_org_website
 entity_type: node
-type: entity_reference
-settings:
-  target_type: taxonomy_term
-module: core
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true

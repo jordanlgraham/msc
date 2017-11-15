@@ -1,18 +1,16 @@
-uuid: 7a85838e-2ac8-47fc-9f97-4313ef3281ae
+uuid: 2107bff6-f9e1-4f7c-9603-07e680ec1a49
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_shift
-field_name: field_shift
+    - telephone
+id: node.field_job_posting_org_fax
+field_name: field_job_posting_org_fax
 entity_type: node
-type: string
-settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
-module: core
+type: telephone
+settings: {  }
+module: telephone
 locked: false
 cardinality: 1
 translatable: true
