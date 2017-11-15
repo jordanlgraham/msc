@@ -75,7 +75,8 @@
     "drupal/contact_block": "^1.4",
     "drupal/views_infinite_scroll": "^1.5",
     "abraham/twitteroauth": "^0.7.4",
-    "drupal/config_ignore": "2.1"
+    "drupal/config_ignore": "2.1",
+    "drupal/scheduler": "1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.8"

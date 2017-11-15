@@ -1,0 +1,6 @@
+msca_job.post_job.config:
+  title: 'Job posting configuration'
+  route_name: msca_job.post_job.config
+  description: 'Job posting configuration'
+  parent: system.admin_config_content
+  weight: 99

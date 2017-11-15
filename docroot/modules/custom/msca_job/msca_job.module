@@ -52,6 +52,9 @@ function msca_job_form_node_job_posting_form_alter(&$form, FormStateInterface $f
     }
     $form_state->setUserInput($input);
   }
+  if (!\Drupal::currentUser()->hasPermission('administer content')) {
+    msca_job_alter_job_posting_form($form, $form_state);
+  }
 }
 
 /**
@@ -59,4 +62,96 @@ function msca_job_form_node_job_posting_form_alter(&$form, FormStateInterface $f
  */
 function msca_job_org_ajax_callback($form, FormStateInterface $formState) {
   return $form;
+}
+
+/**
+ * Additional job post form altering for end users.
+ */
+function msca_job_alter_job_posting_form(&$form, FormStateInterface $form_state) {
+  $to_hide = [
+    'path',
+    'promote',
+    'sticky',
+    'uid',
+    'revision_log',
+    'revision',
+    'options',
+    'menu',
+    'created',
+    'publish_on',
+    'unpublish_on',
+    'advanced',
+  ];
+  foreach ($form as $form_key => &$form_item) {
+    if (in_array($form_key, $to_hide)) {
+      $form_item['#access'] = FALSE;
+    }
+  }
+  $submit = $form['actions']['submit']['#submit'];
+  $submit[] = 'msca_job_add_form_submit';
+  // Hide the default submit button.
+  foreach  ($form['actions'] as $action_key => &$action_item) {
+    if (is_array($action_item)) {
+      $action_item['#access'] = FALSE;
+    }
+  }
+  unset($form['actions']);
+  $form['actions'] = [
+    '#type' => 'actions',
+  ];
+  $form['actions']['submit_job'] = [
+    '#type' => 'submit',
+    '#value' => t('Submit Job Posting'),
+    '#submit' => $submit,
+  ];
+}
+
+/**
+ * Job posting form extra submit function.
+ */
+function msca_job_add_form_submit($form, FormStateInterface $form_state) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $form_state->getFormObject()->getEntity();
+  // Redirect to a page with subscription content.
+  $url_redirect = \Drupal::state()->get('msca_job_config_redirect');
+  if (!empty($url_redirect)) {
+    $url_redirect = \Drupal\Core\Url::fromUserInput($url_redirect);
+    $form_state->setRedirectUrl($url_redirect);
+  }
+  // Send an email notification to admins.
+  /** @var \Drupal\Core\Mail\MailManagerInterface $mailer */
+  $mailer = \Drupal::service('plugin.manager.mail');
+  $to = \Drupal::state()->get('msca_job_config_notify');
+  if (empty($to)) {
+    return;
+  }
+  $wd_args = [
+    '@to' => $to,
+    '@nid' => $node->id(),
+    'link' => $node->toLink('View')->toString(),
+  ];
+  try {
+    $mailer->mail('msca_job', 'job_post', $to, $node->language()
+      ->getId(), [
+      'node' => $form_state->getFormObject()->getEntity(),
+    ]);
+    \Drupal::logger('msca_job')->notice('Job posting form used for job @nid and notification sent to @to', $wd_args);
+  }
+  catch (Exception $exception) {
+    watchdog_exception('msca_job', $exception);
+    \Drupal::logger('msca_job')->error('Unable to send job posting email to @to for job @nid', $wd_args);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function msca_job_mail($key, &$message, $params) {
+  if ($key === 'job_post') {
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $params['node'];
+    $message['subject'] = 'New job posting submission: ' . $node->label();
+    $message['body'][] = 'A new job posting has been submitted. Click to view and approve.';
+    $message['body'][] = $node->toLink($node->toUrl()->toString())->toString();
+  }
 }

@@ -70,3 +70,4 @@ forward_entity_menu_link_content: false
 forward_menu_link_content_menu_link_content: false
 forward_flagging_bookmark: false
 forward_node_paragraph_assembler: 0
+forward_node_job_posting: 0

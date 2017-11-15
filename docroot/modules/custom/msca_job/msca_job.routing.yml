@@ -1,0 +1,15 @@
+msca_job.post_job:
+  path: '/jobs/add'
+  defaults:
+    _controller: '\Drupal\msca_job\Controller\PostJob::postJob'
+    _title: 'Post Job'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+
+msca_job.post_job.config:
+  path: '/admin/config/content/jobs'
+  defaults:
+    _form: '\Drupal\msca_job\Form\PostJobConfig'
+    _title: 'Job posting configuration'
+  requirements:
+    _permission: 'administer site configuration'
