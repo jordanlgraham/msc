@@ -36,6 +36,15 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
+  field_related_content:
+    type: entity_reference_entity_view
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
   field_scholar_image:
     weight: 0
     label: hidden
@@ -51,5 +60,4 @@ hidden:
   entity_print_view_word_docx: true
   field_gated: true
   field_past_recipient_s_: true
-  field_related_content: true
   links: true
