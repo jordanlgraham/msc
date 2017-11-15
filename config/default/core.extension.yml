@@ -74,6 +74,7 @@ module:
   metatag_google_plus: 0
   metatag_open_graph: 0
   msc_button_link_social: 0
+  msca_access: 0
   msca_discourse: 0
   msca_donate: 0
   msca_job: 0

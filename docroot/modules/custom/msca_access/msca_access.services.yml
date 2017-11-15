@@ -1,0 +1,5 @@
+services:
+  msca_access.gated_node_redirect:
+    class: '\Drupal\msca_access\EventSubscriber\GatedNodeRedirectSubscriber'
+    tags:
+      - { name: event_subscriber}

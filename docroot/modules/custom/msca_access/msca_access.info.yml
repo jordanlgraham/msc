@@ -1,0 +1,6 @@
+name: MSCA Access
+description: Control access to certain content
+package: MSC
+
+type: module
+core: 8.x
