@@ -15,11 +15,13 @@ class PostJob extends ControllerBase {
 
     $values = array('type' => 'job_posting', '#job_post_form' => TRUE);
 
-    $node = \Drupal::entityTypeManager()
+    $nm = $this->entityTypeManager();
+
+    $node = $nm
       ->getStorage('node')
       ->create($values);
 
-    $form = \Drupal::entityTypeManager()
+    $form = $nm
       ->getFormObject('node', 'default')
       ->setEntity($node);
 
