@@ -102,8 +102,8 @@ aside .facility-search-simple {
   display: block;
 }
 
-aside .facility-search-simple #edit-keys,
-aside .vendor-search-simple #edit-title {
+aside .facility-search-simple input:not(.button):not([type="radio"]):not([type="checkbox"]),
+aside .vendor-search-simple input:not(.button):not([type="radio"]):not([type="checkbox"]) {
   width: 90%;
   margin: 0 auto 1rem;
   border-radius: 0;
