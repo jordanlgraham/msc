@@ -6,18 +6,6 @@
     }
   }
 }
-//@include media-breakpoint-down(sm) {
-//  .facility-search-header, .facility-search-container section {
-//    max-width: 375px;
-//  }
-//  #site-header {
-//    width: 375px;
-//    margin: 0;
-//  }
-//  .vendor-view-header {
-//    padding: 2rem;
-//  }
-//}
 
 .path-preferred-vendors .views-exposed-form  {
   .submit-input-wrapper:first-of-type .button {
@@ -47,6 +35,12 @@
   display: none;
 }
 
+
+.path-preferred-vendors .title-icon {
+  background: url("/themes/msca_theme/svg/vendor-white.svg") no-repeat center;
+  margin-top: 1rem;
+}
+
 .path-preferred-vendors .views-exposed-form select,
 .facility-search-filters select {
   @extend .form-control;
@@ -61,8 +55,12 @@
   .views-row {
     margin-bottom: $grid-gutter-width-base;
     min-height: 260px;
+    padding-right: 5rem;
     article {
       height: 100%;
+    }
+    article h2 {
+      font-size: 1.5rem;
     }
   }
 }
