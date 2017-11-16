@@ -136,6 +136,10 @@ class EventSync {
   private function createOrUpdateEvents(array $events) {
     foreach($events as $evt_key => $event) {
       $node = $this->loadOrCreateEventNode($evt_key);
+      // Event nodes get manually updated, so don't blow away changes.
+      if (!$node->isNew()) {
+        continue;
+      }
       $node->body->value = $event['description']; //formatted text
       $node->title = $event['name'];
       $node->field_date = $this->formatNetForumDateTime($event['start_date'], $event['start_time']); //date w/time 2017-08-15T18:00:00
