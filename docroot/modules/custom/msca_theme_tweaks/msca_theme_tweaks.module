@@ -48,10 +48,7 @@ function msca_theme_tweaks_node_view(array &$build, EntityInterface $entity, Ent
   }
   //We need a rather complexly formatted, short version of addresses for display
   //on the education and events content type.
-  if($view_mode == 'full' && !empty($build['field_location']) && $build['field_location']['#bundle'] == 'education_events') {
-
-    //Get address parts
-    $parts = $build['field_location'][0];
+  if($view_mode == 'full' && isset($build['field_location']['#bundle']) && $build['field_location']['#bundle'] == 'education_events') {
     //Build a short address. Note that these always exist of the field as a
     //whole is not empty (which we check for above).
     $build['short_address'] = [
