@@ -143,32 +143,6 @@ class OrgSync {
     return FALSE;
   }
 
-
-  /**
-   * Get the facility type term name based on the internal NF value.
-   * FALSE if there is no value.
-   *
-   * @param $id
-   *
-   * @return bool|string
-   */
-  private function getFacilityType($ids) {
-    $return = [];
-    $types = [
-      'a000ae77-7b3e-4e42-a3c0-d0d1ef0c05b6' => 'Associate',
-      '0960ec10-75f4-43c0-9b60-3cdc8c094777' => 'Corporate',
-      '226371b4-2942-455a-85ff-2c3056ee375e' => 'Nursing Facility',
-      '3f5f375f-3f19-44e2-a7f1-0869966fbbd2' => 'Other',
-      'd1031536-1945-4e67-841f-66fab3a335d0' => 'Rest Home',
-    ];
-    foreach ($ids as $id) {
-      if (isset($types[$id])) {
-        $return[] = $types[$id];
-      }
-    }
-    return $return;
-  }
-
   /**
    * @param $org
    * @param \Drupal\node\NodeInterface $node
@@ -213,10 +187,8 @@ class OrgSync {
       $node->field_populations_served = $this->helper->cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
       $node->field_specialized_unit = $this->helper->cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
       $node->field_va_contract = $this->helper->cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
-      $facility_type_id = $this->helper->cleanSoapField($org['mbr_mbt_key']);
-      if ($facility_types = $this->getFacilityType([$facility_type_id])) {
-        $node->field_facility_type = $this->loadOrCreateTermsByName($facility_types, 'facility_type');
-      }
+      $facility_type = [$this->helper->cleanSoapField([$org['org_ogt_code']])];
+      $node->field_facility_type = $this->loadOrCreateTermsByName($facility_type, 'facility_type');
       $node->field_acronym = $this->helper->cleanSoapField($org['org_acronym']);
       $node->field_state_id = $this->helper->cleanSoapField($org['org_custom_string_03']);
       $node->field_congressional_district = $this->helper->cleanSoapField($org['org_custom_string_10']);
