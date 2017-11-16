@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
-    - image.style.sponsor_logo_large_190x110_
+    - image.style.sponsor_logo_largest
     - node.type.sponsor
   module:
     - link
@@ -62,7 +62,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: sponsor_logo_large_190x110_
+      image_style: sponsor_logo_largest
       image_link: ''
     third_party_settings: {  }
     type: image
