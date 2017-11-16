@@ -19,7 +19,7 @@ provider: null
 plugin: vendor_search
 settings:
   id: vendor_search
-  label: 'Find a Vendor'
+  label: 'Find a Preferred Vendor'
   provider: vendor_search
   label_display: visible
 visibility:
