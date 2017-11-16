@@ -243,7 +243,7 @@
 
             </div>
         </div>
-        {% if dcu in content.field_specialized_unit|keys or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (node.field_facility_type.value != 'Nursing Facility' and node.field_facility_price_range_min.value > 0) or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
+        {% if dcu in content.field_specialized_unit|keys or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
             <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
                 <h3>{{ 'Additional Details'|t }}</h3>
 
@@ -251,12 +251,21 @@
                 {% if content.field_specialized_unit|render %}
                     {% set dcu = 'Dementia Care' %}
                     {% if dcu in content.field_specialized_unit|keys %}
+                      {% if content.field_facility_type[0]['#title'] == 'Assisted Living' %}
                         <div col-md-12>
-                            <div class="row mb-3">
-                                <span class="col-md-7">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
-                                <span class="col-md-5">Yes</span>
-                            </div>
+                          <div class="row mb-3">
+                            <span class="col-md-7">{{ 'Special care residences according to EOEA'|t }}</span>
+                            <span class="col-md-5">Yes</span>
+                          </div>
                         </div>
+                        {% else %}
+                          <div col-md-12>
+                              <div class="row mb-3">
+                                  <span class="col-md-7">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
+                                  <span class="col-md-5">Yes</span>
+                              </div>
+                          </div>
+                      {% endif %}
                     {% endif %}
                 {% endif %}
 
@@ -308,8 +317,7 @@
                         </div>
                     </div>
                 {% endif %}
-
-                {%  if node.field_facility_type.value != 'Nursing Facility' %}
+                {%  if content.field_facility_type[0]['#title'] != 'Assisted Living' %}
                     {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
                         <div col-md-12>
                             <div class="row mb-3">
@@ -319,10 +327,8 @@
                         </div>
                     {% endif %}
                 {% endif %}
-
             </div>
         {% endif %}
-
 
         <div class="col-12 text-center mt-5">
             <p>The above facility information is self-reported</p>
