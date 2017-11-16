@@ -106,13 +106,34 @@ function facility_search_preprocess_views_view(&$variables) {
     return;
   }
   $input = $view->getExposedInput();
-  if (empty($input['geocode_state']) || !$input['geocode_state']) {
+  $header = '';
+  if (empty($input['title']) && empty($input['geocode_state'])) {
     return;
   }
-  $variables['header']['zip'] = [
+  $header = '';
+  if (!empty($input['title'])) {
+    $header = t('Searching for @title', ['@title' => $input['title']]);
+  }
+  if ($input['geocode_state'] && !empty($input['proximity'])) {
+    if (!empty($header)) {
+      $header .= ' ' . t('within @distance miles of @postal', ['@distance' => $input['proximity'], '@postal' => $input['geocode_postal']]);
+    }
+    else {
+      $header .= t('Searching within @distance miles of @postal', ['@distance' => $input['proximity'], '@postal' => $input['geocode_postal']]);
+    }
+  }
+  if (!empty($input['city'])) {
+    if (!empty($header)) {
+      $header .= ' ' . t('in @city', ['@city' => $input['city']]);
+    }
+    else {
+      $header = t('Searching in @city', ['@city' => $input['city']]);
+    }
+  }
+  $variables['header']['search_input'] = [
     '#type' => 'html_tag',
     '#tag' => 'h2',
-    '#value' => t('Searching within @rad miles of @zip', ['@rad' => $input['proximity'], '@zip' => $input['geocode_postal']]),
+    '#value' => $header,
     '#cache' => [
       'contexts' => [
         'url.query_args',
