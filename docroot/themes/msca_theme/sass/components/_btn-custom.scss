@@ -141,9 +141,8 @@
 }
 
 .icon-website {
-  color: black;
-  background: transparent url($website-svg) -5px no-repeat;
-  background-size: 37px;
+  background: $light-green url("/themes/msca_theme/svg/external-website.svg") 0 no-repeat;
+  background-size: 30px;
   &:hover {
     color: $gray;
   }
