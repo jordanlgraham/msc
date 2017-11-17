@@ -7,6 +7,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\State\StateInterface;
+use Drupal\geocoder\GeocoderInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\netforum_soap\GetClient;
@@ -45,6 +46,11 @@ class EventSync {
    */
   protected $dateFormatter;
 
+  /**
+   * @var \Drupal\geocoder\GeocoderInterface
+   */
+  protected $geocoder;
+
   const LAST_SYNC_STATE_KEY = 'netforum_event_sync.last_sync';
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager,
@@ -52,7 +58,8 @@ class EventSync {
                               GetClient $getClient,
                               LoggerInterface $logger,
                               DateFormatterInterface $dateFormatter,
-                              StateInterface $state) {
+                              StateInterface $state,
+                              GeocoderInterface $geocoder) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
     $this->config = $configFactory->get('netforum_event_sync.eventsync');
@@ -60,6 +67,7 @@ class EventSync {
     $this->logger = $logger;
     $this->get_client = $getClient;
     $this->state = $state;
+    $this->geocoder = $geocoder;
   }
 
   /**
@@ -147,6 +155,9 @@ class EventSync {
       $node->field_event_category = $this->loadOrCreateEventTermsByName(array($event['event_category'])); //taxonomy
       $node->field_event_key = $evt_key; //text
       $node->status = 1;
+      if (!empty($event['location'])) {
+        $node->field_location->set(0, $event['location']);
+      }
       $node->save();
     }
   }
@@ -195,13 +206,30 @@ class EventSync {
             $xml = simplexml_load_string($response->GetEventListByTypeResult->any);
             $json = json_encode($xml);
             $array = json_decode($json, TRUE);
+            $plugins = ['googlemaps' => 'googlemaps'];
             if(!empty($array['Result'])) {
               foreach ($array['Result'] as $result) {
                 if (!empty($result['evt_key'])) {
                   if(!empty($result['evt_location_html']) && is_string($result['evt_location_html'])) {
                     $location = $this->cleanupNetForumHTML($result['evt_location_html']);
+                    // Attempt to geocode the location string.
+                    $geocoded = $this->geocoder->geocode($location, $plugins, []);
+                    if ($geocoded) {
+                      $geocoded_location = $geocoded->first();
+                      $admin_levels = $geocoded_location->getAdminLevels();
+                      $location = [
+                        'address_line1' => $geocoded_location->getStreetNumber() . ' ' . $geocoded_location->getStreetName(),
+                        'locality' => $geocoded_location->getLocality(),
+                        'postal_code' => $geocoded_location->getPostalCode(),
+                        'country_code' => $geocoded_location->getCountryCode(),
+                        'administrative_area' => $admin_levels->first()->getCode(),
+                      ];
+                    }
+                    else {
+                      $location = [];
+                    }
                   } else {
-                    $location = '';
+                    $location = [];
                   }
                   if(!empty($result['prd_description_html'])) {
                     $description = $this->cleanupNetForumHTML($result['prd_description_html']);
@@ -216,6 +244,7 @@ class EventSync {
                     'end_time' => (string) $result['evt_end_time'],
                     'event_category' => (string) $result['etp_code'],
                     'description' => $description,
+                    'location' => $location,
                   ];
                   $i++;
                 }
