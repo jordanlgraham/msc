@@ -107,19 +107,16 @@ function facility_search_preprocess_views_view(&$variables) {
   }
   $input = $view->getExposedInput();
   $header = '';
-  if (empty($input['title']) && empty($input['geocode_state'])) {
-    return;
-  }
-  $header = '';
   if (!empty($input['title'])) {
     $header = t('Searching for @title', ['@title' => $input['title']]);
   }
-  if ($input['geocode_state'] && !empty($input['proximity'])) {
+  if (!empty($input['geocode_state']) && $input['geocode_state'] && !empty($input['geocode_postal'])) {
+    $distance = !empty($input['proximity']) ? $input['proximity'] : 5;
     if (!empty($header)) {
-      $header .= ' ' . t('within @distance miles of @postal', ['@distance' => $input['proximity'], '@postal' => $input['geocode_postal']]);
+      $header .= ' ' . t('within @distance miles of @postal', ['@distance' => $distance, '@postal' => $input['geocode_postal']]);
     }
     else {
-      $header .= t('Searching within @distance miles of @postal', ['@distance' => $input['proximity'], '@postal' => $input['geocode_postal']]);
+      $header .= t('Searching within @distance miles of @postal', ['@distance' => $distance, '@postal' => $input['geocode_postal']]);
     }
   }
   if (!empty($input['city'])) {
@@ -129,6 +126,9 @@ function facility_search_preprocess_views_view(&$variables) {
     else {
       $header = t('Searching in @city', ['@city' => $input['city']]);
     }
+  }
+  if (!empty($input['keys'])) {
+    $header = t('Searching for "@keys"', ['@keys' => $input['keys']]);
   }
   $variables['header']['search_input'] = [
     '#type' => 'html_tag',
