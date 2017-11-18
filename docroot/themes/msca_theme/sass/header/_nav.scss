@@ -143,6 +143,20 @@
   }
 }
 
+#block-masthead .search.show {
+  background-color: $blue;
+  &:hover {
+    background-color: $blue;
+  }
+}
+
+#block-masthead li.search-show {
+  background-color: $blue;
+  &:hover {
+    background-color: $blue;
+  }
+}
+
 #block-masthead li {
   font-family: $font-family-sans-serif;
   border-left: 1px solid $light-gray;
@@ -154,7 +168,7 @@
   }
 }
 
-#block-masthead li a {
+#block-masthead li > a {
   color: $white;
   font-weight: 300;
   letter-spacing: 1px;
