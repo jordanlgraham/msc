@@ -1,0 +1,24 @@
+uuid: bcd2e36e-f20c-48a6-9fa0-64bfd7f60daf
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - search
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: searchform
+theme: msca_theme
+region: navigation
+weight: 0
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Search
+  provider: search
+  label_display: '0'
+visibility: {  }

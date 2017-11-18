@@ -25,14 +25,14 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes }}>
+<div{{ attributes.addClass('facility-search-block') }}>
     {{ title_prefix }}
     {% if label %}
         <h2{{ title_attributes }}>{{ label }}</h2>
     {% endif %}
     {{ title_suffix }}
     <div class="header-image">
-        <img alt="{{ 'msca logo'|t }}" src="/{{ directory }}/svg/house-blue.svg" />
+      {{ source( directory ~ '/svg/house.svg') }}
     </div>
     {% block content %}
         {{ content }}
