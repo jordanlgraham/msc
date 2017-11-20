@@ -627,11 +627,7 @@ var Tab = function ($) {
 
 (function ($, Drupal) {
   Drupal.behaviors.msca_theme = {
-    attach: function attach(context, settings) {
-      var searchblock = $('div#block-searchform');
-      // Moving search block into masthead search menu link so bootstrap dropdown is happy.
-      $(searchblock, context).once('div#block-searchform').appendTo('.search.nav-item');
-    }
+    attach: function attach(context, settings) {}
   };
 })(jQuery, Drupal);
 

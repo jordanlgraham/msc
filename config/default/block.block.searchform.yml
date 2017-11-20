@@ -1,4 +1,4 @@
-uuid: bcd2e36e-f20c-48a6-9fa0-64bfd7f60daf
+uuid: 8354657f-c815-4bae-9bae-63c2b34c8437
 langcode: en
 status: true
 dependencies:
@@ -12,13 +12,13 @@ third_party_settings:
     classes: ''
 id: searchform
 theme: msca_theme
-region: navigation
+region: gutter
 weight: 0
 provider: null
 plugin: search_form_block
 settings:
   id: search_form_block
-  label: Search
+  label: 'Search form'
   provider: search
   label_display: '0'
 visibility: {  }

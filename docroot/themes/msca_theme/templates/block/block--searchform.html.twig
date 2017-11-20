@@ -33,6 +33,6 @@
   {{ title_suffix }}
   {% block content %}
     {{ content }}
-    <div class="advanced-search"><a href="/search">{{ 'Advanced Search'|t }}</a></div>
+    <div class="advanced-search"><a href="{{ path('search.view') }}">{{ 'Advanced Search'|t }}</a></div>
   {% endblock %}
 </div>

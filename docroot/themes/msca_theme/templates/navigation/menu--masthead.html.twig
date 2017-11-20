@@ -59,6 +59,8 @@
                           item.attributes.setAttribute('role', 'button')
                       )
                   }}
+                  {# Using Twig Tweak module to place search block in menu where bootstrap dropdown needs it to be. #}
+                  {{ drupal_block('searchform') }}
                 {% else %}
                     {{ link(item.title, item.url) }}
                 {% endif %}
