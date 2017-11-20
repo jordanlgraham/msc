@@ -25,16 +25,14 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes.addClass('facility-search-block') }}>
-    {{ title_prefix }}
-    {% if label %}
-        <h2{{ title_attributes }}>{{ label }}</h2>
-    {% endif %}
-    {{ title_suffix }}
-    <div class="header-image">
-      {{ source( directory ~ '/svg/house.svg') }}
-    </div>
-    {% block content %}
-        {{ content }}
-    {% endblock %}
+<div{{ attributes.addClass('dropdown-menu').setAttribute('aria-labelledby', 'dropdownMenuLink') }}>
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+    <div class="advanced-search"><a href="{{ path('search.view') }}">{{ 'Advanced Search'|t }}</a></div>
+  {% endblock %}
 </div>

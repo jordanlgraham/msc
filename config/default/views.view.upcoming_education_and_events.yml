@@ -537,6 +537,7 @@ display:
           relationship: none
           view_mode: sidebar
       block_description: 'Sidebar Events block'
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:

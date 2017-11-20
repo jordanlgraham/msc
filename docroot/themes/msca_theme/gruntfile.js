@@ -56,6 +56,7 @@ module.exports = function(grunt) {
           src: [
             'js/dist/constants.js',
             'js/dist/base.js',
+            'js/dist/bootstrap/dropdown.js',
             'js/dist/bootstrap/tab.js',
             'js/dist/menu.js',
             'js/dist/scripts.js',
@@ -94,6 +95,7 @@ module.exports = function(grunt) {
             'js/dist/scripts.js': 'js/src/scripts.js',
             'js/dist/bootstrap/util.js': 'js/src/bootstrap/util.js',
             'js/dist/bootstrap/tab.js': 'js/src/bootstrap/tab.js',
+            'js/dist/bootstrap/dropdown.js': 'js/src/bootstrap/dropdown.js',
             'js/dist/bootstrap/collapse.js': 'js/src/bootstrap/collapse.js'
           }
         }

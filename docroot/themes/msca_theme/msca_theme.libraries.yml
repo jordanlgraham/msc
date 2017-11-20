@@ -14,4 +14,3 @@ base:
     - core/jquery.once
     - core/drupal.debounce
     - core/collapse
-

@@ -34,6 +34,10 @@ header.container-fluid {
   left: 0;
   right: 0;
   top: 0;
+  // If header is fixed on phones, you can't scroll to the bottom of the menu.
+  @include media-breakpoint-down(md) {
+    position: static;
+  }
 }
 body {
   margin-top: 94px;

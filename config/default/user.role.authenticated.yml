@@ -22,5 +22,6 @@ permissions:
   - 'skip comment approval'
   - 'update any media'
   - 'update media'
+  - 'use advanced search'
   - 'use text format basic_html'
   - 'view media'

@@ -16,4 +16,5 @@ permissions:
   - 'entity print access bundle newsletter'
   - 'entity print access bundle newsletter_article'
   - 'search content'
+  - 'use advanced search'
   - 'use text format restricted_html'
