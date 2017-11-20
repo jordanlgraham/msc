@@ -243,7 +243,7 @@
 
             </div>
         </div>
-        {% if dcu in content.field_specialized_unit|keys or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
+        {% if dcu in content.field_specialized_unit|keys or node.field_facility_price_range_min.value > 0 or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
             <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
                 <h3>{{ 'Additional Details'|t }}</h3>
 
@@ -317,7 +317,7 @@
                         </div>
                     </div>
                 {% endif %}
-                {%  if content.field_facility_type[0]['#title'] != 'Assisted Living' %}
+                {%  if content.field_facility_type[0]['#title'] == 'Assisted Living' %}
                     {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
                         <div col-md-12>
                             <div class="row mb-3">
