@@ -5,5 +5,5 @@ dependencies: {  }
 name: Tags
 vid: tags
 description: 'Topical terms to be applied to any content type.'
-hierarchy: 0
+hierarchy: 1
 weight: 0

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - core.entity_form_mode.node.inline_edit
     - field.field.node.education_events.body
     - field.field.node.education_events.field_call_to_action
     - field.field.node.education_events.field_date
@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
-    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - address
@@ -26,6 +25,7 @@ dependencies:
     - inline_entity_form
     - link
     - path
+    - scheduler
     - text
 id: node.education_events.default
 targetEntityType: node
@@ -148,21 +148,6 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
-  field_newsletter_topic:
-    weight: 6
-    settings:
-      form_mode: simplified_taxonomy_term
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
   path:
     type: path
     weight: 17
@@ -175,6 +160,12 @@ content:
       display_label: true
     weight: 15
     region: content
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
@@ -199,6 +190,12 @@ content:
       size: 60
       placeholder: ''
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   field_event_key: true

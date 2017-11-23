@@ -1,18 +1,8 @@
 // Sidebar blocks.
-aside > div > div {
+aside .sidebar-block {
   border: solid 1px $gray-lighter;
   padding: 1rem 0 0;
   margin: 1.5rem 0;
-}
-
-.sidebar_first aside > div > div {
-  border: solid 0 $gray-lighter;
-  padding: 0;
-  margin: 0;
-}
-
-aside.newsletter > div > div {
-  border: solid 0 $gray-lighter;
 }
 
 // Find-a-facility and member login sidebar block.

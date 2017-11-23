@@ -3,19 +3,22 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.node.newsletter
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - field.field.node.newsletter.field_calendar
     - field.field.node.newsletter.field_featured_article
     - field.field.node.newsletter.field_gated
     - field.field.node.newsletter.field_newsletter_date
     - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
+    - field.field.node.newsletter.field_tags
     - node.type.newsletter
   module:
     - datetime
+    - entity_browser_entity_form
     - inline_entity_form
     - paragraphs
     - path
+    - scheduler
 _core:
   default_config_hash: Iu4-UWmcv1qDkEa8XH5r-vQMLDJFlwYMDW0GfcOirV0
 id: node.newsletter.default
@@ -45,7 +48,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_featured_article:
-    weight: 4
+    weight: 5
     settings:
       form_mode: inline_edit
       label_singular: ''
@@ -74,7 +77,7 @@ content:
     region: content
   field_newsletter_section:
     type: paragraphs
-    weight: 5
+    weight: 6
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -87,7 +90,7 @@ content:
     third_party_settings: {  }
     region: content
   field_sponsor:
-    weight: 3
+    weight: 4
     settings:
       form_mode: newsletter
       label_singular: ''
@@ -99,6 +102,21 @@ content:
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
+  field_tags:
+    type: inline_entity_form_complex
+    weight: 3
+    region: content
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
   path:
     type: path
     weight: 12
@@ -111,6 +129,12 @@ content:
       display_label: true
     weight: 10
     region: content
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 13
+    region: content
+    settings: {  }
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
@@ -136,5 +160,10 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
-hidden:
-  field_tags: true
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

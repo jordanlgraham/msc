@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.newsletter.field_newsletter_date
     - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
+    - field.field.node.newsletter.field_tags
     - node.type.newsletter
   module:
     - user
@@ -20,6 +21,14 @@ targetEntityType: node
 bundle: newsletter
 mode: teaser
 content:
+  field_sponsor:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
   links:
     weight: 0
     region: content
@@ -34,4 +43,4 @@ hidden:
   field_gated: true
   field_newsletter_date: true
   field_newsletter_section: true
-  field_sponsor: true
+  field_tags: true

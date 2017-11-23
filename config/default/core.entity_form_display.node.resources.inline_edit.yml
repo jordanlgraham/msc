@@ -9,7 +9,6 @@ dependencies:
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
     - field.field.node.resources.field_gated
-    - field.field.node.resources.field_newsletter_topic
     - field.field.node.resources.field_related_content
     - field.field.node.resources.field_resource_category
     - field.field.node.resources.field_resource_type
@@ -20,6 +19,7 @@ dependencies:
     - file
     - inline_entity_form
     - link
+    - scheduler
     - text
 id: node.resources.inline_edit
 targetEntityType: node
@@ -57,21 +57,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_newsletter_topic:
-    type: inline_entity_form_complex
-    weight: 7
-    region: content
-    settings:
-      form_mode: simplified_taxonomy_term
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
   field_resource_category:
     type: inline_entity_form_complex
     weight: 3
@@ -117,6 +102,12 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -124,6 +115,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

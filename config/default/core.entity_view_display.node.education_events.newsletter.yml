@@ -12,10 +12,10 @@ dependencies:
     - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
     - field.field.node.education_events.field_event_sponsor
+    - field.field.node.education_events.field_file
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
-    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - address
@@ -59,14 +59,6 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-  field_newsletter_topic:
-    type: entity_reference_label
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
   links:
     weight: 5
     region: content
@@ -81,5 +73,6 @@ hidden:
   field_event_key: true
   field_event_related_content: true
   field_event_sponsor: true
+  field_file: true
   field_gated: true
   field_gold_sponsor: true

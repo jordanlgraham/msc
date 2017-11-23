@@ -1,9 +1,9 @@
-uuid: 9454f21f-71b4-4f27-8be3-98fc0ebd48d5
+uuid: 498c9b07-41ba-4287-8feb-fb8319bc34c0
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.facility_search
+    - views.view.all_content
   module:
     - block_class
     - system
@@ -12,15 +12,15 @@ dependencies:
     - msca_theme
 third_party_settings:
   block_class:
-    classes: ''
-id: exposedformfacility_searchpage_1
+    classes: views-search
+id: exposedformall_contentadvocacy
 theme: msca_theme
-region: sidebar_first
-weight: -18
+region: content
+weight: -15
 provider: null
-plugin: 'views_exposed_filter_block:facility_search-page_1'
+plugin: 'views_exposed_filter_block:all_content-advocacy'
 settings:
-  id: 'views_exposed_filter_block:facility_search-page_1'
+  id: 'views_exposed_filter_block:all_content-advocacy'
   label: ''
   provider: views
   label_display: visible
@@ -28,6 +28,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /find-a-facility
+    pages: /advocacy
     negate: false
     context_mapping: {  }

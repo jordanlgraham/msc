@@ -43,7 +43,6 @@
 
 .path-preferred-vendors .views-exposed-form select,
 .facility-search-filters select {
-  @extend .form-control;
   width: 100%;
   @include media-breakpoint-down(sm) {
     width: 340px;

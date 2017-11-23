@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - block_class
-    - ctools
     - system
   theme:
     - msca_theme
@@ -25,10 +24,8 @@ settings:
   provider: system
   label_display: '0'
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      paragraph_assembler: paragraph_assembler
+  request_path:
+    id: request_path
+    pages: '<front>'
     negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
+    context_mapping: {  }

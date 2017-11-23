@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_edit
-    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
     - entity_browser.browser.image_browser
     - field.field.node.newsletter_article.body
     - field.field.node.newsletter_article.field_gated
@@ -13,17 +12,15 @@ dependencies:
     - field.field.node.newsletter_article.field_news_subtitle
     - field.field.node.newsletter_article.field_news_teaser_image
     - field.field.node.newsletter_article.field_newsletter_byline
-    - field.field.node.newsletter_article.field_newsletter_topic
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
-    - field.field.node.newsletter_article.field_topic
+    - field.field.node.newsletter_article.field_tags
     - node.type.newsletter_article
   module:
     - datetime
     - entity_browser
-    - entity_browser_entity_form
-    - inline_entity_form
     - link
+    - scheduler
     - text
 _core:
   default_config_hash: EyvIYzPlqIJWJXlnkeY2_TjPEpFjGzhKaARK_DbOGBI
@@ -106,36 +103,12 @@ content:
     third_party_settings: {  }
     type: image_widget_crop
     region: content
-  field_newsletter_topic:
-    weight: 6
-    settings:
-      form_mode: simplified_taxonomy_term
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
-    type: inline_entity_form_complex
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
     region: content
-  field_topic:
-    type: inline_entity_form_complex
-    weight: 9
-    region: content
-    settings:
-      form_mode: simplified_taxonomy_term
-      label_singular: ''
-      label_plural: ''
-      allow_new: true
-      allow_existing: true
-      match_operator: CONTAINS
-      override_labels: false
-    third_party_settings:
-      entity_browser_entity_form:
-        entity_browser_id: _none
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -144,10 +117,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   field_related_content: true
   field_sponsor: true
+  field_tags: true
   path: true
   promote: true
   sticky: true

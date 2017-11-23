@@ -15,7 +15,7 @@ _core:
 id: msca_theme_branding
 theme: msca_theme
 region: content
-weight: -11
+weight: -12
 provider: null
 plugin: system_branding_block
 settings:

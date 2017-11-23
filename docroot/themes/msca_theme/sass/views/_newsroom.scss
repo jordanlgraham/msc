@@ -1,0 +1,39 @@
+.views-search form {
+  @extend .form-inline;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.views-search .form-item,
+.views-search .form-actions {
+  @extend .col-md-4;
+}
+
+.views-search.job-search .form-item,
+.views-search.job-search .form-actions {
+  @extend .col-md-3;
+}
+
+#edit-submit-all-content,
+#edit-submit-job-search {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.views-search form label {
+  @extend .col-form-label;
+  font-weight: bold;
+  margin-top: 1rem;
+  width: 100%;
+  justify-content: left;
+}
+
+.views-search input,
+.views-search select,
+.views-search form .form-control {
+  width: 100%;
+}
+
+.form-actions {
+  padding-top: 55px;
+}
