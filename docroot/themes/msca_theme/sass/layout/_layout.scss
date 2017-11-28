@@ -23,3 +23,13 @@ article > .container {
 body > .main-container {
   padding-bottom: 3rem;
 }
+
+// Prevent title from getting cropped for authenticated admins.
+.adminimal-admin-toolbar.user-logged-in #block-msca-theme-page-title {
+  padding: 2rem 0 1.2rem;
+}
+
+.adminimal-admin-toolbar.user-logged-in.path-content .views-element-container .contextual,
+.adminimal-admin-toolbar.user-logged-in.path-content #block-msca-theme-page-title .contextual{
+   top: 40px;
+ }

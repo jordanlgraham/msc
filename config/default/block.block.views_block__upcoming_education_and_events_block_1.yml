@@ -12,7 +12,7 @@ dependencies:
     - msca_theme
 third_party_settings:
   block_class:
-    classes: ''
+    classes: sidebar-block
 id: views_block__upcoming_education_and_events_block_1
 theme: msca_theme
 region: sidebar_second

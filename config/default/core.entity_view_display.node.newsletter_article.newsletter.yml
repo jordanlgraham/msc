@@ -11,10 +11,9 @@ dependencies:
     - field.field.node.newsletter_article.field_news_subtitle
     - field.field.node.newsletter_article.field_news_teaser_image
     - field.field.node.newsletter_article.field_newsletter_byline
-    - field.field.node.newsletter_article.field_newsletter_topic
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
-    - field.field.node.newsletter_article.field_topic
+    - field.field.node.newsletter_article.field_tags
     - image.style.thumbnail
     - node.type.newsletter_article
   module:
@@ -59,14 +58,6 @@ content:
       image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
-  field_newsletter_topic:
-    type: entity_reference_label
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -78,6 +69,6 @@ hidden:
   field_newsletter_image: true
   field_related_content: true
   field_sponsor: true
-  field_topic: true
+  field_tags: true
   flag_bookmark: true
   links: true

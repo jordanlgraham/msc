@@ -46,30 +46,6 @@
 
 {% include directory ~ '/templates/components/header.html.twig' %}
 
-<div class="facility-search-header">
-  <div class="container">
-    <h1>{{ 'Preferred Vendors'|t }}</h1>
-    <div class="title-underline container">
-      <div class="title-line col-5"></div><div class="title-icon col-2"></div><div class="title-line col-5"></div>
-    </div>
-  </div>
-</div>
-
-{# This is not great, but we don't currently have a setup for adding breadcrumbs to views. #}
-<nav role="navigation" aria-labelledby="system-breadcrumb">
-  <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
-  <div class="breadcrumb">
-    <ul class="inner-breadcrumb">
-      <li class="breadcrumb-item">
-        {{ 'Home'|t }}
-      </li>
-      <li class="breadcrumb-item">
-         {{ 'Preferred Vendors'|t }}
-      </li>
-    </ul>
-  </div>
-</nav>
-
 <div class="facility-search-wrapper">
   <div class="facility-search-container">
     <div class="facility-search-row vendor-search-results">

@@ -11,7 +11,7 @@ _core:
 id: msca_theme_search
 theme: msca_theme
 region: content
-weight: -6
+weight: -7
 provider: null
 plugin: search_form_block
 settings:

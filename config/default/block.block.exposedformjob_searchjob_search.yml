@@ -1,9 +1,9 @@
-uuid: 9454f21f-71b4-4f27-8be3-98fc0ebd48d5
+uuid: b03f35fb-f9b2-4312-9914-510a9d6596ab
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.facility_search
+    - views.view.job_search
   module:
     - block_class
     - system
@@ -12,15 +12,15 @@ dependencies:
     - msca_theme
 third_party_settings:
   block_class:
-    classes: ''
-id: exposedformfacility_searchpage_1
+    classes: 'views-search job-search'
+id: exposedformjob_searchjob_search
 theme: msca_theme
-region: sidebar_first
-weight: -18
+region: content
+weight: -14
 provider: null
-plugin: 'views_exposed_filter_block:facility_search-page_1'
+plugin: 'views_exposed_filter_block:job_search-job_search'
 settings:
-  id: 'views_exposed_filter_block:facility_search-page_1'
+  id: 'views_exposed_filter_block:job_search-job_search'
   label: ''
   provider: views
   label_display: visible
@@ -28,6 +28,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: /find-a-facility
+    pages: /job-search
     negate: false
     context_mapping: {  }

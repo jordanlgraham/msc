@@ -13,7 +13,7 @@ dependencies:
     - field.field.node.newsletter_article.field_newsletter_byline
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
-    - field.field.node.newsletter_article.field_topic
+    - field.field.node.newsletter_article.field_tags
     - image.style.max_325x325
     - node.type.newsletter_article
   module:
@@ -66,6 +66,6 @@ hidden:
   field_newsletter_byline: true
   field_related_content: true
   field_sponsor: true
-  field_topic: true
+  field_tags: true
   flag_bookmark: true
   links: true

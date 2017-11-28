@@ -1,24 +1,24 @@
-.page-node-type-newsletter article header {
+.newsletter-full article header {
   margin-left: 1rem;
 }
 
-.page-node-type-newsletter .header-top {
+.newsletter-full .header-top {
   padding: 1rem 0 1rem;
   min-height: 140px;
 }
 
-.page-node-type-newsletter .header-top img {
+.newsletter-full .header-top img {
   margin-top: 20px;
 }
 
-.page-node-type-newsletter .header-top h2 {
+.newsletter-full .header-top h2 {
   color: $blue;
   font-size: 4rem;
   margin-bottom: 0;
   margin-top: 50px;
 }
 
-.page-node-type-newsletter .header-bottom {
+.newsletter-full .header-bottom {
   background-color: $blue;
   color: $light-gray;
   padding: 1rem;
@@ -28,17 +28,17 @@
 }
 
 @include media-breakpoint-down(md) {
-  .page-node-type-newsletter .header-top {
+  .newsletter-full .header-top {
     min-height: 75px;
   }
-  .page-node-type-newsletter .header-top h2 {
+  .newsletter-full .header-top h2 {
     font-size: 3.5rem;
     margin-top: 0;
   }
-  .page-node-type-newsletter .header-top .float-right {
+  .newsletter-full .header-top .float-right {
     display: none;
   }
-  .page-node-type-newsletter .header-bottom {
+  .newsletter-full .header-bottom {
     font-size: 1rem;
     padding: 0 1rem;
     min-height: 2rem;
@@ -47,19 +47,19 @@
 }
 
 @include media-breakpoint-down(sm) {
-  .page-node-type-newsletter .header-top h2 {
+  .newsletter-full .header-top h2 {
     font-size: 2rem;
     margin-top: 20px;
   }
-  .page-node-type-newsletter .header-bottom {
+  .newsletter-full .header-bottom {
     font-size: .9rem;
   }
-  .page-node-type-newsletter .header-bottom .float-left {
+  .newsletter-full .header-bottom .float-left {
     display: none;
   }
 }
 
-.page-node-type-newsletter .icon-social {
+.newsletter-full .icon-social {
   width: 30px;
   height: 30px;
   border-radius: 5px;
@@ -141,11 +141,15 @@ aside.newsletter .sidebar-block {
   margin: -120px 0 0;
 }
 
-.page-node-type-newsletter .event-teaser-text h2 {
+.newsletter-full .event-teaser-text h2 {
   margin-bottom: .5rem;
 }
 
-.page-node-type-newsletter .event-location {
+.newsletter-full .event-location {
   font-weight: 500;
   margin: 0 0 1rem;
+}
+
+.all-content article.newsletter-full {
+  background-color: transparent;
 }

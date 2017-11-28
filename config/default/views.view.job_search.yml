@@ -299,7 +299,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: 'There are currently no job postings that match your search criteria.'
+            value: '<div class="alert alert-info m-5" role="alert"><strong>There are currently no job postings that match your search criteria.</div>'
             format: basic_html
           plugin_id: text
       relationships: {  }
@@ -320,14 +320,16 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  page_1:
+  job_search:
     display_plugin: page
-    id: page_1
-    display_title: Page
+    id: job_search
+    display_title: 'Job Search'
     position: 1
     display_options:
       display_extenders: {  }
       path: job-search
+      exposed_block: true
+      display_description: ''
     cache_metadata:
       max-age: -1
       contexts:

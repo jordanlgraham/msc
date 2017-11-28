@@ -8,7 +8,6 @@ dependencies:
     - field.field.node.resources.field_external_resource
     - field.field.node.resources.field_file
     - field.field.node.resources.field_gated
-    - field.field.node.resources.field_newsletter_topic
     - field.field.node.resources.field_related_content
     - field.field.node.resources.field_resource_category
     - field.field.node.resources.field_resource_type
@@ -30,14 +29,6 @@ content:
       trim_length: 300
     third_party_settings: {  }
     region: content
-  field_newsletter_topic:
-    type: entity_reference_label
-    weight: 1
-    region: content
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
   field_resource_category:
     type: entity_reference_label
     weight: 2

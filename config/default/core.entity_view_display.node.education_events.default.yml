@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
-    - field.field.node.education_events.field_newsletter_topic
     - node.type.education_events
   module:
     - address
@@ -108,5 +107,4 @@ hidden:
   field_event_related_content: true
   field_event_sponsor: true
   field_gated: true
-  field_newsletter_topic: true
   links: true

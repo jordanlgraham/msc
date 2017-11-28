@@ -29,9 +29,19 @@ h2,
   font-weight: 900;
 }
 
+.teaser-text h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 h3, h4, h5,
 .h3, .h4, .h5 {
   font-weight: 700;
+}
+
+.teaser-text h4 {
+  margin-top: 0;
+  margin-bottom: .5rem;
 }
 
 //LINKS
