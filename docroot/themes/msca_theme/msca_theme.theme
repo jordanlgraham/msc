@@ -72,6 +72,44 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
+ * Adds path-based variables for page-title.html.twig.
+ */
+function msca_theme_theme_suggestions_page_title_alter(array &$suggestions, array &$variables) {
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $revision = \Drupal::routeMatch()->getRawParameter('node_revision');
+
+  //revision IDs are strings and node ids are strings when a revision is loaded.
+  //node parameters loaded by getParameter are objects and the bundle can be accessed normally.
+  if ($node) {
+    if ($revision) {
+      $revised_node = \Drupal::entityTypeManager()
+        ->getStorage('node')
+        ->loadRevision($revision);
+
+      $content_type = $revised_node->bundle();
+      $content_type = str_replace('_', '-', $content_type);
+    }
+    else {
+      $content_type = $node->bundle();
+      $content_type = str_replace('_', '-', $content_type);
+    }
+
+    $variables['title_icon_class'] = $content_type;
+  }
+  else {
+    $current_path = \Drupal::service('path.current')->getPath();
+    $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+
+    $path_alias = trim($result, '/');
+    $path_alias = str_replace('/', '-', $path_alias);
+
+    $variables['title_icon_class'] = $path_alias;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
  * Adds template suggestions for field.html.twig.
  */
 function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variables) {
@@ -122,6 +160,4 @@ function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variable
       $suggestions[] = $field_list['template'];
     }
   }
-  // Helpful for certain theming situations.
-  $suggestions[] = 'field__node__' . $variables['element']['#field_name'] . '__' .  $variables['element']['#view_mode'];
 }
