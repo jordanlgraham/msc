@@ -24,19 +24,18 @@ dependencies:
     - field_group
     - link
     - path
+    - scheduler
     - telephone
 third_party_settings:
   field_group:
     group_job_information:
       children:
-        - field_job_posting_category
-        - title
         - field_job_posting_hours
         - field_job_posting_shift
         - field_job_posting_pay_range
         - field_job_posting_description
       parent_name: ''
-      weight: 7
+      weight: 8
       format_type: fieldset
       format_settings:
         id: ''
@@ -48,12 +47,12 @@ third_party_settings:
     group_job_contact_information:
       children:
         - field_job_posting_contact_name
+        - field_job_posting_contact_loc
         - field_job_contact_telephone
         - field_job_posting_contact_fax
         - field_job_posting_contact_email
-        - field_job_posting_contact_loc
       parent_name: ''
-      weight: 5
+      weight: 9
       format_type: fieldset
       format_settings:
         id: ''
@@ -65,12 +64,12 @@ third_party_settings:
     group_job_org:
       children:
         - field_job_posting_org
+        - field_job_posting_org_address
         - field_job_posting_org_phone
         - field_job_posting_org_fax
         - field_job_posting_org_website
-        - field_job_posting_org_address
       parent_name: ''
-      weight: 6
+      weight: 7
       format_type: fieldset
       format_settings:
         id: ''
@@ -91,20 +90,20 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_job_contact_telephone:
-    weight: 14
+    weight: 15
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
   field_job_posting_category:
-    weight: 26
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_job_posting_contact_email:
-    weight: 16
+    weight: 17
     settings:
       size: 60
       placeholder: ''
@@ -112,14 +111,14 @@ content:
     type: email_default
     region: content
   field_job_posting_contact_fax:
-    weight: 15
+    weight: 16
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
   field_job_posting_contact_loc:
-    weight: 17
+    weight: 14
     settings:
       default_country: US
     third_party_settings: {  }
@@ -134,7 +133,7 @@ content:
     type: string_textfield
     region: content
   field_job_posting_description:
-    weight: 31
+    weight: 32
     settings:
       rows: 5
       placeholder: ''
@@ -142,7 +141,7 @@ content:
     type: string_textarea
     region: content
   field_job_posting_hours:
-    weight: 28
+    weight: 29
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
@@ -157,28 +156,28 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_job_posting_org_address:
-    weight: 15
+    weight: 12
     settings:
       default_country: US
     third_party_settings: {  }
     type: address_default
     region: content
   field_job_posting_org_fax:
-    weight: 13
+    weight: 14
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
   field_job_posting_org_phone:
-    weight: 12
+    weight: 13
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
     region: content
   field_job_posting_org_website:
-    weight: 14
+    weight: 15
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -186,7 +185,7 @@ content:
     type: link_default
     region: content
   field_job_posting_pay_range:
-    weight: 30
+    weight: 31
     settings:
       size: 60
       placeholder: ''
@@ -194,7 +193,7 @@ content:
     type: string_textfield
     region: content
   field_job_posting_shift:
-    weight: 29
+    weight: 30
     settings:
       size: 60
       placeholder: ''
@@ -214,6 +213,17 @@ content:
     weight: 2
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduler_settings:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -223,7 +233,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 27
+    weight: 5
     region: content
     settings:
       size: 60
@@ -237,5 +247,11 @@ content:
       size: 60
       placeholder: ''
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 12
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

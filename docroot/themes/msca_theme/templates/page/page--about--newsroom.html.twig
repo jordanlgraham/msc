@@ -42,27 +42,16 @@
  */
 #}
 
-{# The current page.html.twig classes cause issues on this page, so unfortunately we have to use a unique template #}
-
-{% include directory ~ '/templates/components/facilities-header.html.twig' %}
+{% include directory ~ '/templates/components/newsroom-header.html.twig' %}
 
 <div class="facility-search-wrapper">
   <div class="facility-search-container">
-    <div class="facility-search-row">
-      {# Sidebar First #}
-      {% if page.sidebar_first %}
-        {% block sidebar_first %}
-            <aside role="complementary" class="facility-search-filters">
-              {{ page.sidebar_first }}
-            </aside>
-        {% endblock %}
-      {% endif %}
-
-      <section{{ content_attributes.addClass('facility-search-results')}}>
+    <div class="facility-search-row vendor-search-results">
+      <section{{ content_attributes.addClass('')}}>
         <main role="main">
-            <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-            {{ messages }}
-            {{ page.content }}
+          <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+          {{ messages }}
+          {{ page.content }}
         </main>
       </section>
     </div>

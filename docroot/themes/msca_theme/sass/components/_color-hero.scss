@@ -49,10 +49,28 @@ header.container-fluid {
   display: inline-block;
 }
 
-.title-icon-jobs {
+.title-icon.jobs {
   background: $jobs;
-  width: 90px;
-  height: 55px;
-  display: inline-block;
+}
+
+.title-icon.facilities {
+  background: $facilities;
+}
+
+.title-icon.vendors {
+  background: $vendors;
+}
+
+.title-icon.newsroom {
+  background: $newsroom;
+}
+
+.title-icon.events {
+  background: $events;
+  background-size: 60%;
+}
+
+.title-icon.member-resources {
+  background: $member-resources;
 }
 

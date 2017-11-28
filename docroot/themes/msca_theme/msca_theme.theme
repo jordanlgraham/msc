@@ -70,6 +70,10 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ * Adds template suggestions for field.html.twig.
+ */
 function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variables) {
   $field = $variables['element'];
   if ($field['#entity_type'] !== 'node') {
@@ -118,4 +122,6 @@ function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variable
       $suggestions[] = $field_list['template'];
     }
   }
+  // Helpful for certain theming situations.
+  $suggestions[] = 'field__node__' . $variables['element']['#field_name'] . '__' .  $variables['element']['#view_mode'];
 }

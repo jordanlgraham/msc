@@ -11,7 +11,7 @@ id: node.job_posting.field_job_posting_org_phone
 field_name: field_job_posting_org_phone
 entity_type: node
 bundle: job_posting
-label: Phone
+label: 'Facility Phone'
 description: ''
 required: false
 translatable: false
