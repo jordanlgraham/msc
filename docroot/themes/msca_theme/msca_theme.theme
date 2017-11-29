@@ -160,4 +160,6 @@ function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variable
       $suggestions[] = $field_list['template'];
     }
   }
+ // This is helpful for theming teasers etc.
+ $suggestions[] = 'field__' . $variables['element']['#field_name'] . '__' . $variables['element']['#view_mode'];
 }

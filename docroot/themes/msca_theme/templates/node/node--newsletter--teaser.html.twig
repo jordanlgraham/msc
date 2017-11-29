@@ -7,7 +7,7 @@
 #}
 {# For Newsletter TOC anchor links. #}
 <a name="{{ node.id }}"></a>
-<article{{ attributes.addClass('pb-5') }}>
+<article{{ attributes }}>
 
   <div{{ content_attributes }}>
       <div class="icon-square float-left">
@@ -15,7 +15,6 @@
           {{ source(directory ~ '/svg/envelope-blue.svg') }}
       </div>
       <div class="newsletter-teaser-text teaser-text">
-            <p>{{ 'Newsletter'|t }}</p>
         {% if content.field_sponsor|render %}
           <h2{{ title_attributes }}>
         {% else %}

@@ -7,7 +7,7 @@
 #}
 {# For Newsletter TOC anchor links. #}
 <a name="{{ node.id }}"></a>
-<article{{ attributes.addClass('pb-5') }}>
+<article{{ attributes }}>
 
   <div{{ content_attributes }}>
       <div class="icon-square float-left">
@@ -15,8 +15,6 @@
           {{ source(directory ~ '/svg/youtube-play.svg') }}
       </div>
       <div class="video-teaser-title">
-          {# Render the content type this is #}
-          <h4>{{ node.type.entity.label }}</h4>
           <h2{{ title_attributes }}>
             <a href="{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
