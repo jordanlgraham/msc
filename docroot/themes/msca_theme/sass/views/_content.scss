@@ -5,8 +5,6 @@
   padding: 0;
 }
 .all-content article {
-  background-color: $gray-lightest;
-  padding: 1rem;
   margin: 1rem;
   height: 100%;
 }
@@ -14,7 +12,6 @@
   padding: 1rem;
 }
 
-.all-content .icon-square {
-  position: relative;
-  top: -10px;
+.all-content .teaser-text span {
+  line-height: 1.3;
 }
