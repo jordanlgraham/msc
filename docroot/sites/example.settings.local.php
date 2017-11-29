@@ -105,3 +105,31 @@ $settings['rebuild_access'] = TRUE;
  * directory.
  */
 $settings['skip_permissions_hardening'] = TRUE;
+
+/**
+ * Database setup for lando
+ */
+$databases['default']['default'] = array (
+  'database' => getenv('DB_NAME'),
+  'username' => getenv('DB_USER'),
+  'password' => getenv('DB_PASSWORD'),
+  'host' => getenv('DB_HOST'),
+  'port' => getenv('DB_PORT'),
+  'driver' => 'mysql',
+  'prefix' => '',
+  'collation' => 'utf8mb4_general_ci',
+);
+
+ini_set('opcache.enable', 0);
+ini_set('memory_limit', '256M');
+ini_set("soap.wsdl_cache_enabled", "0");
+
+$config['netforum_soap.netforumconfig'] = [
+  'wsdl_address' => 'https://netforum.avectra.com/xWeb/netForumXMLOnDemand.asmx?WSDL',
+  'api_username' => 'api_username',
+  'api_password' => 'api_password',
+];
+
+$config['msca_discourse.config'] = [
+  'api_key' => 'api_key',
+];
