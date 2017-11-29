@@ -16,7 +16,7 @@
 {% if title %}
   <h1{{ title_attributes }}>{{ title }}</h1>
     <div class="title-underline container">
-      <div class="title-line col-5"></div><div class="title-icon col-2"></div><div class="title-line col-5"></div>
+      <div class="title-line col-5"></div><div class="title-icon col-2 {{ title_icon_class }}"></div><div class="title-line col-5"></div>
     </div>
 {% endif %}
 {{ title_suffix }}

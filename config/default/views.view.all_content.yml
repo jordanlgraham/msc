@@ -1042,6 +1042,7 @@ display:
         options:
           relationship: none
           view_mode: teaser
+      enabled: false
     cache_metadata:
       max-age: -1
       contexts:

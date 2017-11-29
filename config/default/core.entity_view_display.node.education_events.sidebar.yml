@@ -30,7 +30,7 @@ content:
     label: hidden
     settings:
       timezone_override: ''
-      date_format: 'F j \a\t ga'
+      date_format: 'F j \a\t g:i a'
     third_party_settings: {  }
     type: datetime_custom
     region: content

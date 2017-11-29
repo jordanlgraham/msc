@@ -23,7 +23,6 @@ $news-svg: '#{$svg-path}/news.svg';
 $search-svg: '#{$svg-path}/search.svg';
 $user-svg: '#{$svg-path}/user.svg';
 
-
 // Animation
 * {
   transition: all 0.1s ease;
@@ -77,6 +76,12 @@ $headings-margin-bottom: 1rem;
 
 // Icons
 $heart-pulse: url('#{$images-path}/heart-pulse-white.svg') no-repeat center;
+$jobs: url('#{$svg-path}/job-white.svg') no-repeat center;
+$facilities: url('#{$svg-path}/house-white.svg') no-repeat center;
+$vendors: url('#{$svg-path}/vendor-white.svg') no-repeat center;
+$newsroom: url('#{$svg-path}/news-white.svg') no-repeat center;
+$events: url('#{$svg-path}/calendar-full.svg') no-repeat center;
+$member-resources: url('#{$svg-path}/file-white.svg') no-repeat center;
 
 // General
 /*$border-radius: 0;

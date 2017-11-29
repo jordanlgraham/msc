@@ -11,7 +11,7 @@ id: node.job_posting.field_job_posting_org_fax
 field_name: field_job_posting_org_fax
 entity_type: node
 bundle: job_posting
-label: Fax
+label: 'Facility Fax'
 description: ''
 required: false
 translatable: false

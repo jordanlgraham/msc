@@ -49,3 +49,28 @@ header.container-fluid {
   display: inline-block;
 }
 
+.title-icon.job-posting {
+  background: $jobs;
+}
+
+.title-icon.find-a-facility {
+  background: $facilities;
+}
+
+.title-icon.preferred-vendors {
+  background: $vendors;
+}
+
+.title-icon.about-newsroom {
+  background: $newsroom;
+}
+
+.title-icon.events {
+  background: $events;
+  background-size: 60%;
+}
+
+.title-icon.member-resources {
+  background: $member-resources;
+}
+
