@@ -23,7 +23,6 @@ class SimpleVendorSearch extends FormBase {
       '#title' => $this->t('Preferred Vendor Search'),
       '#title_display' => 'invisible',
       '#placeholder' => $this->t('Vendor Name'),
-      '#required' => TRUE,
     ];
 
     // We need to provide this hidden field so the exposed filters on the destination view function properly.
