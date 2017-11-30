@@ -58,9 +58,27 @@ set activeslideclasses = [
 ]
 %}
 {% block paragraph %}
+  {% if content.field_call_to_action|render %}
+    {# get value of call to action uri #}
+    {% set url = content.field_call_to_action.0['#url'] %}
+  {% endif %}
+  {% if content.field_title|render %}
+    {# get value of slide title #}
+    {% set slide_title = content.field_title.value %}
+  {% endif %}
+  {# If there is no title, we want entire slide wrapped in hyperlink. #}
+  {% if url is defined and slide_title is not defined %}
+    <a href="{{ url }}" target="_blank">
+  {% endif %}
     {% if content.field_carousel_image|render %}
         {{ content.field_carousel_image }}
+      {{ slide_title }}
     {% endif %}
+  {% if url is defined and slide_title is not defined %}
+    </a>
+  {% endif %}
+
+  {% if content.field_title|render or content.field_subtitle|render %}
     <div class="carousel-caption">
         {% if content.field_title|render %}
             <h2>{{ content.field_title }}</h2>
@@ -72,4 +90,5 @@ set activeslideclasses = [
             {{ content.field_call_to_action }}
         {% endif %}
     </div>
+  {% endif %}
 {% endblock paragraph %}
