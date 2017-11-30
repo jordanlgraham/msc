@@ -4,6 +4,8 @@
  * Theme functions.
  */
 
+use Drupal\taxonomy\Entity\Term;
+
 // Include all files from the includes directory.
 $includes_path = dirname(__FILE__) . '/includes/*.inc';
 foreach (glob($includes_path) as $filename) {
@@ -162,4 +164,58 @@ function msca_theme_theme_suggestions_field_alter(array &$suggestions, $variable
   }
  // This is helpful for theming teasers etc.
  $suggestions[] = 'field__' . $variables['element']['#field_name'] . '__' . $variables['element']['#view_mode'];
+}
+
+/**
+ * Implements hook_views_pre_render().
+ * Dynamic page titles based on exposed filter values.
+ */
+function msca_theme_views_pre_render(&$view) {
+ if ($view->id() == 'all_content') {
+
+    // get value of exposed filter
+    if ($view->current_display == 'newsroom') {
+      $filter_value = $view->exposed_data['news_category'][0]['target_id'];
+    }
+    else if ($view->current_display == 'events') {
+      $filter_value = $view->exposed_data['event_type'][0]['target_id'];
+    }
+    else if ($view->current_display == 'member_resources') {
+      $filter_value = $view->exposed_data['topic'][0]['target_id'];
+    }
+    else if ($view->current_display == 'advocacy') {
+      $filter_value = $view->exposed_data['topic'][0]['target_id'];
+    }
+
+    if (isset($filter_value)) {
+
+      // Find the term based on tid.
+      $term = Term::load($filter_value);
+
+      // Get term name.
+      if (isset($term)) {
+        $name = $term->getName();
+      }
+
+      // Prepend titles with text.
+      if (isset($name)) {
+        if ($view->current_display == 'newsroom') {
+          $page_name = t('Newsroom: ') . $name;
+        }
+        else if ($view->current_display == 'events') {
+          $page_name = $name;
+        }
+        else if ($view->current_display == 'member_resources') {
+          $page_name = t('Member Resources: ') . $name;
+        }
+        else if ($view->current_display == 'advocacy') {
+          $page_name = t('Advocacy: ') . $name;
+        }
+
+        // set title to that value
+        $view->setTitle($page_name);
+      }
+
+    }
+  }
 }
