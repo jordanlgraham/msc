@@ -1,0 +1,18 @@
+<h1>{{ 'Members Only' | t }}</h1>
+{% if not logged_in %}
+  {{ form }}
+  <p><a href="{{ url('user.pass') }}">{{ 'Forgot Password'|t }}</a></p>
+  <p>{% trans %}The information you are seeking is for Mass Senior Care members only. If you are a member, please enter your username (e-mail address) and password above.{% endtrans %}</p>
+  <p>{% trans %}Forgot your login information? <br>
+    Choose Forgot Password under the Log In button above for an automated reset, or contact our webmaster: <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a> / 617-558-0202.{% endtrans %}</p>
+  <p>
+    {% trans %}
+    <a href="mailto:info@maseniorcare.org">Request username and password</a> <br>
+    Click here to request a username and password from our webmaster - used by members to access all member-only information, and by non-members to register for events and purchase products.
+    {% endtrans %}
+  </p>
+{% else %}
+  <p>{% trans %}
+    The information you are seeking is for Mass Senior Care members only. <br>
+  {% endtrans %}</p>
+{% endif %}
