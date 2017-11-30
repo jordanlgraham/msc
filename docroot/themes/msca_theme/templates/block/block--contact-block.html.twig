@@ -32,7 +32,7 @@
     {% endif %}
     {{ title_suffix }}
     {% block content %}
-        <p class="text-center">{% trans %}We look forward to assisting you however we can.{% endtrans %}</p>
+        <p class="text-center">{{ 'We look forward to assisting you.'|t }}</p>
         {{ content }}
     {% endblock %}
 </div>
