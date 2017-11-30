@@ -6,7 +6,7 @@
 
 .views-search .form-item,
 .views-search .form-actions {
-  @extend .col-md-4;
+  @extend .col-md-6;
 }
 
 .views-search.job-search .form-item,
@@ -36,4 +36,10 @@
 
 .form-actions {
   padding-top: 55px;
+}
+
+.form-item-news-category,
+.form-item-event-type,
+.form-item-topic {
+  display: none;
 }
