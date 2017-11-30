@@ -40,20 +40,12 @@
                 {% endif %}
                 {% if content.field_administrator|render or content.field_customer_web_site|render or content.field_for_profit|render %}
                     <div class="ownership">
-                        {% if content.field_for_profit|render %}
-                            <h3>{{ 'Ownership Status'|t }}</h3>
-                            {% if node.field_for_profit.value == 'On' %}
-                                <p>Profit</p>
-                            {% else %}
-                                <p>Non-profit</p>
-                            {% endif %}
-                        {% endif %}
                         {% if content.field_administrator|render %}
                             <h3>{{ 'Administrator'|t }}</h3>
                             {{ content.field_administrator }}
                         {% endif %}
                         {% if content.field_manager|render %}
-                            <h3>{{ 'Owned By'|t }}</h3>
+                            <h3>{{ 'Operated By'|t }}</h3>
                             {{ content.field_manager }}
                         {% endif %}
                     </div>
