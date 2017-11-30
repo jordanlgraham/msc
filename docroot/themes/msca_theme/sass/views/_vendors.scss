@@ -72,8 +72,13 @@
   }
 }
 
+.facility-search-filters .form-actions {
+  padding-top: 1rem;
+}
+
 .path-preferred-vendors .views-exposed-form .form-actions {
   display: flex;
+  padding-top: 0;
   > div:last-child:nth-child(2) {
     padding-left: 15px;
   }
