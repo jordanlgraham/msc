@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.job_posting.field_job_posting_category
     - field.field.node.job_posting.field_job_posting_contact_email
     - field.field.node.job_posting.field_job_posting_contact_fax
+    - field.field.node.job_posting.field_job_posting_contact_loc
     - field.field.node.job_posting.field_job_posting_contact_name
     - field.field.node.job_posting.field_job_posting_description
     - field.field.node.job_posting.field_job_posting_hours
@@ -20,15 +21,40 @@ dependencies:
     - field.field.node.job_posting.field_job_posting_shift
     - node.type.job_posting
   module:
+    - address
+    - options
     - user
 id: node.job_posting.teaser
 targetEntityType: node
 bundle: job_posting
 mode: teaser
 content:
-  links:
-    weight: 100
+  field_job_posting_description:
+    type: basic_string
+    weight: 2
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_job_posting_hours:
+    type: list_default
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_job_posting_org_address:
+    type: address_plain
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
@@ -39,10 +65,7 @@ hidden:
   field_job_posting_contact_fax: true
   field_job_posting_contact_loc: true
   field_job_posting_contact_name: true
-  field_job_posting_description: true
-  field_job_posting_hours: true
   field_job_posting_org: true
-  field_job_posting_org_address: true
   field_job_posting_org_fax: true
   field_job_posting_org_phone: true
   field_job_posting_org_website: true

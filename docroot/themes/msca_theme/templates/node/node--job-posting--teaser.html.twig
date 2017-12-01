@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme override to display a Job Posting node teaser display.
+ *
+ */
+#}
+<article{{ attributes }}>
+
+  <div{{ content_attributes }}>
+      <div class="icon-square float-left">
+          {{ source(directory ~ '/svg/job-blue.svg') }}
+      </div>
+      <div class="newsroom-teaser-text teaser-text">
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {% if content.field_job_posting_org_address|render or content.field_job_posting_hours|render %}
+            <h6>
+              {% if content.field_job_posting_org_address|render %}
+                {{ content.field_job_posting_org_address[0]['#locality']['name'] }} ,
+              {% endif %}
+              {% if content.field_job_posting_hours|render %}
+                {{ content.field_job_posting_hours[0]['#markup'] }}
+              {% endif %}
+            </h6>
+          {% endif %}
+          {{ content.field_job_posting_description }}
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      </div>
+
+  </div>
+
+</article>
