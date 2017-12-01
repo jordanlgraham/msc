@@ -49,10 +49,15 @@ class Auth {
         return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
       }
       else {
+        $roles = [];
+        if ($user_attributes['member']) {
+          $roles[] = 'member';
+        }
         return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
           'name' => $email,
           'mail' => $email,
           'pass' => $password,
+          'roles' => $roles,
         ]);
       }
     } else {
@@ -85,6 +90,7 @@ class Auth {
         if (!empty($array['@attributes']['recordReturn']) && $array['@attributes']['recordReturn'] == '1') {
           $attributes = array(
             'name' => $array['Result']['cst_name_cp'],
+            'member' => (bool)$array['Result']['cst_member_flag'],
           );
           return $attributes;
         }
@@ -95,4 +101,13 @@ class Auth {
       return false;
     }
   }
+
+  public function userIsMember($email, $password) {
+    $attributes = $this->CheckEWebUser($email, $password);
+    if ($attributes) {
+      return $attributes['member'];
+    }
+    return FALSE;
+  }
+
 }
