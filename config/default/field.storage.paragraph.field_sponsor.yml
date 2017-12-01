@@ -1,12 +1,13 @@
-uuid: c1ce9db7-8eb9-4a0e-b69b-1192b6667f6e
+uuid: a994a41d-c620-434b-a811-10aa99a14e6d
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_event_sponsor
-field_name: field_event_sponsor
-entity_type: node
+    - paragraphs
+id: paragraph.field_sponsor
+field_name: field_sponsor
+entity_type: paragraph
 type: entity_reference
 settings:
   target_type: node

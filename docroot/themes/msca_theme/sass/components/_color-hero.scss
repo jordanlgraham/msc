@@ -65,7 +65,8 @@ header.container-fluid {
   background: $newsroom;
 }
 
-.title-icon.events {
+.title-icon.events,
+.title-icon.education-events {
   background: $events;
   background-size: 60%;
 }
