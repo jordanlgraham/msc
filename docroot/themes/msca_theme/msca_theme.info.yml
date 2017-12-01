@@ -15,6 +15,7 @@ regions:
   content: 'Content'
   sidebar_first: 'Sidebar First'
   sidebar_second: 'Sidebar Second'
+  pre_footer: 'Pre-footer'
   footer: 'Footer'
 
   # The purpose of the gutter is to be able to place blocks but not have them appear.

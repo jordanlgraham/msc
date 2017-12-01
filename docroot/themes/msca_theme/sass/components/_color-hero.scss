@@ -61,8 +61,12 @@ header.container-fluid {
   background: $vendors;
 }
 
-.title-icon.about-newsroom {
+.title-icon.about-newsroom,
+.title-icon.newsletter-article,
+.title-icon.newsroom {
   background: $newsroom;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .title-icon.events,
