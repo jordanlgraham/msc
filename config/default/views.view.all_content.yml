@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.full
     - core.entity_view_mode.node.teaser
     - node.type.education_events
+    - node.type.job_posting
     - node.type.newsletter
     - node.type.newsletter_article
     - node.type.newsroom
