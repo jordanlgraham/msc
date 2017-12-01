@@ -17,7 +17,7 @@ _core:
 id: msca_theme_footer
 theme: msca_theme
 region: footer
-weight: -15
+weight: -21
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

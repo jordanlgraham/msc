@@ -65,7 +65,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: ''
+          row_class: related-content-article
           default_row_class: false
       row:
         type: fields
