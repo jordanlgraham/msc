@@ -37,6 +37,14 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     $form[$city_filter]['#options'] = $cities;
   }
 
+  // Hide the "dementia" option.
+  foreach ($form['field_service_type_value']['#options'] as $key => $option) {
+    if ($option === 'Dementia Care') {
+      unset($form['field_service_type_value']['#options'][$key]);
+      break;
+    }
+  }
+
   // Add placeholders to all text fields. Uses label values so they're editable in interface
   foreach($form['#info'] as $key => $form_info_item) {
     foreach ($form as $form_item_key => $form_item_value) {
@@ -100,6 +108,7 @@ function facility_search_views_pre_view(ViewExecutable $view, $display_id, array
  */
 function facility_search_preprocess_views_view(&$variables) {
   /** @var ViewExecutable $view */
+  // Prepare a display of the location.
   $view = $variables['view'];
   if ($view->current_display !== 'page_1' ||
       $view->id() !== 'facility_search') {
@@ -130,7 +139,29 @@ function facility_search_preprocess_views_view(&$variables) {
   if (!empty($input['keys'])) {
     $header = t('Searching for "@keys"', ['@keys' => $input['keys']]);
   }
-  $variables['header']['search_input'] = [
+  $filter_values = [];
+  $input_display_blacklist = [
+    'title',
+    'proximity',
+  ];
+  foreach ($view->display_handler->getOption('filters') as $filter) {
+    if (empty($filter['exposed']) || in_array($filter['expose']['identifier'], $input_display_blacklist)) {
+      continue;
+    }
+    $value = $input[$filter['expose']['identifier']];
+    if (empty($value)) {
+      continue;
+    }
+    if (is_array($value)) {
+      $value = implode(', ', array_values($value));
+    }
+    if (isset($filter['vid'])) {
+      $value = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value)->label();
+    }
+    $filter_values[$filter['expose']['label']] = $value;
+  }
+  // Prepare a display of the additional tags.
+  $variables['header']['location_input'] = [
     '#type' => 'html_tag',
     '#tag' => 'h2',
     '#value' => $header,
@@ -141,5 +172,19 @@ function facility_search_preprocess_views_view(&$variables) {
       'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
     ],
   ];
+  // Add the other search filters.
+  if (!empty($filter_values)) {
+    $search_input = '<div class="facility-search-input">';
+    foreach ($filter_values as $filter => $value) {
+      $search_input .= '<span class="input">';
+      $search_input .= "<em>$filter:</em> $value";
+      $search_input .= '</span>';
+    }
+    $search_input .= '</div>';
+    $variables['header']['search_input'] = [
+      '#type' => 'markup',
+      '#markup' => $search_input,
+    ];
+  }
 }
 
