@@ -13,3 +13,11 @@ effects:
       width: 190
       height: null
       upscale: false
+  f543dd2e-d4e2-4f3b-aebb-4cb63351f3ee:
+    uuid: f543dd2e-d4e2-4f3b-aebb-4cb63351f3ee
+    id: image_scale
+    weight: 2
+    data:
+      width: null
+      height: 110
+      upscale: false
