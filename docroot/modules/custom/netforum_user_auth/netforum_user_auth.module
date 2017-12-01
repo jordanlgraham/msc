@@ -53,6 +53,7 @@ function _netforum_user_auth_login_form_alter(&$form, FormStateInterface $form_s
   $key = array_search('::validateAuthentication', $form['#validate']);
   $form['#validate'][$key] = 'netform_user_auth_core_login_authenticate_validate';
   array_splice($form['#validate'], $key + 1, 0, 'netform_user_auth_login_authenticate_validate');
+  $form['#validate'][] = 'netforum_user_auth_validate_membership';
 }
 
 /**

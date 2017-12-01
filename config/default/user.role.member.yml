@@ -6,4 +6,5 @@ id: member
 label: Member
 weight: 4
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access gated content'
