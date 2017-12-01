@@ -57,7 +57,8 @@ header.container-fluid {
   background: $facilities;
 }
 
-.title-icon.preferred-vendors {
+.title-icon.preferred-vendors,
+.title-icon.vendor {
   background: $vendors;
 }
 
@@ -69,13 +70,27 @@ header.container-fluid {
   margin-bottom: 0;
 }
 
+.title-icon.newsletter {
+  background: $newsletter;
+}
+
 .title-icon.events,
 .title-icon.education-events {
   background: $events;
   background-size: 60%;
 }
 
-.title-icon.member-resources {
+.title-icon.member-resources,
+.title-icon.resources {
   background: $member-resources;
+}
+
+.title-icon.scholarships,
+.title-icon.scholarship_recipient {
+  background: $scholarship;
+}
+
+.title-icon.video {
+  background: $videos;
 }
 
