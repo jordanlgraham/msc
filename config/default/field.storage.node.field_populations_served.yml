@@ -20,6 +20,30 @@ settings:
     -
       value: Bariatric
       label: Bariatric
+    -
+      value: Children/Pediatrics
+      label: Children/Pediatrics
+    -
+      value: 'Huntington''s Disease'
+      label: 'Huntington''s Disease'
+    -
+      value: 'Intellectual Disabilities'
+      label: 'Intellectual Disabilities'
+    -
+      value: 'Mental Illness'
+      label: 'Mental Illness'
+    -
+      value: 'Multiple Sclerosis'
+      label: 'Multiple Sclerosis'
+    -
+      value: 'Peritoneal or Renal Dialysis'
+      label: 'Peritoneal or Renal Dialysis'
+    -
+      value: 'Traumatic Brain Injury'
+      label: 'Traumatic Brain Injury'
+    -
+      value: 'Younger Residents (21-65)'
+      label: 'Younger Residents (21-65)'
   allowed_values_function: ''
 module: options
 locked: false
