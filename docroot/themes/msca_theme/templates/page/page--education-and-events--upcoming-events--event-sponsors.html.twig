@@ -48,6 +48,13 @@
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     {{ messages }}
     {{ page.content }}
+  {% if page.pre_footer %}
+    <section class="site-pre-footer">
+      <div class="site-pre-footer-container container">
+        {{page.pre_footer}}
+      </div>
+    </section>
+  {% endif %}
   {% if page.footer %}
       <footer class="site-footer">
           <div class="site-footer-container">
