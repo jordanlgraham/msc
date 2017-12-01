@@ -72,6 +72,10 @@ class Auth {
    * @return array|bool
    */
   private function CheckEWebUser($email, $password) {
+    $users = &drupal_static(__FUNCTION__, []);
+    if (isset($users[$email])) {
+      return $users[$email];
+    }
     $client = $this->get_client->GetClient();
     $params = array(
       'szEmail' => $email,
@@ -92,6 +96,7 @@ class Auth {
             'name' => $array['Result']['cst_name_cp'],
             'member' => (bool)$array['Result']['cst_member_flag'],
           );
+          $users[$email] = $attributes;
           return $attributes;
         }
         return false;
