@@ -1,0 +1,6 @@
+msca_access.login:
+  path: '/gated-content'
+  defaults:
+    _controller: '\Drupal\msca_access\Controller\GatedLogin::page'
+  requirements:
+    _lacks_permission: 'access gated content'

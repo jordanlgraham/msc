@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file msca_access.module
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function msca_access_theme($existing, $type, $theme, $path) {
+  return [
+    'gated_page' => [
+      'template' => 'gated-page',
+      'variables' => ['form' => NULL],
+    ],
+  ];
+}

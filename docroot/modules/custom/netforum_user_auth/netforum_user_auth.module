@@ -87,3 +87,39 @@ function netform_user_auth_login_authenticate_validate($form, FormStateInterface
     ]);
   }
 }
+
+function netforum_user_auth_validate_membership($form, FormStateInterface $form_state) {
+  if (!$form_state->get('uid')) {
+    return;
+  }
+  try {
+    /** @var \Drupal\netforum_user_auth\Auth $auth */
+    $auth = \Drupal::service('netforum_user_auth.auth');
+    $member = $auth->userIsMember($form_state->getValue('name'), $form_state->getValue('pass'));
+    /** @var \Drupal\user\UserInterface $account */
+    $save = FALSE;
+    $account = \Drupal::entityTypeManager()
+      ->getStorage('user')
+      ->load($form_state->get('uid'));
+    if ($account->hasRole('member')) {
+      if (!$member) {
+        $account->removeRole('member');
+        $save = TRUE;
+      }
+    }
+    else {
+      if ($member) {
+        $account->addRole('member');
+        $save = TRUE;
+      }
+    }
+    if ($save) {
+      $account->save();
+    }
+  }
+  catch (Exception $exception) {
+    watchdog_exception('netforum_user_auth', $exception);
+    \Drupal::logger('netforum_user_auth')->error('Unable to determine if user @name is a member while logging in: %msg',
+      ['%msg' => $exception->getMessage(), '@name' => $form_state->getValue('name')]);
+  }
+}

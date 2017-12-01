@@ -49,10 +49,15 @@ class Auth {
         return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
       }
       else {
+        $roles = [];
+        if ($user_attributes['member']) {
+          $roles[] = 'member';
+        }
         return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
           'name' => $email,
           'mail' => $email,
           'pass' => $password,
+          'roles' => $roles,
         ]);
       }
     } else {
@@ -67,6 +72,10 @@ class Auth {
    * @return array|bool
    */
   private function CheckEWebUser($email, $password) {
+    $users = &drupal_static(__FUNCTION__, []);
+    if (isset($users[$email])) {
+      return $users[$email];
+    }
     $client = $this->get_client->GetClient();
     $params = array(
       'szEmail' => $email,
@@ -85,7 +94,9 @@ class Auth {
         if (!empty($array['@attributes']['recordReturn']) && $array['@attributes']['recordReturn'] == '1') {
           $attributes = array(
             'name' => $array['Result']['cst_name_cp'],
+            'member' => (bool)$array['Result']['cst_member_flag'],
           );
+          $users[$email] = $attributes;
           return $attributes;
         }
         return false;
@@ -95,4 +106,13 @@ class Auth {
       return false;
     }
   }
+
+  public function userIsMember($email, $password) {
+    $attributes = $this->CheckEWebUser($email, $password);
+    if ($attributes) {
+      return $attributes['member'];
+    }
+    return FALSE;
+  }
+
 }

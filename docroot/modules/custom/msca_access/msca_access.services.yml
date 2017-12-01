@@ -3,3 +3,8 @@ services:
     class: '\Drupal\msca_access\EventSubscriber\GatedNodeRedirectSubscriber'
     tags:
       - { name: event_subscriber}
+  msca_access.lacks_permission_access:
+    class: '\Drupal\msca_access\Access\LacksPermission'
+    tags:
+      - { name: access_check, applies_to: _lacks_permission}
+      

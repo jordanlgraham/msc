@@ -32,25 +32,27 @@ class GatedNodeRedirectSubscriber implements EventSubscriberInterface {
    */
   public function redirectGatedNodes(GetResponseEvent $event) {
     $request = $event->getRequest();
-    $user = $request->getUser();
 
     if ($request->attributes->get('_route') !== 'entity.node.canonical') {
       return;
     }
     /** @var \Drupal\node\NodeInterface $node */
     $node = $request->attributes->get('node');
+    /** @var \Drupal\Core\Session\AccountProxyInterface $user */
+    $user = \Drupal::currentUser();
     if (!$node->hasField('field_gated') ||
       (int)$node->field_gated->value !== 1 ||
-      \Drupal::currentUser()->isAuthenticated()) {
+      $user->hasPermission('access gated content') ||
+      $user->hasPermission('bypass node access')) {
       return;
     }
     $dest_url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()]);
-    $redirect_url = Url::fromRoute('user.login', [], ['query' => ['destination' => $dest_url->toString()]]);
+    $redirect_url = Url::fromRoute('msca_access.login', [], ['query' => ['destination' => $dest_url->toString()]]);
     $response = new CacheableRedirectResponse($redirect_url->toString());
     $response->addCacheableDependency($node);
     $md = $response->getCacheableMetadata();
-    $md->addCacheContexts(['user.roles:anonymous']);
-    drupal_set_message($this->t('Please sign in to view this content.'));
+    $md->addCacheableDependency($user);
+    $md->addCacheContexts(['user.permissions']);
     $event->setResponse($response);
   }
 
