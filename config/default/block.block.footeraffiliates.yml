@@ -15,7 +15,7 @@ third_party_settings:
 id: footeraffiliates
 theme: msca_theme
 region: footer
-weight: 0
+weight: -20
 provider: null
 plugin: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
 settings:

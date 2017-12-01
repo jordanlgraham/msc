@@ -15,8 +15,8 @@ third_party_settings:
     classes: newsletter-article-bottom-row
 id: views_block__related_content_block_1
 theme: msca_theme
-region: footer
-weight: -16
+region: pre_footer
+weight: -21
 provider: null
 plugin: 'views_block:related_content-block_1'
 settings:
