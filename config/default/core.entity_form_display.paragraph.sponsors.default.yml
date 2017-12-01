@@ -1,0 +1,44 @@
+uuid: cf63acb7-8567-4600-b3c9-acb67f9299f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.inline_edit
+    - field.field.paragraph.sponsors.field_sponsor
+    - field.field.paragraph.sponsors.field_sponsorship_category
+    - paragraphs.paragraphs_type.sponsors
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.sponsors.default
+targetEntityType: paragraph
+bundle: sponsors
+mode: default
+content:
+  field_sponsor:
+    weight: 1
+    settings:
+      form_mode: inline_edit
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_sponsorship_category:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -10,16 +10,16 @@ dependencies:
     - field.field.node.education_events.field_event_category
     - field.field.node.education_events.field_event_key
     - field.field.node.education_events.field_event_related_content
-    - field.field.node.education_events.field_event_sponsor
     - field.field.node.education_events.field_file
     - field.field.node.education_events.field_gated
-    - field.field.node.education_events.field_gold_sponsor
     - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
     - node.type.education_events
   module:
     - address
     - button_link
     - datetime
+    - entity_reference_revisions
     - file
     - text
     - user
@@ -83,15 +83,6 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-  field_gold_sponsor:
-    weight: 6
-    label: hidden
-    settings:
-      view_mode: gold_sponsors
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_location:
     weight: 1
     label: hidden
@@ -99,12 +90,20 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_sponsors:
+    type: entity_reference_revisions_entity_view
+    weight: 8
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_event_key: true
   field_event_related_content: true
-  field_event_sponsor: true
   field_gated: true
   links: true

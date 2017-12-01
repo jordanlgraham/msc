@@ -62,14 +62,8 @@
                 {% endif %}
             </div>
         </div>
-        {% if content.field_gold_sponsor|render %}
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="thin-heading sponsors">Gold Sponsors | <a href="/education-and-events/upcoming-events/event-sponsors?event={{ node.id }}">View All ></a></h2>
-                <div class="header-image sponsors"><img src="/{{ directory }}/svg/logo-blue.svg" /></div>
-                {{ content.field_gold_sponsor }}
-            </div>
-        </div>
+        {% if content.field_sponsors|render %}
+            {{ content.field_sponsors }}
         {% endif %}
 
 </article>
