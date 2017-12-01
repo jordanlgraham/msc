@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
-    - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
     - image.style.thumbnail
@@ -22,6 +21,7 @@ dependencies:
     - inline_entity_form
     - link
     - path
+    - scheduler
     - svg_image
     - text
 id: node.sponsor.default
@@ -97,12 +97,6 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
-  field_sponsorship_level:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
-    region: content
   field_twitter:
     weight: 8
     settings:
@@ -132,6 +126,12 @@ content:
     weight: 14
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -155,5 +155,11 @@ content:
       size: 60
       placeholder: ''
     region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

@@ -11,13 +11,13 @@ dependencies:
     - field.field.node.sponsor.field_linkedin
     - field.field.node.sponsor.field_logo
     - field.field.node.sponsor.field_primary_services
-    - field.field.node.sponsor.field_sponsorship_level
     - field.field.node.sponsor.field_twitter
     - field.field.node.sponsor.field_web_address
     - image.style.thumbnail
     - node.type.sponsor
   module:
     - link
+    - scheduler
     - svg_image
     - text
 id: node.sponsor.inline_edit
@@ -65,12 +65,6 @@ content:
     third_party_settings: {  }
     type: image_image
     region: content
-  field_sponsorship_level:
-    type: options_select
-    weight: 2
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_twitter:
     weight: 6
     settings:
@@ -87,6 +81,12 @@ content:
     third_party_settings: {  }
     type: link_default
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   title:
     type: string_textfield
     weight: 0
@@ -94,6 +94,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

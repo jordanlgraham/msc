@@ -48,7 +48,10 @@
 .sponsor-logo {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 110px;
 }
+
 
 .events-sponsors .col-md-2 {
   flex: 0 0 20%;
