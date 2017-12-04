@@ -74,9 +74,21 @@
       {% if content.field_news_subtitle|render %}
         <span class="newsletter-article-subtitle">{{ content.field_news_subtitle }}</span>
       {% endif %}
-      <div class="newsletter-article-date">
-         {{ content.field_news_release_date }}
-      </div>
+      {% if content.field_news_release_date|render or content.field_newsletter_byline|render %}
+        <div class="newsletter-article-date">
+      {% endif %}
+        {% if content.field_news_release_date|render %}
+          {{ content.field_news_release_date }}
+        {% endif %}
+        {% if content.field_news_release_date|render or content.field_newsletter_byline|render %}
+          &nbsp;|&nbsp;
+          {% endif %}
+        {% if content.field_newsletter_byline|render %}
+          {{ ('By')|t }}&nbsp;{{ content.field_newsletter_byline }}
+        {% endif %}
+      {% if content.field_news_release_date|render or content.field_newsletter_byline|render %}
+        </div>
+      {% endif %}
 
       {{ content.flag_bookmark }}
 
