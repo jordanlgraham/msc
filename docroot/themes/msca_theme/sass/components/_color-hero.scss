@@ -49,6 +49,12 @@ header.container-fluid {
   display: inline-block;
 }
 
+.title-icon.page {
+  background: $pinwheel;
+  background-size: 120%;
+  background-position-y: 28%;
+}
+
 .title-icon.job-posting,
 .title-icon.careers-job-search {
   background: $jobs;
