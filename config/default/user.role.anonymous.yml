@@ -18,3 +18,4 @@ permissions:
   - 'search content'
   - 'use advanced search'
   - 'use text format restricted_html'
+  - 'view media'
