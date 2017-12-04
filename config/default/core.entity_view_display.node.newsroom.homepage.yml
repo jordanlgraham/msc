@@ -1,9 +1,9 @@
-uuid: 755cf19d-cc03-4e69-9f1b-30e0aef9bfd1
+uuid: 19f6c13e-f21c-47bb-b76d-d9cd800f47b8
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.newsletter
+    - core.entity_view_mode.node.homepage
     - field.field.node.newsroom.body
     - field.field.node.newsroom.field_gated
     - field.field.node.newsroom.field_news_release_date
@@ -13,25 +13,24 @@ dependencies:
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
     - field.field.node.newsroom.field_tags
-    - image.style.thumbnail
+    - image.style.large
     - node.type.newsroom
   module:
     - datetime
-    - link
     - media_entity
     - smart_trim
     - user
-id: node.newsroom.newsletter
+id: node.newsroom.homepage
 targetEntityType: node
 bundle: newsroom
-mode: newsletter
+mode: homepage
 content:
   body:
     label: hidden
     type: smart_trim
-    weight: 0
+    weight: 2
     settings:
-      trim_length: '80'
+      trim_length: '100'
       trim_type: words
       trim_suffix: ''
       more_link: '0'
@@ -43,49 +42,35 @@ content:
     third_party_settings: {  }
     region: content
   field_news_release_date:
-    weight: 3
+    weight: 0
     label: hidden
     settings:
       timezone_override: ''
-      date_format: M/j
+      format_type: direct
     third_party_settings: {  }
-    type: datetime_custom
-    region: content
-  field_news_source:
-    weight: 2
-    label: hidden
-    settings:
-      trim_length: 80
-      target: _blank
-      url_only: false
-      url_plain: false
-      rel: '0'
-    third_party_settings: {  }
-    type: link_separate
+    type: datetime_default
     region: content
   field_news_teaser_image:
-    type: media_thumbnail
     weight: 1
-    region: content
     label: hidden
     settings:
-      image_style: thumbnail
+      image_style: large
       image_link: ''
     third_party_settings: {  }
-  field_newsroom_category:
-    type: entity_reference_label
-    weight: 4
+    type: media_thumbnail
     region: content
-    label: hidden
-    settings:
-      link: false
+  links:
+    weight: 3
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
+  field_news_source: true
   field_news_subtitle: true
+  field_newsroom_category: true
   field_related_content: true
   field_tags: true
-  links: true
