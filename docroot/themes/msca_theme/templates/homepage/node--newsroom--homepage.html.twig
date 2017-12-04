@@ -130,7 +130,7 @@
         {% if content.body|render %}
             {{ content.body }}
             <div class="home-recent-news-read-more">
-                <a href="{{ path('entity.node.canonical', {'node': node.id }) }}" class="read-more">Read more</a>
+                <a href="{{ path('entity.node.canonical', {'node': node.id }) }}" class="read-more">{{ ('Read more'|t) }}</a>
             </div>
         {% endif %}
     </div>
