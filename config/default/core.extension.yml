@@ -100,6 +100,7 @@ module:
   seckit: 0
   shield: 0
   shortcut: 0
+  smart_trim: 0
   svg_image: 0
   system: 0
   taxonomy: 0
@@ -113,6 +114,9 @@ module:
   vendor_search: 0
   views_infinite_scroll: 0
   views_ui: 0
+  webform: 0
+  webform_node: 0
+  webform_ui: 0
   xmlsitemap: 0
   forum: 1
   menu_link_content: 1
