@@ -13,6 +13,10 @@
             $(e.target).closest('li')
               .find('> ul')
               .toggleClass('subnav-active');
+            if (!window.matchMedia('(min-width: 768px)').matches) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
           }
         })
       });
