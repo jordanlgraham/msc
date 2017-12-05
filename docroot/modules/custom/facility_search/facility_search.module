@@ -62,7 +62,7 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
  */
 function facility_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if($form_id == 'user_login_form' ) {
-    $form['name']['#placeholder'] = t('Username');
+    $form['name']['#placeholder'] = t('E-Mail Address');
     $form['pass']['#placeholder'] = t('Password');
   }
 }

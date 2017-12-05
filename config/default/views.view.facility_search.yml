@@ -10,6 +10,7 @@ dependencies:
     - taxonomy.vocabulary.facility_type
   module:
     - address
+    - better_exposed_filters
     - geolocation
     - node
     - options
@@ -900,14 +901,16 @@ display:
         - 'config:core.entity_view_display.node.education_events.featured'
         - 'config:core.entity_view_display.node.education_events.homepage'
         - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.sidebar'
         - 'config:core.entity_view_display.node.education_events.teaser'
         - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.facility_map'
         - 'config:core.entity_view_display.node.facility.teaser'
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.job_listings.default'
-        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.job_posting.default'
+        - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
         - 'config:core.entity_view_display.node.newsletter.email'
         - 'config:core.entity_view_display.node.newsletter.teaser'
@@ -919,6 +922,7 @@ display:
         - 'config:core.entity_view_display.node.newsletter_article.teaser'
         - 'config:core.entity_view_display.node.newsroom.default'
         - 'config:core.entity_view_display.node.newsroom.featured'
+        - 'config:core.entity_view_display.node.newsroom.homepage'
         - 'config:core.entity_view_display.node.newsroom.newsletter'
         - 'config:core.entity_view_display.node.newsroom.teaser'
         - 'config:core.entity_view_display.node.page.default'
@@ -930,6 +934,7 @@ display:
         - 'config:core.entity_view_display.node.resources.newsletter'
         - 'config:core.entity_view_display.node.resources.teaser'
         - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.sidebar'
         - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
         - 'config:core.entity_view_display.node.scholarships.default'
         - 'config:core.entity_view_display.node.scholarships.teaser'
@@ -945,6 +950,8 @@ display:
         - 'config:core.entity_view_display.node.video.featured'
         - 'config:core.entity_view_display.node.video.newsletter'
         - 'config:core.entity_view_display.node.video.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
   attachment_1:
@@ -1055,14 +1062,16 @@ display:
         - 'config:core.entity_view_display.node.education_events.featured'
         - 'config:core.entity_view_display.node.education_events.homepage'
         - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.sidebar'
         - 'config:core.entity_view_display.node.education_events.teaser'
         - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.facility_map'
         - 'config:core.entity_view_display.node.facility.teaser'
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.job_listings.default'
-        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.job_posting.default'
+        - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
         - 'config:core.entity_view_display.node.newsletter.email'
         - 'config:core.entity_view_display.node.newsletter.teaser'
@@ -1074,6 +1083,7 @@ display:
         - 'config:core.entity_view_display.node.newsletter_article.teaser'
         - 'config:core.entity_view_display.node.newsroom.default'
         - 'config:core.entity_view_display.node.newsroom.featured'
+        - 'config:core.entity_view_display.node.newsroom.homepage'
         - 'config:core.entity_view_display.node.newsroom.newsletter'
         - 'config:core.entity_view_display.node.newsroom.teaser'
         - 'config:core.entity_view_display.node.page.default'
@@ -1085,6 +1095,7 @@ display:
         - 'config:core.entity_view_display.node.resources.newsletter'
         - 'config:core.entity_view_display.node.resources.teaser'
         - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.sidebar'
         - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
         - 'config:core.entity_view_display.node.scholarships.default'
         - 'config:core.entity_view_display.node.scholarships.teaser'
@@ -1100,6 +1111,8 @@ display:
         - 'config:core.entity_view_display.node.video.featured'
         - 'config:core.entity_view_display.node.video.newsletter'
         - 'config:core.entity_view_display.node.video.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
   page_1:
@@ -1112,7 +1125,7 @@ display:
       path: find-a-facility
       exposed_block: true
       exposed_form:
-        type: basic
+        type: bef
         options:
           submit_button: Search
           reset_button: true
@@ -1121,6 +1134,80 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
+          input_required: false
+          text_input_required: 'Select any filter and click on Apply to see results'
+          bef:
+            general:
+              allow_secondary: false
+              secondary_label: 'Advanced options'
+              autosubmit: false
+              autosubmit_hide: false
+            field_ge_proximity:
+              bef_format: default
+              slider_options:
+                bef_slider_min: null
+                bef_slider_max: null
+                bef_slider_step: !!float 1
+                bef_slider_animate: ''
+                bef_slider_orientation: ''
+              more_options:
+                is_secondary: false
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
+            field_facility_type_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: "Rest Home|Residential Care Home\n- Any -|All"
+            field_address_locality:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
+            field_languages_spoken_value:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_service_type_value:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_populations_served_value:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_specialized_unit_value:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            combine:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
+          text_input_required_format: basic_html
       defaults:
         exposed_form: false
         pager: false
@@ -1974,14 +2061,16 @@ display:
         - 'config:core.entity_view_display.node.education_events.featured'
         - 'config:core.entity_view_display.node.education_events.homepage'
         - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.sidebar'
         - 'config:core.entity_view_display.node.education_events.teaser'
         - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.facility_map'
         - 'config:core.entity_view_display.node.facility.teaser'
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.job_listings.default'
-        - 'config:core.entity_view_display.node.job_listings.teaser'
+        - 'config:core.entity_view_display.node.job_posting.default'
+        - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
         - 'config:core.entity_view_display.node.newsletter.email'
         - 'config:core.entity_view_display.node.newsletter.teaser'
@@ -1993,6 +2082,7 @@ display:
         - 'config:core.entity_view_display.node.newsletter_article.teaser'
         - 'config:core.entity_view_display.node.newsroom.default'
         - 'config:core.entity_view_display.node.newsroom.featured'
+        - 'config:core.entity_view_display.node.newsroom.homepage'
         - 'config:core.entity_view_display.node.newsroom.newsletter'
         - 'config:core.entity_view_display.node.newsroom.teaser'
         - 'config:core.entity_view_display.node.page.default'
@@ -2004,6 +2094,7 @@ display:
         - 'config:core.entity_view_display.node.resources.newsletter'
         - 'config:core.entity_view_display.node.resources.teaser'
         - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.sidebar'
         - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
         - 'config:core.entity_view_display.node.scholarships.default'
         - 'config:core.entity_view_display.node.scholarships.teaser'
@@ -2019,5 +2110,7 @@ display:
         - 'config:core.entity_view_display.node.video.featured'
         - 'config:core.entity_view_display.node.video.newsletter'
         - 'config:core.entity_view_display.node.video.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
         - 'config:field.storage.node.field_address'
         - 'config:field.storage.node.field_ge'
