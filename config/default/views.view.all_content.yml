@@ -1365,6 +1365,7 @@ display:
         css_class: false
         pager: false
         relationships: false
+        sorts: false
       exposed_form:
         type: bef
         options:
@@ -1553,6 +1554,20 @@ display:
           items_per_page: 1
           offset: 0
       relationships: {  }
+      sorts:
+        field_newsletter_date_value:
+          id: field_newsletter_date_value
+          table: node__field_newsletter_date
+          field: field_newsletter_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: minute
+          plugin_id: datetime
     cache_metadata:
       max-age: -1
       contexts:
@@ -1585,6 +1600,7 @@ display:
         relationships: false
         style: false
         row: false
+        sorts: false
       exposed_form:
         type: bef
         options:
@@ -1800,6 +1816,20 @@ display:
         options:
           relationship: none
           view_mode: teaser
+      sorts:
+        field_newsletter_date_value:
+          id: field_newsletter_date_value
+          table: node__field_newsletter_date
+          field: field_newsletter_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: minute
+          plugin_id: datetime
     cache_metadata:
       max-age: -1
       contexts:
