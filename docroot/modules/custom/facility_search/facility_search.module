@@ -145,7 +145,11 @@ function facility_search_preprocess_views_view(&$variables) {
     'proximity',
   ];
   foreach ($view->display_handler->getOption('filters') as $filter) {
-    if (empty($filter['exposed']) || in_array($filter['expose']['identifier'], $input_display_blacklist)) {
+    if (
+      !isset($filter['expose']['identifier']) ||
+      !isset($input[$filter['expose']['identifier']]) ||
+      empty($filter['exposed']) ||
+      in_array($filter['expose']['identifier'], $input_display_blacklist)) {
       continue;
     }
     $value = $input[$filter['expose']['identifier']];
@@ -155,7 +159,7 @@ function facility_search_preprocess_views_view(&$variables) {
     if (is_array($value)) {
       $value = implode(', ', array_values($value));
     }
-    if (isset($filter['vid'])) {
+    if (isset($filter['vid']) && is_numeric($value)) {
       $value = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value)->label();
     }
     $filter_values[$filter['expose']['label']] = $value;
@@ -174,16 +178,23 @@ function facility_search_preprocess_views_view(&$variables) {
   ];
   // Add the other search filters.
   if (!empty($filter_values)) {
-    $search_input = '<div class="facility-search-input">';
+    $search_input = [];
     foreach ($filter_values as $filter => $value) {
-      $search_input .= '<span class="input">';
-      $search_input .= "<em>$filter:</em> $value";
-      $search_input .= '</span>';
+      $search_input[] = [
+        '#markup' => "<em>$filter:</em> $value",
+        '#wrapper_attributes' => [
+          'class' => ['list-inline-item'],
+        ],
+      ];
     }
-    $search_input .= '</div>';
     $variables['header']['search_input'] = [
-      '#type' => 'markup',
-      '#markup' => $search_input,
+      '#theme' => 'item_list',
+      '#items' => $search_input,
+      '#attributes' => [
+        'class' => [
+          'list-inline',
+        ],
+      ]
     ];
   }
 }
