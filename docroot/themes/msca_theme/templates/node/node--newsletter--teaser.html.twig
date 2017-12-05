@@ -33,7 +33,7 @@
             {% for item in node.field_featured_article %}
               <li>{{ item.entity.label }}</li>
             {% endfor %}
-            {% for item in node.field_newsletter_section|slice(0, 1) %}
+            {% for item in node.field_newsletter_section %}
               {# We just want to display titles of first 3 articles. #}
               {% for article in item.entity.fields.field_featured_articles|slice(0, 3) %}
                 <li>{{ article.entity.label }}</li>
