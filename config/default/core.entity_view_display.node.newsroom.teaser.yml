@@ -12,11 +12,12 @@ dependencies:
     - field.field.node.newsroom.field_news_teaser_image
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
+    - field.field.node.newsroom.field_tags
     - node.type.newsroom
   module:
     - datetime
     - link
-    - text
+    - smart_trim
     - user
 id: node.newsroom.teaser
 targetEntityType: node
@@ -25,10 +26,18 @@ mode: teaser
 content:
   body:
     label: hidden
-    type: text_summary_or_trimmed
+    type: smart_trim
     weight: 0
     settings:
-      trim_length: 300
+      trim_length: '80'
+      trim_type: words
+      trim_suffix: ''
+      more_link: '0'
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: text
+      more_class: more-link
     third_party_settings: {  }
     region: content
   field_news_release_date:
@@ -73,3 +82,4 @@ hidden:
   field_news_subtitle: true
   field_news_teaser_image: true
   field_related_content: true
+  field_tags: true

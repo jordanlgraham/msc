@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.full
     - core.entity_view_mode.node.teaser
     - node.type.education_events
-    - node.type.job_posting
     - node.type.newsletter
     - node.type.newsletter_article
     - node.type.newsroom
@@ -2386,6 +2385,7 @@ display:
         relationships: false
         style: false
         row: false
+        sorts: false
       exposed_form:
         type: bef
         options:
@@ -2601,6 +2601,20 @@ display:
         options:
           relationship: none
           view_mode: teaser
+      sorts:
+        field_news_release_date_value:
+          id: field_news_release_date_value
+          table: node__field_news_release_date
+          field: field_news_release_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: minute
+          plugin_id: datetime
     cache_metadata:
       max-age: -1
       contexts:
