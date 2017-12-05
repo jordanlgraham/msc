@@ -26,6 +26,7 @@
 
 .newsletter-full .header-left img {
   max-width: 85%;
+  max-height: 220px;
   margin-bottom: 1rem;
 }
 
@@ -84,6 +85,9 @@
 @include media-breakpoint-down(md) {
   .newsletter-full .long-term-care {
     width: 70%;
+  }
+  .newsletter-full .header-left img {
+    max-height: 140px;
   }
 }
 
