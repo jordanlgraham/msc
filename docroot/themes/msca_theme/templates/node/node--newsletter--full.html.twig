@@ -30,16 +30,19 @@
     </header>
     <!--header-end -->
 
-    <!--main-section-start -->
-    <section class="col-md-8 float-left">
-
-        <!--featured-article-start -->
-        {% if content.field_featured_article|render %}
+    <!--featured-article-start -->
+      {% if content.field_featured_article|render %}
+        <section class="feature-article-section">
             <div class="featured-article">
                 {{ content.field_featured_article }}
             </div>
-        {% endif %}
-        <!--featured-article-end -->
+        </section>
+      {% endif %}
+    <!--featured-article-end -->
+    <div class="clearfix"></div>
+
+    <!--main-section-start -->
+    <section class="col-md-8 float-left">
 
         <!--articles-start -->
         {% if content.field_newsletter_section|render %}

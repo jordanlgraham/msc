@@ -33,7 +33,7 @@ content:
     region: content
   field_featured_article:
     weight: 1
-    label: hidden
+    label: above
     settings:
       view_mode: featured
       link: false
