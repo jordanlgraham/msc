@@ -8,16 +8,24 @@
 <article{{ attributes.addClass('container newsletter-full') }}>
 
     <!--header-start -->
-    <header>
-        <div class="header-top">
-            <h2 class="float-left">{{ 'E-News Update'|t }}</h2>
-            <div class="float-right"><img src="/themes/msca_theme/images/msca-logo-wide.png"/></div>
+    <header class="row newsletter-header">
+        <div class="header-left col-md-3">
+            <div><img src="/themes/msca_theme/images/massseniorassociation.jpg"/></div>
         </div>
-        <div class="header-bottom">
-            <span class="float-left">{{ 'Your Link to Long Term Care News in Massachusetts'|t }}</span>
-            {% if content.field_newsletter_date|render %}
-                <span class="float-right">{{ content.field_newsletter_date }}</span>
-            {%  endif %}
+        <div class="header-right col-md-9">
+            <div class="header-right-top">
+                <div class="header-right-top-inner">
+                    <div class="your-link-to">{{ 'Your Link to'|t }}</div>
+                    <div class="long-term-care">{{ 'Long Term Care News in Massachusetts'|t }}</div>
+                </div>
+            </div>
+            <div class="header-right-bottom">
+                <span class="e-news-update">{{ 'E-News Update:'|t }}&nbsp;
+                  {% if content.field_newsletter_date|render %}
+                     {{ content.field_newsletter_date }}
+                  {%  endif %}
+                </span>
+            </div>
         </div>
     </header>
     <!--header-end -->

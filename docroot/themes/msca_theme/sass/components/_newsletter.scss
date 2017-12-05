@@ -1,61 +1,113 @@
-.newsletter-full article header {
-  margin-left: 1rem;
-}
-
-.newsletter-full .header-top {
-  padding: 1rem 0 1rem;
-  min-height: 140px;
-}
-
-.newsletter-full .header-top img {
-  margin-top: 20px;
-}
-
-.newsletter-full .header-top h2 {
-  color: $blue;
-  font-size: 4rem;
-  margin-bottom: 0;
-  margin-top: 50px;
-}
-
-.newsletter-full .header-bottom {
-  background-color: $blue;
-  color: $light-gray;
-  padding: 1rem;
-  min-height: 4rem;
+.newsletter-full aside .sidebar-block {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
+}
+
+.newsletter-full .newsletter-header {
+  font-family: $lato;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 2.5rem;
+}
+
+.newsletter-full .header-left {
+  padding: 2rem 0 0 2rem;
+}
+
+.all-content article.newsletter-full  {
+  margin: 0;
+  padding: 0;
+}
+
+.newsletter-full .header-left > div {
+  display: flex;
+  justify-content: left;
+}
+
+.newsletter-full .header-left img {
+  max-width: 85%;
+  margin-bottom: 1rem;
+}
+
+// Need to tweak bootstrap grid to meet design requirements.
+.header-left.col-md-3 {
+  flex: 0 0 22%;
+  max-width: 22%;
+}
+
+.header-right.col-md-9 {
+  flex: 0 0 78%;
+  max-width: 78%;
+}
+
+.newsletter-full .header-right-top {
+  background-image: url('/themes/msca_theme/images/newsletter-hero.jpg');
+  background-size: cover;
+  letter-spacing: 2px;
+}
+
+.newsletter-full .header-right-top-inner {
+  background-color: rgba($black,.6);
+  padding: 3rem;
+}
+
+.newsletter-full .header-right-bottom {
+  background-color: $orange;
+  padding: 1rem;
+  border-top: solid 2px white;
+}
+
+.newsletter-full .your-link-to {
+  color: $gray;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.newsletter-full .long-term-care {
+  font-size: 2rem;
+  width: 60%;
+  margin: 0 auto;
+  line-height: 1.3;
+}
+
+.newsletter-full .e-news-update {
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.newsletter-full .header-right-bottom span {
+  color: white;
+  text-transform: uppercase;
 }
 
 @include media-breakpoint-down(md) {
-  .newsletter-full .header-top {
-    min-height: 75px;
-  }
-  .newsletter-full .header-top h2 {
-    font-size: 3.5rem;
-    margin-top: 0;
-  }
-  .newsletter-full .header-top .float-right {
-    display: none;
-  }
-  .newsletter-full .header-bottom {
-    font-size: 1rem;
-    padding: 0 1rem;
-    min-height: 2rem;
-    margin-bottom: 1rem;
+  .newsletter-full .long-term-care {
+    width: 70%;
   }
 }
 
 @include media-breakpoint-down(sm) {
-  .newsletter-full .header-top h2 {
-    font-size: 2rem;
-    margin-top: 20px;
+  // Need to tweak bootstrap grid to meet design requirements.
+  .header-left.col-md-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
-  .newsletter-full .header-bottom {
-    font-size: .9rem;
+
+  .newsletter-full .header-left img {
+    max-width: 35%;
+    margin: 0 auto 2rem;
   }
-  .newsletter-full .header-bottom .float-left {
-    display: none;
+
+  .header-right.col-md-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .newsletter-full .long-term-care {
+    font-size: 1.3rem;
+  }
+  .newsletter-full .your-link-to {
+    font-size: 1rem;
   }
 }
 
