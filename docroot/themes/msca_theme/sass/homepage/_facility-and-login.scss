@@ -43,6 +43,7 @@
 
 .facility-search-simple {
   display: flex;
+  flex-direction: row;
 }
 
 .facility-search-simple .facility-search-submit {
@@ -57,6 +58,8 @@
   border: none;
   padding: .7rem 3rem .7rem 1rem;
   text-transform: uppercase;
+  width: auto;
+  margin-top: 0;
 }
 
 .search-login-section p {
@@ -98,9 +101,57 @@
 }
 [id^='block-findafacilityuserlogin'] .user-login-form {
   display: flex;
+  flex-direction: row;
 }
 
 [id^='block-findafacilityuserlogin'] .user-login-form .form-actions {
   @extend .btn;
   padding: 0;
+}
+
+@include media-breakpoint-down(sm) {
+  .path-frontpage .facility-search.search-login-section.col-12.col-md-6 h3,
+  .path-frontpage .login.search-login-section.col-12.col-md-6 h3 {
+    top: 0;
+  }
+  .path-frontpage .login.search-login-section.col-12.col-md-6 h3,
+  .path-frontpage .login.search-login-section .bottom-link {
+    padding-right: 2rem;
+  }
+  [id^='block-findafacilityuserlogin'] h3:before,
+  [id^='block-findafacilityuserlogin'] h3:after {
+    background-color: transparent;
+  }
+  [id^='block-findafacilityuserlogin'] h3:after {
+    top: 16px;
+  }
+  .facility-search-simple,
+  [id^='block-findafacilityuserlogin'] .user-login-form {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .facility-search-simple {
+    padding-right: 0;
+  }
+  [id^='block-findafacilityuserlogin'] .user-login-form {
+    padding-right: 2rem;
+  }
+  .facility-search-simple .facility-search-submit input,
+  [id^="block-findafacilityuserlogin"] .user-login-form .form-actions input {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .facility-search-simple .facility-search-submit::after,
+  [id^="block-findafacilityuserlogin"] .user-login-form .form-actions::after {
+    margin-top: 1rem;
+  }
+  [id^="block-findafacilityuserlogin"] .bottom-link {
+    text-align: center;
+  }
+  [id^="block-findafacilityuserlogin"] .user-login-form .form-item {
+    margin-right: 0;
+  }
+  .login.search-login-section.col-12.col-md-6 {
+    margin-top: 2rem;
+  }
 }

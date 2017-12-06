@@ -31,6 +31,18 @@
   transform: translateY(-50%);
 }
 
+@include media-breakpoint-down(sm) {
+  .carousel-caption .btn.btn-primary {
+    padding: 8px;
+    font-size: .7rem;
+  }
+  .carousel-caption .btn.btn-primary::after {
+    content: '';
+    background-color: transparent;
+  }
+}
+
+
 .carousel-caption p {
   color: $gray;
   @include media-breakpoint-down(sm) {

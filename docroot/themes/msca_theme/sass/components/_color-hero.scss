@@ -13,6 +13,7 @@ header.container-fluid {
   background-color: $blue;
   padding: 1rem 0 1.2rem;
   clear: left;
+  margin-top: 7rem;
 }
 
 #block-msca-theme-page-title h1 {
@@ -78,7 +79,8 @@ header.container-fluid {
 }
 
 .title-icon.newsletter,
-.title-icon.member-resources-e-news-update {
+.title-icon.member-resources-e-news-update,
+.title-icon.member-resources-newsletter-articles {
   background: $newsletter;
 }
 
