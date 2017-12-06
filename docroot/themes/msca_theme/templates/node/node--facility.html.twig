@@ -235,14 +235,14 @@
 
             </div>
         </div>
-        {% if dcu in content.field_specialized_unit|keys or node.field_facility_price_range_min.value > 0 or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
+      {% set dcu = 'Dementia Special Care Unit' %}
+      {% if dcu in content.field_specialized_unit[0]['#markup'] or node.field_facility_price_range_min.value > 0 or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
             <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
                 <h3>{{ 'Additional Details'|t }}</h3>
 
                 {# We only want to display this if 'Yes' so we're handling it differently #}
                 {% if content.field_specialized_unit|render %}
-                    {% set dcu = 'Dementia Care' %}
-                    {% if dcu in content.field_specialized_unit|keys %}
+                    {% if dcu in content.field_specialized_unit[0]['#markup'] %}
                       {% if content.field_facility_type[0]['#title'] == 'Assisted Living' %}
                         <div col-md-12>
                           <div class="row mb-3">
