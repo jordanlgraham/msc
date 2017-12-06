@@ -13,7 +13,7 @@ third_party_settings:
 id: msca_theme_masquerade
 theme: msca_theme
 region: content
-weight: -11
+weight: -10
 provider: null
 plugin: masquerade
 settings:

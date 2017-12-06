@@ -13,6 +13,14 @@
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
+@include media-breakpoint-down(md) {
+  .home-join-msca .btn,
+  .paragraph--type--foundation-highlights-column a {
+    padding-left: 1rem;
+    padding-right: 2.5rem;
+    margin: .5rem auto;
+  }
+}
 
 .home-join-msca .join-msca-ctas .btn {
   max-width: 100%;
