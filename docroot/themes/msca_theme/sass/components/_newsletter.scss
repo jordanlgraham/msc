@@ -79,6 +79,15 @@
   background-color: $blue;
 }
 
+.page-node-type-newsletter .featured-article .label {
+  margin: 0 0 1rem 0;
+}
+
+.page-node-type-newsletter article section.col-md-8 {
+  padding-left: 0;
+}
+
+
 .newsletter-full .e-news-update {
   font-size: 1.1rem;
   display: flex;
@@ -135,10 +144,6 @@
   margin-bottom: 1.5rem;
 }
 
-.newsletter-full .feature-article-section {
-  margin-bottom: 3rem;
-}
-
 .featured-article .contextual-region.pb-5 {
   margin-left: 1rem;
 }
@@ -159,6 +164,12 @@ aside.newsletter .sidebar-block {
   padding-bottom: 10px;
   margin-bottom: 1rem;
 }
+
+.newsletter-full .featured-article {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .featured-article > h2 {
   background-color: $orange;
   color: white;
