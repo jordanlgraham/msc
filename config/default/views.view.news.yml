@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_news_release_date
+    - node.type.newsletter_article
     - node.type.newsroom
   module:
     - datetime
@@ -138,27 +139,57 @@ display:
           id: type
           table: node_field_data
           field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
           value:
+            newsletter_article: newsletter_article
             newsroom: newsroom
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
           entity_type: node
           entity_field: type
           plugin_id: bundle
       sorts:
-        created:
-          id: created
-          table: node_field_data
-          field: created
-          order: DESC
-          entity_type: node
-          entity_field: created
-          plugin_id: date
+        field_news_release_date_value:
+          id: field_news_release_date_value
+          table: node__field_news_release_date
+          field: field_news_release_date_value
           relationship: none
           group_type: group
           admin_label: ''
+          order: DESC
           exposed: false
           expose:
             label: ''
-          granularity: second
+          granularity: minute
+          plugin_id: datetime
       title: 'Recent News'
       header: {  }
       footer: {  }
