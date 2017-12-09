@@ -15,10 +15,11 @@
           </div>
       {% endif %}
       <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+        <a href="http://{{ base_path }}{{ url }}" rel="bookmark">{{ label }}</a>
       </h2>
       {{ content.body }}
-      <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
       <div class="utility-links float-right">
           <i class="fa fa-envelope-o" aria-hidden="true"></i>
           <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>

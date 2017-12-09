@@ -17,7 +17,7 @@
               <h4>{{ content.field_event_category.0 }}</h4>
           {% endif %}
           <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            <a href="http://{{ base_path }}{{ url }}" rel="bookmark">{{ label }}</a>
           </h2>
           <div class="event-location">
             {% if node.field_location.organization %}
@@ -32,7 +32,7 @@
           </div>
 
           {{ content.body }}
-          <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
       </div>
 
   </div>
