@@ -1,0 +1,58 @@
+.foundation {
+  #block-masthead .memberlogin, #block-masthead .joinmassseniorcare {
+    background-color: $yellow;
+  }
+  #block-masthead .memberlogin:hover, #block-masthead .joinmassseniorcare:hover {
+    background-color: lighten($yellow, 10%);
+  }
+  #block-masthead .contact, #block-masthead .search {
+    background-color: $green;
+  }
+  #block-masthead .contact:hover, #block-masthead .search:hover {
+    background-color: lighten($green, 10%);
+  }
+  .header-menu .navbar-light .menu-level-1 > li > a {
+    color: $green;
+  }
+  .header-menu .navbar-light .menu-level-1 > li > a.is-active {
+    color: $yellow;
+  }
+  .btn-primary {
+    background-color: $yellow;
+  }
+  #block-msca-theme-page-title {
+    background-color: $green;
+  }
+  .home-join-msca {
+    background-color: $light-green;
+  }
+  [id^="block-findafacilityuserlogin"] {
+    background-color: $green;
+  }
+  [id^="block-findafacilityuserlogin"] .bottom-link {
+    width: 77%;
+  }
+  .login.search-login-section {
+    display: none;
+  }
+  .facility-search-block .header-image {
+    display: none;
+  }
+  .facility-search.search-login-section.col-12.col-md-6 {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 50%;
+  }
+  .facility-search.search-login-section.col-12.col-md-6 h3 {
+    position: static;
+  }
+  .facility-search-simple {
+    justify-content: center;
+  }
+
+  .facility-search-simple .facility-search-submit input, [id^="block-findafacilityuserlogin"] .user-login-form .form-actions input {
+    background-color: $light-green;
+  }
+
+}
+

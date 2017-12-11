@@ -25,13 +25,17 @@
 #}
 <!DOCTYPE html>
 {# Adds some helpful body classes for theming #}
+{% if multisite_status == 'TRUE' %}
+  {% set site_name = 'foundation' %}
+{% endif %}
 {%
 set body_classes = [
 logged_in ? 'user-logged-in',
 not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
 node_type ? 'page-node-type-' ~ node_type|clean_class,
 db_offline ? 'db-offline',
-user.hasPermission('administer')  ? 'admin'
+user.hasPermission('administer')  ? 'admin',
+site_name
 ]
 %}
 <html{{ html_attributes }}>

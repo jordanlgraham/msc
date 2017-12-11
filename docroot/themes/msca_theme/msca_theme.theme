@@ -46,11 +46,20 @@ function msca_theme_preprocess_node(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function msca_theme_preprocess_html(array &$variables) {
+  // Add class to body tag, if set.
+  $variables['multisite_status'] = \Drupal::config('config_split.config_split.foundation')->get('status');
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter().
  * Adds per content type template suggestions for page.html.twig.
  */
 function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
 
+  $multisite_status = \Drupal::config('config_split.config_split.foundation')->get('status');
   $node = \Drupal::routeMatch()->getParameter('node');
   $revision = \Drupal::routeMatch()->getRawParameter('node_revision');
 
@@ -70,6 +79,17 @@ function msca_theme_theme_suggestions_page_alter(array &$suggestions, array $var
 
     $suggestions[] = 'page__' . $content_type;
   }
+
+  //suggestions for foundation multisite
+  if ($multisite_status == 'TRUE') {
+    $foundation = 'foundation';
+    $suggestions[] = 'page__' .  $foundation;
+    if ($node) {
+       $content_type = $node->bundle();
+       $suggestions[] = 'page__' . $content_type . '__' . $foundation;
+    }
+  }
+
 }
 
 /**

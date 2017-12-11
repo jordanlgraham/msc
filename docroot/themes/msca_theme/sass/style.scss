@@ -21,10 +21,14 @@
 @import "components/tabs";
 @import "components/tweet-block";
 @import "components/typography";
+@import "components/user";
 @import "components/youtube";
 
 // Layout
 @import "layout/layout";
+
+// Foundation site (multisite)
+@import "foundation/foundation-homepage";
 
 // Header
 @import "header/dropdown";
