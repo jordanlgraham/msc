@@ -31,10 +31,22 @@
 //  margin-bottom: 0!important;
 //}
 
-.homepage-foundation-header h2 {
+.homepage-foundation-header h2,
+#block-donateform h2 {
   @extend .thin-heading;
   color: $white;
 }
+
+#block-donateform .header-image::before,
+#block-donateform .header-image::after {
+  background-color: white;
+}
+
+#block-donateform .header-image img {
+  width: 60px;
+  height: 60px;
+}
+
 
 .homepage-foundation-header {
   background-color: $foundation-green;
