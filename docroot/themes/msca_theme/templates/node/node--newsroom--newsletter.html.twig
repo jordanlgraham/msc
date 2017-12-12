@@ -16,7 +16,8 @@
           {% set media = image.entity %}
           {% set file = media.field_image.entity | merge({'#image_style': 'thumbnail'}) %}
           {% set uri = file_url(file.uri.value) %}
-          <img src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
+          {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
+          <img width="100" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
         {% endif %}
       {% endfor %}
     </div>

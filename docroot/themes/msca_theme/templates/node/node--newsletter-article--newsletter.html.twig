@@ -13,10 +13,11 @@
     <div class="float-left pr-3">
       {% for key, image in content.field_news_teaser_image  %}
         {%if image.entity %}
-          {% set media = image.entity %}
-          {% set file = media.field_image.entity | merge({'#image_style': 'thumbnail'}) %}
+          {% set media = image.entity | merge({'#image_style': 'thumbnail'}) %}
+          {% set file = media.field_image.entity %}
           {% set uri = file_url(file.uri.value) %}
-          <img src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
+          {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
+          <img width="100" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
         {% endif %}
       {% endfor %}
     </div>
