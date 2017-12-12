@@ -198,7 +198,7 @@ aside.newsletter .sidebar-block {
   padding-right: 0;
   text-align: left;
 }
-.paragraph--type--newsletter-section > div:first-of-type {
+.paragraph--type--newsletter-section > h2 {
   color: white;
   padding: 1rem;
   text-transform: uppercase;
@@ -206,15 +206,15 @@ aside.newsletter .sidebar-block {
   margin: 0 0 1rem;
 }
 
-.paragraph--type--newsletter-section:nth-child(3n+1) > div:first-of-type {
+.paragraph--type--newsletter-section:nth-child(3n+1) > h2 {
   background-color: $green;
 }
 
-.paragraph--type--newsletter-section:nth-child(3n+2) > div:first-of-type {
+.paragraph--type--newsletter-section:nth-child(3n+2) > h2 {
   background-color: $blue;
 }
 
-.paragraph--type--newsletter-section:nth-child(3n+3) > div:first-of-type {
+.paragraph--type--newsletter-section:nth-child(3n+3) > h2 {
   background-color: $dark-blue;
 }
 

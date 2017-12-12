@@ -9,21 +9,28 @@
 <a class="anchor" name="{{ node.id }}"></a>
 <article{{ attributes.addClass('pb-5') }}>
   <div{{ content_attributes }}>
-      {% if content.field_news_teaser_image|render %}
-          <div class="float-left mr-3">
-              {{ content.field_news_teaser_image }}
-          </div>
-      {% endif %}
-      <h2{{ title_attributes }}>
-        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-      </h2>
-      {{ content.body }}
-      <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
-      <div class="utility-links float-right">
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
-          <i class="fa fa-print" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
-      </div>
+    {# Doing this because image urls need to be absolute for email version of newsletter. #}
+    <div class="float-left pr-3">
+      {% for key, image in content.field_news_teaser_image  %}
+        {%if image.entity %}
+          {% set media = image.entity %}
+          {% set file = media.field_image.entity | merge({'#image_style': 'max_325x325'}) %}
+          {% set uri = file_url(file.uri.value) %}
+          <img src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
+        {% endif %}
+      {% endfor %}
+    </div>
+    <h2{{ title_attributes }}>
+      {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+      <a href="http://{{ base_path }}{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+    {{ content.body }}
+    <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+    <div class="utility-links float-right">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
+        <i class="fa fa-print" aria-hidden="true"></i>
+        <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
+    </div>
   </div>
 </article>
