@@ -14,7 +14,7 @@
       {% for key, image in content.field_news_teaser_image  %}
         {%if image.entity %}
           {% set media = image.entity %}
-          {% set file = media.field_image.entity | merge({'#image_style': 'max_325x325'}) %}
+          {% set file = media.field_image.entity | merge({'#image_style': 'thumbnail'}) %}
           {% set uri = file_url(file.uri.value) %}
           <img src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
         {% endif %}
