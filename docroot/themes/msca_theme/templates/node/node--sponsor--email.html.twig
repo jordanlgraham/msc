@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Theme override to display a Sponsor node newsletter display.
+ *
+ */
+#}
+<article>
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes }}>
+
+    {% set logopath = node.field_logo.entity.fileuri %}
+    {% set logostyle = logopath|image_style('sponsor_logo_large_190x110_') %}
+    {% if logopath is defined and logopath is not empty %}
+      <div><img src="http://{{ base_path }}{{ file_url(logostyle) }}" class="logo"></div>
+    {% endif %}
+    <div class="social-links">
+      {% if content.field_facebook|render %}
+        {{ content.field_facebook }}
+      {% endif %}
+      {% if content.field_twitter|render %}
+        {{ content.field_twitter }}
+      {% endif %}
+      {% if content.field_linkedin|render %}
+        {{ content.field_linkedin }}
+      {% endif %}
+      {% if content.field_web_address|render %}
+        {{ content.field_web_address }}
+      {% endif %}
+    </div>
+    {% if content.body|render %}
+      {{ content.body }}
+    {% endif %}
+
+
+
+  </div>
+</article>

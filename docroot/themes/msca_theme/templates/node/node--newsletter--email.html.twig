@@ -40,10 +40,10 @@
         a {color: #ff7e00;text-decoration: none;}
 
         /* MSCA styles */
-        body {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
+        body, p, article div {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
         .lato, .paragraph div, h2 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;}
         .paragraph--view-mode--default {margin-bottom: 40px;}
-        article h2 {font-size: 18px;text-decoration: none;}
+        article h2 {font-size: 18px;text-decoration: none;line-height: normal;}
         .newsletter-full aside .sidebar-block {margin-bottom: 20px;}
         .newsletter-full .newsletter-header {font-family: 'Lato', sans-serif;text-align: center;text-transform: uppercase;color: #ffffff;}
         .newsletter-full .header-left > div {display: flex;justify-content: left;}
@@ -61,30 +61,33 @@
         .newsletter-full .icon-social {width: 30px;height: 30px;border-radius: 5px;display: inline-block;margin-top: 20px;}
         .featured-article {margin-left: 20px;}
         .sidebar {border: solid 0 lightgrey;padding: 0;}
-        .sidebar .sidebar-block {border: solid 1px lightgrey;padding: 40px;margin-bottom: 20px;margin-top: 20px;}
+        .sidebar .sidebar-block {border: solid 1px lightgrey;padding: 10px;margin-bottom: 20px;margin-top: 20px;}
         .featured-article {padding-bottom: 10px;margin-bottom: 20px;}
+        .featured-article article {padding-bottom: 20px;}
         .newsletter-full .featured-article {padding-bottom: 0;margin-bottom: 0;}
         .featured-article > h2 {background-color: #14674d;color: white;padding: 20px;}
         .latest-articles > h2 {background-color: #14674d;color: white;padding: 20px;}
         .latest-articles {margin-top: 20px;}
         h2.calendar {background-color: #005a84;color: #ffffff;padding: 20px;}
-        .newsletter-resources .btn.btn-secondary {width: 100%;padding-left: 20px;padding-right: 0;text-align: left;}
-        .paragraph--type--newsletter-section > div:first-of-type {color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px;}
-        .paragraph--type--newsletter-section:nth-child(3n+1) > div:first-of-type {background-color: #14674d;}
-        .paragraph--type--newsletter-section:nth-child(3n+2) > div:first-of-type {background-color: #2378cb}
-        .paragraph--type--newsletter-section:nth-child(3n+3) > div:first-of-type {background-color: #005a84;}
+        .newsletter-resources .btn.btn-secondary {width: 100%;padding-left: 10px;padding-right: 0;text-align: left;}
+        .paragraph--type--newsletter-section > h2 {color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px;background-color: #005a84}
+        .paragraph--type--newsletter-section:nth-child(3n+1) > h2 {background-color: #14674d;}
+        .paragraph--type--newsletter-section:nth-child(3n+2) > h2 {background-color: #2378cb}
+        .paragraph--type--newsletter-section:nth-child(3n+3) > h2 {background-color: #005a84;}
         .anchor:before {content: "";display: block;height: 120px;margin: -120px 0 0;}
         .newsletter-full .event-teaser-text h2 {margin-bottom: 10px;}
         .newsletter-full .event-location {font-weight: 500;margin: 0 0 10px;}
+        .social-links {display: flex;justify-content: center;margin-bottom: 10px;}
         .all-content article.newsletter-full {background-color: transparent;}
-        .sidebar-block h2 {color: #2378cb;font-size: 22px;font-weight: 300;font-family: "Lato",sans-serif;text-align: center;text-transform: uppercase;}
+        .sidebar-block h2 {color: #2378cb;font-size: 22px;font-weight: 300;font-family: "Lato",sans-serif;text-align: center;text-transform: uppercase;line-height: normal;}
         .sidebar-block {border: solid 1px lightgrey;padding: 40px;margin-bottom: 40px;margin-top: 20px;}
+        img.logo {margin: 0 auto;display: flex;}
         .float-left {float: left;margin-right: 10px;}
         .float-right {float: right;}
         .sidebar ul {list-style: none;padding: 10px;}
-        .date-square {background-color: #ff7e00;height: 65px;width: 65px;color: #fff;display: flex;align-items: center;justify-content: center;flex-direction: column;float: left;margin-right: 20px;  }
-        .date-square-month {font-size: 22px;text-transform: uppercase;  }
-        .date-square-day {font-size: 32px;display: block;font-family: "Lato",sans-serif;font-weight: 700;}
+        .date-square {background-color: #ff7e00;height: 65px;width: 65px;color: #fff;float: left;margin-right: 20px;  }
+        .date-square-month {font-size: 22px;text-transform: uppercase;color: #ffffff;line-height: normal;text-align: center;}
+        .date-square-day {font-size: 32px;display: block;font-family: "Lato",sans-serif;font-weight: 700;color: #ffffff;line-height: normal;text-align: center;}
         .icon-social {width: 30px;height: 30px;border-radius: 5px;display: inline-block;margin-top: 20px;  }
         .icon-website {background: #82b7bd url("http://dev.maseniorcare.org/themes/msca_theme/svg/external-website.svg") 0 no-repeat;background-size: auto auto;background-size: 30px;}
         .icon-facebook {background: #3a589a url("http://dev.maseniorcare.org/themes/msca_theme/svg/facebook.svg") 10px no-repeat;background-size: auto auto;background-size: 20px;}
@@ -95,16 +98,21 @@
         }
         .btn-secondary {background-color: #2378cb;color: #fff;max-width: 260px;}
         .btn-secondary:hover {background-color: lighten(#2378cb, 10%);color: #fff;}
+        ul {line-height: normal;}
         li {margin-bottom: 15px;}
+        .footer p {color: #fff;}
+        .footer-top p {font-size: 16px;}
+        .footer-bottom p {font-size: 12px;}
+        .footer a {color: #fff; text-decoration: underline;}
       </style>
     </head>
 <body class="page-node-type-newsletter">
-  <article class="newsletter-full") }}>
-    <table cellpadding="20px">
+  <article class="newsletter-full">
+    <table cellpadding="20px" id="backgroundTable">
       <tbody>
         <tr>
           <td>
-            <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
+            <table width="700" cellpadding="0" cellspacing="0" border="0" align="center">
               <tbody>
               <tr>
                 <td>
@@ -175,25 +183,16 @@
                   <table class="main-section">
                     <tbody>
                     <tr>
-                      <td class="main-section-left">
-                        <table>
+                      <td class="main-section-left" width="70%">
+                        <table width="100%">
                           <tbody>
                           <tr class="latest-articles">
                             <td>{{ content.field_newsletter_section }}</td>
                           </tr>
-                          {% if content.field_calendar|render %}
-                            <tr>
-                              <td>
-                                <a name="calendar"></a>
-                                <h2 class="calendar">{{ 'Upcoming Education & Events'|t }}</h2>
-                                {{ content.field_calendar }}
-                              </td>
-                            </tr>
-                          {% endif %}
                           </tbody>
                         </table>
                       </td>
-                      <td valign="top">
+                      <td valign="top" width="30%">
                         <table cellpadding="10" class="sidebar">
                           <tbody>
                           {% if content.field_sponsor|render %}
@@ -233,6 +232,40 @@
                           </tr>
                           </tbody>
                         </table>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  {% if content.field_calendar|render %}
+                  <table class="events">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <a name="calendar"></a>
+                          <h2 class="calendar">{{ 'Upcoming Education & Events'|t }}</h2>
+                          {{ content.field_calendar }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {% endif %}
+                  <table class="footer">
+                    <tbody>
+                    <tr>
+                      <td class="footer-top" bgcolor="#2378cb" style="padding:8px 15px; text-align:center">
+                        <p>{{ ('Representing Massachusetts\' nursing facilities and other organizations that provide health care and community for older adults and people with disabilities.')|t }}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="footer-bottom" bgcolor="#000000" style="padding:8px 15px;text-align:center">
+                        <p>
+                          <a href="http://www.maseniorcare.org" target="_blank">{{ ('Massachusetts Senior Care Association.')|t }}</a>{{ ('800 South Street - Suite 280, Waltham, MA 02453')|t }}<br />
+                          <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a>. {{ ('phone:')|t }} 617.558.0202 . {{ ('fax:')|t }} 617.558.3546 <br />
+                          {% trans %}
+                          To ensure delivery of the Mass Senior Care E-News Update, please add mailroom@maseniorcare.org to your email address book.
+                          {% endtrans %}
+                        </p>
                       </td>
                     </tr>
                     </tbody>

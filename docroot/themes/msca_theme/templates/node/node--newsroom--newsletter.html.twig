@@ -9,11 +9,17 @@
 <a class="anchor" name="{{ node.id }}"></a>
 <article{{ attributes.addClass('pb-5') }}>
   <div{{ content_attributes }}>
-      {% if content.field_news_teaser_image|render %}
-          <div class="float-left mr-3">
-              {{ content.field_news_teaser_image }}
-          </div>
-      {% endif %}
+    {# Doing this because image urls need to be absolute for email version of newsletter. #}
+    <div class="float-left pr-3">
+      {% for key, image in content.field_news_teaser_image  %}
+        {%if image.entity %}
+          {% set media = image.entity %}
+          {% set file = media.field_image.entity | merge({'#image_style': 'max_325x325'}) %}
+          {% set uri = file_url(file.uri.value) %}
+          <img src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
+        {% endif %}
+      {% endfor %}
+    </div>
       <h2{{ title_attributes }}>
         <a href="{{ url }}" rel="bookmark">{{ label }}</a>
       </h2>
