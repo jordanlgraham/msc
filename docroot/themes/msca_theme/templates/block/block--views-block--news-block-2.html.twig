@@ -37,6 +37,5 @@
     {% block content %}
         {{ content }}
     {% endblock %}
-    {# Todo use proper route syntax for this link once it's destination is created #}
-    <a class="btn btn-primary" href="/news">{{ 'View All Recent News'|t }}</a>
+    <a class="btn btn-primary" href="{{ path('view.all_content.newsroom') }}">{{ 'View All Recent News'|t }}</a>
 </div>

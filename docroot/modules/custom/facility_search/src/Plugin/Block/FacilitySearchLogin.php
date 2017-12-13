@@ -50,9 +50,6 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
     $build = [];
     $build['#prefix'] = '<div class="facility-and-login container"><div class="row">';
     $build['#suffix'] = '</div></div>';
-    $build['status_messages'] = [
-      '#type' => 'status_messages',
-    ];
     $build['facility_search'] = [
       '#prefix' => '<div class="facility-search search-login-section col-12 col-md-6">',
       'header' => [
@@ -74,6 +71,10 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
       '#prefix' => '<div class="login search-login-section col-12 col-md-6">',
       '#suffix' => '</div>',
     ];
+    $build['status_messages'] = [
+      '#type' => 'status_messages',
+    ];
+
 
     if ($this->currentUser->isAuthenticated()) {
       $build['login']['content'] = [

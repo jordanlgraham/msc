@@ -14,9 +14,19 @@
   .header-menu .navbar-light .menu-level-1 > li > a {
     color: $green;
   }
-  .header-menu .navbar-light .menu-level-1 > li > a.is-active {
+  .header-menu .navbar-light .menu-level-1 > li > a.is-active,
+  .header-menu .navbar-light .menu-level-1 > li > a:hover {
     color: $yellow;
   }
+
+  .header-menu .navbar-toggleable-md ul.menu-level-2 > li:first-of-type {
+    border-top: solid $green 5px;
+  }
+
+  .header-menu .navbar-toggleable-md ul.menu-level-2 > li:hover {
+    background: $green;
+  }
+
   .btn-primary {
     background-color: $yellow;
   }
