@@ -366,7 +366,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: '<div class="alert alert-info m-5" role="alert"><strong>There is currently no content that matches your search criteria.</div>'
+            value: '<div class="alert alert-info m-5" role="alert"><strong>There is currently no content that matches your search criteria.</strong></div>'
             format: basic_html
           plugin_id: text
       relationships: {  }

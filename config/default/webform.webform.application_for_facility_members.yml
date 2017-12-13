@@ -1,0 +1,117 @@
+uuid: 9a694f07-521d-4d57-91fb-80b762e54b51
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: application_for_facility_members
+title: 'Application for Facility Membership - NF'
+description: ''
+category: ''
+elements: "date:\n  '#type': date\n  '#title': Date\n  '#datepicker': true\nname_of_facility:\n  '#type': textfield\n  '#title': 'Name of Facility'\ntelephone:\n  '#type': tel\n  '#title': Telephone\naddress_information:\n  '#type': webform_section\n  '#title': 'Address Information'\n  address:\n    '#type': webform_address\n    '#title': Address\n    '#title_display': ''\n    '#address_2__access': false\n    '#country__access': false\nfax_number:\n  '#type': tel\n  '#title': 'Fax Number'\nfacility_website:\n  '#type': url\n  '#title': 'Facility Website'\nnumber_of_beds:\n  '#type': webform_section\n  '#title': 'Number of Beds'\n  skilled_beds:\n    '#type': number\n    '#title': 'Skilled Beds'\n  intermediate_care_beds:\n    '#type': number\n    '#title': 'Intermediate Care Beds'\n  residential_care_beds_level_iv_:\n    '#type': number\n    '#title': 'Residential Care Beds (Level IV)'\n  total_beds:\n    '#type': number\n    '#title': 'Total Beds'\n    '#states':\n      enabled:\n        -\n          ':input[name=\"assisted_living_units\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"skilled_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"intermediate_care_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"residential_care_beds_level_iv_\"]':\n            filled: true\nfacility_license_number:\n  '#type': number\n  '#title': 'Facility License Number'\ndate_acquired_:\n  '#type': date\n  '#title': 'Date Acquired '\n  '#datepicker': true\ndo_you_or_your_organization_own_any_other_facilities_in_massachu:\n  '#type': checkbox\n  '#title': 'Do you or your organization own any other facilities in Massachusetts?'\n  '#title_display': before\ntype_of_ownership:\n  '#type': webform_section\n  '#title': 'Type of Ownership'\n  proprietary:\n    '#type': checkbox\n    '#title': Proprietary\n  non_profit:\n    '#type': checkbox\n    '#title': Non-Profit\nlegal_ownership:\n  '#type': webform_section\n  '#title': 'Legal Ownership'\n  proprietorship:\n    '#type': checkbox\n    '#title': Proprietorship\n  partnership:\n    '#type': checkbox\n    '#title': Partnership\n  corporation:\n    '#type': checkbox\n    '#title': Corporation\nnames_of_owner_partners_members_of_corporation:\n  '#type': textarea\n  '#title': 'Names of Owner, Partners, Members of Corporation'\n  '#rows': '6'\nname_of_administrator_executive_director:\n  '#type': textfield\n  '#title': 'Name of Administrator/Executive Director'\nadministrator_email:\n  '#type': email\n  '#title': 'Administrator Email'\nnames_of_person_state_position_who_will_represent_the_facility_i:\n  '#type': textfield\n  '#title': 'Names of Person (state position) who will represent the facility in the Association if not Administrator'\nreferences_minimum_of_2_:\n  '#type': webform_section\n  '#title': 'References (minimum of 2)'\n  physician_hospital_or_other_nursing_home_and_or_commercial_or_ba:\n    '#type': textfield\n    '#title': 'physician, hospital or other nursing home and/or commercial or banking and finance (for organizations, please name individual to contact).  Please supply the names and telephone numbers.'\n    '#multiple': 3\n    '#multiple__min_items': '2'\n    '#multiple__sorting': false\n    '#multiple__operations': false\nagreement:\n  '#type': webform_section\n  '#title': Agreement\n  '#description': '<p class=\"MsoBodyText3\"><span style=\"font-family:&quot;Gill Sans MT&quot;\">If accepted to membership, I pledge, on behalf of the facility, to abide by the laws, bylaws, and professional ethics and standards of the Massachusetts Senior Care Association.&nbsp; In the event of termination of membership, it is hereby agreed that any and all certificates and other indications of membership will be promptly surrendered.</span></p>'\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: false
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: page
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }

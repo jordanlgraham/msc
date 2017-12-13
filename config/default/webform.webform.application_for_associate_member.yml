@@ -1,0 +1,117 @@
+uuid: f45e0757-2fa9-41cb-8e57-b3ae91635ac5
+langcode: en
+status: open
+dependencies: {  }
+open: null
+close: null
+uid: 1
+template: false
+id: application_for_associate_member
+title: 'Application for Associate Membership'
+description: ''
+category: ''
+elements: "company_name:\n  '#type': textfield\n  '#title': 'Company Name'\ntelephone:\n  '#type': tel\n  '#title': Telephone\nmailing_address:\n  '#type': webform_address\n  '#title': 'Mailing Address'\n  '#address_2__access': false\n  '#country__access': false\nfax_number:\n  '#type': tel\n  '#title': 'Fax Number'\nwebsite:\n  '#type': url\n  '#title': Website\ntype_of_business:\n  '#type': textarea\n  '#title': 'Type of Business'\n  '#description': 'Please give a brief description of your company and how it relates to senior care.'\n  '#rows': '1'\nplease_list_two_references:\n  '#type': webform_section\n  '#title': 'Please List Two References'\n  '#description': '(one should be a Mass Senior Care facility member or AHCA affiliate organization)'\n  reference_1:\n    '#type': webform_section\n    '#title': 'Reference 1'\n    '#title_tag': h3\n    reference_1_name:\n      '#type': textfield\n      '#title': Name\n    reference_1_organization_name:\n      '#type': textfield\n      '#title': 'Organization Name'\n    reference_1_phone_number:\n      '#type': tel\n      '#title': 'Phone Number'\n    reference_1_email:\n      '#type': email\n      '#title': Email\n  reference_2:\n    '#type': webform_section\n    '#title': 'Reference 2'\n    '#title_tag': h3\n    reference_2_name:\n      '#type': textfield\n      '#title': Name\n    reference_2_organization_name:\n      '#type': textfield\n      '#title': 'Organization Name'\n    reference_2_phone:\n      '#type': tel\n      '#title': 'Phone Number'\n    reference_2_email:\n      '#type': email\n      '#title': Email\nplease_list_other_professional_associations_with_which_you_are_a:\n  '#type': textarea\n  '#title': 'Please List Other Professional Associations with Which You Are Affiliated'\n  '#rows': '6'\nbusiness_contacts:\n  '#type': webform_section\n  '#title': 'Business Contacts'\n  '#description': '<span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Gill Sans MT&quot;\"><span style=\"layout-grid-mode:line\">Who is the best contact for each area?&nbsp; Please list their <strong>name, title and email address</strong>:</span></span></span>'\n  primary_contact:\n    '#type': webform_section\n    '#title': 'Primary Contact'\n    '#title_tag': h3\n    primary_contact_name:\n      '#type': textfield\n      '#title': Name\n      '#description': '(to be listed on our website)'\n    primary_contact_title:\n      '#type': textfield\n      '#title': Title\n    primary_contact_email:\n      '#type': email\n      '#title': Email\n  billing_dues:\n    '#type': webform_section\n    '#title': Billing/Dues\n    '#title_tag': h3\n    billing_dues_name:\n      '#type': textfield\n      '#title': Name\n    billing_dues_title:\n      '#type': textfield\n      '#title': Title\n    billing_dues_email:\n      '#type': email\n      '#title': Email\n  marketing_and_advertising:\n    '#type': webform_section\n    '#title': 'Marketing and Advertising'\n    '#title_tag': h3\n    name:\n      '#type': textfield\n      '#title': Name\n    title:\n      '#type': textfield\n      '#title': Title\n    email:\n      '#type': email\n      '#title': Email\n  trade_shows:\n    '#type': webform_section\n    '#title': 'Trade Shows'\n    '#title_tag': h3\n    trade_show_name:\n      '#type': textfield\n      '#title': Name\n    trade_show_title:\n      '#type': textfield\n      '#title': Title\n    trade_show_email:\n      '#type': email\n      '#title': Email\n  other_contacts:\n    '#type': webform_section\n    '#title': 'Other Contacts'\n    '#description': 'Who else in your company should receive Mass Senior Care member news and updates?'\n    '#title_tag': h3\n    other_name:\n      '#type': textfield\n      '#title': Name\n    other_title:\n      '#type': textfield\n      '#title': Title\n    other_email:\n      '#type': textfield\n      '#title': Email\npreferred_vendor_listing:\n  '#type': webform_section\n  '#title': 'Preferred Vendor Listing'\n  would_you_like_an_email_address_added_to_your_preferred_vendor_l:\n    '#type': checkboxes\n    '#title': 'Would you like an email address added to your “Preferred Vendor” listing on our website www.maseniorcare.org? '\n    '#title_display': before\n    '#options': yes_no\n  if_yes_the_email:\n    '#type': email\n    '#title': 'If yes, the email'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_an_email_address_added_to_your_preferred_vendor_l[Yes]\"]':\n          checked: true\n  would_you_like_your_company_facebook_page_added_to_your_preferre:\n    '#type': checkboxes\n    '#title': 'Would you like your company Facebook page added to your “Preferred Vendor” listing on our website?'\n    '#options': yes_no\n  if_yes_the_link:\n    '#type': url\n    '#title': 'If yes, the link'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_your_company_facebook_page_added_to_your_preferre[Yes]\"]':\n          checked: true\n  would_you_like_your_company_twitter_page_added_to_your_preferred:\n    '#type': checkboxes\n    '#title': 'Would you like your company Twitter page added to your “Preferred Vendor” listing on our website?  '\n    '#options': yes_no\n  if_yes_the_link_twitter:\n    '#type': url\n    '#title': 'If yes, the link'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_your_company_twitter_page_added_to_your_preferred[Yes]\"]':\n          checked: true\nservices_for_your_preferred_vendor_listing:\n  '#type': webform_section\n  '#title': 'Services for Your Preferred Vendor Listing'\n  '#description': 'Using the chart below, please choose the services that best reflect your business.'\n  one_primary_service:\n    '#type': webform_term_select\n    '#title': 'One Primary Service'\n    '#description': 'Begin typing a term to see options that best match your entry.'\n    '#vocabulary': vendor_services_offered\n    '#breadcrumb_delimiter': ''\n  up_to_three_secondary_services:\n    '#type': webform_term_select\n    '#title': 'Up to Three Secondary Services'\n    '#multiple': 3\n    '#description': 'Begin typing a term to see options that best match your entry.'\n    '#vocabulary': vendor_services_offered\n    '#breadcrumb_delimiter': ''\ni_certify_that_the_information_supplied_above_is_true_and_accura:\n  '#type': webform_section\n  '#title': 'I certify that the information supplied above is true and accurate as of the date of this application.  If accepted as an Associate Member, I pledge to abide by the Code of Ethics of the Association.'\n  '#title_tag': h3\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
+css: ''
+javascript: ''
+settings:
+  ajax: false
+  ajax_scroll_top: form
+  page: true
+  page_submit_path: ''
+  page_confirm_path: ''
+  form_submit_once: false
+  form_exception_message: ''
+  form_open_message: ''
+  form_close_message: ''
+  form_previous_submissions: true
+  form_confidential: false
+  form_confidential_message: ''
+  form_convert_anonymous: false
+  form_prepopulate: false
+  form_prepopulate_source_entity: false
+  form_prepopulate_source_entity_required: false
+  form_prepopulate_source_entity_type: ''
+  form_reset: false
+  form_disable_autocomplete: false
+  form_novalidate: false
+  form_unsaved: false
+  form_disable_back: false
+  form_autofocus: false
+  form_details_toggle: false
+  submission_label: ''
+  submission_log: false
+  submission_user_columns: {  }
+  wizard_progress_bar: true
+  wizard_progress_pages: false
+  wizard_progress_percentage: false
+  wizard_start_label: ''
+  wizard_confirmation: true
+  wizard_confirmation_label: ''
+  wizard_track: ''
+  preview: 0
+  preview_label: ''
+  preview_title: ''
+  preview_message: ''
+  preview_attributes: {  }
+  preview_excluded_elements: {  }
+  preview_exclude_empty: true
+  draft: none
+  draft_multiple: false
+  draft_auto_save: false
+  draft_saved_message: ''
+  draft_loaded_message: ''
+  confirmation_type: page
+  confirmation_title: ''
+  confirmation_message: ''
+  confirmation_url: ''
+  confirmation_attributes: {  }
+  confirmation_back: true
+  confirmation_back_label: ''
+  confirmation_back_attributes: {  }
+  limit_total: null
+  limit_total_message: ''
+  limit_user: null
+  limit_user_message: ''
+  purge: none
+  purge_days: null
+  entity_limit_total: null
+  entity_limit_user: null
+  results_disabled: false
+  results_disabled_ignore: false
+  token_update: false
+access:
+  create:
+    roles:
+      - anonymous
+      - authenticated
+    users: {  }
+    permissions: {  }
+  view_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  purge_any:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  view_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  update_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+  delete_own:
+    roles: {  }
+    users: {  }
+    permissions: {  }
+handlers: {  }
