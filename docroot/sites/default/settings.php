@@ -6,6 +6,12 @@
 if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/msca/msca-settings.inc');
 }
+
+// Google Analytics Config for Production Only
+if (!empty($_ENV['AH_PRODUCTION'])) {
+  $config['google_analytics.settings']['account'] = "UA-19805426-1";
+}
+
 // Include local settings.
 require $app_root . '/sites/settings.common.php';
 // Required for config sync.
