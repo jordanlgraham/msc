@@ -106,6 +106,7 @@ AddEncoding gzip svgz
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   # ensure https
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC]
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   # for Dev and Test, just require https since there is no www form of the url.
