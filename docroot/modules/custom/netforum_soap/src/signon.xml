@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSignOnToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthToken" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Minutes" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSignOnTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSignOnTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCstKeyFromSignOnToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="szEncryptedSingOnToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCstKeyFromSignOnTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCstKeyFromSignOnTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOutCst">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="szCstKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOutCstResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogOutToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="szToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LogOutTokenResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:Authenticate" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSignOnTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSignOnToken" />
+  </wsdl:message>
+  <wsdl:message name="GetSignOnTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSignOnTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCstKeyFromSignOnTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCstKeyFromSignOnToken" />
+  </wsdl:message>
+  <wsdl:message name="GetCstKeyFromSignOnTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCstKeyFromSignOnTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOutCstSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOutCst" />
+  </wsdl:message>
+  <wsdl:message name="LogOutCstSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOutCstResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogOutTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:LogOutToken" />
+  </wsdl:message>
+  <wsdl:message name="LogOutTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:LogOutTokenResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SignOnSoap">
+    <wsdl:operation name="Authenticate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Passing correct credentials to this method will return an authentication token - without an authentication token, the rest of the xWeb web methods will be inoperable.  The authentication token is governed by the group privileges assigned to the account invoking the xWeb web methods.  Please consult with the administrator of the netForum database to ensure your level of authorization.</wsdl:documentation>
+      <wsdl:input message="tns:AuthenticateSoapIn" />
+      <wsdl:output message="tns:AuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSignOnToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Sign-On Token</wsdl:documentation>
+      <wsdl:input message="tns:GetSignOnTokenSoapIn" />
+      <wsdl:output message="tns:GetSignOnTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCstKeyFromSignOnToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get CstKey From SignOn Token</wsdl:documentation>
+      <wsdl:input message="tns:GetCstKeyFromSignOnTokenSoapIn" />
+      <wsdl:output message="tns:GetCstKeyFromSignOnTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOutCst">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Expires token by cst key</wsdl:documentation>
+      <wsdl:input message="tns:LogOutCstSoapIn" />
+      <wsdl:output message="tns:LogOutCstSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOutToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Expires token by token</wsdl:documentation>
+      <wsdl:input message="tns:LogOutTokenSoapIn" />
+      <wsdl:output message="tns:LogOutTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SignOnSoap" type="tns:SignOnSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap:operation soapAction="http://tempuri.org/Authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSignOnToken">
+      <soap:operation soapAction="http://tempuri.org/GetSignOnToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCstKeyFromSignOnToken">
+      <soap:operation soapAction="http://tempuri.org/GetCstKeyFromSignOnToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOutCst">
+      <soap:operation soapAction="http://tempuri.org/LogOutCst" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOutToken">
+      <soap:operation soapAction="http://tempuri.org/LogOutToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SignOnSoap12" type="tns:SignOnSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Authenticate">
+      <soap12:operation soapAction="http://tempuri.org/Authenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSignOnToken">
+      <soap12:operation soapAction="http://tempuri.org/GetSignOnToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCstKeyFromSignOnToken">
+      <soap12:operation soapAction="http://tempuri.org/GetCstKeyFromSignOnToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOutCst">
+      <soap12:operation soapAction="http://tempuri.org/LogOutCst" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOutToken">
+      <soap12:operation soapAction="http://tempuri.org/LogOutToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SignOn">
+    <wsdl:port name="SignOnSoap" binding="tns:SignOnSoap">
+      <soap:address location="http://netforumpro.com/xweb/signon.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SignOnSoap12" binding="tns:SignOnSoap12">
+      <soap12:address location="http://netforumpro.com/xweb/signon.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

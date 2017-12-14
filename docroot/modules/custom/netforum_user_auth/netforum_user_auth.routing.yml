@@ -1,0 +1,9 @@
+netforum_user_auth.sso:
+  path: '/netforum/login'
+  defaults:
+    _controller: '\Drupal\netforum_user_auth\Controller\NetforumSso:login'
+    _title: 'Log In'
+  requirements:
+    _access: 'TRUE'
+  options:
+    _no_cache: 'TRUE'
