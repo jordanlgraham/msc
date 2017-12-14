@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\netforum_user_auth\Controller\NetforumSso;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 
 /**
  * Implements hook_help().
@@ -54,6 +56,7 @@ function _netforum_user_auth_login_form_alter(&$form, FormStateInterface $form_s
   $form['#validate'][$key] = 'netform_user_auth_core_login_authenticate_validate';
   array_splice($form['#validate'], $key + 1, 0, 'netform_user_auth_login_authenticate_validate');
   $form['#validate'][] = 'netforum_user_auth_validate_membership';
+  $form['#submit'][] = 'netforum_user_auth_login_submit';
 }
 
 /**
@@ -122,5 +125,38 @@ function netforum_user_auth_validate_membership($form, FormStateInterface $form_
     watchdog_exception('netforum_user_auth', $exception);
     \Drupal::logger('netforum_user_auth')->error('Unable to determine if user @name is a member while logging in: %msg',
       ['%msg' => $exception->getMessage(), '@name' => $form_state->getValue('name')]);
+  }
+}
+
+/**
+ * Extra submit handler for the login form.
+ *  Redirect the user to
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state) {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    return;
+  }
+  $nfUrl = \Drupal::request()->get(NetforumSso::NETFORUM_REDIRECT_URL_KEY);
+  if (empty($nfUrl)) {
+    return;
+  }
+  // Construct a URL with the token.
+  /** @var \Drupal\netforum_user_auth\Auth $auth */
+  try {
+    // Get the token from NF.
+    $auth = \Drupal::service('netforum_user_auth.auth');
+    $token = $auth->getSsoToken($form_state->getValue('name'), $form_state->getValue('pass'));
+    $redirect_url = $auth->getSsoUrl($token, $nfUrl);
+    $response = new TrustedRedirectResponse($redirect_url->toString());
+    // Set the redirect.
+    $form_state->setResponse($response);
+  }
+  catch (Exception $exception) {
+    watchdog_exception('netforum_user_auth', $exception);
+    \Drupal::logger('netforum_user_auth')->error('Unable to complete NetForum SSO.');
+    drupal_set_message(t('An error occurred while signing in.'));
   }
 }
