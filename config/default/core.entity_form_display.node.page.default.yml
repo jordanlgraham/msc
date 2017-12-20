@@ -7,12 +7,12 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_gated
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_restrict_to_groups
     - node.type.page
   module:
     - entity_browser_entity_form
     - inline_entity_form
     - path
+    - scheduler
     - text
 _core:
   default_config_hash: KSvzyFhdLuxniTsunUnUfpfMmod2l57GibtVjL8ymHM
@@ -58,15 +58,6 @@ content:
         entity_browser_id: _none
     type: inline_entity_form_complex
     region: content
-  field_restrict_to_groups:
-    weight: 4
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   path:
     type: path
     weight: 9
@@ -80,6 +71,12 @@ content:
     weight: 7
     third_party_settings: {  }
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -104,4 +101,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }
