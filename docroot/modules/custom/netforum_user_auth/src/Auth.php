@@ -96,6 +96,7 @@ class Auth {
           $attributes = array(
             'name' => $array['Result']['cst_name_cp'],
             'member' => (bool)$array['Result']['cst_member_flag'],
+            'receives_benefits' => (bool)$array['Result']['cst_receives_benefits_flag'],
           );
           $users[$email] = $attributes;
           return $attributes;
@@ -165,7 +166,7 @@ class Auth {
   public function userIsMember($email, $password) {
     $attributes = $this->CheckEWebUser($email, $password);
     if ($attributes) {
-      return $attributes['member'];
+      return $attributes['member'] || $attributes['receives_benefits'];
     }
     return FALSE;
   }
