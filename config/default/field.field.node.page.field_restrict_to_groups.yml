@@ -6,14 +6,6 @@ dependencies:
     - field.storage.node.field_restrict_to_groups
     - node.type.page
     - taxonomy.vocabulary.group
-  module:
-    - abt
-third_party_settings:
-  abt:
-    abt_enable_view_control: '2'
-    abt_enable_update_control: '2'
-    abt_enable_delete_control: '1'
-    user_field: field_groups
 id: node.page.field_restrict_to_groups
 field_name: field_restrict_to_groups
 entity_type: node
