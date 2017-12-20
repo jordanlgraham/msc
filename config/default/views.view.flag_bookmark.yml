@@ -428,7 +428,7 @@ display:
         type: normal
         title: 'My Bookmarks'
         description: ''
-        weight: -52
+        weight: -49
         context: '0'
         enabled: false
       display_extenders: {  }
