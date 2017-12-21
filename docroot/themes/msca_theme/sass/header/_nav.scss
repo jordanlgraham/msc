@@ -129,7 +129,8 @@
   @extend .lato;
 }
 
-#block-masthead .memberlogin, #block-masthead .joinmassseniorcare {
+#block-masthead .memberlogin, #block-masthead .joinmassseniorcare,
+#block-masthead .logout {
   background-color: $orange;
   &:hover {
     background-color: lighten($orange, 10%);
