@@ -11,5 +11,17 @@ definitions:
     parent: ''
     expanded: false
     weight: -50
+  msca_access__sign_in:
+    weight: -50
+    menu_name: masthead
+    parent: ''
+    expanded: false
+    enabled: true
+  msca_access__sign_out:
+    weight: -49
+    menu_name: masthead
+    parent: ''
+    expanded: false
+    enabled: true
 _core:
   default_config_hash: jdY7AU0tU-QsjmiOw3W8vwpYMb-By--_MSFgbqKUTYM

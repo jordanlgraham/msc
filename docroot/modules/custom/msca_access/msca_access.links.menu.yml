@@ -1,0 +1,15 @@
+msca_access.sign_in:
+  title: Member Login
+  parent: system.menu.masthead
+  description: 'Member Login'
+  route_name: user.login
+  weight: -50
+  menu_name: masthead
+
+msca_access.sign_out:
+  title: Log out
+  parent: system.menu.masthead
+  description: 'Log out'
+  route_name: user.logout
+  weight: -49
+  menu_name: masthead
