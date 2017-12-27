@@ -12,7 +12,7 @@ third_party_settings:
     status: true
     scheme: public
     directory: inline-files
-    extensions: 'txt pdf doc'
+    extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods'
 _core:
   default_config_hash: 967ijj7p6i7rwrYl7r08WQFeCY_c23YAh0h8u-w_CXM
 format: full_html
