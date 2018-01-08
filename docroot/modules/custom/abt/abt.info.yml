@@ -1,9 +1,0 @@
-name: Access by Term (ABT)
-type: module
-description: 'ABT controls access based on relationship between node->term<-user.'
-package: 'Access control'
-core: 8.x
-
-dependencies:
-  - drupal:taxonomy
-  - drupal:node
