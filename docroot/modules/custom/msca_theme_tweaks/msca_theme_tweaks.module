@@ -115,3 +115,11 @@ function msca_theme_tweaks_form_views_exposed_form_alter(&$form, FormStateInterf
   $form['title']['#placeholder'] = t('Vendor Name');
   $form['field_primary_services_target_id']['#options']['All'] = t('Filter by Service');
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_theme_tweaks_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Change the label
+  $form['name']['#title'] = t('E-Mail Address');
+}
