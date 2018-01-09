@@ -153,6 +153,9 @@ class Auth {
     parse_str($token, $token_query);
     // Get the rest of the URL array.
     $url_parts = parse_url($redirect_url);
+    if ($url_parts['host'] !== 'netforum.avectra.com') {
+      throw new \InvalidArgumentException('Invalid redirect URL');
+    }
     $redirect_query = [];
     if (!empty($url_parts['query'])) {
       parse_str($url_parts['query'], $redirect_query);
