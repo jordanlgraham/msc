@@ -102,8 +102,8 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
         //       'title' => $this->t('Forgot Password'),
         //       'url' => Url::fromRoute('user.pass'),
         //     ],
-          ],
-        ],
+        //  ],
+        //],
       ];
     }
 
