@@ -89,19 +89,19 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
           '#markup' => '<h3>' . $this->t('Member Login') . '</h3>',
         ],
         'form' => $this->formBuilder->getForm(\Drupal\user\Form\UserLoginForm::class),
-        'links' => [
-          '#prefix' => '<div class="bottom-link">',
-          '#suffix' => '</div>',
-          '#theme' => 'links',
-          '#links' => [
-            'register' => [
-              'title' => $this->t('Create Profile'),
-              'url' => Url::fromRoute('user.register'),
-            ],
-            'reset' => [
-              'title' => $this->t('Forgot Password'),
-              'url' => Url::fromRoute('user.pass'),
-            ],
+        // 'links' => [
+        //   '#prefix' => '<div class="bottom-link">',
+        //   '#suffix' => '</div>',
+        //   '#theme' => 'links',
+        //   '#links' => [
+        //     'register' => [
+        //       'title' => $this->t('Create Profile'),
+        //       'url' => Url::fromRoute('user.register'),
+        //     ],
+        //     'reset' => [
+        //       'title' => $this->t('Forgot Password'),
+        //       'url' => Url::fromRoute('user.pass'),
+        //     ],
           ],
         ],
       ];
