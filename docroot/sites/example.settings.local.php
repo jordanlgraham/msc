@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Local development override configuration feature.
@@ -13,7 +12,6 @@
  * this file to 'sites/example.com/settings.local.php', and uncomment the lines
  * at the bottom of 'sites/example.com/settings.php'.
  */
-
 /**
  * Assertions.
  *
@@ -32,12 +30,10 @@
  */
 assert_options(ASSERT_ACTIVE, TRUE);
 \Drupal\Component\Assertion\Handle::register();
-
 /**
  * Enable local development services.
  */
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml';
-
 /**
  * Show all error messages, with backtrace information.
  *
@@ -45,13 +41,11 @@ $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/development.services.yml'
  * example the database connection failed, we rely only on this value.
  */
 $config['system.logging']['error_level'] = 'verbose';
-
 /**
  * Disable CSS and JS aggregation.
  */
 $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
-
 /**
  * Disable the render cache (this includes the page cache).
  *
@@ -65,7 +59,6 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * Do not use this setting until after the site is installed.
  */
 # $settings['cache']['bins']['render'] = 'cache.backend.null';
-
 /**
  * Disable Dynamic Page Cache.
  *
@@ -74,7 +67,6 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * in the early stages of development, you may want to disable it.
  */
 # $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
-
 /**
  * Allow test modules and themes to be installed.
  *
@@ -83,7 +75,6 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * purposes.
  */
 $settings['extension_discovery_scan_tests'] = TRUE;
-
 /**
  * Enable access to rebuild.php.
  *
@@ -93,7 +84,6 @@ $settings['extension_discovery_scan_tests'] = TRUE;
  * using these parameters in a request to rebuild.php.
  */
 $settings['rebuild_access'] = TRUE;
-
 /**
  * Skip file system permissions hardening.
  *
@@ -107,29 +97,58 @@ $settings['rebuild_access'] = TRUE;
 $settings['skip_permissions_hardening'] = TRUE;
 
 /**
- * Database setup for lando
+ * Netforum configuration.
  */
-$databases['default']['default'] = array (
-  'database' => getenv('DB_NAME'),
-  'username' => getenv('DB_USER'),
-  'password' => getenv('DB_PASSWORD'),
-  'host' => getenv('DB_HOST'),
-  'port' => getenv('DB_PORT'),
-  'driver' => 'mysql',
-  'prefix' => '',
-  'collation' => 'utf8mb4_general_ci',
-);
-
-ini_set('opcache.enable', 0);
-ini_set('memory_limit', '256M');
-ini_set("soap.wsdl_cache_enabled", "0");
-
 $config['netforum_soap.netforumconfig'] = [
   'wsdl_address' => 'https://netforum.avectra.com/xWeb/netForumXMLOnDemand.asmx?WSDL',
-  'api_username' => 'api_username',
-  'api_password' => 'api_password',
+  'api_username' => 'mscaxwebuser',
+  'api_password' => 'mscaXw3bu5Er9',
 ];
 
-$config['msca_discourse.config'] = [
-  'api_key' => 'api_key',
-];
+/**
+ * LOCAL MULTISITE CONFIGURATION
+ *
+ * Copy this file into sites/default and sites/foundation.
+ *
+ * Uncomment the appropriate db connection config below for each site.
+ */
+
+/**
+ * Database configuration - Default.
+ */
+#$databases = array(
+#  'default' =>
+#    array(
+#      'default' =>
+#        array(
+#          'database' => 'drupal8',
+#          'username' => 'drupal8',
+#          'password' => 'drupal8',
+#          'host' => 'database',
+#          'port' => '3306',
+#          'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+#          'driver' => 'mysql',
+#          'prefix' => '',
+#        ),
+#    ),
+#);
+
+/**
+ * Database configuration - Foundation.
+ */
+#$databases = array(
+#  'default' =>
+#    array(
+#      'default' =>
+#        array(
+#          'database' => 'foundation',
+#          'username' => 'drupal8',
+#          'password' => 'drupal8',
+#          'host' => 'foundation_db',
+#          'port' => '3306',
+#          'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+#          'driver' => 'mysql',
+#          'prefix' => '',
+#        ),
+#    ),
+#);
