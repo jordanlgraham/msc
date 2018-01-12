@@ -1,10 +1,9 @@
 name: msca
-
 # add in the varnish edge
 proxy:
   edge:
-    - edge.acquia.lndo.site
-
+    - msca.acquia.lndo.site
+    - foundation.acquia.lndo.site
 # start with basic lamp recipe
 recipe: drupal8
 config:
@@ -13,7 +12,6 @@ config:
   webroot: docroot
   database: mysql:5.6
   xdebug: true
-
 # add additional auxiliary services
 services:
   edge:
@@ -23,3 +21,10 @@ services:
     ssl: true
   cache:
     type: memcached:1.4
+  foundation_db:
+    type: mysql
+    portforward: true
+    creds:
+      user: drupal8
+      password: drupal8
+      database: foundation
