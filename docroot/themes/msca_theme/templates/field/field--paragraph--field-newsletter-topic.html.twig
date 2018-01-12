@@ -38,14 +38,14 @@
 #}
 {% if label_hidden %}
   {% if multiple %}
-    <h2{{ attributes }}>
+    <h2{{ attributes.addClass('paragraph-heading') }}>
       {% for item in items %}
         <div{{ item.attributes }}>{{ item.content }}</div>
       {% endfor %}
     </h2>
   {% else %}
     {% for item in items %}
-      <h2{{ attributes }}>{{ item.content }}</h2>
+      <h2{{ attributes.addClass('paragraph-heading') }}>{{ item.content }}</h2>
     {% endfor %}
   {% endif %}
 {% else %}

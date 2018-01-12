@@ -177,7 +177,7 @@ class RealMagnetSend extends FormBase {
         drupal_set_message(Html::escape($this->t('Real Magnet refused this newsletter. Reason: @message', ['@message' => Html::escape($response->Message)])), 'error');
       }
       else {
-        drupal_set_message($this->t('Success! Login to ReaLMagnet.com to view and distribute newsletter via email.'), 'status');
+        drupal_set_message($this->t('Success! Login to https://www.magnetmail.net to view and distribute newsletter via email.'), 'status');
       }
     }
     catch (\Exception $e) {
