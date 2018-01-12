@@ -101,8 +101,8 @@ $settings['skip_permissions_hardening'] = TRUE;
  */
 $config['netforum_soap.netforumconfig'] = [
   'wsdl_address' => 'https://netforum.avectra.com/xWeb/netForumXMLOnDemand.asmx?WSDL',
-  'api_username' => 'mscaxwebuser',
-  'api_password' => 'mscaXw3bu5Er9',
+  'api_username' => 'api_username',
+  'api_password' => 'api_password',
 ];
 
 /**
