@@ -71,10 +71,6 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
       '#prefix' => '<div class="login search-login-section col-12 col-md-6">',
       '#suffix' => '</div>',
     ];
-    $build['status_messages'] = [
-      '#type' => 'status_messages',
-    ];
-
 
     if ($this->currentUser->isAuthenticated()) {
       $build['login']['content'] = [
@@ -86,7 +82,7 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
       $build['login']['content'] = [
         'header' => [
           '#type' => 'markup',
-          '#markup' => '<h3>' . $this->t('Member Login') . '</h3><div><div>',
+          '#markup' => '<h3>' . $this->t('Member Login') . '</h3>',
         ],
         'form' => $this->formBuilder->getForm(\Drupal\user\Form\UserLoginForm::class),
         // 'links' => [
@@ -103,7 +99,10 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
         //       'url' => Url::fromRoute('user.pass'),
         //     ],
         //  ],
-        //],
+        // ],
+        'messages' => [
+          '#type' => 'status_messages',
+        ],
       ];
     }
 
