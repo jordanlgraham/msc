@@ -86,7 +86,7 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
       $build['login']['content'] = [
         'header' => [
           '#type' => 'markup',
-          '#markup' => '<h3>' . $this->t('Member Login') . '</h3>',
+          '#markup' => '<h3>' . $this->t('Member Login') . '</h3><div><div>',
         ],
         'form' => $this->formBuilder->getForm(\Drupal\user\Form\UserLoginForm::class),
         // 'links' => [

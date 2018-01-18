@@ -2,6 +2,7 @@
   background-color: $dark-blue;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  color: $white;
 }
 
 [id^='block-findafacilityuserlogin'] h3 {
@@ -106,7 +107,7 @@
 
 [id^='block-findafacilityuserlogin'] .user-login-form .form-actions {
   @extend .btn;
-  padding: 0;
+  padding: 0 0 8px 0;
 }
 
 @include media-breakpoint-down(sm) {
