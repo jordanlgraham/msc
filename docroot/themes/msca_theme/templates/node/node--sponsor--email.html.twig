@@ -22,7 +22,7 @@
     {% set logopath = node.field_logo.entity.fileuri %}
     {% set logostyle = logopath|image_style('sponsor_logo_large_190x110_') %}
     {% if logopath is defined and logopath is not empty %}
-      <div><img src="http://{{ base_path }}{{ file_url(logostyle) }}" class="logo"></div>
+      <div class="sponsor-logo"><img src="{{ url('<front>') }}{{ file_url(logostyle) }}" class="logo"></div>
     {% endif %}
     <div class="social-links">
       {% if content.field_facebook|render %}
