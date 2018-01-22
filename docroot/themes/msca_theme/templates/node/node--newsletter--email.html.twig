@@ -27,8 +27,8 @@
         .ExternalClass {width:100%;}
         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
         #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
-        img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
-        a img {border:none;}
+        img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; padding: 0px; margin: 0px; display: block;}
+        a img {border:none; padding: 0px; margin: 0px; display: block;}
         .image_fix {display:block;}
         p {margin: 1em 0;}
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb !important;}
@@ -38,6 +38,7 @@
         table td {border-collapse: collapse;}
         table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
         a {color: #ff7e00;text-decoration: none;}
+        .toc a {color: #2378cb;}
 
         /* MSCA styles */
         body, p, article div {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
@@ -58,12 +59,11 @@
         .newsletter-full .header-right-bottom span {color: white;text-transform: uppercase;}
         .newsletter-full .icon-social {width: 30px;height: 30px;border-radius: 5px;display: inline-block;margin-top: 20px;}
         .featured-article {margin-left: 20px;}
-        .sidebar {border: solid 0 lightgrey;padding: 0;}
-        .sidebar .sidebar-block {border: solid 1px lightgrey;padding: 10px;margin-bottom: 20px;margin-top: 20px;}
+        .sidebar .sidebar-block {padding: 10px;margin-bottom: 20px;margin-top: 20px;}
         .featured-article {padding-bottom: 10px;margin-bottom: 20px;}
         .featured-article article {padding-bottom: 20px;}
         .newsletter-full .featured-article {padding-bottom: 0;margin-bottom: 0;}
-        .latest-articles .paragraph-heading {background-color: #14674d;color: white;padding: 20px; height: 30px;}
+        .latest-articles .paragraph-heading {display: block; background-color: #14674d;color: white;padding: 20px; height: 30px; font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif; text-transform: uppercase;}
         .latest-articles {margin-top: 20px;}
         h2.calendar {background-color: #005a84;color: #ffffff;padding: 20px;}
         .newsletter-resources .btn.btn-secondary {width: 100%;padding-left: 10px;padding-right: 0;text-align: left;}
@@ -74,22 +74,23 @@
         .anchor:before {content: "";display: block;height: 120px;margin: -120px 0 0;}
         .newsletter-full .event-teaser-text h2 {margin-bottom: 10px;}
         .newsletter-full .event-location {font-weight: 500;margin: 0 0 10px;}
-        .social-links {display: flex;justify-content: center;margin-bottom: 10px;}
         .all-content article.newsletter-full {background-color: transparent;}
         .sidebar-block-heading {color: #2378cb;font-size: 22px;font-weight: 300;font-family: "Lato",sans-serif;text-align: center;text-transform: uppercase;line-height: normal;}
         .sidebar-block {border: solid 1px lightgrey;padding: 40px;margin-bottom: 40px;margin-top: 20px;}
-        img.logo {margin: 0 auto;display: flex;}
+        img.logo {margin: 0 auto;display: flex; padding: 0px; margin: 0px; display: block;}
         .float-left {float: left;margin-right: 10px;}
         .float-right {float: right;}
         .sidebar ul {list-style: none;padding: 10px;}
         .date-square {background-color: #ff7e00;height: 65px;width: 65px;color: #fff;float: left;margin-right: 20px;  }
         .date-square-month {font-size: 22px;text-transform: uppercase;color: #ffffff;line-height: normal;text-align: center;}
         .date-square-day {font-size: 32px;display: block;font-family: "Lato",sans-serif;font-weight: 700;color: #ffffff;line-height: normal;text-align: center;}
+        .sponsor-logo {width: 190px;margin: 0 auto 10px;}
+        .social-links {width: 190px;margin: 0 auto 10px;}
         .icon-social {width: 30px;height: 30px;border-radius: 5px;display: inline-block;margin-top: 20px;  }
-        .icon-website {background: #82b7bd url("http://dev.maseniorcare.org/themes/msca_theme/svg/external-website.svg") 0 no-repeat;background-size: auto auto;background-size: 30px;}
-        .icon-facebook {background: #3a589a url("http://dev.maseniorcare.org/themes/msca_theme/svg/facebook.svg") 10px no-repeat;background-size: auto auto;background-size: 20px;}
-        .icon-twitter {background: #00aced url("http://dev.maseniorcare.org/themes/msca_theme/svg/twitter.svg") 5px no-repeat;background-size: auto auto;background-size: 20px;}
-        .icon-linkedin {background: #0077B5 url("http://dev.maseniorcare.org/themes/msca_theme/svg/linkedin.svg") 5px no-repeat;background-size: auto auto;background-size: 20px;}
+        .icon-website {background-color: #82b7bd;}
+        .icon-facebook {background-color: #3a589a;}
+        .icon-twitter {background-color: #00aced;}
+        .icon-linkedin {background-color: #0077B5;}
         .btn {display: inline-block;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;text-transform: uppercase;
           padding: 10px 20px;font-size: 16px;transition: all 0.2s ease-in-out;border-radius: 0;border: none;position: relative;line-height: 1.6;
         }
@@ -111,34 +112,34 @@
     </head>
 <body class="page-node-type-newsletter">
   <article class="newsletter-full">
-    <table cellpadding="20px" id="backgroundTable">
+    <table cellpadding="20px" id="backgroundTable" style="border-collapse: collapse;">
       <tbody>
         <tr>
           <td>
-            <table width="700" cellpadding="0" cellspacing="0" border="0" align="center">
+            <table width="700" cellpadding="0" cellspacing="0" border="0" align="center" style="border-collapse: collapse;">
               <tbody>
               <tr>
                 <td align="center" height="30px">{{ 'If this page doesn\'t display properly in your email'|t }} <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'click here'|t }}</a></td>
               </tr>
               <tr>
                 <td>
-                  <table width="100%" class="newsletter-header lato">
+                  <table width="100%" class="newsletter-header lato" style="border-collapse: collapse;">
                     <tbody>
                     <tr>
                       <td width="25%" class="header-left logo">
                         {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-                        <a href="http://{{ base_path }}" target="_blank"><img alt="{{ 'Massachusetts Senior Care'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/msca-logo-email.png"/></a>
+                        <a href="http://{{ base_path }}" target="_blank"><img alt="{{ 'Massachusetts Senior Care'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/msca-logo-email.png" style="padding: 0px; margin: 0px; display: block;"/></a>
                       </td>
                       <td width="75%">
-                        <table width="100%" class="header-right">
+                        <table width="100%" class="header-right" style="border-collapse: collapse;">
                           <tbody>
                           <tr class="header-right-top">
                             <td>
-                              <table class="header-right-top-inner" width="100%">
+                              <table class="header-right-top-inner" width="100%" style="border-collapse: collapse;">
                                 <tbody>
                                 <tr>
                                   <td>
-                                    <img alt="{{ 'Your link to long term care news in Massachusetts'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/newsletter-banner-email.png"/>
+                                    <img alt="{{ 'Your link to long term care news in Massachusetts'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/newsletter-banner-email.png" style="padding: 0px; margin: 0px; display: block;"/>
                                   </td>
                                 </tr>
                                 </tbody>
@@ -147,10 +148,10 @@
                           </tr>
                           <tr>
                             <td>
-                              <table width="100%" cellpadding="20" bgcolor="#ff7e00" class="header-right-bottom" >
+                              <table width="100%" cellpadding="20" bgcolor="#ff7e00" class="header-right-bottom" style="border-collapse: collapse;">
                                 <tbody>
                                   <tr>
-                                    <td>
+                                    <td style="text-transform: uppercase; color: #ffffff;font-family: 'Lato', sans-serif;">
                                       {{ 'E-News Update:'|t }}&nbsp;
                                       {% if content.field_newsletter_date|render %}
                                         {{ node.field_newsletter_date.value }}
@@ -173,7 +174,7 @@
                 <td>
                   <!--featured-article-start -->
                   {% if content.field_featured_article|render %}
-                    <table class="feature-article-section">
+                    <table class="feature-article-section" style="border-collapse: collapse;">
                       <tbody>
                       <tr>
                         <td class="featured-article">{{ content.field_featured_article }}</td>
@@ -185,11 +186,11 @@
               </tr>
               <tr>
                 <td>
-                  <table class="main-section">
+                  <table class="main-section" style="border-collapse: collapse;">
                     <tbody>
                     <tr>
                       <td class="main-section-left" width="70%">
-                        <table width="100%">
+                        <table width="100%" style="border-collapse: collapse;">
                           <tbody>
                           <tr class="latest-articles">
                             <td>{{ content.field_newsletter_section }}</td>
@@ -198,11 +199,11 @@
                         </table>
                       </td>
                       <td valign="top" width="30%">
-                        <table cellpadding="10" class="sidebar">
+                        <table cellpadding="10" class="sidebar" style="border-collapse: collapse; border: solid 1px lightgrey;">
                           <tbody>
                           {% if content.field_sponsor|render %}
                             <tr>
-                              <td align="center" class="sponsors sidebar-block-heading">
+                              <td align="center" class="sponsors sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
                                 <h2>{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
                               </td>
                             </tr>
@@ -213,38 +214,42 @@
                             </tr>
                           {% endif %}
                           <tr>
-                            <td align="center" height="30px" class="toc sidebar-block-heading">
+                            <td align="center" height="30px" class="toc sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
                               <h2>{{ 'In This Issue'|t }}</h2>
                             </td>
                           </tr>
                           <tr>
                             <td class="toc sidebar-block">
-                              <ul class="list-unstyled issue-toc">
-                                {% for item in node.field_featured_article %}
-                                  <li><a href="#{{ item.entity.id }}">{{ item.entity.label }}</a></li>
-                                {% endfor %}
-                                {% for item in node.field_newsletter_section %}
-                                  {% for article in item.entity.fields.field_featured_articles %}
-                                    <li><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></li>
+                              <table class="list-unstyled issue-toc" cellpadding="10" style="color: #2378cb;font-weight: bold; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
+                                <tbody>
+                                  {% for item in node.field_featured_article %}
+                                    <tr><td><a href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
                                   {% endfor %}
-                                {% endfor %}
-                              </ul>
+                                  {% for item in node.field_newsletter_section %}
+                                    {% for article in item.entity.fields.field_featured_articles %}
+                                      <tr><td><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
+                                    {% endfor %}
+                                  {% endfor %}
+                                </tbody>
+                              </table>
                             </td>
                           </tr>
                           <tr>
-                            <td align="center" height="30px" class="resources sidebar-block-heading">
+                            <td align="center" height="30px" class="resources sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
                               <h2>{{ 'Resources'|t }}</h2>
                             </td>
                           </tr>
                           <tr>
                             <td class="resources sidebar-block">
-                              <ul class="list-unstyled issue-toc newsletter-resources">
-                                <li><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></li>
-                                <li><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></li>
-                                <li><a class="btn btn-secondary" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></li>
-                                <li><a class="btn btn-secondary" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></li>
-                                <li><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></li>
-                              </ul>
+                              <table class="list-unstyled issue-toc newsletter-resources" cellpadding="20" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
+                                <tbody>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></td></tr>
+                                </tbody>
+                              </table>
                             </td>
                           </tr>
                           </tbody>
@@ -254,19 +259,75 @@
                     </tbody>
                   </table>
                   {% if content.field_calendar|render %}
-                  <table class="events">
+                  <table width="100%" class="events" style="border-collapse: collapse;">
                     <tbody>
                       <tr>
                         <td>
                           <a name="calendar"></a>
                           <h2 class="calendar">{{ 'Upcoming Education & Events'|t }}</h2>
-                          {{ content.field_calendar }}
                         </td>
                       </tr>
                     </tbody>
                   </table>
+                  {% for item in node.field_calendar %}
+                    <table cellpadding="10" style="margin-bottom: 40px;">
+                      <tbody>
+                      <tr>
+                        <td valign="top">
+                          <table bgcolor="#ff7e00" width="80" height="80" style="text-transform: uppercase; font-size: 32px; text-align: center; color: #ffffff; padding: 10px;">
+                            <tbody>
+                            <tr><td>{{ item.entity.field_date.value|date('M') }}</td></tr>
+                            <tr><td>{{ item.entity.field_date.value|date('j') }}</td></tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td>
+                          <table width="620">
+                            <tbody>
+                            <tr>
+                              <td>
+                                {% for category in item.entity.field_event_category %}
+                                  {{ category.entity.label }}
+                                {% endfor %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td><h2><a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">{{ item.entity.label }}</a></h2></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                {% if item.entity.field_location.locality %}
+                                  {{ item.entity.field_location.locality }},
+                                {% endif %}
+                                {% if item.entity.field_location.administrative_area %}
+                                  {{ item.entity.field_location.administrative_area }}
+                                {% endif %}
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">
+                          <table>
+                            <tbody>
+                            <tr>
+                              <td>
+                                {% set text = item.entity.body.value|render|striptags %}
+                                <p>{{ text|length > 200 ? text|slice(0, 400)|raw ~ '...' : text|raw }}</p>
+                                <a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">{{ ('Read more')|t }}</a>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  {% endfor %}
                   {% endif %}
-                  <table class="footer">
+                  <table class="footer" style="border-collapse: collapse;">
                     <tbody>
                     <tr>
                       <td class="footer-top" bgcolor="#2378cb" style="padding:8px 15px; text-align:center">
