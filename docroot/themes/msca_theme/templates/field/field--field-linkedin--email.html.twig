@@ -38,6 +38,15 @@
 #}
 
 {# We can't rely on background image for this icon in the newslettter because MS Outlook mail client won't display it. #}
+{# MS Outlook needs this to be a table so we can add background color. #}
 {% for item in items %}
-    <a href="{{ item.content }}" class="icon-social icon-linkedin" style="margin: 20px 5px 0;" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/linkedin.png" style="width: 30px; height: 30px;" alt="Linkedin icon"/></a>
+<table bgcolor="#0077B5" cellpadding="10" width="50">
+    <tbody>
+        <tr>
+            <td>
+                <a href="{{ item.content }}" class="icon-social icon-linkedin" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/linkedin.png" style="width: 30px; height: 30px;" alt="Linkedin icon"/></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 {% endfor %}

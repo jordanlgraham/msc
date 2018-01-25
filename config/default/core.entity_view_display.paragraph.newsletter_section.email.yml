@@ -1,0 +1,35 @@
+uuid: f1b3f811-c134-48fa-b457-cfb4e49f7c51
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.email
+    - field.field.paragraph.newsletter_section.field_featured_articles
+    - field.field.paragraph.newsletter_section.field_newsletter_topic
+    - paragraphs.paragraphs_type.newsletter_section
+id: paragraph.newsletter_section.email
+targetEntityType: paragraph
+bundle: newsletter_section
+mode: email
+content:
+  field_featured_articles:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: email
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_newsletter_topic:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
