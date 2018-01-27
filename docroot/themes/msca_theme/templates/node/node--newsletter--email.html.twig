@@ -13,6 +13,7 @@
       <script src="https://use.fontawesome.com/d08038767f.js"></script>
       <style type="text/css">
         /* Font styles */
+        @import url("http://{{ base_path }}/libraries/fontawesome/css/font-awesome.min.css");
         @media screen {
           @font-face {
             font-family: 'Lato';
@@ -23,7 +24,7 @@
         }
 
         /* email boilerplate styles */
-        #outlook a {padding:0; color: #2378cb!important}
+        #outlook a {padding:0; color: #2378cb;text-decoration:none!important;}
         body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
         .ExternalClass {width:100%;}
         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
@@ -32,24 +33,24 @@
         a img {border:none; padding: 0px; margin: 0px; display: block;}
         .image_fix {display:block;}
         p {margin: 1em 0; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
-        h1, h2, h3, h4 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;kifgtyhujkl;  }
-        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb !important; font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;}
+        h2 {margin:0!important;}
+        h1, h2, h3, h4 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;kifgtyhujkl;  }
+        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb;text-decoration!important:none;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h2 a {text-transform: uppercase;font-weight: bold;}
-        h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {color: #2378cb!important;}
-        h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {color: #2378cb!important;}
+        h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {color: #2378cb;text-decoration:none;}
+        h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {color: #2378cb;text-decoration:none;}
         table td {border-collapse: collapse;}
         table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-        a {color: #2378cb;text-decoration: none;}
-        .toc a {color: #2378cb;}
+        a {color: #2378cb;text-decoration: none!important;}
+        .toc a {color: #2378cb;text-decoration:none;}
 
         /* MSCA styles */
         body, p, article div {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
-        .lato, .paragraph div, h2 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;}
+        .lato, .paragraph div, h2 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         .paragraph--view-mode--default {margin-bottom: 40px;}
         article h2 {font-size: 18px;text-decoration: none;line-height: normal;}
         .newsletter-full aside .sidebar-block {margin-bottom: 20px;}
         .newsletter-full .newsletter-header {font-family: 'Lato', sans-serif;text-align: center;text-transform: uppercase;color: #ffffff;}
-        .newsletter-full .header-left > div {display: flex;justify-content: left;}
         .newsletter-full .header-right-top-inner {background-color: rgba(0, 0, 0,.6);padding: 40px;}
         .newsletter-full .header-right-bottom {background-color: #ff7e00;padding: 20px;border-top: solid 2px white;text-align: center;color: #ffffff;font-size: 24px;}
         .newsletter-full .your-link-to {color: #999999;font-size: 20px;font-weight: 300;text-align: center;}
@@ -67,7 +68,6 @@
         .newsletter-full .featured-article {padding-bottom: 0;margin-bottom: 0;}
         .latest-articles {margin-top: 20px;}
         h2.calendar {background-color: #005a84;color: #ffffff;padding: 20px;}
-        .newsletter-resources .btn.btn-secondary {width: 100%;padding-left: 10px;padding-right: 0;text-align: left;}
         .anchor:before {content: "";display: block;height: 120px;margin: -120px 0 0;}
         .newsletter-full .event-teaser-text h2 {margin-bottom: 10px;}
         .newsletter-full .event-location {font-weight: 500;margin: 0 0 10px;}
@@ -75,8 +75,6 @@
         .sidebar-block-heading {color: #2378cb;font-size: 22px;font-weight: 300;font-family: "Lato",sans-serif;text-align: center;text-transform: uppercase;line-height: normal;}
         .sidebar-block {border: solid 1px lightgrey;padding: 40px;margin-bottom: 40px;margin-top: 20px;}
         img.logo {margin: 0 auto;display: flex; padding: 0px; margin: 0px; display: block;}
-        .float-left {float: left;margin-right: 10px;}
-        .float-right {float: right;}
         .sidebar ul {list-style: none;padding: 10px;}
         .date-square {background-color: #ff7e00;height: 65px;width: 65px;color: #fff;float: left;margin-right: 20px;  }
         .date-square-month {font-size: 22px;text-transform: uppercase;color: #ffffff;line-height: normal;text-align: center;}
@@ -93,7 +91,7 @@
         .footer p {color: #fff;}
         .footer-top p {font-size: 16px;}
         .footer-bottom p {font-size: 12px;}
-        .footer a {color: #fff; text-decoration: underline;}
+        .footer a {color: #fff; text-decoration:none;}
       </style>
       <!--[if gte mso 9]>
       <style type="text/css">
@@ -143,7 +141,7 @@
                               <table width="100%" cellpadding="20" bgcolor="#ff7e00" class="header-right-bottom" style="border-collapse: collapse;">
                                 <tbody>
                                   <tr>
-                                    <td style="text-transform: uppercase; color: #ffffff;font-family: 'Lato', sans-serif;">
+                                    <td style="text-transform: uppercase;color: #ffffff;font-family: 'Lato', sans-serif;font-size:24px;">
                                       {{ 'E-News Update:'|t }}&nbsp;
                                       {% if content.field_newsletter_date|render %}
                                         {{ node.field_newsletter_date.value }}
@@ -215,11 +213,11 @@
                               <table class="list-unstyled issue-toc" cellpadding="10" style="color: #2378cb;font-weight: bold; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
                                 <tbody>
                                   {% for item in node.field_featured_article %}
-                                    <tr><td><a href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
+                                    <tr><td><a style="text-decoration:none;" href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
                                   {% endfor %}
                                   {% for item in node.field_newsletter_section %}
                                     {% for article in item.entity.fields.field_featured_articles %}
-                                      <tr><td><a href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
+                                      <tr><td><a style="text-decoration:none;" href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
                                     {% endfor %}
                                   {% endfor %}
                                 </tbody>
@@ -233,13 +231,13 @@
                           </tr>
                           <tr>
                             <td class="resources sidebar-block">
-                              <table class="list-unstyled issue-toc newsletter-resources" cellpadding="20" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
+                              <table width="100%" class="list-unstyled issue-toc newsletter-resources" cellpadding="20" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
                                 <tbody>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb;"><a class="btn btn-secondary" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></td></tr>
                                 </tbody>
                               </table>
                             </td>
