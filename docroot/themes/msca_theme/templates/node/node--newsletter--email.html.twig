@@ -10,6 +10,7 @@
           {{ content.field_newsletter_date }}
         {%  endif %}
       </title>
+      <script src="https://use.fontawesome.com/d08038767f.js"></script>
       <style type="text/css">
         /* Font styles */
         @media screen {
@@ -64,14 +65,9 @@
         .featured-article {padding-bottom: 10px;margin-bottom: 20px;}
         .featured-article article {padding-bottom: 20px;}
         .newsletter-full .featured-article {padding-bottom: 0;margin-bottom: 0;}
-        .latest-articles .paragraph-heading {display: block; background-color: #14674d;color: white;padding: 20px; height: 30px; font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif; text-transform: uppercase;}
         .latest-articles {margin-top: 20px;}
         h2.calendar {background-color: #005a84;color: #ffffff;padding: 20px;}
         .newsletter-resources .btn.btn-secondary {width: 100%;padding-left: 10px;padding-right: 0;text-align: left;}
-        .paragraph--type--newsletter-section > h2 {color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px;background-color: #005a84}
-        .paragraph--type--newsletter-section:nth-child(3n+1) > h2 {background-color: #14674d;}
-        .paragraph--type--newsletter-section:nth-child(3n+2) > h2 {background-color: #2378cb}
-        .paragraph--type--newsletter-section:nth-child(3n+3) > h2 {background-color: #005a84;}
         .anchor:before {content: "";display: block;height: 120px;margin: -120px 0 0;}
         .newsletter-full .event-teaser-text h2 {margin-bottom: 10px;}
         .newsletter-full .event-location {font-weight: 500;margin: 0 0 10px;}
@@ -260,7 +256,13 @@
                       <tr>
                         <td>
                           <a name="calendar"></a>
-                          <h2 class="calendar">{{ 'Upcoming Education & Events'|t }}</h2>
+                          <table width="100%" bgcolor="#005a84" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:18px;font-weight: bold;">
+                            <tbody>
+                              <tr>
+                                <td>{{ 'Upcoming Education & Events'|t }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </td>
                       </tr>
                     </tbody>

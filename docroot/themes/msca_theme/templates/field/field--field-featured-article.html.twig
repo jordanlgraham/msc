@@ -36,7 +36,6 @@
  * @see template_preprocess_field()
  */
 #}
-
 {% if label_hidden %}
   {% if multiple %}
     <div{{ attributes }}>
@@ -51,7 +50,7 @@
   {% endif %}
 {% else %}
   <div{{ attributes }}>
-    <div{{ title_attributes.addClass('label') }}>{{ label }}</div>
+    <table bgcolor="#2378cb" width="100%" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:18px;font-weight: bold;"><tbody><tr><td>{{ label }}</td></tr></tbody></table>
     {% if multiple %}
       <div>
     {% endif %}

@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ * Overriding Newsletter Topic field because we need to render it in a table so it can be formatted for MS Outlook.
+ */
+#}
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes }}>
+      {% for item in items %}
+        <table width="100%" bgcolor="#14674d" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:18px;font-weight: bold;"><tbody><tr><td>{{ item.content }}</td></tr></tbody></table>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <table width="100%" bgcolor="#14674d" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:18px;font-weight: bold;"><tbody><tr><td>{{ item.content }}</td></tr></tbody></table>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes }}>
+    <div{{ attributes }}>{{ label }}</div>
+    {% if multiple %}
+      <div>
+    {% endif %}
+    {% for item in items %}
+      <div{{ attributes }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
