@@ -16,7 +16,7 @@
       {% endif %}
       <div class="event-teaser-text">
           <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            <a href="{{ url }}" style="text-decoration:none;" rel="bookmark">{{ label }}</a>
           </h2>
           {{ content.body }}
           {% set text = content.body|render|striptags %}

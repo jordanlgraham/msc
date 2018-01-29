@@ -22,25 +22,38 @@
     {% set logopath = node.field_logo.entity.fileuri %}
     {% set logostyle = logopath|image_style('sponsor_logo_large_190x110_') %}
     {% if logopath is defined and logopath is not empty %}
-      <div class="sponsor-logo"><img src="{{ url('<front>') }}{{ file_url(logostyle) }}" class="logo"></div>
+      <table class="sponsor-logo">
+        <tbody>
+          <tr>
+            <td>
+              <img src="{{ url('<front>') }}{{ file_url(logostyle) }}" class="logo">
+            </td>
+          </tr>
+        </tbody>
+      </table>
     {% endif %}
-    <div class="social-links">
-      {% if content.field_facebook|render %}
-        {{ content.field_facebook }}
-      {% endif %}
-      {% if content.field_twitter|render %}
-        {{ content.field_twitter }}
-      {% endif %}
-      {% if content.field_linkedin|render %}
-        {{ content.field_linkedin }}
-      {% endif %}
-      {% if content.field_web_address|render %}
-        {{ content.field_web_address }}
-      {% endif %}
-    </div>
-    {% if content.body|render %}
-      {{ content.body }}
-    {% endif %}
+    <table class="social-links">
+      <tbody>
+        <tr>
+        {% if content.field_facebook|render %}
+          <td>{{ content.field_facebook }}</td>
+        {% endif %}
+        {% if content.field_twitter|render %}
+          <td>{{ content.field_twitter }}</td>
+        {% endif %}
+        {% if content.field_linkedin|render %}
+          <td>{{ content.field_linkedin }}</td>
+        {% endif %}
+        {% if content.field_web_address|render %}
+          <td>{{ content.field_web_address }}</td>
+        {% endif %}
+        </tr>
+        {% if content.body|render %}
+           <tr><td colspan="4">{{ content.body }}</td></tr>
+        {% endif %}
+      </tbody>
+    </table>
+
 
 
 

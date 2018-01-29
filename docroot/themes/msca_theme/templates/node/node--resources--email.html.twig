@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * Theme override to display a Resources node email display.
+ * Tables are needed as this will be rendered in email clients like MS Outlook.
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a class="anchor" name="{{ node.id }}"></a>
+<article{{ attributes.addClass('pb-5') }}>
+    <table cellspacing="10">
+      <tbody>
+      <tr>
+        <td valign="top">
+          <h2{{ title_attributes }}>
+              {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+            <a href="http://{{ base_path }}{{ url }}" style="text-decoration:none;" rel="bookmark">{{ label }}</a>
+          </h2>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ content.body }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <table width="300" cellspacing="10">
+      <tbody>
+      <tr>
+        <td>
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+        </td>
+        <td>
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
+        </td>
+        <td>
+          <i class="fa fa-print" aria-hidden="true"></i>
+          <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  {% endif %}
+</article>
+{# Need space between articles in Outlook. #}
+<table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
