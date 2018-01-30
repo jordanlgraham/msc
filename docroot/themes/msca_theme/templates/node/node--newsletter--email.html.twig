@@ -308,7 +308,7 @@
                               </td>
                             </tr>
                             <tr>
-                              <td><h2><a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">{{ item.entity.label }}</a></h2></td>
+                              <td><h2 style="margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;"><a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank" style="font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ item.entity.label }}</a></h2></td>
                             </tr>
                             <tr>
                               <td>
@@ -345,16 +345,16 @@
                     <table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
                   {% endfor %}
                   {% endif %}
-                  <table class="footer" style="border-collapse: collapse;">
+                  <table class="footer" style="border-collapse:collapse;color:#ffffff;">
                     <tbody>
                     <tr>
-                      <td class="footer-top" bgcolor="#2378cb" style="padding:8px 15px; text-align:center">
+                      <td class="footer-top" bgcolor="#2378cb" style="padding:8px 15px; text-align:center;color:#ffffff;">
                         <p>{{ ('Representing Massachusetts\' nursing facilities and other organizations that provide health care and community for older adults and people with disabilities.')|t }}
                         </p>
                       </td>
                     </tr>
                     <tr>
-                      <td class="footer-bottom" bgcolor="#000000" style="padding:8px 15px;text-align:center">
+                      <td class="footer-bottom" bgcolor="#000000" style="padding:8px 15px;text-align:center;color:#ffffff;">
                         <p>
                           <a href="http://www.maseniorcare.org" target="_blank">{{ ('Massachusetts Senior Care Association.')|t }}</a>{{ ('800 South Street - Suite 280, Waltham, MA 02453')|t }}<br />
                           <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a>. {{ ('phone:')|t }} 617.558.0202 . {{ ('fax:')|t }} 617.558.3546 <br />
