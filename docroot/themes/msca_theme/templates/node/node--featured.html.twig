@@ -26,7 +26,23 @@
         <a href="http://{{ base_path }}{{ url }}" style="text-decoration:none;" rel="bookmark">{{ label }}</a>
       </h2>
       {{ content.body }}
-      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+          <table width="100%" border="0" cellspacing="10" style="border-collapse: collapse;">
+              <tbody>
+              <tr>
+                  <td style="width: 82%;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
+                      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+                  </td>
+                  <td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                      <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
+                  </td>
+                  <td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
+                      <i class="fa fa-print" aria-hidden="true"></i>
+                      <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
   </div>
 
 </article>
