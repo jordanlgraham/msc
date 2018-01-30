@@ -45,17 +45,17 @@
         </tr>
         </tbody>
       </table>
-    <table width="300" cellspacing="10">
+    <table width="100%" cellspacing="10">
       <tbody>
       <tr>
-        <td>
+        <td style="width: 60%;padding:0;vertical-align: top;">
           <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
         </td>
-        <td>
+        <td style="text-align:right;padding:0;vertical-align: top;">
           <i class="fa fa-envelope-o" aria-hidden="true"></i>
           <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
         </td>
-        <td>
+        <td style="text-align:right;padding:0;vertical-align: top;">
           <i class="fa fa-print" aria-hidden="true"></i>
           <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
         </td>
