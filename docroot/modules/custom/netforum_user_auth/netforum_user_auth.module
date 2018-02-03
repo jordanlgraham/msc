@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\netforum_user_auth\Controller\NetforumSso;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\netforum_user_auth\PasswordExpiredException;
 use Drupal\Core\Url;
 
 /**
@@ -85,6 +86,11 @@ function netform_user_auth_login_authenticate_validate($form, FormStateInterface
     if ($account) {
       $form_state->set('uid', $account->id());
     }
+  }
+  catch (PasswordExpiredException $exception) {
+    $form_state->setErrorByName('', t('Your password has expired. <a href="@url">Click here</a> to reset it.', [
+      '@url' => Url::fromUri(\Drupal\netforum_user_auth\Auth::RESET_PASSWORD_URL)->toString(),
+    ]));
   }
   catch (Exception $e) {
     \Drupal::logger('netforum_user_auth')->error('Unable to authenticate @user against Netforum. Error: %err', [

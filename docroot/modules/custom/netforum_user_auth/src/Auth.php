@@ -25,6 +25,7 @@ class Auth {
   private $externalAuth;
 
   const AUTH_PROVIDER = 'netforum';
+  const RESET_PASSWORD_URL = 'https://netforum.avectra.com/eweb/DynamicPage.aspx?WebCode=ForgotPassword&Site=MSCA';
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager, GetClient $getClient,
                               ExternalAuthInterface $externalAuth) {
@@ -42,24 +43,29 @@ class Auth {
   public function authenticate($email, $password) {
     $user_attributes = $this->CheckEWebUser($email, $password);
     if(!empty($user_attributes)) {
-      $existing = $this->userStorage->loadByProperties(['mail' => $email]);
-      // User already has an MSCA account, link it with Netforum via email address.
-      if ($existing) {
-        $account = end($existing);
-        $this->externalAuth->linkExistingAccount($email, self::AUTH_PROVIDER, $account);
-        return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
+      if ($user_attributes['force_password_change']) {
+        throw new PasswordExpiredException();
       }
       else {
-        $roles = [];
-        if ($user_attributes['member']) {
-          $roles[] = 'member';
+        $existing = $this->userStorage->loadByProperties(['mail' => $email]);
+        // User already has an MSCA account, link it with Netforum via email address.
+        if ($existing) {
+          $account = end($existing);
+          $this->externalAuth->linkExistingAccount($email, self::AUTH_PROVIDER, $account);
+          return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
         }
-        return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
-          'name' => $email,
-          'mail' => $email,
-          'pass' => $password,
-          'roles' => $roles,
-        ]);
+        else {
+          $roles = [];
+          if ($user_attributes['member']) {
+            $roles[] = 'member';
+          }
+          return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
+            'name' => $email,
+            'mail' => $email,
+            'pass' => $password,
+            'roles' => $roles,
+          ]);
+        }
       }
     } else {
       return false;
@@ -97,6 +103,7 @@ class Auth {
             'name' => $array['Result']['cst_name_cp'],
             'member' => (bool)$array['Result']['cst_member_flag'],
             'receives_benefits' => (bool)$array['Result']['cst_receives_benefits_flag'],
+            'force_password_change' => (bool)$array['Result']['cst_web_force_password_change'],
           );
           $users[$email] = $attributes;
           return $attributes;

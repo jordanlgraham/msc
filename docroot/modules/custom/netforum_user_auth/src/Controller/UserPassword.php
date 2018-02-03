@@ -5,6 +5,8 @@ namespace Drupal\netforum_user_auth\Controller;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
+use Drupal\netforum_user_auth\Auth;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserPassword extends ControllerBase {
@@ -18,10 +20,7 @@ class UserPassword extends ControllerBase {
    * @return array|\Drupal\Core\Routing\TrustedRedirectResponse
    */
   public function netforumPass(Request $request) {
-    $url = $this->config('netforum_user_auth.config')->get('password_reset');
-    if (UrlHelper::isValid($url, TRUE) && ($request->get('redirect') !== 'false')) {
-      return new TrustedRedirectResponse($url);
-    }
-    return $this->formBuilder()->getForm('\Drupal\user\Form\UserPasswordForm');
+    $url = Auth::RESET_PASSWORD_URL;
+    return new TrustedRedirectResponse($url);
   }
 }
