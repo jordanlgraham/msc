@@ -1,0 +1,8 @@
+external-sso:
+  version: VERSION
+  js:
+    js/nfsso.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupalSettings

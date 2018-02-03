@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\netforum_user_auth\Controller\NetforumSso;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -139,18 +140,26 @@ function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state)
   if (\Drupal::currentUser()->isAnonymous()) {
     return;
   }
-  $nfUrl = \Drupal::request()->get(NetforumSso::NETFORUM_REDIRECT_URL_KEY);
-  if (empty($nfUrl)) {
-    return;
-  }
   // Construct a URL with the token.
   /** @var \Drupal\netforum_user_auth\Auth $auth */
   try {
     // Get the token from NF.
     $auth = \Drupal::service('netforum_user_auth.auth');
     $token = $auth->getSsoToken($form_state->getValue('name'), $form_state->getValue('pass'));
-    $redirect_url = $auth->getSsoUrl($token, $nfUrl);
-    $response = new TrustedRedirectResponse($redirect_url->toString());
+    $query = [];
+    // Set up the parameters for redirection.
+    $nfUrl = \Drupal::request()->get(NetforumSso::NETFORUM_REDIRECT_URL_KEY);
+    if (!empty($nfUrl)) {
+      $query['nfUrl'] = $nfUrl;
+    }
+    else {
+      $query['redirect'] = \Drupal::destination()->get();
+    }
+    // Redirect to the special SSO page. Parameters preserved here and used for the final redirect.
+    $query['token'] = urlencode($token);
+    \Drupal::request()->query->remove('destination');
+    $redirect = Url::fromRoute('netforum_user_auth.login_insert', [], ['query' => $query]);
+    $response = new \Symfony\Component\HttpFoundation\RedirectResponse($redirect->toString());
     // Set the redirect.
     $form_state->setResponse($response);
   }

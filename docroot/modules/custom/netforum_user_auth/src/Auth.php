@@ -123,7 +123,7 @@ class Auth {
     $params = array(
       'Email' => $email,
       'Password' => $password,
-      'Minutes' => 10,
+      'Minutes' => 2,
       'AuthToken' => $auth_headers->data['Token'],
     );
     $response_headers = $this->get_client->getResponseHeaders();
@@ -164,6 +164,28 @@ class Auth {
     $query = array_merge($redirect_query, $token_query);
     return Url::fromUri($url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'],
       ['query' => $query, 'external' => TRUE]);
+  }
+
+  /**
+   * Expire a login token so it can't be used again.
+   *
+   * @param $token
+   *
+   * @return bool
+   */
+  public function expireSsoToken($token) {
+    $client = $this->get_client->GetClient($this->get_client::SSO);
+    $auth_headers = $this->get_client->getSsoAuthHeaders();
+    $params = array(
+      'szToken' => $token,
+    );
+    $response_headers = $this->get_client->getResponseHeaders();
+    try {
+      $response = $client->__soapCall('LogOutToken', array('parameters' => $params), NULL, $auth_headers, $response_headers);
+    }
+    catch (\Exception $exception) {
+      return FALSE;
+    }
   }
 
   public function userIsMember($email, $password) {
