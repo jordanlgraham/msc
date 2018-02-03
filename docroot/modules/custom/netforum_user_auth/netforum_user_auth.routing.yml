@@ -7,3 +7,23 @@ netforum_user_auth.sso:
     _access: 'TRUE'
   options:
     _no_cache: 'TRUE'
+
+netforum_user_auth.login_insert:
+  path: '/netforum/external-auth'
+  defaults:
+    _controller: '\Drupal\netforum_user_auth\Controller\ExternalAuth::page'
+    _title: 'Logging in...'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+  options:
+      _no_cache: 'TRUE'
+
+netforum_user_auth.expire_token:
+  path: '/netforum/expire'
+  defaults:
+    _controller: '\Drupal\netforum_user_auth\Controller\ExternalAuth::expire'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+  methods: ['POST']
+  options:
+      _no_cache: 'TRUE'
