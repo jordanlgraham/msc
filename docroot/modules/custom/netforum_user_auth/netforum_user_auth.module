@@ -159,7 +159,12 @@ function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state)
       $query['nfUrl'] = $nfUrl;
     }
     else {
-      $query['redirect'] = \Drupal::destination()->get();
+      $destination = \Drupal::destination()->get();
+      // Don't redirect to the user page but preserve other set destinations.
+      if ($destination === '/user/login') {
+        $destination = '<front>';
+      }
+      $query['redirect'] = $destination;
     }
     // Redirect to the special SSO page. Parameters preserved here and used for the final redirect.
     $query['token'] = urlencode($token);

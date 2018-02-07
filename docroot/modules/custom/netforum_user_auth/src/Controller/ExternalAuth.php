@@ -53,7 +53,12 @@ class ExternalAuth extends ControllerBase {
       $url = Url::fromUri(urldecode($nfDestination));
     }
     else {
-      $url = Url::fromUserInput($destination);
+      if ($destination === '<front>') {
+        $url = Url::fromRoute('<front>');
+      }
+      else {
+        $url = Url::fromUserInput($destination);
+      }
     }
 
     $build['link'] = [
