@@ -74,7 +74,11 @@
   <div class="col-md-6">
     {# Facility Info #}
     {% for item in node.field_job_posting_org %}
-      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
+        {% if item.entity.isPublished() %}
+            <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
+        {% else %}
+            <div{{ attributes.addClass('job-org') }}>{{ item.entity.label }}</div>
+        {% endif %}
     {% endfor %}
 
     {% if content.field_job_posting_org_address|render %}
