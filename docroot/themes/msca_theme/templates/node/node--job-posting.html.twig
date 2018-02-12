@@ -74,76 +74,84 @@
   <div class="col-md-6">
     {# Facility Info #}
     {% for item in node.field_job_posting_org %}
-        {% if item.entity.isPublished() %}
-            <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
-        {% else %}
-            <div{{ attributes.addClass('job-org') }}>{{ item.entity.label }}</div>
-        {% endif %}
+    {% if node.field_job_posting_org.entity.title.value == 'Massachusetts Senior Care Association' %}
+      <div{{ attributes.addClass('job-org') }}>{{ item.entity.label }}</div>
+    {% else %}
+      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
+    {% endif %}
     {% endfor %}
 
     {% if content.field_job_posting_org_address|render %}
       {{ content.field_job_posting_org_address }}
     {% endif %}
 
-    {% if content.field_job_posting_org_phone %}
+    {% if content.field_job_posting_org_phone|render %}
       <div class="row">
+        {% if node.field_job_posting_org.entity.title.value == 'Massachusetts Senior Care Association' %}
+          <span class="col-md-4">{{ 'Phone'|t }}</span>
+        {% else %}
           <span class="col-md-4">{{ 'Facility Phone'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_org_phone }}</span>
+        {% endif %}
+        <span class="col-md-8">{{ content.field_job_posting_org_phone }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_org_fax|render %}
       <div class="row">
+        {% if node.field_job_posting_org.entity.title.value == 'Massachusetts Senior Care Association' %}
+          <span class="col-md-4">{{ 'Fax'|t }}</span>
+        {% else %}
           <span class="col-md-4">{{ 'Facility Fax'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_org_fax }}</span>
+        {% endif %}
+        <span class="col-md-8">{{ content.field_job_posting_org_fax }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_hours|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Hours'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_hours }}</span>
+        <span class="col-md-4">{{ 'Hours'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_hours }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_shift|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Shift'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_shift }}</span>
+        <span class="col-md-4">{{ 'Shift'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_shift }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_contact_name|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Contact'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_contact_name }}</span>
+        <span class="col-md-4">{{ 'Contact'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_contact_name }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_contact_telephone|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Contact Phone'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_contact_telephone }}</span>
+        <span class="col-md-4">{{ 'Contact Phone'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_contact_telephone }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_contact_fax|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Contact Fax'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_contact_fax }}</span>
+        <span class="col-md-4">{{ 'Contact Fax'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_contact_fax }}</span>
       </div>
     {% endif %}
 
     {% if content.field_job_posting_contact_email|render %}
       <div class="row">
-          <span class="col-md-4">{{ 'Contact Email'|t }}</span>
-          <span class="col-md-8">{{ content.field_job_posting_contact_email }}</span>
+        <span class="col-md-4">{{ 'Contact Email'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_contact_email }}</span>
       </div>
     {% endif %}
     
     <div class="row">
-        <span class="col-md-4">{{ 'Posted'|t }}</span>
-        <span class="col-md-8">{{ date }}</span>
+      <span class="col-md-4">{{ 'Posted'|t }}</span>
+      <span class="col-md-8">{{ date }}</span>
     </div>
   </div>
   <div class="col-md-6">
