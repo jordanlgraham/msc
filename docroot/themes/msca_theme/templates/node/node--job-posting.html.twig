@@ -74,11 +74,13 @@
   <div class="col-md-6">
     {# Facility Info #}
     {% for item in node.field_job_posting_org %}
-    {% if node.field_job_posting_org.entity.title.value == 'Massachusetts Senior Care Association' %}
-      <div{{ attributes.addClass('job-org') }}>{{ item.entity.label }}</div>
-    {% else %}
-      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
-    {% endif %}
+      {% if item.entity.isPublished() %}
+        {% if node.field_job_posting_org.entity.title.value == 'Massachusetts Senior Care Association' %}
+          <div{{ attributes.addClass('job-org') }}>{{ item.entity.label }}</div>
+        {% else %}
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" >{{ item.entity.label }}</a>
+        {% endif %}
+      {% endif %}
     {% endfor %}
 
     {% if content.field_job_posting_org_address|render %}
