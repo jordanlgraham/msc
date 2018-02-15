@@ -81,7 +81,7 @@ class GetClient {
       }
       else {
         $wsdl = drupal_get_path('module', 'netforum_soap') . '/src/netForumXMLOnDemand.xml';
-        $client = new SoapClient('netForumXMLOnDemand.xml', array('trace' => 1));
+        $client = new SoapClient($wsdl, array('trace' => 1));
       }
       return $client;
     }
