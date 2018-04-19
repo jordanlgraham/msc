@@ -35,6 +35,9 @@
     <table class="social-links">
       <tbody>
         <tr>
+        {% if content.field_web_address|render %}
+          <td>{{ content.field_web_address }}</td>
+        {% endif %}
         {% if content.field_facebook|render %}
           <td>{{ content.field_facebook }}</td>
         {% endif %}
@@ -43,9 +46,6 @@
         {% endif %}
         {% if content.field_linkedin|render %}
           <td>{{ content.field_linkedin }}</td>
-        {% endif %}
-        {% if content.field_web_address|render %}
-          <td>{{ content.field_web_address }}</td>
         {% endif %}
         </tr>
         {% if content.body|render %}

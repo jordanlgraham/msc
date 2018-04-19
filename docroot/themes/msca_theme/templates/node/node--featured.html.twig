@@ -30,16 +30,16 @@
               <tbody>
               <tr>
                   <td style="width: 82%;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
-                      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+                      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-size: 14px;font-weight: bold;">{{ 'Read more'|t }}</a>
                   </td>
-                  <td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
-                      <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                      <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
-                  </td>
-                  <td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
-                      <i class="fa fa-print" aria-hidden="true"></i>
-                      <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
-                  </td>
+                  {#<td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">#}
+                      {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
+                      {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
+                  {#</td>#}
+                  {#<td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">#}
+                      {#<i class="fa fa-print" aria-hidden="true"></i>#}
+                      {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
+                  {#</td>#}
               </tr>
               </tbody>
           </table>

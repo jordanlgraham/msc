@@ -36,16 +36,21 @@
  * @see template_preprocess_field()
  */
 #}
+
 {% if label_hidden %}
   {% if multiple %}
-    <h2{{ attributes.addClass('paragraph-heading') }}>
-      {% for item in items %}
+
+    {% for item in items %}
+      <h2 class="paragraph-heading paragraph-heading-{{ loop.revindex }}">
         <div{{ item.attributes }}>{{ item.content }}</div>
-      {% endfor %}
-    </h2>
+      </h2>
+    {% endfor %}
+
   {% else %}
     {% for item in items %}
-      <h2{{ attributes.addClass('paragraph-heading') }}>{{ item.content }}</h2>
+      <h2 class="paragraph-heading paragraph-heading-{{ loop.revindex }}">
+        <div{{ item.attributes }}>{{ item.content }}</div>
+      </h2>
     {% endfor %}
   {% endif %}
 {% else %}

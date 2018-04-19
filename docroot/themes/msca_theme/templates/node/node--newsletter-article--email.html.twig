@@ -48,17 +48,17 @@
     <table width="100%" cellspacing="10">
       <tbody>
       <tr>
-        <td style="width: 60%;padding:0;vertical-align: top;">
+        <td style="width: 60%;padding:0;vertical-align: top;font-size: 14px;font-weight: bold;">
           <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
         </td>
-        <td style="text-align:right;padding:0;vertical-align: top;">
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
-        </td>
-        <td style="text-align:right;padding:0;vertical-align: top;">
-          <i class="fa fa-print" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
-        </td>
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
+        {#</td>#}
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-print" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
+        {#</td>#}
       </tr>
       </tbody>
     </table>
@@ -83,16 +83,16 @@
       <tbody>
       <tr>
         <td style="width: 60%;padding:0;vertical-align: top;">
-          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-weight: bold;font-size: 14px;">{{ 'Read more'|t }}</a>
         </td>
-        <td style="text-align:right;padding:0;vertical-align: top;">
-          <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
-        </td>
-        <td style="text-align:right;padding:0;vertical-align: top;">
-          <i class="fa fa-print" aria-hidden="true"></i>
-          <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
-        </td>
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
+        {#</td>#}
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-print" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
+        {#</td>#}
       </tr>
       </tbody>
     </table>

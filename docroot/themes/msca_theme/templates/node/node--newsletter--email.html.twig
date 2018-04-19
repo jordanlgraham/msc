@@ -37,16 +37,15 @@
 
         /* email boilerplate styles */
         #outlook a {padding:0; color: #2378cb;text-decoration:none!important;}
-        body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
+        body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         .ExternalClass {width:100%;}
         .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
         #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
         img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; padding: 0px; margin: 0px; display: block;}
         a img {border:none; padding: 0px; margin: 0px; display: block;}
         .image_fix {display:block;}
-        p {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}
         h2 {margin:0!important;}
-        h1, h2, h3, h4 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
+        h1, h2, h3, h4, p {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb;text-decoration!important:none;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h2 a {text-transform: uppercase;font-weight: bold;}
         h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {color: #2378cb;text-decoration:none;}
@@ -57,17 +56,17 @@
         .toc a {color: #2378cb;text-decoration:none;}
 
         /* MSCA styles */
-        body, p, article div {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;font-size: 16px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
+        body, p, article div {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;font-size: 14px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
         .lato, .paragraph div, h2 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         .paragraph--view-mode--default {margin-bottom: 40px;}
-        article h2 {font-size: 18px;text-decoration: none;line-height: normal;}
+        article h2 {font-size: 14px;text-decoration: none;line-height: normal;}
         .newsletter-full aside .sidebar-block {margin-bottom: 20px;}
         .newsletter-full .newsletter-header {font-family: 'Lato', sans-serif;text-align: center;text-transform: uppercase;color: #ffffff;}
         .newsletter-full .header-right-top-inner {background-color: rgba(0, 0, 0,.6);padding: 40px;}
         .newsletter-full .header-right-bottom {background-color: #ff7e00;padding: 20px;border-top: solid 2px white;text-align: center;color: #ffffff;font-size: 24px;}
         .newsletter-full .your-link-to {color: #999999;font-size: 20px;font-weight: 300;text-align: center;}
         .newsletter-full .long-term-care {font-size: 30px;width: 60%;margin: 0 auto;line-height: 1.3;color:#fff;text-align: center;}
-        .featured-article .label {font-size: 18px;font-family:Arial, Helvetica, sans-serif;color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px 20px;background-color: #2378cb}
+        .featured-article .label {font-size: 18px;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px 20px;background-color: #2378cb}
         .page-node-type-newsletter .featured-article .label {margin: 0 0 20px 0;}
         .page-node-type-newsletter article section.col-md-8 {padding-left: 0;}
         .newsletter-full .e-news-update {font-size: 24px;display: flex;justify-content: center;}
@@ -94,7 +93,7 @@
         .sponsor-logo {width: 190px;margin: 0 auto 10px;}
         .social-links {width: 190px;margin: 0 auto 10px;}
         .btn {display: inline-block;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;text-transform: uppercase;
-          padding: 10px 20px;font-size: 16px;transition: all 0.2s ease-in-out;border-radius: 0;border: none;position: relative;line-height: 1.6;
+          padding: 10px 20px;font-size: 14px;transition: all 0.2s ease-in-out;border-radius: 0;border: none;position: relative;line-height: 1.6;
         }
         .btn-secondary {background-color: #2378cb;color: #fff;max-width: 260px;}
         .btn-secondary:hover {background-color: lighten(#2378cb, 10%);color: #fff;}
@@ -153,10 +152,10 @@
                               <table width="100%" cellpadding="20" bgcolor="#ff7e00" class="header-right-bottom" style="border-collapse: collapse;">
                                 <tbody>
                                   <tr>
-                                    <td style="text-transform: uppercase;color: #ffffff;font-family: 'Lato', sans-serif;font-size:24px;">
+                                    <td style="text-transform: uppercase;color: #ffffff;font-family: 'Lato', sans-serif;font-size:20px;">
                                       {{ 'E-News Update:'|t }}&nbsp;
                                       {% if content.field_newsletter_date|render %}
-                                        {{ node.field_newsletter_date.value }}
+                                        {{ node.field_newsletter_date.value|date('F j, Y') }}
                                       {%  endif %}
                                     </td>
                                   </tr>
@@ -176,7 +175,7 @@
                 <td>
                   <!--featured-article-start -->
                   {% if content.field_featured_article|render %}
-                    <table class="feature-article-section" style="border-collapse: collapse;">
+                    <table width="100%" class="feature-article-section" style="border-collapse: collapse;">
                       <tbody>
                       <tr>
                         <td class="featured-article">{{ content.field_featured_article }}</td>
@@ -228,14 +227,14 @@
                           </tr>
                           <tr>
                             <td class="toc sidebar-block">
-                              <table class="list-unstyled issue-toc" cellpadding="10" style="color: #2378cb;font-weight: bold; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">
+                              <table class="list-unstyled issue-toc" cellpadding="10" style="color: #2378cb;font-weight: bold; font-size: 14px; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
                                 <tbody>
                                   {% for item in node.field_featured_article %}
-                                    <tr><td><a style="text-decoration:none;" href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
+                                    <tr><td style="font-size: 14px;"><a style="text-decoration:none;" href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
                                   {% endfor %}
                                   {% for item in node.field_newsletter_section %}
                                     {% for article in item.entity.fields.field_featured_articles %}
-                                      <tr><td><a style="text-decoration:none;" href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
+                                      <tr><td style="font-size: 14px;"><a style="text-decoration:none;" href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
                                     {% endfor %}
                                   {% endfor %}
                                 </tbody>
@@ -251,12 +250,12 @@
                           </tr>
                           <tr>
                             <td class="resources sidebar-block">
-                              <table width="100%" class="list-unstyled issue-toc newsletter-resources" cellpadding="20" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
+                              <table width="100%" class="list-unstyled issue-toc newsletter-resources" cellpadding="5" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
                                 <tbody>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 3px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
+                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
                                 <tr><td style="background-color: #2378cb;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></td></tr>
                                 </tbody>
                               </table>
@@ -290,10 +289,10 @@
                       <tbody>
                       <tr>
                         <td valign="top">
-                          <table bgcolor="#ff7e00" width="60" height="60" style="text-transform: uppercase; font-size: 24px; text-align: center; color: #ffffff; padding: 10px;">
+                          <table bgcolor="#ff7e00" width="60" height="60" style="text-transform: uppercase; text-align: center; color: #ffffff; padding: 10px;">
                             <tbody>
-                            <tr><td>{{ item.entity.field_date.value|date('M') }}</td></tr>
-                            <tr><td>{{ item.entity.field_date.value|date('j') }}</td></tr>
+                            <tr><td style="font-size: 16px;">{{ item.entity.field_date.value|date('M') }}</td></tr>
+                            <tr><td style="font-size: 20px;" >{{ item.entity.field_date.value|date('j') }}</td></tr>
                             </tbody>
                           </table>
                         </td>
@@ -342,7 +341,7 @@
                       </tbody>
                     </table>
                     {# Need space between articles in Outlook. #}
-                    <table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
+                    <table cellpadding="1"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
                   {% endfor %}
                   {% endif %}
                   <table class="footer" style="border-collapse:collapse;color:#ffffff;">
@@ -362,6 +361,51 @@
                           To ensure delivery of the Mass Senior Care E-News Update, please add mailroom@maseniorcare.org to your email address book.
                           {% endtrans %}
                         </p>
+                        <table cellpadding="10">
+                          <tbody>
+                          <tr>
+                            <td>
+                              <table width="230"></table>
+                            </td>
+                            <td>
+                              <table bgcolor="#82b7bd" cellpadding="2" width="20">
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <a href="https://www.maseniorcare.org/" class="icon-social icon-website" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/external-website.png" alt="Website icon"/></a>
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <td>
+                              <table bgcolor="#3a589a" cellpadding="2" width="20">
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <a href="https://www.facebook.com/maseniorcare/" class="icon-social icon-facebook" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/facebook.png" alt="Facebook icon"/></a>
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <td>
+                              <table bgcolor="#00aced" cellpadding="2" width="20">
+                                <tbody>
+                                <tr>
+                                  <td>
+                                    <a href="https://twitter.com/MASeniorCare" class="icon-social icon-twitter" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/twitter.png" alt="Twitter icon"/></a>
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <td>
+                              <table width="220"></table>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
                       </td>
                     </tr>
                     </tbody>
