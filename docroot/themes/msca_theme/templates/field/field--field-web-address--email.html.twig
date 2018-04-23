@@ -40,11 +40,11 @@
 {# We can't rely on background image for this icon in the newslettter because MS Outlook mail client won't display it. #}
 {# MS Outlook needs this to be a table so we can add background color. #}
 {% for item in items %}
-    <table bgcolor="#82b7bd" cellpadding="2" width="20">
+    <table bgcolor="#82b7bd" cellpadding="6" width="20">
       <tbody>
         <tr>
           <td>
-            <a href="{{ item.content }}" class="icon-social icon-website" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/external-website.png" alt="Website icon"/></a>
+            <a href="{{ item.content }}" class="icon-social icon-website" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/external-website-sm.png" alt="Website icon"/></a>
           </td>
         </tr>
       </tbody>

@@ -8,13 +8,13 @@
 {# For Newsletter TOC anchor links. #}
 <a class="anchor" name="{{ node.id }}"></a>
 <article{{ attributes.addClass('pb-5') }}>
-    <table cellspacing="10">
+    <table>
       <tbody>
       <tr>
         <td valign="top">
-          <h2 style="margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
+          <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
               {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-            <a href="http://{{ base_path }}{{ url }}" style="font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+            <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
           </h2>
         </td>
       </tr>

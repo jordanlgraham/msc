@@ -10,7 +10,7 @@
 <article{{ attributes.addClass('pb-5') }}>
   {% if content.field_news_teaser_image|render %}
       {# We have an image so more complex table is needed. #}
-      <table cellspacing="10" cellpadding="5">
+      <table>
         <tbody>
         <tr>
           <td>
@@ -34,9 +34,9 @@
             </table>
           </td>
           <td valign="top">
-            <h2 style="margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
+            <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
                 {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-              <a href="http://{{ base_path }}{{ url }}" style="font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+              <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
             </h2>
           </td>
         </tr>
@@ -64,13 +64,13 @@
     </table>
   {% else %}
     {# No image so simplify table. #}
-    <table cellspacing="10">
+    <table>
       <tbody>
       <tr>
         <td valign="top">
           <h2 style="margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;font-size: 14px;">
               {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-            <a href="http://{{ base_path }}{{ url }}" style="font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+            <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
           </h2>
         </td>
       </tr>
