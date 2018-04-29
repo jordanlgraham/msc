@@ -44,7 +44,7 @@
         img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; padding: 0px; margin: 0px; display: block;}
         a img {border:none; padding: 0px; margin: 0px; display: block;}
         .image_fix {display:block;}
-        h2 {margin:0!important;}
+        h2, span {margin:0!important;text-transform: uppercase;font-size:16px;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h1, h2, h3, h4, p {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb;text-decoration!important:none;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
         h2 a {text-transform: uppercase;font-weight: bold;}
@@ -204,8 +204,8 @@
                           <tbody>
                           {% if content.field_sponsor|render %}
                             <tr>
-                              <td align="center" class="sponsors sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
-                                <h2 style="font-size: 18px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
+                              <td align="center" class="sponsors sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
+                                <h2 style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
                               </td>
                             </tr>
                             <tr>
@@ -221,8 +221,8 @@
                             </td>
                           </tr>
                           <tr>
-                            <td align="center" height="30px" class="toc sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
-                              <h2 style="font-size: 18px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'In This Issue'|t }}</h2>
+                            <td align="center" height="30px" class="toc sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
+                              <h2 style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'In This Issue'|t }}</h2>
                             </td>
                           </tr>
                           <tr>
@@ -244,8 +244,8 @@
                             </td>
                           </tr>
                           <tr>
-                            <td align="center" height="30px" class="resources sidebar-block-heading" style="text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
-                              <h2>{{ 'Resources'|t }}</h2>
+                            <td align="center" height="30px" class="resources sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
+                              <h2 style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'Resources'|t }}</h2>
                             </td>
                           </tr>
                           <tr>
@@ -273,7 +273,7 @@
                       <tr>
                         <td>
                           <a name="calendar"></a>
-                          <table width="100%" bgcolor="#005a84" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:18px;font-weight: bold;">
+                          <table width="100%" bgcolor="#005a84" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:16px;font-weight: bold;">
                             <tbody>
                               <tr>
                                 <td>{{ 'Upcoming Education & Events'|t }}</td>
@@ -285,7 +285,7 @@
                     </tbody>
                   </table>
                   {% for item in node.field_calendar %}
-                    <table cellpadding="10">
+                    <table>
                       <tbody>
                       <tr>
                         <td valign="top">

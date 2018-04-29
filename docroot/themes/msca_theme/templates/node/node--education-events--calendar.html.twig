@@ -5,6 +5,9 @@
  *
  */
 #}
+<style type="text/css">
+    h2, a {margin:0!important;text-transform: uppercase;font-size:16px;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
+</style>
 <article{{ attributes.addClass('pb-5') }}>
 
   <div{{ content_attributes }}>
@@ -16,7 +19,7 @@
           {% if content.field_event_category|render %}
               <h4>{{ content.field_event_category.0 }}</h4>
           {% endif %}
-          <h2{{ title_attributes }}>
+          <h2 style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">
             <a href="http://{{ base_path }}{{ url }}"  style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
           </h2>
           <div class="event-location">
