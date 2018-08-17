@@ -4,6 +4,7 @@ namespace Drupal\webform\Form\AdminConfig;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\webform\Plugin\WebformElement\TableSelect;
 
 /**
  * Base webform admin settings form.
@@ -53,13 +54,16 @@ abstract class WebformAdminConfigBaseForm extends ConfigFormBase {
       ];
     }
 
-    return [
+    $element = [
       '#type' => 'tableselect',
       '#header' => $header,
       '#options' => $options,
       '#required' => TRUE,
+      '#sticky' => TRUE,
       '#default_value' => array_diff($ids, $excluded_ids),
     ];
+    TableSelect::setProcessTableSelectCallback($element);
+    return $element;
   }
 
   /**

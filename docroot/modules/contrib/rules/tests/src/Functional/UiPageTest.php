@@ -5,7 +5,10 @@ namespace Drupal\Tests\rules\Functional;
 /**
  * Tests that the Rules UI pages are reachable.
  *
- * @group rules_ui
+ * @group RulesUi
+ * @group legacy
+ * @todo Remove the 'legacy' tag when Rules no longer uses deprecated code.
+ * @see https://www.drupal.org/project/rules/issues/2922757
  */
 class UiPageTest extends RulesBrowserTestBase {
 

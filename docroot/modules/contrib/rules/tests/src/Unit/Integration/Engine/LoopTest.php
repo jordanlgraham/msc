@@ -13,7 +13,7 @@ use Drupal\Tests\rules\Unit\Integration\RulesEntityIntegrationTestBase;
 /**
  * Test Rules execution with the loop plugin.
  *
- * @group rules
+ * @group Rules
  */
 class LoopTest extends RulesEntityIntegrationTestBase {
 
@@ -295,12 +295,11 @@ class LoopTest extends RulesEntityIntegrationTestBase {
 
   /**
    * Tests that the loop list item variable is not available after the loop.
-   *
-   * @expectedException \Drupal\rules\Exception\EvaluationException
-   *
-   * @expectedExceptionMessage Unable to get variable list_item, it is not defined.
    */
   public function testOutOfScopeVariableExecution() {
+    // Set the expected exception class and message.
+    $this->setExpectedException('\Drupal\rules\Exception\EvaluationException', 'Unable to get variable list_item, it is not defined.');
+
     $rule = $this->rulesExpressionManager->createRule();
     $loop = $this->rulesExpressionManager->createInstance('rules_loop', ['list' => 'string_list']);
 

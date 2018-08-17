@@ -63,13 +63,49 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
       '#open' => TRUE,
       '#tree' => TRUE,
     ];
+    $form['submission_settings']['default_submission_login_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default login message when access denied to submission'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_submission_login_message'],
+    ];
+    $form['submission_settings']['default_submission_exception_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default exception message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_submission_exception_message'],
+    ];
+    $form['submission_settings']['default_submission_locked_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default locked message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_submission_locked_message'],
+    ];
+    $form['submission_settings']['default_previous_submission_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default previous submission message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_previous_submission_message'],
+    ];
+    $form['submission_settings']['default_previous_submissions_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default previous submissions message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_previous_submissions_message'],
+    ];
+    $form['submission_settings']['default_autofill_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default autofill message'),
+      '#description' => $this->t('Leave blank to not display a message when a form is autofilled.'),
+      '#default_value' => $settings['default_autofill_message'],
+    ];
     $form['submission_settings']['default_submission_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Default submission label'),
       '#required' => TRUE,
       '#default_value' => $settings['default_submission_label'],
     ];
-    $form['submission_settings']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['submission_settings']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Submission Behaviors.
     $form['submission_behaviors'] = [
@@ -104,16 +140,14 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
     $form['submission_limits']['default_limit_total_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default total submissions limit message'),
-      '#required' => TRUE,
       '#default_value' => $config->get('settings.default_limit_total_message'),
     ];
     $form['submission_limits']['default_limit_user_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default per user submission limit message'),
-      '#required' => TRUE,
       '#default_value' => $config->get('settings.default_limit_user_message'),
     ];
-    $form['submission_limits']['token_tree_link'] = $this->tokenManager->buildTreeLink();
+    $form['submission_limits']['token_tree_link'] = $this->tokenManager->buildTreeElement();
 
     // Submission purging.
     $form['purge'] = [
@@ -129,6 +163,8 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('purge.cron_size'),
       '#description' => $this->t('Enter the amount of submissions to be purged during single cron run. You may want to lower this number if you are facing memory or timeout issues when purging via cron.'),
     ];
+
+    $this->tokenManager->elementValidate($form);
 
     return parent::buildForm($form, $form_state);
   }
@@ -148,5 +184,5 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
 
     parent::submitForm($form, $form_state);
   }
-  
+
 }

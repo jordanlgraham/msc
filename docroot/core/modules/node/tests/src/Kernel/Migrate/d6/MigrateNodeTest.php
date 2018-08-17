@@ -89,6 +89,20 @@ class MigrateNodeTest extends MigrateNodeTestBase {
     // Test that an email field is migrated.
     $this->assertSame('PrincessRuwenne@example.com', $node->field_test_email->value);
 
+    // Test that node reference field values were migrated.
+    $node = Node::load(18);
+    $this->assertCount(2, $node->field_company);
+    $this->assertSame('Klingon Empire', $node->field_company[0]->entity->label());
+    $this->assertSame('Romulan Empire', $node->field_company[1]->entity->label());
+    $this->assertCount(1, $node->field_company_2);
+    $this->assertSame('Klingon Empire', $node->field_company_2[0]->entity->label());
+    $this->assertCount(1, $node->field_company_3);
+    $this->assertSame('Romulan Empire', $node->field_company_3[0]->entity->label());
+
+    // Test that user reference field values were migrated.
+    $this->assertCount(1, $node->field_commander);
+    $this->assertSame('joe.roe', $node->field_commander[0]->entity->getUsername());
+
     $node = Node::load(2);
     $this->assertIdentical('Test title rev 3', $node->getTitle());
     $this->assertIdentical('test rev 3', $node->body->value);
@@ -213,7 +227,7 @@ class MigrateNodeTest extends MigrateNodeTestBase {
     $default_connection = \Drupal::database();
     $default_connection->truncate($table_name)->execute();
     if ($new_row) {
-      $hash = $migration->getIdMap()->getSourceIDsHash(['nid' => $new_row['sourceid1']]);
+      $hash = $migration->getIdMap()->getSourceIdsHash(['nid' => $new_row['sourceid1']]);
       $new_row['source_ids_hash'] = $hash;
       $default_connection->insert($table_name)
         ->fields($new_row)

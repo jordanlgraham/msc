@@ -29,6 +29,7 @@ class Textarea extends TextBase {
       'default_value' => '',
       // Description/Help.
       'help' => '',
+      'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
@@ -39,6 +40,7 @@ class Textarea extends TextBase {
       'field_suffix' => '',
       'placeholder' => '',
       'disabled' => FALSE,
+      'readonly' => FALSE,
       'rows' => '',
       'maxlength' => '',
       // Form validation.
@@ -49,10 +51,13 @@ class Textarea extends TextBase {
       'unique_entity' => FALSE,
       'unique_error' => '',
       'counter_type' => '',
+      'counter_minimum' => '',
+      'counter_minimum_message' => '',
       'counter_maximum' => '',
-      'counter_message' => '',
+      'counter_maximum_message' => '',
       // Attributes.
       'wrapper_attributes' => [],
+      'label_attributes' => [],
       'attributes' => [],
       // Submission display.
       'format' => $this->getItemDefaultFormat(),
@@ -62,13 +67,6 @@ class Textarea extends TextBase {
       'format_items_html' => '',
       'format_items_text' => '',
     ] + parent::getDefaultProperties() + $this->getDefaultMultipleProperties();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getTranslatableProperties() {
-    return array_merge(parent::getTranslatableProperties(), ['counter_message']);
   }
 
   /**
@@ -88,7 +86,7 @@ class Textarea extends TextBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = $this->getValue($element, $webform_submission, $options);
 
     return [

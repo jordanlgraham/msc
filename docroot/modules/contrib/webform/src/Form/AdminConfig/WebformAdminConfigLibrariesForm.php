@@ -4,6 +4,8 @@ namespace Drupal\webform\Form\AdminConfig;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\webform\Plugin\WebformElement\TableSelect;
 use Drupal\webform\WebformLibrariesManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -78,7 +80,8 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
       '#type' => 'webform_codemirror',
       '#mode' => 'css',
       '#title' => $this->t('CSS'),
-      '#description' => $this->t('Enter custom CSS to be attached to all webforms.'),
+      '#description' => $this->t('Enter custom CSS to be attached to the all webforms.') . '<br/>' .
+        $this->t("To customize only webform specific elements, you should use the '.webform-submission-form' selector"),
       '#default_value' => $config->get('assets.css'),
     ];
     $form['assets']['javascript'] = [
@@ -101,6 +104,7 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
     $libraries_header = [
       'title' => ['data' => $this->t('Title')],
       'description' => ['data' => $this->t('Description/Notes'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
+      'resources' => ['data' => $this->t('Resources'), 'class' => [RESPONSIVE_PRIORITY_LOW]],
     ];
 
     $this->libraries = [];
@@ -112,6 +116,35 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
         continue;
       }
 
+      $operations = [];
+      $operations['homepage'] = [
+        'title' => $this->t('Homepage'),
+        'url' => $library['homepage_url'],
+      ];
+      $operations['download'] = [
+        'title' => $this->t('Download'),
+        'url' => $library['download_url'],
+      ];
+      if (isset($library['issues_url'])) {
+        $issues_url = $library['issues_url'];
+      }
+      elseif (preg_match('#https://github.com/[^/]+/[^/]+#', $library['download_url']->toString(), $match)) {
+        $issues_url = Url::fromUri($match[0] . '/issues');
+      }
+      else {
+        $issues_url = NULL;
+      }
+      if ($issues_url) {
+        $operations['issues'] = [
+          'title' => $this->t('Open Issues'),
+          'url' => $issues_url,
+        ];
+        $operations['accessibility'] = [
+          'title' => $this->t('Accessibility Issues'),
+          'url' => $issues_url->setOption('query', ['q' => 'is:issue is:open accessibility ']),
+        ];
+      }
+
       $this->libraries[$library_name] = $library_name;
       $libraries_options[$library_name] = [
         'title' => $library['title'],
@@ -119,10 +152,24 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
           'data' => [
             'content' => ['#markup' => $library['description'], '#suffix' => '<br />'],
             'notes' => ['#markup' => '(' . $library['notes'] . ')', '#prefix' => '<em>', '#suffix' => '</em><br />'],
+            'status' => (!empty($library['deprecated'])) ? [
+              '#markup' => $library['deprecated'],
+              '#prefix' => '<div class="color-warning"><strong>',
+              '#suffix' => '</strong></div>',
+            ] : [],
+          ],
+        ],
+        'resources' => [
+          'data' => [
+            '#type' => 'operations',
+            '#links' => $operations,
+            '#prefix' => '<div class="webform-dropbutton">',
+            '#suffix' => '</div>',
           ],
         ],
       ];
     }
+
     $form['libraries']['excluded_libraries'] = [
       '#type' => 'tableselect',
       '#title' => $this->t('Libraries'),
@@ -131,6 +178,8 @@ class WebformAdminConfigLibrariesForm extends WebformAdminConfigBaseForm {
       '#options' => $libraries_options,
       '#default_value' => array_diff($this->libraries, array_combine($config->get('libraries.excluded_libraries'), $config->get('libraries.excluded_libraries'))),
     ];
+    TableSelect::setProcessTableSelectCallback($form['libraries']['excluded_libraries']);
+
     $t_args = [
       ':select2_href' => $libraries['jquery.select2']['homepage_url']->toString(),
       ':chosen_href' => $libraries['jquery.chosen']['homepage_url']->toString(),

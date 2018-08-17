@@ -12,7 +12,10 @@ use Drupal\Tests\rules\Kernel\RulesDrupalTestBase;
 /**
  * Tests that data selector autocomplete results work correctly.
  *
- * @group rules
+ * @group Rules
+ * @group legacy
+ * @todo Remove the 'legacy' tag when Rules no longer uses deprecated code.
+ * @see https://www.drupal.org/project/rules/issues/2922757
  */
 class AutocompleteTest extends RulesDrupalTestBase {
 
@@ -97,7 +100,7 @@ class AutocompleteTest extends RulesDrupalTestBase {
 
     // Tests that "node." returns all available fields on a node.
     $results = $component->autocomplete('node.');
-    $expected = [
+    $expected = array_merge([
       [
         'value' => 'node.changed',
         'label' => 'node.changed (Changed)',
@@ -156,6 +159,22 @@ class AutocompleteTest extends RulesDrupalTestBase {
         'value' => 'node.promote.',
         'label' => 'node.promote... (Promoted to front page)',
       ],
+    ],
+    // The "Default revision" flag was added in core 8.5.x but not 8.4.x.
+    // Use tertiary conditional to either add two items or add none.
+    // @todo Remove this conditional check when 8.4.x is no longer supported.
+    // @see https://www.drupal.org/project/rules/issues/2936679
+    (version_compare(substr(\Drupal::VERSION, 0, 3), '8.5', '>=')) ? [
+      [
+        'value' => 'node.revision_default',
+        'label' => 'node.revision_default (Default revision)',
+      ],
+      [
+        'value' => 'node.revision_default.',
+        'label' => 'node.revision_default... (Default revision)',
+      ],
+    ] : [],
+    [
       [
         'value' => 'node.revision_log',
         'label' => 'node.revision_log (Revision log message)',
@@ -198,11 +217,15 @@ class AutocompleteTest extends RulesDrupalTestBase {
       ],
       [
         'value' => 'node.status',
-        'label' => 'node.status (Publishing status)',
+        // In Core 8.4 the text has changed from Publishing Status to Published.
+        // @todo Remove this version checking when 8.3.x is unsupported.
+        'label' => version_compare(substr(\Drupal::VERSION, 0, 3), '8.4', '>=') ? 'node.status (Published)' : 'node.status (Publishing status)',
       ],
       [
         'value' => 'node.status.',
-        'label' => 'node.status... (Publishing status)',
+        // In Core 8.4 the text has changed from Publishing Status to Published.
+        // @todo Remove this version checking when 8.3.x is unsupported.
+        'label' => version_compare(substr(\Drupal::VERSION, 0, 3), '8.4', '>=') ? 'node.status... (Published)' : 'node.status... (Publishing status)',
       ],
       [
         'value' => 'node.sticky',
@@ -254,7 +277,7 @@ class AutocompleteTest extends RulesDrupalTestBase {
         'value' => 'node.vid.',
         'label' => 'node.vid... (Revision ID)',
       ],
-    ];
+    ]);
     // Because this is a huge array run the assertion per entry because that is
     // easier for debugging.
     foreach ($expected as $index => $entry) {

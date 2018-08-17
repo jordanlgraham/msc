@@ -32,7 +32,7 @@ class WebformExampleComposite extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  public static function getCompositeElements() {
+  public static function getCompositeElements(array $element) {
     // Generate an unique ID that can be used by #states.
     $html_id = Html::getUniqueId('webform_example_composite');
 
@@ -50,6 +50,9 @@ class WebformExampleComposite extends WebformCompositeBase {
     $elements['date_of_birth'] = [
       '#type' => 'date',
       '#title' => t('Date of birth'),
+      // Add .js-form-wrapper to wrapper (ie td) to prevent #states API from
+      // disabling the entire table row when this element is disabled.
+      '#wrapper_attributes' => ['class' => 'js-form-wrapper'],
       '#states' => [
         'enabled' => [
           '[data-webform-composite-id="' . $html_id . '--first_name"]' => ['filled' => TRUE],
@@ -61,7 +64,9 @@ class WebformExampleComposite extends WebformCompositeBase {
       '#type' => 'select',
       '#title' => t('Gender'),
       '#options' => 'gender',
-      '#empty_option' => '',
+      // Add .js-form-wrapper to wrapper (ie td) to prevent #states API from
+      // disabling the entire table row when this element is disabled.
+      '#wrapper_attributes' => ['class' => 'js-form-wrapper'],
       '#states' => [
         'enabled' => [
           '[data-webform-composite-id="' . $html_id . '--first_name"]' => ['filled' => TRUE],

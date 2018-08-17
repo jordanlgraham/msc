@@ -63,7 +63,7 @@ class ConnectionUnitTest extends KernelTestBase {
    *
    * @return int
    */
-  protected function getConnectionID() {
+  protected function getConnectionId() {
     return (int) Database::getConnection($this->target, $this->key)->query('SELECT CONNECTION_ID()')->fetchField();
   }
 
@@ -92,7 +92,7 @@ class ConnectionUnitTest extends KernelTestBase {
   /**
    * Tests Database::closeConnection() without query.
    *
-   * @todo getConnectionID() executes a query.
+   * @todo getConnectionId() executes a query.
    */
   public function testOpenClose() {
     if ($this->skipTest) {
@@ -100,7 +100,7 @@ class ConnectionUnitTest extends KernelTestBase {
     }
     // Add and open a new connection.
     $this->addConnection();
-    $id = $this->getConnectionID();
+    $id = $this->getConnectionId();
     Database::getConnection($this->target, $this->key);
 
     // Verify that there is a new connection.
@@ -124,7 +124,7 @@ class ConnectionUnitTest extends KernelTestBase {
     }
     // Add and open a new connection.
     $this->addConnection();
-    $id = $this->getConnectionID();
+    $id = $this->getConnectionId();
     Database::getConnection($this->target, $this->key);
 
     // Verify that there is a new connection.
@@ -151,7 +151,7 @@ class ConnectionUnitTest extends KernelTestBase {
     }
     // Add and open a new connection.
     $this->addConnection();
-    $id = $this->getConnectionID();
+    $id = $this->getConnectionId();
     Database::getConnection($this->target, $this->key);
 
     // Verify that there is a new connection.
@@ -178,7 +178,7 @@ class ConnectionUnitTest extends KernelTestBase {
     }
     // Add and open a new connection.
     $this->addConnection();
-    $id = $this->getConnectionID();
+    $id = $this->getConnectionId();
     Database::getConnection($this->target, $this->key);
 
     // Verify that there is a new connection.
@@ -221,6 +221,12 @@ class ConnectionUnitTest extends KernelTestBase {
     $reflection = new \ReflectionObject($connection);
     $connection_property = $reflection->getProperty('connection');
     $connection_property->setAccessible(TRUE);
+    // Skip this test when a database driver does not implement PDO.
+    // An alternative database driver that does not implement PDO
+    // should implement its own connection test.
+    if (get_class($connection_property->getValue($connection)) !== 'PDO') {
+      $this->markTestSkipped('Ignored PDO connection unit test for this driver because it does not implement PDO.');
+    }
     $error_mode = $connection_property->getValue($connection)
       ->getAttribute(\PDO::ATTR_ERRMODE);
     $this->assertEqual($error_mode, \PDO::ERRMODE_EXCEPTION, 'Ensure the default error mode is set to exception.');

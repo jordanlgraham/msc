@@ -28,22 +28,12 @@ class IcuResFileDumper extends FileDumper
     /**
      * {@inheritdoc}
      */
-    public function format(MessageCatalogue $messages, $domain = 'messages')
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.8 and will be removed in 3.0. Use the formatCatalogue() method instead.', E_USER_DEPRECATED);
-
-        return $this->formatCatalogue($messages, $domain);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function formatCatalogue(MessageCatalogue $messages, $domain, array $options = array())
     {
         $data = $indexes = $resources = '';
 
         foreach ($messages->all($domain) as $source => $target) {
-            $indexes .= pack('v', strlen($data) + 28);
+            $indexes .= pack('v', \strlen($data) + 28);
             $data .= $source."\0";
         }
 
@@ -54,7 +44,7 @@ class IcuResFileDumper extends FileDumper
         foreach ($messages->all($domain) as $source => $target) {
             $resources .= pack('V', $this->getPosition($data));
 
-            $data .= pack('V', strlen($target))
+            $data .= pack('V', \strlen($target))
                 .mb_convert_encoding($target."\0", 'UTF-16LE', 'UTF-8')
                 .$this->writePadding($data)
                   ;
@@ -62,7 +52,7 @@ class IcuResFileDumper extends FileDumper
 
         $resOffset = $this->getPosition($data);
 
-        $data .= pack('v', count($messages->all($domain)))
+        $data .= pack('v', \count($messages->all($domain)))
             .$indexes
             .$this->writePadding($data)
             .$resources
@@ -76,7 +66,7 @@ class IcuResFileDumper extends FileDumper
             $keyTop,                        // Index keys top
             $bundleTop,                     // Index resources top
             $bundleTop,                     // Index bundle top
-            count($messages->all($domain)), // Index max table length
+            \count($messages->all($domain)), // Index max table length
             0                               // Index attributes
         );
 
@@ -94,7 +84,7 @@ class IcuResFileDumper extends FileDumper
 
     private function writePadding($data)
     {
-        $padding = strlen($data) % 4;
+        $padding = \strlen($data) % 4;
 
         if ($padding) {
             return str_repeat("\xAA", 4 - $padding);
@@ -103,7 +93,7 @@ class IcuResFileDumper extends FileDumper
 
     private function getPosition($data)
     {
-        return (strlen($data) + 28) / 4;
+        return (\strlen($data) + 28) / 4;
     }
 
     /**

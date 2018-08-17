@@ -8,6 +8,7 @@ use Drupal\Core\Url;
 use Drupal\entity_test\Entity\EntityTest;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\link\LinkItemInterface;
+use Drupal\node\NodeInterface;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\field\Entity\FieldStorageConfig;
 
@@ -23,7 +24,12 @@ class LinkFieldTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['entity_test', 'link', 'node'];
+  public static $modules = [
+    'entity_test',
+    'link',
+    'node',
+    'link_test_base_field',
+  ];
 
   /**
    * A field to use in this test class.
@@ -95,11 +101,7 @@ class LinkFieldTest extends BrowserTestBase {
     // Create a node to test the link widget.
     $node = $this->drupalCreateNode();
 
-    // Create an entity with restricted view access.
-    $entity_test_no_label_access = EntityTest::create([
-      'name' => 'forbid_access',
-    ]);
-    $entity_test_no_label_access->save();
+    $restricted_node = $this->drupalCreateNode(['status' => NodeInterface::NOT_PUBLISHED]);
 
     // Define some valid URLs (keys are the entered values, values are the
     // strings displayed to the user).
@@ -119,6 +121,10 @@ class LinkFieldTest extends BrowserTestBase {
       '/?example=llama' => '&lt;front&gt;?example=llama',
       '/#example' => '&lt;front&gt;#example',
 
+      // Trailing spaces should be ignored.
+      '/ ' => '&lt;front&gt;',
+      '/path with spaces ' => '/path with spaces',
+
       // @todo '<front>' is valid input for BC reasons, may be removed by
       //   https://www.drupal.org/node/2421941
       '<front>' => '&lt;front&gt;',
@@ -134,7 +140,7 @@ class LinkFieldTest extends BrowserTestBase {
       // Entity URI displayed as ER autocomplete value when displayed in a form.
       'entity:node/1' => $node->label() . ' (1)',
       // URI for an entity that exists, but is not accessible by the user.
-      'entity:entity_test/' . $entity_test_no_label_access->id() => '- Restricted access - (' . $entity_test_no_label_access->id() . ')',
+      'entity:node/' . $restricted_node->id() => '- Restricted access - (' . $restricted_node->id() . ')',
       // URI for an entity that doesn't exist, but with a valid ID.
       'entity:user/999999' => 'entity:user/999999',
     ];
@@ -198,7 +204,7 @@ class LinkFieldTest extends BrowserTestBase {
       preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
       $id = $match[1];
       $this->assertText(t('entity_test @id has been created.', ['@id' => $id]));
-      $this->assertRaw($string);
+      $this->assertRaw('"' . $string . '"');
     }
   }
 
@@ -279,13 +285,21 @@ class LinkFieldTest extends BrowserTestBase {
         $this->assertRaw('placeholder="Enter the text for this link"');
 
         $this->assertFieldByName("{$field_name}[0][title]", '', 'Link text field found.');
+        if ($title_setting === DRUPAL_OPTIONAL) {
+          // Verify that the URL is required, if the link text is non-empty.
+          $edit = [
+            "{$field_name}[0][title]" => 'Example',
+          ];
+          $this->drupalPostForm(NULL, $edit, t('Save'));
+          $this->assertText(t('The URL field is required when the @title field is specified.', ['@title' => t('Link text')]));
+        }
         if ($title_setting === DRUPAL_REQUIRED) {
           // Verify that the link text is required, if the URL is non-empty.
           $edit = [
             "{$field_name}[0][uri]" => 'http://www.example.com',
           ];
           $this->drupalPostForm(NULL, $edit, t('Save'));
-          $this->assertText(t('@name field is required.', ['@name' => t('Link text')]));
+          $this->assertText(t('@title field is required if there is @uri input.', ['@title' => t('Link text'), '@uri' => t('URL')]));
 
           // Verify that the link text is not required, if the URL is empty.
           $edit = [
@@ -607,6 +621,110 @@ class LinkFieldTest extends BrowserTestBase {
         }
       }
     }
+  }
+
+  /**
+   * Test '#link_type' property exists on 'link_default' widget.
+   *
+   * Make sure the 'link_default' widget exposes a '#link_type' property on
+   * its element. Modules can use it to understand if a text form element is
+   * a link and also which LinkItemInterface::LINK_* is (EXTERNAL, GENERIC,
+   * INTERNAL).
+   */
+  public function testLinkTypeOnLinkWidget() {
+
+    $link_type = LinkItemInterface::LINK_EXTERNAL;
+    $field_name = Unicode::strtolower($this->randomMachineName());
+
+    // Create a field with settings to validate.
+    $this->fieldStorage = FieldStorageConfig::create([
+      'field_name' => $field_name,
+      'entity_type' => 'entity_test',
+      'type' => 'link',
+      'cardinality' => 1,
+    ]);
+    $this->fieldStorage->save();
+    FieldConfig::create([
+      'field_storage' => $this->fieldStorage,
+      'label' => 'Read more about this entity',
+      'bundle' => 'entity_test',
+      'settings' => [
+        'title' => DRUPAL_OPTIONAL,
+        'link_type' => $link_type,
+      ],
+    ])->save();
+
+    $this->container->get('entity.manager')
+      ->getStorage('entity_form_display')
+      ->load('entity_test.entity_test.default')
+      ->setComponent($field_name, [
+        'type' => 'link_default',
+      ])
+      ->save();
+
+    $form = \Drupal::service('entity.form_builder')->getForm(EntityTest::create());
+    $this->assertEqual($form[$field_name]['widget'][0]['uri']['#link_type'], $link_type);
+  }
+
+
+  /**
+   * Tests editing a link to a non-node entity.
+   */
+  public function testEditNonNodeEntityLink() {
+
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $entity_test_storage = $entity_type_manager->getStorage('entity_test');
+
+    // Create a field with settings to validate.
+    $this->fieldStorage = FieldStorageConfig::create([
+      'field_name' => 'field_link',
+      'entity_type' => 'entity_test',
+      'type' => 'link',
+      'cardinality' => 1,
+    ]);
+    $this->fieldStorage->save();
+    FieldConfig::create([
+      'field_storage' => $this->fieldStorage,
+      'label' => 'Read more about this entity',
+      'bundle' => 'entity_test',
+      'settings' => [
+        'title' => DRUPAL_OPTIONAL,
+      ],
+    ])->save();
+
+    $entity_type_manager
+      ->getStorage('entity_form_display')
+      ->load('entity_test.entity_test.default')
+      ->setComponent('field_link', [
+        'type' => 'link_default',
+      ])
+      ->save();
+
+    // Create a node and a test entity to have a possibly valid reference for
+    // both. Create another test entity that references the first test entity.
+    $entity_test_link = $entity_test_storage->create(['name' => 'correct link target']);
+    $entity_test_link->save();
+
+    $node = $this->drupalCreateNode(['wrong link target']);
+
+    $correct_link = 'entity:entity_test/' . $entity_test_link->id();
+    $entity_test = $entity_test_storage->create([
+      'name' => 'correct link target',
+      'field_link' => $correct_link,
+    ]);
+    $entity_test->save();
+
+    // Edit the entity and save it, verify the correct link is kept and not
+    // changed to point to a node. Currently, widget does not support non-node
+    // autocomplete and therefore must show the link unaltered.
+    $this->drupalGet($entity_test->toUrl('edit-form'));
+    $this->assertSession()->fieldValueEquals('field_link[0][uri]', $correct_link);
+    $this->drupalPostForm(NULL, [], 'Save');
+
+    $entity_test_storage->resetCache();
+    $entity_test = $entity_test_storage->load($entity_test->id());
+
+    $this->assertEquals($correct_link, $entity_test->get('field_link')->uri);
   }
 
   /**

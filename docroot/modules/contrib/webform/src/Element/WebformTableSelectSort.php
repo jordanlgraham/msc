@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\Table;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\webform\Plugin\WebformElement\TableSelect;
 
 /**
  * Provides a webform element for a sortable tableselect element.
@@ -166,12 +167,8 @@ class WebformTableSelectSort extends Table {
     $value = is_array($element['#value']) ? $element['#value'] : [];
 
     // Add validate callback that extracts the associative array of options.
-    if (isset($element['#element_validate'])) {
-      array_unshift($element['#element_validate'], [get_called_class(), 'validateWebformTableSelectOrder']);
-    }
-    else {
-      $element['#element_validate'][] = [get_called_class(), 'validateWebformTableSelectOrder'];
-    }
+    $element += ['#element_validate' => []];
+    array_unshift($element['#element_validate'], [get_called_class(), 'validateWebformTableSelectOrder']);
 
     $element['#tree'] = TRUE;
 
@@ -201,17 +198,13 @@ class WebformTableSelectSort extends Table {
       foreach ($element['#options'] as $key => $choice) {
         // Do not overwrite manually created children.
         if (!isset($element[$key])) {
-          $checkbox_title = '';
-          $weight_title = '';
-          if (isset($element['#options'][$key]['title']) && is_array($element['#options'][$key]['title'])) {
-            if (!empty($element['#options'][$key]['title']['data']['#title'])) {
-              $checkbox_title = new TranslatableMarkup('Update @title', [
-                '@title' => $element['#options'][$key]['title']['data']['#title'],
-              ]);
-              $weight_title = new TranslatableMarkup('Weight for @title', [
-                '@title' => $element['#options'][$key]['title']['data']['#title'],
-              ]);
-            }
+          if ($title = TableSelect::getTableSelectOptionTitle($choice)) {
+            $checkbox_title = $title;
+            $weight_title = new TranslatableMarkup('Weight for @title', ['@title' => $title]);
+          }
+          else {
+            $checkbox_title = '';
+            $weight_title = '';
           }
 
           $element[$key]['checkbox'] = [
@@ -278,6 +271,7 @@ class WebformTableSelectSort extends Table {
     $form_state->setValueForElement($element, NULL);
 
     // Now, set the values as the element's value.
+    $element['#value'] = $values;
     $form_state->setValueForElement($element, $values);
   }
 

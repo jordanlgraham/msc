@@ -1,14 +1,26 @@
 <?php
 
-// It's likely that the settings.php include will need refactoring when the
-// number of bootstrap phases is reduced and the kernel utilised more fully.
-// https://drupal.org/node/2023495
-// https://drupal.org/node/2016629
+/**
+ * @file
+ * Optional include that enables fast 404 logic.
+ */
 
 use Drupal\Core\Site\Settings;
+use Drupal\fast404\Fast404;
 use Symfony\Component\HttpFoundation\Request;
 
-function fast404_preboot(Array $settings = array()) {
+/**
+ * Fast 404 preboot.
+ *
+ * It's likely that the settings.php include will need refactoring when the
+ * number of bootstrap phases is reduced and the kernel utilised more fully:
+ * - https://drupal.org/node/2023495
+ * - https://drupal.org/node/2016629
+ *
+ * @param array $settings
+ *   The settings from settings.php.
+ */
+function fast404_preboot(array $settings = []) {
 
   // We must instantiate a Settings object before attempting to Settings::get().
   new Settings($settings);
@@ -22,8 +34,7 @@ function fast404_preboot(Array $settings = array()) {
 
   // This is pretty much a wrote copy of the Fast404EventSubscriber class that
   // fires when the module is enabled.
-
-  $fast_404 = new \Drupal\fast404\Fast404($request);
+  $fast_404 = new Fast404($request);
 
   $fast_404->extensionCheck();
   if ($fast_404->isPathBlocked()) {

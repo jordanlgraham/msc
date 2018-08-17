@@ -5,7 +5,10 @@ namespace Drupal\Tests\rules\Functional;
 /**
  * Tests that a rule can be configured and triggered when a node is edited.
  *
- * @group rules_ui
+ * @group RulesUi
+ * @group legacy
+ * @todo Remove the 'legacy' tag when Rules no longer uses deprecated code.
+ * @see https://www.drupal.org/project/rules/issues/2922757
  */
 class ConfigureAndExecuteTest extends RulesBrowserTestBase {
 
@@ -92,6 +95,22 @@ class ConfigureAndExecuteTest extends RulesBrowserTestBase {
     $this->pressButton('Save');
 
     $this->assertSession()->pageTextContains('Title matched "Test title"!');
+
+    // Edit the rule and negate the condition.
+    $this->drupalGet('admin/config/workflow/rules/reactions/edit/test_rule');
+    $this->clickLink('Edit', 0);
+    $this->getSession()->getPage()->checkField('negate');
+    $this->pressButton('Save');
+    // One more save to permanently store the rule.
+    $this->pressButton('Save');
+
+    // Need to clear cache so that the edited version will be used.
+    drupal_flush_all_caches();
+    // Create node with same title and check that the message is not shown.
+    $this->drupalGet('node/add/article');
+    $this->fillField('Title', 'Test title');
+    $this->pressButton('Save');
+    $this->assertSession()->pageTextNotContains('Title matched "Test title"!');
   }
 
 }

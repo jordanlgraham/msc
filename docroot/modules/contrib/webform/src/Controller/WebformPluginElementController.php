@@ -144,7 +144,7 @@ class WebformPluginElementController extends ControllerBase implements Container
             'data' => [
               '#type' => 'link',
               '#title' => $element_plugin_id,
-              '#url' => new Url('webform.element_plugins.test', ['type' => $element_plugin_id]),
+              '#url' => new Url('webform.reports_plugins.elements.test', ['type' => $element_plugin_id]),
               '#attributes' => ['class' => ['webform-form-filter-text-source']],
             ],
           ];
@@ -180,6 +180,7 @@ class WebformPluginElementController extends ControllerBase implements Container
           'container' => $webform_element->isContainer($element),
           'root' => $webform_element->isRoot(),
           'hidden' => $webform_element->isHidden(),
+          'composite' => $webform_element->isComposite(),
           'multiple' => $webform_element->supportsMultipleValues(),
           'multiline' => $webform_element->isMultiline($element),
           'default_key' => $webform_element_plugin_definition['default_key'],
@@ -190,7 +191,7 @@ class WebformPluginElementController extends ControllerBase implements Container
           $webform_info[] = '<b>' . $key . '</b>: ' . ($value ? $this->t('Yes') : $this->t('No'));
         }
 
-        // Wlement info.
+        // Element info.
         $element_info_definitions = [
           'input' => (empty($webform_element_info['#input'])) ? $this->t('No') : $this->t('Yes'),
           'theme' => (isset($webform_element_info['#theme'])) ? $webform_element_info['#theme'] : 'N/A',
@@ -215,7 +216,7 @@ class WebformPluginElementController extends ControllerBase implements Container
         }
         $properties += $element_default_properties;
         if (count($properties) >= 20) {
-          $properties = array_slice($properties, 0, 20) + ['...' => '...'];
+          $properties = array_slice($properties, 0, 20) + ['…' => '…'];
         }
 
         // Operations.
@@ -223,7 +224,7 @@ class WebformPluginElementController extends ControllerBase implements Container
         if ($test_element_enabled) {
           $operations['test'] = [
             'title' => $this->t('Test'),
-            'url' => new Url('webform.element_plugins.test', ['type' => $element_plugin_id]),
+            'url' => new Url('webform.reports_plugins.elements.test', ['type' => $element_plugin_id]),
           ];
         }
         if ($api_url = $webform_element->getPluginApiUrl()) {
@@ -246,12 +247,14 @@ class WebformPluginElementController extends ControllerBase implements Container
             $dependencies ? ['data' => ['#markup' => '• ' . implode('<br />• ', $dependencies)], 'nowrap' => 'nowrap'] : '',
             $element_plugin_definition['provider'],
             $webform_element_plugin_definition['provider'],
-            $operations ? ['data' => [
-              '#type' => 'operations',
-              '#links' => $operations,
-              '#prefix' => '<div class="webform-dropbutton">',
-              '#suffix' => '</div>',
-            ]] : '',
+            $operations ? [
+              'data' => [
+                '#type' => 'operations',
+                '#links' => $operations,
+                '#prefix' => '<div class="webform-dropbutton">',
+                '#suffix' => '</div>',
+              ],
+            ] : '',
           ],
         ];
         if (isset($excluded_elements[$element_plugin_id])) {
@@ -276,13 +279,16 @@ class WebformPluginElementController extends ControllerBase implements Container
       '#placeholder' => $this->t('Filter by element name'),
       '#attributes' => [
         'class' => ['webform-form-filter-text'],
-        'data-element' => '.webform-element-plugin',
+        'data-element' => '.webform-element-plugin-table',
+        'data-summary' => '.webform-element-plugin-summary',
+        'data-item-single' => $this->t('element'),
+        'data-item-plural' => $this->t('elements'),
         'title' => $this->t('Enter a part of the element type to filter by.'),
         'autofocus' => 'autofocus',
       ],
     ];
 
-    // Settings
+    // Settings.
     $build['settings'] = [
       '#type' => 'link',
       '#title' => $this->t('Edit configuration'),
@@ -292,11 +298,11 @@ class WebformPluginElementController extends ControllerBase implements Container
 
     // Display info.
     $build['info'] = [
-      '#markup' => $this->t('@total exporters', ['@total' => count($webform_form_element_rows)]),
-      '#prefix' => '<p>',
+      '#markup' => $this->t('@total elements', ['@total' => count($webform_form_element_rows)]),
+      '#prefix' => '<p class="webform-element-plugin-summary">',
       '#suffix' => '</p>',
     ];
-    
+
     ksort($webform_form_element_rows);
     $build['webform_elements'] = [
       '#type' => 'table',
@@ -315,8 +321,9 @@ class WebformPluginElementController extends ControllerBase implements Container
         $this->t('Operations'),
       ],
       '#rows' => $webform_form_element_rows,
+      '#sticky' => TRUE,
       '#attributes' => [
-        'class' => ['webform-element-plugin'],
+        'class' => ['webform-element-plugin-table'],
       ],
     ];
 

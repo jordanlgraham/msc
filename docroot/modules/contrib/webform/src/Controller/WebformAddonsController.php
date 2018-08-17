@@ -53,25 +53,22 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
       ],
     ];
 
-    // Promotions.
-    $build['promotions'] = [
-      '#type' => 'container',
+    // Filter.
+    $build['filter'] = [
+      '#type' => 'search',
+      '#title' => $this->t('Filter'),
+      '#title_display' => 'invisible',
+      '#size' => 30,
+      '#placeholder' => $this->t('Filter by keyword'),
       '#attributes' => [
-        'class' => ['webform-addons-promotions'],
+        'class' => ['webform-form-filter-text'],
+        'data-element' => '.admin-list',
+        'data-source' => 'li',
+        'data-parent' => 'li',
+        'title' => $this->t('Enter a keyword to filter by.'),
+        'autofocus' => 'autofocus',
       ],
-
     ];
-    $promotions = $this->addons->getPromotions();
-    foreach ($promotions as $promotion_name => $promotion) {
-      $build['promotions'][$promotion_name] = [
-        '#type' => 'webform_message',
-        '#message_type' => $promotion_name,
-        '#message_message' => $promotion['content'],
-        '#message_close' => TRUE,
-        '#message_id' => 'webform.addons.promotion.' . $promotion_name,
-        '#message_storage' => WebformMessage::STORAGE_SESSION,
-      ];
-    }
 
     // Projects.
     $build['projects'] = [
@@ -80,7 +77,6 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
         'class' => ['webform-addons-projects', 'js-webform-details-toggle', 'webform-details-toggle'],
       ],
     ];
-    $build['projects']['#attached']['library'][] = 'webform/webform.addons';
 
     $categories = $this->addons->getCategories();
     foreach ($categories as $category_name => $category) {
@@ -120,6 +116,9 @@ class WebformAddonsController extends ControllerBase implements ContainerInjecti
         '#content' => $projects,
       ];
     }
+
+    $build['#attached']['library'][] = 'webform/webform.addons';
+    $build['#attached']['library'][] = 'webform/webform.admin';
 
     return $build;
   }

@@ -6,16 +6,9 @@ use Drupal\Tests\rules\Unit\Integration\RulesIntegrationTestBase;
 
 /**
  * @coversDefaultClass \Drupal\rules\Plugin\RulesAction\VariableAdd
- * @group rules_actions
+ * @group RulesAction
  */
 class VariableAddTest extends RulesIntegrationTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setUp() {
-    parent::setUp();
-  }
 
   /**
    * Test the action execution.

@@ -9,8 +9,8 @@ use Drupal\Core\EventSubscriber\MainContentViewSubscriber;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
-use Drupal\system\Tests\Cache\AssertPageCacheContextsAndTagsTrait;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\system\Functional\Cache\AssertPageCacheContextsAndTagsTrait;
 
 /**
  * Create and delete nodes and check for their display in the tracker listings.
@@ -361,8 +361,14 @@ class TrackerTest extends BrowserTestBase {
     ];
     $this->drupalPostForm('comment/reply/node/' . $nodes[3]->id() . '/comment', $comment, t('Save'));
 
-    // Start indexing backwards from node 3.
-    \Drupal::state()->set('tracker.index_nid', 3);
+    // Create an unpublished node.
+    $unpublished = $this->drupalCreateNode([
+      'title' => $this->randomMachineName(8),
+      'status' => 0,
+    ]);
+
+    // Start indexing backwards from node 4.
+    \Drupal::state()->set('tracker.index_nid', 4);
 
     // Clear the current tracker tables and rebuild them.
     db_delete('tracker_node')

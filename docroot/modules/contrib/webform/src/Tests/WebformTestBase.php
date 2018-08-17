@@ -7,14 +7,12 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\filter\Entity\FilterFormat;
-use Drupal\node\NodeInterface;
 use Drupal\simpletest\WebTestBase;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\user\Entity\Role;
 use Drupal\webform\WebformInterface;
 use Drupal\webform\Entity\Webform;
-use Drupal\webform\Entity\WebformSubmission;
 
 /**
  * Defines an abstract test base for webform tests.
@@ -165,6 +163,7 @@ abstract class WebformTestBase extends WebTestBase {
       'view own webform submission',
       'edit own webform submission',
       'delete own webform submission',
+      'access webform submission user',
     ]));
 
     // Any webform submission user.
@@ -367,13 +366,15 @@ abstract class WebformTestBase extends WebTestBase {
    *   Submission values.
    * @param string $submit
    *   Value of the submit button whose click is to be emulated.
+   * @param array $options
+   *   Options to be forwarded to the url generator.
    *
    * @return int
    *   The created test submission's sid.
    */
-  protected function postSubmissionTest(WebformInterface $webform, array $edit = [], $submit = NULL) {
+  protected function postSubmissionTest(WebformInterface $webform, array $edit = [], $submit = NULL, array $options = []) {
     $submit = $this->getWebformSubmitButtonLabel($webform, $submit);
-    $this->drupalPostForm('webform/' . $webform->id() . '/test', $edit, $submit);
+    $this->drupalPostForm('webform/' . $webform->id() . '/test', $edit, $submit, $options);
     return $this->getLastSubmissionId($webform);
   }
 

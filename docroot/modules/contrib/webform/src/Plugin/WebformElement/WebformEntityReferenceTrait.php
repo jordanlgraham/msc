@@ -38,7 +38,7 @@ trait WebformEntityReferenceTrait {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $entity = $this->getTargetEntity($element, $webform_submission, $options);
     if (!$entity) {
       return '';
@@ -69,7 +69,7 @@ trait WebformEntityReferenceTrait {
   /**
    * {@inheritdoc}
    */
-  public function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function formatTextItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $entity = $this->getTargetEntity($element, $webform_submission, $options);
     if (!$entity) {
       return '';
@@ -535,7 +535,7 @@ trait WebformEntityReferenceTrait {
       '#submit' => [[get_called_class(), 'submitEntityReferenceCallback']],
       // Refresh the entity reference details container.
       '#ajax' => [
-        'callback' => [get_called_class(), 'entityReferenceAjaxCallback'],
+        'callback' => [get_called_class(), 'ajaxEntityReferenceCallback'],
         'wrapper' => 'webform-entity-reference-selection-wrapper',
         'progress' => ['type' => 'fullscreen'],
       ],
@@ -583,13 +583,17 @@ trait WebformEntityReferenceTrait {
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
     parent::validateConfigurationForm($form, $form_state);
     $values = $form_state->getValues();
+
     if (isset($values['selection_settings']['target_bundles']) && empty($values['selection_settings']['target_bundles'])) {
       unset($values['selection_settings']['target_bundles']);
     }
     if (isset($values['selection_settings']['sort']['field']) && $values['selection_settings']['sort']['field'] == '_none') {
       unset($values['selection_settings']['sort']);
     }
-    // Convert include_anonymous into boolean.
+    // Convert auto_create and include_anonymous into boolean.
+    if (isset($values['selection_settings']['auto_create'])) {
+      $values['selection_settings']['auto_create'] = (bool) $values['selection_settings']['auto_create'];
+    }
     if (isset($values['selection_settings']['include_anonymous'])) {
       $values['selection_settings']['include_anonymous'] = (bool) $values['selection_settings']['include_anonymous'];
     }
@@ -653,7 +657,7 @@ trait WebformEntityReferenceTrait {
    * @return array
    *   The properties element.
    */
-  public static function entityReferenceAjaxCallback(array $form, FormStateInterface $form_state) {
+  public static function ajaxEntityReferenceCallback(array $form, FormStateInterface $form_state) {
     $button = $form_state->getTriggeringElement();
     $element = NestedArray::getValue($form, array_slice($button['#array_parents'], 0, -1));
     return $element;

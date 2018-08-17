@@ -33,8 +33,12 @@
 
       // Display the element.
       $element[showEffect]();
-      // Focus and require the input.
-      $input.focus().prop('required', true).attr('aria-required', 'aria-required');
+      // If not initializing, then focus the other element.
+      if (effect !== false) {
+        $input.focus();
+      }
+      // Require the input.
+      $input.prop('required', true).attr('aria-required', 'true');
       // Restore the input's value.
       var value = $input.data('webform-value');
       if (value !== undefined) {
@@ -139,7 +143,7 @@
 
         var $buttons = $element.find('input[type="radio"]');
         var $input = $element.find('.js-webform-buttons-other-input');
-        var $container = $(this).find('.form-radios');
+        var $container = $(this).find('.js-webform-webform-buttons');
 
         // Create set onchange handler.
         $container.change(function () {

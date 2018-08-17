@@ -19,8 +19,6 @@ abstract class ContainerBase extends WebformElementBase {
   public function getDefaultProperties() {
     return [
       'title' => '',
-      // General settings.
-      'description' => '',
       // Form validation.
       'required' => FALSE,
       // Attributes.
@@ -35,6 +33,15 @@ abstract class ContainerBase extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
+  protected function getDefaultBaseProperties() {
+    $properties = parent::getDefaultBaseProperties();
+    unset($properties['prepopulate']);
+    return $properties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isInput(array $element) {
     return FALSE;
   }
@@ -44,20 +51,6 @@ abstract class ContainerBase extends WebformElementBase {
    */
   public function isContainer(array $element) {
     return TRUE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
-    parent::prepare($element, $webform_submission);
-
-    // Containers can only hide (aka invisible) the title by removing the
-    // #title attribute.
-    // @see core/modules/system/templates/fieldset.html.twig
-    if (isset($element['#title_display']) && $element['#title_display'] === 'invisible') {
-      unset($element['#title']);
-    }
   }
 
   /**
@@ -181,7 +174,7 @@ abstract class ContainerBase extends WebformElementBase {
         '#suffix' => PHP_EOL,
       ];
     }
-    $build += $children;
+    $build['children'] = $children;
     return $build;
   }
 
@@ -236,7 +229,6 @@ abstract class ContainerBase extends WebformElementBase {
     // @see fieldset.html.twig
     // @see webform-section.html.twig
     $form['form']['display_container']['title_display']['#options'] = [
-      '' => '',
       'invisible' => $this->t('Invisible'),
     ];
 

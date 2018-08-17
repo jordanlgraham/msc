@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\WebformSubmissionConditionsValidator;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -13,7 +14,7 @@ use Drupal\webform\WebformSubmissionInterface;
  *   id = "checkboxes",
  *   api = "https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Render!Element!Checkboxes.php/class/Checkboxes",
  *   label = @Translation("Checkboxes"),
- *   description = @Translation("Provides a form element for a set of checkboxes, with the ability to enter a custom value."),
+ *   description = @Translation("Provides a form element for a set of checkboxes."),
  *   category = @Translation("Options elements"),
  * )
  */
@@ -61,8 +62,12 @@ class Checkboxes extends OptionsBase {
    */
   protected function getElementSelectorInputsOptions(array $element) {
     $selectors = $element['#options'];
-    foreach ($selectors as &$text) {
+    foreach ($selectors as $index => $text) {
+      // Remove description from text.
+      list($text) = explode(WebformOptionsHelper::DESCRIPTION_DELIMITER, $text);
+      // Append element type to text.
       $text .= ' [' . $this->t('Checkbox') . ']';
+      $selectors[$index] = $text;
     }
     return $selectors;
   }

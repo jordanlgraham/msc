@@ -12,19 +12,16 @@
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  *
  * Checks for the user password reset form and changes the validate and submit
  * functions. Uses the overridden functions defined in this module instead of
  * Drupal cores.
  */
-function username_enumeration_prevention_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  // Check to see if form is the reset password form.
-  if ($form_id == 'user_pass') {
-    // Override core validate and submit actions.
-    $form['#validate'][0] = 'username_enumeration_prevention_pass_validate';
-    $form['#submit'][0] = 'username_enumeration_prevention_pass_submit';
-  }
+function username_enumeration_prevention_form_user_pass_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Override core validate and submit actions.
+  $form['#validate'][0] = 'username_enumeration_prevention_pass_validate';
+  $form['#submit'][0] = 'username_enumeration_prevention_pass_submit';
 }
 
 /**
@@ -41,14 +38,11 @@ function username_enumeration_prevention_pass_validate($form, FormStateInterface
     $account = user_load_by_name($name);
   }
 
-  if ($account && $account->id()) {
-    $form_state->setValueForElement(array('#parents' => array('account')), $account);
+  if ($account && $account->id() && $account->isActive()) {
+    $form_state->setValueForElement(['#parents' => ['account']], $account);
   }
   else {
-    // Reuse the 'send email' message if a value was entered in form.
-    if ($name != '') {
-      drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
-    }
+    \Drupal::logger('username_enumeration_prevention')->notice('Blocked user attempting to reset password.');
   }
 }
 
@@ -63,9 +57,10 @@ function username_enumeration_prevention_pass_submit($form, FormStateInterface $
     // Mail one time login URL and instructions using current language.
     $mail = _user_mail_notify('password_reset', $account, $langcode);
     if (!empty($mail)) {
-      \Drupal::logger('username_enumeration_prevention')->notice('Password reset instructions mailed to %name at %email.', array('%name' => $account->getUsername(), '%email' => $account->getEmail()));
+      \Drupal::logger('username_enumeration_prevention')->notice('Password reset instructions mailed to %name at %email.', ['%name' => $account->getUsername(), '%email' => $account->getEmail()]);
     }
-    drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
   }
+
+  drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
   $form_state->setRedirect('user.page');
 }

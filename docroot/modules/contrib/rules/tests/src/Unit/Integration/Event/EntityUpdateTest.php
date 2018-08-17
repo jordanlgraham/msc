@@ -7,7 +7,7 @@ namespace Drupal\Tests\rules\Unit\Integration\Event;
  *
  * @coversDefaultClass \Drupal\rules\Plugin\RulesEvent\EntityUpdateDeriver
  *
- * @group rules_events
+ * @group RulesEvent
  */
 class EntityUpdateTest extends EventTestBase {
 
@@ -21,7 +21,7 @@ class EntityUpdateTest extends EventTestBase {
     $this->assertSame('entity:test', $context_definition->getDataType());
     $this->assertSame('Test', $context_definition->getLabel());
 
-    // Also check that there is a context for the orginal entity.
+    // Also check that there is a context for the original entity.
     $context_definition = $plugin_definition['context']['test_unchanged'];
     $this->assertSame('entity:test', $context_definition->getDataType());
     $this->assertSame('Unchanged Test', (string) $context_definition->getLabel());

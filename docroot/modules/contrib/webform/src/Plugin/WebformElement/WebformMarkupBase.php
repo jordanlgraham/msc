@@ -25,7 +25,7 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformEl
    * {@inheritdoc}
    */
   public function isContainer(array $element) {
-    return TRUE;
+    return FALSE;
   }
 
   /**
@@ -41,11 +41,20 @@ abstract class WebformMarkupBase extends WebformElementBase implements WebformEl
   /**
    * {@inheritdoc}
    */
+  protected function getDefaultBaseProperties() {
+    $properties = parent::getDefaultBaseProperties();
+    unset($properties['prepopulate']);
+    return $properties;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function prepare(array &$element, WebformSubmissionInterface $webform_submission = NULL) {
     parent::prepare($element, $webform_submission);
 
     // Hide element if it should not be displayed on 'form'.
-    if (!$this->isDisplayOn($element, static::DISPLAY_ON_FORM)) {
+    if ($this->hasProperty('display_on') && !$this->isDisplayOn($element, static::DISPLAY_ON_FORM)) {
       $element['#access'] = FALSE;
     }
 

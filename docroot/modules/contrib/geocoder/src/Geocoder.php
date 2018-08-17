@@ -30,7 +30,7 @@ class Geocoder implements GeocoderInterface {
    * {@inheritdoc}
    */
   public function geocode($data, array $plugins, array $options = []) {
-    foreach (array_keys($plugins) as $plugin_id) {
+    foreach ($plugins as $plugin_id) {
       $options += [$plugin_id => []];
       $provider = $this->providerPluginManager->createInstance($plugin_id, $options[$plugin_id]);
 
@@ -51,7 +51,7 @@ class Geocoder implements GeocoderInterface {
   /**
    * {@inheritdoc}
    */
-  public function reverse(\double $latitude, \double $longitude, array $plugins, array $options = []) {
+  public function reverse($latitude, $longitude, array $plugins, array $options = []) {
     foreach ($plugins as $plugin_id) {
       $options += [$plugin_id => []];
       $provider = $this->providerPluginManager->createInstance($plugin_id, $options[$plugin_id]);
@@ -60,10 +60,10 @@ class Geocoder implements GeocoderInterface {
         return $provider->reverse($latitude, $longitude);
       }
       catch (InvalidCredentials $e) {
-        static::log($e->getMessage(), 'error');
+        static::log($e->getMessage());
       }
       catch (\Exception $e) {
-        static::log($e->getMessage(), 'error');
+        static::log($e->getMessage());
       }
     }
 

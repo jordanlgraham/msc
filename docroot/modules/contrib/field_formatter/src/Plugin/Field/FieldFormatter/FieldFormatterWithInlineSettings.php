@@ -192,7 +192,11 @@ class FieldFormatterWithInlineSettings extends FieldFormatterBase implements Con
     $target_entity_type_id = $this->fieldDefinition->getSetting('target_type');
     $field_storage_definitions = $this->entityFieldManager->getFieldStorageDefinitions($target_entity_type_id);
     $formatted_field_name = $this->getSettingFromFormState($form_state, 'field_name');
-    $field_storage = $field_storage_definitions[$formatted_field_name];
+    // In case there is no definition for specified field.
+    if (isset($field_storage_definitions[$formatted_field_name])) {
+      $field_storage = $field_storage_definitions[$formatted_field_name];
+      $formatter_options = $this->getAvailableFormatterOptions($field_storage);
+    }
 
     $form['#prefix'] = '<div id="field-formatter-ajax">';
     $form['#suffix'] = '</div>';
@@ -224,8 +228,7 @@ class FieldFormatterWithInlineSettings extends FieldFormatterBase implements Con
       '#default_value' => $this->getSettingFromFormState($form_state, 'label'),
     ];
 
-    $formatter_options = $this->getAvailableFormatterOptions($field_storage);
-    if ($formatted_field_name) {
+    if ($formatted_field_name && isset($formatter_options)) {
       $formatter_type = $this->getSettingFromFormState($form_state, 'type');
       $settings = $this->getSettingFromFormState($form_state, 'settings');
       if (!isset($formatter_options[$formatter_type])) {

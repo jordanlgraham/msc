@@ -47,6 +47,7 @@ class WebformSettingsPathTest extends WebformTestBase {
     $webform->setSettings(['page' => FALSE])->save();
     $this->drupalGet('webform/' . $webform->id());
     $this->assertResponse(403, 'Submit system path access denied');
+    $this->assertNoRaw('Only webform administrators are allowed to access this page and create new submissions.');
     $this->drupalGet('form/' . str_replace('_', '-', $webform->id()));
     $this->assertResponse(404, 'Submit URL alias does not exist');
 
@@ -54,6 +55,7 @@ class WebformSettingsPathTest extends WebformTestBase {
     $this->drupalLogin($this->rootUser);
     $this->drupalGet('webform/' . $webform->id());
     $this->assertResponse(200, 'Submit system path access permitted');
+    $this->assertRaw('Only webform administrators are allowed to access this page and create new submissions.');
     $this->drupalLogout();
 
     // Check custom submit and confirm path.
@@ -78,6 +80,31 @@ class WebformSettingsPathTest extends WebformTestBase {
     $this->assertResponse(404, 'Submit URL alias does not exist.');
     $this->drupalGet('base/path/' . str_replace('_', '-', $webform->id()) . '/confirmation');
     $this->assertResponse(404, 'Confirm URL alias does not exist.');
+
+    // Disable automatic generation of paths.
+    \Drupal::configFactory()->getEditable('webform.settings')
+      ->set('settings.default_page_base_path', '')
+      ->save();
+
+    $webform = Webform::create([
+      'langcode' => 'en',
+      'status' => WebformInterface::STATUS_OPEN,
+      'id' => 'test_no_paths',
+      'title' => 'test_no_paths',
+      'elements' => Yaml::encode([
+        'test' => ['#markup' => 'test'],
+      ]),
+    ]);
+    $webform->save();
+
+    // Check default system submit path.
+    $this->drupalGet('webform/' . $webform->id());
+    $this->assertResponse(200, 'Submit system path exists');
+
+    // Check no default alias submit path.
+    $this->drupalGet('form/' . str_replace('_', '-', $webform->id()));
+    $this->assertResponse(404, 'Submit URL alias does not exist');
+
   }
 
 }

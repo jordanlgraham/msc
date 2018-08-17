@@ -6,77 +6,13 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\webform\Ajax\WebformAnnounceCommand;
 use Drupal\webform\WebformSubmissionInterface;
-use Drupal\webform\WebformRequestInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides route responses for webform submissions.
  */
-class WebformSubmissionController extends ControllerBase implements ContainerInjectionInterface {
-
-  /**
-   * Webform request handler.
-   *
-   * @var \Drupal\webform\WebformRequestInterface
-   */
-  protected $requestHandler;
-
-  /**
-   * Constructs a WebformSubmissionController object.
-   *
-   * @param \Drupal\webform\WebformRequestInterface $request_handler
-   *   The webform request handler.
-   */
-  public function __construct(WebformRequestInterface $request_handler) {
-    $this->requestHandler = $request_handler;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('webform.request')
-    );
-  }
-
-  /**
-   * Returns a webform submission in a specified format type.
-   *
-   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
-   *   A webform submission.
-   * @param string $type
-   *   The format type.
-   *
-   * @return array
-   *   A render array representing a webform submission in a specified format
-   *   type.
-   */
-  public function index(WebformSubmissionInterface $webform_submission, $type) {
-    if ($type == 'default') {
-      $type = 'html';
-    }
-
-    $build = [];
-    $source_entity = $this->requestHandler->getCurrentSourceEntity('webform_submission');
-    // Navigation.
-    $build['navigation'] = [
-      '#theme' => 'webform_submission_navigation',
-      '#webform_submission' => $webform_submission,
-    ];
-
-    // Submission.
-    $build['submission'] = [
-      '#theme' => 'webform_submission',
-      '#webform_submission' => $webform_submission,
-      '#source_entity' => $source_entity,
-      '#type' => $type,
-    ];
-
-    return $build;
-  }
+class WebformSubmissionController extends ControllerBase {
 
   /**
    * Toggle webform submission sticky.
@@ -91,31 +27,84 @@ class WebformSubmissionController extends ControllerBase implements ContainerInj
     // Toggle sticky.
     $webform_submission->setSticky(!$webform_submission->isSticky())->save();
 
-    // Get state.
-    $state = $webform_submission->isSticky() ? 'on' : 'off';
+    // Get selector.
+    $selector = '#webform-submission-' . $webform_submission->id() . '-sticky';
 
     $response = new AjaxResponse();
-    $response->addCommand(new HtmlCommand(
-      '#webform-submission-' . $webform_submission->id() . '-sticky',
-      new FormattableMarkup('<span class="webform-icon webform-icon-sticky webform-icon-sticky--@state"></span>', ['@state' => $state])
-    ));
+
+    // Update sticky.
+    $response->addCommand(new HtmlCommand($selector, static::buildSticky($webform_submission)));
+
+    // Announce sticky status.
+    $t_args = ['@label' => $webform_submission->label()];
+    $text = $webform_submission->isSticky() ? $this->t('@label flagged/starred.', $t_args) : $this->t('@label unflagged/unstarred.', $t_args);
+    $response->addCommand(new WebformAnnounceCommand($text));
+
     return $response;
   }
 
   /**
-   * Route title callback.
+   * Toggle webform submission locked.
    *
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
-   *   The webform submission.
-   * @param bool $duplicate
-   *   Flag indicating if submission is being duplicated.
+   *   A webform submission.
    *
-   * @return array
-   *   The webform submission as a render array.
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   An Ajax response that toggle the lock icon.
    */
-  public function title(WebformSubmissionInterface $webform_submission, $duplicate = FALSE) {
-    $title = $webform_submission->label();
-    return ($duplicate) ? $this->t('Duplicate @title', ['@title' => $title]) : $title;
+  public function locked(WebformSubmissionInterface $webform_submission) {
+    // Toggle locked.
+    $webform_submission->setLocked(!$webform_submission->isLocked())->save();
+
+    // Get selector.
+    $selector = '#webform-submission-' . $webform_submission->id() . '-locked';
+
+    $response = new AjaxResponse();
+
+    // Update lock.
+    $response->addCommand(new HtmlCommand($selector, static::buildLocked($webform_submission)));
+
+    // Announce lock status.
+    $t_args = ['@label' => $webform_submission->label()];
+    $text = $webform_submission->isLocked() ? $this->t('@label locked.', $t_args) : $this->t('@label unlocked.', $t_args);
+    $response->addCommand(new WebformAnnounceCommand($text));
+    return $response;
+  }
+
+  /**
+   * Build sticky icon.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   *
+   * @return \Drupal\Component\Render\FormattableMarkup
+   *   Sticky icon.
+   */
+  public static function buildSticky(WebformSubmissionInterface $webform_submission) {
+    $t_args = ['@label' => $webform_submission->label()];
+    $args = [
+      '@state' => $webform_submission->isSticky() ? 'on' : 'off',
+      '@label' => $webform_submission->isSticky() ? t('Unstar/Unflag @label', $t_args) : t('Star/flag @label', $t_args),
+    ];
+    return new FormattableMarkup('<span class="webform-icon webform-icon-sticky webform-icon-sticky--@state"></span><span class="visually-hidden">@label</span>', $args);
+  }
+
+  /**
+   * Build locked icon.
+   *
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   *
+   * @return \Drupal\Component\Render\FormattableMarkup
+   *   Locked icon.
+   */
+  public static function buildLocked(WebformSubmissionInterface $webform_submission) {
+    $t_args = ['@label' => $webform_submission->label()];
+    $args = [
+      '@state' => $webform_submission->isLocked() ? 'on' : 'off',
+      '@label' => $webform_submission->isLocked() ? t('Unlock @label', $t_args) : t('Lock @label', $t_args),
+    ];
+    return new FormattableMarkup('<span class="webform-icon webform-icon-lock webform-icon-locked--@state"></span><span class="visually-hidden">@label</span>', $args);
   }
 
 }

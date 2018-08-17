@@ -92,6 +92,14 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function supportsConditions();
 
   /**
+   * Determine if webform handler supports tokens.
+   *
+   * @return bool
+   *   TRUE if the webform handler supports tokens.
+   */
+  public function supportsTokens();
+
+  /**
    * Returns the unique ID representing the webform handler.
    *
    * @return string
@@ -182,6 +190,20 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
   public function setConditions(array $conditions);
 
   /**
+   * Enables the webform handler.
+   *
+   * @return $this
+   */
+  public function enable();
+
+  /**
+   * Disables the webform handler.
+   *
+   * @return $this
+   */
+  public function disable();
+
+  /**
    * Checks if the handler is excluded via webform.settings.
    *
    * @return bool
@@ -248,7 +270,7 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    * Note: Conditions are only applied to callbacks that require a
    * webform submissions.
    *
-   * Conditions are ignored by...
+   * Conditions are ignored by…
    * - \Drupal\webform\Plugin\WebformHandlerInterface::alterElements
    * - \Drupal\webform\Plugin\WebformHandlerInterface::preCreate
    *
@@ -276,6 +298,23 @@ interface WebformHandlerInterface extends PluginInspectionInterface, Configurabl
    *   The webform.
    */
   public function alterElements(array &$elements, WebformInterface $webform);
+
+  /****************************************************************************/
+  // Webform submission methods.
+  /****************************************************************************/
+
+  /**
+   * Alter/override a webform submission webform settings.
+   *
+   * IMPORTANT: Webform settings are overridden for just the webform submission.
+   * Overridden settings are never saved to the Webform's configuration.
+   *
+   * @param array $settings
+   *   An associative array containing the webform settings.
+   * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
+   *   A webform submission.
+   */
+  public function overrideSettings(array &$settings, WebformSubmissionInterface $webform_submission);
 
   /****************************************************************************/
   // Submission form methods.

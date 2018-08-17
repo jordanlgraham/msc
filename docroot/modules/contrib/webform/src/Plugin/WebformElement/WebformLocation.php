@@ -32,6 +32,7 @@ class WebformLocation extends WebformCompositeBase {
       'multiple' => FALSE,
       // Description/Help.
       'help' => '',
+      'help_title' => '',
       'description' => '',
       'more' => '',
       'more_title' => '',
@@ -44,6 +45,7 @@ class WebformLocation extends WebformCompositeBase {
       'required_error' => '',
       // Attributes.
       'wrapper_attributes' => [],
+      'label_attributes' => [],
       // Location settings.
       'geolocation' => FALSE,
       'hidden' => FALSE,
@@ -99,7 +101,7 @@ class WebformLocation extends WebformCompositeBase {
   /**
    * {@inheritdoc}
    */
-  public function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
+  protected function formatHtmlItem(array $element, WebformSubmissionInterface $webform_submission, array $options = []) {
     $value = $this->getValue($element, $webform_submission, $options);
 
     // Return empty value.
@@ -247,14 +249,14 @@ class WebformLocation extends WebformCompositeBase {
               '#type' => 'textfield',
               '#title' => $this->t('@title title', $t_args),
               '#title_display' => 'invisible',
-              '#placeholder' => $this->t('Enter title...'),
+              '#placeholder' => $this->t('Enter title…'),
               '#attributes' => $attributes,
             ],
             $composite_key . '__placeholder' => [
               '#type' => 'textfield',
               '#title' => $this->t('@title placeholder', $t_args),
               '#title_display' => 'invisible',
-              '#placeholder' => $this->t('Enter placeholder...'),
+              '#placeholder' => $this->t('Enter placeholder…'),
               '#attributes' => $attributes,
             ],
           ],

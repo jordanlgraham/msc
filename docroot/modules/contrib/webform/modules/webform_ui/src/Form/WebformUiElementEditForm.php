@@ -18,7 +18,7 @@ class WebformUiElementEditForm extends WebformUiElementFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL, $key = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, WebformInterface $webform = NULL, $key = NULL, $parent_key = NULL, $type = NULL) {
     $this->element = $webform->getElementDecoded($key);
     if ($this->element === NULL) {
       throw new NotFoundHttpException();
@@ -48,7 +48,7 @@ class WebformUiElementEditForm extends WebformUiElementFormBase {
     // ISSUE:
     // The below delete link with .use-ajax is throwing errors because the modal
     // dialog code is creating a <button> without any parent form.
-    // Issue #2879304: Editing Select Other elements produces JavaScript errors
+    // Issue #2879304: Editing Select Other elements produces JavaScript errors.
     // @see Drupal.Ajax
     /*
     if ($this->isModalDialog()) {
@@ -62,19 +62,20 @@ class WebformUiElementEditForm extends WebformUiElementFormBase {
             'key' => $key,
           ]
         ),
-        '#attributes' => WebformDialogHelper::getModalDialogAttributes(700, ['button', 'button--danger']),
+        '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::NARROW_DIALOG, ['button', 'button--danger']),
       ];
     }
     */
 
     // WORKAROUND:
     // Create a hidden link that is clicked using jQuery.
-    if ($this->isDialog()) {
+    // @see \Drupal\webform_ui\Form\WebformUiElementFormBase::buildDefaultValueForm
+    if ($this->isDialog() && !$form_state->get('default_value_element')) {
       $form['delete'] = [
         '#type' => 'link',
         '#title' => $this->t('Delete'),
         '#url' => new Url('entity.webform_ui.element.delete_form', ['webform' => $webform->id(), 'key' => $key]),
-        '#attributes' => ['style' => 'display:none'] + WebformDialogHelper::getModalDialogAttributes(700, ['webform-ui-element-delete-link']),
+        '#attributes' => ['style' => 'display:none'] + WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, ['webform-ui-element-delete-link']),
       ];
       $form['actions']['delete'] = [
         '#type' => 'submit',

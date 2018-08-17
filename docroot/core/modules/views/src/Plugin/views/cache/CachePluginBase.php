@@ -97,6 +97,9 @@ abstract class CachePluginBase extends PluginBase {
    * Save data to the cache.
    *
    * A plugin should override this to provide specialized caching behavior.
+   *
+   * @param $type
+   *   The cache type, either 'query', 'result'.
    */
   public function cacheSet($type) {
     switch ($type) {
@@ -119,6 +122,12 @@ abstract class CachePluginBase extends PluginBase {
    * Retrieve data from the cache.
    *
    * A plugin should override this to provide specialized caching behavior.
+   *
+   * @param $type
+   *   The cache type, either 'query', 'result'.
+   *
+   * @return bool
+   *   TRUE if data has been taken from the cache, otherwise FALSE.
    */
   public function cacheGet($type) {
     $cutoff = $this->cacheExpire($type);
@@ -171,7 +180,7 @@ abstract class CachePluginBase extends PluginBase {
    * All of the cached result data will be available in $view->result, as well,
    * so all ids used in the query should be discoverable.
    */
-  public function postRender(&$output) { }
+  public function postRender(&$output) {}
 
   /**
    * Calculates and sets a cache ID used for the result cache.
@@ -190,7 +199,7 @@ abstract class CachePluginBase extends PluginBase {
           $query = clone $build_info[$index];
           $query->preExecute();
           $build_info[$index] = [
-            'query' => (string)$query,
+            'query' => (string) $query,
             'arguments' => $query->getArguments(),
           ];
         }
@@ -292,7 +301,7 @@ abstract class CachePluginBase extends PluginBase {
   /**
    * Returns the row cache tags.
    *
-   * @param ResultRow $row
+   * @param \Drupal\views\ResultRow $row
    *   A result row.
    *
    * @return string[]
