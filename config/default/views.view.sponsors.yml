@@ -242,7 +242,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2017 Annual Meeting & Trade Show.'
+            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2018 Spring Conference & Trade Show.'
             format: basic_html
           plugin_id: text
       footer:

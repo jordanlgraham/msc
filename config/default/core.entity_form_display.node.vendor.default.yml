@@ -25,6 +25,7 @@ dependencies:
     - field_group
     - link
     - path
+    - scheduler
 third_party_settings:
   field_group:
     group_netforum_data_auto_synchro:
@@ -207,6 +208,19 @@ content:
     weight: 17
     third_party_settings: {  }
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
@@ -230,5 +244,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
     region: content
 hidden: {  }

@@ -8,6 +8,7 @@ dependencies:
     - node.type.file_browser
   module:
     - path
+    - scheduler
     - text
 _core:
   default_config_hash: T4d_Dkvp7jeLwdryQmxI24m4lOfIbsLTUL8_FIlZnmo
@@ -44,6 +45,19 @@ content:
     weight: 6
     third_party_settings: {  }
     region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
@@ -67,6 +81,15 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
     region: content
 hidden:
   field_file_browser_image: true

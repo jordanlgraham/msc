@@ -13,6 +13,7 @@ dependencies:
     - node.type.scholarship_recipient
   module:
     - path
+    - scheduler
     - text
 id: node.scholarship_recipient.default
 targetEntityType: node
@@ -93,6 +94,19 @@ content:
     weight: 10
     region: content
     third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
@@ -117,4 +131,13 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
 hidden: {  }

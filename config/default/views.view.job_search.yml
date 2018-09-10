@@ -177,6 +177,7 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -265,6 +266,7 @@ display:
               administrator: '0'
               content_author: '0'
               member: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''

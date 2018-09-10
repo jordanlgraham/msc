@@ -8,13 +8,13 @@ folder: ../config/foundation
 module: {  }
 theme: {  }
 blacklist:
-- block.block.findafacility
-- block.block.findapreferredvendor
+  - block.block.findafacility
+  - block.block.findapreferredvendor
 graylist:
-- system.site
-- views.view.all_sponsors
-- views.view.sponsors
-- block.block.footeraffliates
+  - system.site
+  - views.view.all_sponsors
+  - views.view.sponsors
+  - block.block.footeraffliates
 graylist_dependents: true
 graylist_skip_equal: true
 weight: 0

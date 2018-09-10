@@ -7,8 +7,8 @@ dependencies:
     - media_entity.bundle.image
   module:
     - entity_browser
-    - image
     - media_entity
+    - svg_image
     - user
 id: image_browser
 label: 'Image Browser'
