@@ -78,7 +78,8 @@
     "drupal/scheduler": "1.0",
     "drupal/webform": "^5.0@beta",
     "drupal/smart_trim": "^1.0",
-    "drush/drush": "^9.3"
+    "drush/drush": "^9.3",
+    "drupal/honeypot": "^1.29"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.8"
