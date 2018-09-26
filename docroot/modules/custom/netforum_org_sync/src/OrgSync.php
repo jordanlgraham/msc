@@ -169,7 +169,9 @@ class OrgSync {
     $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
     $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
     $node->field_customer_key = $this->helper->cleanSoapField($org['org_cst_key']); //Text (plain)
-
+    if ($node->getType() == 'vendor' && $this->helper->cleanSoapField($org['cst_member_flag']) == '0') {
+      $node->setUnpublished();
+    }
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
       $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
@@ -261,7 +263,11 @@ class OrgSync {
       $node->field_additional_services = $this->loadOrCreateTermsByName($additional_services, 'vendor_services_offered');
     }
 
-    $node->save();
+    try {
+      $node->save();
+    } catch (EntityStorageException $e) {
+      $this->logger->error($e->getMessage());
+    }
     return $node;
   }
 
