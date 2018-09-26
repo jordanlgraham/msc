@@ -169,9 +169,6 @@ class OrgSync {
     $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
     $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
     $node->field_customer_key = $this->helper->cleanSoapField($org['org_cst_key']); //Text (plain)
-    if ($node->getType() == 'vendor' && $this->helper->cleanSoapField($org['cst_member_flag']) == '0') {
-      $node->setUnpublished();
-    }
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
       $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
@@ -225,7 +222,6 @@ class OrgSync {
       $oasis = $this->helper->cleanSoapField($org['org_custom_text_15'], 'array');
       $node->field_oasis_participation = $this->loadOrCreateTermsByName($oasis, 'oasis_participation');
 
-
       $node->field_assisted_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_07']);
       $node->field_companion_units = $this->helper->cleanSoapField($org['org_custom_integer_04']);
       $node->field_dementia_care_beds = $this->helper->cleanSoapField($org['org_custom_integer_12']);
@@ -251,6 +247,12 @@ class OrgSync {
       $node->field_total_annual_admissions = $this->helper->cleanSoapField($org['org_custom_integer_15']);
       $node->field_two_bedroom = $this->helper->cleanSoapField($org['org_custom_integer_06']);
       $node->field_wib_region = $this->helper->cleanSoapField($org['org_custom_text_01']);
+      $memberFlag = $this->helper->cleanSoapField($org['cst_member_flag']);
+      if ($memberFlag == '0') {
+        $node->setUnpublished();
+      } elseif($memberFlag == '1') {
+        $node->setPublished();
+      }
     }
     //fields specific to vendor nodes
     $primary_services = $this->helper->cleanSoapField($org['org_custom_text_03'], 'array');
