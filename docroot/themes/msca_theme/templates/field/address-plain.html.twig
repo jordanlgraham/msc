@@ -48,7 +48,7 @@
   {% if dependent_locality.code %}
     {{ dependent_locality.code }} <br>
   {% endif %}
-  {% if locality.name or postal_code or administrative_area.code %}
-    {{ locality.name }}, {{ administrative_area.code }} {{ postal_code }}  <br>
+  {% if locality.code or postal_code or administrative_area.code %}
+    {{ locality }}, {{ administrative_area.code }} {{ postal_code }}  <br>
   {% endif %}
 </p>
