@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="header-right-bottom">
-                <span class="e-news-update">{{ 'E-News Update:'|t }}&nbsp;
+                <span class="e-news-update" style="font-size: 18px;">{{ 'E-News Update:'|t }}&nbsp;
                   {% if content.field_newsletter_date|render %}
                      {{ content.field_newsletter_date }}
                   {%  endif %}
@@ -71,7 +71,7 @@
         <!--custom-top ad space-start -->
         {% if content.field_sponsor|render %}
             <div class="sidebar-block">
-                <h2>{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
+                <h2 style="font-size: 22px; color: #2378cb;">{{ 'This Week\'s E-News Update is Sponsored By'|t }}</h2>
                 {{ content.field_sponsor }}
             </div>
         {% endif %}
@@ -79,7 +79,7 @@
         <div class="sidebar-block">
 
             <!--tocstart -->
-            <h2>{{ 'In This Issue'|t }}</h2>
+            <h2 style="font-size: 22px; color: #2378cb;">{{ 'In This Issue'|t }}</h2>
             <ul class="list-unstyled issue-toc">
               {% for item in node.field_featured_article %}
                 <li><a href="#{{ item.entity.id }}">{{ item.entity.label }}</a></li>
