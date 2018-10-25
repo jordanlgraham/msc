@@ -177,6 +177,7 @@ class ComposerStaticInitDrupal8
         'A' => 
         array (
             'Asm89\\Stack\\' => 12,
+            'Ajgl\\Twig\\Extension\\' => 20,
             'Abraham\\TwitterOAuth\\' => 21,
         ),
     );
@@ -539,6 +540,10 @@ class ComposerStaticInitDrupal8
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
+        ),
+        'Ajgl\\Twig\\Extension\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ajgl/breakpoint-twig-extension/src',
         ),
         'Abraham\\TwitterOAuth\\' => 
         array (

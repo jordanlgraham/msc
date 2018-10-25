@@ -11,6 +11,7 @@ module:
   block_content: 0
   breakpoint: 0
   button_link: 0
+  captcha: 0
   ckeditor: 0
   color: 0
   comment: 0
@@ -74,6 +75,7 @@ module:
   metatag_facebook: 0
   metatag_google_plus: 0
   metatag_open_graph: 0
+  module_filter: 0
   msc_button_link_social: 0
   msca_access: 0
   msca_discourse: 0
@@ -93,6 +95,7 @@ module:
   quickedit: 0
   rdf: 0
   real_magnet: 0
+  recaptcha: 0
   redirect: 0
   redirect_404: 0
   responsive_image: 0
@@ -111,6 +114,7 @@ module:
   toolbar: 0
   tour: 0
   twig_tweak: 0
+  twig_xdebug: 0
   user: 0
   vendor_search: 0
   views_infinite_scroll: 0
