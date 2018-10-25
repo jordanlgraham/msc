@@ -1,0 +1,7 @@
+uuid: d758a246-280b-4a41-b920-8007f2ba5491
+langcode: en
+status: false
+dependencies: {  }
+formId: node_education_events_form
+captchaType: default
+label: null

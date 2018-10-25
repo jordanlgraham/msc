@@ -1,0 +1,7 @@
+uuid: 12feffcb-e28a-4bcd-bf40-091770d8265a
+langcode: en
+status: false
+dependencies: {  }
+formId: node_forum_form
+captchaType: default
+label: null
