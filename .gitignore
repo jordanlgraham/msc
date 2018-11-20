@@ -2,7 +2,7 @@
 docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
-
+.DS_Store
 .idea/*
 docroot/vendor/phayes/geophp/.gitignore
 
