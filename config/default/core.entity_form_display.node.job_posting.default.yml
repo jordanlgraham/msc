@@ -36,12 +36,14 @@ third_party_settings:
         - field_job_posting_description
       parent_name: ''
       weight: 8
-      format_type: fieldset
+      format_type: tab
       format_settings:
         id: ''
         classes: ''
         description: ''
         required_fields: true
+        effect: none
+        formatter: closed
       label: 'Job Information'
       region: content
     group_job_contact_information:
@@ -53,12 +55,14 @@ third_party_settings:
         - field_job_posting_contact_email
       parent_name: ''
       weight: 9
-      format_type: fieldset
+      format_type: tab
       format_settings:
         id: ''
         classes: ''
         description: ''
         required_fields: true
+        effect: none
+        formatter: closed
       label: 'Job Contact Information'
       region: content
     group_job_org:
@@ -70,12 +74,14 @@ third_party_settings:
         - field_job_posting_org_website
       parent_name: ''
       weight: 7
-      format_type: fieldset
+      format_type: tab
       format_settings:
         id: ''
         classes: ''
         description: ''
         required_fields: true
+        effect: none
+        formatter: closed
       label: 'Facility/Organization Information'
       region: content
 id: node.job_posting.default
@@ -264,4 +270,6 @@ content:
   url_redirects:
     weight: 50
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }
