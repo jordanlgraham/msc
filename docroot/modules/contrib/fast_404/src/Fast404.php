@@ -4,9 +4,11 @@ namespace Drupal\fast404;
 
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Database\Database;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Component\Render\FormattableMarkup;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 /**
  * Fast404: A value object for manager Fast 404 logic.
@@ -15,8 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Fast404 {
 
+  use StringTranslationTrait;
+
   /**
-   * Whether fast 404 logic should be used.
+   * Whether Fast 404 logic should be used.
    *
    * @var bool
    */
@@ -49,7 +53,7 @@ class Fast404 {
   /**
    * Extension check.
    *
-   * A strategy for handling fast 404 settings.
+   * A strategy for handling Fast 404 settings.
    */
   public function extensionCheck() {
     // Get the path from the request.
@@ -137,13 +141,10 @@ class Fast404 {
       return;
     }
 
-    /*
-     *  If we have a database connection we can use it, otherwise we might be
-     * initialising it.
-     * We remove '/' from the list of possible patterns as it exists in the
-     * router by default. This means that the query would match any path (/%)
-     * which is undesirable when we're only looking to match some paths.
-     */
+    // If we have a database connection we can use it, otherwise we might be
+    // initialising it. We remove '/' from the list of possible patterns as it
+    // exists in the router by default. This means that the query would match
+    // any path (/%) which is undesirable.
     $sql = "SELECT pattern_outline FROM {router} WHERE :path LIKE CONCAT(pattern_outline, '%') AND pattern_outline != '/'";
     $result = Database::getConnection()->query($sql, [':path' => $path])->fetchField();
     if ($result) {
@@ -199,13 +200,13 @@ class Fast404 {
     $return_gone = Settings::get('fast404_return_gone', FALSE);
     $custom_404_path = Settings::get('fast404_HTML_error_page', FALSE);
     if ($return_gone) {
-      header((Settings::get('fast_404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 410 Gone');
+      header((Settings::get('fast404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 410 Gone');
     }
     else {
-      header((Settings::get('fast_404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 404 Not Found');
+      header((Settings::get('fast404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 404 Not Found');
     }
-    // If a file is set to provide us with fast_404 joy, load it.
-    if (($this->loadHtml || Settings::get('fast_404_HTML_error_all_paths', FALSE) === TRUE) && file_exists($custom_404_path)) {
+    // If a file is set to provide us with Fast 404 joy, load it.
+    if (($this->loadHtml || Settings::get('fast404_HTML_error_all_paths', FALSE) === TRUE) && file_exists($custom_404_path)) {
       $message = @file_get_contents($custom_404_path, FALSE);
     }
     $response = new Response(new FormattableMarkup($message, ['@path' => $this->request->getPathInfo()]), 404);
@@ -214,6 +215,7 @@ class Fast404 {
     }
     else {
       $response->send();
+      throw new ServiceUnavailableHttpException(3, $this->t('The requested URL "@path" was not found on this server. Try again shortly.', ['@path' => $this->request->getPathInfo()]));
     }
   }
 

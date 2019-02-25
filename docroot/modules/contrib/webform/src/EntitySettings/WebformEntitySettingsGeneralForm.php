@@ -110,7 +110,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     ];
     $form['general_settings']['archive'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Archived this webform'),
+      '#title' => $this->t('Archive this webform'),
       '#description' => $this->t('If checked, this webform will be closed and unavailable to webform blocks and fields.'),
       '#return_value' => TRUE,
       '#default_value' => $webform->isArchived(),
@@ -250,11 +250,6 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#title' => $this->t('Ajax settings'),
       '#open' => TRUE,
       '#access' => empty($elements['#method']),
-      '#states' => [
-        'visible' => [
-          ':input[name="method"]' => ['value' => ''],
-        ],
-      ],
     ];
     $form['ajax_settings']['ajax'] = [
       '#type' => 'checkbox',
@@ -345,11 +340,12 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       $form['dialog_settings']['form_prepopulate_source_entity'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Allow (dialog) source entity to be populated using query string parameters'),
-        '#description' => $this->t("If checked, source entity can be populated using query string parameters. For example, appending ?source_entity_type=node&source_entity_id=1 to a webform's URL would set a submission's 'Submitted to' value to 'node:1'."),
+        '#description' => $this->t("If checked, source entity can be populated using query string parameters.") .
+          '<br/><br/>' . $this->t("For example, appending <code>?source_entity_type=node&source_entity_id=1</code> to a webform's URL would set a submission's 'Submitted to' value to 'node:1'.") .
+          '<br/><br/>' . $this->t("You can also append <code>?source_entity_type=ENTITY_TYPE&amp;source_entity_id=ENTITY_ID</code> and the <code>ENTITY_TYPE</code> and <code>ENTITY_ID</code> parameters will automatically be replaced based on the current page's source entity."),
         '#return_value' => TRUE,
         '#default_value' => $settings['form_prepopulate_source_entity'],
       ];
-
     }
 
     if ($this->currentUser()->hasPermission('administer webform')) {
@@ -450,13 +446,13 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
    * Build dialog source.
    *
    * @param array $link
-   *   Webform link
+   *   Webform link.
    *
    * @return array
    *   A renderable array containing dialog source
    */
   protected function buildDialogSource(array $link) {
-    $source_entity_link  = $link;
+    $source_entity_link = $link;
     $source_entity_link['#url'] = clone $source_entity_link['#url'];
     $source_entity_link['#url']->setOption('query', ['source_entity_type' => 'ENTITY_TYPE', 'source_entity_id' => 'ENTITY_ID']);
 
@@ -486,6 +482,6 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         ],
       ],
     ];
-
   }
+
 }

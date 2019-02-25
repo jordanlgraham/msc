@@ -17,7 +17,6 @@ class InlineEntityFormTest extends EntityBrowserJavascriptTestBase {
    * {@inheritdoc}
    */
   public static $modules = [
-    'ctools',
     'views',
     'block',
     'node',
@@ -257,4 +256,5 @@ class InlineEntityFormTest extends EntityBrowserJavascriptTestBase {
 
     $this->assertSession()->pageTextContains('Test entity browser file modal');
   }
+
 }

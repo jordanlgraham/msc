@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Optional include that enables fast 404 logic.
+ * Optional include that enables Fast 404 logic.
  */
 
 use Drupal\Core\Site\Settings;

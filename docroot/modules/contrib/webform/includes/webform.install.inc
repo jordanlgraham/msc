@@ -101,6 +101,7 @@ function _webform_update_webform_setting(array $data) {
     'dependencies' => [],
     'open' => NULL,
     'close' => NULL,
+    'weight' => 0,
     'uid' => '',
     'template' => FALSE,
     'archive' => FALSE,
@@ -137,7 +138,9 @@ function _webform_update_webform_setting(array $data) {
   $data['settings'] = $settings;
 
   // Set access.
-  $data['access'] += Webform::getDefaultAccessRules();
+  /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
+  $access_rules_manager = \Drupal::service('webform.access_rules_manager');
+  $data['access'] += $access_rules_manager->getDefaultAccessRules();
 
   return $data;
 }

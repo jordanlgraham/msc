@@ -233,11 +233,11 @@ class WebformCliService implements WebformCliServiceInterface {
     /* Repair */
 
     $items['webform-repair'] = [
-      'description' => 'Makes sure all Webform admin settings and webforms are up-to-date.',
+      'description' => 'Makes sure all Webform admin configuration and webform settings are up-to-date.',
       'core' => ['8+'],
       'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_ROOT,
       'examples' => [
-        'webform-repair' => 'Repairs admin settings and webforms are up-to-date.',
+        'webform-repair' => 'Repairs admin configuration and webform settings are up-to-date.',
       ],
       'aliases' => ['wfr'],
     ];
@@ -394,7 +394,8 @@ class WebformCliService implements WebformCliServiceInterface {
 
     // Make sure there are submissions that need to be deleted.
     if (!$submission_storage->getTotal($webform)) {
-      return $this->drush_set_error($this->dt('There are no submissions that need to be deleted.'));
+      $this->drush_print($this->dt('There are no submissions that need to be deleted.'));
+      return;
     }
 
     if (!$webform) {
@@ -484,25 +485,39 @@ class WebformCliService implements WebformCliServiceInterface {
       $original_yaml = file_get_contents($file->uri);
       $tidied_yaml = $original_yaml;
 
-      // Add module dependency to exporter webform and webform options config entities.
-      if ($dependencies && preg_match('/^(webform\.webform\.|webform\.webform_options\.)/', $file->filename)) {
+      try {
+        $data = Yaml::decode($tidied_yaml);
+      }
+      catch (\Exception $exception) {
+        $message = 'Error parsing: ' . $file->filename . PHP_EOL . $exception->getMessage();
+        if (strlen($message) > 255) {
+          $message = substr($message, 0, 255) . '…';
+        }
+        $this->drush_log($message, LogLevel::ERROR);
+        $this->drush_print($message);
+        continue;
+      }
+
+      // Tidy elements.
+      if (strpos($file->filename, 'webform.webform.') === 0 && isset($data['elements'])) {
         try {
-          $data = Yaml::decode($tidied_yaml);
-          if (empty($data['dependencies']['enforced']['module']) || !in_array($target, $data['dependencies']['enforced']['module'])) {
-            $this->drush_print($this->dt('Adding module dependency to @file…', ['@file' => $file->filename]));
-            $data['dependencies']['enforced']['module'][] = $target;
-            $tidied_yaml = Yaml::encode($data);
-          }
+          $elements = WebformYaml::tidy($data['elements']);
+          $data['elements'] = $elements;
         }
         catch (\Exception $exception) {
-          $message = 'Error parsing: ' . $file->filename . PHP_EOL . $exception->getMessage();
-          if (strlen($message) > 255) {
-            $message = substr($message, 0, 255) . '…';
-          }
-          $this->drush_log($message, LogLevel::ERROR);
-          $this->drush_print($message);
+          // Do nothing.
         }
       }
+
+      // Add module dependency to exporter webform and webform options config entities.
+      if ($dependencies && preg_match('/^(webform\.webform\.|webform\.webform_options\.)/', $file->filename)) {
+        if (empty($data['dependencies']['enforced']['module']) || !in_array($target, $data['dependencies']['enforced']['module'])) {
+          $this->drush_print($this->dt('Adding module dependency to @file…', ['@file' => $file->filename]));
+          $data['dependencies']['enforced']['module'][] = $target;
+        }
+      }
+
+      $tidied_yaml = Yaml::encode($data);
 
       // Tidy and add new line to the end of the tidied file.
       $tidied_yaml = WebformYaml::tidy($tidied_yaml) . PHP_EOL;
@@ -602,26 +617,13 @@ class WebformCliService implements WebformCliServiceInterface {
    * {@inheritdoc}
    */
   public function drush_webform_libraries_composer() {
-    // Load existing composer.json file.
-    $data = json_decode('{
-  "name": "drupal/webform",
-  "description": "Enables the creation of webforms and questionnaires.",
-  "type": "drupal-module",
-  "license": "GPL-2.0+",
-  "minimum-stability": "dev",
-  "homepage": "https://drupal.org/project/webform",
-  "authors": [
-    {
-      "name": "Jacob Rockowitz (jrockowitz)",
-      "homepage": "https://www.drupal.org/u/jrockowitz",
-      "role": "Maintainer"
-    }
-  ],
-  "support": {
-    "issues": "https://drupal.org/project/issues/webform",
-    "source": "http://cgit.drupalcode.org/webform"
-  }
-}', FALSE, $this->drush_webform_composer_get_json_encode_options());
+    // Load existing composer.json file and unset certain properties.
+    $composer_path = drupal_get_path('module', 'webform') . '/composer.json';
+    $json = file_get_contents($composer_path);
+    $data = json_decode($json , FALSE, $this->drush_webform_composer_get_json_encode_options());
+    $data = (array) $data;
+    unset($data['extra'], $data['require-dev']);
+    $data = (object) $data;
 
     // Set disable tls.
     $this->drush_webform_composer_set_disable_tls($data);
@@ -630,7 +632,10 @@ class WebformCliService implements WebformCliServiceInterface {
     $data->repositories = (object) [];
     $data->require = (object) [];
     $this->drush_webform_composer_set_libraries($data->repositories, $data->require);
-
+    // Remove _webform property.
+    foreach ($data->repositories as &$repository) {
+      unset($repository['_webform']);
+    }
     $this->drush_print(json_encode($data, $this->drush_webform_composer_get_json_encode_options()));
   }
 
@@ -649,6 +654,11 @@ class WebformCliService implements WebformCliServiceInterface {
     $libraries_manager = \Drupal::service('webform.libraries_manager');
     $libraries = $libraries_manager->getLibraries(TRUE);
     foreach ($libraries as $library_name => $library) {
+      // Skip libraries installed by other modules.
+      if (!empty($library['module'])) {
+        continue;
+      }
+
       // Download archive to temp directory.
       $download_url = $library['download_url']->toString();
       $this->drush_print("Downloading $download_url");
@@ -729,6 +739,8 @@ class WebformCliService implements WebformCliServiceInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @see \Drupal\webform\Form\AdminConfig\WebformAdminConfigAdvancedForm::submitForm
    */
   public function drush_webform_repair() {
     if (!$this->drush_confirm($this->dt("Are you sure you want repair the Webform module's admin settings and webforms?"))) {
@@ -737,23 +749,26 @@ class WebformCliService implements WebformCliServiceInterface {
 
     module_load_include('install', 'webform');
 
-    $this->drush_print('Repairing admin settings…');
+    $this->drush_print($this->dt('Repairing webform submission storage schema…'));
+    _webform_update_webform_submission_storage_schema();
+
+    $this->drush_print($this->dt('Repairing admin settings…'));
     _webform_update_admin_settings(TRUE);
 
-    $this->drush_print('Repairing webform settings…');
+    $this->drush_print($this->dt('Repairing webform settings…'));
     _webform_update_webform_settings();
 
-    $this->drush_print('Repairing webform handlers…');
+    $this->drush_print($this->dt('Repairing webform handlers…'));
     _webform_update_webform_handler_settings();
 
-    $this->drush_print('Repairing webform field storage definitions…');
+    $this->drush_print($this->dt('Repairing webform field storage definitions…'));
     _webform_update_field_storage_definitions();
 
-    $this->drush_print('Repairing webform submission storage schema…');
+    $this->drush_print($this->dt('Repairing webform submission storage schema…'));
     _webform_update_webform_submission_storage_schema();
 
     // Validate all webform elements.
-    $this->drush_print('Validating webform elements…');
+    $this->drush_print($this->dt('Validating webform elements…'));
     /** @var \Drupal\webform\WebformEntityElementsValidatorInterface $elements_validator */
     $elements_validator = \Drupal::service('webform.elements_validator');
 
@@ -761,7 +776,7 @@ class WebformCliService implements WebformCliServiceInterface {
     $webforms = Webform::loadMultiple();
     foreach ($webforms as $webform) {
       if ($messages = $elements_validator->validate($webform)) {
-        $this->drush_print('  ' . t('@title (@id): Found element validation errors.', ['@title' => $webform->label(), '@id' => $webform->id()]));
+        $this->drush_print('  ' . $this->dt('@title (@id): Found element validation errors.', ['@title' => $webform->label(), '@id' => $webform->id()]));
         foreach ($messages as $message) {
           $this->drush_print('  - ' . strip_tags($message));
         }
@@ -880,6 +895,9 @@ class WebformCliService implements WebformCliServiceInterface {
     // Remove <code> tag nested within <pre> tag.
     $html = preg_replace('#<pre><code>\s*#', "<code>\n", $html);
     $html = preg_replace('#\s*</code></pre>#', "\n</code>", $html);
+
+    // Fix code in webform-libraries.html.
+    $html = str_replace(' &gt; ', ' > ', $html);
 
     // Remove space after <br> tags.
     $html = preg_replace('/(<br[^>]*>)\s+/', '\1', $html);
@@ -1024,8 +1042,21 @@ class WebformCliService implements WebformCliServiceInterface {
         continue;
       }
 
+      // Skip libraries installed by other modules.
+      if (!empty($library['module'])) {
+        continue;
+      }
+
       $dist_url = $library['download_url']->toString();
-      $dist_type = (preg_match('/\.zip$/', $dist_url)) ? 'zip' : 'file';
+      if (preg_match('/\.zip$/', $dist_url)) {
+        $dist_type = 'zip';
+      }
+      elseif (preg_match('/\.tgz$/', $dist_url)) {
+        $dist_type = 'tar';
+      }
+      else {
+        $dist_type = 'file';
+      }
       $package_version = $library['version'];
       $package_name = (strpos($library_name, '.') === FALSE) ? "$library_name/$library_name" : str_replace('.', '/', $library_name);
       $repositories->$library_name = [
@@ -1236,6 +1267,7 @@ $functions
 
         // usage.
         foreach ($command_item['examples'] as $example_name => $example_description) {
+          $example_name = str_replace('-', ':', $example_name);
           $command_annotations[] = "@usage $example_name";
           $command_annotations[] = "  $example_description";
         }

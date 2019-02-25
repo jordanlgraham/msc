@@ -134,9 +134,19 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
         'data-element' => '.webform-ui-element-type-table',
         'data-item-single' => $this->t('element'),
         'data-item-plural' => $this->t('elements'),
+        'data-no-results' => '.webform-element-no-results',
         'title' => $this->t('Enter a part of the element name to filter by.'),
         'autofocus' => 'autofocus',
       ],
+    ];
+
+    // No results.
+    $form['no_results'] = [
+      '#type' => 'webform_message',
+      '#message_message' => $this->t('No elements found. Try a different search.'),
+      '#message_type' => 'info',
+      '#attributes' => ['class' => ['webform-element-no-results']],
+      '#weight' => 1000,
     ];
 
     return $form;
@@ -420,7 +430,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
         ];
         break;
 
-      case 'webform_location':
+      case 'webform_location_geocomplete':
         unset($element['#map'], $element['#geolocation']);
         break;
 
@@ -483,11 +493,7 @@ abstract class WebformUiElementTypeFormBase extends FormBase {
     foreach ($grouped_definitions as $grouped_definition) {
       $sorted_definitions += $grouped_definition;
     }
-    foreach ($sorted_definitions as &$plugin_definition) {
-      if (empty($plugin_definition['category'])) {
-        $plugin_definition['category'] = $this->t('Other elements');
-      }
-    }
+
     return $sorted_definitions;
   }
 

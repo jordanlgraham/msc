@@ -34,6 +34,7 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler service.
    * @param \Drupal\entity_embed\EntityEmbedDisplay\EntityEmbedDisplayManager $display_manager
+   *   The entity embed display plugin manager.
    */
   public function __construct(ModuleHandlerInterface $module_handler, EntityEmbedDisplayManager $display_manager) {
     $this->moduleHandler = $module_handler;
@@ -58,6 +59,18 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
       'data-entity-embed-display-settings' => [],
     ];
 
+    // If the data-entity-embed-display-settings isn't an array reset  it,
+    // otherwise we'll encounter a fatal error when calling
+    // $this->buildEntityEmbedDisplayPlugin() further down the line.
+    if (!is_array($context['data-entity-embed-display-settings'])) {
+      \Drupal::logger('entity_embed')->warning('Invalid display settings encountered. Could not process following settings for entity type "@entity_type" with the uuid "@uuid": @settings', [
+        '@settings' => $context['data-entity-embed-display-settings'],
+        '@entity_type' => $entity->getEntityTypeId(),
+        '@uuid' => $entity->uuid(),
+      ]);
+      $context['data-entity-embed-display-settings'] = [];
+    }
+
     // The default Entity Embed Display plugin has been deprecated by the
     // rendered entity field formatter.
     if ($context['data-entity-embed-display'] === 'default') {
@@ -76,7 +89,6 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
     // alter the result before rendering.
     $build = [
       '#theme_wrappers' => ['entity_embed_container'],
-      '#attributes' => ['class' => ['embedded-entity']],
       '#entity' => $entity,
       '#context' => $context,
     ];
@@ -87,18 +99,11 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
       $context
     );
 
-    // Maintain data-align if it is there.
-    if (isset($context['data-align'])) {
-      $build['#attributes']['data-align'] = $context['data-align'];
+    // Maintain data- attributes.
+    if (isset($context)) {
+      $build['#attributes'] = $context;
     }
-    elseif ((isset($context['class']))) {
-      $build['#attributes']['class'][] = $context['class'];
-    }
-
-    // Maintain data-caption if it is there.
-    if (isset($context['data-caption'])) {
-      $build['#attributes']['data-caption'] = $context['data-caption'];
-    }
+    $build['#attributes']['class'] = isset($build['#attributes']['class']) ? $build['#attributes']['class'] . ' embedded-entity' : 'embedded-entity';
 
     // Make sure that access to the entity is respected.
     $build['#access'] = $entity->access('view', NULL, TRUE);

@@ -293,7 +293,7 @@ class Media extends ContentEntityBase implements MediaInterface {
       ->setTranslatable(TRUE)
       ->setRevisionable(TRUE)
       ->setDisplayOptions('view', [
-        'type' => 'hidden',
+        'region' => 'hidden',
       ])
       ->setDisplayOptions('form', [
         'type' => 'language_select',
@@ -393,14 +393,14 @@ class Media extends ContentEntityBase implements MediaInterface {
     $fields['revision_timestamp'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Revision timestamp'))
       ->setDescription(t('The time that the current revision was created.'))
-      ->setQueryable(FALSE)
+      ->setCustomStorage(FALSE)
       ->setRevisionable(TRUE);
 
     $fields['revision_uid'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Revision publisher ID'))
       ->setDescription(t('The user ID of the publisher of the current revision.'))
       ->setSetting('target_type', 'user')
-      ->setQueryable(FALSE)
+      ->setCustomStorage(FALSE)
       ->setRevisionable(TRUE);
 
     $fields['revision_log'] = BaseFieldDefinition::create('string_long')
@@ -458,14 +458,14 @@ class Media extends ContentEntityBase implements MediaInterface {
    * {@inheritdoc}
    */
   public function getRevisionUserId() {
-    return $this->revision_user->target_id;
+    return $this->revision_uid->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setRevisionUserId($user_id) {
-    $this->revision_user->target_id = $user_id;
+    $this->revision_uid->target_id = $user_id;
     return $this;
   }
 

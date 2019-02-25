@@ -4,6 +4,7 @@ namespace Drupal\webform\EntitySettings;
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Element\WebformMessage;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Utility\WebformElementHelper;
@@ -80,6 +81,21 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
         ],
       ],
     ];
+    $t_args = [
+      ':page_cache_href' => 'https://www.drupal.org/docs/8/administering-a-drupal-8-site/internal-page-cache',
+      ':issue_href' => 'https://www.drupal.org/node/2352009',
+      ':cache_control_override_href' => 'https://www.drupal.org/project/cache_control_override',
+    ];
+    if ($this->moduleHandler->moduleExists('page_cache') && !$this->moduleHandler->moduleExists('cache_control_override')) {
+      $form['form_settings']['scheduled']['page_cache'] = [
+        '#type' => 'webform_message',
+        '#message_type' => 'warning',
+        '#message_close' => TRUE,
+        '#message_storage' => WebformMessage::STORAGE_SESSION,
+        '#message_message' => $this->t('Scheduled forms do not work as expected for anonymous users when Drupal\'s <a href=":page_cache_href">Internal Page Cache</a> module is enabled. This is a <a href=":issue_href">known issue</a>.', $t_args) . '<br/><br/>' .
+          '<strong>' . $this->t('It is strongly recommended that you install the <a href=":cache_control_override_href">Cache Control Override</a> module.', $t_args) . '</strong>',
+      ];
+    }
     $form['form_settings']['scheduled']['open'] = [
       '#type' => 'datetime',
       '#title' => $this->t('Open'),
@@ -112,6 +128,19 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       $form['form_settings']['status']['#access'] = FALSE;
       $form['form_settings']['scheduled']['#access'] = FALSE;
     }
+    $form['form_settings']['form_title'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Form title display'),
+      '#description' => $this->t("Select how the form's title is displayed when this webform is attached to a source entity. This title is only displayed when a webform is linked to from a source entity or opened in dialog."),
+      '#options' => [
+        WebformInterface::TITLE_SOURCE_ENTITY_WEBFORM => $this->t('Source entity: Webform'),
+        WebformInterface::TITLE_WEBFORM_SOURCE_ENTITY => $this->t('Webform: Source entity'),
+        WebformInterface::TITLE_WEBFORM => $this->t('Webform'),
+        WebformInterface::TITLE_SOURCE_ENTITY => $this->t('Source entity'),
+      ],
+      '#required' => TRUE,
+      '#default_value' => $settings['form_title'],
+    ];
     $form['form_settings']['form_open_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Form open message'),
@@ -146,37 +175,67 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#default_value' => (isset($elements['#attributes'])) ? $elements['#attributes'] : [],
     ];
 
-    // Form access denied.
-    $form['form_access_denied'] = [
+    // Access denied.
+    $form['access_denied'] = [
       '#type' => 'details',
       '#title' => $this->t('Access denied'),
       '#open' => TRUE,
     ];
-    $form['form_access_denied']['form_login'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Redirect to login when access denied to webform'),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['form_login'],
+    $form['access_denied']['form_access_denied'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('When a user is denied access to this webform'),
+      '#options' => [
+        WebformInterface::ACCESS_DENIED_DEFAULT => $this->t('Default (Displays the default access denied page)'),
+        WebformInterface::ACCESS_DENIED_MESSAGE => $this->t('Inline (Displays message when access is denied to field, nodes, and blocks)'),
+        WebformInterface::ACCESS_DENIED_PAGE => $this->t('Page (Displays message when access is denied to forms, fields, nodes, and blocks)'),
+        WebformInterface::ACCESS_DENIED_LOGIN => $this->t('Login (Redirects to user login form and displays message. Field, nodes, and block only display the message.)'),
+      ],
+      '#required' => TRUE,
+      '#default_value' => $settings['form_access_denied'],
     ];
-    $form['form_access_denied']['form_login_message'] = [
-      '#type' => 'webform_html_editor',
-      '#title' => $this->t('Login message when access denied to webform'),
-      '#description' => $this->t('A message to be displayed on the login page.'),
-      '#default_value' => $settings['form_login_message'],
+    $form['access_denied']['access_denied_container'] = [
+      '#type' => 'container',
       '#states' => [
         'visible' => [
-          ':input[name="form_login"]' => ['checked' => TRUE],
+          ':input[name="form_access_denied"]' => ['!value' => WebformInterface::ACCESS_DENIED_DEFAULT],
         ],
       ],
     ];
-    $form['form_access_denied']['token_tree_link'] = $this->tokenManager->buildTreeElement();
-    if ($form['form_access_denied']['token_tree_link']) {
-      $form['form_access_denied']['token_tree_link']['#states'] = [
+    $form['access_denied']['access_denied_container']['form_access_denied_title'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Access denied title'),
+      '#description' => $this->t('Page title to be shown on access denied page'),
+      '#default_value' => $settings['form_access_denied_title'],
+      '#states' => [
         'visible' => [
-          ':input[name="form_login"]' => ['checked' => TRUE],
+          ':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE],
         ],
-      ];
-    }
+      ],
+    ];
+    $form['access_denied']['access_denied_container']['form_access_denied_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Access denied message'),
+      '#description' => $this->t('Will be displayed either in-line or as a status message depending on the setting above.'),
+      '#default_value' => $settings['form_access_denied_message'],
+    ];
+    $form['access_denied']['access_denied_container']['token_tree_link'] = $this->tokenManager->buildTreeElement();
+    $form['access_denied']['access_denied_container']['access_denied_attributes'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Access denied message attributes'),
+      '#open' => TRUE,
+      '#states' => [
+        'visible' => [
+          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_MESSAGE]],
+          'or',
+          [':input[name="form_access_denied"]' => ['value' => WebformInterface::ACCESS_DENIED_PAGE]],
+        ],
+      ],
+    ];
+    $form['access_denied']['access_denied_container']['access_denied_attributes']['form_access_denied_attributes'] = [
+      '#type' => 'webform_element_attributes',
+      '#title' => $this->t('Access denied message'),
+      '#default_value' => $settings['form_access_denied_attributes'],
+    ];
 
     // Form behaviors.
     $form['form_behaviors'] = [
@@ -401,6 +460,22 @@ class WebformEntitySettingsFormForm extends WebformEntitySettingsBaseForm {
       '#default_value' => $settings['preview_attributes'],
     ];
     $form['preview_settings']['preview_container']['token_tree_link'] = $this->tokenManager->buildTreeElement();
+
+    // File settings.
+    $form['file_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('File settings'),
+      '#open' => TRUE,
+      '#access' => $webform->hasManagedFile(),
+    ];
+    $form['file_settings']['form_file_limit'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('File upload limit'),
+      '#description' => $this->t('Enter a value like "512" (bytes), "80 KB" (kilobytes) or "50 MB" (megabytes) in order to set the file upload limit for this form.'),
+      '#element_validate' => [['\Drupal\webform\Form\AdminConfig\WebformAdminConfigElementsForm', 'validateMaxFilesize']],
+      '#size' => 10,
+      '#default_value' => $settings['form_file_limit'],
+    ];
 
     // Custom settings.
     $properties = WebformElementHelper::getProperties($webform->getElementsDecoded());

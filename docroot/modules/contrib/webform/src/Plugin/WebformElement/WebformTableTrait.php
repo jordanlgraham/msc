@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\OptGroup;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\WebformSubmissionInterface;
 
@@ -44,14 +45,10 @@ trait WebformTableTrait {
 
     $element['#attached']['library'][] = 'webform/webform.element.' . $element['#type'];
 
-    // Set table select element's #processr callback so that we can
-    // add visually hidden #title to the checkboxes/radios.
-    // Note: The Table select sort (webform_table_select_sort) element
-    // adds visually hidden #title to all checkboxes.
-    // @see \Drupal\webform\Element\WebformTableSelectSort::processWebformTableSelectSort
+    // Set table select element's #process callback so that fix UX
+    // and accessiblity issues.
     if ($this->getPluginId() === 'tableselect') {
-      $this->setElementDefaultCallback($element, 'process');
-      $element['#process'][] = [get_class($this), 'processTableSelectOptions'];
+      static::setProcessTableSelectCallback($element);
     }
   }
 
@@ -86,24 +83,59 @@ trait WebformTableTrait {
   protected function getTableSelectElementSelectorOptions(array $element, $input_selector = '') {
     $title = $this->getAdminLabel($element) . ' [' . $this->getPluginLabel() . ']';
     $name = $element['#webform_key'];
-    $type = ($this->hasMultipleValues($element) ? $this->t('Checkbox') : $this->t('Radio'));
-
-    $selectors = [];
-    foreach ($element['#options'] as $value => $text) {
-      if (is_array($text)) {
-        $text = $value;
+    if ($this->hasMultipleValues($element)) {
+      $selectors = [];
+      foreach ($element['#options'] as $value => $text) {
+        if (is_array($text)) {
+          $text = $value;
+        }
+        $selectors[":input[name=\"{$name}[{$value}]$input_selector\"]"] = $text . ' [' . $this->t('Checkbox') . ']';
       }
-      $selectors[":input[name=\"{$name}[{$value}]$input_selector\"]"] = $text . ' [' . $type . ']';
+      return [$title => $selectors];
     }
-    return [$title => $selectors];
+    else {
+      return [":input[name=\"{$name}\"]" => $title];
+    }
   }
 
   /**
-   * Process table options and tdd #title to the table options.
+   * {@inheritdoc}
+   */
+  public function getElementSelectorSourceValues(array $element) {
+    if ($this->hasMultipleValues($element)) {
+      return [];
+    }
+
+    $name = $element['#webform_key'];
+    $options = OptGroup::flattenOptions($element['#options']);
+    return [":input[name=\"{$name}\"]" => $options];
+  }
+
+  /**
+   * Process table select and attach JavaScript.
    *
    * @param array $element
    *   An associative array containing the properties and children of
-   *   the tableselect element
+   *   the tableselect element.
+   *
+   * @return array
+   *   The processed element.
+   *
+   * @see \Drupal\Core\Render\Element\Tableselect::processTableselect
+   */
+  public static function processTableSelect(array $element) {
+    $element['#attributes']['class'][] = 'webform-tableselect';
+    $element['#attributes']['class'][] = 'js-webform-tableselect';
+    $element['#attached']['library'][] = 'webform/webform.element.tableselect';
+    return $element;
+  }
+
+  /**
+   * Process table selected options and add #title to the table's options.
+   *
+   * @param array $element
+   *   An associative array containing the properties and children of
+   *   the tableselect element.
    *
    * @return array
    *   The processed element.
@@ -127,7 +159,7 @@ trait WebformTableTrait {
    *
    * @param array $element
    *   An associative array containing the properties and children of
-   *   the table select element
+   *   the table select element.
    *
    * @see \Drupal\Core\Render\Element\Tableselect::processTableselect
    */
@@ -135,6 +167,7 @@ trait WebformTableTrait {
     $class = get_called_class();
     $element['#process'] = [
       ['\Drupal\Core\Render\Element\Tableselect', 'processTableselect'],
+      [$class , 'processTableSelect'],
       [$class , 'processTableSelectOptions'],
     ];
   }
@@ -143,7 +176,7 @@ trait WebformTableTrait {
    * Get table selection option title/text.
    *
    * Issue #2719453: Tableselect single radio button missing #title attribute
-   * and is not accessible
+   * and is not accessible,
    *
    * @param array $option
    *   A table select option.

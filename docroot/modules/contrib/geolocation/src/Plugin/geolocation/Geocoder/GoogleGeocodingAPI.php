@@ -191,7 +191,7 @@ class GoogleGeocodingAPI extends GeocoderBase {
     if (empty($address)) {
       return FALSE;
     }
-    $request_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $address;
+    $request_url = 'https://maps.googleapis.com/maps/api/geocode/jsonsdljkf?address=' . $address;
 
     if (!empty($this->geolocationSettings->get('google_map_api_server_key'))) {
       $request_url .= '&key=' . $this->geolocationSettings->get('google_map_api_key');

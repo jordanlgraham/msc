@@ -11,10 +11,10 @@ use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Render\Markup;
 use Drupal\user\Entity\User;
-use Drupal\webform\Plugin\WebformElement\WebformComputedBase;
-use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\Plugin\WebformElementManagerInterface;
 use Drupal\webform\Plugin\WebformElementEntityReferenceInterface;
+use Drupal\webform\Plugin\WebformElement\WebformComputedBase;
+use Drupal\webform\Utility\WebformDateHelper;
 use Drupal\webform\WebformSubmissionInterface;
 use Drupal\Core\Url;
 
@@ -84,7 +84,7 @@ function webform_token_info() {
     'name' => t('In draft'),
     'description' => t('Is the webform submission in draft.'),
   ];
-  $webform['label'] = [
+  $webform_submission['label'] = [
     'name' => t('Label'),
     'description' => t('The label of the webform submission.'),
   ];
@@ -172,7 +172,6 @@ function webform_token_info() {
       t("The 'items' can be 'comma', 'semicolon', 'and', 'ol', 'ul', or custom delimiter") . '<br />' .
       t("The 'entity:*' applies to the referenced entity") . '<br />' .
       t("Add 'html' at the end of the token to return HTML markup instead of plain text.") . '<br />' .
-      t("Add 'urlencode' at the end of the token to return a URL encoded value.") . '<br />' .
       t("For example, to display the Contact webform's 'Subject' element's value you would use the [webform_submission:values:subject] token.")
     ),
     'dynamic' => TRUE,
@@ -691,15 +690,12 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
   // Set default options.
   $options += [
     'html' => FALSE,
-    'urlencode' => FALSE,
   ];
 
   // Parse suffixes and set options.
   $suffixes = [
     // Indicates the tokens should be formatted as HTML instead of plain text.
     'html',
-    // Indicates the tokens should be urlencoded.
-    'urlencode',
   ];
   foreach ($suffixes as $suffix) {
     if ($keys && in_array($suffix, $keys)) {
@@ -719,8 +715,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
 
   // Always get value for a computed element.
   if ($element_plugin instanceof WebformComputedBase) {
-    $token_value = $element_plugin->getValue($element, $webform_submission);
-    return _webform_token_get_submission_value_encode($token_value, $options);
+    return $element_plugin->getValue($element, $webform_submission);
   }
 
   // Exit if no submission data and form element is not a container.
@@ -773,7 +768,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
         $options,
         $bubbleable_metadata
       ));
-      return _webform_token_get_submission_value_encode($token_value, $options);
+      return $token_value;
     }
     else {
       return '';
@@ -814,30 +809,7 @@ function _webform_token_get_submission_value($value_token, array $options, Webfo
     $token_value = (string) $token_value;
   }
 
-  return _webform_token_get_submission_value_encode($token_value, $options);
-}
-
-/**
- * Encode token value.
- *
- * @param \Drupal\Component\Render\MarkupInterface|string $value
- *   Token value.
- * @param array $options
- *   Token options.
- *
- * @return \Drupal\Component\Render\MarkupInterface|string
- *   Encoded token value.
- */
-function _webform_token_get_submission_value_encode($value, array $options) {
-  if ($options['urlencode']) {
-    if ($value instanceof MarkupInterface) {
-      return Markup::create(urlencode((string) $value));
-    }
-    else {
-      return urlencode((string) $value);
-    }
-  }
-  return $value;
+  return $token_value;
 }
 
 /**

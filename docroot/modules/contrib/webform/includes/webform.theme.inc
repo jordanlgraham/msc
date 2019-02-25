@@ -119,6 +119,9 @@ function webform_theme() {
       'variables' => ['element' => [], 'value' => NULL, 'webform_submission' => NULL, 'options' => [], 'file' => NULL],
     ],
 
+    'webform_email_html' => [
+      'variables' => ['subject' => '', 'body' => '', 'webform_submission' => NULL, 'handler' => NULL],
+    ],
     'webform_email_message_html' => [
       'variables' => ['message' => '', 'webform_submission' => NULL, 'handler' => NULL],
     ],
@@ -272,8 +275,67 @@ function webform_preprocess_radios(&$variables) {
 }
 
 /******************************************************************************/
+// Preprocess tables.
+/******************************************************************************/
+
+/**
+ * Prepares variables for table templates.
+ */
+function webform_preprocess_table(&$variables) {
+  // Add links to 'Translate' webform tab.
+  if (\Drupal::routeMatch()->getRouteName() === 'entity.webform.config_translation_overview') {
+    /** @var \Drupal\webform\WebformInterface $webform */
+    $webform = \Drupal::routeMatch()->getParameter('webform');
+    foreach ($variables['rows'] as &$row) {
+      // Check first cell.
+      if (!isset($row['cells'][0]['content'])
+        || !is_array($row['cells'][0]['content'])
+        || !isset($row['cells'][0]['content']['#markup'])) {
+        continue;
+      }
+
+      // Check last cell edit link.
+      if (!isset($row['cells'][1]['content'])
+        || !is_array($row['cells'][1]['content'])
+        || !isset($row['cells'][1]['content']['#links'])
+        || !is_array($row['cells'][1]['content']['#links'])
+        || !isset($row['cells'][1]['content']['#links']['edit'])) {
+        continue;
+      }
+
+      // Get language from edit link.
+      $route_parameters = $row['cells'][1]['content']['#links']['edit']['url']->getRouteParameters();
+      $langcode = (isset($route_parameters['langcode'])) ? $route_parameters['langcode'] : NULL;
+      $language = \Drupal::languageManager()->getLanguage($langcode);
+
+      // Convert first to link.
+      $row['cells'][0]['content'] = [
+        '#type' => 'link',
+        '#url' => $webform->toUrl('canonical', ['language' => $language]),
+        '#title' => $row['cells'][0]['content'],
+      ];
+    }
+  }
+}
+
+/******************************************************************************/
 // Preprocess containers.
 /******************************************************************************/
+
+/**
+ * Prepares variables for datetime form element templates.
+ */
+function webform_preprocess_datetime_form(&$variables) {
+  if (!WebformElementHelper::isWebformElement($variables['element'])) {
+    return;
+  }
+
+  // Add .container-inline to datetime form wrapper which is missing from the
+  // stable base theme.
+  // @see core/themes/classy/templates/form/datetime-form.html.twig
+  // @see core/themes/stable/templates/form/datetime-form.html.twig
+  $variables['attributes']['class'][] = 'container-inline';
+}
 
 /**
  * Prepares variables for details element templates.
@@ -315,6 +377,25 @@ function webform_preprocess_fieldset(&$variables) {
 
   $element = &$variables['element'];
 
+  // If the description is displayed 'before' we need to move it to the
+  // fieldset's prefix.
+  // @see fieldset.html.twig
+  if (isset($element['#description_display']) && $element['#description_display'] === 'before' && !empty($variables['description']['content'])) {
+    if (isset($variables['prefix'])) {
+      if (is_array($variables['prefix'])) {
+        $variables['prefix'] = ['prefix' => $variables['prefix']];
+      }
+      else {
+        $variables['prefix'] = ['prefix' => ['#markup' => $variables['prefix']]];
+      }
+    }
+    else {
+      $variables['prefix'] = [];
+    }
+    $variables['prefix']['description'] = $variables['description']['content'];
+    unset($variables['description']['content']);
+  }
+
   // Apply inline title defined by radios, checkboxes, and buttons.
   // @see \Drupal\webform\Plugin\WebformElement\OptionsBase::prepare
   if (isset($element['#_title_display'])) {
@@ -322,7 +403,7 @@ function webform_preprocess_fieldset(&$variables) {
   }
 
   // Add .js-webform-form-type-* class to be used JavaScript and #states API.
-  // @see js/webform.element.location.js
+  // @see js/webform.element.location.geocomplete.js
   // @see js/webform.states.js
   if (isset($element['#type'])) {
     $variables['attributes']['class'][] = 'js-webform-type-' . Html::getClass($element['#type']);
@@ -433,6 +514,16 @@ function webform_preprocess_file_managed_file(&$variables) {
 }
 
 /**
+ * Prepares variables for file upload help text templates.
+ */
+function webform_preprocess_file_upload_help(&$variables) {
+  $upload_validators = $variables['upload_validators'];
+  if (isset($upload_validators['webform_file_limit']) && $upload_validators['webform_file_limit'][0]) {
+    $variables['descriptions'][] = t('@size limit per form.', ['@size' => format_size($upload_validators['webform_file_limit'][0])]);
+  }
+}
+
+/**
  * Prepares variables for file link templates.
  *
  * @see webform_file_access
@@ -513,7 +604,17 @@ function _webform_preprocess_element(array &$variables, $title_parents = ['title
   // @see template_preprocess_details
   // @see Issue #2896169: Details elements have incorrect aria-describedby attributes
   if (!empty($element['#description'])) {
-    $description = (is_array($element['#description'])) ? $element['#description'] : ['#markup' => $element['#description']];
+    // Convert the current description to simple #markup.
+    if (is_array($element['#description'])) {
+      // Make a copy of the element's #description so that it can be rendered
+      // without affecting the element's #description.
+      $element_description = $element['#description'];
+      $description = ['#markup' => \Drupal::service('renderer')->render($element_description)];
+    }
+    else {
+      $description = ['#markup' => $element['#description']];
+    }
+
     if ($type === 'details') {
       $description_attributes = [];
       if (!empty($element['#id'])) {
@@ -851,6 +952,13 @@ function webform_theme_suggestions_webform_container_base_html(array $variables)
  */
 function webform_theme_suggestions_webform_container_base_text(array $variables) {
   return _webform_theme_suggestions($variables, 'webform_container_base_text');
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function webform_theme_suggestions_webform_email_html(array $variables) {
+  return _webform_theme_suggestions($variables, 'webform_email_html');
 }
 
 /**

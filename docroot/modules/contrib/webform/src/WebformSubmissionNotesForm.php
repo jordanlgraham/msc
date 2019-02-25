@@ -22,7 +22,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    *
    * @var \Drupal\webform\WebformRequestInterface
    */
-  protected $requestManager;
+  protected $requestHandler;
 
   /**
    * Constructs a ContentEntityForm object.
@@ -40,7 +40,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
     // Calling the parent constructor.
     parent::__construct($entity_manager, $entity_type_bundle_info, $time);
 
-    $this->requestManager = $webform_request;
+    $this->requestHandler = $webform_request;
   }
 
   /**
@@ -61,15 +61,15 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     // @var \Drupal\webform\WebformSubmissionInterface $webform_submission.
     // @var \Drupal\Core\Entity\EntityInterface $source_entity.
-    list($webform_submission, $source_entity) = $this->requestManager->getWebformSubmissionEntities();
+    list($webform_submission, $source_entity) = $this->requestHandler->getWebformSubmissionEntities();
 
     $form['navigation'] = [
-      '#theme' => 'webform_submission_navigation',
+      '#type' => 'webform_submission_navigation',
       '#webform_submission' => $webform_submission,
       '#access' => $this->isDialog() ? FALSE : TRUE,
     ];
     $form['information'] = [
-      '#theme' => 'webform_submission_information',
+      '#type' => 'webform_submission_information',
       '#webform_submission' => $webform_submission,
       '#source_entity' => $source_entity,
       '#access' => $this->isDialog() ? FALSE : TRUE,
@@ -107,6 +107,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
       ],
       '#required' => TRUE,
       '#default_value' => $webform_submission->getOwner(),
+      '#access' => $this->currentUser()->hasPermission('administer users'),
     ];
 
     $form['#attached']['library'][] = 'webform/webform.admin';

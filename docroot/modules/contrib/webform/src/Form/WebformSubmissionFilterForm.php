@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\WebformInterface;
 
 /**
- * Provides the webform submission filter webform.
+ * Provides the webform submission filter form.
  */
 class WebformSubmissionFilterForm extends FormBase {
 
@@ -56,7 +56,7 @@ class WebformSubmissionFilterForm extends FormBase {
           '#type' => 'select',
           '#title' => $this->t('Submitted to'),
           '#title_display' => 'invisible',
-          '#options' => ['' =>  $this->t('Filter by submitted to')] + $source_entity_options,
+          '#options' => ['' => $this->t('Filter by submitted to')] + $source_entity_options,
           '#default_value' => $source_entity,
         ];
       }

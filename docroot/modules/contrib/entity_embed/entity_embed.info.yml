@@ -7,5 +7,6 @@ dependencies:
   - drupal:editor
   - embed:embed
   - drupal:filter
+  - drupal:system (>=8.4.0)
 test_dependencies:
   - entity_browser:entity_browser

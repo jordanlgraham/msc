@@ -30,7 +30,8 @@
       if (!$.fn.oldChosen) {
         $.fn.oldChosen = $.fn.chosen;
         $.fn.chosen = function (options) {
-          var select = $(this), is_creating_chosen = !!options;
+          var select = $(this);
+          var is_creating_chosen = !!options;
           if (is_creating_chosen && select.css('position') === 'absolute') {
             select.removeAttr('style');
           }
@@ -43,8 +44,6 @@
         };
       }
 
-      var options = $.extend({width: '100%'}, Drupal.webform.chosen.options);
-
       $(context)
         .find('select.js-webform-chosen, .js-webform-chosen select')
         .once('webform-chosen')
@@ -52,11 +51,25 @@
           var $select = $(this);
           // Check for .chosen-enable to prevent the chosen.module and
           // webform.module from both initializing the chosen select element.
-          if (!$select.hasClass('chosen-enable')) {
-            $select.chosen(options);
+          if ($select.hasClass('chosen-enable')) {
+            return;
           }
-        })
 
+          var options = $.extend({width: '100%'}, Drupal.webform.chosen.options);
+          if ($select.data('placeholder')) {
+            if ($select.prop('multiple')) {
+              options.placeholder_text_multiple = $select.data('placeholder');
+            }
+            else {
+              // Clear option value so that placeholder is displayed.
+              $select.find('option[value=""]').html('');
+              // Allow single option to be deselected.
+              options.allow_single_deselect = true;
+            }
+          }
+
+          $select.chosen(options);
+        });
     }
   };
 

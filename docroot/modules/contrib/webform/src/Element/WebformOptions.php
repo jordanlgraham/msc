@@ -9,6 +9,7 @@ use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Utility\WebformElementHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
+use Drupal\webform\Utility\WebformYaml;
 
 /**
  * Provides a webform element to assist in creation of options.
@@ -30,8 +31,9 @@ class WebformOptions extends FormElement {
       '#yaml' => FALSE,
       '#label' => t('option'),
       '#labels' => t('options'),
-      '#empty_items' => 5,
-      '#add_more' => 1,
+      '#min_items' => 3,
+      '#empty_items' => 1,
+      '#add_more_items' => 1,
       '#options_value_maxlength' => 255,
       '#options_text_maxlength' => 255,
       '#options_description' => FALSE,
@@ -85,7 +87,7 @@ class WebformOptions extends FormElement {
       $element['options'] = [
         '#type' => 'webform_codemirror',
         '#mode' => 'yaml',
-        '#default_value' => trim(Yaml::encode($element['#default_value'])),
+        '#default_value' => WebformYaml::encode($element['#default_value']),
         '#placeholder' => t('Enter custom options…'),
         '#description' => t('Key-value pairs MUST be specified as "safe_key: \'Some readable options\'". Use of only alphanumeric characters and underscores is recommended in keys. One option per line.') . '<br /><br />' .
           t('Option groups can be created by using just the group name followed by indented group options.'),
@@ -94,7 +96,7 @@ class WebformOptions extends FormElement {
     }
     else {
       $t_args = ['@label' => isset($element['#label']) ? Unicode::ucfirst($element['#label']) : t('Options')];
-      $properties = ['#label', '#labels', '#empty_items', '#add_more'];
+      $properties = ['#label', '#labels', '#min_items', '#empty_items', '#add_more_items'];
 
       $element['options'] = array_intersect_key($element, array_combine($properties, $properties)) + [
         '#type' => 'webform_multiple',
@@ -111,7 +113,7 @@ class WebformOptions extends FormElement {
             '#title' => t('@label value', $t_args),
             '#title_display' => 'invisible',
             '#placeholder' => t('Enter value…'),
-            '#attributes' => ['class' => ['js-webform-options-value']],
+            '#attributes' => ['class' => ['js-webform-options-sync']],
             '#maxlength' => $element['#options_value_maxlength'],
             '#error_no_message' => TRUE,
           ],
@@ -146,7 +148,7 @@ class WebformOptions extends FormElement {
             '#title' => t('@label value', $t_args),
             '#title_display' => 'invisible',
             '#placeholder' => t('Enter value…'),
-            '#attributes' => ['class' => ['js-webform-options-value']],
+            '#attributes' => ['class' => ['js-webform-options-sync']],
             '#maxlength' => $element['#options_value_maxlength'],
             '#error_no_message' => TRUE,
           ],

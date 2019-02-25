@@ -2,13 +2,13 @@
 
 namespace Drupal\webform_ui\Form;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Url;
 use Drupal\webform\Utility\WebformDialogHelper;
 use Drupal\webform\Form\WebformDialogFormTrait;
@@ -108,6 +108,13 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
    * @var string
    */
   protected $originalType;
+
+  /**
+   * The operation of the current webform.
+   *
+   * @var string
+   */
+  protected $operation;
 
   /**
    * The action of the current webform.
@@ -212,7 +219,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
           '#type' => 'link',
           '#title' => $this->t('Cancel'),
           '#url' => new Url('entity.webform_ui.element.edit_form', $route_parameters),
-          '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NORMAL, ['button', 'button--small']),
+          '#attributes' => WebformDialogHelper::getOffCanvasDialogAttributes(WebformDialogHelper::DIALOG_NORMAL, ['button', 'button--small']),
         ];
         $form['properties']['element']['type']['#description'] = '(' . $this->t('Changing from %type', ['%type' => $original_webform_element->getPluginLabel()]) . ')';
       }
@@ -282,6 +289,13 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
       '#button_type' => 'primary',
       '#_validate_form' => TRUE,
     ];
+    if ($this->operation === 'create' && $this->isAjax()) {
+      $form['actions']['save_add_element'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Save + Add element'),
+        '#_validate_form' => TRUE,
+      ];
+    }
 
     // Add token links below the form and on every tab.
     $form['token_tree_link'] = $this->tokenManager->buildTreeElement();
@@ -349,6 +363,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $op = $form_state->getValue('op');
     $parent_key = $form_state->getValue('parent_key');
     $key = $form_state->getValue('key');
 
@@ -376,16 +391,26 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     ];
     $this->messenger()->addStatus($this->t('%title has been @action.', $t_args));
 
+    // Determine add element parent key.
+    $save_and_add_element = ($op == (string) $this->t('Save + Add element')) ? TRUE : FALSE;
+    $add_element = ($element_plugin->isContainer($this->getElement())) ? $key : $parent_key;
+    $add_element = $add_element ? Html::getClass($add_element) : '_root_';
+
     // Append ?update= to (redirect) destination.
     if ($this->requestStack->getCurrentRequest()->query->get('destination')) {
       $redirect_destination = $this->getRedirectDestination();
       $destination = $redirect_destination->get();
       $destination .= (strpos($destination, '?') !== FALSE ? '&' : '?') . 'update=' . $key;
+      $destination .= ($save_and_add_element) ? '&add_element=' . $add_element : '';
       $redirect_destination->set($destination);
     }
 
     // Still set the redirect URL just to be safe.
-    $form_state->setRedirectUrl($this->webform->toUrl('edit-form', ['query' => ['update' => $key]]));
+    $query = ['update' => $key];
+    if ($save_and_add_element) {
+      $query['add_element'] = $add_element;
+    }
+    $form_state->setRedirectUrl($this->webform->toUrl('edit-form', ['query' => $query]));
   }
 
   /**
@@ -485,7 +510,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
    *   An element's default key which will be incremented to prevent duplicate
    *   keys.
    */
-  protected function getDefaultKey() {
+  public function getDefaultKey() {
     $element_plugin = $this->getWebformElementPlugin();
     if (empty($element_plugin->getDefaultKey())) {
       return NULL;
@@ -564,10 +589,14 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
       $form['actions']['submit'] = [
         '#type' => 'submit',
         '#value' => $this->t('Update default value'),
+        '#attributes' => ['data-hash' => 'webform-tab--advanced'],
         '#validate' => ['::validateDefaultValue'],
         '#submit' => ['::getDefaultValue'],
         '#button_type' => 'primary',
       ];
+
+      // Remove 'Save + Add element'.
+      unset($form['actions']['save_add_element']);
 
       if ($this->isAjax()) {
         $form['actions']['submit']['#ajax'] = [
@@ -578,7 +607,8 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     }
     else {
       // Add 'Set default value' button.
-      $form['properties']['default']['set_default_value'] = [
+      $form['properties']['default']['actions'] = ['#type' => 'container'];
+      $form['properties']['default']['actions']['set_default_value'] = [
         '#type' => 'submit',
         '#value' => $this->t('Set default value'),
         '#submit' => ['::setDefaultValue'],
@@ -589,7 +619,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
       ];
 
       if ($this->isAjax()) {
-        $form['properties']['default']['set_default_value']['#ajax'] = [
+        $form['properties']['default']['actions']['set_default_value']['#ajax'] = [
           'callback' => '::submitAjaxForm',
           'event' => 'click',
         ];
@@ -618,7 +648,7 @@ abstract class WebformUiElementFormBase extends FormBase implements WebformUiEle
     $element_plugin = $this->getWebformElementPlugin();
     if (is_array($default_value)) {
       if ($element_plugin->isComposite()) {
-        $default_value = WebformYaml::tidy(Yaml::encode($default_value));
+        $default_value = WebformYaml::encode($default_value);
       }
       else {
         $default_value = implode(', ', $default_value);

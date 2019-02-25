@@ -2,7 +2,6 @@
 
 namespace Drupal\seckit\Controller;
 
-use Drupal\Core\Access\AccessResult;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -10,8 +9,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Example page controller.
  */
-
 class SeckitExportController {
+
   /**
    * Reports CSP violations.
    */
@@ -44,11 +43,11 @@ class SeckitExportController {
       if (!isset($report->{'violated-directive'})) {
         continue;
       }
-      $info = array(
-        '@directive'   => $report->{'violated-directive'},
+      $info = [
+        '@directive' => $report->{'violated-directive'},
         '@blocked_uri' => $report->{'blocked-uri'},
-        '@data'        => print_r($report, TRUE),
-      );
+        '@data' => print_r($report, TRUE),
+      ];
       \Drupal::logger('seckit')->warning('CSP: Directive @directive violated.<br /> Blocked URI: @blocked_uri.<br /> <pre>Data: @data</pre>', $info);
     }
 
@@ -56,4 +55,5 @@ class SeckitExportController {
 
     return new Response();
   }
+
 }

@@ -22,7 +22,7 @@ use Drupal\embed\DomHelperTrait;
  * @Filter(
  *   id = "entity_embed",
  *   title = @Translation("Display embedded entities"),
- *   description = @Translation("Embeds entities using data attributes: data-entity-type, data-entity-uuid, and data-view-mode."),
+ *   description = @Translation("Embeds entities using data attributes: data-entity-type, data-entity-uuid, and data-view-mode. If used in conjunction with the 'Align/Caption' filters, make sure this filter is configured to run before them."),
  *   type = Drupal\filter\Plugin\FilterInterface::TYPE_TRANSFORM_REVERSIBLE
  * )
  */
@@ -139,7 +139,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
             }
 
             $context = $this->getNodeAttributesAsArray($node);
-            $context += array('data-langcode' => $langcode);
+            $context += ['data-langcode' => $langcode];
             $build = $this->builder->buildEntityEmbed($entity, $context);
             // We need to render the embedded entity:
             // - without replacing placeholders, so that the placeholders are
@@ -158,6 +158,8 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
             $depth--;
           }
           else {
+            $alt_text = $this->t('Deleted content encountered, site owner alerted.');
+            $entity_output = '<img src="' . file_create_url('core/modules/media/images/icons/no-thumbnail.png') . '" width="180" height="180" alt="' . $alt_text . '" />';
             throw new EntityNotFoundException(sprintf('Unable to load embedded %s entity %s.', $entity_type, $id));
           }
         }

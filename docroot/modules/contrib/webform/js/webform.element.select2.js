@@ -28,7 +28,21 @@
         .once('webform-select2')
         // http://stackoverflow.com/questions/14313001/select2-not-calculating-resolved-width-correctly-if-select-is-hidden
         .css('width', '100%')
-        .select2(Drupal.webform.select2.options);
+        .each(function () {
+          var $select = $(this);
+
+          var options = $.extend({}, Drupal.webform.select2.options);
+          if ($select.data('placeholder')) {
+            options.placeholder = $select.data('placeholder');
+            if (!$select.prop('multiple')) {
+              // Allow single option to be deselected.
+              options.allowClear = true;
+            }
+          }
+
+          $select.select2(options);
+        });
+
     }
   };
 

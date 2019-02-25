@@ -5,11 +5,11 @@ namespace Drupal\webform_devel\Commands;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformYaml;
 use Drush\Commands\DrushCommands;
+use Drush\Exceptions\UserAbortException;
 use Psr\Log\LogLevel;
 
-
 /**
- * Webform scheduled email commands for Drush 9.x.
+ * Webform devel commandfile.
  */
 class WebformDevelCommands extends DrushCommands {
 
@@ -38,7 +38,7 @@ class WebformDevelCommands extends DrushCommands {
         }
 
         $data = _webform_update_webform_setting($data);
-        $tidied_yaml = WebformYaml::tidy(Yaml::encode($data)) . PHP_EOL;
+        $tidied_yaml = WebformYaml::encode($data) . PHP_EOL;
 
         if ($tidied_yaml != $original_yaml) {
           $this->output()->writeln(dt('Updating @file…', ['@file' => $file->filename]));
@@ -62,6 +62,26 @@ class WebformDevelCommands extends DrushCommands {
     else {
       $this->output()->writeln(dt('No webform.webform.* configuration files updated.'));
     }
+  }
+
+  /**
+   * Executes webform devel reset.
+   *
+   * @command webform:devel:reset
+   * @aliases wfdr
+   *
+   * @see drush_webform_devel_reset()
+   */
+  public function drush_webform_devel_reset() {
+    if (!$this->io()->confirm(dt("Are you sure you want repair the Webform module's admin settings and webforms?"))) {
+      throw new UserAbortException();
+    }
+
+    $this->output()->writeln(dt('Resetting message closed via State API…'));
+    \Drupal::state()->delete('webform.element.message');
+
+    $this->output()->writeln(dt('Resetting message closed via User Data…'));
+    \Drupal::service('user.data')->delete('webform', NULL, 'webform.element.message');
   }
 
 }
