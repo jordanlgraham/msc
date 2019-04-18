@@ -7,6 +7,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\externalauth\ExternalAuthInterface;
 use Drupal\netforum_soap\GetClient;
 use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+use SoapHeader;
 
 class Auth {
 
@@ -51,10 +53,18 @@ class Auth {
         $existing = $this->userStorage->loadByProperties(['mail' => $email]);
         // User already has an MSCA account, link it with Netforum via email address.
         if ($existing) {
+          /** @var \Drupal\user\Entity\User $account */
           $account = end($existing);
           if (empty($account->field_full_name->getValue()) && !empty($user_attributes['name'])) {
-            /** @var \Drupal\user\Entity\User $account */
             $account->set('field_full_name', $user_attributes['name']);
+            try {
+              $account->save();
+            } catch (EntityStorageException $e) {
+              \Drupal::logger('MSCA Auth')->error($e->getMessage());
+            }
+          }
+          if (empty($account->field_cst_key->getValue()) && !empty($user_attributes['cst_key'])) {
+            $account->set('field_cst_key', $user_attributes['cst_key']);
             try {
               $account->save();
             } catch (EntityStorageException $e) {
@@ -115,6 +125,7 @@ class Auth {
             'member' => (bool)$array['Result']['cst_member_flag'],
             'receives_benefits' => (bool)$array['Result']['cst_receives_benefits_flag'],
             'force_password_change' => (bool)$array['Result']['cst_web_force_password_change'],
+            'cst_key' => $array['Result']['cst_key'],
           );
           $users[$email] = $attributes;
           return $attributes;
@@ -200,6 +211,23 @@ class Auth {
     $response_headers = $this->get_client->getResponseHeaders();
     try {
       $response = $client->__soapCall('LogOutToken', array('parameters' => $params), NULL, $auth_headers, $response_headers);
+    }
+    catch (\Exception $exception) {
+      return FALSE;
+    }
+  }
+
+  public function logOutCst(User $user) {
+    $client = $this->get_client->GetClient($this->get_client::SSO);
+    /** @var SoapHeader $auth_headers */
+    $auth_headers = $this->get_client->getSsoAuthHeaders();
+    $params = [
+      'szToken' => $auth_headers->data['Token'],
+      'szCstKey' => $user->field_cst_key->value,
+    ];
+    $response_headers = $this->get_client->getResponseHeaders();
+    try {
+      $response = $client->__soapCall('LogOutCst', ['parameters' => $params], NULL, $auth_headers, $response_headers);
     }
     catch (\Exception $exception) {
       return FALSE;

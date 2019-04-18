@@ -7,6 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\netforum_user_auth\Controller\NetforumSso;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\netforum_user_auth\PasswordExpiredException;
@@ -179,4 +180,14 @@ function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state)
     \Drupal::logger('netforum_user_auth')->error('Unable to complete NetForum SSO.');
     drupal_set_message(t('An error occurred while signing in.'));
   }
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function netforum_user_auth_user_logout(AccountInterface $account) {
+  /** @var \Drupal\netforum_user_auth\Auth $auth */
+  $auth = \Drupal::service('netforum_user_auth.auth');
+  $user = \Drupal::entityTypeManager()->getStorage('user')->load($account->id());
+  $auth->logOutCst($user);
 }
