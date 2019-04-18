@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_cst_key
     - field.field.user.user.field_full_name
     - field.field.user.user.field_groups
     - field.field.user.user.user_picture
@@ -28,6 +29,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_cst_key:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_full_name:
     weight: 1
     settings:
