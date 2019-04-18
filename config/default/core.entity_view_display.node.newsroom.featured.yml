@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.newsroom.field_news_teaser_image
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
+    - field.field.node.newsroom.field_tags
     - image.style.max_325x325
     - node.type.newsroom
   module:
@@ -83,3 +84,4 @@ hidden:
   field_gated: true
   field_news_subtitle: true
   field_related_content: true
+  field_tags: true

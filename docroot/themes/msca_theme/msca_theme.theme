@@ -12,6 +12,25 @@ foreach (glob($includes_path) as $filename) {
   require_once dirname(__FILE__) . '/includes/' . basename($filename);
 }
 
+function msca_theme_preprocess_menu(&$vars) {
+  if ($vars['menu_name'] == 'masthead') {
+    $account = \Drupal::currentUser()->getAccount();
+    if ($account->isAuthenticated()) {
+      $user = \Drupal::entityTypeManager()->getStorage('user')->load($account->id());
+      if (!empty($user->field_full_name)) {
+        $vars['content'] = [];
+        $vars['content']['#fullname'] = 'Welcome, ' . $user->field_full_name->value;
+      }
+      foreach ($vars['items'] as $key => $item) {
+        /** @var \Drupal\Core\Url $url */
+        if ($item['title'] === 'Join Mass Senior Care') {
+          unset($vars['items'][$key]);
+        }
+      }
+    }
+  }
+}
+
 function msca_theme_preprocess_node(&$variables) {
   //Upcoming Education and Events section needs field_date and field_end_date to
   //appear in a couple different formats.

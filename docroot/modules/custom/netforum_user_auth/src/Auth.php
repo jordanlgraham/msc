@@ -2,6 +2,7 @@
 
 namespace Drupal\netforum_user_auth;
 
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\externalauth\ExternalAuthInterface;
 use Drupal\netforum_soap\GetClient;
@@ -51,6 +52,15 @@ class Auth {
         // User already has an MSCA account, link it with Netforum via email address.
         if ($existing) {
           $account = end($existing);
+          if (empty($account->field_full_name->getValue()) && !empty($user_attributes['name'])) {
+            /** @var \Drupal\user\Entity\User $account */
+            $account->set('field_full_name', $user_attributes['name']);
+            try {
+              $account->save();
+            } catch (EntityStorageException $e) {
+              \Drupal::logger('MSCA Auth')->error($e->getMessage());
+            }
+          }
           $this->externalAuth->linkExistingAccount($email, self::AUTH_PROVIDER, $account);
           return $this->externalAuth->userLoginFinalize($account, $email, self::AUTH_PROVIDER);
         }
@@ -62,6 +72,7 @@ class Auth {
           return $this->externalAuth->loginRegister($email, self::AUTH_PROVIDER, [
             'name' => $email,
             'mail' => $email,
+            'field_full_name' => $user_attributes['name'],
             'pass' => $password,
             'roles' => $roles,
           ]);

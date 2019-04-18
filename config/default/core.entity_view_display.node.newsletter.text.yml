@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.newsletter.field_newsletter_date
     - field.field.node.newsletter.field_newsletter_section
     - field.field.node.newsletter.field_sponsor
+    - field.field.node.newsletter.field_tags
     - node.type.newsletter
   module:
     - datetime
@@ -68,3 +69,4 @@ hidden:
   entity_print_view_word_docx: true
   field_gated: true
   field_newsletter_section: true
+  field_tags: true

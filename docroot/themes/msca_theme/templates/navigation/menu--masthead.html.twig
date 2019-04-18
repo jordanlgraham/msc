@@ -24,9 +24,12 @@
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
-{{ menus.menu_links(items, attributes, 0) }}
-
-{% macro menu_links(items, attributes, menu_level) %}
+{% set fullname = '' %}
+{% if content['#fullname'] %}
+    {% set fullname = content['#fullname'] %}
+{% endif %}
+{{ menus.menu_links(items, attributes, 0, fullname) }}
+{% macro menu_links(items, attributes, menu_level, fullname) %}
     {% import _self as menus %}
     {% if items %}
         {# Add level classes for easier CSS targeting#}
@@ -38,6 +41,12 @@
             <ul{{ attributes.addClass('navbar-nav','nav', 'menu-level-3').removeClass('menu-level-1', 'menu-level-2') }}>
         {% endif %}
         {% for item in items %}
+
+            {% if loop.first %}
+                {% if fullname is not empty %}
+                <li class="menu__fullname">{{ fullname }}</li>
+                {% endif %}
+            {% endif %}
             {# Create lowercase variable with no spaces or ampersands so we can assign unique class to each menu li. #}
             {% set titleclass = item.title|replace({' ':'','&':''})|lower %}
             {# Add class to items that have submenus for easy JS targeting #}
@@ -65,7 +74,7 @@
                     {{ link(item.title, item.url) }}
                 {% endif %}
                 {% if item.below %}
-                    {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+                    {{ menus.menu_links(item.below, attributes, menu_level + 1, '') }}
                 {% endif %}
             </li>
         {% endfor %}

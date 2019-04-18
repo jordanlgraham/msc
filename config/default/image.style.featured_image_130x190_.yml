@@ -14,6 +14,7 @@ effects:
     data:
       width: 130
       height: 190
+      anchor: center-center
   c9e97e15-b505-4afb-bd30-8b5ac0cde1d5:
     uuid: c9e97e15-b505-4afb-bd30-8b5ac0cde1d5
     id: insert_image_linked
