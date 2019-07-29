@@ -1,0 +1,23 @@
+msca_constant_contact.auth_test:
+  path: '/admin/config/services/constantcontact/authtest'
+  defaults:
+    _title: 'Auth Test'
+    _controller: 'Drupal\msca_constant_contact\Controller\ConstantContactAuthTestController::auth'
+  requirements:
+    _permission: 'access content'
+
+msca_constant_contact.auth_response:
+  path: '/admin/config/services/constantcontact/authresponse'
+  defaults:
+    _title: 'Auth Response'
+    _controller: 'Drupal\msca_constant_contact\Controller\ConstantContactAuthController::authResponse'
+  requirements:
+    _permission: 'access content'
+
+msca_constant_contact.create_campaign:
+  path: '/node/{node}/cc'
+  defaults:
+    _controller: '\Drupal\msca_constant_contact\Controller\ConstantContactAuthController::createEmailCampaign'
+    _title: 'Constant Contact Send'
+  requirements:
+    _permission: 'access content'

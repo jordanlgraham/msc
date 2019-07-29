@@ -5,24 +5,14 @@
  *
  */
 #}
-<a class="anchor" name="{{ node.id }}"></a>
-<article{{ attributes }}>
-  <div{{ content_attributes }}>
-      {% if content.field_date|render %}
-          <div class="date-square">
-              <div class="date-square-month">{{ content.field_date.value|date('M') }}</div>
-              <div class="date-square-day">{{ content.field_date.value|date('j') }}</div>
-          </div>
-      {% endif %}
-      <div class="event-teaser-text">
-          <h2{{ title_attributes }}>
-            <a href="{{ url }}" style="text-decoration:none;" rel="bookmark">{{ label }}</a>
-          </h2>
-          {{ content.body }}
-          {% set text = content.body|render|striptags %}
-          {% if text|length > 350 %}
-              <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">Read more</a>
-          {% endif %}
-      </div>
+<td style="padding: 15px; border-top: initial; color: #2278CB; vertical-align: middle; text-align: center;" width="3%">
+  <div style="width: 52px; height: 52px; background-color: #fff; padding-top: 10px;">
+    <span style="font-size: 11px;display: block; color: #005A84; text-transform: uppercase; line-height: 12px;">{{ content.field_date.value|date('M') }}</span>
+    <span style="font-size: 18px; font-weight: bold; color: #005A84; line-height: 18px;">{{ content.field_date.value|date('j') }}</span>
   </div>
-</article>
+</td>
+<td style="padding: 15px; border-top: initial; vertical-align: middle; text-align: center;" width="47%">
+  <h2{{ title_attributes }} style="margin-bottom: 0; margin-left: 5px; text-align: left;">
+    <a href="{{ url }}" style="text-decoration:none; color: #fff; text-transform: initial; text-align: left; font-size:18px; line-height: 22px; font-weight: 400;" rel="bookmark">{{ label }}</a>
+  </h2>
+</td>

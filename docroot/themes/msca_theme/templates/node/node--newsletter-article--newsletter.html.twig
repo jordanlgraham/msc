@@ -7,7 +7,7 @@
 #}
 {# For Newsletter TOC anchor links. #}
 <a class="anchor" name="{{ node.id }}"></a>
-<article{{ attributes.addClass('pb-5') }}>
+<article{{ attributes.addClass('pb-5') }} name="testarticle" title="testarticle">
   <div{{ content_attributes }}>
     {# Doing this because image urls need to be absolute for email version of newsletter. #}
     <div class="float-left pr-3">
@@ -25,13 +25,7 @@
       {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
       <a href="http://{{ base_path }}{{ url }}" rel="bookmark">{{ label }}</a>
     </h2>
-    {{ content.body }}
-    <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
-    <div class="utility-links float-right">
-        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-        <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
-        <i class="fa fa-print" aria-hidden="true"></i>
-        <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
-    </div>
+    {{ content.body }}...
+    <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read'|t }}</a>
   </div>
 </article>

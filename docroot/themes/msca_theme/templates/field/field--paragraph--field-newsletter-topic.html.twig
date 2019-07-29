@@ -37,33 +37,6 @@
  */
 #}
 
-{% if label_hidden %}
-  {% if multiple %}
-
-    {% for item in items %}
-      <h2 style="padding: 16px; font-size: 16px;" class="paragraph-heading paragraph-heading-{{ loop.revindex }}">
-        <div{{ item.attributes }}>{{ item.content }}</div>
-      </h2>
-    {% endfor %}
-
-  {% else %}
-    {% for item in items %}
-      <h2 style="padding: 16px; font-size: 16px;" class="paragraph-heading paragraph-heading-{{ loop.revindex }}">
-        <div{{ item.attributes }}>{{ item.content }}</div>
-      </h2>
-    {% endfor %}
-  {% endif %}
-{% else %}
-  <div{{ attributes }}>
-    <div{{ title_attributes }}>{{ label }}</div>
-    {% if multiple %}
-      <div>
-    {% endif %}
-    {% for item in items %}
-      <div{{ item.attributes }}>{{ item.content }}</div>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  </div>
-{% endif %}
+{% for item in items %}
+  <h2 style="padding: 16px; font-size: 17px; background-color: transparent; color: #005A84;">{{ item.content }}</h2>
+{% endfor %}

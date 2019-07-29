@@ -1,0 +1,6 @@
+msca_constant_contact.create_campaign:
+  route_name: msca_constant_contact.create_campaign
+  title: 'Send CC Newsletter'
+  weight: 5
+  appears_on:
+    - entity.node.canonical

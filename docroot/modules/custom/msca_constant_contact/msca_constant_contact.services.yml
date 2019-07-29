@@ -1,0 +1,4 @@
+services:
+  constant_contact_auth:
+    class: 'Drupal\msca_constant_contact\ConstantContactAuth'
+    arguments: []

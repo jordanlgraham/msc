@@ -1,0 +1,5 @@
+name: MSCA Constant Contact
+type: module
+description: MSCA Constant Contact integration.
+core: 8.x
+package: MSCA

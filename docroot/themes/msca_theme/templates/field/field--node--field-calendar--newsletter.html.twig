@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Theme override for a field.
+ * Default theme implementation for a field.
  *
  * To override output, copy the "field.html.twig" from the templates directory
  * to your theme's directory and customize it, just like customizing other
@@ -34,12 +34,24 @@
  * - label_display: The display settings for the label.
  *
  * @see template_preprocess_field()
+ *
+ * @ingroup themeable
  */
 #}
-  <div{{ attributes }}>
-    <div class="label" style="background-color: transparent; color: #005A84; font-weight: 500; padding-top: 38px; padding-bottom: 16px; padding-left: 0;">
-      <img src="/themes/msca_theme/images/newspaper.png" style="margin-right: 16px" /> {{ label }}</div>
-    {% for item in items %}
-      <div{{ item.attributes }}>{{ item.content }}</div>
-    {% endfor %}
-  </div>
+{%
+  set title_classes = [
+  label_display == 'visually_hidden' ? 'visually-hidden',
+]
+%}
+<table>
+  {% for item in items %}
+    {% if loop.index is odd %}
+      <tr{{ item.attributes }}>
+    {% endif %}
+    {{ item.content }}
+    {% if loop.index is even %}
+      </tr>
+    {% endif %}
+  {% endfor %}
+</table>
+<div><a href="#" style="text-transform: uppercase;padding: 9px 14px;background-color: #fff;color: #005A84;margin-top: 42px;margin-bottom: 52px;display: inline-block;font-size: 13px;font-weight: normal;margin-left: 15px;">{{ 'See Full Event Calendar' }}</a></div>

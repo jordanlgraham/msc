@@ -6,7 +6,7 @@
  */
 #}
 <a class="anchor" name="{{ node.id }}"></a>
-<article{{ attributes }}>
+<article name="example" title="example">
   {# Doing this because image urls need to be absolute for email version of newsletter. #}
   <div class="float-left pr-3">
     {% for key, image in content.field_news_teaser_image  %}
@@ -20,26 +20,18 @@
     {% endfor %}
   </div>
 
-  <div class="newsletter-article-teaser-text teaser-text">
-      <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;text-transform: uppercase;">
+  <div class="newsletter-article-teaser-text teaser-text" style="line-height: 24px; color: #657B85;">
+      <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif; text-transform: initial; padding-bottom: 15px;">
         {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-        <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+        <a href="http://{{ base_path }}{{ url }}" style="font-size: 38px; line-height: 42px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none; color: #005A84;" rel="bookmark">{{ label }}</a>
       </h2>
       {{ content.body }}
-          <table width="100%" border="0" style="border-collapse: collapse;">
+          <table width="auto" border="0" style="border-collapse: collapse; background-color: #2278CB; width: auto; margin-top: 30px; margin-bottom: 65px;">
               <tbody>
               <tr>
-                  <td style="width: 82%;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">
-                      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-size: 14px;font-weight: bold;">{{ 'Read more'|t }}</a>
+                  <td style="vertical-align: center;border-top: 0 solid #eceeef; width:auto;">
+                      <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-size: 14px;font-weight: normal; text-transform: uppercase; padding: 9px 15px; color:#fff;">{{ 'Read Full Article'|t }}</a>
                   </td>
-                  {#<td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">#}
-                      {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
-                      {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
-                  {#</td>#}
-                  {#<td style="text-align:right;padding:0;vertical-align: top;border-top: 0 solid #eceeef;">#}
-                      {#<i class="fa fa-print" aria-hidden="true"></i>#}
-                      {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
-                  {#</td>#}
               </tr>
               </tbody>
           </table>
