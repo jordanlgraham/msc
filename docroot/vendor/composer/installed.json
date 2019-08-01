@@ -2011,7 +2011,7 @@
         "version_normalized": "1.16.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/acquia_connector",
+            "url": "https://git.drupalcode.org/project/acquia_connector.git",
             "reference": "8.x-1.16"
         },
         "dist": {
@@ -2097,7 +2097,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/address",
+            "url": "https://git.drupalcode.org/project/address.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -2158,7 +2158,7 @@
         "version_normalized": "1.26.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/admin_toolbar",
+            "url": "https://git.drupalcode.org/project/admin_toolbar.git",
             "reference": "8.x-1.26"
         },
         "dist": {
@@ -2241,7 +2241,7 @@
         "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/adminimal_admin_toolbar",
+            "url": "https://git.drupalcode.org/project/adminimal_admin_toolbar.git",
             "reference": "8.x-1.9"
         },
         "dist": {
@@ -2292,7 +2292,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/adminimal_theme",
+            "url": "https://git.drupalcode.org/project/adminimal_theme.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -2350,7 +2350,7 @@
         "version_normalized": "3.0.0.0-alpha6",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/better_exposed_filters",
+            "url": "https://git.drupalcode.org/project/better_exposed_filters.git",
             "reference": "8.x-3.0-alpha6"
         },
         "dist": {
@@ -2415,7 +2415,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/block_class",
+            "url": "https://git.drupalcode.org/project/block_class.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -2517,7 +2517,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/button_link",
+            "url": "https://git.drupalcode.org/project/button_link.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -2566,7 +2566,7 @@
         "version_normalized": "1.0.0.0-beta1",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/captcha",
+            "url": "https://git.drupalcode.org/project/captcha.git",
             "reference": "8.x-1.0-beta1"
         },
         "dist": {
@@ -2668,7 +2668,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/config_filter",
+            "url": "https://git.drupalcode.org/project/config_filter.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -2739,7 +2739,7 @@
         "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/config_ignore",
+            "url": "https://git.drupalcode.org/project/config_ignore.git",
             "reference": "8.x-2.1"
         },
         "dist": {
@@ -2798,7 +2798,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/config_installer",
+            "url": "https://git.drupalcode.org/project/config_installer.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -2846,7 +2846,7 @@
         "version_normalized": "1.0.0.0-beta6",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/config_split",
+            "url": "https://git.drupalcode.org/project/config_split.git",
             "reference": "8.x-1.0-beta6"
         },
         "dist": {
@@ -2908,7 +2908,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/contact_block",
+            "url": "https://git.drupalcode.org/project/contact_block.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -2957,7 +2957,7 @@
         "version_normalized": "1.0.0.0-beta9",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/contact_storage",
+            "url": "https://git.drupalcode.org/project/contact_storage.git",
             "reference": "8.x-1.0-beta9"
         },
         "dist": {
@@ -3264,7 +3264,7 @@
         "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/crop",
+            "url": "https://git.drupalcode.org/project/crop.git",
             "reference": "8.x-1.5"
         },
         "dist": {
@@ -3322,7 +3322,7 @@
         "version_normalized": "3.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/ctools",
+            "url": "https://git.drupalcode.org/project/ctools.git",
             "reference": "8.x-3.0"
         },
         "dist": {
@@ -3417,7 +3417,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/current_page_crumb",
+            "url": "https://git.drupalcode.org/project/current_page_crumb.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -3470,7 +3470,7 @@
         "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/devel",
+            "url": "https://git.drupalcode.org/project/devel.git",
             "reference": "8.x-1.2"
         },
         "dist": {
@@ -3554,7 +3554,7 @@
         "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/easy_breadcrumb",
+            "url": "https://git.drupalcode.org/project/easy_breadcrumb.git",
             "reference": "8.x-1.6"
         },
         "dist": {
@@ -3623,7 +3623,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/editor_advanced_link",
+            "url": "https://git.drupalcode.org/project/editor_advanced_link.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -3672,7 +3672,7 @@
         "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/editor_file",
+            "url": "https://git.drupalcode.org/project/editor_file.git",
             "reference": "8.x-1.2"
         },
         "dist": {
@@ -3721,7 +3721,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/embed",
+            "url": "https://git.drupalcode.org/project/embed.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -3788,7 +3788,7 @@
         "version_normalized": "1.0.0.0-RC1",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entity",
+            "url": "https://git.drupalcode.org/project/entity.git",
             "reference": "8.x-1.0-rc1"
         },
         "dist": {
@@ -3853,7 +3853,7 @@
         "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entity_browser",
+            "url": "https://git.drupalcode.org/project/entity_browser.git",
             "reference": "8.x-1.7"
         },
         "dist": {
@@ -3946,7 +3946,7 @@
         "version_normalized": "dev-1.x",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entity_embed",
+            "url": "https://git.drupalcode.org/project/entity_embed.git",
             "reference": "7649aa25d500c5ce3cd56d87f41fc143e9bfa323"
         },
         "require": {
@@ -4019,7 +4019,7 @@
         "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entity_print",
+            "url": "https://git.drupalcode.org/project/entity_print.git",
             "reference": "8.x-2.1"
         },
         "dist": {
@@ -4082,7 +4082,7 @@
         "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entity_reference_revisions",
+            "url": "https://git.drupalcode.org/project/entity_reference_revisions.git",
             "reference": "8.x-1.6"
         },
         "dist": {
@@ -4142,7 +4142,7 @@
         "version_normalized": "1.0.0.0-alpha8",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/entityqueue",
+            "url": "https://git.drupalcode.org/project/entityqueue.git",
             "reference": "8.x-1.0-alpha8"
         },
         "dist": {
@@ -4207,7 +4207,7 @@
         "version_normalized": "1.0.0.0-alpha2",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/external_entities",
+            "url": "https://git.drupalcode.org/project/external_entities.git",
             "reference": "8.x-1.0-alpha2"
         },
         "dist": {
@@ -4276,7 +4276,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/externalauth",
+            "url": "https://git.drupalcode.org/project/externalauth.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -4333,7 +4333,7 @@
         "version_normalized": "1.0.0.0-alpha4",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/fast_404",
+            "url": "https://git.drupalcode.org/project/fast_404.git",
             "reference": "8.x-1.0-alpha4"
         },
         "dist": {
@@ -4397,7 +4397,7 @@
         "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/field_formatter",
+            "url": "https://git.drupalcode.org/project/field_formatter.git",
             "reference": "8.x-1.2"
         },
         "dist": {
@@ -4466,7 +4466,7 @@
         "version_normalized": "dev-3.x",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/field_group",
+            "url": "https://git.drupalcode.org/project/field_group.git",
             "reference": "c7b3194f0655eb9c0b37d9a0dd1b36f6e40b4c94"
         },
         "require": {
@@ -4525,7 +4525,7 @@
         "version_normalized": "4.0.0.0-alpha2",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/flag",
+            "url": "https://git.drupalcode.org/project/flag.git",
             "reference": "8.x-4.0-alpha2"
         },
         "dist": {
@@ -4602,7 +4602,7 @@
         "version_normalized": "2.0.0.0-RC2",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/forward",
+            "url": "https://git.drupalcode.org/project/forward.git",
             "reference": "8.x-2.0-rc2"
         },
         "dist": {
@@ -4672,7 +4672,7 @@
         "version_normalized": "2.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/geocoder",
+            "url": "https://git.drupalcode.org/project/geocoder.git",
             "reference": "8.x-2.1"
         },
         "dist": {
@@ -4776,7 +4776,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/geofield",
+            "url": "https://git.drupalcode.org/project/geofield.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -4859,7 +4859,7 @@
         "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/geolocation",
+            "url": "https://git.drupalcode.org/project/geolocation.git",
             "reference": "8.x-1.11"
         },
         "dist": {
@@ -4912,7 +4912,7 @@
         "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/google_analytics",
+            "url": "https://git.drupalcode.org/project/google_analytics.git",
             "reference": "8.x-2.4"
         },
         "dist": {
@@ -4970,7 +4970,7 @@
         "version_normalized": "1.29.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/honeypot",
+            "url": "https://git.drupalcode.org/project/honeypot.git",
             "reference": "8.x-1.29"
         },
         "dist": {
@@ -5028,7 +5028,7 @@
         "version_normalized": "2.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/image_widget_crop",
+            "url": "https://git.drupalcode.org/project/image_widget_crop.git",
             "reference": "8.x-2.0"
         },
         "dist": {
@@ -5108,7 +5108,7 @@
         "version_normalized": "1.0.0.0-beta1",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/inline_entity_form",
+            "url": "https://git.drupalcode.org/project/inline_entity_form.git",
             "reference": "8.x-1.0-beta1"
         },
         "dist": {
@@ -5176,7 +5176,7 @@
         "version_normalized": "1.0.0.0-beta1",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/insert",
+            "url": "https://git.drupalcode.org/project/insert.git",
             "reference": "8.x-1.0-beta1"
         },
         "dist": {
@@ -5229,7 +5229,7 @@
         "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/jquery_colorpicker",
+            "url": "https://git.drupalcode.org/project/jquery_colorpicker.git",
             "reference": "8.x-1.4"
         },
         "dist": {
@@ -5282,7 +5282,7 @@
         "version_normalized": "2.0.0.0-beta1",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/masquerade",
+            "url": "https://git.drupalcode.org/project/masquerade.git",
             "reference": "8.x-2.0-beta1"
         },
         "dist": {
@@ -5351,7 +5351,7 @@
         "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/media_entity",
+            "url": "https://git.drupalcode.org/project/media_entity.git",
             "reference": "8.x-1.8"
         },
         "dist": {
@@ -5453,7 +5453,7 @@
         "version_normalized": "1.0.0.0-beta3",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/media_entity_browser",
+            "url": "https://git.drupalcode.org/project/media_entity_browser.git",
             "reference": "8.x-1.0-beta3"
         },
         "dist": {
@@ -5522,7 +5522,7 @@
         "version_normalized": "1.3.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/media_entity_image",
+            "url": "https://git.drupalcode.org/project/media_entity_image.git",
             "reference": "8.x-1.3"
         },
         "dist": {
@@ -5597,7 +5597,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/metatag",
+            "url": "https://git.drupalcode.org/project/metatag.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -5661,7 +5661,7 @@
         "version_normalized": "3.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/module_filter",
+            "url": "https://git.drupalcode.org/project/module_filter.git",
             "reference": "8.x-3.1"
         },
         "dist": {
@@ -5718,7 +5718,7 @@
         "version_normalized": "1.6.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/paragraphs",
+            "url": "https://git.drupalcode.org/project/paragraphs.git",
             "reference": "8.x-1.6"
         },
         "dist": {
@@ -5800,7 +5800,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/pathauto",
+            "url": "https://git.drupalcode.org/project/pathauto.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -5863,7 +5863,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/persistent_login",
+            "url": "https://git.drupalcode.org/project/persistent_login.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -5916,7 +5916,7 @@
         "version_normalized": "2.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/recaptcha",
+            "url": "https://git.drupalcode.org/project/recaptcha.git",
             "reference": "8.x-2.4"
         },
         "dist": {
@@ -5983,7 +5983,7 @@
         "version_normalized": "1.3.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/redirect",
+            "url": "https://git.drupalcode.org/project/redirect.git",
             "reference": "8.x-1.3"
         },
         "dist": {
@@ -6040,7 +6040,7 @@
         "version_normalized": "3.0.0.0-alpha4",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/rules",
+            "url": "https://git.drupalcode.org/project/rules.git",
             "reference": "8.x-3.0-alpha4"
         },
         "dist": {
@@ -6103,7 +6103,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/scheduler",
+            "url": "https://git.drupalcode.org/project/scheduler.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -6173,7 +6173,7 @@
         "version_normalized": "1.11.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/search_api",
+            "url": "https://git.drupalcode.org/project/search_api.git",
             "reference": "8.x-1.11"
         },
         "dist": {
@@ -6246,7 +6246,7 @@
         "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/search_api_solr",
+            "url": "https://git.drupalcode.org/project/search_api_solr.git",
             "reference": "8.x-1.2"
         },
         "dist": {
@@ -6330,7 +6330,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/seckit",
+            "url": "https://git.drupalcode.org/project/seckit.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -6396,7 +6396,7 @@
         "version_normalized": "4.0.0.0-beta4",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/services",
+            "url": "https://git.drupalcode.org/project/services.git",
             "reference": "8.x-4.0-beta4"
         },
         "dist": {
@@ -6460,7 +6460,7 @@
         "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/shield",
+            "url": "https://git.drupalcode.org/project/shield.git",
             "reference": "8.x-1.2"
         },
         "dist": {
@@ -6529,7 +6529,7 @@
         "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/smart_trim",
+            "url": "https://git.drupalcode.org/project/smart_trim.git",
             "reference": "8.x-1.1"
         },
         "dist": {
@@ -6600,7 +6600,7 @@
         "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/svg_image",
+            "url": "https://git.drupalcode.org/project/svg_image.git",
             "reference": "8.x-1.9"
         },
         "dist": {
@@ -6649,7 +6649,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/token",
+            "url": "https://git.drupalcode.org/project/token.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -6718,7 +6718,7 @@
         "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/twig_tweak",
+            "url": "https://git.drupalcode.org/project/twig_tweak.git",
             "reference": "8.x-1.9"
         },
         "dist": {
@@ -6775,7 +6775,7 @@
         "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/twig_xdebug",
+            "url": "https://git.drupalcode.org/project/twig_xdebug.git",
             "reference": "8.x-1.0"
         },
         "dist": {
@@ -6825,7 +6825,7 @@
         "version_normalized": "1.0.0.0-alpha2",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/typed_data",
+            "url": "https://git.drupalcode.org/project/typed_data.git",
             "reference": "8.x-1.0-alpha2"
         },
         "dist": {
@@ -6884,7 +6884,7 @@
         "version_normalized": "1.0.0.0-beta2",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/username_enumeration_prevention",
+            "url": "https://git.drupalcode.org/project/username_enumeration_prevention.git",
             "reference": "8.x-1.0-beta2"
         },
         "dist": {
@@ -6933,7 +6933,7 @@
         "version_normalized": "1.5.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/views_infinite_scroll",
+            "url": "https://git.drupalcode.org/project/views_infinite_scroll.git",
             "reference": "8.x-1.5"
         },
         "dist": {
@@ -6986,7 +6986,7 @@
         "version_normalized": "5.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/webform",
+            "url": "https://git.drupalcode.org/project/webform.git",
             "reference": "8.x-5.1"
         },
         "dist": {
@@ -7093,7 +7093,7 @@
         "version_normalized": "1.0.0.0-alpha3",
         "source": {
             "type": "git",
-            "url": "https://git.drupal.org/project/xmlsitemap",
+            "url": "https://git.drupalcode.org/project/xmlsitemap.git",
             "reference": "8.x-1.0-alpha3"
         },
         "dist": {
@@ -8406,12 +8406,12 @@
         "version_normalized": "1.6.5.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/mikey179/vfsStream.git",
+            "url": "https://github.com/bovigo/vfsStream.git",
             "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+            "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
             "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
             "shasum": ""
         },
@@ -10935,35 +10935,35 @@
     },
     {
         "name": "symfony/dom-crawler",
-        "version": "v4.1.3",
-        "version_normalized": "4.1.3.0",
+        "version": "v3.4.26",
+        "version_normalized": "3.4.26.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/dom-crawler.git",
-            "reference": "1c4519d257e652404c3aa550207ccd8ada66b38e"
+            "reference": "d40023c057393fb25f7ca80af2a56ed948c45a09"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/1c4519d257e652404c3aa550207ccd8ada66b38e",
-            "reference": "1c4519d257e652404c3aa550207ccd8ada66b38e",
+            "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/d40023c057393fb25f7ca80af2a56ed948c45a09",
+            "reference": "d40023c057393fb25f7ca80af2a56ed948c45a09",
             "shasum": ""
         },
         "require": {
-            "php": "^7.1.3",
+            "php": "^5.5.9|>=7.0.8",
             "symfony/polyfill-ctype": "~1.8",
             "symfony/polyfill-mbstring": "~1.0"
         },
         "require-dev": {
-            "symfony/css-selector": "~3.4|~4.0"
+            "symfony/css-selector": "~2.8|~3.0|~4.0"
         },
         "suggest": {
             "symfony/css-selector": ""
         },
-        "time": "2018-07-26T11:00:49+00:00",
+        "time": "2019-02-23T15:06:07+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "4.1-dev"
+                "dev-master": "3.4-dev"
             }
         },
         "installation-source": "dist",

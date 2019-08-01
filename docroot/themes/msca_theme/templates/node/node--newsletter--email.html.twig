@@ -1,423 +1,151 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-    <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>
-        Mass Senior Care E-News Update -
-        {% if content.field_newsletter_date|render %}
-          {{ content.field_newsletter_date }}
-        {%  endif %}
-      </title>
-      <script src="https://use.fontawesome.com/d08038767f.js"></script>
-      <style type="text/css">
-        /* Font styles */
-        @import url("http://{{ base_path }}/libraries/fontawesome/css/font-awesome.min.css");
-        @media screen {
-          @font-face {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 400;
-            src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
-          }
-          @font-face{
-            font-family:'FontAwesome';
-            src:url('../fonts/fontawesome-webfont.eot?v=4.7.0');
-            src:url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0')
-            format('embedded-opentype'),url('../fonts/fontawesome-webfont.woff2?v=4.7.0')
-            format('woff2'),url('../fonts/fontawesome-webfont.woff?v=4.7.0')
-            format('woff'),url('../fonts/fontawesome-webfont.ttf?v=4.7.0')
-            format('truetype'),url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular')
-            format('svg');
-            font-weight:normal;
-            font-style:normal;
-          }
-        }
-
-        /* email boilerplate styles */
-        #outlook a {padding:0; color: #2378cb;text-decoration:none!important;}
-        body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0; font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
-        .ExternalClass {width:100%;}
-        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
-        #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
-        img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; padding: 0px; margin: 0px; display: block;}
-        a img {border:none; padding: 0px; margin: 0px; display: block;}
-        .image_fix {display:block;}
-        h2, span, a.cal-title, h2 a {margin:0!important;text-transform: uppercase;font-size:16px;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
-        h1, h2, h3, h4, p {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
-        h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: #2378cb;text-decoration!important:none;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
-        h2 a {text-transform: uppercase;font-weight: bold;}
-        h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {color: #2378cb;text-decoration:none;}
-        h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {color: #2378cb;text-decoration:none;}
-        table td {border-collapse: collapse;}
-        table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-        a {color: #2378cb;text-decoration: none!important;}
-        .toc a {color: #2378cb;text-decoration:none;}
-
-        /* MSCA styles */
-        body, p, article div {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;font-size: 14px;font-weight: normal;line-height: 1.5;color: #3a3a3a;}
-        .lato, .paragraph div, h2 {font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;}
-        .paragraph--view-mode--default {margin-bottom: 40px;}
-        article h2 {font-size: 14px;text-decoration: none;line-height: normal;}
-        .newsletter-full aside .sidebar-block {margin-bottom: 20px;}
-        .newsletter-full .newsletter-header {font-family: 'Lato', sans-serif;text-align: center;text-transform: uppercase;color: #ffffff;}
-        .newsletter-full .header-right-top-inner {background-color: rgba(0, 0, 0,.6);padding: 40px;}
-        .newsletter-full .header-right-bottom {background-color: #ff7e00;padding: 20px;border-top: solid 2px white;text-align: center;color: #ffffff;font-size: 24px;}
-        .newsletter-full .your-link-to {color: #999999;font-size: 20px;font-weight: 300;text-align: center;}
-        .newsletter-full .long-term-care {font-size: 30px;width: 60%;margin: 0 auto;line-height: 1.3;color:#fff;text-align: center;}
-        .featured-article .label {font-size: 18px;font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;color: white;padding: 20px;text-transform: uppercase;font-weight: bold;margin: 0 0 20px 20px;background-color: #2378cb}
-        .page-node-type-newsletter .featured-article .label {margin: 0 0 20px 0;}
-        .page-node-type-newsletter article section.col-md-8 {padding-left: 0;}
-        .newsletter-full .e-news-update {font-size: 24px;display: flex;justify-content: center;}
-        .newsletter-full .header-right-bottom span {color: white;text-transform: uppercase;}
-        .newsletter-full .icon-social {width: 30px;height: 30px;}
-        .featured-article {margin-left: 20px;}
-        .sidebar .sidebar-block {padding: 10px;margin-bottom: 20px;margin-top: 20px;}
-        .featured-article {padding-bottom: 10px;margin-bottom: 20px;}
-        .featured-article article {padding-bottom: 20px;}
-        .newsletter-full .featured-article {padding-bottom: 0;margin-bottom: 0;}
-        .latest-articles {margin-top: 20px;}
-        h2.calendar {background-color: #005a84;color: #ffffff;padding: 20px;}
-        .anchor:before {content: "";display: block;height: 120px;margin: -120px 0 0;}
-        .newsletter-full .event-teaser-text h2 {margin-bottom: 10px;}
-        .newsletter-full .event-location {font-weight: 500;margin: 0 0 10px;}
-        .all-content article.newsletter-full {background-color: transparent;}
-        .sidebar-block-heading {color: #2378cb;font-size: 22px;font-weight: 300;font-family: "Lato",sans-serif;text-align: center;text-transform: uppercase;line-height: normal;}
-        .sidebar-block {border: solid 1px lightgrey;padding: 40px;margin-bottom: 40px;margin-top: 20px;}
-        img.logo {margin: 0 auto;display: flex; padding: 0px; margin: 0px; display: block;}
-        .sidebar ul {list-style: none;padding: 10px;}
-        .date-square {background-color: #ff7e00;height: 65px;width: 65px;color: #fff;float: left;margin-right: 20px;  }
-        .date-square-month {font-size: 22px;text-transform: uppercase;color: #ffffff;line-height: normal;text-align: center;}
-        .date-square-day {font-size: 32px;display: block;font-family: "Lato",sans-serif;font-weight: 700;color: #ffffff;line-height: normal;text-align: center;}
-        .sponsor-logo {width: 190px;margin: 0 auto 10px;}
-        .social-links {width: 190px;margin: 0 auto 10px;}
-        .btn {display: inline-block;font-weight: normal;text-align: center;white-space: nowrap;vertical-align: middle;user-select: none;text-transform: uppercase;
-          padding: 10px 20px;font-size: 14px;transition: all 0.2s ease-in-out;border-radius: 0;border: none;position: relative;line-height: 1.6;
-        }
-        .btn-secondary {background-color: #2378cb;color: #fff;max-width: 260px;}
-        .btn-secondary:hover {background-color: lighten(#2378cb, 10%);color: #fff;}
-        ul {line-height: normal;}
-        li {margin-bottom: 15px;}
-        .footer p {color: #fff;}
-        .footer-top p {font-size: 16px;}
-        .footer-bottom p {font-size: 12px;}
-        .footer a {color: #fff; text-decoration:none;}
-      </style>
-      <!--[if gte mso 9]>
-      <style type="text/css">
-        /* Outlook-specific CSS. */
-        .paragraph--type--newsletter-section > h2 {background-color: #14674d;}
-      </style>
-      <![endif]-->
-    </head>
-<body class="page-node-type-newsletter">
-  <article class="newsletter-full">
-    <table cellpadding="20px" id="backgroundTable" style="border-collapse: collapse;">
-      <tbody>
-        <tr>
-          <td>
-            <table width="700" cellpadding="0" cellspacing="0" border="0" align="center" style="border-collapse: collapse;">
-              <tbody>
-              <tr>
-                <td align="center" height="30px">{{ 'If this page doesn\'t display properly in your email'|t }} <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'click here'|t }}</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <table width="100%" class="newsletter-header lato" style="border-collapse: collapse;">
-                    <tbody>
-                    <tr>
-                      <td width="25%" class="header-left logo">
-                        {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-                        <a href="http://{{ base_path }}" target="_blank"><img alt="{{ 'Massachusetts Senior Care'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/msca-logo-email.png" style="padding: 0px; margin: 0px; display: block;"/></a>
-                      </td>
-                      <td width="75%">
-                        <table width="100%" class="header-right" style="border-collapse: collapse;">
-                          <tbody>
-                          <tr class="header-right-top">
-                            <td>
-                              <table class="header-right-top-inner" width="100%" style="border-collapse: collapse;">
-                                <tbody>
-                                <tr>
-                                  <td>
-                                    <img alt="{{ 'Your link to long term care news in Massachusetts'|t }}" src="http://{{ base_path }}/themes/msca_theme/images/newsletter-email-banner.jpg" style="padding: 0px; margin: 0px; display: block;"/>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <table width="100%" cellpadding="20" bgcolor="#ff7e00" class="header-right-bottom" style="border-collapse: collapse;">
-                                <tbody>
-                                  <tr>
-                                    <td style="text-transform: uppercase;color: #ffffff;font-family: 'Lato', sans-serif;font-size:20px;">
-                                      {{ 'E-News Update:'|t }}&nbsp;
-                                      {% if content.field_newsletter_date|render %}
-                                        {{ node.field_newsletter_date.value|date('F j, Y') }}
-                                      {%  endif %}
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <!--featured-article-start -->
-                  {% if content.field_featured_article|render %}
-                    <table width="100%" class="feature-article-section" style="border-collapse: collapse;">
-                      <tbody>
-                      <tr>
-                        <td class="featured-article">{{ content.field_featured_article }}</td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  {% endif %}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <table class="main-section" style="border-collapse: collapse;">
-                    <tbody>
-                    <tr>
-                      <td class="main-section-left" width="70%">
-                        <table width="100%" style="border-collapse: collapse;">
-                          <tbody>
-                          <tr class="latest-articles">
-                            <td>{{ content.field_newsletter_section }}</td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                      <td valign="top" width="30%">
-                        <table cellpadding="10" class="sidebar" style="border-collapse: collapse; border: solid 1px lightgrey;">
-                          <tbody>
-                          {% if content.field_sponsor|render %}
-                            <tr>
-                              <td align="center" class="sponsors sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
-                                <div style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'This Week\'s E-News Update is Sponsored By'|t }}</div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="sponsors sidebar-block">
-                              {{ content.field_sponsor }}
-                              </td>
-                            </tr>
-                          {% endif %}
-                          <tr>
-                            <td>
-                              {# Need space between articles in Outlook. #}
-                              <table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="center" height="30px" class="toc sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;">
-                              <div style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'In This Issue'|t }}</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="toc sidebar-block">
-                              <table class="list-unstyled issue-toc" cellpadding="10" style="color: #2378cb;font-weight: bold; font-size: 14px; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
-                                <tbody>
-                                  {% for item in node.field_featured_article %}
-                                    <tr><td style="font-size: 14px;"><a style="text-decoration:none;" href="#{{ item.entity.id }}">{{ item.entity.label }}</a></td></tr>
-                                  {% endfor %}
-                                  {% for item in node.field_newsletter_section %}
-                                    {% for article in item.entity.fields.field_featured_articles %}
-                                      <tr><td style="font-size: 14px;"><a style="text-decoration:none;" href="#{{ article.entity.id }}">{{ article.entity.label }}</a></td></tr>
-                                    {% endfor %}
-                                  {% endfor %}
-                                </tbody>
-                              </table>
-                              {# Need space between articles in Outlook. #}
-                              <table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="center" height="30px" class="resources sidebar-block-heading" style="font-size: 16px;text-transform: uppercase; font-weight: bold; color: #2378cb; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
-                              <div style="font-size: 16px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ 'Resources'|t }}</div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="resources sidebar-block">
-                              <table width="100%" class="list-unstyled issue-toc newsletter-resources" cellpadding="5" cellspacing="5" style="text-transform: uppercase; font-weight: bold; color: #ffffff; font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;">
-                                <tbody>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.all_content.enews_updates') }}" target="_blank">{{ 'See Previous Issues'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.preferred_vendors.page_1') }}" target="_blank">{{ 'Find a Preferred Vendor'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="mailto:gabrahams@massseniorcare.org" target="_blank">{{ 'Contact Us'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb; border-bottom: solid 10px #ffffff;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://www.magnetmail.net/actions/subscription_manage.cfm?user_id=MA_ExCare" target="_blank">{{ 'Manage Your Subscription'|t }}</a></td></tr>
-                                <tr><td style="background-color: #2378cb;"><a class="btn btn-secondary" style="color:#ffffff;text-decoration:none;" href="http://{{ base_path }}{{ path('view.job_search.job_search') }}" target="_blank">{{ 'Careers'|t }}</a></td></tr>
-                                </tbody>
-                              </table>
-                            </td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  {% if content.field_calendar|render %}
-                  <table width="100%" class="events" style="border-collapse: collapse;">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <a name="calendar"></a>
-                          <table width="100%" bgcolor="#005a84" cellpadding="20" style="color: white;font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, sans-serif;text-transform: uppercase;font-size:16px;font-weight: bold;">
-                            <tbody>
-                              <tr>
-                                <td>{{ 'Upcoming Education & Events'|t }}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  {% for item in node.field_calendar %}
-                    <table>
-                      <tbody>
-                      <tr>
-                        <td valign="top">
-                          <table bgcolor="#ff7e00" width="60" height="60" style="text-transform: uppercase; text-align: center; color: #ffffff; padding: 10px;">
-                            <tbody>
-                            <tr><td style="font-size: 16px;">{{ item.entity.field_date.value|date('M') }}</td></tr>
-                            <tr><td style="font-size: 20px;" >{{ item.entity.field_date.value|date('j') }}</td></tr>
-                            </tbody>
-                          </table>
-                        </td>
-                        <td>
-                          <table width="620">
-                            <tbody>
-                            <tr>
-                              <td>
-                                {% for category in item.entity.field_event_category %}
-                                  {{ category.entity.label }}
-                                {% endfor %}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td><h2 style="font-family:16px;margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;"><a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank" style="font-size:16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;">{{ item.entity.label }}</a></h2></td>
-                            </tr>
-                            <tr>
-                              <td>
-                                {% if item.entity.field_location.locality %}
-                                  {{ item.entity.field_location.locality }},
-                                {% endif %}
-                                {% if item.entity.field_location.administrative_area %}
-                                  {{ item.entity.field_location.administrative_area }}
-                                {% endif %}
-                              </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">
-                          <table>
-                            <tbody>
-                            <tr>
-                              <td>
-                                {% set text = item.entity.body.value|render|striptags %}
-                                <p>{{ text|length > 200 ? text|slice(0, 400)|raw ~ '...' : text|raw }}</p>
-                                <a href="{{ path('entity.node.canonical', {'node': item.entity.nid.value }) }}" target="_blank">{{ ('Read more')|t }}</a>
-                              </td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                    {# Need space between articles in Outlook. #}
-                    <table cellpadding="1"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
-                  {% endfor %}
-                  {% endif %}
-                  <table class="footer" style="border-collapse:collapse;color:#ffffff;">
-                    <tbody>
-                    <tr>
-                      <td class="footer-top" bgcolor="#2378cb" style="padding:8px 15px; text-align:center;color:#ffffff;">
-                        <p>{{ ('Representing Massachusetts\' nursing facilities and other organizations that provide health care and community for older adults and people with disabilities.')|t }}
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="footer-bottom" bgcolor="#000000" style="padding:8px 15px;text-align:center;color:#ffffff;">
-                        <p>
-                          <a href="http://www.maseniorcare.org" target="_blank">{{ ('Massachusetts Senior Care Association.')|t }}</a>{{ ('800 South Street - Suite 280, Waltham, MA 02453')|t }}<br />
-                          <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a>. {{ ('phone:')|t }} 617.558.0202 . {{ ('fax:')|t }} 617.558.3546 <br />
-                          {% trans %}
-                          To ensure delivery of the Mass Senior Care E-News Update, please add mailroom@maseniorcare.org to your email address book.
-                          {% endtrans %}
-                        </p>
-                        <table cellpadding="10">
-                          <tbody>
-                          <tr>
-                            <td>
-                              <table width="260"></table>
-                            </td>
-                            <td>
-                              <table bgcolor="#82b7bd" cellpadding="2" width="20">
-                                <tbody>
-                                <tr>
-                                  <td>
-                                    <a href="https://www.maseniorcare.org/" class="icon-social icon-website" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/external-website.png" alt="Website icon"/></a>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                            <td>
-                              <table bgcolor="#3a589a" cellpadding="2" width="20">
-                                <tbody>
-                                <tr>
-                                  <td>
-                                    <a href="https://www.facebook.com/maseniorcare/" class="icon-social icon-facebook" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/facebook.png" alt="Facebook icon"/></a>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                            <td>
-                              <table bgcolor="#00aced" cellpadding="2" width="20">
-                                <tbody>
-                                <tr>
-                                  <td>
-                                    <a href="https://twitter.com/MASeniorCare" class="icon-social icon-twitter" target="_blank"><img src="{{ url('<front>') }}themes/msca_theme/images/twitter.png" alt="Twitter icon"/></a>
-                                  </td>
-                                </tr>
-                                </tbody>
-                              </table>
-                            </td>
-                            <td>
-                              <table width="220"></table>
-                            </td>
-                          </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
+{#
+/**
+ * @file
+ * Theme override to display a Newsletter node Full display.
+ *
+ */
+#}
+<article{{ attributes.addClass('newsletter-full') }} name="emailcampaign" title="emailcampaign">
+  <!--header-start -->
+  <header class="row newsletter-header" style="background-color: #dce8ed;padding-top: 50px;padding-bottom: 30px;">
+    <table style="width: 100%">
+      <tr>
+        <td style="width: 66%; text-align: left; padding-left: 15px; padding-right: 30px">
+          <h2 style="font-size: 54px; color: #005A84; text-transform: initial; font-weight: bold; margin:0; mso-line-height-rule:exactly;">{{ 'E-News Update'|t }}</h2>
+          <h3 style="color: #005A84;text-transform: initial;font-weight: normal;font-size:20px;margin: 0 0 30px;mso-line-height-rule:exactly;">{{ 'Your Link to Long Term Care News in Massachusetts'|t }}</h3>
+          {% if content.field_newsletter_date|render %}
+            <p style="color: #005A84; font-weight: bold; margin: 0">{{ content.field_newsletter_date[0]['#markup'] }}</p>
+          {% endif %}
+        </td>
+        <td style="width: 33%; text-align: left;">
+          <img src="https://www.maseniorcare.org/themes/msca_theme/images/MassSeniorAssociation-logo.png" />
+        </td>
+      </tr>
     </table>
-  </article>
-</body>
-</html>
+  </header>
+  <!--header-end -->
+  <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;"><tr><td class="row">
+        <table style="width: 100%">
+          <tr class="row" style="margin-left: 0; margin-right: 0;">
+            <!--main-section-start -->
+            <td style="width: 66%; padding-right: 2%; vertical-align: top;">
+              <!--featured-article-start -->
+              {% if content.field_featured_article|render %}
+                <section class="feature-article-section">
+                  <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="featured-article" style="font-size: 16px; background-color: #fff; color: #005A84; font-weight: normal">
+                        {{ content.field_featured_article }}
+                      </td></tr></table>
+                </section>
+              {% endif %}
+              <!--featured-article-end -->
+              <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="clearfix"></td></tr></table>
+              <!--articles-start -->
+              {% if content.field_newsletter_section|render %}
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="latest-articles">
+                      {{ content.field_newsletter_section }}
+                    </td></tr></table>
+              {% endif %}
+              <!--articles-end -->
+
+            </td>
+            <!--main-section-end -->
+
+            <!--right-sidebar-start -->
+            <td style="background-color:#F5F5F5;width:33%;padding-top: 0;vertical-align: top; margin-top: 0">
+              <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="sidebar-block" style="margin-bottom: 0;margin-top: 0px;border-top: none;background-color: #F5F5F5;padding-top: 60px;padding-left: 20px; padding-right: 20px;">
+
+                    <!--tocstart -->
+                    <h2 style="font-size: 18px; color: #005A84; text-align: left; padding-left: 0; text-transform: uppercase; font-weight:normal; margin: 0; mso-line-height-rule:exactly; padding-bottom: 30px;">{{ 'In This Issue'|t }}</h2>
+                    <table class="list-unstyled issue-toc" style="list-style-type: none; margin-left: 0; padding-left: 0;">
+                      {% for item in node.field_featured_article %}
+                        <a href="#{{ item.entity.id }}" style="color: #005A84; text-decoration: none; line-height: 20px">{{ item.entity.label }}</a><br /><br /><hr /><br />
+                      {% endfor %}
+                      {% for item in node.field_newsletter_section %}
+                        {% for article in item.entity.fields.field_featured_articles %}
+                          {% if loop.last %}
+                            <a href="#{{ article.entity.id }}" style="color: #005A84; text-decoration: none; line-height: 20px">{{ article.entity.label }}</a><br /><br /><br />
+                          {% else %}
+                            <a href="#{{ article.entity.id }}" style="color: #005A84; text-decoration: none; line-height: 20px">{{ article.entity.label }}</a><br /><br /><hr /><br />
+                          {% endif %}
+                        {% endfor %}
+                      {% endfor %}
+                    </table>
+                    <!--tocend -->
+
+                  </td></tr></table>
+              <!--custom-top ad space-start -->
+              {% if content.field_sponsor|render %}
+                <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="sidebar-block" style="margin-bottom: 0;margin-top: 0;border-top: none;background-color: #005A84;color: #fff;border: none;padding: 20px;">
+                      <h2 style="font-size: 22px; color: #fff; text-transform: initial; text-align: left; padding: 0; font-weight: bold; margin: 18px 0 0;mso-line-height-rule:exactly;">{{ 'This Week\'s E-News Sponsor'|t }}</h2> <br />
+                      {{ content.field_sponsor }}
+                    </td></tr></table>
+              {% endif %}
+              <!--custom-top ad space-end -->
+
+            </td>
+            <!--right-sidebar-end -->
+          </tr>
+        </table>
+      </td></tr></table>
+  <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="row" style="background-color: #2278CB; color: #fff;">
+        <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="container" style="width: 100%">
+              <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="row">
+                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="col-md-12">
+                          <!--custom-calendar-start -->
+                          {% if content.field_calendar|render %}
+                            <table cellpadding="0" cellspacing="0" border="0" style="width:100%"><tr><td class="calendar">
+                                  <h2 style="background-color: #2278CB; color: #fff; font-weight: normal; text-transform: uppercase; font-size: 16px; padding-top: 47px; padding-left: 20px; margin: 0; mso-line-height-rule:exactly;"><img src="https://www.maseniorcare.org/themes/msca_theme/images/calendar.png" style="margin-right: 10px" />{{ 'Events Calendar'|t }}</h2>
+                                  {{ content.field_calendar }}
+                                </td></tr></table>
+                          {% endif %}
+                          <!--custom-calendar-end -->
+                        </td></tr></table>
+                  </td></tr></table>
+            </td></tr></table>
+      </td></tr></table>
+  <table cellpadding="0" cellspacing="0" border="0" style="width: 100%"><tr><td class="row" style="padding-left: 15px;">
+        <h2 style="margin: 42px 0 20px; font-weight: normal; color: #005A84; text-transform: uppercase; mso-line-height-rule: exactly;">{{ 'Quick Links'|t }}</h2>
+        <table width="100%" style="margin-bottom: 57px;">
+          <tr>
+            <td width="2%" style="height: 100px;"><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-newspaper.png" /></td>
+            <td width="40%" style="border-top: none"><a href="{{ path('view.all_content.enews_updates') }}" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'See Previous Issues'|t }}</a></td>
+            <td width="2%"><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-user.png" /></td>
+            <td width="56%" style="border-top: none"><a href="{{ path('view.preferred_vendors.page_1') }}" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'Find a Preferred Vendor'|t }}</a></td>
+          </tr>
+          <tr>
+            <td style="border-top: none; height: 100px;"><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-phone.png" /></td>
+            <td><a href="mailto:gabrahams@massseniorcare.org" target="_blank" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'Contact Us'|t }}</a></td>
+            {# todo: replace with link for constant contact #}
+            <td><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-cog.png" /></td>
+            <td style="border-top: none"><a href="https://visitor.constantcontact.com/do?mse=001yf2H1b86AVCddD2NcnmI7jXIVWkULdFQ&t=0018Zq9Tox0aFqZ4hTGZfO5WA%3D%3D&lang=001FCSs65SMrsI%3D&id=001b-xBWU3VMke4D0mky2HKACnRRcczV8Mp&llr=9zoosx5ab&p=oo" target="_blank" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'Manage Your Subscription'|t }}</a></td>
+          </tr>
+          <tr>
+            <td style="height: 100px;"><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-doctor.png" /></td>
+            <td style="border-top: none"><a href="{{ path('view.job_search.job_search') }}" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'Careers'|t }}</a></td>
+            <td><img src="https://www.maseniorcare.org/themes/msca_theme/images/quicklinks-star.png" /></td>
+            <td style="border-top: none"><a href="#" style="margin-left: 25px; font-weight: normal; color: #005A84; text-decoration: none;">{{ 'Answering the Call to Care Campaign'|t }}</a></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+    <tr>
+      <td class="row" style="background-color: #005A84; padding-top: 36px; padding-bottom: 27px;">
+        <table style="width: 100%">
+          <tr>
+            <td style="width: 60%">
+              <p style="color: #fff; margin-left: 15px; line-height: 25px; margin-right:5px; margin-top: 0; margin-bottom: 0;">{{ 'The Massachusetts Senior Care Association represents a diverse set of organizations that deliver a broad spectrum of services to meet the needs of older adults and people with disabilities.'|t }}</p>
+            </td>
+            <td style="width: 40%">
+              <img src="https://www.maseniorcare.org/themes/msca_theme/images/newsletter-facebook.png" />
+              <img src="https://www.maseniorcare.org/themes/msca_theme/images/newsletter-twitter.png" style="margin-left: 20px;" />
+              <img src="https://www.maseniorcare.org/themes/msca_theme/images/newsletter-logo-footer.png" style="margin-left: 33px;" />
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</article>

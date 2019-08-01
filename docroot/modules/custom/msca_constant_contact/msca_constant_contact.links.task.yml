@@ -1,0 +1,5 @@
+msca_constant_contact.create_campaign:
+  route_name: msca_constant_contact.create_campaign
+  base_route: entity.node.canonical
+  title: Send to Constant Contact
+  weight: 99

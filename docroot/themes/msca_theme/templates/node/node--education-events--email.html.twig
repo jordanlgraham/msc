@@ -1,46 +1,18 @@
 {#
 /**
  * @file
- * Theme override to display a Education and Events node email display.
- * Tables are needed as this will be rendered in email clients like MS Outlook.
+ * Theme override to display an Education and Events node teaser display.
+ *
  */
 #}
-{# For Newsletter TOC anchor links. #}
-<a class="anchor" name="{{ node.id }}"></a>
-<article{{ attributes.addClass('pb-5') }}>
-    <table>
-      <tbody>
-      <tr>
-        <td valign="top">
-          <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
-              {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-            <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
-          </h2>
-        </td>
-      </tr>
-      <tr>
-        <td>{{ content.body }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <table width="100%">
-      <tbody>
-      <tr>
-        <td style="width: 60%;padding:0;vertical-align: top;">
-          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-weight: bold;font-size: 14px;">{{ 'Read more'|t }}</a>
-        </td>
-        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
-          {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
-          {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
-        {#</td>#}
-        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
-          {#<i class="fa fa-print" aria-hidden="true"></i>#}
-          {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
-        {#</td>#}
-      </tr>
-      </tbody>
-    </table>
-  {% endif %}
-</article>
-{# Need space between articles in Outlook. #}
-<table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
+<td style="padding: 15px; border-top: initial; color: #2278CB; vertical-align: middle; text-align: center;" width="3%">
+  <div style="width: 52px; height: 42px; background-color: #fff; padding-top: 10px;">
+    <span style="font-size: 11px;display: block; color: #005A84; text-transform: uppercase; line-height: 12px;">{{ content.field_date.value|date('M') }}</span>
+    <span style="font-size: 18px; font-weight: bold; color: #005A84; line-height: 18px;">{{ content.field_date.value|date('j') }}</span>
+  </div>
+</td>
+<td style="padding: 15px; border-top: initial; vertical-align: middle; text-align: center;" width="47%">
+  <h2{{ title_attributes }} style="margin-top: 0; margin-bottom: 0; margin-left: 5px; text-align: left;">
+    <a href="{{ url }}" style="text-decoration:none; color: #fff; text-transform: initial; text-align: left; font-size:18px; line-height: 22px; font-weight: 400;" rel="bookmark">{{ label }}</a>
+  </h2>
+</td>

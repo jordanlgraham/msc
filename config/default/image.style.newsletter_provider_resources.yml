@@ -1,0 +1,15 @@
+uuid: 416176d2-9951-4e53-8a57-ed274602e998
+langcode: en
+status: true
+dependencies: {  }
+name: newsletter_provider_resources
+label: 'Newsletter - Provider Resources'
+effects:
+  9e0eb6a1-33fa-4e5b-8568-2eee72410ef1:
+    uuid: 9e0eb6a1-33fa-4e5b-8568-2eee72410ef1
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 224
+      height: 148
+      anchor: center-center

@@ -25,10 +25,10 @@ class ConstantContactAuth {
 
     $baseUrl = 'https://api.cc.email/v3/idfed?';
     $client = 'client_id=' . $pubkey;
-    $redirectUri = '&redirect_uri=http://msca.docksal/admin/config/services/constantcontact/authresponse?test';
+    $redirectUri = '&redirect_uri=http://msca.docksal/admin/config/services/constantcontact/authresponse';
     $responseType = '&response_type=code';
-
-    $url = $baseUrl . $client . $redirectUri . $responseType;
+    $scope = '&scope=campaign_data';
+    $url = $baseUrl . $client . $redirectUri . $responseType . $scope;
     return new TrustedRedirectResponse($url);
   }
 
@@ -40,25 +40,24 @@ class ConstantContactAuth {
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     $node_viewer = \Drupal::entityTypeManager()->getViewBuilder('node');
     // Use 'Email' view display.
-    $node_array = $node_viewer->view($node, 'full');
-    // Use 'Text' view display.
-//    $text_array = $this->node_viewer->view($node, 'text');
+    $node_array = $node_viewer->view($node, 'email');
     // Capture rendered and themed html.
     $node_html = \Drupal::service('renderer')->render($node_array);
-    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
+//    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
     $node_html = str_replace(array("\r", "\n"), '', $node_html);
-    $node_html = str_replace('"', '\"', $node_html);
+    $node_html = str_replace('src="/', 'src="https://www.maseniorcare.org/', $node_html);
+    $node_html = str_replace('href="/', 'href="https://www.maseniorcare.org/', $node_html);
+    $node_html = str_replace('<p>', '<p style="margin: 0">', $node_html);
     $node_html = str_replace("article", "div", $node_html);
     $node_html = str_replace("aside", "div", $node_html);
-    //    $text_html = drupal_render($text_array);
-    // Capture the node title for use as MessageName.
-//    $message_name_array = $node->get('title')->getValue();
-//    $message_name = $message_name_array[0]['value'];
-    // Capture the current date and time for use in MessageName to satisfy Real Magnet's unique MessageName constraint.
-//    $now = date("m-d-y h:i");
+    $node_html = str_replace("header", "div", $node_html);
+    $node_html = str_replace("section", "div", $node_html);
+    $node_html = str_replace("<div", '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-family: sans-serif"><tr><td', $node_html );
+    $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
+    $node_html = str_replace('"', '\"', $node_html);
     $subject = $node->getTitle();
     $json = '{
-  "name": "' . $subject . '",
+  "name": "' . $subject . rand(10000, 99999) . '",
   "email_campaign_activities": [
     {
       "format_type": 1,
@@ -66,20 +65,24 @@ class ConstantContactAuth {
       "from_email": "aantolini@maseniorcare.org",
       "reply_to_email": "aantolini@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<html><body>' . $node_html . '</body></html>",
+      "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html><head></head><body style=\"font-family: sans-serif\"><!--[if mso]>
+      <style type=\"text/css\">
+body, table, td {font-family: sans-serif !important;}
+</style>
+<![endif]--><meta http-equiv=\"Content-Type\" content=\"text/html charset=UTF-8\" />' . $node_html . '</body></html>",
       "physical_address_in_footer": {
-        "address_line1": "123 Maple Street",
-        "address_line2": "Unit 1",
-        "address_line3": "string",
-        "address_optional": "Near Boston Fire Station",
-        "city": "Boston",
+        "address_line1": "800 South St #280",
+        "address_line2": "",
+        "address_line3": "",
+        "address_optional": "",
+        "city": "Waltham",
         "country_code": "US",
         "country_name": "United States",
-        "organization_name": "Jake Dodge\'s Pancakes",
-        "postal_code": "02451",
+        "organization_name": "Massachusetts Senior Care Association",
+        "postal_code": "02453",
         "state_code": "MA",
-        "state_name": "string",
-        "state_non_us_name": "Victoria"
+        "state_name": "Massachusetts",
+        "state_non_us_name": ""
       },
       "document_properties": {
         "style_content": ".white{color: #ffffff;}",
@@ -101,6 +104,36 @@ class ConstantContactAuth {
     }
   ]
 }';
-    $post = json_encode($json);
+//    $json = json_encode($json);
+    $base_url = 'https://api.cc.email/v3/';
+    $client = new Client([
+      'base_uri' => $base_url,
+    ]);
+
+    try {
+      $response = $client->post('emails', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $_SESSION['token'],
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json',
+        ],
+        'body' => $json,
+      ]);
+    }
+    catch (\GuzzleHttp\Exception\ServerException $e) {
+      $message = $e->getMessage();
+      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+      $redirect->send();
+    }
+    catch (\GuzzleHttp\Exception\ClientException $e) {
+      $message = $e->getMessage();
+      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+      $redirect->send();
+    }
+    drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
+    $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+    $redirect->send();
   }
 }

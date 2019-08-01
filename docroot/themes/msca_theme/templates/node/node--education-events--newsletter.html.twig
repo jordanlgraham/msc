@@ -5,14 +5,18 @@
  *
  */
 #}
-<td style="padding: 15px; border-top: initial; color: #2278CB; vertical-align: middle; text-align: center;" width="3%">
-  <div style="width: 52px; height: 52px; background-color: #fff; padding-top: 10px;">
-    <span style="font-size: 11px;display: block; color: #005A84; text-transform: uppercase; line-height: 12px;">{{ content.field_date.value|date('M') }}</span>
-    <span style="font-size: 18px; font-weight: bold; color: #005A84; line-height: 18px;">{{ content.field_date.value|date('j') }}</span>
-  </div>
+<td style="padding: 13px 0;border-top: initial;color: #2278CB;vertical-align: middle;text-align: center;" width="3%">
+  <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+    <tr>
+      <td style="width: 52px; height: 52px; background-color: #fff; padding: 7px 16px 0;">
+        <span style="font-size: 11px;display: block; color: #005A84; text-transform: uppercase; line-height: 12px;">{{ content.field_date.value|date('M') }}</span>
+        <span style="font-size: 18px; font-weight: bold; color: #005A84; line-height: 18px;">{{ content.field_date.value|date('j') }}</span>
+      </td>
+    </tr>
+  </table>
 </td>
 <td style="padding: 15px; border-top: initial; vertical-align: middle; text-align: center;" width="47%">
-  <h2{{ title_attributes }} style="margin-bottom: 0; margin-left: 5px; text-align: left;">
-    <a href="{{ url }}" style="text-decoration:none; color: #fff; text-transform: initial; text-align: left; font-size:18px; line-height: 22px; font-weight: 400;" rel="bookmark">{{ label }}</a>
+  <h2{{ title_attributes }} style="margin: 0 0 0 5px;text-align: left; mso-line-height-rule:exactly;">
+    <a href="{{ url }}" style="text-decoration:none; color: #fff; text-transform: initial; text-align: left; font-size:18px; line-height: 22px; font-weight: 400; margin-top: 0; margin-bottom: 0" rel="bookmark">{{ label }}</a>
   </h2>
 </td>
