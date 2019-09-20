@@ -25,7 +25,7 @@ class Auth {
   private $externalAuth;
 
   const AUTH_PROVIDER = 'netforum';
-  const RESET_PASSWORD_URL = 'https://netforum.avectra.com/eweb/DynamicPage.aspx?WebCode=ForgotPassword&Site=MSCA';
+  const RESET_PASSWORD_URL = 'https://netforumpro.com/eweb/DynamicPage.aspx?Site=MSCA&WebCode=ForgotPassword';
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager, GetClient $getClient,
                               ExternalAuthInterface $externalAuth) {
