@@ -27,6 +27,7 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
+  devel: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   editor: 0
@@ -93,7 +94,6 @@ module:
   page_cache: 0
   path: 0
   pathauto: 0
-  persistent_login: 0
   quickedit: 0
   rdf: 0
   real_magnet: 0

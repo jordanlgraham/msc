@@ -8,4 +8,3 @@ weight: 4
 is_admin: null
 permissions:
   - 'access gated content'
-  - 'create forum content'

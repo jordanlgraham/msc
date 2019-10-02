@@ -3,8 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.user.user.field_cst_key
-    - field.field.user.user.field_full_name
     - field.field.user.user.field_groups
     - field.field.user.user.user_picture
     - image.style.thumbnail
@@ -20,7 +18,7 @@ bundle: user
 mode: default
 content:
   account:
-    weight: 0
+    weight: -10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -29,24 +27,8 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_cst_key:
-    weight: 9
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_full_name:
-    weight: 1
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_groups:
-    weight: 8
+    weight: 31
     settings:
       match_operator: CONTAINS
       size: 60
@@ -55,18 +37,18 @@ content:
     type: entity_reference_autocomplete
     region: content
   google_analytics:
-    weight: 4
-    region: content
+    weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
   language:
-    weight: 3
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 30
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -81,6 +63,6 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    weight: 2
+    weight: -1
     region: content
 hidden: {  }

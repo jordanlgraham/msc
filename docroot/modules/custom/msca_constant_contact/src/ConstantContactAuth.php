@@ -43,20 +43,85 @@ class ConstantContactAuth {
     $node_array = $node_viewer->view($node, 'email');
     // Capture rendered and themed html.
     $node_html = \Drupal::service('renderer')->render($node_array);
-//    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
+    $node_html = $this->cleanHtml($node_html);
+    /** @var \Drupal\node\NodeStorageInterface $node */
+    $subject = $node->getTitle();
+    $json = $this->buildJson($subject, $node_html);
+//    $json = json_encode($json);
+    $base_url = 'https://api.cc.email/v3/';
+    $client = new Client([
+      'base_uri' => $base_url,
+    ]);
+
+    try {
+      $response = $client->post('emails', [
+        'headers' => [
+          'Authorization' => 'Bearer ' . $_SESSION['token'],
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json',
+        ],
+        'body' => $json,
+      ]);
+    }
+    catch (\GuzzleHttp\Exception\ServerException $e) {
+      $message = $e->getMessage();
+      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+      $redirect->send();
+    }
+    catch (\GuzzleHttp\Exception\ClientException $e) {
+      $message = $e->getMessage();
+      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+      $redirect->send();
+    }
+    drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
+    $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
+    $redirect->send();
+  }
+
+  /**
+   * Perform general cleanup functions on the $node_html to prepare it for email.
+   *
+   * @param $node_html
+   *
+   * @return mixed
+   */
+  private function cleanHtml($node_html) {
+    // Get rid of excess linebreaks.
     $node_html = str_replace(array("\r", "\n"), '', $node_html);
+    // Ensure all images and links point to production.
     $node_html = str_replace('src="/', 'src="https://www.maseniorcare.org/', $node_html);
     $node_html = str_replace('href="/', 'href="https://www.maseniorcare.org/', $node_html);
+    // Reset paragraph margins to 0, which can have default margins in Outlook.
     $node_html = str_replace('<p>', '<p style="margin: 0">', $node_html);
-    $node_html = str_replace("article", "div", $node_html);
-    $node_html = str_replace("aside", "div", $node_html);
-    $node_html = str_replace("header", "div", $node_html);
-    $node_html = str_replace("section", "div", $node_html);
-    $node_html = str_replace("<div", '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-family: sans-serif"><tr><td', $node_html );
+    // Replace html5 nodes with divs
+    $node_html = str_replace("<article", "<div", $node_html);
+    $node_html = str_replace("<aside", "<div", $node_html);
+    $node_html = str_replace("<header", "<div", $node_html);
+    $node_html = str_replace("<section", "<div", $node_html);
+    $node_html = str_replace("</article", "</div", $node_html);
+    $node_html = str_replace("</aside", "</div", $node_html);
+    $node_html = str_replace("</header", "</div", $node_html);
+    $node_html = str_replace("</section", "</div", $node_html);
+    // Replace all divs with tables.
+    $node_html = str_replace("<div", '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-family: Helvetica, Arial, sans-serif"><tr><td', $node_html );
     $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
+
+    // Escape double-quote characters to prepare it as part of a JSON string.
     $node_html = str_replace('"', '\"', $node_html);
-    $subject = $node->getTitle();
-    $json = '{
+    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
+    // Replace trademarks, registered trademarks, copyright symbols.
+    $node_html = preg_replace("/(™|®|©|&trade;|&reg;|&copy;|&#8482;|&#174;|&#169;)/", "", $node_html);
+    // Replace Windows smart quotes.
+    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
+    $replace = ["'", "'", '"', '"', '-'];
+    $node_html = str_replace($search, $replace, $node_html);
+    return $node_html;
+  }
+
+  private function buildJson($subject, $node_html) {
+    return '{
   "name": "' . $subject . rand(10000, 99999) . '",
   "email_campaign_activities": [
     {
@@ -65,11 +130,7 @@ class ConstantContactAuth {
       "from_email": "aantolini@maseniorcare.org",
       "reply_to_email": "aantolini@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html><head></head><body style=\"font-family: sans-serif\"><!--[if mso]>
-      <style type=\"text/css\">
-body, table, td {font-family: sans-serif !important;}
-</style>
-<![endif]--><meta http-equiv=\"Content-Type\" content=\"text/html charset=UTF-8\" />' . $node_html . '</body></html>",
+      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
       "physical_address_in_footer": {
         "address_line1": "800 South St #280",
         "address_line2": "",
@@ -104,36 +165,6 @@ body, table, td {font-family: sans-serif !important;}
     }
   ]
 }';
-//    $json = json_encode($json);
-    $base_url = 'https://api.cc.email/v3/';
-    $client = new Client([
-      'base_uri' => $base_url,
-    ]);
-
-    try {
-      $response = $client->post('emails', [
-        'headers' => [
-          'Authorization' => 'Bearer ' . $_SESSION['token'],
-          'Content-Type' => 'application/json',
-          'Accept' => 'application/json',
-        ],
-        'body' => $json,
-      ]);
-    }
-    catch (\GuzzleHttp\Exception\ServerException $e) {
-      $message = $e->getMessage();
-      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
-      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      $redirect->send();
-    }
-    catch (\GuzzleHttp\Exception\ClientException $e) {
-      $message = $e->getMessage();
-      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
-      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      $redirect->send();
-    }
-    drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
-    $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-    $redirect->send();
   }
 }
+
