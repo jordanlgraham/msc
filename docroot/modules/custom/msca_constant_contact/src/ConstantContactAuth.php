@@ -18,14 +18,11 @@ class ConstantContactAuth {
   }
 
   public function auth() {
-    // https://api.cc.email/v3/idfed?client_id=9fdc2e05-0e19-4847-b6e0-17e49f9f47a4&redirect_uri=https%3A%2F%2Fwww.maseniorcare.org&response_type=token&scope=contact_data+campaign_data
-
-    $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
-//    $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
+    $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
 
     $baseUrl = 'https://api.cc.email/v3/idfed?';
     $client = 'client_id=' . $pubkey;
-    $redirectUri = '&redirect_uri=http://msca.docksal/admin/config/services/constantcontact/authresponse';
+    $redirectUri = '&redirect_uri=https://www.maseniorcare.org/admin/config/services/constantcontact/authresponse';
     $responseType = '&response_type=code';
     $scope = '&scope=campaign_data';
     $url = $baseUrl . $client . $redirectUri . $responseType . $scope;
@@ -107,16 +104,18 @@ class ConstantContactAuth {
     // Replace all divs with tables.
     $node_html = str_replace("<div", '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-family: Helvetica, Arial, sans-serif"><tr><td', $node_html );
     $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
-
-    // Escape double-quote characters to prepare it as part of a JSON string.
-    $node_html = str_replace('"', '\"', $node_html);
-    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
-    // Replace trademarks, registered trademarks, copyright symbols.
     $node_html = preg_replace("/(™|®|©|&trade;|&reg;|&copy;|&#8482;|&#174;|&#169;)/", "", $node_html);
     // Replace Windows smart quotes.
     $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
     $replace = ["'", "'", '"', '"', '-'];
     $node_html = str_replace($search, $replace, $node_html);
+    $node_html = str_replace('!important', '', $node_html);
+
+    // Escape double-quote characters to prepare it as part of a JSON string.
+    $node_html = str_replace('"', '\"', $node_html);
+    $node_html = preg_replace('/<!--(.|\s)*?-->/', '', $node_html);
+    // Replace trademarks, registered trademarks, copyright symbols.
+
     return $node_html;
   }
 
