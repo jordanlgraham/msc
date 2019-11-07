@@ -101,14 +101,16 @@ class ConstantContactAuth {
     $node_html = str_replace("</aside", "</div", $node_html);
     $node_html = str_replace("</header", "</div", $node_html);
     $node_html = str_replace("</section", "</div", $node_html);
+    $node_html = str_replace("http://msca.docksal", "https://www.maseniorcare.org", $node_html);
+    $node_html = str_replace("https://msca.docksal", "https://www.maseniorcare.org", $node_html);
     // Replace all divs with tables.
     $node_html = str_replace("<div", '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%; font-family: Helvetica, Arial, sans-serif"><tr><td', $node_html );
     $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
     $node_html = preg_replace("/(™|®|©|&trade;|&reg;|&copy;|&#8482;|&#174;|&#169;)/", "", $node_html);
     // Replace Windows smart quotes.
-    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
-    $replace = ["'", "'", '"', '"', '-'];
-    $node_html = str_replace($search, $replace, $node_html);
+//    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
+//    $replace = ["'", "'", '"', '"', '-'];
+//    $node_html = str_replace($search, $replace, $node_html);
     $node_html = str_replace('!important', '', $node_html);
 
     // Escape double-quote characters to prepare it as part of a JSON string.
