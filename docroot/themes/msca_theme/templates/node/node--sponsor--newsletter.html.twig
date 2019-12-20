@@ -8,8 +8,7 @@
 <article name="sponsor" title="sponsor">
 
   <div{{ content_attributes }}>
-{#    <a href="{{ content.field_web_address[0]["#plain_text"] }}">{{ content.field_logo }}</a>#}
-{#    {{ content|without('field_logo') }}#}
-    {{ content }}
+    <a href="{{ content.field_web_address[0]["#plain_text"] }}">{{ content.field_logo }}</a>
+    {{ content|without('field_logo') }}
   </div>
 </article>

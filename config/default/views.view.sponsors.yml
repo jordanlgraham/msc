@@ -204,7 +204,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2019 Spring Conference & Trade Show.'
+            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2019 Annual Meeting & Trade Show.'
             format: basic_html
           plugin_id: text
       footer:
@@ -218,7 +218,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<a href="/education-and-events/upcoming-events/pdpm-journey-continues-2019-spring-conference-trade-show" class="btn btn-primary">View All Sponsors</a>'
+            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/2019-annual-meeting-trade-show" class="btn btn-primary">View All Sponsors</a>'
             format: full_html
           plugin_id: text
       empty: {  }

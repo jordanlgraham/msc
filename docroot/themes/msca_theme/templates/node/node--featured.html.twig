@@ -8,22 +8,20 @@
 <a class="anchor" name="{{ node.id }}"></a>
 <article name="example" title="example">
   {# Doing this because image urls need to be absolute for email version of newsletter. #}
-  <div class="float-left pr-3">
-    {% for key, image in content.field_news_teaser_image  %}
-      {%if image.entity %}
-        {% set media = image.entity %}
-        {% set file = media.field_image.entity %}
-        {% set uri = file_url(file.uri.value) %}
-        {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
-        <img width="325" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
-      {% endif %}
-    {% endfor %}
-  </div>
+  {% for key, image in content.field_news_teaser_image  %}
+    {%if image.entity %}
+      {% set media = image.entity %}
+      {% set file = media.field_image.entity %}
+      {% set uri = file_url(file.uri.value) %}
+      {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
+      <img width="325" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" style="margin-bottom: 10px;" />
+    {% endif %}
+  {% endfor %}
 
   <div class="newsletter-article-teaser-text teaser-text" style="line-height: 24px; color: #657B85;">
-    <h2 style="margin:0;font-size: 14px;font-weight:normal;font-family: 'Lato', Arial, Helvetica, sans-serif; text-transform: initial; padding-bottom: 15px; mso-line-height-rule:exactly;">
+    <h2 style="margin:0;">
       {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
-      <a href="https://{{ base_path }}{{ url }}" style="font-size: 24px; line-height: 30px; font-family: 'Lato', Tahoma, sans-serif;text-decoration:none; color: #005A84 !important;" rel="bookmark">{{ label }}</a>
+      <a href="https://{{ base_path }}{{ url }}" style="text-decoration: none; color: #005A84 !important; font-size: 18px;" rel="bookmark">{{ label }}</a>
     </h2>
     {{ content.body }}
     <table width="100%" border="0" cellspacing="0" cellpadding="0">

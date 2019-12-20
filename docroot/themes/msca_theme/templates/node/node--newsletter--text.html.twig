@@ -7,7 +7,7 @@ E-News Update:
 
 {% for item in node.field_sponsor %}
 This Week's E-News is Sponsored By:
-{{ item.entity.body.value|raw }}
+{{ item.entity.body }}
 {% endfor %}
 
 {% for item in node.field_newsletter_article %}

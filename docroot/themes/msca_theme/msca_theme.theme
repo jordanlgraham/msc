@@ -32,10 +32,13 @@ function msca_theme_preprocess_menu(&$vars) {
 }
 
 function msca_theme_preprocess_node(&$variables) {
+  if ($variables['node']->bundle() == 'education_events') {
+    $a = 1;
+  }
   //Upcoming Education and Events section needs field_date and field_end_date to
   //appear in a couple different formats.
 
-  if (in_array($variables['view_mode'], ['default', 'homepage', 'calendar', 'sidebar', 'teaser'])) {
+  if (in_array($variables['view_mode'], ['default', 'homepage', 'calendar', 'sidebar', 'teaser', 'newsletter'])) {
     if(!empty($variables['content']['field_date'][0]['#markup'])) {
       $date_field = $variables['content']['field_date'][0]['#markup'];
     }
