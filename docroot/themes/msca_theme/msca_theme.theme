@@ -16,16 +16,6 @@ function msca_theme_preprocess_menu(&$vars) {
   if ($vars['menu_name'] == 'masthead') {
     $account = \Drupal::currentUser()->getAccount();
     if ($account->isAuthenticated()) {
-      $user = \Drupal::entityTypeManager()->getStorage('user')->load($account->id());
-      if (!empty($user->field_full_name)) {
-        $vars['content'] = [];
-        $vars['content']['#fullname'] = 'Welcome, ' . $user->field_full_name->value;
-        $vars['content']['#cache'] = [
-          'contexts' => [
-            'user',
-          ],
-        ];
-      }
       foreach ($vars['items'] as $key => $item) {
         /** @var \Drupal\Core\Url $url */
         if ($item['title'] === 'Join Mass Senior Care') {
