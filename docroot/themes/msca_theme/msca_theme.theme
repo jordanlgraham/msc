@@ -20,6 +20,11 @@ function msca_theme_preprocess_menu(&$vars) {
       if (!empty($user->field_full_name)) {
         $vars['content'] = [];
         $vars['content']['#fullname'] = 'Welcome, ' . $user->field_full_name->value;
+        $vars['content']['#cache'] = [
+          'contexts' => [
+            'user',
+          ],
+        ];
       }
       foreach ($vars['items'] as $key => $item) {
         /** @var \Drupal\Core\Url $url */
