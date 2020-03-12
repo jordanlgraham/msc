@@ -49,13 +49,21 @@
       <tr{{ item.attributes }}>
     {% endif %}
     {{ item.content }}
+    {% if loop.index is odd %}
+      {% if loop.last %}
+        <td style="border-top: initial">&nbsp;</td>
+        <td style="border-top: initial">&nbsp;</td>
+      </tr>
+      {% endif %}
+    {% endif %}
     {% if loop.index is even %}
       </tr>
     {% endif %}
   {% endfor %}
 </table>
 <table style="margin-top: 42px;margin-bottom: 52px; margin-left: 15px;">
-  <tr><td>
+  <tr>
+    <td>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td>
@@ -66,4 +74,7 @@
             </table>
           </td>
         </tr>
-      </table></td></tr></table>
+      </table>
+    </td>
+  </tr>
+</table>
