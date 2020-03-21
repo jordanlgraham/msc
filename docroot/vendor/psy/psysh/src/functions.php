@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,6 +11,7 @@
 
 namespace Psy;
 
+use Psy\ExecutionLoop\ProcessForker;
 use Psy\VersionUpdater\GitHubChecker;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +19,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use XdgBaseDir\Xdg;
 
-if (!function_exists('Psy\sh')) {
+if (!\function_exists('Psy\sh')) {
     /**
      * Command to return the eval-able code to startup PsySH.
      *
@@ -32,7 +33,7 @@ if (!function_exists('Psy\sh')) {
     }
 }
 
-if (!function_exists('Psy\debug')) {
+if (!\function_exists('Psy\debug')) {
     /**
      * Invoke a Psy Shell from the current context.
      *
@@ -70,7 +71,7 @@ if (!function_exists('Psy\debug')) {
      *         }
      *     }
      *
-     * @param array         $vars   Scope variables from the calling context (default: array())
+     * @param array         $vars   Scope variables from the calling context (default: [])
      * @param object|string $bindTo Bound object ($this) or class (self) value for the shell
      *
      * @return array Scope variables from the debugger session
@@ -89,7 +90,7 @@ if (!function_exists('Psy\debug')) {
             $sh->addInput('whereami -n2', true);
         }
 
-        if (is_string($bindTo)) {
+        if (\is_string($bindTo)) {
             $sh->setBoundClass($bindTo);
         } elseif ($bindTo !== null) {
             $sh->setBoundObject($bindTo);
@@ -101,7 +102,7 @@ if (!function_exists('Psy\debug')) {
     }
 }
 
-if (!function_exists('Psy\info')) {
+if (!\function_exists('Psy\info')) {
     /**
      * Get a bunch of debugging info about the current PsySH environment and
      * configuration.
@@ -123,12 +124,12 @@ if (!function_exists('Psy\info')) {
         }
 
         $xdg = new Xdg();
-        $home = rtrim(str_replace('\\', '/', $xdg->getHomeDir()), '/');
-        $homePattern = '#^' . preg_quote($home, '#') . '/#';
+        $home = \rtrim(\str_replace('\\', '/', $xdg->getHomeDir()), '/');
+        $homePattern = '#^' . \preg_quote($home, '#') . '/#';
 
         $prettyPath = function ($path) use ($homePattern) {
-            if (is_string($path)) {
-                return preg_replace($homePattern, '~/', $path);
+            if (\is_string($path)) {
+                return \preg_replace($homePattern, '~/', $path);
             } else {
                 return $path;
             }
@@ -146,7 +147,7 @@ if (!function_exists('Psy\info')) {
             'config file'         => [
                 'default config file' => $prettyPath($config->getConfigFile()),
                 'local config file'   => $prettyPath($config->getLocalConfigFile()),
-                'PSYSH_CONFIG env'    => $prettyPath(getenv('PSYSH_CONFIG')),
+                'PSYSH_CONFIG env'    => $prettyPath(\getenv('PSYSH_CONFIG')),
             ],
             // 'config dir'  => $config->getConfigDir(),
             // 'data dir'    => $config->getDataDir(),
@@ -171,12 +172,12 @@ if (!function_exists('Psy\info')) {
         ];
 
         if ($config->hasReadline()) {
-            $info = readline_info();
+            $info = \readline_info();
 
             $readline = [
                 'readline available' => true,
                 'readline enabled'   => $config->useReadline(),
-                'readline service'   => get_class($config->getReadline()),
+                'readline service'   => \get_class($config->getReadline()),
             ];
 
             if (isset($info['library_version'])) {
@@ -193,14 +194,19 @@ if (!function_exists('Psy\info')) {
         }
 
         $pcntl = [
-            'pcntl available' => function_exists('pcntl_signal'),
-            'posix available' => function_exists('posix_getpid'),
+            'pcntl available' => ProcessForker::isPcntlSupported(),
+            'posix available' => ProcessForker::isPosixSupported(),
         ];
 
-        $disabledFuncs = array_map('trim', explode(',', ini_get('disable_functions')));
-        if (in_array('pcntl_signal', $disabledFuncs) || in_array('pcntl_fork', $disabledFuncs)) {
-            $pcntl['pcntl disabled'] = true;
+        if ($disabledPcntl = ProcessForker::disabledPcntlFunctions()) {
+            $pcntl['disabled pcntl functions'] = $disabledPcntl;
         }
+
+        if ($disabledPosix = ProcessForker::disabledPosixFunctions()) {
+            $pcntl['disabled posix functions'] = $disabledPosix;
+        }
+
+        $pcntl['use pcntl'] = $config->usePcntl();
 
         $history = [
             'history file'     => $prettyPath($config->getHistoryFile()),
@@ -226,7 +232,7 @@ if (!function_exists('Psy\info')) {
                                 $val = $d->format(\DateTime::RFC2822);
                                 break;
                         }
-                        $key = 'db ' . str_replace('_', ' ', $key);
+                        $key = 'db ' . \str_replace('_', ' ', $key);
                         $docs[$key] = $val;
                     }
                 } else {
@@ -243,25 +249,25 @@ if (!function_exists('Psy\info')) {
 
         $autocomplete = [
             'tab completion enabled' => $config->useTabCompletion(),
-            'custom matchers'        => array_map('get_class', $config->getTabCompletionMatchers()),
+            'custom matchers'        => \array_map('get_class', $config->getTabCompletionMatchers()),
             'bracketed paste'        => $config->useBracketedPaste(),
         ];
 
         // Shenanigans, but totally justified.
         if ($shell = Sudo::fetchProperty($config, 'shell')) {
-            $core['loop listeners'] = array_map('get_class', Sudo::fetchProperty($shell, 'loopListeners'));
-            $core['commands']       = array_map('get_class', $shell->all());
+            $core['loop listeners'] = \array_map('get_class', Sudo::fetchProperty($shell, 'loopListeners'));
+            $core['commands']       = \array_map('get_class', $shell->all());
 
-            $autocomplete['custom matchers'] = array_map('get_class', Sudo::fetchProperty($shell, 'matchers'));
+            $autocomplete['custom matchers'] = \array_map('get_class', Sudo::fetchProperty($shell, 'matchers'));
         }
 
         // @todo Show Presenter / custom casters.
 
-        return array_merge($core, compact('updates', 'pcntl', 'readline', 'history', 'docs', 'autocomplete'));
+        return \array_merge($core, \compact('updates', 'pcntl', 'readline', 'history', 'docs', 'autocomplete'));
     }
 }
 
-if (!function_exists('Psy\bin')) {
+if (!\function_exists('Psy\bin')) {
     /**
      * `psysh` command line executable.
      *
@@ -270,6 +276,38 @@ if (!function_exists('Psy\bin')) {
     function bin()
     {
         return function () {
+            if (!isset($_SERVER['PSYSH_IGNORE_ENV']) || !$_SERVER['PSYSH_IGNORE_ENV']) {
+                if (defined('HHVM_VERSION_ID') && \HHVM_VERSION_ID < 31800) {
+                    fwrite(STDERR, 'HHVM 3.18 or higher is required. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+
+                if (defined('HHVM_VERSION_ID') && \HHVM_VERSION_ID > 39999) {
+                    fwrite(STDERR, 'HHVM 4 or higher is not supported. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+
+                if (\PHP_VERSION_ID < 50509) {
+                    fwrite(STDERR, 'PHP 5.5.9 or higher is required. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+
+                if (\PHP_VERSION_ID > 89999) {
+                    fwrite(STDERR, 'PHP 9 or higher is not supported. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+
+                if (!function_exists('json_encode')) {
+                    fwrite(STDERR, 'The JSON extension is required. Please install it. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+
+                if (!function_exists('token_get_all')) {
+                    fwrite(STDERR, 'The Tokenizer extension is required. Please install it. You can set the environment variable PSYSH_IGNORE_ENV=1 to override this restriction and proceed anyway.' . PHP_EOL);
+                    exit(1);
+                }
+            }
+
             $usageException = null;
 
             $input = new ArgvInput();
@@ -277,10 +315,15 @@ if (!function_exists('Psy\bin')) {
                 $input->bind(new InputDefinition([
                     new InputOption('help',     'h',  InputOption::VALUE_NONE),
                     new InputOption('config',   'c',  InputOption::VALUE_REQUIRED),
-                    new InputOption('version',  'v',  InputOption::VALUE_NONE),
+                    new InputOption('version',  'V',  InputOption::VALUE_NONE),
                     new InputOption('cwd',      null, InputOption::VALUE_REQUIRED),
                     new InputOption('color',    null, InputOption::VALUE_NONE),
                     new InputOption('no-color', null, InputOption::VALUE_NONE),
+
+                    new InputOption('quiet',          'q',        InputOption::VALUE_NONE),
+                    new InputOption('verbose',        'v|vv|vvv', InputOption::VALUE_NONE),
+                    new InputOption('no-interaction', 'n',        InputOption::VALUE_NONE),
+                    new InputOption('raw-output',     'r',        InputOption::VALUE_NONE),
 
                     new InputArgument('include', InputArgument::IS_ARRAY),
                 ]));
@@ -304,6 +347,11 @@ if (!function_exists('Psy\bin')) {
                 $config['colorMode'] = Configuration::COLOR_MODE_DISABLED;
             }
 
+            // Handle --raw-output
+            if ($input->getOption('raw-output')) {
+                $config['rawOutput'] = true;
+            }
+
             $shell = new Shell(new Configuration($config));
 
             // Handle --help
@@ -313,7 +361,7 @@ if (!function_exists('Psy\bin')) {
                 }
 
                 $version = $shell->getVersion();
-                $name    = basename(reset($_SERVER['argv']));
+                $name    = \basename(\reset($_SERVER['argv']));
                 echo <<<EOL
 $version
 
@@ -324,7 +372,7 @@ Options:
   --help     -h Display this help message.
   --config   -c Use an alternate PsySH config file location.
   --cwd         Use an alternate working directory.
-  --version  -v Display the PsySH version.
+  --version  -V Display the PsySH version.
   --color       Force colors in output.
   --no-color    Disable colors in output.
 
@@ -345,7 +393,7 @@ EOL;
                 // And go!
                 $shell->run();
             } catch (\Exception $e) {
-                echo $e->getMessage() . PHP_EOL;
+                fwrite(STDERR, $e->getMessage() . PHP_EOL);
 
                 // @todo this triggers the "exited unexpectedly" logic in the
                 // ForkingLoop, so we can't exit(1) after starting the shell...

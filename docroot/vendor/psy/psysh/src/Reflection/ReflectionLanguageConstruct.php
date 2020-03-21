@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -122,7 +122,7 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
     {
         $params = [];
         foreach (self::$languageConstructs[$this->keyword] as $parameter => $opts) {
-            array_push($params, new ReflectionLanguageConstructParameter($this->keyword, $parameter, $opts));
+            \array_push($params, new ReflectionLanguageConstructParameter($this->keyword, $parameter, $opts));
         }
 
         return $params;
@@ -159,6 +159,6 @@ class ReflectionLanguageConstruct extends \ReflectionFunctionAbstract
      */
     public static function isLanguageConstruct($keyword)
     {
-        return array_key_exists($keyword, self::$languageConstructs);
+        return \array_key_exists($keyword, self::$languageConstructs);
     }
 }

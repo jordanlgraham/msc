@@ -55,16 +55,29 @@ Hidden settings
    Example settings.php override:
    # $config['acquia_search.settings']['disable_auto_read_only'] = true;
 
+- acquia_search.settings.default_search_core
+    String that contains default Acquia Search Solr search core. The search core
+    should be available in the search cores list returned by Acquia Search API.
+    You must disable disable_auto_switch to make the default_search_core option
+    work.
+
+    Here's an example for settings.php:
+
+    # Override Acquia Search Solr search core.
+    # $config['acquia_search.settings']['default_search_core'] =
+      'ABCD-12345.prod.mysite;
+
 - acquia_search.settings.connection_override
     Array that overrides the Acquia Search connection for all your Search API
     Servers using Acquia Search. These overrides are applied at a later stage
-    and overrides any and all module behavior from auto-switching or any settings
-    done via the UI.
+    and overrides any and all module behavior from auto-switching or any
+    settings done via the UI.
 
     Here's an example for settings.php:
 
     # Make all Acquia Search connections connect to a certain index.
-    # NOTE: This requires overriding the: scheme, host, port, index_id and derived_key
+    # NOTE: This requires overriding the: scheme, host, port, index_id and
+    # derived_key
     $config['acquia_search.settings']['connection_override'] = [
       'scheme' => 'http',
       'host' => 'somehostname.acquia-search.com',

@@ -15,6 +15,8 @@ use Drupal\geocoder_field\GeocoderFieldPluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Utility\LinkGeneratorInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 
 /**
  * Provides a default generic geocoder field plugin.
@@ -39,6 +41,13 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $config;
+
+  /**
+   * The entity field manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
 
   /**
    * The module handler.
@@ -105,6 +114,8 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
    *   The renderer.
    * @param \Drupal\Core\Utility\LinkGeneratorInterface $link_generator
    *   The Link Generator service.
+   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
+   *   The entity field manager service.
    */
   public function __construct(
     array $configuration,
@@ -116,7 +127,9 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
     DumperPluginManager $dumper_plugin_manager,
     ProviderPluginManager $provider_plugin_manager,
     RendererInterface $renderer,
-    LinkGeneratorInterface $link_generator
+    LinkGeneratorInterface $link_generator,
+    EntityFieldManagerInterface $entity_field_manager
+
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->config = $config_factory->get('geocoder.settings');
@@ -126,6 +139,7 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
     $this->providerPluginManager = $provider_plugin_manager;
     $this->renderer = $renderer;
     $this->link = $link_generator;
+    $this->entityFieldManager = $entity_field_manager;
   }
 
   /**
@@ -142,7 +156,8 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
       $container->get('plugin.manager.geocoder.dumper'),
       $container->get('plugin.manager.geocoder.provider'),
       $container->get('renderer'),
-      $container->get('link_generator')
+      $container->get('link_generator'),
+      $container->get('entity_field.manager')
     );
   }
 
@@ -150,21 +165,39 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
    * {@inheritdoc}
    */
   public function getSettingsForm(FieldConfigInterface $field, array $form, FormStateInterface &$form_state) {
+
+    $geocoder_settings_link = $this->link->generate(t('Edit options in the Geocoder configuration page</span>'), Url::fromRoute('geocoder.settings', [], [
+      'query' => [
+        'destination' => Url::fromRoute('<current>')
+          ->toString(),
+      ],
+    ]));
+
     $element = [
       '#type' => 'details',
       '#title' => t('Geocode'),
       '#open' => TRUE,
     ];
 
+    if ($this->config->get('geocoder_presave_disabled')) {
+      $element['#description'] = [
+        '#type' => 'html_tag',
+        '#tag' => 'div',
+        '#value' => $this->t("<b>The Geocoder and Reverse Geocoding operations are disabled, and won't be processed.</b> (@geocoder_settings_link)", [
+          '@geocoder_settings_link' => $geocoder_settings_link,
+        ]),
+      ];
+      $element['#open'] = FALSE;
+    }
+
     // Attach Geofield Map Library.
     $element['#attached']['library'] = [
       'geocoder/general',
     ];
 
-    $invisible_state = [
-      'invisible' => [
-        ':input[name="third_party_settings[geocoder_field][method]"]' => ['value' => 'none'],
-      ],
+    $geocoder_field_unselected_condition = [':input[name="third_party_settings[geocoder_field][method]"]' => ['value' => 'none']];
+    $basic_invisible_state_condition = [
+      'invisible' => $geocoder_field_unselected_condition,
     ];
 
     $element['method'] = [
@@ -185,7 +218,7 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
       '#min' => 0,
       '#max' => 9,
       '#size' => 2,
-      '#states' => $invisible_state,
+      '#states' => $basic_invisible_state_condition,
     ];
 
     // Set a default empty value for geocode_field.
@@ -244,24 +277,34 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
         ],
       ];
     }
-    $element['hidden'] = [
+
+    $element['skip_not_empty_value'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('<strong>Hide</strong> this field in the Content Edit Form'),
-      '#description' => $this->t('If checked, the Field will be Hidden to the user in the edit form, </br>and totally managed by the Geocode/Reverse Geocode operation chosen'),
-      '#default_value' => $field->getThirdPartySetting('geocoder_field', 'hidden'),
-      '#states' => $invisible_state,
+      '#title' => $this->t('<b>Skip Geocode/Reverse Geocode</b> if target value is not empty'),
+      '#description' => $this->t('This allows to preserve existing value of the target field, and make the Geocoder/Reverse Geocoder work only for insert op'),
+      '#default_value' => $field->getThirdPartySetting('geocoder_field', 'skip_not_empty_value', FALSE),
+      '#states' => [
+        'invisible' => $geocoder_field_unselected_condition,
+      ],
     ];
+
     $element['disabled'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('<strong>Disable</strong> this field in the Content Edit Form'),
       '#description' => $this->t('If checked, the Field will be Disabled to the user in the edit form, </br>and totally managed by the Geocode/Reverse Geocode operation chosen'),
       '#default_value' => $field->getThirdPartySetting('geocoder_field', 'disabled'),
       '#states' => [
-        'invisible' => [
-          [':input[name="third_party_settings[geocoder_field][method]"]' => ['value' => 'none']],
-          [':input[name="third_party_settings[geocoder_field][hidden]"]' => ['checked' => TRUE]],
-        ],
+        'invisible' => $geocoder_field_unselected_condition,
+        'visible' => [':input[name="third_party_settings[geocoder_field][hidden]"]' => ['checked' => FALSE]],
       ],
+    ];
+
+    $element['hidden'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('<strong>Hide</strong> this field in the Content Edit Form'),
+      '#description' => $this->t('If checked, the Field will be Hidden to the user in the edit form, </br>and totally managed by the Geocode/Reverse Geocode operation chosen'),
+      '#default_value' => $field->getThirdPartySetting('geocoder_field', 'hidden'),
+      '#states' => $basic_invisible_state_condition,
     ];
 
     // Get the enabled/selected plugins.
@@ -269,7 +312,7 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
 
     // Generates the Draggable Table of Selectable Geocoder Plugins.
     $element['plugins'] = $this->providerPluginManager->providersPluginsTableList($enabled_plugins);
-    $element['plugins']['#states'] = $invisible_state;
+    $element['plugins']['#states'] = $basic_invisible_state_condition;
 
     $element['dumper'] = [
       '#type' => 'select',
@@ -277,7 +320,7 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
       '#default_value' => $field->getThirdPartySetting('geocoder_field', 'dumper', 'wkt'),
       '#options' => $this->dumperPluginManager->getPluginsAsOptions(),
       '#description' => $this->t('Set the output format of the value. Ex, for a geofield, the format must be set to WKT.'),
-      '#states' => $invisible_state,
+      '#states' => $basic_invisible_state_condition,
     ];
     $element['delta_handling'] = [
       '#type' => 'select',
@@ -311,19 +354,19 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
         'empty' => $this->t('Empty the field value'),
       ],
       '#default_value' => $failure['handling'],
-      '#states' => $invisible_state,
+      '#states' => $basic_invisible_state_condition,
     ];
     $element['failure']['status_message'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Show a status message warning in case of geo-coding failure.'),
       '#default_value' => $failure['status_message'],
-      '#states' => $invisible_state,
+      '#states' => $basic_invisible_state_condition,
     ];
     $element['failure']['log'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Log the geo-coding failure.'),
       '#default_value' => $failure['log'],
-      '#states' => $invisible_state,
+      '#states' => $basic_invisible_state_condition,
     ];
 
     return $element;

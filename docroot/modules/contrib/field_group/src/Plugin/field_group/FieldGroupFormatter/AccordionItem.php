@@ -35,7 +35,7 @@ class AccordionItem extends FieldGroupFormatterBase {
     $element += [
       '#type' => 'field_group_accordion_item',
       '#effect' => $this->getSetting('effect'),
-      '#title' => Html::escape($this->t($this->getLabel())),
+      '#title' => $this->getLabel(),
     ];
 
     if ($this->getSetting('id')) {
@@ -49,6 +49,10 @@ class AccordionItem extends FieldGroupFormatterBase {
 
     if ($this->getSetting('required_fields')) {
       $element['#attached']['library'][] = 'field_group/formatter.details';
+    }
+
+    if ($this->getSetting('formatter') == 'open') {
+        $element['#open'] = TRUE;
     }
 
     foreach ($element as $key => $value) {

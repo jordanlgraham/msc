@@ -8,6 +8,7 @@ use Drupal\Core\Field\FormatterPluginManager;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TypedData\TypedDataManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -36,6 +37,13 @@ class ImageFieldFormatter extends FileFieldFormatter {
   protected $imageFactory;
 
   /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * Constructs an ImageFieldFormatter object.
    *
    * @param array $configuration
@@ -54,10 +62,13 @@ class ImageFieldFormatter extends FileFieldFormatter {
    *   The image factory.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FormatterPluginManager $formatter_plugin_manager, TypedDataManager $typed_data_manager, ImageFactory $image_factory, LanguageManagerInterface $language_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, FormatterPluginManager $formatter_plugin_manager, TypedDataManager $typed_data_manager, ImageFactory $image_factory, LanguageManagerInterface $language_manager, MessengerInterface $messenger) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_type_manager, $formatter_plugin_manager, $typed_data_manager, $language_manager);
     $this->imageFactory = $image_factory;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -72,7 +83,8 @@ class ImageFieldFormatter extends FileFieldFormatter {
       $container->get('plugin.manager.field.formatter'),
       $container->get('typed_data_manager'),
       $container->get('image.factory'),
-      $container->get('language_manager')
+      $container->get('language_manager'),
+      $container->get('messenger')
     );
   }
 
@@ -117,7 +129,14 @@ class ImageFieldFormatter extends FileFieldFormatter {
       // Loading large files is slow, make sure it is an image mime type before
       // doing that.
       list($type,) = explode('/', $entity->getMimeType(), 2);
-      $access = AccessResult::allowedIf($type == 'image' && $this->imageFactory->get($entity->getFileUri())->isValid())
+      $is_valid_image = FALSE;
+      if ($type == 'image') {
+        $is_valid_image = $this->imageFactory->get($entity->getFileUri())->isValid();
+        if (!$is_valid_image) {
+          $this->messenger->addMessage($this->t('The selected image "@image" is invalid.', ['@image' => $entity->label()]), 'error');
+        }
+      }
+      $access = AccessResult::allowedIf($type == 'image' && $is_valid_image)
         // See the above @todo, this is the best we can do for now.
         ->addCacheableDependency($entity);
     }
@@ -159,7 +178,7 @@ class ImageFieldFormatter extends FileFieldFormatter {
       // double quotes in place of empty alt text only if that was filled
       // intentionally by the user.
       if (!empty($entity_element) && $entity_element['data-entity-embed-display'] == 'image:image') {
-        $alt = '""';
+        $alt = MediaImageDecorator::EMPTY_STRING;
       }
     }
 
@@ -192,7 +211,7 @@ class ImageFieldFormatter extends FileFieldFormatter {
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
     // When the alt attribute is set to two double quotes, transform it to the
     // empty string: two double quotes signify "empty alt attribute". See above.
-    if (trim($form_state->getValue(['attributes', 'alt'])) === '""') {
+    if (trim($form_state->getValue(['attributes', 'alt'])) === MediaImageDecorator::EMPTY_STRING) {
       $form_state->setValue(['attributes', 'alt'], '');
     }
   }

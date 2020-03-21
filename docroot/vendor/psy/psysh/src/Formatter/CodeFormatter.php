@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,7 +25,7 @@ class CodeFormatter implements Formatter
      * Format the code represented by $reflector.
      *
      * @param \Reflector  $reflector
-     * @param null|string $colorMode (default: null)
+     * @param string|null $colorMode (default: null)
      *
      * @return string formatted code
      */
@@ -38,11 +38,11 @@ class CodeFormatter implements Formatter
         $colorMode = $colorMode ?: Configuration::COLOR_MODE_AUTO;
 
         if ($fileName = $reflector->getFileName()) {
-            if (!is_file($fileName)) {
+            if (!\is_file($fileName)) {
                 throw new RuntimeException('Source code unavailable');
             }
 
-            $file  = file_get_contents($fileName);
+            $file  = \file_get_contents($fileName);
             $start = $reflector->getStartLine();
             $end   = $reflector->getEndLine() - $start;
 

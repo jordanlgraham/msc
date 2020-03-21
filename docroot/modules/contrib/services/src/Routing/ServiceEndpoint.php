@@ -49,7 +49,7 @@ class ServiceEndpoint {
         }
 
         if($resource->getNoCache()) {
-          $route->setOption('no_cache', true);
+          $route->setOption('no_cache', TRUE);
         }
 
         // Enable CSRF tokens for restricted HTTP methods.

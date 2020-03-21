@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -97,7 +97,7 @@ class ParseCommand extends Command implements ContextAware, PresenterAware
 
         if ($this->parserFactory->hasKindsSupport()) {
             $msg = 'One of PhpParser\\ParserFactory constants: '
-                . implode(', ', ParserFactory::getPossibleKinds())
+                . \implode(', ', ParserFactory::getPossibleKinds())
                 . " (default is based on current interpreter's version).";
             $defaultKind = $this->parserFactory->getDefaultKind();
 
@@ -128,7 +128,7 @@ HELP
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $code = $input->getArgument('code');
-        if (strpos('<?', $code) === false) {
+        if (\strpos('<?', $code) === false) {
             $code = '<?php ' . $code;
         }
 
@@ -138,6 +138,8 @@ HELP
         $output->page($this->presenter->present($nodes, $depth));
 
         $this->context->setReturnValue($nodes);
+
+        return 0;
     }
 
     /**
@@ -153,7 +155,7 @@ HELP
         try {
             return $parser->parse($code);
         } catch (\PhpParser\Error $e) {
-            if (strpos($e->getMessage(), 'unexpected EOF') === false) {
+            if (\strpos($e->getMessage(), 'unexpected EOF') === false) {
                 throw $e;
             }
 
@@ -171,7 +173,7 @@ HELP
      */
     private function getParser($kind = null)
     {
-        if (!array_key_exists($kind, $this->parsers)) {
+        if (!\array_key_exists($kind, $this->parsers)) {
             $this->parsers[$kind] = $this->parserFactory->createParser($kind);
         }
 

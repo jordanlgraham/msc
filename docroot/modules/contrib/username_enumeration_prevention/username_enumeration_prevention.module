@@ -20,8 +20,23 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function username_enumeration_prevention_form_user_pass_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Override core validate and submit actions.
-  $form['#validate'][0] = 'username_enumeration_prevention_pass_validate';
-  $form['#submit'][0] = 'username_enumeration_prevention_pass_submit';
+  $key_validate = array_search('::validateForm', $form['#validate']);
+  if ($key_validate !== FALSE) {
+    $form['#validate'][$key_validate] = 'username_enumeration_prevention_pass_validate';
+  }
+  $key_submit = array_search('::submitForm', $form['#submit']);
+  if ($key_submit !== FALSE) {
+    $form['#submit'][$key_submit] = 'username_enumeration_prevention_pass_submit';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Ensures usernames are not exposed when spoofing a reset password URL.
+ */
+function username_enumeration_prevention_form_user_pass_reset_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['message'] = ['#markup' => t('<p>This is a one-time login.</p><p>Click on this button to log in to the site and change your password.</p>')];
 }
 
 /**
@@ -60,7 +75,6 @@ function username_enumeration_prevention_pass_submit($form, FormStateInterface $
       \Drupal::logger('username_enumeration_prevention')->notice('Password reset instructions mailed to %name at %email.', ['%name' => $account->getUsername(), '%email' => $account->getEmail()]);
     }
   }
-
-  drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
+  \Drupal::messenger()->addMessage(t('Further instructions have been sent to your e-mail address.'));
   $form_state->setRedirect('user.page');
 }

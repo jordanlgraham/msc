@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +14,6 @@ namespace Psy\Command;
 use Psy\Formatter\DocblockFormatter;
 use Psy\Formatter\SignatureFormatter;
 use Psy\Input\CodeArgument;
-use Psy\Reflection\ReflectionClassConstant;
 use Psy\Reflection\ReflectionLanguageConstruct;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -83,11 +82,13 @@ HELP
 
         // Set some magic local variables
         $this->setCommandScopeVariables($reflector);
+
+        return 0;
     }
 
     private function getManualDoc($reflector)
     {
-        switch (get_class($reflector)) {
+        switch (\get_class($reflector)) {
             case 'ReflectionClass':
             case 'ReflectionObject':
             case 'ReflectionFunction':
@@ -125,7 +126,7 @@ HELP
     {
         if ($db = $this->getApplication()->getManualDb()) {
             return $db
-                ->query(sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
+                ->query(\sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
                 ->fetchColumn(0);
         }
     }

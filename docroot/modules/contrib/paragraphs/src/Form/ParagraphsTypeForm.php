@@ -5,10 +5,11 @@ namespace Drupal\paragraphs\Form;
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\SubformState;
-use Drupal\Core\Messenger\Messenger;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\field_ui\FieldUI;
 use Drupal\paragraphs\ParagraphsBehaviorManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\paragraphs\ParagraphsTypeInterface;
 
 /**
  * Form controller for paragraph type forms.
@@ -41,10 +42,10 @@ class ParagraphsTypeForm extends EntityForm {
    *
    * @param \Drupal\paragraphs\ParagraphsBehaviorManager $paragraphs_behavior_manager
    *   The paragraphs type feature manager service.
-   * @param \Drupal\Core\Messenger\Messenger $messenger
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    */
-  public function __construct(ParagraphsBehaviorManager $paragraphs_behavior_manager, Messenger $messenger) {
+  public function __construct(ParagraphsBehaviorManager $paragraphs_behavior_manager, MessengerInterface $messenger) {
     $this->paragraphsBehaviorManager = $paragraphs_behavior_manager;
     $this->messenger = $messenger;
   }
@@ -95,7 +96,7 @@ class ParagraphsTypeForm extends EntityForm {
     $form['icon_file'] = [
       '#title' => $this->t('Paragraph type icon'),
       '#type' => 'managed_file',
-      '#upload_location' => 'public://paragraphs_type_icon/',
+      '#upload_location' => ParagraphsTypeInterface::ICON_UPLOAD_LOCATION,
       '#upload_validators' => [
         'file_validate_extensions' => ['png jpg svg'],
       ],
@@ -116,12 +117,12 @@ class ParagraphsTypeForm extends EntityForm {
     if ($behavior_plugin_definitions = $this->paragraphsBehaviorManager->getApplicableDefinitions($paragraphs_type)) {
       $form['message'] = [
         '#type' => 'container',
-        '#markup' => $this->t('Behavior plugins are only supported by the EXPERIMENTAL paragraphs widget.'),
+        '#markup' => $this->t('Behavior plugins are only supported by the EXPERIMENTAL paragraphs widget.', [], ['context' => 'paragraphs']),
         '#attributes' => ['class' => ['messages', 'messages--warning']]
       ];
       $form['behavior_plugins'] = [
         '#type' => 'details',
-        '#title' => $this->t('Behaviors'),
+        '#title' => $this->t('Behaviors', [], ['context' => 'paragraphs']),
         '#tree' => TRUE,
         '#open' => TRUE
       ];
@@ -168,12 +169,16 @@ class ParagraphsTypeForm extends EntityForm {
     $paragraphs_type = $this->entity;
 
     $icon_file = $form_state->getValue(['icon_file', '0']);
-    // Set the file UUID to the paragraph configuration.
+    // Set the icon file UUID and default value to the paragraph configuration.
     if (!empty($icon_file) && $file = $this->entityTypeManager->getStorage('file')->load($icon_file)) {
       $paragraphs_type->set('icon_uuid', $file->uuid());
+      $paragraphs_type->set(
+        'icon_default',
+        'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getFileUri())));
     }
     else {
       $paragraphs_type->set('icon_uuid', NULL);
+      $paragraphs_type->set('icon_default', NULL);
     }
 
     if ($behavior_plugin_definitions = $this->paragraphsBehaviorManager->getApplicableDefinitions($paragraphs_type)) {
@@ -218,7 +223,7 @@ class ParagraphsTypeForm extends EntityForm {
     $this->messenger->addMessage($this->t('Saved the %label Paragraphs type.', array(
       '%label' => $paragraphs_type->label(),
     )));
-    if (($status == SAVED_NEW && \Drupal::moduleHandler()->moduleExists('field_ui'))
+    if (($status == SAVED_NEW && $this->moduleHandler->moduleExists('field_ui'))
       && $route_info = FieldUI::getOverviewRouteInfo('paragraph', $paragraphs_type->id())) {
       $form_state->setRedirectUrl($route_info);
     }
@@ -234,7 +239,7 @@ class ParagraphsTypeForm extends EntityForm {
     $form = parent::actions($form, $form_state);
 
     // We want to display the button only on add page.
-    if ($this->entity->isNew() && \Drupal::moduleHandler()->moduleExists('field_ui')) {
+    if ($this->entity->isNew() && $this->moduleHandler->moduleExists('field_ui')) {
       $form['submit']['#value'] = $this->t('Save and manage fields');
     }
 

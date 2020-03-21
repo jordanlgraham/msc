@@ -31,7 +31,7 @@ class ViewModeFieldFormatterTest extends EntityEmbedTestBase {
         ->createInstance($plugin, []);
       $display->setContextValue('entity', $this->node);
       $conf_form = $display->buildConfigurationForm($form, $form_state);
-      $this->assertIdentical(array_keys($conf_form), []);
+      $this->assertSame([], array_keys($conf_form));
     }
   }
 
@@ -49,7 +49,7 @@ class ViewModeFieldFormatterTest extends EntityEmbedTestBase {
       $this->drupalGet('node/' . $node->id());
       $plugin = explode('.', $plugin);
       $view_mode = str_replace('_', '-', end($plugin));
-      $this->assertRaw('node--view-mode-' . $view_mode, 'Node rendered in the correct view mode: ' . $view_mode . '.');
+      $this->assertSession()->responseContains('node--view-mode-' . $view_mode, 'Node rendered in the correct view mode: ' . $view_mode . '.');
     }
   }
 

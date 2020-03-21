@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -105,6 +105,8 @@ HELP
 
         $shell = $this->getApplication();
         $shell->addCode($throwCode, !$shell->hasCode());
+
+        return 0;
     }
 
     /**
@@ -125,12 +127,12 @@ HELP
             return [new Arg(new Variable('_e'))];
         }
 
-        if (strpos('<?', $code) === false) {
+        if (\strpos('<?', $code) === false) {
             $code = '<?php ' . $code;
         }
 
         $nodes = $this->parse($code);
-        if (count($nodes) !== 1) {
+        if (\count($nodes) !== 1) {
             throw new \InvalidArgumentException('No idea how to throw this');
         }
 
@@ -161,7 +163,7 @@ HELP
         try {
             return $this->parser->parse($code);
         } catch (\PhpParser\Error $e) {
-            if (strpos($e->getMessage(), 'unexpected EOF') === false) {
+            if (\strpos($e->getMessage(), 'unexpected EOF') === false) {
                 throw $e;
             }
 

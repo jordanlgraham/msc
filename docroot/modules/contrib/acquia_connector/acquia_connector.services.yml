@@ -6,10 +6,10 @@ services:
       - {name: event_subscriber}
   acquia_connector.client:
     class: Drupal\acquia_connector\Client
-    arguments: ['@config.factory']
+    arguments: ['@config.factory', '@state']
   acquia_connector.spi:
     class: Drupal\acquia_connector\Controller\SpiController
-    arguments: ['@acquia_connector.client']
+    arguments: ['@acquia_connector.client', '@config.factory']
   logger.acquia_connector:
     class: Drupal\acquia_connector\CronService
     tags:

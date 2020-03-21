@@ -5,7 +5,6 @@ use Consolidation\AnnotatedCommand\CommandData;
 use Consolidation\AnnotatedCommand\CommandError;
 use Consolidation\OutputFormatters\StructuredData\RowsOfFields;
 use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\Queue\QueueInterface;
 use Drupal\Core\Queue\QueueWorkerManagerInterface;
 use Drupal\Core\Queue\RequeueException;
 use Drupal\Core\Queue\SuspendQueueException;
@@ -58,17 +57,19 @@ class QueueCommands extends DrushCommands
      * @param string $name The name of the queue to run, as defined in either hook_queue_info or hook_cron_queue_info.
      * @validate-queue name
      * @option time-limit The maximum number of seconds allowed to run the queue
+     * @option items-limit The maximum number of items allowed to run the queue
      */
-    public function run($name, $options = ['time-limit' => self::REQ])
+    public function run($name, $options = ['time-limit' => self::REQ, 'items-limit' => self::OPT])
     {
         $time_limit = (int) $options['time-limit'];
+        $items_limit = (int) $options['items-limit'];
         $start = microtime(true);
         $worker = $this->getWorkerManager()->createInstance($name);
         $end = time() + $time_limit;
         $queue = $this->getQueue($name);
         $count = 0;
 
-        while ((!$time_limit || time() < $end) && ($item = $queue->claimItem())) {
+        while ((!$time_limit || time() < $end) && (!$items_limit || $count < $items_limit) && ($item = $queue->claimItem())) {
             try {
                 $this->logger()->info(dt('Processing item @id from @name queue.', ['@name' => $name, '@id' => $item->item_id]));
                 $worker->processItem($item->data);
@@ -98,6 +99,7 @@ class QueueCommands extends DrushCommands
      *   items: Items
      *   class: Class
      *
+     * @filter-default-field queue
      * @return \Consolidation\OutputFormatters\StructuredData\RowsOfFields
      */
     public function qList($options = ['format' => 'table'])

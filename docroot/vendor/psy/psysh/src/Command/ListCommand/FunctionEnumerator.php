@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,14 +30,13 @@ class FunctionEnumerator extends Enumerator
         //     ls --functions Foo
         //
         // ... for listing functions in the Foo namespace
-
         if ($reflector !== null || $target !== null) {
-            return;
+            return [];
         }
 
         // only list functions if we are specifically asked
         if (!$input->getOption('functions')) {
-            return;
+            return [];
         }
 
         if ($input->getOption('user')) {
@@ -54,7 +53,7 @@ class FunctionEnumerator extends Enumerator
         $functions = $this->prepareFunctions($functions);
 
         if (empty($functions)) {
-            return;
+            return [];
         }
 
         $ret = [];
@@ -68,18 +67,18 @@ class FunctionEnumerator extends Enumerator
      *
      * Optionally limit functions to "user" or "internal" functions.
      *
-     * @param null|string $type "user" or "internal" (default: both)
+     * @param string|null $type "user" or "internal" (default: both)
      *
      * @return array
      */
     protected function getFunctions($type = null)
     {
-        $funcs = get_defined_functions();
+        $funcs = \get_defined_functions();
 
         if ($type) {
             return $funcs[$type];
         } else {
-            return array_merge($funcs['internal'], $funcs['user']);
+            return \array_merge($funcs['internal'], $funcs['user']);
         }
     }
 
@@ -92,18 +91,22 @@ class FunctionEnumerator extends Enumerator
      */
     protected function prepareFunctions(array $functions)
     {
-        natcasesort($functions);
+        \natcasesort($functions);
 
         // My kingdom for a generator.
         $ret = [];
 
         foreach ($functions as $name) {
             if ($this->showItem($name)) {
-                $ret[$name] = [
-                    'name'  => $name,
-                    'style' => self::IS_FUNCTION,
-                    'value' => $this->presentSignature($name),
-                ];
+                try {
+                    $ret[$name] = [
+                        'name'  => $name,
+                        'style' => self::IS_FUNCTION,
+                        'value' => $this->presentSignature($name),
+                    ];
+                } catch (\Exception $e) {
+                    // Ignore failures. HHVM does this sometimes for internal functions.
+                }
             }
         }
 

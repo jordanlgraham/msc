@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,7 +27,7 @@ class HoaConsole implements Readline
      */
     public static function isSupported()
     {
-        return class_exists('\Hoa\Console\Console', true);
+        return \class_exists('\Hoa\Console\Console', true);
     }
 
     public function __construct()

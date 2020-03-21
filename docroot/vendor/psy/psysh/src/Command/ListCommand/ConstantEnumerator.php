@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,6 +18,33 @@ use Symfony\Component\Console\Input\InputInterface;
  */
 class ConstantEnumerator extends Enumerator
 {
+    // Because `Json` is ugly.
+    private static $categoryLabels = [
+        'libxml'   => 'libxml',
+        'openssl'  => 'OpenSSL',
+        'pcre'     => 'PCRE',
+        'sqlite3'  => 'SQLite3',
+        'curl'     => 'cURL',
+        'dom'      => 'DOM',
+        'ftp'      => 'FTP',
+        'gd'       => 'GD',
+        'gmp'      => 'GMP',
+        'iconv'    => 'iconv',
+        'json'     => 'JSON',
+        'ldap'     => 'LDAP',
+        'mbstring' => 'mbstring',
+        'odbc'     => 'ODBC',
+        'pcntl'    => 'PCNTL',
+        'pgsql'    => 'pgsql',
+        'posix'    => 'POSIX',
+        'mysqli'   => 'mysqli',
+        'soap'     => 'SOAP',
+        'exif'     => 'EXIF',
+        'sysvmsg'  => 'sysvmsg',
+        'xml'      => 'XML',
+        'xsl'      => 'XSL',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -31,17 +58,29 @@ class ConstantEnumerator extends Enumerator
         //
         // ... for listing constants in the Foo namespace
         if ($reflector !== null || $target !== null) {
-            return;
+            return [];
         }
 
         // only list constants if we are specifically asked
         if (!$input->getOption('constants')) {
-            return;
+            return [];
         }
 
         $user     = $input->getOption('user');
         $internal = $input->getOption('internal');
         $category = $input->getOption('category');
+
+        if ($category) {
+            $category = \strtolower($category);
+
+            if ($category === 'internal') {
+                $internal = true;
+                $category = null;
+            } elseif ($category === 'user') {
+                $user = true;
+                $category = null;
+            }
+        }
 
         $ret = [];
 
@@ -50,11 +89,12 @@ class ConstantEnumerator extends Enumerator
         }
 
         if ($internal) {
-            $ret['Interal Constants'] = $this->getConstants('internal');
+            $ret['Internal Constants'] = $this->getConstants('internal');
         }
 
         if ($category) {
-            $label = ucfirst($category) . ' Constants';
+            $caseCategory = \array_key_exists($category, self::$categoryLabels) ? self::$categoryLabels[$category] : \ucfirst($category);
+            $label = $caseCategory . ' Constants';
             $ret[$label] = $this->getConstants($category);
         }
 
@@ -62,7 +102,7 @@ class ConstantEnumerator extends Enumerator
             $ret['Constants'] = $this->getConstants();
         }
 
-        return array_map([$this, 'prepareConstants'], array_filter($ret));
+        return \array_map([$this, 'prepareConstants'], \array_filter($ret));
     }
 
     /**
@@ -78,18 +118,24 @@ class ConstantEnumerator extends Enumerator
     protected function getConstants($category = null)
     {
         if (!$category) {
-            return get_defined_constants();
+            return \get_defined_constants();
         }
 
-        $consts = get_defined_constants(true);
+        $consts = \get_defined_constants(true);
 
         if ($category === 'internal') {
             unset($consts['user']);
 
-            return call_user_func_array('array_merge', $consts);
+            return \call_user_func_array('array_merge', $consts);
         }
 
-        return isset($consts[$category]) ? $consts[$category] : [];
+        foreach ($consts as $key => $value) {
+            if (\strtolower($key) === $category) {
+                return $value;
+            }
+        }
+
+        return [];
     }
 
     /**
@@ -104,8 +150,8 @@ class ConstantEnumerator extends Enumerator
         // My kingdom for a generator.
         $ret = [];
 
-        $names = array_keys($constants);
-        natcasesort($names);
+        $names = \array_keys($constants);
+        \natcasesort($names);
 
         foreach ($names as $name) {
             if ($this->showItem($name)) {

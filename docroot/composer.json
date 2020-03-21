@@ -1,6 +1,6 @@
 {
-  "name": "drupal/drupal",
-  "description": "Drupal is an open source content management platform powering millions of websites and applications.",
+  "name": "handsomedogstudio/msc",
+  "description": "Drupal 8 website for Massachusetts Senior Care Association.",
   "type": "project",
   "license": "GPL-2.0+",
   "repositories": [
@@ -17,7 +17,9 @@
     "drupal/better_exposed_filters": "^3.0@alpha",
     "drupal/block_class": "^1.0@alpha",
     "drupal/contact_storage": "^1.0@beta",
-    "drupal/core": "^8.5",
+    "drupal/core-composer-scaffold": "^8.8",
+    "drupal/core-project-message": "^8.8",
+    "drupal/core-recommended": "^8.8",
     "drupal/ctools": "3.0.0",
     "drupal/devel": "^1.0@RC",
     "drupal/entityqueue": "^1.0@alpha",
@@ -31,7 +33,7 @@
     "drupal/google_analytics": "^2.1",
     "drupal/masquerade": "2.0-beta1",
     "drupal/metatag": "1.0",
-    "drupal/pathauto": "1.0.0",
+    "drupal/pathauto": "^1.6",
     "drupal/redirect": "^1.0@alpha",
     "drupal/rules": "^3.0@alpha",
     "drupal/seckit": "^1.0@alpha",
@@ -60,7 +62,7 @@
     "drupal/media_entity_browser": "1.*",
     "drupal/media_entity_image": "^1.2",
     "drupal/embed": "1.0",
-    "drupal/entity_embed": "1.x-dev",
+    "drupal/entity_embed": "^1.0",
     "drupal/paragraphs": "^1.1",
     "drupal/config_installer": "1.4",
     "drupal/config_split": "1.0-beta6",
@@ -120,6 +122,9 @@
       },
       "drupal/address": {
         "The locality.name data is missed in PlainFormater": "patches/contrib/address/locality-name-data-missed-plainformater-2881391-1.patch"
+      },
+      "drupal/paragraphs": {
+        "Updating Paragraph on D8.8.2 gives error on update #8017": "https://gist.githubusercontent.com/jordanlgraham/79f963187debb2ea66090fd87ffc15ae/raw/2341af27359c769807d2762979f83397bf6ba160/3114512-1-corrected-for-8-x-1-11.patch"
       }
     }
   },

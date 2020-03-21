@@ -56,6 +56,15 @@ abstract class EntityEmbedTestBase extends BrowserTestBase {
       'format' => 'custom_format',
       'name' => 'Custom format',
       'filters' => [
+        'filter_align' => [
+          'status' => 1,
+        ],
+        'filter_caption' => [
+          'status' => 1,
+        ],
+        'filter_html_image_secure' => [
+          'status' => 1,
+        ],
         'entity_embed' => [
           'status' => 1,
         ],
@@ -121,7 +130,7 @@ abstract class EntityEmbedTestBase extends BrowserTestBase {
   public function assertAvailableDisplayPlugins(EntityInterface $entity, array $expected_plugins, $message = '') {
     $plugin_options = $this->container->get('plugin.manager.entity_embed.display')
       ->getDefinitionOptionsForEntity($entity);
-    $this->assertEqual([], array_diff($expected_plugins, array_keys($plugin_options)), $message);
+    $this->assertEquals([], array_diff($expected_plugins, array_keys($plugin_options)), $message);
   }
 
 }

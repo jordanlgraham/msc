@@ -18,6 +18,7 @@
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
+    margin: 3px 0;
 
     // Empty badges collapse automatically
     &:empty {
@@ -26,33 +27,63 @@
   }
 }
 
-.paragraph-info {
-  display: flex;
-  // Needed not just because of centering but also to prevent span child to
-  // stretch vertically.
-  align-items: center;
-}
-
 // We are using .js prefix here mainly because we want to apply this style rules
 // only for JS version of the element.
 .js {
-  .paragraphs-collapsed-description {
-    position: relative;
-    height: 1.538em;
-    overflow: hidden;
-    color: #777;
-    word-break: break-all;
-    line-height: 1.538em;
+  .paragraphs-description {
+    .paragraphs-content-wrapper,
+    .paragraphs-plugin-wrapper {
+      position: relative;
+      height: 1.538em;
+      overflow: hidden;
+      word-break: break-all;
+      line-height: 1.538em;
+      text-overflow: ellipsis;
+    }
 
-    // Fade out text element.
-    &::after {
+    .summary-plugin-label::after {
+      content: ": ";
+    }
+
+    .summary-content {
+      color: $content-summary-color;
+    }
+
+    .summary-plugin {
+      display: inline-block;
+      padding-right: 5px;
+      font-size: 0.7rem;
+      color: $behavior-summary-color;
+
+      &:not(:last-child) {
+        border-right: 2px solid $light-grey;
+      }
+
+      &:not(:first-child) {
+        padding: 0 5px;
+      }
+    }
+  }
+
+  // Behavior tab is active.
+  .behavior-active {
+    // Hide plugin summary.
+    .paragraphs-expanded-description .paragraphs-plugin-wrapper,
+    .paragraphs-content {
+      display: none;
+    }
+
+    // Display paragraphs behavior.
+    .paragraphs-behavior {
       display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 3em;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
-      content: "\00a0";
+    }
+  }
+
+  // Content tab is active.
+  .content-active {
+    // Hide content summary.
+    .paragraphs-expanded-description .paragraphs-content-wrapper {
+      display: none;
     }
   }
 }

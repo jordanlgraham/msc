@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,9 +30,8 @@ class ClassEnumerator extends Enumerator
         //     ls --classes Foo
         //
         // ... for listing classes in the Foo namespace
-
         if ($reflector !== null || $target !== null) {
-            return;
+            return [];
         }
 
         $user     = $input->getOption('user');
@@ -43,18 +42,18 @@ class ClassEnumerator extends Enumerator
         // only list classes, interfaces and traits if we are specifically asked
 
         if ($input->getOption('classes')) {
-            $ret = array_merge($ret, $this->filterClasses('Classes', get_declared_classes(), $internal, $user));
+            $ret = \array_merge($ret, $this->filterClasses('Classes', \get_declared_classes(), $internal, $user));
         }
 
         if ($input->getOption('interfaces')) {
-            $ret = array_merge($ret, $this->filterClasses('Interfaces', get_declared_interfaces(), $internal, $user));
+            $ret = \array_merge($ret, $this->filterClasses('Interfaces', \get_declared_interfaces(), $internal, $user));
         }
 
         if ($input->getOption('traits')) {
-            $ret = array_merge($ret, $this->filterClasses('Traits', get_declared_traits(), $internal, $user));
+            $ret = \array_merge($ret, $this->filterClasses('Traits', \get_declared_traits(), $internal, $user));
         }
 
-        return array_map([$this, 'prepareClasses'], array_filter($ret));
+        return \array_map([$this, 'prepareClasses'], \array_filter($ret));
     }
 
     /**
@@ -75,7 +74,7 @@ class ClassEnumerator extends Enumerator
         $ret = [];
 
         if ($internal) {
-            $ret['Internal ' . $key] = array_filter($classes, function ($class) {
+            $ret['Internal ' . $key] = \array_filter($classes, function ($class) {
                 $refl = new \ReflectionClass($class);
 
                 return $refl->isInternal();
@@ -83,7 +82,7 @@ class ClassEnumerator extends Enumerator
         }
 
         if ($user) {
-            $ret['User ' . $key] = array_filter($classes, function ($class) {
+            $ret['User ' . $key] = \array_filter($classes, function ($class) {
                 $refl = new \ReflectionClass($class);
 
                 return !$refl->isInternal();
@@ -106,7 +105,7 @@ class ClassEnumerator extends Enumerator
      */
     protected function prepareClasses(array $classes)
     {
-        natcasesort($classes);
+        \natcasesort($classes);
 
         // My kingdom for a generator.
         $ret = [];

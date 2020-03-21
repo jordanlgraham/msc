@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\field_group\Functional;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Tests\BrowserTestBase;
 
 /**
@@ -26,7 +25,10 @@ class ManageDisplayTest extends BrowserTestBase {
    */
   protected $type;
 
-  protected $strictConfigSchema = FALSE;
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -58,7 +60,7 @@ class ManageDisplayTest extends BrowserTestBase {
   public function testCreateGroup() {
     // Create random group name.
     $group_label = $this->randomString(8);
-    $group_name_input = Unicode::strtolower($this->randomMachineName());
+    $group_name_input = mb_strtolower($this->randomMachineName());
     $group_name = 'group_' . $group_name_input;
     $group_formatter = 'details';
 
@@ -84,6 +86,9 @@ class ManageDisplayTest extends BrowserTestBase {
     // Test if group is in the $groups array.
     $this->group = field_group_load_field_group($group_name, 'node', $this->type, 'form', 'default');
     $this->assertNotNull($group, 'Group was loaded');
+
+    // Test if region key is set.
+    $this->assertEquals('hidden', $this->group->region);
 
     // Add new group on the 'Manage display' page.
     $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display/add-group', $group, 'Save and continue');
@@ -125,7 +130,7 @@ class ManageDisplayTest extends BrowserTestBase {
     $group = $this->createGroup('node', $this->type, 'view', 'default', $data);
 
     $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/display/' . $group->group_name . '/delete', [], t('Delete'));
-    $this->assertRaw(t('The group %label has been deleted from the %type content type.', ['%label' => $group->label, '%type' => $this->type]));
+    $this->assertSession()->responseContains(t('The group %label has been deleted from the %type content type.', ['%label' => $group->label, '%type' => $this->type]));
 
     // Test that group is not in the $groups array.
     \Drupal::entityTypeManager()
@@ -149,7 +154,7 @@ class ManageDisplayTest extends BrowserTestBase {
       'fields[body][parent]' => $group->group_name,
     ];
     $this->drupalPostForm('admin/structure/types/manage/' . $this->type . '/form-display', $edit, 'Save');
-    $this->assertRaw('Your settings have been saved.');
+    $this->assertSession()->responseContains('Your settings have been saved.');
 
     $group = field_group_load_field_group($group->group_name, 'node', $this->type, 'form', 'default');
     $this->assertTrue(in_array('body', $group->children), t('Body is a child of %group', ['%group' => $group->group_name]));

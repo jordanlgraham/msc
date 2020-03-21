@@ -11,6 +11,8 @@ PHP WkHtmlToPdf provides a simple and clean interface to ease PDF and image crea
 [wkhtmltopdf](http://wkhtmltopdf.org). **The `wkhtmltopdf` and - optionally - `wkhtmltoimage`
 command must be installed and working on your system.** See the section below for details.
 
+For Windows systems make sure to set the path to wkhtmltopdf.exe in the binary option. Alternatively you can add the wkhtmltopdf "bin" directory to the system PATH variable to allow wkhtmltopdf command available to Windows CMD.
+
 ## Installation
 
 Install the package through [composer](http://getcomposer.org):
@@ -21,6 +23,8 @@ composer require mikehaertl/phpwkhtmltopdf
 
 Make sure, that you include the composer [autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading)
 somewhere in your codebase.
+
+## Examples
 
 ### Single page PDF
 
@@ -34,7 +38,8 @@ $pdf = new Pdf('/path/to/page.html');
 // $pdf->binary = 'C:\...';
 
 if (!$pdf->saveAs('/path/to/page.pdf')) {
-    echo $pdf->getError();
+    $error = $pdf->getError();
+    // ... handle error here
 }
 ```
 
@@ -56,13 +61,22 @@ $pdf->addCover('/path/to/mycover.html');
 $pdf->addToc();
 
 // Save the PDF
-$pdf->saveAs('/path/to/report.pdf');
+if (!$pdf->saveAs('/path/to/report.pdf')) {
+    $error = $pdf->getError();
+    // ... handle error here
+}
 
 // ... or send to client for inline display
-$pdf->send();
+if (!$pdf->send()) {
+    $error = $pdf->getError();
+    // ... handle error here
+}
 
 // ... or send to client as file download
-$pdf->send('report.pdf');
+if (!$pdf->send('report.pdf')) {
+    $error = $pdf->getError();
+    // ... handle error here
+}
 
 // ... or you can get the raw pdf as a string
 $content = $pdf->toString();
@@ -78,10 +92,16 @@ $image = new Image('/path/to/page.html');
 $image->saveAs('/path/to/page.png');
 
 // ... or send to client for inline display
-$image->send();
+if (!$image->send()) {
+    $error = $image->getError();
+    // ... handle error here
+}
 
 // ... or send to client as file download
-$image->send('page.png');
+if (!$image->send('page.png')) {
+    $error = $image->getError();
+    // ... handle error here
+}
 ```
 
 ## Setting options
@@ -168,6 +188,23 @@ $pdf = new Pdf(array(
         ),
     ),
 ));
+```
+
+### Passing strings
+
+Some options like `header-html` usually expect a URL or a filename. With our
+library you can also pass a string. The class will try to detect if the
+argument is a URL, a filename or some HTML or XML content.  To make detection
+easier you can surround your content in `<html>` tag.
+
+If this doesn't work correctly you can also pass an instance of our `File`
+helper as a last resort:
+
+```php
+use mikehaertl\tmp\File;
+$options = [
+    'header-html' => new File('Complex content', '.html'),
+];
 ```
 
 ## Error handling
@@ -312,7 +349,10 @@ $pdf = new Pdf(array(
 // another $options array as second argument.
 $pdf->addPage('/path/to/demo.html');
 
-$pdf->send();
+if (!$pdf->send()) {
+    $error = $pdf->getError();
+    // ... handle error here
+}
 ```
 
 **demo.html**

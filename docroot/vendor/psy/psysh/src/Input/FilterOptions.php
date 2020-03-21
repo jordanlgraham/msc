@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -56,7 +56,7 @@ class FilterOptions
         }
 
         if (!$this->stringIsRegex($pattern)) {
-            $pattern = '/' . preg_quote($pattern, '/') . '/';
+            $pattern = '/' . \preg_quote($pattern, '/') . '/';
         }
 
         if ($insensitive = $input->getOption('insensitive')) {
@@ -91,7 +91,7 @@ class FilterOptions
      */
     public function match($string, array &$matches = null)
     {
-        return $this->filter === false || (preg_match($this->pattern, $string, $matches) xor $this->invert);
+        return $this->filter === false || (\preg_match($this->pattern, $string, $matches) xor $this->invert);
     }
 
     /**
@@ -121,7 +121,7 @@ class FilterOptions
      */
     private function stringIsRegex($string)
     {
-        return substr($string, 0, 1) === '/' && substr($string, -1) === '/' && strlen($string) >= 3;
+        return \substr($string, 0, 1) === '/' && \substr($string, -1) === '/' && \strlen($string) >= 3;
     }
 
     /**
@@ -133,13 +133,13 @@ class FilterOptions
      */
     private function validateRegex($pattern)
     {
-        set_error_handler(['Psy\Exception\ErrorException', 'throwException']);
+        \set_error_handler(['Psy\Exception\ErrorException', 'throwException']);
         try {
-            preg_match($pattern, '');
+            \preg_match($pattern, '');
         } catch (ErrorException $e) {
-            restore_error_handler();
-            throw new RuntimeException(str_replace('preg_match(): ', 'Invalid regular expression: ', $e->getRawMessage()));
+            \restore_error_handler();
+            throw new RuntimeException(\str_replace('preg_match(): ', 'Invalid regular expression: ', $e->getRawMessage()));
         }
-        restore_error_handler();
+        \restore_error_handler();
     }
 }

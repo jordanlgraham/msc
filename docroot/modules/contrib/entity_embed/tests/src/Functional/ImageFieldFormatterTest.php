@@ -64,20 +64,21 @@ class ImageFieldFormatterTest extends EntityEmbedTestBase {
       ->createInstance('image:image', []);
     $display->setContextValue('entity', $this->image);
     $conf_form = $display->buildConfigurationForm($form, $form_state);
-    $this->assertIdentical(array_keys($conf_form), [
+    $expected = [
       'image_style',
       'image_link',
       'alt',
       'title',
-    ]);
-    $this->assertIdentical($conf_form['image_style']['#type'], 'select');
-    $this->assertIdentical((string) $conf_form['image_style']['#title'], 'Image style');
-    $this->assertIdentical($conf_form['image_link']['#type'], 'select');
-    $this->assertIdentical((string) $conf_form['image_link']['#title'], 'Link image to');
-    $this->assertIdentical($conf_form['alt']['#type'], 'textfield');
-    $this->assertIdentical((string) $conf_form['alt']['#title'], 'Alternate text');
-    $this->assertIdentical($conf_form['title']['#type'], 'textfield');
-    $this->assertIdentical((string) $conf_form['title']['#title'], 'Title');
+    ];
+    $this->assertSame($expected, array_keys($conf_form));
+    $this->assertSame('select', $conf_form['image_style']['#type']);
+    $this->assertSame('Image style', (string) $conf_form['image_style']['#title']);
+    $this->assertSame('select', $conf_form['image_link']['#type']);
+    $this->assertSame('Link image to', (string) $conf_form['image_link']['#title']);
+    $this->assertSame('textfield', $conf_form['alt']['#type']);
+    $this->assertSame('Alternate text', (string) $conf_form['alt']['#title']);
+    $this->assertSame('textfield', $conf_form['title']['#type']);
+    $this->assertSame('Title', (string) $conf_form['title']['#title']);
 
     // Test entity embed using 'Image' Entity Embed Display plugin.
     $alt_text = "This is sample description";
@@ -90,9 +91,11 @@ class ImageFieldFormatterTest extends EntityEmbedTestBase {
     $settings['body'] = [['value' => $content, 'format' => 'custom_format']];
     $node = $this->drupalCreateNode($settings);
     $this->drupalGet('node/' . $node->id());
-    $this->assertRaw($alt_text, 'Alternate text for the embedded image is visible when embed is successful.');
-    $this->assertNoText(strip_tags($content), 'Placeholder does not appears in the output when embed is successful.');
-    $this->assertLinkByHref(file_create_url($this->image->getFileUri()), 0, 'Link to the embedded image exists.');
+    // Verify alternate text for the embedded image is visible
+    // when embed is successful.
+    $this->assertSession()->responseContains($alt_text);
+    $this->assertSession()->responseNotContains('This placeholder should not be rendered.');
+    $this->assertSession()->linkByHrefExists(file_create_url($this->image->getFileUri()), 0, 'Link to the embedded image exists.');
 
     // Embed all three field types in one, to ensure they all render correctly.
     $content = '<drupal-entity data-entity-type="node" data-entity-uuid="' . $this->node->uuid() . '" data-entity-embed-display="entity_reference:entity_reference_label"></drupal-entity>';

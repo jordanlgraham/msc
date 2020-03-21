@@ -72,6 +72,18 @@ class HorizontalTabs extends RenderElement {
       }
     }
 
+    // Search for the correct default active tab.
+    $group_identifier = implode('][', $element['#parents']);
+    if (!empty($element['#groups'][$group_identifier])) {
+      $children = Element::children($element['#groups'][$group_identifier], TRUE);
+      foreach ($children as $key) {
+        if (!empty($element['#groups'][$group_identifier][$key]['#open'])) {
+          $element['#default_tab'] = $element['#groups'][$group_identifier][$key]['#id'];
+          $element[str_replace('][', '__', $group_identifier) . '__active_tab']['#value'] = $element['#default_tab'];
+        }
+      }
+    }
+
     return $element;
   }
 
@@ -113,14 +125,18 @@ class HorizontalTabs extends RenderElement {
       $element['#attached']['library'][] = 'core/drupal.form';
     }
 
-    // The JavaScript stores the currently selected tab in this hidden
-    // field so that the active tab can be restored the next time the
-    // form is rendered, e.g. on preview pages or when form validation
-    // fails.
     $name = implode('__', $element['#parents']);
     if ($form_state->hasValue($name . '__active_tab')) {
       $element['#default_tab'] = $form_state->getValue($name . '__active_tab');
     }
+
+    $displayed_tab = isset($element['#default_tab']) ? $element['#default_tab'] : '';
+
+    // The JavaScript stores the currently selected tab in this hidden
+    // field so that the active tab can be restored the next time the
+    // form is rendered, e.g. on preview pages or when form validation
+    // fails.
+    $element['#default_tab'] = $displayed_tab;
     $element[$name . '__active_tab'] = [
       '#type' => 'hidden',
       '#default_value' => $element['#default_tab'],

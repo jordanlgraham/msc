@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -79,16 +79,15 @@ class RequirePass extends CodeCleanerPass
             // @todo Shell::handleError would be better here, because we could
             // fake the file and line number, but we can't call it statically.
             // So we're duplicating some of the logics here.
-            if (E_WARNING & error_reporting()) {
+            if (E_WARNING & \error_reporting()) {
                 ErrorException::throwException(E_WARNING, 'Filename cannot be empty', null, $lineNumber);
-            } else {
-                // @todo trigger an error as fallback? this is pretty ugly…
-                // trigger_error('Filename cannot be empty', E_USER_WARNING);
             }
+            // @todo trigger an error as fallback? this is pretty ugly…
+            // trigger_error('Filename cannot be empty', E_USER_WARNING);
         }
 
-        if ($file === '' || !stream_resolve_include_path($file)) {
-            $msg = sprintf("Failed opening required '%s'", $file);
+        if ($file === '' || !\stream_resolve_include_path($file)) {
+            $msg = \sprintf("Failed opening required '%s'", $file);
             throw new FatalErrorException($msg, 0, E_ERROR, null, $lineNumber);
         }
 
@@ -97,6 +96,6 @@ class RequirePass extends CodeCleanerPass
 
     private function isRequireNode(Node $node)
     {
-        return $node instanceof Include_ && in_array($node->type, self::$requireTypes);
+        return $node instanceof Include_ && \in_array($node->type, self::$requireTypes);
     }
 }

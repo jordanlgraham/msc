@@ -2,7 +2,7 @@ services:
 
   geocoder:
     class: Drupal\geocoder\Geocoder
-    arguments: ['@plugin.manager.geocoder.provider']
+    arguments: ['@config.factory','@plugin.manager.geocoder.provider']
 
   geocoder.http_adapter:
     class: Drupal\geocoder\GeocoderHttpAdapter
@@ -16,7 +16,7 @@ services:
   plugin.manager.geocoder.dumper:
     class: Drupal\geocoder\DumperPluginManager
     parent: default_plugin_manager
-    arguments: ['@logger.factory']
+    arguments: ['@logger.factory', '@messenger']
 
   plugin.manager.geocoder.formatter:
     class: Drupal\geocoder\FormatterPluginManager

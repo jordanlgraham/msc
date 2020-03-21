@@ -83,6 +83,18 @@ class EntitySubqueueListBuilder extends EntityListBuilder {
 
     $operations['edit']['title'] = $this->t('Edit items');
 
+    /** @var \Drupal\entityqueue\EntityQueueInterface $queue */
+    $queue = $entity->getQueue();
+
+    // Add the 'edit queue' operation as well.
+    if ($queue->access('update') && $queue->hasLinkTemplate('edit-form')) {
+      $operations['configure'] = [
+        'title' => $this->t('Configure queue'),
+        'weight' => 10,
+        'url' => $this->ensureDestination($queue->toUrl('edit-form')),
+      ];
+    }
+
     return $operations;
   }
 

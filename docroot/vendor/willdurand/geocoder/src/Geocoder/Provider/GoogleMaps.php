@@ -25,7 +25,7 @@ class GoogleMaps extends AbstractHttpProvider implements LocaleAwareProvider
     /**
      * @var string
      */
-    const ENDPOINT_URL = 'https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=AIzaSyDD1wUgUXeij23_FXes6f0-MHnWvxT-99I';
+    const ENDPOINT_URL = 'http://maps.googleapis.com/maps/api/geocode/json?address=%s';
 
     /**
      * @var string

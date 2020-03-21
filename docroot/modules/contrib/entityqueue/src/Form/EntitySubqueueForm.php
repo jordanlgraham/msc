@@ -6,13 +6,13 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityForm;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\ElementInfoManagerInterface;
+use Drupal\entity_browser\Plugin\Field\FieldWidget\EntityReferenceBrowserWidget;
 use Drupal\inline_entity_form\Plugin\Field\FieldWidget\InlineEntityFormBase;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -35,13 +35,6 @@ class EntitySubqueueForm extends ContentEntityForm {
   protected $elementInfo;
 
   /**
-   * A logger instance.
-   *
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected $logger;
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -49,30 +42,26 @@ class EntitySubqueueForm extends ContentEntityForm {
       $container->get('entity.manager'),
       $container->get('entity_type.bundle.info'),
       $container->get('datetime.time'),
-      $container->get('element_info'),
-      $container->get('logger.factory')->get('entityqueue')
+      $container->get('element_info')
     );
   }
 
   /**
    * Constructs a EntitySubqueueForm.
    *
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
-   *   The entity manager.
+   * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+   *   The entity repository service.
    * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
    *   The entity type bundle service.
    * @param \Drupal\Component\Datetime\TimeInterface $time
    *   The time service.
    * @param \Drupal\Core\Render\ElementInfoManagerInterface $element_info
    *   The element info manager.
-   * @param \Psr\Log\LoggerInterface $logger
-   *   A logger instance.
    */
-  public function __construct(EntityManagerInterface $entity_manager, EntityTypeBundleInfoInterface $entity_type_bundle_info, TimeInterface $time, ElementInfoManagerInterface $element_info, LoggerInterface $logger) {
-    parent::__construct($entity_manager, $entity_type_bundle_info, $time);
+  public function __construct(EntityRepositoryInterface $entity_repository, EntityTypeBundleInfoInterface $entity_type_bundle_info, TimeInterface $time, ElementInfoManagerInterface $element_info) {
+    parent::__construct($entity_repository, $entity_type_bundle_info, $time);
 
     $this->elementInfo = $element_info;
-    $this->logger = $logger;
   }
 
   /**
@@ -261,10 +250,18 @@ class EntitySubqueueForm extends ContentEntityForm {
           }
 
           foreach ($entities as $delta => $item) {
-            $item['_weight'] = $delta;
+            $item['weight'] = $delta;
             $form_state->set(['inline_entity_form', $ief_id, 'entities', $delta], $item);
           }
         }
+      }
+
+      // Handle 'entity_browser' widgets separately because they have a custom
+      // form state storage for the current state of the referenced entities.
+      if (\Drupal::moduleHandler()->moduleExists('entity_browser') && $items_widget instanceof EntityReferenceBrowserWidget) {
+        $ids = array_column($subqueue_items->getValue(), 'target_id');
+        $widget_id = $subqueue_items->getEntity()->uuid() . ':' . $subqueue_items->getFieldDefinition()->getName();
+        $form_state->set(['entity_browser_widget', $widget_id], $ids);
       }
 
       $form_state->getFormObject()->setEntity($entity);
@@ -297,12 +294,12 @@ class EntitySubqueueForm extends ContentEntityForm {
 
     $edit_link = $subqueue->toLink($this->t('Edit'), 'edit-form')->toString();
     if ($status == SAVED_UPDATED) {
-      drupal_set_message($this->t('The entity subqueue %label has been updated.', ['%label' => $subqueue->label()]));
-      $this->logger->notice('The entity subqueue %label has been updated.', ['%label' => $subqueue->label(), 'link' => $edit_link]);
+      $this->messenger()->addMessage($this->t('The entity subqueue %label has been updated.', ['%label' => $subqueue->label()]));
+      $this->logger('entityqueue')->notice('The entity subqueue %label has been updated.', ['%label' => $subqueue->label(), 'link' => $edit_link]);
     }
     else {
-      drupal_set_message($this->t('The entity subqueue %label has been added.', ['%label' => $subqueue->label()]));
-      $this->logger->notice('The entity subqueue %label has been added.', ['%label' => $subqueue->label(), 'link' => $edit_link]);
+      $this->messenger()->addMessage($this->t('The entity subqueue %label has been added.', ['%label' => $subqueue->label()]));
+      $this->logger('entityqueue')->notice('The entity subqueue %label has been added.', ['%label' => $subqueue->label(), 'link' => $edit_link]);
     }
 
     $queue = $subqueue->getQueue();

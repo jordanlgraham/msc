@@ -4,12 +4,12 @@ description: A standardized solution of integrating external applications with D
 # core: 8.x
 package: Services
 dependencies:
-  - ctools
-  - serialization
+  - ctools:ctools
+  - drupal:serialization
 
 
-# Information added by Drupal.org packaging script on 2017-05-25
-version: '8.x-4.0-beta4'
+# Information added by Drupal.org packaging script on 2019-04-01
+version: '8.x-4.0-beta5'
 core: '8.x'
 project: 'services'
-datestamp: 1495725860
+datestamp: 1554130089

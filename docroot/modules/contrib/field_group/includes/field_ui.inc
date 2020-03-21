@@ -42,7 +42,8 @@ function field_group_field_ui_form_params($form, EntityDisplayBase $display) {
   $params->parents = [];
   foreach ($params->groups as $name => $group) {
     foreach ($group->children as $child) {
-      // Field UI js sometimes can trigger an endless loop. Check if the parent of this field is not a child.
+      // Field UI js sometimes can trigger an endless loop. Check if the parent
+      // of this field is not a child.
       if ($child !== $group->parent_name) {
         $params->parents[$child] = $name;
       }
@@ -50,11 +51,22 @@ function field_group_field_ui_form_params($form, EntityDisplayBase $display) {
   }
 
   // Get possible regions.
-  $layout_info = $display->getThirdPartySettings('field_layout');
-  if (!empty($layout_info) && isset($layout_info['id'])) {
-    $layout = \Drupal::service('plugin.manager.core.layout')->getDefinition($layout_info['id']);
+  // TODO remove the field layout part when it's remove from in core.
+  // see https://www.drupal.org/project/field_group/issues/3086019
+  $ds_info = $display->getThirdPartySettings('ds');
+  $field_layout_info = $display->getThirdPartySettings('field_layout');
+  /** @var \Drupal\Core\Layout\LayoutDefinition $layout */
+  if (!empty($field_layout_info) && isset($field_layout_info['id'])) {
+    $layout = \Drupal::service('plugin.manager.core.layout')->getDefinition($field_layout_info['id']);
     $params->available_regions = $layout->getRegionNames();
-    $params->default_region = $layout->getDefaultRegion();
+    $params->default_region = $layout->getDefaultRegion() ?: 'hidden';
+  }
+  elseif (!empty($ds_info['layout']['id'])) {
+    $layout = \Drupal::service('plugin.manager.core.layout')->getDefinition($ds_info['layout']['id']);
+    $params->available_regions = $layout->getRegionNames();
+    // Hidden is an available region too, as weird as it may seems.
+    $params->available_regions[] = 'hidden';
+    $params->default_region = $layout->getDefaultRegion() ?: 'hidden';
   }
   else {
     $params->available_regions = ['content', 'hidden'];
@@ -93,7 +105,7 @@ function field_group_field_ui_display_form_alter(&$form, FormStateInterface $for
 
   $entity_display_form = $form_state->getBuildInfo()['callback_object'];
   if (!$entity_display_form instanceof EntityDisplayFormBase) {
-    throw new InvalidArgumentException('Unkown callback object.');
+    throw new InvalidArgumentException('Unknown callback object.');
   }
 
   $display = $entity_display_form->getEntity();
@@ -166,7 +178,7 @@ function field_group_field_ui_display_form_alter(&$form, FormStateInterface $for
       '#region_callback' => 'field_group_display_overview_row_region',
       '#js_settings' => ['rowHandler' => 'group'],
       'human_name' => [
-        '#markup' => Html::escape(t($group->label)),
+        '#markup' => $group->label,
         '#prefix' => '<span class="group-label">',
         '#suffix' => '</span>',
       ],
@@ -326,7 +338,7 @@ function field_group_field_ui_display_form_alter(&$form, FormStateInterface $for
       $group_check = field_group_load_field_group($group_name, $params->entity_type, $params->bundle, $params->context, $params->mode);
       if (isset($parent_requirements[$group_check->format_type])) {
         if (!$group_check->parent_name || field_group_load_field_group($group_check->parent_name, $params->entity_type, $params->bundle, $params->context, $params->mode)->format_type != $parent_requirements[$group_check->format_type]['parent']) {
-          drupal_set_message(t($parent_requirements[$group_check->format_type]['message']), 'warning', FALSE);
+          \Drupal::messenger()->addMessage(t($parent_requirements[$group_check->format_type]['message']), 'warning', FALSE);
         }
       }
     }
@@ -453,8 +465,8 @@ function field_group_field_overview_submit($form, FormStateInterface $form_state
       $group = $groups[$group_name];
       $group->label = $field_group_form_state[$group_name]->label;
 
-      // Sometimes field UI does a fuckup if people drag to fast when switching nested values.
-      // This results in an endless loop => Cleanup before saving.
+      // Sometimes field UI freaks a bit if people drag to fast when switching
+      // nested values which results in an endless loop, so cleanup first.
       // unset($children[$group_name][$form_values[$group_name]['parent']]);.
       $group->children = array_keys($children[$group_name]);
       $group->parent_name = $form_values[$group_name]['parent'];
@@ -497,11 +509,18 @@ function field_group_format_settings_form(&$group, $form, $form_state) {
   $manager = \Drupal::service('plugin.manager.field_group.formatters');
   $plugin = $manager->getInstance([
     'format_type' => $group->format_type,
-    'configuration' => ['label' => $group->label, 'settings' => $group->format_settings],
+    'configuration' => [
+      'label' => $group->label,
+      'settings' => $group->format_settings,
+    ],
     'group' => $group,
   ]);
 
-  return $plugin->settingsForm($form, $form_state);
+  if ($plugin) {
+    return $plugin->settingsForm($form, $form_state);
+  }
+
+  return [];
 }
 
 /**
@@ -555,11 +574,19 @@ function field_group_format_settings_summary($group_name, $group) {
   $manager = \Drupal::service('plugin.manager.field_group.formatters');
   $plugin = $manager->getInstance([
     'format_type' => $group->format_type,
-    'configuration' => ['label' => $group->label, 'settings' => $group->format_settings],
+    'configuration' => [
+      'label' => $group->label,
+      'settings' => $group->format_settings,
+    ],
     'group' => $group,
   ]);
 
-  $summary = $plugin->settingsSummary();
+  if ($plugin) {
+    $summary = $plugin->settingsSummary();
+  }
+  else {
+    $summary = '';
+  }
 
   return [
     '#markup' => '<div class="field-plugin-summary">' . implode('<br />', $summary) . '</div>',
@@ -589,7 +616,7 @@ function field_group_field_ui_clone_field_groups_validate($form, FormStateInterf
   foreach ($source_groups as $key => $group) {
     if (in_array($group->format_type, $non_existing_types)) {
       unset($source_groups[$key]);
-      drupal_set_message(t('Skipping @group because this type does not exist in current mode', ['@group' => $group->label]), 'warning');
+      \Drupal::messenger()->addMessage(t('Skipping @group because this type does not exist in current mode', ['@group' => $group->label]), 'warning');
     }
   }
 
@@ -615,7 +642,7 @@ function field_group_field_ui_clone_field_groups($form, FormStateInterface $form
     $field_group_params = $form_state->get('field_group_params');
     foreach ($source_groups as $source_group) {
       if (in_array($source_group->group_name, $fields)) {
-        drupal_set_message(t('Fieldgroup @group is not cloned since a group already exists with the same name.', ['@group' => $source_group->group_name]), 'warning');
+        \Drupal::messenger()->addMessage(t('Fieldgroup @group is not cloned since a group already exists with the same name.', ['@group' => $source_group->group_name]), 'warning');
         continue;
       }
 
@@ -624,7 +651,7 @@ function field_group_field_ui_clone_field_groups($form, FormStateInterface $form
       $source_group->children = [];
       field_group_group_save($source_group);
 
-      drupal_set_message(t('Fieldgroup @group cloned successfully.', ['@group' => $source_group->group_name]));
+      \Drupal::messenger()->addMessage(t('Fieldgroup @group cloned successfully.', ['@group' => $source_group->group_name]));
 
     }
   }

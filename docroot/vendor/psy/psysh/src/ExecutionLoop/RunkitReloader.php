@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,7 +30,7 @@ class RunkitReloader extends AbstractListener
      */
     public static function isSupported()
     {
-        return extension_loaded('runkit');
+        return \extension_loaded('runkit');
     }
 
     /**
@@ -62,11 +62,11 @@ class RunkitReloader extends AbstractListener
      */
     private function reload(Shell $shell)
     {
-        clearstatcache();
+        \clearstatcache();
         $modified = [];
 
-        foreach (get_included_files() as $file) {
-            $timestamp = filemtime($file);
+        foreach (\get_included_files() as $file) {
+            $timestamp = \filemtime($file);
 
             if (!isset($this->timestamps[$file])) {
                 $this->timestamps[$file] = $timestamp;
@@ -78,7 +78,7 @@ class RunkitReloader extends AbstractListener
             }
 
             if (!$this->lintFile($file)) {
-                $msg = sprintf('Modified file "%s" could not be reloaded', $file);
+                $msg = \sprintf('Modified file "%s" could not be reloaded', $file);
                 $shell->writeException(new ParseErrorException($msg));
                 continue;
             }
@@ -125,7 +125,7 @@ class RunkitReloader extends AbstractListener
     {
         // first try to parse it
         try {
-            $this->parser->parse(file_get_contents($file));
+            $this->parser->parse(\file_get_contents($file));
         } catch (\Exception $e) {
             return false;
         }

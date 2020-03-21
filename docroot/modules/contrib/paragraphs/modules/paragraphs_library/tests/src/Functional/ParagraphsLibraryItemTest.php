@@ -2,11 +2,11 @@
 
 namespace Drupal\Tests\paragraphs_library\Functional;
 
-use Drupal\field_ui\Tests\FieldUiTestTrait;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\field_ui\Traits\FieldUiTestTrait;
 use Drupal\Tests\paragraphs\FunctionalJavascript\ParagraphsTestBaseTrait;
 
 /**
@@ -29,6 +29,11 @@ class ParagraphsLibraryItemTest extends BrowserTestBase {
     'block',
     'field_ui',
   ];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'classy';
 
   /**
    * {@inheritdoc}
@@ -293,6 +298,7 @@ class ParagraphsLibraryItemTest extends BrowserTestBase {
     $assert_session->elementContains('css', 'table tbody tr td:nth-child(2)', 'Paragraph');
     $assert_session->elementContains('css', 'table tbody tr td:nth-child(3)', 'English');
     $assert_session->elementContains('css', 'table tbody tr td:nth-child(4)', 'Reusable paragraph');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(5)', 'Published');
 
     // Assert breadcrumb.
     $assert_session->elementContains('css', '.breadcrumb ol li:nth-child(1)', 'Home');
@@ -311,13 +317,48 @@ class ParagraphsLibraryItemTest extends BrowserTestBase {
     $this->clickLink('Usage');
     $assert_session->pageTextContains('Entity usage information for Test usage nested paragraph');
 
-    // No usage shows up on this page.
-    // @todo once 2954039 lands, we expect to have a row here indicating that
-    // the host node references the paragraph in a non-default revision.
-    // Alternatively, if 2971131 lands first, we would have here an extra row
-    // with possibly a generic label (just with the entity ID or similar). In
-    // both cases this test will need to be updated.
-    $assert_session->elementNotExists('css', 'table tbody tr');
+    // Assert there is a row here indicating that the host node references the
+    // paragraph in a non-default revision.
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(1)', 'Test content &gt; field_paragraphs (previous revision)');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(2)', 'Paragraph');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(3)', 'English');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(4)', 'Reusable paragraph');
+    $assert_session->elementContains('css', 'table tbody tr td:nth-child(5)', 'Published');
+  }
+
+  /**
+   * Test if the usage warning message shows up, when deleting a library item.
+   */
+  public function testLibraryItemDeleteWarningMessage() {
+    $page = $this->getSession()->getPage();
+    $assert_session = $this->assertSession();
+
+    // Create a paragraph in the library.
+    $this->drupalGet('admin/content/paragraphs/add/default');
+    $page->pressButton('Add text');
+
+    $edit = [
+      'label[0][value]' => 'Test usage warning message',
+      'paragraphs[0][subform][field_text][0][value]' => 'Example text.',
+    ];
+    $this->drupalPostForm(NULL, $edit, 'Save');
+    $assert_session->pageTextContains('Paragraph Test usage warning message has been created.');
+
+    // Create content with referenced paragraph.
+    $this->drupalGet('node/add/paragraphed_test');
+    $page->pressButton('Add From library');
+    $edit = [
+      'title[0][value]' => 'Test content',
+      'field_paragraphs[0][subform][field_reusable_paragraph][0][target_id]' => 'Test usage warning message',
+    ];
+    $this->drupalPostForm(NULL, $edit, 'Save');
+
+    $node = $this->drupalGetNodeByTitle('Test content');
+    $library_item = $node->get('field_paragraphs')->entity->get('field_reusable_paragraph')->entity;
+
+    // Check if there is a warning message on the delete form.
+    $this->drupalGet('/admin/content/paragraphs/' . $library_item->id() . '/delete');
+    $assert_session->pageTextContains('There are recorded usages of this entity.');
   }
 
 }

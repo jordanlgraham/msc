@@ -39,7 +39,7 @@ class ServiceResourceTest extends UnitTestCase {
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => [],
         'authentication' => [],
-        'no_cache' => false
+        'no_cache' => FALSE
       ],
       'service_endpoint_resource'
     );
@@ -55,7 +55,7 @@ class ServiceResourceTest extends UnitTestCase {
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => [],
         'authentication' => [],
-        'no_cache' => true
+        'no_cache' => TRUE
       ],
       'service_endpoint_resource'
     );

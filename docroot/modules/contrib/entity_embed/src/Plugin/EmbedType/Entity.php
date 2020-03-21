@@ -121,7 +121,7 @@ class Entity extends EmbedTypeBase implements ContainerFactoryPluginInterface {
       '#title' => $this->t('Entity type'),
       '#options' => $this->getEntityTypeOptions(),
       '#default_value' => $entity_type_id,
-      '#description' => $this->t("Entity type for which this button is to enabled."),
+      '#description' => $this->t("The entity type this button will embed."),
       '#required' => TRUE,
       '#ajax' => [
         'callback' => [$form_state->getFormObject(), 'updateTypeSettings'],
@@ -210,7 +210,7 @@ class Entity extends EmbedTypeBase implements ContainerFactoryPluginInterface {
     $form_state->setValue('display_plugins', array_keys(array_filter($display_plugins)));
     $entity_browser = $form_state->getValue('entity_browser') == '_none' ? '' : $form_state->getValue('entity_browser');
     $form_state->setValue('entity_browser', $entity_browser);
-    $form_state->setValue('entity_browser_settings', $form_state->getValue('entity_browser_settings'));
+    $form_state->setValue('entity_browser_settings', $form_state->getValue('entity_browser_settings', []));
 
     parent::submitConfigurationForm($form, $form_state);
   }
@@ -234,12 +234,12 @@ class Entity extends EmbedTypeBase implements ContainerFactoryPluginInterface {
           unset($options[$group][$entity_type_id]);
         }
         // Filter out entity types that do not support UUIDs.
-        if (!$this->entityTypeManager->getDefinition($entity_type_id)->hasKey('uuid')) {
+        elseif (!$this->entityTypeManager->getDefinition($entity_type_id)->hasKey('uuid')) {
           unset($options[$group][$entity_type_id]);
         }
         // Filter out entity types that will not have any Entity Embed Display
         // plugins.
-        if (!$this->displayPluginManager->getDefinitionOptionsForEntityType($entity_type_id)) {
+        elseif (!$this->displayPluginManager->getDefinitionOptionsForEntityType($entity_type_id)) {
           unset($options[$group][$entity_type_id]);
         }
       }

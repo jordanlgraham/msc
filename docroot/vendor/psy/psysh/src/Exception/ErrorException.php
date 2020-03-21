@@ -3,7 +3,7 @@
 /*
  * This file is part of Psy Shell.
  *
- * (c) 2012-2018 Justin Hileman
+ * (c) 2012-2020 Justin Hileman
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,7 +32,7 @@ class ErrorException extends \ErrorException implements Exception
     {
         $this->rawMessage = $message;
 
-        if (!empty($filename) && preg_match('{Psy[/\\\\]ExecutionLoop}', $filename)) {
+        if (!empty($filename) && \preg_match('{Psy[/\\\\]ExecutionLoop}', $filename)) {
             $filename = '';
         }
 
@@ -67,7 +67,7 @@ class ErrorException extends \ErrorException implements Exception
                 break;
         }
 
-        $message = sprintf('PHP %s:  %s%s on line %d', $type, $message, $filename ? ' in ' . $filename : '', $lineno);
+        $message = \sprintf('PHP %s:  %s%s on line %d', $type, $message, $filename ? ' in ' . $filename : '', $lineno);
         parent::__construct($message, $code, $severity, $filename, $lineno, $previous);
     }
 
@@ -86,7 +86,7 @@ class ErrorException extends \ErrorException implements Exception
      *
      * This allows us to:
      *
-     *     set_error_handler(array('Psy\Exception\ErrorException', 'throwException'));
+     *     set_error_handler(['Psy\Exception\ErrorException', 'throwException']);
      *
      * @throws ErrorException
      *

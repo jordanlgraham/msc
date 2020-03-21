@@ -75,7 +75,7 @@ class ServiceEndpointResources extends ControllerBase {
         '#type' => 'table',
         '#rows' => $rows,
         '#header' => $this->buildHeader(),
-        '#empty' => t('No service definitions exist'),
+        '#empty' => $this->t('No service definitions exist'),
       );
     }
 

@@ -1,32 +1,26 @@
 <?php
 
-/**
- * @file
- * Extends the Solarium plugin for the acquia search module.
- */
-
 namespace Drupal\acquia_search\EventSubscriber;
 
+use Drupal\acquia_connector\CryptConnector;
 use Drupal\acquia_connector\Helper\Storage;
+use Drupal\Component\Utility\Crypt;
 use Solarium\Core\Client\Response;
 use Solarium\Core\Event\Events;
-use Solarium\Core\Event\preExecuteRequest;
 use Solarium\Core\Event\postExecuteRequest;
-use Solarium\Core\Plugin\Plugin;
-use Drupal\Component\Utility\Crypt;
+use Solarium\Core\Event\preExecuteRequest;
+use Solarium\Core\Plugin\AbstractPlugin;
 use Solarium\Exception\HttpException;
-use Drupal\acquia_connector\CryptConnector;
-use Drupal\acquia_search\AcquiaSearchV3ApiClient;
 
 /**
  * Extends Solarium plugin: authenticate, etc.
  */
-class SearchSubscriber extends Plugin {
+class SearchSubscriber extends AbstractPlugin {
 
   /**
    * Solarium client.
    *
-   * @var \Solarium\Core\Client\Client;
+   * @var \Solarium\Core\Client\Client
    */
   protected $client;
 
@@ -54,8 +48,7 @@ class SearchSubscriber extends Plugin {
   /**
    * {@inheritdoc}
    */
-  public function initPlugin($client, $options) {
-    $this->client = $client;
+  public function initPluginType() {
     $dispatcher = $this->client->getEventDispatcher();
     $dispatcher->addListener(Events::PRE_EXECUTE_REQUEST, [$this, 'preExecuteRequest']);
     $dispatcher->addListener(Events::POST_EXECUTE_REQUEST, [$this, 'postExecuteRequest']);
@@ -64,14 +57,15 @@ class SearchSubscriber extends Plugin {
   /**
    * Build Acquia Solr Search Authenticator.
    *
-   * @param preExecuteRequest $event
+   * @param \Solarium\Core\Event\preExecuteRequest $event
    *   PreExecuteRequest event.
    */
   public function preExecuteRequest(preExecuteRequest $event) {
     $request = $event->getRequest();
     $request->addParam('request_id', uniqid(), TRUE);
     // If we're hosted on Acquia, and have an Acquia request ID,
-    // append it to the request so that we map Solr queries to Acquia search requests.
+    // append it to the request so that we map Solr queries to Acquia search
+    // requests.
     if (isset($_ENV['HTTP_X_REQUEST_ID'])) {
       $xid = empty($_ENV['HTTP_X_REQUEST_ID']) ? '-' : $_ENV['HTTP_X_REQUEST_ID'];
       $request->addParam('x-request-id', $xid);
@@ -89,7 +83,7 @@ class SearchSubscriber extends Plugin {
       $string = $path . $query;
     }
 
-    $cookie = $this->calculateAuthCookie($string, $this->nonce);
+    $cookie = $this->calculateAuthCookie($string, $this->nonce, \Drupal::time()->getRequestTime());
     $request->addHeader('Cookie: ' . $cookie);
     $request->addHeader('User-Agent: ' . 'acquia_search/' . \Drupal::config('acquia_search.settings')->get('version'));
   }
@@ -97,7 +91,7 @@ class SearchSubscriber extends Plugin {
   /**
    * Validate response.
    *
-   * @param postExecuteRequest $event
+   * @param \Solarium\Core\Event\postExecuteRequest $event
    *   postExecuteRequest event.
    */
   public function postExecuteRequest(postExecuteRequest $event) {
@@ -124,7 +118,7 @@ class SearchSubscriber extends Plugin {
    * @return \Solarium\Core\Client\Response
    *   Solarium Response.
    *
-   * @throws HttpException
+   * @throws \Solarium\Exception\HttpException
    */
   protected function authenticateResponse(Response $response, $nonce, $url) {
     $hmac = $this->extractHmac($response->getHeaders());
@@ -137,7 +131,7 @@ class SearchSubscriber extends Plugin {
   /**
    * Look in the headers and get the hmac_digest out.
    *
-   * @param array $headers
+   * @param mixed $headers
    *   Headers array.
    *
    * @return string
@@ -266,7 +260,7 @@ class SearchSubscriber extends Plugin {
     $salt = \Drupal::config('acquia_search.settings')->get('derived_key_salt');
     if (!$salt) {
       // If the variable doesn't exist, set it using the subscription data.
-      $subscription = \Drupal::config('acquia_connector.settings')->get('subscription_data');
+      $subscription = \Drupal::state()->get('acquia_subscription_data');
       if (isset($subscription['derived_key_salt'])) {
         \Drupal::configFactory()->getEditable('acquia_search.settings')->set('derived_key_salt', $subscription['derived_key_salt'])->save();
         $salt = $subscription['derived_key_salt'];
@@ -282,6 +276,8 @@ class SearchSubscriber extends Plugin {
    *   Data string.
    * @param string $nonce
    *   Nonce.
+   * @param int $time
+   *   Request time.
    * @param string $derived_key
    *   Derived key.
    * @param string $env_id
@@ -290,7 +286,7 @@ class SearchSubscriber extends Plugin {
    * @return string
    *   Auth cookie string.
    */
-  public function calculateAuthCookie($string, $nonce, $derived_key = NULL, $env_id = NULL) {
+  public function calculateAuthCookie($string, $nonce, $time, $derived_key = NULL, $env_id = NULL) {
     if (empty($derived_key)) {
       $derived_key = $this->getDerivedKey($env_id);
     }
@@ -299,7 +295,6 @@ class SearchSubscriber extends Plugin {
       return '';
     }
     else {
-      $time = REQUEST_TIME;
       return 'acquia_solr_time=' . $time . '; acquia_solr_nonce=' . $nonce . '; acquia_solr_hmac=' . hash_hmac('sha1', $time . $nonce . $string, $derived_key) . ';';
     }
   }
@@ -307,8 +302,8 @@ class SearchSubscriber extends Plugin {
   /**
    * Fetches the search v3 index keys.
    *
-   * @return array | FALSE
-   *   Search v3 index keys.
+   * @return array|null
+   *   Search v3 index keys, NULL if unavailable.
    */
   public function getSearchV3IndexKeys() {
     $core_service = acquia_search_get_core_service();
@@ -326,7 +321,9 @@ class SearchSubscriber extends Plugin {
       return;
     }
 
-    $search_v3_index = $search_v3_client->getKeys($core['core_id'], $core_service->acquia_identifier);
+    $storage = new Storage();
+    $acquia_identifier = $storage->getIdentifier();
+    $search_v3_index = $search_v3_client->getKeys($core['core_id'], $acquia_identifier);
     if (is_array($search_v3_index) && !empty($search_v3_index)) {
       return $search_v3_index;
     }

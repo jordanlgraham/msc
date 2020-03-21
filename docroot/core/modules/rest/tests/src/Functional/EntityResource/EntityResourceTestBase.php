@@ -234,7 +234,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
         $this->entity = $reloaded_entity;
 
         // Set a default value on the fields.
-        $this->entity->set('field_rest_test', ['value' => 'All the faith he had had had had no effect on the outcome of his life.']);
+        $this->entity->set('field_rest_test', ['value' => 'All the faith they had had had had no effect on the outcome of their life.']);
         $this->entity->set('field_rest_test_multivalue', [['value' => 'One'], ['value' => 'Two']]);
         $this->entity->set('rest_test_validation', ['value' => 'allowed value']);
         $this->entity->save();
@@ -535,13 +535,14 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
 
     // 200 for well-formed HEAD request.
     $response = $this->request('HEAD', $url, $request_options);
-    $this->assertResourceResponse(200, '', $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', 'MISS');
+    $is_cacheable_by_dynamic_page_cache = empty(array_intersect(['user', 'session'], $this->getExpectedCacheContexts()));
+    $this->assertResourceResponse(200, '', $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', $is_cacheable_by_dynamic_page_cache ? 'MISS' : 'UNCACHEABLE');
     $head_headers = $response->getHeaders();
 
     // 200 for well-formed GET request. Page Cache hit because of HEAD request.
     // Same for Dynamic Page Cache hit.
     $response = $this->request('GET', $url, $request_options);
-    $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'HIT', static::$auth ? 'HIT' : 'MISS');
+    $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'HIT', $is_cacheable_by_dynamic_page_cache ? (static::$auth ? 'HIT' : 'MISS') : 'UNCACHEABLE');
     // Assert that Dynamic Page Cache did not store a ResourceResponse object,
     // which needs serialization after every cache hit. Instead, it should
     // contain a flattened response. Otherwise performance suffers.
@@ -551,30 +552,35 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
         ':pattern' => '%[route]=rest.%',
       ])
       ->fetchAllAssoc('cid');
-    $this->assertTrue(count($cache_items) >= 2);
-    $found_cache_redirect = FALSE;
-    $found_cached_200_response = FALSE;
-    $other_cached_responses_are_4xx = TRUE;
-    foreach ($cache_items as $cid => $cache_item) {
-      $cached_data = unserialize($cache_item->data);
-      if (!isset($cached_data['#cache_redirect'])) {
-        $cached_response = $cached_data['#response'];
-        if ($cached_response->getStatusCode() === 200) {
-          $found_cached_200_response = TRUE;
-        }
-        elseif (!$cached_response->isClientError()) {
-          $other_cached_responses_are_4xx = FALSE;
-        }
-        $this->assertNotInstanceOf(ResourceResponseInterface::class, $cached_response);
-        $this->assertInstanceOf(CacheableResponseInterface::class, $cached_response);
-      }
-      else {
-        $found_cache_redirect = TRUE;
-      }
+    if (!$is_cacheable_by_dynamic_page_cache) {
+      $this->assertCount(0, $cache_items);
     }
-    $this->assertTrue($found_cache_redirect);
-    $this->assertTrue($found_cached_200_response);
-    $this->assertTrue($other_cached_responses_are_4xx);
+    else {
+      $this->assertCount(2, $cache_items);
+      $found_cache_redirect = FALSE;
+      $found_cached_200_response = FALSE;
+      $other_cached_responses_are_4xx = TRUE;
+      foreach ($cache_items as $cid => $cache_item) {
+        $cached_data = unserialize($cache_item->data);
+        if (!isset($cached_data['#cache_redirect'])) {
+          $cached_response = $cached_data['#response'];
+          if ($cached_response->getStatusCode() === 200) {
+            $found_cached_200_response = TRUE;
+          }
+          elseif (!$cached_response->isClientError()) {
+            $other_cached_responses_are_4xx = FALSE;
+          }
+          $this->assertNotInstanceOf(ResourceResponseInterface::class, $cached_response);
+          $this->assertInstanceOf(CacheableResponseInterface::class, $cached_response);
+        }
+        else {
+          $found_cache_redirect = TRUE;
+        }
+      }
+      $this->assertTrue($found_cache_redirect);
+      $this->assertTrue($found_cached_200_response);
+      $this->assertTrue($other_cached_responses_are_4xx);
+    }
 
     // Sort the serialization data first so we can do an identical comparison
     // for the keys with the array order the same (it needs to match with
@@ -648,7 +654,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       $this->rebuildAll();
 
       $response = $this->request('GET', $url, $request_options);
-      $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', 'MISS');
+      $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', $is_cacheable_by_dynamic_page_cache ? 'MISS' : 'UNCACHEABLE');
 
       // Again do an identical comparison, but this time transform the expected
       // normalized entity's values to strings. This ensures the BC layer for
@@ -680,7 +686,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       $this->rebuildAll();
 
       $response = $this->request('GET', $url, $request_options);
-      $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', 'MISS');
+      $this->assertResourceResponse(200, FALSE, $response, $this->getExpectedCacheTags(), $this->getExpectedCacheContexts(), static::$auth ? FALSE : 'MISS', $is_cacheable_by_dynamic_page_cache ? 'MISS' : 'UNCACHEABLE');
 
       // This ensures the BC layer for bc_timestamp_normalizer_unix works as
       // expected. This method should be using
@@ -734,7 +740,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     if (!static::$auth && in_array('user.permissions', $expected_cache_contexts, TRUE)) {
       $expected_cache_tags = Cache::mergeTags($expected_cache_tags, ['config:user.role.anonymous']);
     }
-    $this->assertResourceResponse(200, FALSE, $response, $expected_cache_tags, $expected_cache_contexts, static::$auth ? FALSE : 'MISS', 'MISS');
+    $this->assertResourceResponse(200, FALSE, $response, $expected_cache_tags, $expected_cache_contexts, static::$auth ? FALSE : 'MISS', $is_cacheable_by_dynamic_page_cache ? 'MISS' : 'UNCACHEABLE');
 
     $this->resourceConfigStorage->load(static::$resourceConfigId)->disable()->save();
     $this->refreshTestStateAfterRestConfigChange();
@@ -747,7 +753,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
 
     // DX: upon re-enabling a resource, immediate 200.
     $response = $this->request('GET', $url, $request_options);
-    $this->assertResourceResponse(200, FALSE, $response, $expected_cache_tags, $expected_cache_contexts, static::$auth ? FALSE : 'MISS', 'MISS');
+    $this->assertResourceResponse(200, FALSE, $response, $expected_cache_tags, $expected_cache_contexts, static::$auth ? FALSE : 'MISS', $is_cacheable_by_dynamic_page_cache ? 'MISS' : 'UNCACHEABLE');
 
     $this->resourceConfigStorage->load(static::$resourceConfigId)->delete();
     $this->refreshTestStateAfterRestConfigChange();
@@ -895,9 +901,10 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
 
     // DX: 422 when invalid entity: multiple values sent for single-value field.
     $response = $this->request('POST', $url, $request_options);
-    $label_field = $this->entity->getEntityType()->hasKey('label') ? $this->entity->getEntityType()->getKey('label') : static::$labelFieldName;
-    $label_field_capitalized = $this->entity->getFieldDefinition($label_field)->getLabel();
-    $this->assertResourceErrorResponse(422, "Unprocessable Entity: validation failed.\n$label_field: $label_field_capitalized: this field cannot hold more than 1 values.\n", $response);
+    if ($label_field = $this->entity->getEntityType()->hasKey('label') ? $this->entity->getEntityType()->getKey('label') : static::$labelFieldName) {
+      $label_field_capitalized = $this->entity->getFieldDefinition($label_field)->getLabel();
+      $this->assertResourceErrorResponse(422, "Unprocessable Entity: validation failed.\n$label_field: $label_field_capitalized: this field cannot hold more than 1 values.\n", $response);
+    }
 
     $request_options[RequestOptions::BODY] = $parseable_invalid_request_body_2;
 
@@ -982,7 +989,9 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       // 500 when creating an entity with a duplicate UUID.
       $normalized_entity = $this->getModifiedEntityForPostTesting();
       $normalized_entity[$created_entity->getEntityType()->getKey('uuid')] = [['value' => $created_entity->uuid()]];
-      $normalized_entity[$label_field] = [['value' => $this->randomMachineName()]];
+      if ($label_field) {
+        $normalized_entity[$label_field] = [['value' => $this->randomMachineName()]];
+      }
       $request_options[RequestOptions::BODY] = $this->serializer->encode($normalized_entity, static::$format);
 
       $response = $this->request('POST', $url, $request_options);
@@ -993,7 +1002,9 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       $normalized_entity = $this->getModifiedEntityForPostTesting();
       $new_uuid = \Drupal::service('uuid')->generate();
       $normalized_entity[$created_entity->getEntityType()->getKey('uuid')] = [['value' => $new_uuid]];
-      $normalized_entity[$label_field] = [['value' => $this->randomMachineName()]];
+      if ($label_field) {
+        $normalized_entity[$label_field] = [['value' => $this->randomMachineName()]];
+      }
       $request_options[RequestOptions::BODY] = $this->serializer->encode($normalized_entity, static::$format);
 
       $response = $this->request('POST', $url, $request_options);
@@ -1124,9 +1135,10 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
 
     // DX: 422 when invalid entity: multiple values sent for single-value field.
     $response = $this->request('PATCH', $url, $request_options);
-    $label_field = $this->entity->getEntityType()->hasKey('label') ? $this->entity->getEntityType()->getKey('label') : static::$labelFieldName;
-    $label_field_capitalized = $this->entity->getFieldDefinition($label_field)->getLabel();
-    $this->assertResourceErrorResponse(422, "Unprocessable Entity: validation failed.\n$label_field: $label_field_capitalized: this field cannot hold more than 1 values.\n", $response);
+    if ($label_field = $this->entity->getEntityType()->hasKey('label') ? $this->entity->getEntityType()->getKey('label') : static::$labelFieldName) {
+      $label_field_capitalized = $this->entity->getFieldDefinition($label_field)->getLabel();
+      $this->assertResourceErrorResponse(422, "Unprocessable Entity: validation failed.\n$label_field: $label_field_capitalized: this field cannot hold more than 1 values.\n", $response);
+    }
 
     $request_options[RequestOptions::BODY] = $parseable_invalid_request_body_2;
 
@@ -1135,13 +1147,13 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     $this->assertResourceErrorResponse(403, "Access denied on updating field 'field_rest_test'.", $response);
 
     // DX: 403 when entity trying to update an entity's ID field.
-    $request_options[RequestOptions::BODY] = $this->serializer->encode($this->makeNormalizationInvalid($this->getNormalizedPatchEntity(), 'id'), static::$format);;
+    $request_options[RequestOptions::BODY] = $this->serializer->encode($this->makeNormalizationInvalid($this->getNormalizedPatchEntity(), 'id'), static::$format);
     $response = $this->request('PATCH', $url, $request_options);
     $this->assertResourceErrorResponse(403, "Access denied on updating field '{$this->entity->getEntityType()->getKey('id')}'. The entity ID cannot be changed.", $response);
 
     if ($this->entity->getEntityType()->hasKey('uuid')) {
       // DX: 403 when entity trying to update an entity's UUID field.
-      $request_options[RequestOptions::BODY] = $this->serializer->encode($this->makeNormalizationInvalid($this->getNormalizedPatchEntity(), 'uuid'), static::$format);;
+      $request_options[RequestOptions::BODY] = $this->serializer->encode($this->makeNormalizationInvalid($this->getNormalizedPatchEntity(), 'uuid'), static::$format);
       $response = $this->request('PATCH', $url, $request_options);
       $this->assertResourceErrorResponse(403, "Access denied on updating field '{$this->entity->getEntityType()->getKey('uuid')}'. The entity UUID cannot be changed.", $response);
     }
@@ -1235,7 +1247,7 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     // Ensure that fields do not get deleted if they're not present in the PATCH
     // request. Test this using the configurable field that we added, but which
     // is not sent in the PATCH request.
-    $this->assertSame('All the faith he had had had had no effect on the outcome of his life.', $updated_entity->get('field_rest_test')->value);
+    $this->assertSame('All the faith they had had had had no effect on the outcome of their life.', $updated_entity->get('field_rest_test')->value);
 
     // Multi-value field: remove item 0. Then item 1 becomes item 0.
     $normalization_multi_value_tests = $this->getNormalizedPatchEntity();
@@ -1493,8 +1505,9 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     switch ($entity_key) {
       case 'label':
         // Add a second label to this entity to make it invalid.
-        $label_field = $entity_type->hasKey('label') ? $entity_type->getKey('label') : static::$labelFieldName;
-        $normalization[$label_field][1]['value'] = 'Second Title';
+        if ($label_field = $entity_type->hasKey('label') ? $entity_type->getKey('label') : static::$labelFieldName) {
+          $normalization[$label_field][1]['value'] = 'Second Title';
+        }
         break;
       case 'id':
         $normalization[$entity_type->getKey('id')][0]['value'] = $this->anotherEntity->id();
@@ -1532,8 +1545,13 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
     else {
       // This is the desired response.
       $this->assertSame(406, $response->getStatusCode());
-      $this->stringContains('?_format=' . static::$format . '>; rel="alternate"; type="' . static::$mimeType . '"', $response->getHeader('Link'));
-      $this->stringContains('?_format=foobar>; rel="alternate"', $response->getHeader('Link'));
+      $actual_link_header = $response->getHeader('Link');
+      if ($actual_link_header) {
+        $this->assertTrue(is_array($actual_link_header));
+        $expected_type = explode(';', static::$mimeType)[0];
+        $this->assertContains('?_format=' . static::$format . '>; rel="alternate"; type="' . $expected_type . '"', $actual_link_header[0]);
+        $this->assertContains('?_format=foobar>; rel="alternate"', $actual_link_header[0]);
+      }
     }
   }
 
@@ -1569,18 +1587,43 @@ abstract class EntityResourceTestBase extends ResourceTestBase {
       // Some top-level keys in the normalization may not be fields on the
       // entity (for example '_links' and '_embedded' in the HAL normalization).
       if ($modified_entity->hasField($field_name)) {
-        $field_type = $modified_entity->get($field_name)->getFieldDefinition()->getType();
-        // Fields are stored in the database, when read they are represented
-        // as strings in PHP memory. The exception: field types that are
-        // stored in a serialized way. Hence we need to cast most expected
-        // field normalizations to strings.
-        $expected_field_normalization = ($field_type !== 'map')
-          ? static::castToString($field_normalization)
-          : $field_normalization;
+        $field_definition = $modified_entity->get($field_name)->getFieldDefinition();
+        $property_definitions = $field_definition->getItemDefinition()->getPropertyDefinitions();
+        $expected_stored_data = [];
+        // Some fields don't have any property definitions, so there's nothing
+        // to denormalize.
+        if (empty($property_definitions)) {
+          $expected_stored_data = $field_normalization;
+        }
+        else {
+          // Denormalize every sent field item property to make it possible to
+          // compare against the stored value.
+          $denormalization_context = ['field_definition' => $field_definition];
+          foreach ($field_normalization as $delta => $expected_field_item_normalization) {
+            foreach ($property_definitions as $property_name => $property_definition) {
+              // Not every property is required to be sent.
+              if (!array_key_exists($property_name, $field_normalization[$delta])) {
+                continue;
+              }
+              // Computed properties are not stored.
+              if ($property_definition->isComputed()) {
+                continue;
+              }
+              $property_value = $field_normalization[$delta][$property_name];
+              $property_value_class = $property_definitions[$property_name]->getClass();
+              $expected_stored_data[$delta][$property_name] = $this->serializer->supportsDenormalization($property_value, $property_value_class, NULL, $denormalization_context)
+                ? $this->serializer->denormalize($property_value, $property_value_class, NULL, $denormalization_context)
+                : $property_value;
+            }
+          }
+          // Fields are stored in the database, when read they are represented
+          // as strings in PHP memory.
+          $expected_stored_data = static::castToString($expected_stored_data);
+        }
         // Subset, not same, because we can e.g. send just the target_id for the
         // bundle in a PATCH or POST request; the response will include more
         // properties.
-        $this->assertArraySubset($expected_field_normalization, $modified_entity->get($field_name)->getValue(), TRUE);
+        $this->assertArraySubset($expected_stored_data, $modified_entity->get($field_name)->getValue(), TRUE);
       }
     }
   }

@@ -46,32 +46,32 @@ class ServiceEndpointForm extends EntityForm {
 
     /* @var $service_endpoint \Drupal\services\Entity\ServiceEndpoint */
     $service_endpoint = $this->entity;
-    $form['label'] = array(
+    $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $service_endpoint->label(),
       '#description' => $this->t('Label for the service endpoint.'),
       '#required' => TRUE,
-    );
+    ];
 
-    $form['id'] = array(
+    $form['id'] = [
       '#type' => 'machine_name',
       '#default_value' => $service_endpoint->id(),
-      '#machine_name' => array(
+      '#machine_name' => [
         'exists' => '\Drupal\services\Entity\ServiceEndpoint::load',
-      ),
+      ],
       '#disabled' => !$service_endpoint->isNew(),
-    );
+    ];
 
-    $form['endpoint'] = array(
+    $form['endpoint'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Endpoint'),
       '#maxlength' => 255,
       '#default_value' => $service_endpoint->getEndpoint(),
       '#description' => $this->t('URL endpoint.'),
       '#required' => TRUE,
-    );
+    ];
 
     return $form;
   }
@@ -84,14 +84,14 @@ class ServiceEndpointForm extends EntityForm {
     $status = $service_endpoint->save();
 
     if ($status) {
-      drupal_set_message($this->t('Saved the %label service endpoint.', array(
+      drupal_set_message($this->t('Saved the %label service endpoint.', [
         '%label' => $service_endpoint->label(),
-      )));
+      ]));
     }
     else {
-      drupal_set_message($this->t('The %label service endpoint was not saved.', array(
+      drupal_set_message($this->t('The %label service endpoint was not saved.', [
         '%label' => $service_endpoint->label(),
-      )));
+      ]));
     }
     $form_state->setRedirectUrl($service_endpoint->urlInfo('collection'));
   }
