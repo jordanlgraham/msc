@@ -11,3 +11,12 @@ docroot/sites/sites.local.php
 
 # Remove donate blocks
 config/default/block.block.donateform*
+
+# Ignore private files directory used in local development.
+private-files
+
+# Ignore databases.
+*.sql
+*.sql.gz
+*.mysql
+*.mysql.gz

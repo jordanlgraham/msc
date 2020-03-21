@@ -122,9 +122,6 @@
       },
       "drupal/address": {
         "The locality.name data is missed in PlainFormater": "patches/contrib/address/locality-name-data-missed-plainformater-2881391-1.patch"
-      },
-      "drupal/paragraphs": {
-        "Updating Paragraph on D8.8.2 gives error on update #8017": "https://gist.githubusercontent.com/jordanlgraham/79f963187debb2ea66090fd87ffc15ae/raw/2341af27359c769807d2762979f83397bf6ba160/3114512-1-corrected-for-8-x-1-11.patch"
       }
     }
   },
