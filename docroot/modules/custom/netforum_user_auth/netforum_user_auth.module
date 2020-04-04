@@ -52,13 +52,28 @@ function netforum_user_auth_form_user_login_block_form_alter(&$form, FormStateIn
 function _netforum_user_auth_login_form_alter(&$form, FormStateInterface $form_state) {
   // Add help text.
   $t_args = $form['name']['#description']->getArguments();
-//  $form['name']['#description'] = t('Enter your @s username (your email address). You may also log on using your Netforum email address.', $t_args);
   $form['name']['#description'] = '';
   $form['pass']['#description'] = '';
+  
+  // Wrap the form elements in a container.
+  $form['form_elements'] = [
+    '#type' => 'fieldset',
+    '#attributes' => ['class' => ['row']],
+  ];
+
+  $elements = ['name', 'pass', 'actions'];
+  foreach ($elements as $element) {
+    $form['form_elements'][$element] = $form[$element];
+    $form['form_elements'][$element]['#prefix'] = '<div class="column">';
+    $form['form_elements'][$element]['#suffix'] = '</div>';
+    unset($form[$element]);
+  }
+
+  // Position the submit button above the password reset information.
   $form['forgotpass'] = [
-    '#type' => 'html_tag',
-    '#tag' => 'div',
-    '#value' => '<strong>Forgot your password?</strong> Please reset it <a href="https://netforumpro.com/eweb/DynamicPage.aspx?Site=MSCA&WebCode=ForgotPassword">here</a>. If you need assistance with your member log-in, please e-mail <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a>.',
+    '#type' => 'item',
+    '#markup' => '<div id="forgot_password" class="row"><p><strong>Forgot your password?</strong> Please reset it <a href="https://netforumpro.com/eweb/DynamicPage.aspx?Site=MSCA&WebCode=ForgotPassword">here</a>. If you need assistance with your member log-in, please e-mail <a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a>.</p></div>',
+    '#weight' => 5,
   ];
   // Add custom validators.
   $key = array_search('::validateAuthentication', $form['#validate']);

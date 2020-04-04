@@ -53,7 +53,7 @@
 }
 
 .facility-search-simple .facility-search-submit input,
-[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input{
+[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input {
   background-color: $blue;
   color: $white;
   border: none;
@@ -61,6 +61,11 @@
   text-transform: uppercase;
   width: auto;
   margin-top: 0;
+}
+
+.facility-search-simple .facility-search-submit input:hover,
+[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input:hover {
+  cursor: pointer;
 }
 
 .search-login-section p {
@@ -102,12 +107,61 @@
 }
 [id^='block-findafacilityuserlogin'] .user-login-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 [id^='block-findafacilityuserlogin'] .user-login-form .form-actions {
   @extend .btn;
   padding: 0 0 8px 0;
+}
+
+
+
+[id^='block-findafacilityuserlogin'] .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+[id^='block-findafacilityuserlogin'] .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+[id^='block-findafacilityuserlogin'] .fieldset-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: -.5rem;
+}
+
+[id^='block-findafacilityuserlogin'] .fieldset-wrapper #edit-actions {
+  padding-bottom: 0;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 3;
+  margin-top: .5rem;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass a {
+  color: $orange;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass a:hover {
+  color: $white;
+  text-decoration: underline;
+}
+
+#user-login-form .form-actions input {
+  width: 100%;
 }
 
 @include media-breakpoint-down(sm) {
@@ -140,11 +194,6 @@
   .facility-search-simple .facility-search-submit input,
   [id^="block-findafacilityuserlogin"] .user-login-form .form-actions input {
     width: 100%;
-    margin-top: 1rem;
-  }
-  .facility-search-simple .facility-search-submit::after,
-  [id^="block-findafacilityuserlogin"] .user-login-form .form-actions::after {
-    margin-top: 1rem;
   }
   [id^="block-findafacilityuserlogin"] .bottom-link {
     text-align: center;
@@ -154,5 +203,11 @@
   }
   .login.search-login-section.col-12.col-md-6 {
     margin-top: 2rem;
+  }
+  [id^='block-findafacilityuserlogin'] .fieldset-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
   }
 }
