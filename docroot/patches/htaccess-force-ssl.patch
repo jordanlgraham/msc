@@ -1,8 +1,8 @@
 diff --git a/docroot/.htaccess b/docroot/.htaccess
-index 9a73a3d3a..a5f4a72b7 100644
+index 9a73a3d3a..2072f2e58 100644
 --- a/docroot/.htaccess
 +++ b/docroot/.htaccess
-@@ -69,6 +69,19 @@ AddEncoding gzip svgz
+@@ -69,6 +69,23 @@ AddEncoding gzip svgz
  <IfModule mod_rewrite.c>
    RewriteEngine on
  
@@ -10,12 +10,16 @@ index 9a73a3d3a..a5f4a72b7 100644
 +  # alternative sites like test or dev and Lando dev sites.)
 +  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
 +  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
++  RewriteCond %{HTTP_HOST} !\.dev\.maseniorcare\.org [NC]
++  RewriteCond %{HTTP_HOST} !\.stage\.maseniorcare\.org [NC]
 +  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 +
 +  # Rewrite non-ssl traffic to https:// prefix  (except for acquia
 +  # alternative sites like test or dev.)
 +  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
 +  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
++  RewriteCond %{HTTP_HOST} !\.dev\.maseniorcare\.org [NC]
++  RewriteCond %{HTTP_HOST} !\.stage\.maseniorcare\.org [NC]
 +  RewriteCond %{HTTP:X-Forwarded-Proto} !https
 +  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 +
