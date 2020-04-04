@@ -69,29 +69,29 @@ AddEncoding gzip svgz
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
-  # Redirect to bare domain to www.prefix domain using ssl (except for Acquia
-  # alternative sites like test or dev and Lando dev sites.)
-  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
-  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
-  RewriteCond %{HTTP_HOST} !\.dev\.maseniorcare\.org [NC]
-  RewriteCond %{HTTP_HOST} !\.stage\.maseniorcare\.org [NC]
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Rewrite non-ssl traffic to https:// prefix  (except for acquia
-  # alternative sites like test or dev.)
-  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
-  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
-  RewriteCond %{HTTP_HOST} !\.dev\.maseniorcare\.org [NC]
-  RewriteCond %{HTTP_HOST} !\.stage\.maseniorcare\.org [NC]
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
   # you don't bounce between http and https.
   RewriteRule ^ - [E=protossl]
   RewriteCond %{HTTPS} on
   RewriteRule ^ - [E=protossl:s]
+
+  # Redirect to bare domain to www.prefix domain using ssl (except for Acquia
+  # alternative sites like test or dev and Lando dev sites.)
+  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
+  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
+  RewriteCond %{HTTP_HOST} !=dev.maseniorcare.org [NC]
+  RewriteCond %{HTTP_HOST} !=stage.maseniorcare.org [NC]
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Rewrite non-ssl traffic to https:// prefix  (except for acquia
+  # alternative sites like test or dev.)
+  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
+  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
+  RewriteCond %{HTTP_HOST} !=dev.maseniorcare.org [NC]
+  RewriteCond %{HTTP_HOST} !=stage.maseniorcare.org [NC]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Make sure Authorization HTTP header is available to PHP
   # even when running as CGI or FastCGI.
