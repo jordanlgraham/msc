@@ -76,23 +76,6 @@ AddEncoding gzip svgz
   RewriteCond %{HTTPS} on
   RewriteRule ^ - [E=protossl:s]
 
-  # Redirect to bare domain to www.prefix domain using ssl (except for Acquia
-  # alternative sites like test or dev and Lando dev sites.)
-  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
-  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
-  RewriteCond %{HTTP_HOST} !=dev.maseniorcare.org [NC]
-  RewriteCond %{HTTP_HOST} !=stage.maseniorcare.org [NC]
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Rewrite non-ssl traffic to https:// prefix  (except for acquia
-  # alternative sites like test or dev.)
-  RewriteCond %{HTTP_HOST} !\.acquia-sites\.com [NC]
-  RewriteCond %{HTTP_HOST} !\.lndo\.site [NC]
-  RewriteCond %{HTTP_HOST} !=dev.maseniorcare.org [NC]
-  RewriteCond %{HTTP_HOST} !=stage.maseniorcare.org [NC]
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
   # Make sure Authorization HTTP header is available to PHP
   # even when running as CGI or FastCGI.
   RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -119,10 +102,17 @@ AddEncoding gzip svgz
   # To redirect all users to access the site WITH the 'www.' prefix,
   # (http://example.com/foo will be redirected to http://www.example.com/foo)
   # uncomment the following:
-  # RewriteCond %{HTTP_HOST} .
-  # RewriteCond %{HTTP_HOST} !^www\. [NC]
-  # RewriteRule ^ http%{ENV:protossl}://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-  #
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  RewriteCond %{HTTP_HOST} .
+  RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirect HTTP to HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
   # To redirect all users to access the site WITHOUT the 'www.' prefix,
   # (http://www.example.com/foo will be redirected to http://example.com/foo)
   # uncomment the following:
