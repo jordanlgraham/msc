@@ -2392,8 +2392,124 @@ function system_update_8802() {
  * Install the 'path_alias' entity type.
  */
 function system_update_8803() {
+  $schema['path_alias'] = [
+    'description' => 'The base table for path_alias entities.',
+    'fields' => [
+      'id' => [
+        'description' => 'Identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'revision_id' => [
+        'description' => 'Revision ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'uuid' => [
+        'description' => 'UUID',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
+      'langcode' => [
+        'description' => 'Langcode',
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+      ],
+      'path' => [
+        'description' => 'Path',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'alias' => [
+        'description' => 'Alias',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'status' => [
+        'description' => 'Status',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ],
+    ],
+    'indexes' => [
+      'path_alias__status' => ['status', 'id'],
+      'path_alias__alias_langcode_id_status' => ['alias', 'langcode','id', 'status'],
+      'path_alias__path_langcode_id_status' => ['path', 'langcode','id', 'status'],
+    ],
+    'unique keys' => [
+      'path_alias_field__uuid__value' => ['uuid'],
+      'path_alias__revision_id' => ['revision_id'],
+    ],
+    'foreign keys' => [],
+    'primary key' => [
+      'id',
+    ],
+  ];
+
+  $schema['path_alias_revision'] = [
+    'description' => 'The revision table for path_alias entities.',
+    'fields' => [
+      'id' => [
+        'description' => 'Identifier',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'revision_id' => [
+        'description' => 'Revision ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'langcode' => [
+        'description' => 'Langcode',
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+      ],
+      'path' => [
+        'description' => 'Path',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'alias' => [
+        'description' => 'Alias',
+        'type' => 'varchar',
+        'length' => 255,
+      ],
+      'status' => [
+        'description' => 'Status',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+      ],
+      'revision_default' => [
+        'description' => 'Revision default',
+        'type' => 'int',
+        'size' => 'tiny',
+      ],
+    ],
+    'indexes' => [
+      'path_alias__id' => ['id'],
+    ],
+    'unique keys' => [],
+    'foreign keys' => [],
+    'primary key' => [
+      'revision_id',
+    ],
+  ];
   // Enable the Path Alias module if needed.
   if (!\Drupal::moduleHandler()->moduleExists('path_alias')) {
+
+    foreach ($schema as $name => $spec) {
+      \Drupal::database()->schema()->createTable($name, $spec);
+    }
+
     \Drupal::service('module_installer')->install(['path_alias'], FALSE);
     return t('The "path_alias" entity type has been installed.');
   }
