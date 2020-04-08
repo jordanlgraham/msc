@@ -107,6 +107,11 @@ AddEncoding gzip svgz
   RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
   RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  RewriteCond %{HTTP_HOST} .
+  RewriteCond %{HTTP_HOST} ^maseniorcarefoundation\.org [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
   # Redirect HTTP to HTTPS
   RewriteCond %{HTTPS} off
   RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
