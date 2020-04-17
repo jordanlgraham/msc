@@ -8,7 +8,7 @@ namespace Drupal\metatag\Plugin\metatag\Tag;
  * @MetatagTag(
  *   id = "referrer",
  *   label = @Translation("Referrer policy"),
- *   description = @Translation("Indicate to search engines and other page scrapers whether or not links should be followed. See <a href='http://w3c.github.io/webappsec/specs/referrer-policy/'>the W3C specifications</a> for further details."),
+ *   description = @Translation("Indicate to search engines and other page scrapers whether or not links should be followed. See <a href='https://w3c.github.io/webappsec/specs/referrer-policy/'>the W3C specifications</a> for further details."),
  *   name = "referrer",
  *   group = "advanced",
  *   weight = 5,
@@ -29,9 +29,12 @@ class Referrer extends MetaNameBase {
       '#description' => $this->description(),
       '#options' => [
         'no-referrer' => t('No Referrer'),
-        'origin' => t('Origin'),
         'no-referrer-when-downgrade' => t('No Referrer When Downgrade'),
+        'origin' => t('Origin'),
         'origin-when-cross-origin' => t('Origin When Cross-Origin'),
+        'same-origin' => t('Same Origin'),
+        'strict-origin' => t('Strict Origin'),
+        'strict-origin-when-cross-origin' => t('Strict Origin When Cross-Origin'),
         'unsafe-url' => t('Unsafe URL'),
       ],
       '#empty_option' => t('- None -'),

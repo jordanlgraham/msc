@@ -6,6 +6,8 @@
  */
 
 use Drupal\Component\Utility\Random;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\field\Entity\FieldStorageConfig;
 
 /**
  * Implements hook_install().
@@ -36,7 +38,7 @@ function geolocation_demo_install() {
     ]);
 
     $data = file_get_contents($icon_path . 'druplicon-deadpool.png');
-    $file = file_save_data($data, 'public://druplicon-deadpool.png', FILE_EXISTS_REPLACE);
+    $file = file_save_data($data, 'public://druplicon-deadpool.png', FileSystemInterface::EXISTS_REPLACE);
     if ($file) {
       $term_a->set('field_geolocation_demo_term_icon', [
         'target_id' => $file->id(),
@@ -53,7 +55,7 @@ function geolocation_demo_install() {
     ]);
 
     $data = file_get_contents($icon_path . 'druplicon-wolverine.png');
-    $file = file_save_data($data, 'public://druplicon-wolverine.png', FILE_EXISTS_REPLACE);
+    $file = file_save_data($data, 'public://druplicon-wolverine.png', FileSystemInterface::EXISTS_REPLACE);
     if ($file) {
       $term_b->set('field_geolocation_demo_term_icon', [
         'target_id' => $file->id(),
@@ -70,7 +72,7 @@ function geolocation_demo_install() {
     ]);
 
     $data = file_get_contents($icon_path . 'druplicon-wonder-woman.png');
-    $file = file_save_data($data, 'public://druplicon-wonder-woman.png', FILE_EXISTS_REPLACE);
+    $file = file_save_data($data, 'public://druplicon-wonder-woman.png', FileSystemInterface::EXISTS_REPLACE);
     if ($file) {
       $term_c->set('field_geolocation_demo_term_icon', [
         'target_id' => $file->id(),
@@ -108,7 +110,7 @@ function geolocation_demo_install() {
     ]);
 
     $data = file_get_contents($icon_path . 'druplicon-nick-fury.png');
-    $file = file_save_data($data, 'public://druplicon-nick-fury.png', FILE_EXISTS_REPLACE);
+    $file = file_save_data($data, 'public://druplicon-nick-fury.png', FileSystemInterface::EXISTS_REPLACE);
     if ($file) {
       $term_single->set('field_geolocation_demo_term_icon', [
         'target_id' => $file->id(),
@@ -132,14 +134,6 @@ function geolocation_demo_install() {
     $node->save();
   }
 
-  /*
-   * Set Demo API key.
-   */
-  /** @var \Drupal\Core\Config\Config $config */
-  $config = \Drupal::service('config.factory')->getEditable('geolocation.settings');
-  if (empty($config->get('google_map_api_key'))) {
-    $config->set('google_map_api_key', 'AIzaSyBGosteHy-rau8K81IauvzrzI7yhlSu-2Y')->save();
-  }
 }
 
 /**
@@ -152,9 +146,16 @@ function geolocation_demo_uninstall() {
   $taxonomy_storage->delete($taxonomy_storage->loadByProperties(['vid' => 'geolocation_demo_taxonomy']));
   $node_storage->delete($node_storage->loadByProperties(['type' => 'geolocation_default_article']));
 
-  /** @var \Drupal\Core\Config\Config $config */
-  $config = \Drupal::service('config.factory')->getEditable('geolocation.settings');
-  if ($config->get('google_map_api_key') == 'AIzaSyBGosteHy-rau8K81IauvzrzI7yhlSu-2Y') {
-    $config->set('google_map_api_key', '')->save();
+  foreach ([
+    'field_geolocation_demo_single',
+    'field_geolocation_demo_multiple',
+    'field_geolocation_demo_taxonomy',
+  ] as $field_storage_name) {
+    $field_storage = FieldStorageConfig::loadByName('node', $field_storage_name);
+    if ($field_storage) {
+      $field_storage->delete();
+    }
   }
+
+  field_purge_batch(100);
 }

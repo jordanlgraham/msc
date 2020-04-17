@@ -178,7 +178,6 @@
       // Display the tab.
       this.item.removeClass('horizontal-tab-hidden');
       this.item.show();
-      alert('show');
 
       // Update .first marker for items. We need recurse from parent to retain the
       // actual DOM element order as jQuery implements sortOrder, but not as public
@@ -201,7 +200,6 @@
       // Hide this tab.
       this.item.addClass('horizontal-tab-hidden');
       this.item.hide();
-      alert('hide');
 
       // Update .first marker for items. We need recurse from parent to retain the
       // actual DOM element order as jQuery implements sortOrder, but not as public

@@ -186,11 +186,12 @@ class SearchApiSolrAcquiaConnector extends SolrConnectorPluginBase {
    */
   protected function connect() {
     if (!$this->solr) {
-      $this->solr = new Client(NULL, $this->eventDispatcher);
+      $this->solr = new Client();
       $this->configuration['port'] = ($this->configuration['scheme'] == 'https') ? 443 : 80;
       $this->configuration['key'] = 'core';
       $this->solr->createEndpoint($this->configuration, TRUE);
       $this->attachServerEndpoint();
+      $this->eventDispatcher = $this->solr->getEventDispatcher();
       $plugin = new SearchSubscriber();
       $this->solr->registerPlugin('acquia_solr_search_subscriber', $plugin);
       // Don't use curl.

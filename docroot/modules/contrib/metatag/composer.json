@@ -3,7 +3,10 @@
   "description": "Manage meta tags for all entities.",
   "type": "drupal-module",
   "license": "GPL-2.0+",
-  "keywords": ["php", "seo"],
+  "keywords": [
+    "Drupal",
+    "seo"
+  ],
   "homepage": "https://www.drupal.org/project/metatag",
   "authors": [
     {
@@ -12,7 +15,21 @@
       "role": "Developer"
     }
   ],
+  "minimum-stability": "dev",
   "support": {
-    "issues": "http://drupal.org/project/issues/metatag"
+    "issues": "https://www.drupal.org/project/issues/metatag",
+    "source": "https://git.drupalcode.org/project/metatag",
+    "docs": "https://www.drupal.org/docs/8/modules/metatag"
+  },
+  "require": {
+    "drupal/core": "^8 || ^9",
+    "drupal/token": "^1.0"
+  },
+  "require-dev": {
+    "drupal/devel": "^2.0",
+    "drupal/redirect": "^1.0",
+    "drupal/restui": "^1.0",
+    "drupal/page_manager": "^4.0",
+    "drupal/schema_metatag": "^1.0"
   }
 }
