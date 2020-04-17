@@ -40,6 +40,11 @@ if (!empty($lando_info)) {
 
   // Set config directory in Lando local dev environment.
   $config_directories['sync'] = '/app/config/sync';
+
+  // Load settings.local.php if it exists.
+  if (file_exists(__DIR__ . '/settings.local.php')) {
+    include __DIR__ . '/settings.local.php';
+  }
 }
 
 

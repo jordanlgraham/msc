@@ -53,7 +53,7 @@
 }
 
 .facility-search-simple .facility-search-submit input,
-[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input{
+[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input {
   background-color: $blue;
   color: $white;
   border: none;
@@ -61,6 +61,11 @@
   text-transform: uppercase;
   width: auto;
   margin-top: 0;
+}
+
+.facility-search-simple .facility-search-submit input:hover,
+[id^='block-findafacilityuserlogin'] .user-login-form .form-actions input:hover {
+  cursor: pointer;
 }
 
 .search-login-section p {
@@ -102,7 +107,7 @@
 }
 [id^='block-findafacilityuserlogin'] .user-login-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 [id^='block-findafacilityuserlogin'] .user-login-form .form-actions {
@@ -110,12 +115,63 @@
   padding: 0 0 8px 0;
 }
 
+
+
+[id^='block-findafacilityuserlogin'] .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+[id^='block-findafacilityuserlogin'] .column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+[id^='block-findafacilityuserlogin'] .fieldset-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: -.5rem;
+}
+
+[id^='block-findafacilityuserlogin'] .fieldset-wrapper #edit-actions {
+  padding-bottom: 0;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 3;
+  margin-top: .5rem;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass a {
+  color: $orange;
+}
+
+[id^='block-findafacilityuserlogin'] #edit-forgotpass a:hover {
+  color: $white;
+  text-decoration: underline;
+}
+
+#user-login-form .form-actions input {
+  width: 100%;
+}
+
 @include media-breakpoint-down(sm) {
   .path-frontpage .facility-search.search-login-section.col-12.col-md-6 h3,
   .path-frontpage .login.search-login-section.col-12.col-md-6 h3 {
     top: 0;
   }
-  .path-frontpage .login.search-login-section.col-12.col-md-6 h3,
+  [id^='block-findafacilityuserlogin'] .row {
+    margin: 0 0 0 0;
+  }
   .path-frontpage .login.search-login-section .bottom-link {
     padding-right: 2rem;
   }
@@ -135,16 +191,11 @@
     padding-right: 0;
   }
   [id^='block-findafacilityuserlogin'] .user-login-form {
-    padding-right: 2rem;
+    margin: 0 0 0 0;
   }
   .facility-search-simple .facility-search-submit input,
   [id^="block-findafacilityuserlogin"] .user-login-form .form-actions input {
     width: 100%;
-    margin-top: 1rem;
-  }
-  .facility-search-simple .facility-search-submit::after,
-  [id^="block-findafacilityuserlogin"] .user-login-form .form-actions::after {
-    margin-top: 1rem;
   }
   [id^="block-findafacilityuserlogin"] .bottom-link {
     text-align: center;
@@ -154,5 +205,23 @@
   }
   .login.search-login-section.col-12.col-md-6 {
     margin-top: 2rem;
+  }
+  [id^='block-findafacilityuserlogin'] .facility-search.search-login-section.col-12.col-md-6 {
+    padding: 0!important;
+  }
+  [id^='block-findafacilityuserlogin'] .login.search-login-section.col-12.col-md-6 {
+    padding-left: 0!important;
+  }
+  [id^='block-findafacilityuserlogin'] .fieldset-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+  [id^='block-findafacilityuserlogin'] input.form-submit {
+    padding-left: 3rem;
+  }
+  #edit-submit--2 {
+    padding-left: 3rem;
   }
 }
