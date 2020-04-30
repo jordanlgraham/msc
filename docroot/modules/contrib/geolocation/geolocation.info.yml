@@ -12,7 +12,7 @@ simplytest_dependencies:
   - geolocation_leaflet
   - geolocation_leaflet_demo
 
-# Information added by Drupal.org packaging script on 2020-04-07
-version: '8.x-3.0-rc8'
+# Information added by Drupal.org packaging script on 2020-04-29
+version: '8.x-3.0'
 project: 'geolocation'
-datestamp: 1586278238
+datestamp: 1588146854

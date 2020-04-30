@@ -21,7 +21,7 @@ Install as you would normally install a contributed Drupal module. See:
 CONFIGURATION
 -------------
 Create a contact form
- - Home > Administation > Structure > Contact forms
+ - Home > Administration > Structure > Contact forms
  - Edit (or delete) the default contact forms. Use Manage fields to add, update
    or remove fields of the form.
  - Optionally, create a contact form.
