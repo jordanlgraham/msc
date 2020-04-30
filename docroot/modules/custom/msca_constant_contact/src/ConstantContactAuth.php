@@ -131,7 +131,7 @@ class ConstantContactAuth {
       "from_email": "aantolini@maseniorcare.org",
       "reply_to_email": "aantolini@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
+      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . ' [[trackingImage]]</body></html>",
       "physical_address_in_footer": {
         "address_line1": "800 South St #280",
         "address_line2": "",
