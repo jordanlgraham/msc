@@ -1,25 +1,22 @@
 <?php
-/**
- * @file
- * Contains Drupal\metatag\Command\GenerateTagCommand.
- */
 
 namespace Drupal\metatag\Command;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
+use Drupal\Console\Command\Shared\ConfirmationTrait;
+use Drupal\Console\Command\Shared\FormTrait;
+use Drupal\Console\Command\Shared\ModuleTrait;
 use Drupal\Console\Core\Command\Shared\CommandTrait;
 use Drupal\Console\Core\Style\DrupalStyle;
-use Drupal\metatag\MetatagManager;
-use Drupal\metatag\Generator\MetatagTagGenerator;
-use Drupal\Console\Command\Shared\ModuleTrait;
-use Drupal\Console\Command\Shared\FormTrait;
-use Drupal\Console\Command\Shared\ConfirmationTrait;
-use Symfony\Component\Console\Input\InputOption;
-use Drupal\Console\Extension\Manager;
-use Drupal\Console\Core\Utils\StringConverter;
 use Drupal\Console\Core\Utils\ChainQueue;
+use Drupal\Console\Core\Utils\StringConverter;
+use Drupal\Console\Extension\Manager;
+use Drupal\metatag\Generator\MetatagTagGenerator;
+use Drupal\metatag\MetatagManagerInterface;
+use Drupal\Console\Core\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Drupal\Console\Utils\Validator;
 
 /**
  * Class GenerateTagCommand.
@@ -30,55 +27,79 @@ use Drupal\Console\Core\Utils\ChainQueue;
  */
 class GenerateTagCommand extends Command {
 
-  use CommandTrait;
   use ModuleTrait;
   use FormTrait;
   use ConfirmationTrait;
 
   /**
-   * @var MetatagManager
+   * The Metatag manager.
+   *
+   * @var \Drupal\metatag\MetatagManagerInterface
    */
   protected $metatagManager;
 
   /**
-   * @var MetatagTagGenerator
+   * The Metatag tag generator.
+   *
+   * @var \Drupal\metatag\Generator\MetatagTagGenerator
    */
   protected $generator;
 
-  /** @var Manager  */
+  /**
+   * An extension manager.
+   *
+   * @var \Drupal\Console\Extension\Manager
+   */
   protected $extensionManager;
 
   /**
-   * @var StringConverter
+   * The string converter.
+   *
+   * @var \Drupal\Console\Core\Utils\StringConverter
    */
   protected $stringConverter;
 
   /**
-   * @var ChainQueue
+   * The console chain queue.
+   *
+   * @var \Drupal\Console\Core\Utils\ChainQueue
    */
   protected $chainQueue;
 
   /**
-   * GenerateTagCommand constructor.
+   * @var Validator
+   */
+  protected $validator;
+
+  /**
+   * The GenerateTagCommand constructor.
    *
-   * @param MetatagManager $metatagManager
-   * @param MetatagTagGenerator $generator
-   * @param Manager $extensionManager
-   * @param StringConverter $stringConverter
-   * @param ChainQueue $chainQueue
+   * @param \Drupal\metatag\MetatagManagerInterface $metatagManager
+   *   The metatag manager object.
+   * @param \Drupal\metatag\Generator\MetatagTagGenerator $generator
+   *   The tag generator object.
+   * @param \Drupal\Console\Extension\Manager $extensionManager
+   *   The extension manager object.
+   * @param \Drupal\Console\Core\Utils\StringConverter $stringConverter
+   *   The string converter object.
+   * @param \Drupal\Console\Core\Utils\ChainQueue $chainQueue
+   *   The chain queue object.
+   * @param Validator $validator
    */
   public function __construct(
-      MetatagManager $metatagManager,
+      MetatagManagerInterface $metatagManager,
       MetatagTagGenerator $generator,
       Manager $extensionManager,
       StringConverter $stringConverter,
-      ChainQueue $chainQueue
-    ) {
+      ChainQueue $chainQueue,
+      Validator $validator
+  ) {
     $this->metatagManager = $metatagManager;
     $this->generator = $generator;
     $this->extensionManager = $extensionManager;
     $this->stringConverter = $stringConverter;
     $this->chainQueue = $chainQueue;
+    $this->validator = $validator;
 
     parent::__construct();
   }
@@ -91,51 +112,43 @@ class GenerateTagCommand extends Command {
       ->setName('generate:plugin:metatag:tag')
       ->setDescription($this->trans('commands.generate.metatag.tag.description'))
       ->setHelp($this->trans('commands.generate.metatag.tag.help'))
-      ->addOption('base_class', '', InputOption::VALUE_REQUIRED,
+      ->addOption('base_class', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.common.options.base_class'))
-      ->addOption('module', '', InputOption::VALUE_REQUIRED,
+      ->addOption('module', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.common.options.module'))
-      ->addOption('name', '', InputOption::VALUE_REQUIRED,
+      ->addOption('name', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.name'))
-      ->addOption('label', '', InputOption::VALUE_REQUIRED,
+      ->addOption('label', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.label'))
-      ->addOption('description', '', InputOption::VALUE_OPTIONAL,
+      ->addOption('description', null, InputOption::VALUE_OPTIONAL,
         $this->trans('commands.generate.metatag.tag.options.description'))
-      ->addOption('plugin-id', '', InputOption::VALUE_REQUIRED,
+      ->addOption('plugin-id', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.plugin_id'))
-      ->addOption('class-name', '', InputOption::VALUE_REQUIRED,
+      ->addOption('class-name', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.class_name'))
-      ->addOption('group', '', InputOption::VALUE_REQUIRED,
+      ->addOption('group', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.group'))
-      ->addOption('weight', '', InputOption::VALUE_REQUIRED,
+      ->addOption('weight', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.weight'))
-      ->addOption('type', '', InputOption::VALUE_REQUIRED,
+      ->addOption('type', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.type'))
-      ->addOption('secure', '', InputOption::VALUE_REQUIRED,
+      ->addOption('secure', null, InputOption::VALUE_REQUIRED,
         $this->trans('commands.generate.metatag.tag.options.secure'))
-      ->addOption('multiple', '', InputOption::VALUE_REQUIRED,
-        $this->trans('commands.generate.metatag.tag.options.multiple'))
-      ;
+      ->addOption('multiple', null, InputOption::VALUE_REQUIRED,
+        $this->trans('commands.generate.metatag.tag.options.multiple'));
   }
 
   /**
    * {@inheritdoc}
    */
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $io = new DrupalStyle($input, $output);
-
-    // @see use Drupal\Console\Command\ConfirmationTrait::confirmGeneration
-    if (!$this->confirmGeneration($io)) {
-      return 1;
-    }
-
     $base_class = $input->getOption('base_class');
-    $module = $input->getOption('module');
+    $module = $this->validateModule($input->getOption('module'));
     $name = $input->getOption('name');
     $label = $input->getOption('label');
     $description = $input->getOption('description');
     $plugin_id = $input->getOption('plugin-id');
-    $class_name = $input->getOption('class-name');
+    $class_name = $this->validator->validateClassName($input->getOption('class-name'));
     $group = $input->getOption('group');
     $weight = $input->getOption('weight');
     $type = $input->getOption('type');
@@ -153,14 +166,12 @@ class GenerateTagCommand extends Command {
    */
   protected function interact(InputInterface $input, OutputInterface $output) {
 
-    $io = new DrupalStyle($input, $output);
-
     $boolean_options = [
       'FALSE',
       'TRUE',
     ];
 
-    // ToDo: Take this from typed data, so it can be extended?
+    // @todo Take this from typed data, so it can be extended?
     $type_options = [
       'integer',
       'string',
@@ -173,7 +184,7 @@ class GenerateTagCommand extends Command {
     // @todo Turn this into a choice() option.
     $base_class = $input->getOption('base_class');
     if (empty($base_class)) {
-      $base_class = $io->ask(
+      $base_class = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.base_class'),
         'MetaNameBase'
       );
@@ -181,18 +192,13 @@ class GenerateTagCommand extends Command {
     $input->setOption('base_class', $base_class);
 
     // --module option.
-    $module = $input->getOption('module');
-    if (empty($module)) {
-      // @see Drupal\AppConsole\Command\Helper\ModuleTrait::moduleQuestion
-      $module = $this->moduleQuestion($io);
-    }
-    $input->setOption('module', $module);
+    $this->getModuleOption();
 
     // --name option.
     // @todo Add validation.
     $name = $input->getOption('name');
     if (empty($name)) {
-      $name = $io->ask(
+      $name = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.name')
       );
     }
@@ -201,7 +207,7 @@ class GenerateTagCommand extends Command {
     // --label option.
     $label = $input->getOption('label');
     if (empty($label)) {
-      $label = $io->ask(
+      $label = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.label'),
         $name
       );
@@ -211,7 +217,7 @@ class GenerateTagCommand extends Command {
     // --description option.
     $description = $input->getOption('description');
     if (empty($description)) {
-      $description = $io->ask(
+      $description = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.description')
       );
     }
@@ -221,7 +227,7 @@ class GenerateTagCommand extends Command {
     $plugin_id = $input->getOption('plugin-id');
     if (empty($plugin_id)) {
       $plugin_id = $this->nameToPluginId($name);
-      $plugin_id = $io->ask(
+      $plugin_id = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.plugin_id'),
         $plugin_id
       );
@@ -230,20 +236,23 @@ class GenerateTagCommand extends Command {
 
     // --class-name option.
     $class_name = $input->getOption('class-name');
-    if (empty($class_name)) {
-      $class_name = $this->nameToClassName($name);
-      $class_name = $io->ask(
+    if (!$class_name) {
+      $class_name = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.class_name'),
-        $class_name
+        $this->nameToClassName($name),
+        function ($class_name) {
+          return $this->validator->validateClassName($class_name);
+        }
       );
+      $input->setOption('class-name', $class_name);
     }
-    $input->setOption('class-name', $class_name);
+
 
     // --group option.
     $group = $input->getOption('group');
     if (empty($group)) {
       $groups = $this->getGroups();
-      $group = $io->choice(
+      $group = $this->getIo()->choice(
         $this->trans('commands.generate.metatag.tag.questions.group'),
         $groups
       );
@@ -251,11 +260,10 @@ class GenerateTagCommand extends Command {
     $input->setOption('group', $group);
 
     // --weight option.
-    // @todo Automatically get the next integer value based upon the current
-    //   group.
+    // @todo Automatically get the next int value based upon the current group.
     $weight = $input->getOption('weight');
     if (is_null($weight)) {
-      $weight = $io->ask(
+      $weight = $this->getIo()->ask(
         $this->trans('commands.generate.metatag.tag.questions.weight'),
         0
       );
@@ -266,7 +274,7 @@ class GenerateTagCommand extends Command {
     // @todo Turn this into an option.
     $type = $input->getOption('type');
     if (is_null($type)) {
-      $type = $io->choice(
+      $type = $this->getIo()->choice(
         $this->trans('commands.generate.metatag.tag.questions.type'),
         $type_options,
         0
@@ -278,7 +286,7 @@ class GenerateTagCommand extends Command {
     // @todo Turn this into an option.
     $secure = $input->getOption('secure');
     if (is_null($secure)) {
-      $secure = $io->choice(
+      $secure = $this->getIo()->choice(
         $this->trans('commands.generate.metatag.tag.questions.secure'),
         $boolean_options,
         0
@@ -289,7 +297,7 @@ class GenerateTagCommand extends Command {
     // --multiple option.
     $multiple = $input->getOption('multiple');
     if (is_null($multiple)) {
-      $multiple = $io->choice(
+      $multiple = $this->getIo()->choice(
         $this->trans('commands.generate.metatag.tag.questions.multiple'),
         $boolean_options,
         0
@@ -334,23 +342,6 @@ class GenerateTagCommand extends Command {
    */
   private function getGroups() {
     return array_keys($this->metatagManager->sortedGroups());
-  }
-
-  /**
-   * Confirm that a requested group exists.
-   *
-   * @param string $group
-   *   A group's machine name.
-   *
-   * @return string
-   *   The group's name, if available, otherwise an empty string.
-   */
-  private function validateGroupExist($group) {
-    $groups = $this->getGroups();
-    if (isset($groups[$group])) {
-      return $group;
-    }
-    return '';
   }
 
 }

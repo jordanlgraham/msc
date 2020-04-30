@@ -11,14 +11,16 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\contact\Access\ContactPageAccess;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'ContactBlock' block.
  *
  * @Block(
- *  id = "contact_block",
- *  admin_label = @Translation("Contact block"),
+ *   id = "contact_block",
+ *   admin_label = @Translation("Contact block"),
  * )
  */
 class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -59,6 +61,21 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $contactForm;
 
   /**
+   * The current route match.
+   *
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   */
+  protected $routeMatch;
+
+  /**
+   * The access check of personal contact.
+   *
+   * @var \Drupal\contact\Access\ContactPageAccess
+   */
+  protected $checkContactPageAccess;
+
+
+  /**
    * Constructor for ContactBlock block class.
    *
    * @param array $configuration
@@ -67,20 +84,26 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The plugin_id for the plugin instance.
    * @param string $plugin_definition
    *   The plugin implementation definition.
-   * @param EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity manager.
-   * @param ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The config factory.
-   * @param EntityFormBuilderInterface $entity_form_builder
+   * @param \Drupal\Core\Entity\EntityFormBuilderInterface $entity_form_builder
    *   The entity form builder.
-   * @param RendererInterface $renderer
+   * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer.
+   * @param \Drupal\Core\Routing\CurrentRouteMatch $route_match
+   *   The route match service.
+   * @param \Drupal\contact\Access\ContactPageAccess $check_contact_page_access
+   *   Check the access of personal contact.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory, EntityFormBuilderInterface $entity_form_builder, RendererInterface $renderer) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory, EntityFormBuilderInterface $entity_form_builder, RendererInterface $renderer, CurrentRouteMatch $route_match, ContactPageAccess $check_contact_page_access) {
     $this->entityTypeManager = $entity_type_manager;
     $this->configFactory = $config_factory;
     $this->entityFormBuilder = $entity_form_builder;
     $this->renderer = $renderer;
+    $this->routeMatch = $route_match;
+    $this->checkContactPageAccess = $check_contact_page_access;
 
     parent::__construct($configuration, $plugin_id, $plugin_definition);
   }
@@ -96,7 +119,9 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $container->get('entity_type.manager'),
       $container->get('config.factory'),
       $container->get('entity.form_builder'),
-      $container->get('renderer')
+      $container->get('renderer'),
+      $container->get('current_route_match'),
+      $container->get('access_check.contact_personal')
     );
   }
 
@@ -114,7 +139,7 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
     if ($contact_message->isPersonal()) {
       /** @var \Drupal\user\Entity\User $user */
-      $user = \Drupal::routeMatch()->getParameter('user');
+      $user = $this->routeMatch->getParameter('user');
 
       // Deny access to the contact form if we are not on a user related page
       // or we have no access to that page.
@@ -122,8 +147,8 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
         return AccessResult::forbidden();
       }
 
-      // Use the regular personal contact acces service to check.
-      return \Drupal::service('access_check.contact_personal')->access($user, $account);
+      // Use the regular personal contact access service to check.
+      return $this->checkContactPageAccess->access($user, $account);
     }
 
     // Access to other contact forms is equal to the permission of the
@@ -137,10 +162,10 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
   public function defaultConfiguration() {
     $default_form = $this->configFactory->get('contact.settings')->get('default_form');
 
-    return array(
+    return [
       'label' => $this->t('Contact block'),
       'contact_form' => $default_form,
-    );
+    ];
   }
 
   /**
@@ -155,13 +180,13 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
       $options[$key] = $option->label();
     }
 
-    $form['contact_form'] = array(
+    $form['contact_form'] = [
       '#type' => 'select',
       '#title' => $this->t('Contact form'),
       '#options' => $options,
       '#default_value' => $this->configuration['contact_form'],
       '#required' => TRUE,
-    );
+    ];
 
     return $form;
   }
@@ -177,7 +202,7 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public function build() {
-    $form = array();
+    $form = [];
 
     /** @var \Drupal\contact\Entity\ContactForm $contact_form */
     $contact_form = $this->getContactForm();
@@ -188,7 +213,7 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
       // contact page we visit. We use the 'user' property from the URL
       // to determine this user. For example: user/{user}.
       if ($contact_message->isPersonal()) {
-        $user = \Drupal::routeMatch()->getParameter('user');
+        $user = $this->routeMatch->getParameter('user');
         $contact_message->set('recipient', $user);
       }
 
@@ -224,6 +249,9 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *
    * @return \Drupal\contact\Entity\ContactForm|null
    *   The contact form configuration entity. NULL if the entity does not exist.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   protected function getContactForm() {
     if (!isset($this->contactForm)) {
@@ -241,6 +269,9 @@ class ContactBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *
    * @return \Drupal\contact\Entity\Message|null
    *   The contact message entity. NULL if the entity does not exist.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   protected function createContactMessage() {
     $contact_message = NULL;

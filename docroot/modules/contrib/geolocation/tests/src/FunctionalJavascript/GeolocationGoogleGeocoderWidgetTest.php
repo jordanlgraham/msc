@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\geolocation\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
@@ -13,10 +12,11 @@ use Drupal\Core\Entity\Entity\EntityFormDisplay;
  *
  * @group geolocation
  */
-class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
+class GeolocationGoogleGeocoderWidgetTest extends GeolocationJavascriptTestBase {
 
-  use GeolocationGoogleTestTrait;
-
+  /**
+   * {@inheritdoc}
+   */
   public $adminUser;
 
   /**
@@ -26,6 +26,7 @@ class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
     'node',
     'field',
     'geolocation',
+    'geolocation_google_maps',
   ];
 
   /**
@@ -128,12 +129,12 @@ class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
   public function testGeocoderWidgetMapPresent() {
     $this->drupalLogin($this->adminUser);
 
-    $this->drupalGetFilterGoogleKey('node/3/edit');
+    $this->drupalGet('node/3/edit');
 
-    $this->assertSession()->elementExists('css', '.geolocation-map-canvas');
+    $this->assertSession()->elementExists('css', '.geolocation-map-container');
 
     // If Google works, either gm-style or gm-err-container will be present.
-    $this->assertSession()->elementExists('css', '.geolocation-map-canvas [class^="gm-"]');
+    $this->assertSession()->elementExists('css', '.geolocation-map-container [class^="gm-"]');
   }
 
   /**
@@ -152,7 +153,7 @@ class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
 
     $this->drupalLogin($this->adminUser);
 
-    $this->drupalGetFilterGoogleKey('node/add/article');
+    $this->drupalGet('node/add/article');
 
     $page = $this->getSession()->getPage();
     $page->findField('Title')->setValue('I am new');

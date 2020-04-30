@@ -899,6 +899,18 @@ abstract class WebformManagedFileBase extends WebformElementBase implements Webf
    * Form API callback. Consolidate the array of fids for this field into a single fids.
    */
   public static function validateManagedFile(array &$element, FormStateInterface $form_state, &$complete_form) {
+    // Issue #3130448: Add custom #required_message support to
+    // ManagedFile elements.
+    // @see https://www.drupal.org/project/drupal/issues/3130448
+    if (!empty($element['#required_error'])) {
+      $errors = $form_state->getErrors();
+      $key = $element['#webform_key'];
+      if (isset($errors[$key])
+        && $errors[$key]->getUntranslatedString() === '@name field is required.') {
+        $errors[$key]->__construct($element['#required_error']);
+      }
+    }
+
     if (!empty($element['#files'])) {
       $fids = array_keys($element['#files']);
       if (empty($element['#multiple'])) {

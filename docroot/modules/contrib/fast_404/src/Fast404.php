@@ -180,7 +180,7 @@ class Fast404 {
    *   Whether the path is blocked or not.
    */
   public function isPathBlocked() {
-    if (PHP_SAPI === 'cli') {
+    if ($this->isCli()) {
       return FALSE;
     }
     return $this->respond404;
@@ -196,7 +196,7 @@ class Fast404 {
    *   If this returns anything, it will be a response object.
    */
   public function response($return = FALSE) {
-    $message = Settings::get('fast404_html', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server (Fast 404).</p></body></html>');
+    $message = Settings::get('fast404_html', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>');
     $return_gone = Settings::get('fast404_return_gone', FALSE);
     $custom_404_path = Settings::get('fast404_HTML_error_page', FALSE);
     if ($return_gone) {
@@ -217,6 +217,16 @@ class Fast404 {
       $response->send();
       throw new ServiceUnavailableHttpException(3, $this->t('The requested URL "@path" was not found on this server. Try again shortly.', ['@path' => $this->request->getPathInfo()]));
     }
+  }
+
+  /**
+   * Check the type of interface between web server and PHP is CLI.
+   *
+   * @return bool
+   *   Whether or not the Server API for this build of PHP is CLI.
+   */
+  protected function isCli() {
+    return PHP_SAPI === 'cli';
   }
 
 }

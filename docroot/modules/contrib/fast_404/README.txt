@@ -24,8 +24,7 @@ Step 2. Copy the example.settings.fast404.php to your site folder and rename it
 Step 3. Place the include code below at the end of your settings.php file.
 Step 4. Optionally, modify the include_once path in the example
   settings.fast404.php if you did not put the module in /modules.
-Step 5. If you are using cacherouter, put this above cacherouter.
-Step 6. Enable the module in your modules page.
+Step 5. Enable the module in your modules page.
 
 /**
  * Load fast404 configuration, if available.
@@ -62,7 +61,7 @@ GETTING EXTRA SPEED OUT OF THE ADVANCED INSTALL
 
 #2) Enable Drupal path checking
 
-  This checks to see if the URL you being visited actually corresponds to a
+  This checks to see if the URL being visited actually corresponds to a
   real page in Drupal. This feature may be enabled with the following.
 
   Global switch to turn this checking on and off (Default: off):
@@ -74,7 +73,7 @@ GETTING EXTRA SPEED OUT OF THE ADVANCED INSTALL
   Static file checking does require you to keep an eye on the extension list
   as well as a bit of extra work with the preg_match (OK, a very small amount).
   Optionally, you can use whitelisting rather than blacklisting. To turn this
-  on alter this setting in the settings.php:
+  on, alter this setting in the settings.php:
 
   $settings['fast404_url_whitelisting'] = TRUE;
 
@@ -84,7 +83,7 @@ GETTING EXTRA SPEED OUT OF THE ADVANCED INSTALL
 
   $settings['fast404_whitelist']  = ['index.php', 'rss.xml', 'install.php', 'cron.php', 'update.php', 'xmlrpc.php'];
 
-#4) Disallow imagecache file creation for anonymous users (NEW!)
+#4) Disallow imagestyles file creation for anonymous users
 
   Normally the module skips out if 'styles' is in the URL to the static file.
   There are times when you may not want this (it would be pretty easy for
@@ -94,7 +93,7 @@ GETTING EXTRA SPEED OUT OF THE ADVANCED INSTALL
   In an ideal situation, your logged in users should have verified the pages
   are loading correctly when they create them, so any needed image derivatives
   are already made. This new setting will make it so that image derivative URLs
-  are not excluded and fall under the same static file rules as non-imagecache
+  are not excluded and fall under the same static file rules as non-imagestyles
   URLs. Set to false to enable this new feature.
 
   $settings['fast404_allow_anon_imagecache'] = TRUE;

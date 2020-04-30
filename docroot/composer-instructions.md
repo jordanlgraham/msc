@@ -1,7 +1,7 @@
 #Composer Instructions
 
 - Do not use drush to download modules.
-- Instead, use composer. To install a module with composer, cd to the docroot directory and type ‘composer require vendor/package’
+- Instead, use composer. To install a module with composer, cd to the project root and type ‘composer require vendor/package’
 - Once a module is downloaded, you can enable or uninstall it with drush.
 - To remove a module, type ‘composer remove vendor/package’
 - To update a module (or core), type ‘composer update vendor/package’

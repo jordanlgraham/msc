@@ -838,8 +838,15 @@ class WebformSubmissionConditionsValidator implements WebformSubmissionCondition
    *   Visible elements.
    */
   protected function &getBuildElements(array &$form) {
+    if (isset($form['#webform_id']) && isset($form['elements'])) {
+      $form_elements =& $form['elements'];
+    }
+    else {
+      $form_elements =& $form;
+    }
+
     $elements = [];
-    $this->getBuildElementsRecusive($elements, $form);
+    $this->getBuildElementsRecusive($elements, $form_elements);
     return $elements;
   }
 
