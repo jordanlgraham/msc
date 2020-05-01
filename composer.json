@@ -35,7 +35,7 @@
         "drupal/editor_advanced_link": "1.4",
         "drupal/editor_file": "1.2",
         "drupal/embed": "1.0",
-        "drupal/entity_browser": "1.*",
+        "drupal/entity_browser": "2.*",
         "drupal/entity_embed": "^1.0",
         "drupal/entity_print": "2.x",
         "drupal/entityqueue": "^1.0@alpha",
