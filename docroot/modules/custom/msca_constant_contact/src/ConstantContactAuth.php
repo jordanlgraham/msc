@@ -127,13 +127,13 @@ class ConstantContactAuth {
   "email_campaign_activities": [
     {
       "format_type": 1,
-      "from_name": "Massachusetts Senior Care",
-      "from_email": "aantolini@maseniorcare.org",
-      "reply_to_email": "aantolini@maseniorcare.org",
+      "from_name": "Massachusetts Senior Care Association",
+      "from_email": "mailroom@maseniorcare.org",
+      "reply_to_email": "mailroom@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . ' [[trackingImage]]</body></html>",
+      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . ' <OpenTracking/></body></html>",
       "physical_address_in_footer": {
-        "address_line1": "800 South St #280",
+        "address_line1": "800 South Street, Suite 280",
         "address_line2": "",
         "address_line3": "",
         "address_optional": "",
@@ -157,7 +157,7 @@ class ConstantContactAuth {
         "greeting_salutation": "Hi,",
         "greeting_name_type": "F",
         "greeting_secondary": "Greetings!",
-        "forward_email_link_enabled": "true",
+        "forward_email_link_enabled": "false",
         "forward_email_link_name": "Forward email",
         "subscribe_link_enabled": "false",
         "subscribe_link_name": "Subscribe to my email list!",
