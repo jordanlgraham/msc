@@ -131,7 +131,7 @@ class ConstantContactAuth {
       "from_email": "mailroom@maseniorcare.org",
       "reply_to_email": "mailroom@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . ' <OpenTracking/></body></html>",
+      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking />[[trackingImage]]<style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
       "physical_address_in_footer": {
         "address_line1": "800 South Street, Suite 280",
         "address_line2": "",
@@ -161,7 +161,7 @@ class ConstantContactAuth {
         "forward_email_link_name": "Forward email",
         "subscribe_link_enabled": "false",
         "subscribe_link_name": "Subscribe to my email list!",
-        "letter_format": "XHTML"
+        "letter_format": "HTML"
       }
     }
   ]
