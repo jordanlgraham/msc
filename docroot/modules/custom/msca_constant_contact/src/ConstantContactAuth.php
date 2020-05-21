@@ -71,7 +71,7 @@ class ConstantContactAuth {
       print_r($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      $redirect->send();
+      // $redirect->send();
     }
     drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
     $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
