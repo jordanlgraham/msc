@@ -123,12 +123,12 @@ class ConstantContactAuth {
   "name": "' . $subject . rand(10000, 99999) . '",
   "email_campaign_activities": [
     {
-      "format_type": 1,
+      "format_type": 5,
       "from_name": "Massachusetts Senior Care Association",
       "from_email": "mailroom@maseniorcare.org",
       "reply_to_email": "mailroom@maseniorcare.org",
       "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
+      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking />[[trackingImage]]<style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
       "physical_address_in_footer": {
         "address_line1": "800 South Street, Suite 280",
         "address_line2": "",
