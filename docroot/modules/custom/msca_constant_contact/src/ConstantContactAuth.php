@@ -59,14 +59,16 @@ class ConstantContactAuth {
     }
     catch (\GuzzleHttp\Exception\ServerException $e) {
       $message = $e->getMessage();
-      \Drupal::logger('msca_constant_contact')->notice($message);
+      \Drupal::logger('msca_constant_contact')->notice("62:" . $message);
+      print_r($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
     }
     catch (\GuzzleHttp\Exception\ClientException $e) {
       $message = $e->getMessage();
-      \Drupal::logger('msca_constant_contact')->notice($message);
+      \Drupal::logger('msca_constant_contact')->notice("70: " . $message);
+      print_r($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
