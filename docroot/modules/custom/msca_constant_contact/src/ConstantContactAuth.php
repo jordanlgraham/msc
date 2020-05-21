@@ -59,12 +59,14 @@ class ConstantContactAuth {
     }
     catch (\GuzzleHttp\Exception\ServerException $e) {
       $message = $e->getMessage();
+      \Drupal::logger('msca_constant_contact')->notice($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
     }
     catch (\GuzzleHttp\Exception\ClientException $e) {
       $message = $e->getMessage();
+      \Drupal::logger('msca_constant_contact')->notice($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
@@ -123,7 +125,7 @@ class ConstantContactAuth {
   "name": "' . $subject . rand(10000, 99999) . '",
   "email_campaign_activities": [
     {
-      "format_type": 5,
+      "format_type": 1,
       "from_name": "Massachusetts Senior Care Association",
       "from_email": "mailroom@maseniorcare.org",
       "reply_to_email": "mailroom@maseniorcare.org",
