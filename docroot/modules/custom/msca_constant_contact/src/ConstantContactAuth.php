@@ -41,7 +41,7 @@ class ConstantContactAuth {
     /** @var \Drupal\node\NodeStorageInterface $node */
     $subject = $node->getTitle();
     $json = $this->buildJson($subject, $node_html);
-    
+
     $base_url = 'https://api.cc.email/v3/';
     $client = new Client([
       'base_uri' => $base_url,
