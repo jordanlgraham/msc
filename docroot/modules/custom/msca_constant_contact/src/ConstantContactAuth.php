@@ -30,9 +30,6 @@ class ConstantContactAuth {
   }
 
   public function createEmailCampaign($nid) {
-//    $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
-//    $template_id = $realMagnetConfig->get('real_magnet_template_id');
-
     // Load the node so we can send it as message body.
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     $node_viewer = \Drupal::entityTypeManager()->getViewBuilder('node');
@@ -44,7 +41,7 @@ class ConstantContactAuth {
     /** @var \Drupal\node\NodeStorageInterface $node */
     $subject = $node->getTitle();
     $json = $this->buildJson($subject, $node_html);
-//    $json = json_encode($json);
+    
     $base_url = 'https://api.cc.email/v3/';
     $client = new Client([
       'base_uri' => $base_url,
@@ -108,9 +105,9 @@ class ConstantContactAuth {
     $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
     $node_html = preg_replace("/(™|®|©|&trade;|&reg;|&copy;|&#8482;|&#174;|&#169;)/", "", $node_html);
     // Replace Windows smart quotes.
-//    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
-//    $replace = ["'", "'", '"', '"', '-'];
-//    $node_html = str_replace($search, $replace, $node_html);
+    //    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
+    //    $replace = ["'", "'", '"', '"', '-'];
+    //    $node_html = str_replace($search, $replace, $node_html);
     $node_html = str_replace('!important', '', $node_html);
 
     // Escape double-quote characters to prepare it as part of a JSON string.
