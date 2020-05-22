@@ -124,49 +124,48 @@ class ConstantContactAuth {
 
   private function buildJson($subject, $node_html) {
     return '{
-  "name": "' . $subject . rand(10000, 99999) . '",
-  "email_campaign_activities": [
-    {
-      "format_type": 1,
-      "from_name": "Massachusetts Senior Care Association",
-      "from_email": "mailroom@maseniorcare.org",
-      "reply_to_email": "mailroom@maseniorcare.org",
-      "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking />[[trackingImage]]<style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
-      "physical_address_in_footer": {
-        "address_line1": "800 South Street, Suite 280",
-        "address_line2": "",
-        "address_line3": "",
-        "address_optional": "",
-        "city": "Waltham",
-        "country_code": "US",
-        "country_name": "United States",
-        "organization_name": "Massachusetts Senior Care Association",
-        "postal_code": "02453",
-        "state_code": "MA",
-        "state_name": "Massachusetts",
-        "state_non_us_name": ""
-      },
-      "document_properties": {
-        "style_content": ".white{color: #ffffff;}",
-        "text_content": "<Text><Greetings/></Text>",
-        "permission_reminder_enabled": "true",
-        "permission_reminder": "Hi, just a reminder that you\'re receiving this email because you have expressed an interest in our company.",
-        "view_as_webpage_enabled": "false",
-        "view_as_webpage_text": "Having trouble viewing this email?",
-        "view_as_webpage_link_name": "Click here to view this email as a web page",
-        "greeting_salutation": "Hi,",
-        "greeting_name_type": "F",
-        "greeting_secondary": "Greetings!",
-        "forward_email_link_enabled": "false",
-        "forward_email_link_name": "Forward email",
-        "subscribe_link_enabled": "false",
-        "subscribe_link_name": "Subscribe to my email list!",
-        "letter_format": "HTML"
-      }
-    }
-  ]
-}';
+      "name": "' . $subject . rand(10000, 99999) . '",
+      "email_campaign_activities": [
+        {
+          "format_type": 1,
+          "from_name": "Massachusetts Senior Care Association",
+          "from_email": "mailroom@maseniorcare.org",
+          "reply_to_email": "mailroom@maseniorcare.org",
+          "subject": "' . $subject . '",
+          "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
+          "physical_address_in_footer": {
+            "address_line1": "800 South Street, Suite 280",
+            "address_line2": "",
+            "address_line3": "",
+            "address_optional": "",
+            "city": "Waltham",
+            "country_code": "US",
+            "country_name": "United States",
+            "organization_name": "Massachusetts Senior Care Association",
+            "postal_code": "02453",
+            "state_code": "MA",
+            "state_name": "Massachusetts",
+            "state_non_us_name": ""
+          },
+          "document_properties": {
+            "text_content": "<Text><Greetings/></Text>",
+            "permission_reminder_enabled": "true",
+            "permission_reminder": "Hi, just a reminder that you\'re receiving this email because you have expressed an interest in our company.",
+            "view_as_webpage_enabled": "false",
+            "view_as_webpage_text": "Having trouble viewing this email?",
+            "view_as_webpage_link_name": "Click here to view this email as a web page",
+            "greeting_salutation": "Hi,",
+            "greeting_name_type": "F",
+            "greeting_secondary": "Greetings!",
+            "forward_email_link_enabled": "false",
+            "forward_email_link_name": "Forward email",
+            "subscribe_link_enabled": "false",
+            "subscribe_link_name": "Subscribe to my email list!",
+            "letter_format": "HTML"
+          }
+        }
+      ]
+    }';
   }
 }
 
