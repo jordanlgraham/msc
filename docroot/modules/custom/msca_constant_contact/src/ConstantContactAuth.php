@@ -30,9 +30,6 @@ class ConstantContactAuth {
   }
 
   public function createEmailCampaign($nid) {
-//    $realMagnetConfig = $this->config('real_magnet.realmagnetsettings');
-//    $template_id = $realMagnetConfig->get('real_magnet_template_id');
-
     // Load the node so we can send it as message body.
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     $node_viewer = \Drupal::entityTypeManager()->getViewBuilder('node');
@@ -44,7 +41,7 @@ class ConstantContactAuth {
     /** @var \Drupal\node\NodeStorageInterface $node */
     $subject = $node->getTitle();
     $json = $this->buildJson($subject, $node_html);
-//    $json = json_encode($json);
+
     $base_url = 'https://api.cc.email/v3/';
     $client = new Client([
       'base_uri' => $base_url,
@@ -62,15 +59,19 @@ class ConstantContactAuth {
     }
     catch (\GuzzleHttp\Exception\ServerException $e) {
       $message = $e->getMessage();
+      \Drupal::logger('msca_constant_contact')->notice("62:" . $message);
+      print_r($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
     }
     catch (\GuzzleHttp\Exception\ClientException $e) {
       $message = $e->getMessage();
+      \Drupal::logger('msca_constant_contact')->notice("70: " . $message);
+      print_r($message);
       drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      $redirect->send();
+      // $redirect->send();
     }
     drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
     $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
@@ -108,9 +109,9 @@ class ConstantContactAuth {
     $node_html = str_replace("</div>", "</td></tr></table>", $node_html);
     $node_html = preg_replace("/(™|®|©|&trade;|&reg;|&copy;|&#8482;|&#174;|&#169;)/", "", $node_html);
     // Replace Windows smart quotes.
-//    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
-//    $replace = ["'", "'", '"', '"', '-'];
-//    $node_html = str_replace($search, $replace, $node_html);
+    //    $search = [chr(145), chr(146), chr(147), chr(148), chr(151)];
+    //    $replace = ["'", "'", '"', '"', '-'];
+    //    $node_html = str_replace($search, $replace, $node_html);
     $node_html = str_replace('!important', '', $node_html);
 
     // Escape double-quote characters to prepare it as part of a JSON string.
@@ -123,49 +124,48 @@ class ConstantContactAuth {
 
   private function buildJson($subject, $node_html) {
     return '{
-  "name": "' . $subject . rand(10000, 99999) . '",
-  "email_campaign_activities": [
-    {
-      "format_type": 1,
-      "from_name": "Massachusetts Senior Care Association",
-      "from_email": "mailroom@maseniorcare.org",
-      "reply_to_email": "mailroom@maseniorcare.org",
-      "subject": "' . $subject . '",
-      "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . ' <OpenTracking/></body></html>",
-      "physical_address_in_footer": {
-        "address_line1": "800 South Street, Suite 280",
-        "address_line2": "",
-        "address_line3": "",
-        "address_optional": "",
-        "city": "Waltham",
-        "country_code": "US",
-        "country_name": "United States",
-        "organization_name": "Massachusetts Senior Care Association",
-        "postal_code": "02453",
-        "state_code": "MA",
-        "state_name": "Massachusetts",
-        "state_non_us_name": ""
-      },
-      "document_properties": {
-        "style_content": ".white{color: #ffffff;}",
-        "text_content": "<Text><Greetings/></Text>",
-        "permission_reminder_enabled": "true",
-        "permission_reminder": "Hi, just a reminder that you\'re receiving this email because you have expressed an interest in our company.",
-        "view_as_webpage_enabled": "false",
-        "view_as_webpage_text": "Having trouble viewing this email?",
-        "view_as_webpage_link_name": "Click here to view this email as a web page",
-        "greeting_salutation": "Hi,",
-        "greeting_name_type": "F",
-        "greeting_secondary": "Greetings!",
-        "forward_email_link_enabled": "false",
-        "forward_email_link_name": "Forward email",
-        "subscribe_link_enabled": "false",
-        "subscribe_link_name": "Subscribe to my email list!",
-        "letter_format": "XHTML"
-      }
-    }
-  ]
-}';
+      "name": "' . $subject . rand(10000, 99999) . '",
+      "email_campaign_activities": [
+        {
+          "format_type": 1,
+          "from_name": "Massachusetts Senior Care Association",
+          "from_email": "mailroom@maseniorcare.org",
+          "reply_to_email": "mailroom@maseniorcare.org",
+          "subject": "' . $subject . '",
+          "html_content": "<html><head></head><body style=\"font-family: sans-serif\"><OpenTracking /><style type=\"text/css\">body, table, td {font-family: sans-serif !important;}</style>' . $node_html . '</body></html>",
+          "physical_address_in_footer": {
+            "address_line1": "800 South Street, Suite 280",
+            "address_line2": "",
+            "address_line3": "",
+            "address_optional": "",
+            "city": "Waltham",
+            "country_code": "US",
+            "country_name": "United States",
+            "organization_name": "Massachusetts Senior Care Association",
+            "postal_code": "02453",
+            "state_code": "MA",
+            "state_name": "Massachusetts",
+            "state_non_us_name": ""
+          },
+          "document_properties": {
+            "text_content": "<Text><Greetings/></Text>",
+            "permission_reminder_enabled": "true",
+            "permission_reminder": "Hi, just a reminder that you\'re receiving this email because you have expressed an interest in our company.",
+            "view_as_webpage_enabled": "false",
+            "view_as_webpage_text": "Having trouble viewing this email?",
+            "view_as_webpage_link_name": "Click here to view this email as a web page",
+            "greeting_salutation": "Hi,",
+            "greeting_name_type": "F",
+            "greeting_secondary": "Greetings!",
+            "forward_email_link_enabled": "false",
+            "forward_email_link_name": "Forward email",
+            "subscribe_link_enabled": "false",
+            "subscribe_link_name": "Subscribe to my email list!",
+            "letter_format": "HTML"
+          }
+        }
+      ]
+    }';
   }
 }
 
