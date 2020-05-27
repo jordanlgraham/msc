@@ -5,6 +5,7 @@ namespace Drupal\facility_search\Plugin\geolocation\Geocoder;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\geolocation\GeocoderBase;
+use Drupal\geolocation\GeocoderCountryFormattingManager;
 use Geocoder\Model\AddressCollection;
 use Drupal\Core\Config\Config;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,8 +27,8 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
   /** @var GeocoderInterface */
   protected $geocoder;
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Config $config, GeocoderInterface $geocoder) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $config);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Config $config, GeocoderInterface $geocoder, GeocoderCountryFormattingManager $formattingManager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $formattingManager);
     $this->geocoder = $geocoder;
   }
 
@@ -38,7 +39,8 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
       $plugin_id,
       $plugin_definition,
       $container->get('config.factory')->get('geolocation.settings'),
-      $container->get('geocoder')
+      $container->get('geocoder'),
+      $container->get('plugin.manager.geolocation.geocoder_country_formatting')
     );
   }
 

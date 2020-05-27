@@ -33,10 +33,10 @@ class UnescoWorldHeritage extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public function import() {
+  public function import(&$context) {
     $filename = \Drupal::service('file_system')->getTempDirectory() . '/' . $this->sourceFilename;
     if (!file_exists($filename)) {
-      return FALSE;
+      return t('Error importing World heritage sites.');
     }
 
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
@@ -57,7 +57,7 @@ class UnescoWorldHeritage extends GeolocationGeometryDataBase {
       $node->save();
     }
 
-    return TRUE;
+    return t('Done importing World heritage sites.');
   }
 
 }
