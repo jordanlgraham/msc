@@ -17,6 +17,7 @@
    * @inheritDoc
    *
    * @prop {Object} settings.yandex_settings - Yandex Maps specific settings.
+   * @prop {ymaps} yandexMap
    */
   function GeolocationYandexMap(mapSettings) {
     if (typeof ymaps === 'undefined') {

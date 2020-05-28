@@ -48,6 +48,8 @@ function geolocation_geometry_field_views_data(FieldStorageConfigInterface $fiel
   // Make sure views.views.inc is loaded.
   module_load_include('inc', 'views', 'views.views');
 
+  $entity_definition = \Drupal::entityTypeManager()->getDefinition($field_storage->getTargetEntityTypeId());
+
   // Get the default data from the views module.
   $data = views_field_default_views_data($field_storage);
 
@@ -86,6 +88,92 @@ function geolocation_geometry_field_views_data(FieldStorageConfigInterface $fiel
         unset($data[$table_name][$field_name]['sort']);
       }
     }
+
+    $title_short = $help = '';
+    // Add proximity handlers.
+    $data[$table_name][$args['@field_name'] . '_proximity'] = [
+      'group' => $entity_definition->getLabel(),
+      'title' => t('Geo Proximity (@field_name)', $args),
+      'title short' => $title_short . ' - ' . t("Geo Proximity"),
+      'help' => $help,
+      'argument' => [
+        'id' => 'geolocation_geometry_argument_proximity',
+        'table' => $table_name,
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'field_name' => $args['@field_name'] . '_proximity',
+        'real field' => $args['@field_name'],
+        'label' => t('Geo Distance to !field_name', $args),
+        'empty field name' => '- No value -',
+        'additional fields' => [
+          $args['@field_name'] . '_geometry',
+        ],
+      ],
+      'filter' => [
+        'id' => 'geolocation_geometry_filter_proximity',
+        'table' => $table_name,
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'field_name' => $args['@field_name'] . '_proximity',
+        'real field' => $args['@field_name'],
+        'label' => t('Geo Distance to !field_name', $args),
+        'allow empty' => TRUE,
+        'additional fields' => [
+          $args['@field_name'] . '_geometry',
+        ],
+      ],
+      'field' => [
+        'table' => $table_name,
+        'id' => 'geolocation_geometry_field_proximity',
+        'field_name' => $args['@field_name'] . '_proximity',
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'real field' => $args['@field_name'],
+        'float' => TRUE,
+        'additional fields' => [
+          $args['@field_name'] . '_geometry',
+        ],
+        'element type' => 'div',
+        'is revision' => (isset($table_data[$args['@field_name']]['field']['is revision']) && $table_data[$args['@field_name']]['field']['is revision']),
+        'click sortable' => TRUE,
+      ],
+      'sort' => [
+        'table' => $table_name,
+        'id' => 'geolocation_sort_proximity',
+        'field_name' => $args['@field_name'] . '_proximity',
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'real field' => $args['@field_name'],
+      ],
+    ];
+
+    // Add boundary handlers.
+    $data[$table_name][$args['@field_name'] . '_boundary'] = [
+      'group' => $entity_definition->getLabel(),
+      'title' => t('Geo Boundary (@field_name)', $args),
+      'title short' => $title_short . ' - ' . t("Boundary"),
+      'help' => $help,
+      'argument' => [
+        'id' => 'geolocation_geometry_argument_boundary',
+        'table' => $table_name,
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'field_name' => $args['@field_name'] . '_boundary',
+        'real field' => $args['@field_name'],
+        'label' => t('Geo Boundaries around !field_name', $args),
+        'empty field name' => '- No value -',
+        'additional fields' => [
+          $args['@field_name'] . '_geometry',
+        ],
+      ],
+      'filter' => [
+        'id' => 'geolocation_geometry_filter_boundary',
+        'table' => $table_name,
+        'entity_type' => $field_storage->getTargetEntityTypeId(),
+        'field_name' => $args['@field_name'] . '_boundary',
+        'real field' => $args['@field_name'],
+        'label' => t('Geo Boundaries around !field_name', $args),
+        'allow empty' => TRUE,
+        'additional fields' => [
+          $args['@field_name'] . '_geometry',
+        ],
+      ],
+    ];
 
     foreach ($geometry_fields as $geometry_field_id => $geometry_field_data) {
       if ($field_storage->getName() == $geometry_field_data['geometry_field_name'] && $field_storage->getTargetEntityTypeId() == $geometry_field_data['entity_type']) {

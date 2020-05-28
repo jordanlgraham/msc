@@ -11,6 +11,9 @@ geolocation.field.formatter.map.base:
     common_map:
       type: boolean
       label: 'Display results on a common map'
+    show_delta_label:
+      type: boolean
+      label: 'Show delta marker label'
     use_overridden_map_settings:
       type: boolean
       label: 'Use overridden map settings.'
