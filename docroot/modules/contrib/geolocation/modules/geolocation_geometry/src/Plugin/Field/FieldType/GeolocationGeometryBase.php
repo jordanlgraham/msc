@@ -99,6 +99,9 @@ abstract class GeolocationGeometryBase extends FieldItemBase {
         $query->expression($field_storage_definition->getName() . '_geometry', 'ST_GeomFromGeoJSON(' . $field_storage_definition->getName() . '_geojson)');
         $query->expression($field_storage_definition->getName() . '_wkt', 'ST_AsText(ST_GeomFromGeoJSON(' . $field_storage_definition->getName() . '_geojson))');
       }
+      if (empty($this->values['data'])) {
+        $query->fields([$field_storage_definition->getName() . '_data' => serialize(NULL)]);
+      }
       $query->condition('entity_id', $entity->id());
       $query->condition('revision_id', $entity->getRevisionId());
       $query->condition('bundle', $entity->bundle());
@@ -116,7 +119,9 @@ abstract class GeolocationGeometryBase extends FieldItemBase {
       $query->expression($field_storage_definition->getName() . '_geometry', 'ST_GeomFromGeoJSON(' . $field_storage_definition->getName() . '_geojson)');
       $query->expression($field_storage_definition->getName() . '_wkt', 'ST_AsText(ST_GeomFromGeoJSON(' . $field_storage_definition->getName() . '_geojson))');
     }
-
+    if (empty($this->values['data'])) {
+      $query->fields([$field_storage_definition->getName() . '_data' => serialize(NULL)]);
+    }
     $query->condition('entity_id', $entity->id());
     $query->condition('bundle', $entity->bundle());
     $query->condition('delta', $this->getName());

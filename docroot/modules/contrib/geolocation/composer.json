@@ -2,7 +2,7 @@
   "name": "drupal/geolocation",
   "description": "Provides a simple geolocation Drupal field type to store and display location data (lat, lng).",
   "type": "drupal-module",
-  "license": "GPL-2.0+",
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "derjochenmeyer",
@@ -14,7 +14,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "gasparesganga/php-shapefile": ">=2.4",
+    "gasparesganga/php-shapefile": ">=3.2",
     "sibyx/phpgpx": "^1.0"
   },
   "support": {
