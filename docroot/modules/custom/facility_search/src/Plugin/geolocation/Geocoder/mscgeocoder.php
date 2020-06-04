@@ -45,9 +45,14 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
   }
 
   public function formAttachGeocoder(array &$render_array, $element_name) {
+    $zip = '';
+    if (!empty($_GET["geocode_postal"])) {
+      $zip = $_GET["geocode_postal"];
+    }
     $render_array['geocode_postal'] = array(
       '#type' => 'textfield',
       '#title' => t('Zip Code'),
+      '#default_value' => $zip,
     );
 
     $render_array['geocode_state'] = array(
@@ -116,6 +121,7 @@ class mscGeocoder extends GeocoderBase implements ContainerFactoryPluginInterfac
     $plugins = ['googlemaps' => 'googlemaps'];
     /** @var AddressCollection $addressCollection */
     $addressCollection = $this->geocoder->geocode($address, $plugins, []);
+    exit();
     if (!$addressCollection) {
       $location = FALSE;
     }
