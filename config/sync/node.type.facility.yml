@@ -1,0 +1,17 @@
+uuid: efbd2c6a-9c9f-4c42-b2fd-b7c5dca4403d
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Facility
+type: facility
+description: 'The <em>Facility</em> content type is populated by NetForum synchronization, but images and related content can be added manually.'
+help: 'The <em>Facility</em> content type is populated by NetForum synchronization, but images and related content can be added manually.'
+new_revision: false
+preview_mode: 1
+display_submitted: false

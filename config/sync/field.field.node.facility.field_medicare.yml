@@ -1,0 +1,23 @@
+uuid: 69744b84-4324-4f52-afe5-09003a85dfc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_medicare
+    - node.type.facility
+id: node.facility.field_medicare
+field_name: field_medicare
+entity_type: node
+bundle: facility
+label: Medicare
+description: 'If selected, facility participates in Medicare.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Medicare
+  off_label: 'No Medicare'
+field_type: boolean

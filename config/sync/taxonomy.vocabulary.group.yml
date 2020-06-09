@@ -1,0 +1,8 @@
+uuid: 4b8d6f78-93c8-478e-a45c-679c84ac1558
+langcode: en
+status: true
+dependencies: {  }
+name: Group
+vid: group
+description: 'Groups for content access control'
+weight: 0

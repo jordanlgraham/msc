@@ -1,0 +1,23 @@
+uuid: 93efb68b-9882-439c-b687-f0dae1c06bb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_assisted_living_beds
+    - node.type.facility
+id: node.facility.field_assisted_living_beds
+field_name: field_assisted_living_beds
+entity_type: node
+bundle: facility
+label: 'Assisted Living Beds'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

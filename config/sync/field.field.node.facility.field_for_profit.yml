@@ -1,0 +1,23 @@
+uuid: 8cb3930f-d445-4222-99a3-1d17373039d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_for_profit
+    - node.type.facility
+id: node.facility.field_for_profit
+field_name: field_for_profit
+entity_type: node
+bundle: facility
+label: 'For Profit'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

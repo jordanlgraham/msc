@@ -1,0 +1,19 @@
+uuid: 550d1a00-7aa0-474f-881e-a4f8845ba3bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+_core:
+  default_config_hash: 3JYyjOtNEOcWWl6ppSNCuskR385GXM7tSkXNqOK8kTU
+name: Newsletter
+type: newsletter
+description: 'Use <em>Newsletter</em> content type for displaying newsletters on site and also for sending them to email marketing system (Real Magnet).'
+help: 'Use <em>Newsletter</em> content type for displaying newsletters on site and also for sending them to email marketing system (Real Magnet).'
+new_revision: true
+preview_mode: 1
+display_submitted: false

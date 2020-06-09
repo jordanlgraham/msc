@@ -1,0 +1,108 @@
+uuid: 8d4f638c-814b-4aea-9c85-969bf4a9468c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.newsletter
+    - field.field.node.education_events.body
+    - field.field.node.education_events.field_call_to_action
+    - field.field.node.education_events.field_date
+    - field.field.node.education_events.field_end_date
+    - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_file
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
+    - node.type.education_events
+  module:
+    - address
+    - datetime
+    - scheduler
+    - text
+id: node.education_events.newsletter
+targetEntityType: node
+bundle: education_events
+mode: newsletter
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 4
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    region: content
+  field_date:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_end_date:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_location:
+    weight: 5
+    settings:
+      default_country: null
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_call_to_action: true
+  field_event_category: true
+  field_event_key: true
+  field_event_related_content: true
+  field_file: true
+  field_sponsors: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

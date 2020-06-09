@@ -1,0 +1,37 @@
+uuid: d35f1ac0-52ee-435d-a7c3-ae3122dc8f98
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.resource_type
+  module:
+    - path
+    - text
+id: taxonomy_term.resource_type.default
+targetEntityType: taxonomy_term
+bundle: resource_type
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

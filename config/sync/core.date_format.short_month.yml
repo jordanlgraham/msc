@@ -1,0 +1,8 @@
+uuid: 669947e4-6e33-4738-876d-a57fe61bd540
+langcode: en
+status: true
+dependencies: {  }
+id: short_month
+label: 'Short Month'
+locked: false
+pattern: M

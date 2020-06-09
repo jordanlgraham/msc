@@ -1,0 +1,129 @@
+uuid: 9ca2fbf5-3475-478c-b95a-c849224e5fbc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_languages_spoken
+field_name: field_languages_spoken
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Albanian
+      label: Albanian
+    -
+      value: 'American Sign'
+      label: 'American Sign'
+    -
+      value: Arabic
+      label: Arabic
+    -
+      value: Armenian
+      label: Armenian
+    -
+      value: Cambodian
+      label: Cambodian
+    -
+      value: 'Cape Verdean'
+      label: 'Cape Verdean'
+    -
+      value: Chinese
+      label: Chinese
+    -
+      value: Creole
+      label: Creole
+    -
+      value: English
+      label: English
+    -
+      value: Farsi
+      label: Farsi
+    -
+      value: Filipino
+      label: Filipino
+    -
+      value: Finnish
+      label: Finnish
+    -
+      value: French
+      label: French
+    -
+      value: 'French Creole'
+      label: 'French Creole'
+    -
+      value: Gaelic
+      label: Gaelic
+    -
+      value: German
+      label: German
+    -
+      value: Greek
+      label: Greek
+    -
+      value: Haitian
+      label: Haitian
+    -
+      value: Hebrew
+      label: Hebrew
+    -
+      value: Hungarian
+      label: Hungarian
+    -
+      value: Indian
+      label: Indian
+    -
+      value: Italian
+      label: Italian
+    -
+      value: Japanese
+      label: Japanese
+    -
+      value: Khmer
+      label: Khmer
+    -
+      value: Lithuanian
+      label: Lithuanian
+    -
+      value: Mandarin
+      label: Mandarin
+    -
+      value: Polish
+      label: Polish
+    -
+      value: Portuguese
+      label: Portuguese
+    -
+      value: Romanian
+      label: Romanian
+    -
+      value: Russian
+      label: Russian
+    -
+      value: Slovak
+      label: Slovak
+    -
+      value: Spanish
+      label: Spanish
+    -
+      value: Uganda
+      label: Uganda
+    -
+      value: Ukranian
+      label: Ukranian
+    -
+      value: Vietnamese
+      label: Vietnamese
+    -
+      value: Yiddish
+      label: Yiddish
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,24 @@
+uuid: 24ccffd8-ced8-4620-9577-650bf87e5aaa
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.file_browser
+    - field.field.block_content.file_browser.field_file_browser_reference
+_core:
+  default_config_hash: 9768UdFiuPm7WBvbZRx0h1HBAKD9k2cAxBfvpBDfn7Y
+id: block_content.file_browser.default
+targetEntityType: block_content
+bundle: file_browser
+mode: default
+content:
+  info:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_file_browser_reference: true

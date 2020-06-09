@@ -1,0 +1,20 @@
+uuid: 48e8d844-ca26-4b3a-afdf-0553957bf4f9
+langcode: en
+status: false
+dependencies:
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: msca_theme_local_actions
+theme: msca_theme
+region: content
+weight: -7
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

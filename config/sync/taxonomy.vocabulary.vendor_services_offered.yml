@@ -1,0 +1,8 @@
+uuid: ac94ee3c-84da-4697-8f75-768007c66ebd
+langcode: en
+status: true
+dependencies: {  }
+name: 'Vendor Services Offered'
+vid: vendor_services_offered
+description: 'List of services offered by vendors'
+weight: 0

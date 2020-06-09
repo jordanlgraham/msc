@@ -1,0 +1,23 @@
+uuid: 258f65e8-dd95-41e7-aa1a-2c7365c0b924
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gated
+    - node.type.newsletter
+id: node.newsletter.field_gated
+field_name: field_gated
+entity_type: node
+bundle: newsletter
+label: 'Gated?'
+description: 'Enable this if you want only authenticated members to see this full content. All visitors will still be able to see Title and excerpt of text.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Gated
+  off_label: Public
+field_type: boolean

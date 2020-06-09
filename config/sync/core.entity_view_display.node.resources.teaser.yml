@@ -1,0 +1,70 @@
+uuid: dead1265-eed3-4314-a8a6-753378542089
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.resources.body
+    - field.field.node.resources.field_external_resource
+    - field.field.node.resources.field_file
+    - field.field.node.resources.field_gated
+    - field.field.node.resources.field_related_content
+    - field.field.node.resources.field_resource_category
+    - field.field.node.resources.field_resource_type
+    - field.field.node.resources.field_tags
+    - node.type.resources
+  module:
+    - smart_trim
+    - user
+id: node.resources.teaser
+targetEntityType: node
+bundle: resources
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: smart_trim
+    weight: 0
+    settings:
+      trim_length: '80'
+      trim_type: words
+      trim_suffix: ''
+      more_link: '0'
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: text
+      more_class: more-link
+    third_party_settings: {  }
+    region: content
+  field_resource_category:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_resource_type:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_accessible_by: true
+  field_external_resource: true
+  field_file: true
+  field_gated: true
+  field_related_content: true
+  field_tags: true

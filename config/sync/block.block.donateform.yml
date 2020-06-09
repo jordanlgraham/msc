@@ -1,0 +1,25 @@
+uuid: 6c1547d5-3f50-49cf-9798-0e0482669c20
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - msca_donate
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: donateform
+theme: msca_theme
+region: gutter
+weight: 0
+provider: null
+plugin: donate_form
+settings:
+  id: donate_form
+  label: 'Donate form'
+  provider: msca_donate
+  label_display: '0'
+  message: 'Thank you for your donation, @first!'
+visibility: {  }

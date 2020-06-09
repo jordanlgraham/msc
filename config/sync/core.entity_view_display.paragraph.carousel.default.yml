@@ -1,0 +1,61 @@
+uuid: 266ca17f-c7bd-445d-888c-84d0c206c3b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.carousel.field_call_to_action
+    - field.field.paragraph.carousel.field_carousel_image
+    - field.field.paragraph.carousel.field_subtitle
+    - field.field.paragraph.carousel.field_title
+    - paragraphs.paragraphs_type.carousel
+  module:
+    - button_link
+    - image
+    - text
+id: paragraph.carousel.default
+targetEntityType: paragraph
+bundle: carousel
+mode: default
+content:
+  field_call_to_action:
+    weight: 2
+    label: hidden
+    settings:
+      link_text: ''
+      btn_type: btn-primary
+      trim_length: '80'
+      url_only: false
+      url_plain: false
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: button_link
+    region: content
+  field_carousel_image:
+    weight: 3
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_subtitle:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

@@ -1,0 +1,20 @@
+uuid: ff3ea6b8-98e1-4f15-bcc3-5485d3d8f4d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_hospital_based_nf_tcu_beds
+field_name: field_hospital_based_nf_tcu_beds
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

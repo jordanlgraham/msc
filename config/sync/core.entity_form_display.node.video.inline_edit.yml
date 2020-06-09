@@ -1,0 +1,105 @@
+uuid: 3a2407cc-3183-49a5-ad9e-0acc8982da37
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.inline_edit
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - field.field.node.video.body
+    - field.field.node.video.field_event_category
+    - field.field.node.video.field_gated
+    - field.field.node.video.field_related_content
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video_date
+    - field.field.node.video.field_youtube_id
+    - node.type.video
+  module:
+    - datetime
+    - entity_browser_entity_form
+    - inline_entity_form
+id: node.video.inline_edit
+targetEntityType: node
+bundle: video
+mode: inline_edit
+content:
+  field_event_category:
+    weight: 3
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_tags:
+    weight: 5
+    settings:
+      form_mode: simplified_taxonomy_term
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      override_labels: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: inline_entity_form_complex
+    region: content
+  field_video_date:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_youtube_id:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  created: true
+  field_related_content: true
+  path: true
+  promote: true
+  publish_on: true
+  sticky: true
+  uid: true
+  unpublish_on: true

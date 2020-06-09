@@ -1,0 +1,7 @@
+uuid: f7065688-80cc-411c-99a2-69bfcfada77e
+langcode: en
+status: false
+dependencies: {  }
+formId: node_newsroom_form
+captchaType: default
+label: null

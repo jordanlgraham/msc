@@ -1,0 +1,8 @@
+uuid: 82a8063a-1977-4c50-b9ce-f7e0a8b4888d
+langcode: en
+status: true
+dependencies: {  }
+id: short_month_and_day
+label: 'Short Month and Day'
+locked: false
+pattern: 'M j'

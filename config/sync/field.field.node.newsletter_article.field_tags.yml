@@ -1,0 +1,28 @@
+uuid: cfee50a5-bc80-4c1e-a4a7-4fe498f427a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.newsletter_article
+    - taxonomy.vocabulary.tags
+id: node.newsletter_article.field_tags
+field_name: field_tags
+entity_type: node
+bundle: newsletter_article
+label: 'Related Terms'
+description: 'Select appropriate term(s) to allow for filtering in aggregate views of content.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,33 @@
+uuid: dad6927a-e839-4223-9c4d-0830cde142f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: views-search
+id: exposedformall_contentmember_resources
+theme: msca_theme
+region: content
+weight: -17
+provider: null
+plugin: 'views_exposed_filter_block:all_content-member_resources'
+settings:
+  id: 'views_exposed_filter_block:all_content-member_resources'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /member-resources
+    negate: false
+    context_mapping: {  }

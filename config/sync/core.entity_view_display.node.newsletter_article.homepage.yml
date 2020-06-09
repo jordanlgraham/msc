@@ -1,0 +1,75 @@
+uuid: 75afb098-b7fc-44a1-aefd-3475b83b1259
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.homepage
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_gated
+    - field.field.node.newsletter_article.field_news_release_date
+    - field.field.node.newsletter_article.field_news_source
+    - field.field.node.newsletter_article.field_news_subtitle
+    - field.field.node.newsletter_article.field_news_teaser_image
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_related_content
+    - field.field.node.newsletter_article.field_sponsor
+    - field.field.node.newsletter_article.field_tags
+    - image.style.large
+    - node.type.newsletter_article
+  module:
+    - datetime
+    - entity_print
+    - media
+    - text
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'Print this Article'
+id: node.newsletter_article.homepage
+targetEntityType: node
+bundle: newsletter_article
+mode: homepage
+content:
+  body:
+    type: text_summary_or_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 400
+    third_party_settings: {  }
+  field_news_release_date:
+    weight: 0
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: short_month_and_day
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_news_teaser_image:
+    weight: 1
+    label: hidden
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+    type: media_thumbnail
+    region: content
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_news_source: true
+  field_news_subtitle: true
+  field_newsletter_byline: true
+  field_related_content: true
+  field_sponsor: true
+  field_tags: true
+  flag_bookmark: true

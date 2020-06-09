@@ -1,0 +1,27 @@
+uuid: 87067a5c-cc8f-40bc-aaaf-df79f4b8a9bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - node.type.resources
+  module:
+    - file
+id: node.resources.field_file
+field_name: field_file
+entity_type: node
+bundle: resources
+label: 'Upload Document'
+description: 'Upload one or more files in downloadable formats (txt, pdf, doc, docx)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: resources
+  file_extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods'
+  max_filesize: 20MB
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

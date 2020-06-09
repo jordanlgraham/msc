@@ -1,0 +1,125 @@
+uuid: a23c06d3-912c-40d6-bac7-1724bc1c601e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.inline_edit
+    - field.field.node.education_events.body
+    - field.field.node.education_events.field_call_to_action
+    - field.field.node.education_events.field_date
+    - field.field.node.education_events.field_end_date
+    - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_file
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
+    - node.type.education_events
+  module:
+    - address
+    - datetime
+    - link
+    - scheduler
+    - text
+id: node.education_events.inline_edit
+targetEntityType: node
+bundle: education_events
+mode: inline_edit
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 6
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    region: content
+  field_call_to_action:
+    weight: 7
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_date:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_end_date:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_event_category:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_gated:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_location:
+    weight: 3
+    settings:
+      default_country: null
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_event_key: true
+  field_event_related_content: true
+  field_file: true
+  field_sponsors: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

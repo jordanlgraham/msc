@@ -1,0 +1,23 @@
+uuid: 285fc53b-1001-434e-b078-df2513df1db1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gated
+    - node.type.vendor
+id: node.vendor.field_gated
+field_name: field_gated
+entity_type: node
+bundle: vendor
+label: 'Gated?'
+description: 'Enable this if you want only authenticated members to see this full content. All visitors will still be able to see Title and excerpt of text.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Gated
+  off_label: Public
+field_type: boolean

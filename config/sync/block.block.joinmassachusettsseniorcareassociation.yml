@@ -1,0 +1,26 @@
+uuid: f0b55820-db20-4d06-8d7c-bfd9fa551eef
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: home-join-msca
+id: joinmassachusettsseniorcareassociation
+theme: msca_theme
+region: gutter
+weight: -11
+provider: null
+plugin: 'block_content:b635573f-4d7f-495c-8d0e-8f42c45bc097'
+settings:
+  id: 'block_content:b635573f-4d7f-495c-8d0e-8f42c45bc097'
+  label: 'Join Massachusetts Senior Care Association'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

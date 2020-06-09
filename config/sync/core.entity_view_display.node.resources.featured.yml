@@ -1,0 +1,61 @@
+uuid: 1c4ff7af-608f-497d-af92-b128cbd87f96
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.resources.body
+    - field.field.node.resources.field_external_resource
+    - field.field.node.resources.field_file
+    - field.field.node.resources.field_gated
+    - field.field.node.resources.field_related_content
+    - field.field.node.resources.field_resource_category
+    - field.field.node.resources.field_resource_type
+    - field.field.node.resources.field_tags
+    - node.type.resources
+  module:
+    - text
+    - user
+id: node.resources.featured
+targetEntityType: node
+bundle: resources
+mode: featured
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    region: content
+  field_resource_category:
+    type: entity_reference_label
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_resource_type:
+    weight: 2
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_external_resource: true
+  field_file: true
+  field_gated: true
+  field_related_content: true
+  field_tags: true

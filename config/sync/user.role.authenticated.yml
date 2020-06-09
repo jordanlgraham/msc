@@ -1,0 +1,27 @@
+uuid: 9d4d25e5-0911-44d3-b1c9-b4325930242c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access forward'
+  - 'access site-wide contact form'
+  - 'create media'
+  - 'entity print access bundle newsletter'
+  - 'entity print access bundle newsletter_article'
+  - 'masquerade as authenticated'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'update any media'
+  - 'update media'
+  - 'use advanced search'
+  - 'use text format basic_html'
+  - 'view media'

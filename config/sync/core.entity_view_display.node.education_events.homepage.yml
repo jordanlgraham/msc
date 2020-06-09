@@ -1,0 +1,77 @@
+uuid: f31c7f81-cf6d-4608-8062-5a9259feb264
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.homepage
+    - field.field.node.education_events.body
+    - field.field.node.education_events.field_call_to_action
+    - field.field.node.education_events.field_date
+    - field.field.node.education_events.field_end_date
+    - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_file
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
+    - node.type.education_events
+  module:
+    - address
+    - button_link
+    - datetime
+    - user
+id: node.education_events.homepage
+targetEntityType: node
+bundle: education_events
+mode: homepage
+content:
+  field_call_to_action:
+    weight: 3
+    label: hidden
+    settings:
+      link_text: ''
+      btn_type: btn-outline-primary
+      trim_length: '80'
+      url_only: false
+      url_plain: false
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: button_link
+    region: content
+  field_date:
+    weight: 0
+    label: hidden
+    settings:
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_plain
+    region: content
+  field_end_date:
+    weight: 1
+    label: hidden
+    settings:
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_plain
+    region: content
+  field_location:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+hidden:
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_event_category: true
+  field_event_key: true
+  field_event_related_content: true
+  field_file: true
+  field_gated: true
+  field_sponsors: true
+  links: true

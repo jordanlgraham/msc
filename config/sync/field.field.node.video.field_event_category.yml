@@ -1,0 +1,28 @@
+uuid: ce0c4808-1e66-42f5-898a-dc9b3b5fc3a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_category
+    - node.type.video
+    - taxonomy.vocabulary.event_types
+id: node.video.field_event_category
+field_name: field_event_category
+entity_type: node
+bundle: video
+label: 'Video Type'
+description: 'Enter the type of content this video documents (e.g., webinar, conference session, keynote speech).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      event_types: event_types
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

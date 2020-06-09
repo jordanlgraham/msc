@@ -1,0 +1,23 @@
+uuid: 15d12c6f-b0df-4bb0-a7ac-c87a477ef213
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - taxonomy.vocabulary.vendor_services_offered
+id: taxonomy_term.vendor_services_offered.simplified_taxonomy_term
+targetEntityType: taxonomy_term
+bundle: vendor_services_offered
+mode: simplified_taxonomy_term
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true

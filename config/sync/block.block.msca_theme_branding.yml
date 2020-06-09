@@ -1,0 +1,29 @@
+uuid: e5166a4d-a9bc-4c75-aac9-0e46301989f1
+langcode: en
+status: false
+dependencies:
+  module:
+    - block_class
+    - system
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: msca_theme_branding
+theme: msca_theme
+region: content
+weight: -11
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

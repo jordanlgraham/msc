@@ -1,0 +1,20 @@
+uuid: bd273f1c-8b4a-4e75-832b-3571fdf0d6bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_private_ltc_insurance
+field_name: field_private_ltc_insurance
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

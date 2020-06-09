@@ -1,0 +1,21 @@
+uuid: 54ca07c0-d68a-4ecf-b7ab-b0408cfad20d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_posting_org_fax
+    - node.type.job_posting
+  module:
+    - telephone
+id: node.job_posting.field_job_posting_org_fax
+field_name: field_job_posting_org_fax
+entity_type: node
+bundle: job_posting
+label: 'Facility Fax'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

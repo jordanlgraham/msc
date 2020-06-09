@@ -1,0 +1,22 @@
+uuid: 0f5112d1-306b-4bec-9aab-c3a51181d270
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: msca_theme_powered
+theme: msca_theme
+region: content
+weight: -8
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

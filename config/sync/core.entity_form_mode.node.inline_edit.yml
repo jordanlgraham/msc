@@ -1,0 +1,10 @@
+uuid: c71e68d8-6703-4217-9ba6-1f6f18db305a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.inline_edit
+label: 'Inline Edit'
+targetEntityType: node
+cache: true

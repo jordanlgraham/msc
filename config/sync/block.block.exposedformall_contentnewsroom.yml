@@ -1,0 +1,33 @@
+uuid: dacac96c-1914-4c5c-901e-518ee81a0961
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: views-search
+id: exposedformall_contentnewsroom
+theme: msca_theme
+region: content
+weight: -19
+provider: null
+plugin: 'views_exposed_filter_block:all_content-newsroom'
+settings:
+  id: 'views_exposed_filter_block:all_content-newsroom'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: 'Search Newsroom'
+visibility:
+  request_path:
+    id: request_path
+    pages: /about/newsroom
+    negate: false
+    context_mapping: {  }

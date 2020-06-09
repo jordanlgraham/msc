@@ -1,0 +1,8 @@
+uuid: 5e4f7c87-b637-4ca9-856b-6b7bcb0f90db
+langcode: en
+status: true
+dependencies: {  }
+name: 'News Types'
+vid: news_types
+description: 'Types of news for Newsroom'
+weight: 0

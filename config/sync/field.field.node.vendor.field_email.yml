@@ -1,0 +1,19 @@
+uuid: baf07d15-3ed3-41dc-bba7-e25860cff8ff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email
+    - node.type.vendor
+id: node.vendor.field_email
+field_name: field_email
+entity_type: node
+bundle: vendor
+label: Email
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

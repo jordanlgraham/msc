@@ -1,0 +1,8 @@
+uuid: 2f7e5433-38a5-48dc-8348-1239dcf19f67
+langcode: en
+status: true
+dependencies: {  }
+name: 'Job Categories'
+vid: job_categories
+description: 'Categories for job postings.'
+weight: 0

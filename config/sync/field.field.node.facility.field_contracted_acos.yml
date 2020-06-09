@@ -1,0 +1,28 @@
+uuid: 3b04def3-b623-4596-80eb-2fb904486852
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contracted_acos
+    - node.type.facility
+    - taxonomy.vocabulary.contracted_acos
+id: node.facility.field_contracted_acos
+field_name: field_contracted_acos
+entity_type: node
+bundle: facility
+label: 'Contracted ACOs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      contracted_acos: contracted_acos
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

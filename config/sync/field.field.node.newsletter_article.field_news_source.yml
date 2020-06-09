@@ -1,0 +1,23 @@
+uuid: 80fb9fed-a4ba-41ce-a285-930726ebb792
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_source
+    - node.type.newsletter_article
+  module:
+    - link
+id: node.newsletter_article.field_news_source
+field_name: field_news_source
+entity_type: node
+bundle: newsletter_article
+label: 'Online Source'
+description: 'Optional. Add external URL of original article if published elesewhere (e.g., https://example.com/news-story).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 1
+field_type: link

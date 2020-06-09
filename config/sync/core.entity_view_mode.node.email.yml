@@ -1,0 +1,12 @@
+uuid: 8b7c7e4c-f647-41ae-9332-622b1bfc6dd0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: eaKdGN5KAEfOIN-1pQc7mcXhJNnZ48ZXevbWEGvg8gk
+id: node.email
+label: Email
+targetEntityType: node
+cache: true

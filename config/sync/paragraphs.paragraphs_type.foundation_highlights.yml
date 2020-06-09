@@ -1,0 +1,7 @@
+uuid: 6a5e3600-a4ba-4e71-879b-cf1947e809d9
+langcode: en
+status: true
+dependencies: {  }
+id: foundation_highlights
+label: 'Foundation Highlights'
+behavior_plugins: {  }

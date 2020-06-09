@@ -1,0 +1,32 @@
+uuid: a0c9013e-2499-4fce-9fc7-9ffda4d1080f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_subtitle
+    - node.type.newsroom
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.newsroom.field_news_subtitle
+field_name: field_news_subtitle
+entity_type: node
+bundle: newsroom
+label: 'News Subtitle'
+description: 'Enter subtitle to be displayed under title.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

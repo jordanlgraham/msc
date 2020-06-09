@@ -1,0 +1,22 @@
+uuid: 8354657f-c815-4bae-9bae-63c2b34c8437
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - search
+  theme:
+    - msca_theme
+id: searchform
+theme: msca_theme
+region: gutter
+weight: 0
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form'
+  provider: search
+  label_display: '0'
+  page_id: ''
+visibility: {  }

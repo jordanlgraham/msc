@@ -1,0 +1,24 @@
+uuid: ae88af3e-a5f4-4ff3-a517-a6d38a4e2e2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_release_date
+    - node.type.newsroom
+  module:
+    - datetime
+id: node.newsroom.field_news_release_date
+field_name: field_news_release_date
+entity_type: node
+bundle: newsroom
+label: 'News Release Date'
+description: 'Select the Release Date (will display above article''s body text).'
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

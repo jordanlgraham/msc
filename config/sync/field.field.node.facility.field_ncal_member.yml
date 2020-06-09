@@ -1,0 +1,23 @@
+uuid: 8f658ebb-c13e-4eed-a4b4-3ca2ae67be86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ncal_member
+    - node.type.facility
+id: node.facility.field_ncal_member
+field_name: field_ncal_member
+entity_type: node
+bundle: facility
+label: 'NCAL Member'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

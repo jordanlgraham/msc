@@ -1,0 +1,22 @@
+uuid: 531c8ccd-3566-4307-941f-90171a31c5ba
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: msca_theme_messages
+theme: msca_theme
+region: content
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

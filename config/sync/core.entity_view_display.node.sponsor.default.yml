@@ -1,0 +1,112 @@
+uuid: fce2c25c-cfb1-45c9-bda4-937a5e87e764
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.sponsor.body
+    - field.field.node.sponsor.field_address
+    - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_gated
+    - field.field.node.sponsor.field_linkedin
+    - field.field.node.sponsor.field_logo
+    - field.field.node.sponsor.field_primary_services
+    - field.field.node.sponsor.field_twitter
+    - field.field.node.sponsor.field_web_address
+    - image.style.sponsor_logo_large_190x110_
+    - node.type.sponsor
+  module:
+    - address
+    - link
+    - svg_image
+    - text
+    - user
+id: node.sponsor.default
+targetEntityType: node
+bundle: sponsor
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_address:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: address_default
+    region: content
+  field_facebook:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_linkedin:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_logo:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: sponsor_logo_large_190x110_
+      image_link: ''
+    third_party_settings: {  }
+  field_primary_services:
+    weight: 7
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_twitter:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_web_address:
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      target: _blank
+      rel: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  links: true

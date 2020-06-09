@@ -1,0 +1,46 @@
+uuid: 2d628322-d184-4707-8481-9c125bf37fc8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.education_events
+    - node.type.facility
+    - node.type.job_posting
+    - node.type.newsletter_article
+    - node.type.newsroom
+    - node.type.page
+    - node.type.resources
+    - node.type.scholarship_recipient
+    - node.type.scholarships
+    - node.type.sponsor
+    - node.type.vendor
+    - node.type.video
+  module:
+    - entity_embed
+    - node
+_core:
+  default_config_hash: xgvZUh-eaMilacE1XYCQ9nLH-2-meOjCyofXSO82gqg
+label: Node
+id: node
+type_id: entity
+type_settings:
+  entity_type: node
+  bundles:
+    - page
+    - education_events
+    - facility
+    - job_posting
+    - newsletter_article
+    - newsroom
+    - resources
+    - scholarship_recipient
+    - scholarships
+    - sponsor
+    - vendor
+    - video
+  display_plugins:
+    - 'entity_reference:entity_reference_label'
+  entity_browser: ''
+  entity_browser_settings:
+    display_review: false
+icon_uuid: null

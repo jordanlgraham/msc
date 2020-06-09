@@ -1,0 +1,25 @@
+uuid: 3366f303-01c3-4339-94d7-d2921b9c2a8b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.file_browser
+  module:
+    - text
+_core:
+  default_config_hash: LsSTE3lC6M5ysT2Dv5beGdAjrC8QyGE8Mbtjjn7dRDo
+id: node.file_browser.body
+field_name: body
+entity_type: node
+bundle: file_browser
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

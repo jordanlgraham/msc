@@ -1,0 +1,32 @@
+uuid: d43cf432-c14e-4f4c-8c64-4dedcb5da4e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_school
+    - node.type.scholarship_recipient
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.scholarship_recipient.field_school
+field_name: field_school
+entity_type: node
+bundle: scholarship_recipient
+label: School
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

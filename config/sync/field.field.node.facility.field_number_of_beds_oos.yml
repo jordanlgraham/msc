@@ -1,0 +1,32 @@
+uuid: f67fc37f-740f-42f9-ac2a-14cc45ea8d3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_number_of_beds_oos
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    plugins: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_number_of_beds_oos
+field_name: field_number_of_beds_oos
+entity_type: node
+bundle: facility
+label: 'Number of Beds Out of Service'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

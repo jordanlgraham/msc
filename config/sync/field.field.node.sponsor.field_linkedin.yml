@@ -1,0 +1,23 @@
+uuid: 73d01442-15ee-4593-b690-decaf3d691fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_linkedin
+    - node.type.sponsor
+  module:
+    - link
+id: node.sponsor.field_linkedin
+field_name: field_linkedin
+entity_type: node
+bundle: sponsor
+label: LinkedIn
+description: 'Optional. Add a LinkedIn URL.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

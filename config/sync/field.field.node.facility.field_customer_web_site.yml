@@ -1,0 +1,19 @@
+uuid: 02c07640-d7d2-4ea1-a4c5-dd962536a2cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_customer_web_site
+    - node.type.facility
+id: node.facility.field_customer_web_site
+field_name: field_customer_web_site
+entity_type: node
+bundle: facility
+label: 'Customer Web Site'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,37 @@
+uuid: 108608b1-6c8e-4f26-815e-62cfa457ccbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.related_content
+  module:
+    - block_class
+    - ctools
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: sidebar-block
+id: views_block__related_content_block_2
+theme: msca_theme
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'views_block:related_content-block_2'
+settings:
+  id: 'views_block:related_content-block_2'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      education_events: education_events
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

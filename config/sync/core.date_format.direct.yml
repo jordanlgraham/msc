@@ -1,0 +1,8 @@
+uuid: a11613e3-3cf9-48f3-ba87-7c9e1fb34d5a
+langcode: en
+status: true
+dependencies: {  }
+id: direct
+label: Direct
+locked: false
+pattern: 'F j, Y'

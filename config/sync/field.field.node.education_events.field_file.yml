@@ -1,0 +1,27 @@
+uuid: d62831a7-c2ba-4860-ad60-35e2f7e15b95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file
+    - node.type.education_events
+  module:
+    - file
+id: node.education_events.field_file
+field_name: field_file
+entity_type: node
+bundle: education_events
+label: 'Upload Document'
+description: 'Optional. Upload one or more files for visitors to download.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: events/files
+  file_extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods jpg'
+  max_filesize: 10MB
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
