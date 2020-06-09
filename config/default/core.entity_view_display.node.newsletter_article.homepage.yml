@@ -19,7 +19,7 @@ dependencies:
   module:
     - datetime
     - entity_print
-    - media_entity
+    - media
     - text
     - user
 third_party_settings:

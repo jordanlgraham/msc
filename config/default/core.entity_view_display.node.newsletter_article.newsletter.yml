@@ -18,7 +18,7 @@ dependencies:
   module:
     - datetime
     - entity_print
-    - media_entity
+    - media
     - smart_trim
     - user
 third_party_settings:

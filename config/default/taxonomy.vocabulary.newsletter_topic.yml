@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Newsletter Topic'
 vid: newsletter_topic
 description: 'For grouping display of articles in newsletters (E-News)'
-hierarchy: 0
 weight: 0

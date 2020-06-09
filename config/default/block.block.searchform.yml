@@ -7,9 +7,6 @@ dependencies:
     - search
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: searchform
 theme: msca_theme
 region: gutter
@@ -21,4 +18,5 @@ settings:
   label: 'Search form'
   provider: search
   label_display: '0'
+  page_id: ''
 visibility: {  }

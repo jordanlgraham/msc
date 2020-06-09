@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Resource Category'
 vid: resource_category
 description: 'Category for resource (e.g., Workforce)'
-hierarchy: 0
 weight: 0

@@ -85,7 +85,7 @@ dependencies:
     - address
     - geolocation
     - link
-    - media_entity
+    - media
     - options
     - user
 id: node.facility.default
@@ -339,16 +339,17 @@ content:
     label: hidden
     settings:
       title: ''
-      set_marker: '1'
-      common_map: ''
+      set_marker: true
+      common_map: false
       info_text: ''
-      use_overridden_map_settings: 0
-      google_map_settings:
+      use_overridden_map_settings: false
+      map_provider_id: google_maps
+      map_provider_settings:
         type: ROADMAP
-        zoom: '10'
+        zoom: 10
         minZoom: 0
         maxZoom: 18
-        rotateControl: 0
+        rotateControl: false
         mapTypeControl: 1
         streetViewControl: 1
         zoomControl: 1

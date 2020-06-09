@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'News Types'
 vid: news_types
 description: 'Types of news for Newsroom'
-hierarchy: 0
 weight: 0

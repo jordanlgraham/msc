@@ -12,7 +12,7 @@ dependencies:
     - image.style.c
     - node.type.scholarships
   module:
-    - media_entity
+    - media
     - text
     - user
 id: node.scholarships.default

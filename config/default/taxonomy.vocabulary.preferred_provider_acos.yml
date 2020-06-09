@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Preferred Provider ACOs'
 vid: preferred_provider_acos
 description: ''
-hierarchy: 0
 weight: 0

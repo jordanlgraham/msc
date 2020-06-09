@@ -19,7 +19,7 @@ dependencies:
   module:
     - datetime
     - entity_print
-    - media_entity
+    - media
     - smart_trim
     - user
 third_party_settings:
@@ -36,14 +36,14 @@ content:
     region: content
     label: hidden
     settings:
-      trim_length: '80'
+      trim_length: 80
       trim_type: words
       trim_suffix: ''
-      more_link: '0'
+      more_link: false
       more_text: More
       summary_handler: full
       trim_options:
-        text: text
+        text: true
       more_class: more-link
     third_party_settings: {  }
   field_news_release_date:

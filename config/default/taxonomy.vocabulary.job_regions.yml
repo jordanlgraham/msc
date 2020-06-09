@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Job Regions'
 vid: job_regions
 description: 'Regions for job postings.'
-hierarchy: 0
 weight: 0

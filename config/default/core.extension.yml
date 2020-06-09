@@ -2,6 +2,7 @@ module:
   acquia_connector: 0
   address: 0
   admin_toolbar: 0
+  admin_toolbar_search: 0
   admin_toolbar_tools: 0
   adminimal_admin_toolbar: 0
   automated_cron: 0
@@ -27,7 +28,6 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
-  devel: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   editor: 0
@@ -41,7 +41,6 @@ module:
   entity_print: 0
   entity_reference_revisions: 0
   entityqueue: 0
-  externalauth: 0
   facility_search: 0
   fast404: 0
   field: 0
@@ -69,9 +68,8 @@ module:
   jquery_colorpicker: 0
   link: 0
   masquerade: 0
-  media_entity: 0
+  media: 0
   media_entity_browser: 0
-  media_entity_image: 0
   menu_ui: 0
   metatag: 0
   metatag_facebook: 0
@@ -94,6 +92,7 @@ module:
   options: 0
   page_cache: 0
   path: 0
+  path_alias: 0
   pathauto: 0
   quickedit: 0
   rdf: 0
@@ -128,6 +127,7 @@ module:
   xmlsitemap: 0
   forum: 1
   menu_link_content: 1
+  externalauth: 10
   views: 10
   paragraphs: 11
   standard: 1000

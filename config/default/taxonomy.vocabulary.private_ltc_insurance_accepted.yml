@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Private LTC Insurance Accepted'
 vid: private_ltc_insurance_accepted
 description: ''
-hierarchy: 0
 weight: 0

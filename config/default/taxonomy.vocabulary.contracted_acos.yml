@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Contracted ACOs'
 vid: contracted_acos
 description: ''
-hierarchy: 0
 weight: 0

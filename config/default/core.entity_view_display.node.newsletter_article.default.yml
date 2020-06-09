@@ -18,7 +18,7 @@ dependencies:
     - datetime
     - entity_print
     - link
-    - media_entity
+    - media
     - text
     - user
 third_party_settings:

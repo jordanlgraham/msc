@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'HMO Accepted'
 vid: hmo_accepted
 description: ''
-hierarchy: 0
 weight: 0

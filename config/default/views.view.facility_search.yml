@@ -36,7 +36,7 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: none
+        type: tag
         options: {  }
       query:
         type: views_query
@@ -47,7 +47,7 @@ display:
           query_comment: ''
           query_tags: {  }
       exposed_form:
-        type: bef
+        type: basic
         options:
           submit_button: Search
           reset_button: true
@@ -56,81 +56,6 @@ display:
           expose_sort_order: false
           sort_asc_label: Asc
           sort_desc_label: Desc
-          input_required: false
-          text_input_required: 'Select any filter and click on Apply to see results'
-          bef:
-            general:
-              allow_secondary: false
-              secondary_label: 'Advanced options'
-              autosubmit: false
-              autosubmit_exclude_textfield: false
-              autosubmit_hide: false
-            field_ge_proximity:
-              bef_format: default
-              slider_options:
-                bef_slider_min: null
-                bef_slider_max: null
-                bef_slider_step: !!float 1
-                bef_slider_animate: ''
-                bef_slider_orientation: ''
-              more_options:
-                is_secondary: false
-            title:
-              bef_format: default
-              more_options:
-                is_secondary: false
-                placeholder_text: ''
-            field_facility_type_target_id:
-              bef_format: default
-              more_options:
-                bef_select_all_none: false
-                bef_collapsible: false
-                is_secondary: false
-                rewrite:
-                  filter_rewrite_values: ''
-            field_address_locality:
-              bef_format: default
-              more_options:
-                is_secondary: false
-                placeholder_text: ''
-            field_languages_spoken_value:
-              bef_format: default
-              more_options:
-                bef_select_all_none: false
-                bef_collapsible: false
-                is_secondary: false
-                rewrite:
-                  filter_rewrite_values: ''
-            field_service_type_value:
-              bef_format: default
-              more_options:
-                bef_select_all_none: false
-                bef_collapsible: false
-                is_secondary: false
-                rewrite:
-                  filter_rewrite_values: ''
-            field_populations_served_value:
-              bef_format: default
-              more_options:
-                bef_select_all_none: false
-                bef_collapsible: false
-                is_secondary: false
-                rewrite:
-                  filter_rewrite_values: ''
-            field_specialized_unit_value:
-              bef_format: default
-              more_options:
-                bef_select_all_none: false
-                bef_collapsible: false
-                is_secondary: false
-                rewrite:
-                  filter_rewrite_values: ''
-            combine:
-              bef_format: default
-              more_options:
-                is_secondary: false
-                placeholder_text: ''
-          text_input_required_format: basic_html
       pager:
         type: mini
         options:
@@ -1010,8 +935,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
@@ -1077,297 +1000,57 @@ display:
         type: maps_common
         options:
           geolocation_field: field_ge
-          data_provider_id: geolocation_field_provider
-          title_field: ''
-          label_field: ''
-          marker_icon_path: ''
-          marker_row_number: 0
+          title_field: title
           centre:
-            client_location:
-              weight: 0
-              enable: false
-              map_center_id: client_location
-            fixed_boundaries:
-              settings:
-                north: ''
-                east: ''
-                south: ''
-                west: ''
-              weight: 0
-              enable: false
-              map_center_id: fixed_boundaries
-            fit_bounds:
-              enable: true
-              settings:
-                min_zoom: null
-                reset_zoom: false
-              weight: 0
-              map_center_id: fit_bounds
-            fixed_value:
-              settings:
-                latitude: null
-                longitude: null
-                location_option_id: fixed_value
-              weight: 0
-              enable: false
-              map_center_id: location_plugins
             first_row:
               enable: true
               weight: 0
-              map_center_id: location_plugins
-              settings:
-                location_option_id: first_row
-            ipstack:
-              settings:
-                access_key: ''
-                location_option_id: ipstack
+              map_center_id: first_row
+            fixed_value:
               weight: 0
+              settings:
+                latitude: null
+                longitude: null
               enable: false
               map_center_id: location_plugins
-            freeogeoip:
+            client_location:
               weight: 0
               enable: false
-              map_center_id: location_plugins
               settings:
-                location_option_id: freeogeoip
-            views_proximity_filter:
+                update_map: '0'
+              map_center_id: client_location
+            fit_bounds:
+              enable: true
               weight: 0
-              enable: false
-              map_center_id: location_plugins
-              settings:
-                location_option_id: field_ge_proximity
-          even_empty: 1
+              map_center_id: fit_bounds
+          show_raw_locations: 0
+          even_empty: 0
+          context_popup_content: ''
+          marker_clusterer: 0
+          marker_clusterer_image_path: ''
+          marker_clusterer_styles: ''
           map_provider_id: google_maps
           map_provider_settings:
-            map_features:
-              marker_infobubble:
-                weight: 0
-                settings:
-                  close_other: 1
-                  close_button_src: ''
-                  shadow_style: 0
-                  padding: 10
-                  border_radius: 8
-                  border_width: 2
-                  border_color: '#039be5'
-                  background_color: '#fff'
-                  min_width: null
-                  max_width: 550
-                  min_height: null
-                  max_height: null
-                  arrow_style: 2
-                  arrow_position: 30
-                  arrow_size: 10
-                  close_button: 0
-                enabled: false
-              control_streetview:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                  behavior: default
-                enabled: false
-              control_zoom:
-                enabled: true
-                weight: 0
-                settings:
-                  position: RIGHT_CENTER
-                  behavior: default
-                  style: LARGE
-              map_restriction:
-                weight: 0
-                settings:
-                  north: ''
-                  south: ''
-                  east: ''
-                  west: ''
-                  strict: true
-                enabled: false
-              map_type_style:
-                weight: 0
-                settings:
-                  style: '[]'
-                enabled: false
-              marker_clusterer:
-                weight: 0
-                settings:
-                  image_path: ''
-                  styles: ''
-                  zoom_on_click: true
-                  grid_size: 60
-                  minimum_cluster_size: 2
-                  max_zoom: 15
-                  average_center: false
-                enabled: false
-              marker_icon:
-                weight: 0
-                settings:
-                  marker_icon_path: ''
-                  anchor:
-                    x: 0
-                    'y': 0
-                  origin:
-                    x: 0
-                    'y': 0
-                  label_origin:
-                    x: 0
-                    'y': 0
-                  size:
-                    width: null
-                    height: null
-                  scaled_size:
-                    width: null
-                    height: null
-                enabled: false
-              marker_infowindow:
-                enabled: true
-                weight: 0
-                settings:
-                  info_window_solitary: true
-                  disable_auto_pan: true
-                  max_width: null
-                  info_auto_display: false
-              control_recenter:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                enabled: false
-              marker_label:
-                weight: 0
-                settings:
-                  color: ''
-                  font_family: ''
-                  font_size: ''
-                  font_weight: ''
-                enabled: false
-              marker_opacity:
-                weight: 0
-                settings:
-                  opacity: !!float 1
-                enabled: false
-              geolocation_marker_scroll_to_id:
-                weight: 0
-                settings:
-                  scroll_target_id: ''
-                enabled: false
-              marker_zoom_to_animate:
-                weight: 0
-                settings:
-                  marker_zoom_anchor_id: ''
-                enabled: false
-              spiderfying:
-                weight: 0
-                settings:
-                  spiderfiable_marker_path: /modules/contrib/geolocation/modules/geolocation_google_maps/images/marker-plus.svg
-                  markersWontMove: true
-                  keepSpiderfied: true
-                  nearbyDistance: 20
-                  circleSpiralSwitchover: 9
-                  circleFootSeparation: 23
-                  spiralFootSeparation: 26
-                  spiralLengthStart: 11
-                  spiralLengthFactor: 4
-                  legWeight: 1.5
-                  markersWontHide: false
-                  ignoreMapClick: false
-                enabled: false
-              google_maps_layer_traffic:
-                weight: 0
-                enabled: false
-              control_rotate:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                  behavior: default
-                enabled: false
-              control_maptype:
-                enabled: true
-                weight: 0
-                settings:
-                  position: RIGHT_BOTTOM
-                  behavior: default
-                  style: DEFAULT
-              context_popup:
-                weight: 0
-                settings:
-                  content:
-                    value: ''
-                    format: basic_html
-                enabled: false
-              google_maps_layer_bicycling:
-                weight: 0
-                enabled: false
-              client_location_indicator:
-                weight: 0
-                enabled: false
-              map_disable_tilt:
-                weight: 0
-                enabled: false
-              control_locate:
-                enabled: true
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-              map_disable_poi:
-                weight: 0
-                enabled: false
-              map_disable_user_interaction:
-                weight: 0
-                enabled: false
-              drawing:
-                weight: 0
-                settings:
-                  strokeColor: '#FF0000'
-                  strokeOpacity: '0.8'
-                  strokeWeight: '2'
-                  fillColor: '#FF0000'
-                  fillOpacity: '0.35'
-                  polyline: false
-                  geodesic: false
-                  polygon: false
-                enabled: false
-              control_fullscreen:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                  behavior: default
-                enabled: false
-              control_geocoder:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                  geocoder: google_geocoding_api
-                  settings:
-                    label: Address
-                    description: 'Enter an address to be localized.'
-                    autocomplete_min_length: 1
-                    component_restrictions:
-                      route: ''
-                      locality: ''
-                      administrative_area: ''
-                      postal_code: ''
-                      country: ''
-                    boundary_restriction:
-                      south: ''
-                      west: ''
-                      north: ''
-                      east: ''
-                enabled: false
-              control_loading_indicator:
-                weight: 0
-                settings:
-                  position: TOP_LEFT
-                  loading_label: Loading
-                enabled: false
-              google_maps_layer_transit:
-                weight: 0
-                enabled: false
             height: 400px
             width: 100%
             type: ROADMAP
             zoom: 10
-            maxZoom: 20
+            maxZoom: 18
             minZoom: 0
+            mapTypeControl: 1
+            streetViewControl: 1
+            zoomControl: 1
+            rotateControl: false
+            fullscreenControl: 0
+            scrollwheel: 1
             gestureHandling: auto
+            draggable: 1
+            preferScrollingToZooming: 0
+            disableDoubleClickZoom: 0
+            style: ''
+            info_auto_display: 1
+            marker_icon_path: ''
+            disableAutoPan: 0
       defaults:
         style: false
         row: false
@@ -1459,6 +1142,14 @@ display:
           entity_field: type
           plugin_id: bundle
         field_ge_proximity:
+          proximity_source: exposed
+          proximity_lat: ''
+          proximity_lng: ''
+          proximity_units: mile
+          proximity_argument: ''
+          entity_id_argument: ''
+          boundary_filter: ''
+          client_location: false
           id: field_ge_proximity
           table: node__field_ge
           field: field_ge_proximity
@@ -1469,8 +1160,7 @@ display:
           value:
             min: ''
             max: ''
-            value: '5'
-            center: ''
+            value: ''
           group: 1
           exposed: true
           expose:
@@ -1479,8 +1169,6 @@ display:
             description: ''
             use_operator: false
             operator: field_ge_proximity_op
-            operator_limit_selection: false
-            operator_list: {  }
             identifier: proximity
             required: false
             remember: false
@@ -1490,13 +1178,14 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
-              member: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
             input_by_geocoding_widget: 1
             geocoder_plugin_settings:
               plugin_id: msc_geocoder
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -1509,63 +1198,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          location_input:
-            client_location:
-              weight: 0
-              enable: false
-              location_input_id: client_location
-              settings:
-                auto_submit: false
-                hide_form: false
-            coordinates:
-              weight: 0
-              enable: false
-              location_input_id: coordinates
-            geocoder:
-              enable: true
-              settings:
-                plugin_id: msc_geocoder
-                settings:
-                  label: Address
-                  description: 'Enter an address to be localized.'
-                hide_form: true
-                auto_submit: false
-              weight: 0
-              location_input_id: geocoder
-            'fixed_value:fixed_value':
-              settings:
-                location_settings:
-                  settings:
-                    latitude: ''
-                    longitude: ''
-                location_plugin_id: fixed_value
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'ipstack:ipstack':
-              settings:
-                location_settings:
-                  settings:
-                    access_key: ''
-                location_plugin_id: ipstack
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'freeogeoip:freeogeoip':
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-              settings:
-                location_plugin_id: freeogeoip
-          unit: mi
-          proximity_source: exposed
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: mile
-          proximity_argument: ''
-          entity_id_argument: ''
-          boundary_filter: ''
-          client_location: false
           plugin_id: geolocation_filter_proximity
         title:
           id: title
@@ -1918,47 +1550,6 @@ display:
             field_address_locality: field_address_locality
             title: title
           plugin_id: combine
-        title_1:
-          id: title_1
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '!='
-          value: 'Massachusetts Senior Care Association'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
       filter_groups:
         operator: AND
         groups:
@@ -1988,8 +1579,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
@@ -2066,7 +1655,6 @@ display:
               allow_secondary: false
               secondary_label: 'Advanced options'
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
             field_ge_proximity:
               bef_format: default
@@ -2090,7 +1678,7 @@ display:
                 bef_collapsible: false
                 is_secondary: false
                 rewrite:
-                  filter_rewrite_values: ''
+                  filter_rewrite_values: "Rest Home|Residential Care Home\n- Any -|All"
             field_address_locality:
               bef_format: default
               more_options:
@@ -2412,6 +2000,97 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
+        field_ge_proximity:
+          id: field_ge_proximity
+          table: node__field_ge
+          field: field_ge_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ','
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
+          center:
+            field_ge_proximity:
+              weight: 0
+              enable: false
+              location_plugin_id: views_proximity_filter
+            fixed_value:
+              weight: 0
+              settings:
+                latitude: ''
+                longitude: ''
+              enable: false
+              location_plugin_id: fixed_value
+            freeogeoip:
+              weight: 0
+              enable: false
+              location_plugin_id: freeogeoip
+            ipstack:
+              weight: 0
+              settings:
+                access_key: ''
+              enable: false
+              location_plugin_id: ipstack
+          display_unit: mi
+          proximity_source: filter
+          proximity_lat: ''
+          proximity_lng: ''
+          proximity_units: km
+          proximity_filter: field_ge_proximity
+          proximity_argument: ''
+          entity_id_argument: ''
+          boundary_filter: ''
+          proximity_geocoder: 0
+          proximity_geocoder_plugin_settings:
+            plugin_id: msc_geocoder
+          plugin_id: geolocation_field_proximity
         rendered_entity:
           id: rendered_entity
           table: node
@@ -2520,6 +2199,14 @@ display:
           entity_field: type
           plugin_id: bundle
         field_ge_proximity:
+          proximity_source: exposed
+          proximity_lat: ''
+          proximity_lng: ''
+          proximity_units: mile
+          proximity_argument: ''
+          entity_id_argument: ''
+          boundary_filter: ''
+          client_location: false
           id: field_ge_proximity
           table: node__field_ge
           field: field_ge_proximity
@@ -2530,18 +2217,15 @@ display:
           value:
             min: ''
             max: ''
-            value: '5'
-            center: ''
+            value: ''
           group: 1
           exposed: true
           expose:
             operator_id: field_ge_proximity_op
-            label: 'Proximity (field_ge)'
+            label: Radius
             description: ''
             use_operator: false
             operator: field_ge_proximity_op
-            operator_limit_selection: false
-            operator_list: {  }
             identifier: proximity
             required: false
             remember: false
@@ -2551,10 +2235,14 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
-              member: '0'
+            input_by_geocoding_widget: 1
+            geocoder_plugin_settings:
+              plugin_id: msc_geocoder
             placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -2567,63 +2255,6 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          location_input:
-            client_location:
-              weight: 0
-              enable: false
-              location_input_id: client_location
-              settings:
-                auto_submit: false
-                hide_form: false
-            coordinates:
-              weight: 0
-              enable: false
-              location_input_id: coordinates
-            geocoder:
-              enable: true
-              settings:
-                plugin_id: msc_geocoder
-                settings:
-                  label: Address
-                  description: 'Enter an address to be localized.'
-                hide_form: true
-                auto_submit: false
-              weight: 0
-              location_input_id: geocoder
-            'fixed_value:fixed_value':
-              settings:
-                location_settings:
-                  settings:
-                    latitude: ''
-                    longitude: ''
-                location_plugin_id: fixed_value
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'ipstack:ipstack':
-              settings:
-                location_settings:
-                  settings:
-                    access_key: ''
-                location_plugin_id: ipstack
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'freeogeoip:freeogeoip':
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-              settings:
-                location_plugin_id: freeogeoip
-          unit: mi
-          proximity_source: exposed
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: mile
-          proximity_argument: ''
-          entity_id_argument: ''
-          boundary_filter: ''
-          client_location: false
           plugin_id: geolocation_filter_proximity
         title:
           id: title
@@ -3047,8 +2678,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'

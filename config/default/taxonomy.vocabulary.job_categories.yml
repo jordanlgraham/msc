@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Job Categories'
 vid: job_categories
 description: 'Categories for job postings.'
-hierarchy: 0
 weight: 0

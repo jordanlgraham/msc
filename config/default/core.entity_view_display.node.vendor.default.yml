@@ -23,7 +23,7 @@ dependencies:
     - address
     - button_link
     - link
-    - media_entity
+    - media
     - user
 id: node.vendor.default
 targetEntityType: node

@@ -97,7 +97,6 @@ description: 'Administrative view for facility content'
 tag: ''
 base_table: node_field_data
 base_field: nid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -5873,6 +5872,9 @@ display:
           entity_field: type
           plugin_id: bundle
           group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         title:
           id: title
           table: node_field_data
@@ -5900,6 +5902,8 @@ display:
               administrator: '0'
               content_author: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -5941,6 +5945,8 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -5983,6 +5989,8 @@ display:
               administrator: '0'
               content_author: '0'
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -12201,6 +12209,9 @@ display:
           entity_field: type
           plugin_id: bundle
           group: 1
+          expose:
+            operator_limit_selection: false
+            operator_list: {  }
         title:
           id: title
           table: node_field_data
@@ -12228,6 +12239,8 @@ display:
               administrator: '0'
               content_author: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -12269,6 +12282,8 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
