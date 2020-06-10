@@ -1,8 +1,0 @@
-uuid: 0777e9fa-7036-4ba8-8a71-79e67a9076a0
-langcode: en
-status: true
-dependencies: {  }
-name: 'HMO Accepted'
-vid: hmo_accepted
-description: ''
-weight: 0

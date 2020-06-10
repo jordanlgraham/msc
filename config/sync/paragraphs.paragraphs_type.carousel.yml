@@ -1,7 +1,0 @@
-uuid: da78b5fb-617f-40a1-9471-01e44926b031
-langcode: en
-status: true
-dependencies: {  }
-id: carousel
-label: 'Carousel Slide'
-behavior_plugins: {  }

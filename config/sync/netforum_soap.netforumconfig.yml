@@ -1,6 +1,0 @@
-netforum_soap:
-  wsdl_address: ''
-  api_username: ''
-  api_password: ''
-_core:
-  default_config_hash: hkCvBb2GZvBMHN0MISKbsRTbeSeLWiJ8OnTQYSRSffI

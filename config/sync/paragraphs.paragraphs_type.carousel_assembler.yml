@@ -1,7 +1,0 @@
-uuid: 3afcc745-1d34-470b-b714-9be1e048ce7a
-langcode: en
-status: true
-dependencies: {  }
-id: carousel_assembler
-label: 'Carousel Assembler'
-behavior_plugins: {  }

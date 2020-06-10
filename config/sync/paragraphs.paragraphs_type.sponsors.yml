@@ -1,9 +1,0 @@
-uuid: 6618d00a-efb4-4cc0-bb2e-41d59c809d99
-langcode: en
-status: true
-dependencies: {  }
-id: sponsors
-label: Sponsors
-icon_uuid: null
-description: 'Add sponsor categories and populate them with nodes.'
-behavior_plugins: {  }

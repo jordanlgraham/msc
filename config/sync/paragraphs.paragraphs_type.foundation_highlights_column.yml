@@ -1,7 +1,0 @@
-uuid: 7b1d4fc8-2e5a-448a-9dc0-a51d3f73b204
-langcode: en
-status: true
-dependencies: {  }
-id: foundation_highlights_column
-label: 'Foundation Highlights Column'
-behavior_plugins: {  }

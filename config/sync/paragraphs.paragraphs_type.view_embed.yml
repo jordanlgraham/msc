@@ -1,7 +1,0 @@
-uuid: 99316723-f776-48cb-b1f7-982bbb5775ba
-langcode: en
-status: true
-dependencies: {  }
-id: view_embed
-label: 'View Embed'
-behavior_plugins: {  }

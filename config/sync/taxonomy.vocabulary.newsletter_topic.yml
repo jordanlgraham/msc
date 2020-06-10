@@ -1,8 +1,0 @@
-uuid: 38f09ed1-2041-4537-9ad1-47397054c33b
-langcode: en
-status: true
-dependencies: {  }
-name: 'Newsletter Topic'
-vid: newsletter_topic
-description: 'For grouping display of articles in newsletters (E-News)'
-weight: 0

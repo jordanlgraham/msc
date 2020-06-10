@@ -39,7 +39,7 @@ if (!empty($lando_info)) {
   $settings['trusted_host_patterns'][] = '\.lndo\.site$';
 
   // Set config directory in Lando local dev environment.
-  $config_directories['sync'] = '/app/config/sync';
+  $config_directories['sync'] = '/app/config/default';
 
   // Load settings.local.php if it exists.
   if (file_exists(__DIR__ . '/settings.local.php')) {

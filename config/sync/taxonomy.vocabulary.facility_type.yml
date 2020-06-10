@@ -1,8 +1,0 @@
-uuid: befee788-5a19-4867-9821-98342e0acf99
-langcode: en
-status: true
-dependencies: {  }
-name: 'Facility Type'
-vid: facility_type
-description: ''
-weight: 0

@@ -1,8 +1,0 @@
-uuid: c3faa513-cd6f-4249-a031-aaf8438d9e97
-langcode: en
-status: true
-dependencies: {  }
-name: 'Resource Category'
-vid: resource_category
-description: 'Category for resource (e.g., Workforce)'
-weight: 0
