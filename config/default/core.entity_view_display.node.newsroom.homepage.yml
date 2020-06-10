@@ -17,7 +17,7 @@ dependencies:
     - node.type.newsroom
   module:
     - datetime
-    - media_entity
+    - media
     - smart_trim
     - user
 id: node.newsroom.homepage
@@ -30,14 +30,14 @@ content:
     type: smart_trim
     weight: 2
     settings:
-      trim_length: '100'
+      trim_length: 100
       trim_type: words
       trim_suffix: ''
-      more_link: '0'
+      more_link: false
       more_text: More
       summary_handler: full
       trim_options:
-        text: text
+        text: true
       more_class: more-link
     third_party_settings: {  }
     region: content

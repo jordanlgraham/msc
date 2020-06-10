@@ -17,7 +17,7 @@ dependencies:
   module:
     - datetime
     - link
-    - media_entity
+    - media
     - text
     - user
 id: node.newsroom.default

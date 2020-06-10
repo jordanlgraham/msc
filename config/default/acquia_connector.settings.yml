@@ -14,7 +14,6 @@ spi:
   def_vars: {  }
   def_waived_vars: {  }
   def_timestamp: 0
-  new_optional_data: 1
   admin_priv: 1
   send_node_user: 1
   send_watchdog: 1
@@ -174,30 +173,3 @@ mapping:
     - http.response.debug_cacheability_headers
 _core:
   default_config_hash: RMNSHwzDEdSNEB31EpdvLaYowqBXRGgxKMoLkcRTMPU
-subscription_data:
-  active: true
-  href: 'https://insight.acquia.com/node/uuid/a885e6ad-3b1c-4c0f-835b-3c06735e1875/dashboard'
-  uuid: a885e6ad-3b1c-4c0f-835b-3c06735e1875
-  subscription_name: 'Mass Senior Care'
-  expiration_date:
-    value: '2020-08-01T00:00:00'
-  product:
-    view: 'Acquia Network'
-  derived_key_salt: 571e441f9b5b0286cc7342e9b8b27e03
-  update_service: '1'
-  search_service_enabled: 1
-  rpc_version: '3.1'
-  update: {  }
-  heartbeat_data:
-    acquia_lift:
-      status: false
-      decision:
-        public_key: ''
-        private_key: ''
-      profile:
-        account_name: ''
-        hostname: ''
-        public_key: ''
-        secret_key: ''
-        js_path: ''
-    search_service_enabled: 1

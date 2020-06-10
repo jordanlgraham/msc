@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Vendor Services Offered'
 vid: vendor_services_offered
 description: 'List of services offered by vendors'
-hierarchy: 0
 weight: 0

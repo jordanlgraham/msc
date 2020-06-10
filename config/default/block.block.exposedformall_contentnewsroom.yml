@@ -23,7 +23,7 @@ settings:
   id: 'views_exposed_filter_block:all_content-newsroom'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: 'Search Newsroom'
 visibility:
   request_path:

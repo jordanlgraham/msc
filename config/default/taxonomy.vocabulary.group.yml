@@ -5,5 +5,4 @@ dependencies: {  }
 name: Group
 vid: group
 description: 'Groups for content access control'
-hierarchy: 0
 weight: 0

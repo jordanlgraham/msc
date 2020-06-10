@@ -19,7 +19,6 @@ description: ''
 tag: ''
 base_table: node_field_data
 base_field: nid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -137,6 +136,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         type:
           id: type
@@ -163,6 +164,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -204,7 +207,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: 'Mass Senior Care would like to thank all of our generous sponsors who supported the 2019 Annual Meeting & Trade Show.'
+            value: 'Mass Senior Care would like to thank all of our generous sponsors. '
             format: basic_html
           plugin_id: text
       footer:
@@ -218,7 +221,7 @@ display:
           empty: false
           tokenize: false
           content:
-            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/2019-annual-meeting-trade-show" class="btn btn-primary">View All Sponsors</a>'
+            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/2020-spring-conference-trade-show" class="btn btn-primary">View All Sponsors</a>'
             format: full_html
           plugin_id: text
       empty: {  }

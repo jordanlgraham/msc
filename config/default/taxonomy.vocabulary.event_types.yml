@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Event Types'
 vid: event_types
 description: 'Type of Education/Event (e.g., webinar).'
-hierarchy: 0
 weight: 0

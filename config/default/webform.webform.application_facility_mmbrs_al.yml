@@ -11,15 +11,19 @@ id: application_facility_mmbrs_al
 title: 'Application for Facility Membership - AL'
 description: ''
 category: ''
-elements: "date:\n  '#type': date\n  '#title': Date\n  '#datepicker': true\nname_of_facility:\n  '#type': textfield\n  '#title': 'Name of Facility'\ntelephone:\n  '#type': tel\n  '#title': Telephone\naddress_information:\n  '#type': webform_section\n  '#title': 'Address Information'\n  address:\n    '#type': webform_address\n    '#title': Address\n    '#title_display': ''\n    '#address_2__access': false\n    '#country__access': false\nfax_number:\n  '#type': tel\n  '#title': 'Fax Number'\nfacility_website:\n  '#type': url\n  '#title': 'Facility Website'\nnumber_of_beds:\n  '#type': webform_section\n  '#title': 'Number of Beds'\n  assisted_living_units:\n    '#type': number\n    '#title': 'Assisted Living Units'\n  independent_living_units:\n    '#type': number\n    '#title': 'Independent Living Units'\n  other:\n    '#type': textfield\n    '#title': Other\n  other_number_of_beds:\n    '#type': number\n    '#title': 'Other Number of Beds'\n    '#states':\n      visible:\n        ':input[name=\"other\"]':\n          filled: true\n  total_beds:\n    '#type': number\n    '#title': 'Total Beds'\n    '#states':\n      enabled:\n        -\n          ':input[name=\"assisted_living_units\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"skilled_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"intermediate_care_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"residential_care_beds_level_iv_\"]':\n            filled: true\n  apartment_types:\n    '#type': webform_section\n    '#title': 'Apartment Types'\n    '#title_tag': h3\n    apartment_types_studio_:\n      '#type': number\n      '#title': 'Studio '\n    one_bedroom:\n      '#type': number\n      '#title': 'One Bedroom'\n    two_bedroom:\n      '#type': number\n      '#title': 'Two Bedroom'\nmonthly_fee_range:\n  '#type': webform_section\n  '#title': 'Monthly Fee Range'\n  '#title_tag': h3\n  minimum_:\n    '#type': number\n    '#title': 'Minimum $'\n    '#title_display': inline\n  maximum_:\n    '#type': number\n    '#title': 'Maximum $'\n    '#title_display': inline\nincome_subsidies_other_than_g_a_f_c_:\n  '#type': checkboxes\n  '#title': 'Income Subsidies (other than G.A.F.C.)?'\n  '#options': yes_no\nis_your_residence_a_special_care_residence_or_have_special_care_:\n  '#type': checkboxes\n  '#title': 'Is your Residence a Special Care Residence or have Special Care Residence units as defined by the Executive Office of Elder Affairs? Y or N'\n  '#options': yes_no\ndate_acquired_:\n  '#type': date\n  '#title': 'Date Acquired '\n  '#datepicker': true\nyear_of_original_certification:\n  '#type': datelist\n  '#title': 'Year of Original Certification'\n  '#date_part_order':\n    - year\ndo_you_or_your_organization_own_any_other_facilities_in_massachu:\n  '#type': checkbox\n  '#title': 'Do you or your organization own any other facilities in Massachusetts?'\n  '#title_display': before\ntype_of_ownership:\n  '#type': webform_section\n  '#title': 'Type of Ownership'\n  proprietary:\n    '#type': checkbox\n    '#title': Proprietary\n  non_profit:\n    '#type': checkbox\n    '#title': Non-Profit\nlegal_ownership:\n  '#type': webform_section\n  '#title': 'Legal Ownership'\n  proprietorship:\n    '#type': checkbox\n    '#title': Proprietorship\n  partnership:\n    '#type': checkbox\n    '#title': Partnership\n  corporation:\n    '#type': checkbox\n    '#title': Corporation\nnames_of_owner_partners_members_of_corporation:\n  '#type': textarea\n  '#title': 'Names of Owner, Partners, Members of Corporation'\n  '#rows': '6'\nname_of_administrator_executive_director:\n  '#type': textfield\n  '#title': 'Name of Administrator/Executive Director'\nadministrator_email:\n  '#type': email\n  '#title': 'Administrator Email'\nnames_of_person_state_position_who_will_represent_the_facility_i:\n  '#type': textfield\n  '#title': 'Names of Person (state position) who will represent the facility in the Association if not Administrator'\nreferences_minimum_of_2_:\n  '#type': webform_section\n  '#title': 'References (minimum of 2)'\n  physician_hospital_or_other_nursing_home_and_or_commercial_or_ba:\n    '#type': textfield\n    '#title': 'physician, hospital or other nursing home and/or commercial or banking and finance (for organizations, please name individual to contact).  Please supply the names and telephone numbers.'\n    '#multiple': 3\n    '#multiple__min_items': '2'\n    '#multiple__sorting': false\n    '#multiple__operations': false\nagreement:\n  '#type': webform_section\n  '#title': Agreement\n  '#description': '<p class=\"MsoBodyText3\"><span style=\"font-family:&quot;Gill Sans MT&quot;\">If accepted to membership, I pledge, on behalf of the facility, to abide by the laws, bylaws, and professional ethics and standards of the Massachusetts Senior Care Association.&nbsp; In the event of termination of membership, it is hereby agreed that any and all certificates and other indications of membership will be promptly surrendered.</span></p>'\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
+elements: "date:\n  '#type': date\n  '#title': Date\n  '#datepicker': true\nname_of_facility:\n  '#type': textfield\n  '#title': 'Name of Facility'\ntelephone:\n  '#type': tel\n  '#title': Telephone\naddress_information:\n  '#type': webform_section\n  '#title': 'Address Information'\n  address:\n    '#type': webform_address\n    '#title': Address\n    '#title_display': ''\n    '#address_2__access': false\n    '#country__access': false\nfax_number:\n  '#type': tel\n  '#title': 'Fax Number'\nfacility_website:\n  '#type': url\n  '#title': 'Facility Website'\nnumber_of_beds:\n  '#type': webform_section\n  '#title': 'Number of Beds'\n  assisted_living_units:\n    '#type': number\n    '#title': 'Assisted Living Units'\n  independent_living_units:\n    '#type': number\n    '#title': 'Independent Living Units'\n  other:\n    '#type': textfield\n    '#title': Other\n  other_number_of_beds:\n    '#type': number\n    '#title': 'Other Number of Beds'\n    '#states':\n      visible:\n        ':input[name=\"other\"]':\n          filled: true\n  total_beds:\n    '#type': number\n    '#title': 'Total Beds'\n    '#states':\n      enabled:\n        -\n          ':input[name=\"assisted_living_units\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"skilled_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"intermediate_care_beds\"]':\n            filled: true\n        - or\n        -\n          ':input[name=\"residential_care_beds_level_iv_\"]':\n            filled: true\n  apartment_types:\n    '#type': webform_section\n    '#title': 'Apartment Types'\n    '#title_tag': h3\n    apartment_types_studio_:\n      '#type': number\n      '#title': 'Studio '\n    one_bedroom:\n      '#type': number\n      '#title': 'One Bedroom'\n    two_bedroom:\n      '#type': number\n      '#title': 'Two Bedroom'\nmonthly_fee_range:\n  '#type': webform_section\n  '#title': 'Monthly Fee Range'\n  '#title_tag': h3\n  minimum_:\n    '#type': number\n    '#title': 'Minimum $'\n    '#title_display': inline\n  maximum_:\n    '#type': number\n    '#title': 'Maximum $'\n    '#title_display': inline\nincome_subsidies_other_than_g_a_f_c_:\n  '#type': checkboxes\n  '#title': 'Income Subsidies (other than G.A.F.C.)?'\n  '#options': yes_no\nis_your_residence_a_special_care_residence_or_have_special_care_:\n  '#type': checkboxes\n  '#title': 'Is your Residence a Special Care Residence or have Special Care Residence units as defined by the Executive Office of Elder Affairs? Y or N'\n  '#options': yes_no\ndate_acquired_:\n  '#type': date\n  '#title': 'Date Acquired '\n  '#datepicker': true\nyear_of_original_certification:\n  '#type': datelist\n  '#title': 'Year of Original Certification'\n  '#date_part_order':\n    - year\ndo_you_or_your_organization_own_any_other_facilities_in_massachu:\n  '#type': checkbox\n  '#title': 'Do you or your organization own any other facilities in Massachusetts?'\n  '#title_display': before\ntype_of_ownership:\n  '#type': webform_section\n  '#title': 'Type of Ownership'\n  proprietary:\n    '#type': checkbox\n    '#title': Proprietary\n  non_profit:\n    '#type': checkbox\n    '#title': Non-Profit\nlegal_ownership:\n  '#type': webform_section\n  '#title': 'Legal Ownership'\n  proprietorship:\n    '#type': checkbox\n    '#title': Proprietorship\n  partnership:\n    '#type': checkbox\n    '#title': Partnership\n  corporation:\n    '#type': checkbox\n    '#title': Corporation\nnames_of_owner_partners_members_of_corporation:\n  '#type': textarea\n  '#title': 'Names of Owner, Partners, Members of Corporation'\n  '#rows': 6\nname_of_administrator_executive_director:\n  '#type': textfield\n  '#title': 'Name of Administrator/Executive Director'\nadministrator_email:\n  '#type': email\n  '#title': 'Administrator Email'\nnames_of_person_state_position_who_will_represent_the_facility_i:\n  '#type': textfield\n  '#title': 'Names of Person (state position) who will represent the facility in the Association if not Administrator'\nreferences_minimum_of_2_:\n  '#type': webform_section\n  '#title': 'References (minimum of 2)'\n  physician_hospital_or_other_nursing_home_and_or_commercial_or_ba:\n    '#type': textfield\n    '#title': 'physician, hospital or other nursing home and/or commercial or banking and finance (for organizations, please name individual to contact).  Please supply the names and telephone numbers.'\n    '#multiple': 3\n    '#multiple__min_items': 2\n    '#multiple__sorting': false\n    '#multiple__operations': false\nagreement:\n  '#type': webform_section\n  '#title': Agreement\n  '#description': '<p class=\"MsoBodyText3\"><span style=\"font-family:&quot;Gill Sans MT&quot;\">If accepted to membership, I pledge, on behalf of the facility, to abide by the laws, bylaws, and professional ethics and standards of the Massachusetts Senior Care Association.&nbsp; In the event of termination of membership, it is hereby agreed that any and all certificates and other indications of membership will be promptly surrendered.</span></p>'\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
 css: ''
 javascript: ''
 settings:
   ajax: false
   ajax_scroll_top: form
+  ajax_progress_type: ''
+  ajax_effect: ''
+  ajax_speed: null
   page: true
   page_submit_path: ''
   page_confirm_path: ''
+  page_admin_theme: false
   form_title: both
   form_submit_once: false
   form_exception_message: ''
@@ -73,6 +77,7 @@ settings:
   wizard_progress_pages: false
   wizard_progress_percentage: false
   wizard_progress_link: false
+  wizard_progress_states: false
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
@@ -91,6 +96,8 @@ settings:
   draft_auto_save: false
   draft_saved_message: ''
   draft_loaded_message: ''
+  draft_pending_single_message: ''
+  draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
   confirmation_message: ''
@@ -101,6 +108,7 @@ settings:
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
   confirmation_exclude_token: false
+  confirmation_update: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -117,6 +125,8 @@ settings:
   purge_days: null
   results_disabled: false
   results_disabled_ignore: false
+  results_customize: false
+  token_view: false
   token_update: false
 access:
   create:
@@ -191,6 +201,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -200,6 +211,7 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
   notification_email:
     id: email
     label: 'Notification Email'
@@ -225,6 +237,7 @@ handlers:
       ignore_access: false
       exclude_empty: true
       exclude_empty_checkbox: false
+      exclude_attachments: false
       html: true
       attachments: false
       twig: false
@@ -234,4 +247,6 @@ handlers:
       sender_mail: ''
       sender_name: ''
       theme_name: ''
+      parameters: {  }
+variants: {  }
 uuid: 681e82c8-7619-46e5-a701-d1bd97c230ca

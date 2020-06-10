@@ -10,9 +10,6 @@ dependencies:
     - views
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: exposedformfacility_searchpage_1
 theme: msca_theme
 region: sidebar_first
@@ -23,7 +20,7 @@ settings:
   id: 'views_exposed_filter_block:facility_search-page_1'
   label: ''
   provider: views
-  label_display: visible
+  label_display: '0'
   views_label: ''
 visibility:
   request_path:

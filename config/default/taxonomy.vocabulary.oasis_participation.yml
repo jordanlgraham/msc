@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'OASIS Participation'
 vid: oasis_participation
 description: ''
-hierarchy: 0
 weight: 0

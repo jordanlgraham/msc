@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.node.field_scholar_image
-    - media_entity.bundle.image
+    - media.type.image
     - node.type.scholarships
 id: node.scholarships.field_scholar_image
 field_name: field_scholar_image

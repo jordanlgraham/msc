@@ -139,8 +139,8 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: ‹‹
-            next: ››
+            previous: â€¹â€¹
+            next: â€ºâ€º
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -1388,8 +1388,8 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: '‹ Previous'
-            next: 'Next ›'
+            previous: 'â€¹ Previous'
+            next: 'Next â€º'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -2150,8 +2150,8 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: ‹‹
-            next: ››
+            previous: â€¹â€¹
+            next: â€ºâ€º
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'

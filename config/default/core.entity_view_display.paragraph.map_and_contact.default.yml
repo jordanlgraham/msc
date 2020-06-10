@@ -26,14 +26,17 @@ content:
     weight: 0
     label: hidden
     settings:
-      set_marker: '1'
+      set_marker: true
       title: 'Massachusetts Senior Care'
       info_text: "<div class=\"location-content\">\n  <div class=\"map-address\">800 South Street - Suite 280<br>\nWaltham, MA 02453<br>\n<a href=\"/\">Directions/Parking</a>\n</div>\n<br>\n  <table>\n    <tbody>\n      <tr>\n        <td><i class=\"fa fa-envelope-o\" aria-hidden=\"true\"></i></td>\n        <td><a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a></td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-phone\" aria-hidden=\"true\"></i></td>\n        <td>+1 (617) 558-0202<br>\n            +1 (800) CARE-FOR</td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-fax\" aria-hidden=\"true\"></i></td>\n        <td>Fax (617) 558-3546</td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
-      google_map_settings:
+      use_overridden_map_settings: false
+      common_map: false
+      map_provider_id: google_maps
+      map_provider_settings:
         height: 750px
         width: 100%
         type: ROADMAP
-        zoom: '15'
+        zoom: 15
         maxZoom: 18
         minZoom: 0
         zoomControl: 1
@@ -45,13 +48,11 @@ content:
         marker_icon_path: ''
         mapTypeControl: 0
         streetViewControl: 0
-        rotateControl: 0
+        rotateControl: false
         fullscreenControl: 0
         preferScrollingToZooming: 0
         disableDoubleClickZoom: 0
         disableAutoPan: 0
-      use_overridden_map_settings: 0
-      common_map: ''
     third_party_settings: {  }
     type: geolocation_map
     region: content

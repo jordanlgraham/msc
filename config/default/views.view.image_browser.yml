@@ -4,10 +4,10 @@ status: true
 dependencies:
   config:
     - image.style.cropped_preview_thumbnail
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - entity_browser
-    - media_entity
+    - media
     - svg_image
     - user
 id: image_browser
@@ -17,7 +17,6 @@ description: 'For use with Media embed button'
 tag: ''
 base_table: media_field_data
 base_field: mid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -261,6 +260,8 @@ display:
           id: status
           expose:
             operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
           group: 1
         bundle:
           id: bundle
@@ -287,6 +288,8 @@ display:
             remember_roles:
               authenticated: authenticated
             reduce: false
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''

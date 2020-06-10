@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media_entity.bundle.image
+    - media.type.image
   content:
     - 'file:file:bf44dafa-157a-432a-837d-ff17db1cc798'
   module:
     - entity_embed
-    - media_entity
+    - media
 _core:
   default_config_hash: yDF6LgE9PjFsaJNdFK5ULMMfUz9LaTu15HpoyUREzbA
 label: 'Media Entity Embed'
