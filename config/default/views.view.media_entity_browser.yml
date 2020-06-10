@@ -1,0 +1,4 @@
+display:
+  default:
+    display_options:
+      css_class: view-media-entity-browser-view
