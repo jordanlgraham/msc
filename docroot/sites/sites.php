@@ -60,6 +60,7 @@ $sites['foundation-test.msca'] = 'foundation';
 $sites['dev.maseniorcarefoundation.org'] = 'foundation';
 $sites['stage.maseniorcarefoundation.org'] = 'foundation';
 $sites['www.maseniorcarefoundation.org'] = 'foundation';
+$sites['maseniorcarefoundation.org'] = 'foundation';
 
 if (file_exists($app_root . '/sites/sites.local.php')) {
   include $app_root . '/sites/sites.local.php';
