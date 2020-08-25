@@ -1,0 +1,6 @@
+name: ABT
+description: Module to resolve missing ABT module issue.
+package: Custom
+
+type: module
+core: 8.x
