@@ -31,6 +31,7 @@
         "drupal/core-recommended": "^8.8",
         "drupal/ctools": "3.0.0",
         "drupal/current_page_crumb": "1.1",
+        "drupal/devel_entity_updates": "^3.0",
         "drupal/easy_breadcrumb": "1.6",
         "drupal/editor_advanced_link": "1.4",
         "drupal/editor_file": "1.2",
