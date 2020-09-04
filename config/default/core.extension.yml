@@ -1,4 +1,5 @@
 module:
+  abt: 0
   acquia_connector: 0
   address: 0
   admin_toolbar: 0
@@ -12,7 +13,6 @@ module:
   block_content: 0
   breakpoint: 0
   button_link: 0
-  captcha: 0
   ckeditor: 0
   color: 0
   comment: 0
@@ -28,6 +28,8 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
+  devel: 0
+  devel_entity_updates: 0
   dynamic_page_cache: 0
   easy_breadcrumb: 0
   editor: 0
@@ -57,10 +59,8 @@ module:
   geocoder_field: 0
   geolocation: 0
   geolocation_google_maps: 0
-  google_analytics: 0
   help: 0
   history: 0
-  honeypot: 0
   image: 0
   image_widget_crop: 0
   inline_entity_form: 0
@@ -75,10 +75,8 @@ module:
   metatag_facebook: 0
   metatag_google_plus: 0
   metatag_open_graph: 0
-  module_filter: 0
   msc_button_link_social: 0
   msca_access: 0
-  msca_constant_contact: 0
   msca_discourse: 0
   msca_donate: 0
   msca_job: 0
@@ -87,7 +85,6 @@ module:
   netforum_event_sync: 0
   netforum_org_sync: 0
   netforum_soap: 0
-  netforum_user_auth: 0
   node: 0
   options: 0
   page_cache: 0
@@ -97,7 +94,6 @@ module:
   quickedit: 0
   rdf: 0
   real_magnet: 0
-  recaptcha: 0
   redirect: 0
   redirect_404: 0
   responsive_image: 0
@@ -116,7 +112,7 @@ module:
   toolbar: 0
   tour: 0
   twig_tweak: 0
-  twig_xdebug: 0
+  update: 0
   user: 0
   vendor_search: 0
   views_infinite_scroll: 0

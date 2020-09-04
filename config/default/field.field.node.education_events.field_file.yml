@@ -19,7 +19,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   file_directory: events/files
-  file_extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods jpg'
+  file_extensions: 'txt pdf doc xls jpg'
   max_filesize: 10MB
   description_field: true
   handler: 'default:file'

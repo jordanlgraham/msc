@@ -1,0 +1,36 @@
+uuid: 67170e71-9f7a-4f5f-8d2b-5ea5eec2c6a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_restrict_to_groups
+    - node.type.page
+    - taxonomy.vocabulary.group
+  module:
+    - abt
+third_party_settings:
+  abt:
+    abt_enable_view_control: '2'
+    abt_enable_update_control: '2'
+    abt_enable_delete_control: '1'
+    user_field: field_groups
+id: node.page.field_restrict_to_groups
+field_name: field_restrict_to_groups
+entity_type: node
+bundle: page
+label: 'Restrict to group(s)'
+description: 'Enter the group(s) that this node should be restricted to. Anonymous visitors and authenticated users who are not members of this  group will be denied access.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      group: group
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

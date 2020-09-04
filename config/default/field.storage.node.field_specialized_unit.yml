@@ -15,6 +15,9 @@ settings:
       value: 'ABI/TBI Unit'
       label: 'ABI/TBI Unit'
     -
+      value: 'Alzheimer''s Unit'
+      label: 'Alzheimer''s Unit'
+    -
       value: 'Dementia Special Care Unit'
       label: 'Dementia Special Care Unit'
     -

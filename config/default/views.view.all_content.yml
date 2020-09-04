@@ -14,8 +14,6 @@ dependencies:
     - taxonomy.vocabulary.event_types
     - taxonomy.vocabulary.news_types
     - taxonomy.vocabulary.tags
-  content:
-    - 'taxonomy_term:tags:d0a8bcae-f09f-4616-801e-04bf60c9815f'
   module:
     - better_exposed_filters
     - datetime
@@ -2203,7 +2201,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          order: ASC
+          order: DESC
           exposed: false
           expose:
             label: ''
