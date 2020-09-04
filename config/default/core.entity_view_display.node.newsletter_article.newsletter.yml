@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_tags
+    - image.style.thumbnail
     - node.type.newsletter_article
   module:
     - datetime
@@ -36,18 +37,15 @@ content:
     type: smart_trim
     weight: 2
     settings:
-      trim_length: 30
+      trim_length: 80
       trim_type: words
       trim_suffix: ''
-      wrap_class: trimmed
+      more_link: false
       more_text: More
-      more_class: more-link
       summary_handler: full
       trim_options:
         text: true
-        trim_zero: false
-      wrap_output: false
-      more_link: false
+      more_class: more-link
     third_party_settings: {  }
     region: content
   field_news_release_date:
@@ -65,8 +63,8 @@ content:
     region: content
     label: hidden
     settings:
-      image_style: ''
-      image_link: content
+      image_style: thumbnail
+      image_link: ''
     third_party_settings: {  }
 hidden:
   entity_print_view_epub: true

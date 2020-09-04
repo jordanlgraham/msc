@@ -1,5 +1,3 @@
-ignored_config_entities:
-  0: 'block.block.donateform*'
-  2: 'webform.webform.*'
+ignored_config_entities: {  }
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

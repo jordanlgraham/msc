@@ -19,7 +19,7 @@ default_value: {  }
 default_value_callback: ''
 settings:
   file_directory: resources
-  file_extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods'
+  file_extensions: 'txt pdf doc docx'
   max_filesize: 20MB
   description_field: true
   handler: 'default:file'

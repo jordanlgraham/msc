@@ -1,7 +1,0 @@
-uuid: b2d70605-fd8d-4e3d-8315-d3fcf021b57f
-langcode: en
-status: false
-dependencies: {  }
-formId: node_scholarship_recipient_form
-captchaType: default
-label: null

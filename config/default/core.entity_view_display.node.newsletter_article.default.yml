@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_tags
+    - image.style.thumbnail
     - node.type.newsletter_article
   module:
     - datetime
@@ -74,7 +75,7 @@ content:
     weight: 2
     label: hidden
     settings:
-      image_style: ''
+      image_style: thumbnail
       image_link: ''
     third_party_settings: {  }
     type: media_thumbnail
