@@ -73,8 +73,15 @@ function _facility_search_get_coordinates($zip) {
 
   $response = curl_exec($curl);
   $response_json = json_decode($response);
-  $coordinates['latitude'] = $response_json->results[0]->locations[0]->latLng->lat;
-  $coordinates['longitude'] = $response_json->results[0]->locations[0]->latLng->lng;
+
+  // Filter out results for ZIP codes that come from other countries.
+  foreach ($response_json->results[0]->locations as $location) {
+    if ($location->adminArea1 == "US" && $location->adminArea3 = "MA") {
+      $coordinates['latitude'] = $location->latLng->lat;
+      $coordinates['longitude'] = $location->latLng->lng;
+    }
+  }
+
   $err = curl_error($curl);
 
   curl_close($curl);
