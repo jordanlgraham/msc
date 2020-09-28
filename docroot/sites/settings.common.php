@@ -771,7 +771,7 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 // </DDSETTINGS>
 
 // Real Magnet API credentials config override
-if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+if (isset($_ENV['AH_SITE_ENVIRONMENT']) && $_ENV['AH_SITE_ENVIRONMENT'] !== 'local') {
   //set private_path
   $private_path = '/mnt/files/' . $_ENV['AH_SITE_GROUP'] . '.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
   if (file_exists($private_path . '/real_magnet_settings.php')) {
