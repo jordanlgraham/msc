@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update facilities with empty geolocation fields.
+ */
+function facility_search_update_8001(&$sandbox) {
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'facility']);
+
+  foreach ($nodes as $node) {
+    if (!empty($node->field_ge->lng) && !empty($node->field_ge->lat)) {
+      continue;
+    }
+    if (!empty($node->field_address->postal_code)) {
+      $zip = $node->field_address->postal_code;
+      $coordinates = _facility_search_get_coordinates_update($zip);
+      \Drupal::messenger()->addMessage('The following facility had its coordinates saved: ' . $node->getTitle());
+      $node->set('field_ge', ['lat' => (int) $coordinates['latitude'], 'lng' => (int) $coordinates['longitude']]);
+      $node->save();
+    }
+  }
+
+}
+
+function _facility_search_get_coordinates_update($zip) {
+  $curl = curl_init();
+  $coordinates = array();
+  $options = _get_curl_options_update($zip);
+  curl_setopt_array($curl, $options);
+
+  $response = curl_exec($curl);
+  $response_json = json_decode($response);
+
+  // Filter out results for ZIP codes that come from other countries.
+  foreach ($response_json->results[0]->locations as $location) {
+    if ($location->adminArea1 == "US" && $location->adminArea3 = "MA") {
+      $coordinates['latitude'] = $location->latLng->lat;
+      $coordinates['longitude'] = $location->latLng->lng;
+    }
+  }
+
+  $err = curl_error($curl);
+
+  curl_close($curl);
+  return $coordinates;
+}
+
+function _get_curl_options_update($zip) {
+  $config = \Drupal::config('mapquest.open');
+  $key = $config->get('key');
+  return [
+    CURLOPT_URL => "https://open.mapquestapi.com/geocoding/v1/address?key=$key&location=$zip",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+    CURLOPT_POSTFIELDS => "",
+  ];
+}
