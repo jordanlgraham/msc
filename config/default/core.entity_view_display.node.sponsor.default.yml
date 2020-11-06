@@ -71,6 +71,10 @@ content:
     settings:
       image_style: sponsor_logo_large_190x110_
       image_link: ''
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
     third_party_settings: {  }
   field_primary_services:
     weight: 7
@@ -96,7 +100,7 @@ content:
     weight: 4
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: 120
       url_only: true
       url_plain: true
       target: _blank
