@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_cst_key
+    - field.field.user.user.field_full_name
     - field.field.user.user.field_groups
     - field.field.user.user.user_picture
     - image.style.thumbnail
@@ -16,6 +18,22 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  field_cst_key:
+    weight: 53
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_full_name:
+    weight: 52
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_groups:
     weight: 51
     label: above

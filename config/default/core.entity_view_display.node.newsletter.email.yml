@@ -25,16 +25,16 @@ mode: email
 content:
   field_calendar:
     type: entity_reference_entity_view
-    weight: 4
+    weight: 5
     region: content
     label: hidden
     settings:
-      view_mode: calendar
+      view_mode: newsletter
       link: false
     third_party_settings: {  }
   field_featured_article:
     type: entity_reference_entity_view
-    weight: 2
+    weight: 1
     region: content
     label: above
     settings:
@@ -42,7 +42,7 @@ content:
       link: false
     third_party_settings: {  }
   field_newsletter_date:
-    weight: 1
+    weight: 3
     label: hidden
     settings:
       timezone_override: ''
@@ -52,7 +52,7 @@ content:
     region: content
   field_newsletter_section:
     type: entity_reference_revisions_entity_view
-    weight: 3
+    weight: 2
     region: content
     label: hidden
     settings:
@@ -61,12 +61,20 @@ content:
     third_party_settings: {  }
   field_sponsor:
     type: entity_reference_entity_view
-    weight: 5
+    weight: 4
     region: content
     label: hidden
     settings:
-      view_mode: email
+      view_mode: newsletter
       link: false
+    third_party_settings: {  }
+  field_tags:
+    type: entity_reference_label
+    weight: 6
+    region: content
+    label: above
+    settings:
+      link: true
     third_party_settings: {  }
   links:
     weight: 0
@@ -78,4 +86,3 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_gated: true
-  field_tags: true

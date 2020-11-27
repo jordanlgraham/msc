@@ -16,12 +16,7 @@ class NetforumSso extends ControllerBase {
   const NETFORUM_REDIRECT_URL_KEY = 'nfUrl';
 
   public function login(Request $request) {
-    if ($this->currentUser()->isAuthenticated()) {
-      return $this->formBuilder()->getForm(NetforumLogin::class);
-    }
-    else {
-      return $this->getLogin($request);
-    }
+    return $this->formBuilder()->getForm(NetforumLogin::class);
   }
 
   protected function netforumRedirect($request) {

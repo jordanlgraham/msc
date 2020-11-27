@@ -1,0 +1,29 @@
+uuid: 6b90954b-bb72-4d51-bd08-099ddf2d3de9
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:8147e3ed-952e-46d8-ba48-196709c933fa'
+  module:
+    - block_class
+    - block_content
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: 'site-footer-right col-md-6'
+id: footeraffiliates
+theme: msca_theme
+region: footer
+weight: -20
+provider: null
+plugin: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
+settings:
+  id: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
+  label: FooterAffiliates
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

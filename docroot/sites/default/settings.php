@@ -9,7 +9,11 @@ if (file_exists('/var/www/site-php')) {
 
 // Google Analytics Config for Production Only
 if (!empty($_ENV['AH_PRODUCTION'])) {
-  $config['google_analytics.settings']['account'] = "UA-19805426-1";
+  $config['google_analytics.settings']['account'] = "UA-176994039-1";
+  // Set a different Google Analytics key for Mass Senior Care Foundation site.
+  if (stristr($_SERVER["HTTP_HOST"], 'maseniorcarefoundation')) {
+    $config['google_analytics.settings']['account'] = "UA-177034085-1";
+  }
 }
 
 // Include local settings.

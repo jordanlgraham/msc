@@ -7,7 +7,6 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_gated
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_restrict_to_groups
     - node.type.page
   module:
     - entity_browser_entity_form
@@ -59,16 +58,6 @@ content:
       entity_browser_entity_form:
         entity_browser_id: _none
     type: inline_entity_form_complex
-    region: content
-  field_restrict_to_groups:
-    weight: 4
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-      match_limit: 10
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   path:
     type: path
