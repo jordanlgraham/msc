@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d257675f7552f666bac3816ccebd4f18",
+    "content-hash": "e66be58714140177c500899702950d53",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -4445,26 +4445,26 @@
         },
         {
             "name": "drupal/fast_404",
-            "version": "1.0.0-alpha5",
+            "version": "2.0.0-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/fast_404.git",
-                "reference": "8.x-1.0-alpha5"
+                "reference": "8.x-2.0-alpha5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/fast_404-8.x-1.0-alpha5.zip",
-                "reference": "8.x-1.0-alpha5",
-                "shasum": "5458ae6f35fce2463666d5d2c8991181dd0621e5"
+                "url": "https://ftp.drupal.org/files/projects/fast_404-8.x-2.0-alpha5.zip",
+                "reference": "8.x-2.0-alpha5",
+                "shasum": "071518c28f73ed011068ec0dbfe07a5904b8f982"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8.8"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-alpha5",
-                    "datestamp": "1585347457",
+                    "version": "8.x-2.0-alpha5",
+                    "datestamp": "1590876049",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -5317,29 +5317,29 @@
         },
         {
             "name": "drupal/insert",
-            "version": "1.0.0-beta1",
+            "version": "2.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/insert.git",
-                "reference": "8.x-1.0-beta1"
+                "reference": "8.x-2.0-beta2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/insert-8.x-1.0-beta1.zip",
-                "reference": "8.x-1.0-beta1",
-                "shasum": "7417e12b61cd4f36bce615fd5d0d61f2c1cd74a6"
+                "url": "https://ftp.drupal.org/files/projects/insert-8.x-2.0-beta2.zip",
+                "reference": "8.x-2.0-beta2",
+                "shasum": "a8231c17020a7fab94444b0122741f9ccd60b5dc"
             },
             "require": {
-                "drupal/core": "*"
+                "drupal/core": "^8 || ^9"
+            },
+            "require-dev": {
+                "drupal/colorbox": "*"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-1.0-beta1",
-                    "datestamp": "1514827685",
+                    "version": "8.x-2.0-beta2",
+                    "datestamp": "1597166250",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -5352,6 +5352,10 @@
             ],
             "authors": [
                 {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
                     "name": "Snater",
                     "homepage": "https://www.drupal.org/user/3513717"
                 },
@@ -5360,7 +5364,7 @@
                     "homepage": "https://www.drupal.org/user/35821"
                 }
             ],
-            "description": "Assists in inserting files, images, or other media into the body field or other text areas.",
+            "description": "Assists in inserting files, images, or other media into the body field as well as other editor and text areas.",
             "homepage": "https://www.drupal.org/project/insert",
             "support": {
                 "source": "https://git.drupalcode.org/project/insert"
@@ -5385,9 +5389,6 @@
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
                     "version": "8.x-1.4",
                     "datestamp": "1523761084",
@@ -5407,8 +5408,20 @@
                     "homepage": "https://www.drupal.org/user/324696"
                 },
                 {
+                    "name": "Neslee Canil Pinto",
+                    "homepage": "https://www.drupal.org/user/3580850"
+                },
+                {
+                    "name": "gisle",
+                    "homepage": "https://www.drupal.org/user/409554"
+                },
+                {
                     "name": "plopesc",
                     "homepage": "https://www.drupal.org/user/282415"
+                },
+                {
+                    "name": "podarok",
+                    "homepage": "https://www.drupal.org/user/116002"
                 }
             ],
             "description": "Creates a jQuery colorpicker field and form element",
@@ -12479,6 +12492,7 @@
         "drupal/fast_404": 15,
         "drupal/field_group": 20,
         "drupal/geofield": 15,
+        "drupal/insert": 10,
         "drupal/maillog": 10,
         "drupal/redirect": 15,
         "drupal/rules": 15,

@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\insert\FunctionalJavascript;
 
-use Drupal\Core\Entity\Display\EntityDisplayInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\field\Entity\FieldStorageConfig;
 
@@ -18,30 +17,32 @@ trait TextFieldCreationTrait {
    *   The name of the new field (all lowercase), exclude the "field_" prefix.
    * @param string $type_name
    *   The node type that this field will be added to.
-   * @param string [$type='text_long']
+   * @param string (optional) $type
    *   Type of the text field.
-   * @param array [$storage_settings=array()]
+   * @param array (optional) $storage_settings
    *   A list of field storage settings that will be added to the
    *   defaults.
-   * @param array [$field_settings=array()]
+   * @param array (optional) $field_settings
    *   A list of instance settings that will be added to the instance
    *   defaults.
-   * @param array [$widget_settings=array()]
+   * @param array (optional) $widget_settings
    *   Widget settings to be added to the widget defaults.
-   * @param array [$formatter_settings=array()]
+   * @param array (optional) $formatter_settings
    *   Formatter settings to be added to the formatter defaults.
-   * @param string [$description='']
+   * @param string (optional) $description
    *   A description for the field. Defaults to ''.
+   *
    * @return \Drupal\Core\Entity\EntityInterface
    */
-  protected function createTextField($name, $type_name, $type = 'text_long', $storage_settings = array(), $field_settings = array(), $widget_settings = array(), $formatter_settings = array(), $description = '') {
-    FieldStorageConfig::create(array(
+  protected function createTextField($name, $type_name, $type = 'text_long', array $storage_settings = [], array $field_settings = [], array $widget_settings = [], array $formatter_settings = [], $description = '') {
+    FieldStorageConfig::create([
       'field_name' => $name,
       'entity_type' => 'node',
       'type' => $type,
       'settings' => $storage_settings,
-      'cardinality' => !empty($storage_settings['cardinality']) ? $storage_settings['cardinality'] : 1,
-    ))->save();
+      'cardinality' => !empty($storage_settings['cardinality'])
+      ? $storage_settings['cardinality'] : 1,
+    ])->save();
 
     $field_config = FieldConfig::create([
       'field_name' => $name,
@@ -54,28 +55,28 @@ trait TextFieldCreationTrait {
     ]);
     $field_config->save();
 
-    /** @var EntityDisplayInterface $entity */
+    /** @var \Drupal\Core\Entity\Display\EntityDisplayInterface $entity */
     $entity = \Drupal::entityTypeManager()
       ->getStorage('entity_form_display')
       ->load('node.' . $type_name . '.default');
 
     $entity
-      ->setComponent($name, array(
+      ->setComponent($name, [
         'type' => 'string_textarea',
         'settings' => $widget_settings,
-      ))
+      ])
       ->save();
 
-    /** @var EntityDisplayInterface $entity */
+    /** @var \Drupal\Core\Entity\Display\EntityDisplayInterface $entity */
     $entity = \Drupal::entityTypeManager()
       ->getStorage('entity_view_display')
       ->load('node.' . $type_name . '.default');
 
     $entity
-      ->setComponent($name, array(
+      ->setComponent($name, [
         'type' => 'basic_string',
         'settings' => $formatter_settings,
-      ))
+      ])
       ->save();
 
     return $field_config;
