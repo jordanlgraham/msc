@@ -4,6 +4,7 @@ migration_tags:
   - Drupal 7
 source:
   plugin: d7_field_group
+deriver: Drupal\field_group_migrate\Plugin\migrate\D7FieldGroupDeriver
 process:
   entity_type: entity_type
   bundle: bundle

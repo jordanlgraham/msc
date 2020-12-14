@@ -75,7 +75,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
   protected $messageManager;
 
   /**
-   * A webform element plugin manager.
+   * The webform element plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
@@ -267,6 +267,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
         '#title' => $this->t('@title URL', $t_args),
         '#description' => $this->t('The full URL to POST to when an existing webform submission is @state. (e.g. @url)', $t_args),
         '#required' => ($state === WebformSubmissionInterface::STATE_COMPLETED),
+        '#maxlength' => NULL,
         '#default_value' => $this->configuration[$state_url],
       ];
       $form[$state][$state_custom_data] = [
@@ -505,7 +506,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       }
       else {
         $method = strtolower($request_method);
-        $request_options[($request_type == 'json' ? 'json' : 'form_params')] = $this->getRequestData($state, $webform_submission);
+        $request_options[($request_type === 'json' ? 'json' : 'form_params')] = $this->getRequestData($state, $webform_submission);
         $response = $this->httpClient->$method($request_url, $request_options);
       }
     }
@@ -525,7 +526,8 @@ class RemotePostWebformHandler extends WebformHandlerBase {
       $message = $this->t('Remote post request return @status_code status code.', ['@status_code' => $response->getStatusCode()]);
       $this->handleError($state, $message, $request_url, $request_method, $request_type, $request_options, $response);
       return;
-    } else {
+    }
+    else {
       $this->displayCustomResponseMessage($response, FALSE);
     }
 
@@ -710,6 +712,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    *   Custom data.
    *
    * @return array
+   *   The custom data with value casted
    */
   protected function castCustomData(array $data) {
     if (empty($this->configuration['cast'])) {
@@ -829,7 +832,7 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    *   TRUE if saving of draft is enabled.
    */
   protected function isDraftEnabled() {
-    return $this->isResultsEnabled() && ($this->getWebform()->getSetting('draft') != WebformInterface::DRAFT_NONE);
+    return $this->isResultsEnabled() && ($this->getWebform()->getSetting('draft') !== WebformInterface::DRAFT_NONE);
   }
 
   /**
@@ -1074,15 +1077,15 @@ class RemotePostWebformHandler extends WebformHandlerBase {
    *   A custom response message.
    */
   protected function getCustomResponseMessage($response, $default = TRUE) {
-    if ($response instanceof ResponseInterface) {
+    if (!empty($this->configuration['messages']) && $response instanceof ResponseInterface) {
       $status_code = $response->getStatusCode();
       foreach ($this->configuration['messages'] as $message_item) {
-        if ($message_item['code'] == $status_code) {
+        if ((int) $message_item['code'] === (int) $status_code) {
           return $message_item['message'];
         }
       }
     }
-    return ($default && !empty($this->configuration['message'])) ? $this->configuration['message'] : '';
+    return (!empty($this->configuration['message']) && $default) ? $this->configuration['message'] : '';
   }
 
   /**

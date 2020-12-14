@@ -6,8 +6,9 @@ use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Entity\TypedData\EntityDataDefinition;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+use Drupal\KernelTests\KernelTestBase;
 use Drupal\file\Entity\File;
+use Drupal\filter\Entity\FilterFormat;
 use Drupal\node\Entity\Node;
 
 /**
@@ -17,7 +18,7 @@ use Drupal\node\Entity\Node;
  *
  * @coversDefaultClass \Drupal\typed_data\DataFilterManager
  */
-class DataFilterTest extends EntityKernelTestBase {
+class DataFilterTest extends KernelTestBase {
 
   /**
    * The typed data manager.
@@ -38,22 +39,52 @@ class DataFilterTest extends EntityKernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['typed_data', 'node', 'file'];
+  protected static $modules = [
+    'file',
+    'filter',
+    'node',
+    'system',
+    'typed_data',
+    'user',
+  ];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->typedDataManager = $this->container->get('typed_data_manager');
     $this->dataFilterManager = $this->container->get('plugin.manager.typed_data_filter');
 
     // Make sure default date formats are available
     // for testing the format_date filter.
-    $this->installConfig(['system']);
+    $this->installConfig(['system', 'filter']);
 
     $this->installEntitySchema('file');
     $this->installSchema('file', ['file_usage']);
+
+    // Set up the filter formats used by this test.
+    $basic_html_format = FilterFormat::create([
+      'format' => 'basic_html',
+      'name' => 'Basic HTML',
+      'filters' => [
+        'filter_html' => [
+          'status' => 1,
+          'settings' => [
+            'allowed_html' => '<p> <br> <strong> <a> <em> <code>',
+          ],
+        ],
+      ],
+    ]);
+    $basic_html_format->save();
+
+    $full_html_format = FilterFormat::create([
+      'format' => 'full_html',
+      'name' => 'Full HTML',
+      'weight' => 1,
+      'filters' => [],
+    ]);
+    $full_html_format->save();
   }
 
   /**
@@ -85,16 +116,7 @@ class DataFilterTest extends EntityKernelTestBase {
 
     $fails = $filter->validateArguments($data->getDataDefinition(), []);
     $this->assertEquals(1, count($fails));
-    // @todo In Drupal 8.8.x PHPUnit 9 functions need to be used otherwise
-    // the tests will fail with a deprecation error.
-    // Remove this once 8.7.x is unsupported.
-    // @see https://www.drupal.org/project/typed_data/issues/3138469
-    if (version_compare(substr(\Drupal::VERSION, 0, 3), '8.8', '>=')) {
-      $this->assertStringContainsString('Missing arguments', (string) $fails[0]);
-    }
-    else {
-      $this->assertContains('Missing arguments', (string) $fails[0]);
-    }
+    $this->assertStringContainsString('Missing arguments', (string) $fails[0]);
     $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass()]);
     $this->assertEquals(1, count($fails));
     $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
@@ -149,6 +171,44 @@ class DataFilterTest extends EntityKernelTestBase {
   }
 
   /**
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\FormatTextFilter
+   */
+  public function testFormatTextFilter() {
+    $filter = $this->dataFilterManager->createInstance('format_text');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), '<b>Test <em>format_text</em> filter with <code>full_html</code> plugin</b>');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), ['full_html'])->getDataType());
+
+    $fails = $filter->validateArguments($data->getDataDefinition(), []);
+    $this->assertEquals(1, count($fails));
+    $this->assertStringContainsString('Missing arguments', (string) $fails[0]);
+    $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass()]);
+    $this->assertEquals(1, count($fails));
+    $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
+
+    $this->assertEquals(
+      '<b>Test <em>format_text</em> filter with <code>full_html</code> plugin</b>',
+      $filter->filter($data->getDataDefinition(), $data->getValue(), ['full_html'])
+    );
+
+    $data->setValue('<b>Test <em>format_text</em> filter with <code>basic_html</code> plugin</b>');
+    $this->assertEquals(
+      'Test <em>format_text</em> filter with <code>basic_html</code> plugin',
+      $filter->filter($data->getDataDefinition(), $data->getValue(), ['basic_html'])
+    );
+
+    // Test the fallback filter.
+    $data->setValue('<b>Test <em>format_text</em> filter with <code>plain_text</code> plugin</b>');
+    $this->assertEquals(
+      "<p>&lt;b&gt;Test &lt;em&gt;format_text&lt;/em&gt; filter with &lt;code&gt;plain_text&lt;/code&gt; plugin&lt;/b&gt;</p>\n",
+      $filter->filter($data->getDataDefinition(), $data->getValue(), ['plain_text'])
+    );
+  }
+
+  /**
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\StripTagsFilter
    */
   public function testStripTagsFilter() {
@@ -167,6 +227,9 @@ class DataFilterTest extends EntityKernelTestBase {
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\EntityUrlFilter
    */
   public function testEntityUrlFilter() {
+    $this->installEntitySchema('user');
+    $this->installEntitySchema('node');
+
     /* @var \Drupal\node\NodeInterface $node */
     $node = Node::create([
       'title' => 'Test node',

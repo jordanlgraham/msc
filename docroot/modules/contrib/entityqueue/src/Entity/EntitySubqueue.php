@@ -217,7 +217,6 @@ class EntitySubqueue extends EditorialContentEntityBase implements EntitySubqueu
       // entity type that uses strings IDs, in order to allow both integers and
       // strings to be stored by the default entity reference field storage.
       ->setSetting('target_type', 'entity_subqueue')
-      ->setTranslatable(TRUE)
       ->setRevisionable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
@@ -286,14 +285,30 @@ class EntitySubqueue extends EditorialContentEntityBase implements EntitySubqueu
    * {@inheritdoc}
    */
   public function removeItem(EntityInterface $entity) {
-    $subqueue_items = $this->get('items')->getValue();
-    foreach ($subqueue_items as $key => $item) {
-      if ($item['target_id'] == $entity->id()) {
-        unset($subqueue_items[$key]);
-      }
+    $index = $this->getItemPosition($entity);
+    if ($index !== FALSE) {
+      $this->get('items')->offsetUnset($index);
     }
-    $this->get('items')->setValue($subqueue_items);
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function hasItem(EntityInterface $entity) {
+    return $this->getItemPosition($entity) !== FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getItemPosition(EntityInterface $entity) {
+    $subqueue_items = $this->get('items')->getValue();
+    $subqueue_items_ids = array_map(function ($item) {
+      return $item['target_id'];
+    }, $subqueue_items);
+
+    return array_search($entity->id(), $subqueue_items_ids);
   }
 
   /**
