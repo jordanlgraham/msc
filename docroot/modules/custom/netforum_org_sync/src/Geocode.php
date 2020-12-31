@@ -41,7 +41,7 @@ class Geocode {
 
       // Create a new revision.
       $node->setNewRevision(TRUE);
-      $node->revision_log = 'Created revision for node' . $node->Id();
+      $node->revision_log = 'Created revision for node ' . $node->Id() . ', setting correct geo coordinates.';
       $node->setRevisionCreationTime(REQUEST_TIME);
       $node->setRevisionUserId(1);
     }

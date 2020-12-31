@@ -57,7 +57,7 @@ function netforum_org_sync_cron() {
  * @return void
  */
 function netforum_org_sync_node_presave(EntityInterface $entity) {
-  if ($entity->getType() !== 'facility' || $entity->field_ge->value !== '0, 0') {
+  if ($entity->getType() !== 'facility' && (!empty($entity->field_ge->value) && $entity->field_ge->value !== '0, 0')) {
     return;
   }
 
