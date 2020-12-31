@@ -5,8 +5,9 @@
  * Contains netforum_org_sync.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\netforum_org_sync\OrgSync;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
  * Implements hook_help().
@@ -47,4 +48,18 @@ function netforum_org_sync_cron() {
   catch (Exception $exception) {
     watchdog_exception('netforum_org_sync', $exception, 'Unable to sync events during cron.');
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * @param Drupal\Core\Entity\EntityInterface $entity
+ * @return void
+ */
+function netforum_org_sync_node_presave(EntityInterface $entity) {
+  if ($entity->getType() !== 'facility' || $entity->field_ge->value !== '0, 0') {
+    return;
+  }
+
+  \Drupal::service('netforum_org_sync.geocode')->setCoordinates($entity);
 }
