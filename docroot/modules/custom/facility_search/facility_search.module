@@ -27,7 +27,7 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     $user_input['lng'] = $coordinates['longitude'];
     $form_state->setUserInput($user_input);
   }
-//  $form_state->setValue()
+
   // Turn the city filter into a dropdown.
   $cities = \Drupal::database()->select('node__field_address', 'address')
     ->fields('address', ['field_address_locality'])
@@ -64,6 +64,9 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
     }
   }
   unset($form['proximity']);
+
+  // Remove validation for the city field.
+  $form['city']['#validated'] = TRUE;
 }
 
 function _facility_search_get_coordinates($zip) {
