@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains msca_misc.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function msca_misc_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the msca_misc module.
+    case 'help.page.msca_misc':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides miscellaneous functionality and database updates') . '</p>';
+      return $output;
+
+    default:
+  }
+}

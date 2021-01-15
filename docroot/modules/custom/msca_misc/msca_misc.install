@@ -1,0 +1,35 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * @file
+ * Holds install hooks for the jQuery Colorpicker module.
+ */
+
+/**
+ * Updates database table paragraph_r__c7c37a6e8e, whatever it is.
+ */
+function msca_misc_install() {
+
+  $table = 'paragraph_r__c7c37a6e8e';
+
+  $spec = [
+    'type' => 'varchar',
+    'description' => "Background color color",
+    'length' => 7,
+    'not null' => FALSE,
+  ];
+  $schema = Database::getConnection()->schema();
+  $schema->addField($table, 'field_heading_background_color_color', $spec);
+
+  $spec = [
+    'type' => 'varchar',
+    'description' => "Background color name",
+    'length' => 255,
+    'not null' => FALSE,
+  ];
+  $schema = Database::getConnection()->schema();
+  $schema->addField($table, 'field_heading_background_color_name', $spec);
+
+}
