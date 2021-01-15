@@ -4,10 +4,10 @@ namespace Drupal\Test\jquery_colorpicker\Element;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\jquery_colorpicker\Element\JQueryColorpicker;
+use Drupal\jquery_colorpicker\Element\JQueryColorpickerElement;
 
 /**
- * @coversDefaultClass \Drupal\jquery_colorpicker\Element\JQueryColorpicker
+ * @coversDefaultClass \Drupal\jquery_colorpicker\Element\JQueryColorpickerElement
  * @group jquery_colorpicker
  */
 class JQueryColorpickerTest extends UnitTestCase {
@@ -20,7 +20,7 @@ class JQueryColorpickerTest extends UnitTestCase {
   public function testValueCallback($expected, $input) {
     $element = [];
     $form_state = $this->prophesize(FormStateInterface::class)->reveal();
-    $this->assertSame($expected, JQueryColorpicker::valueCallback($element, $input, $form_state));
+    $this->assertSame($expected, JQueryColorpickerElement::valueCallback($element, $input, $form_state));
   }
 
   /**
@@ -30,15 +30,14 @@ class JQueryColorpickerTest extends UnitTestCase {
     $data = [];
 
     $data[] = [NULL, FALSE];
-    $data[] = [NULL, NULL];
-    $data[] = ['', ['test']];
+    $data[] = [NULL, ['test']];
     $test = new \stdClass();
-    $test->value = 'test';
-    $data[] = ['', $test];
-    $data[] = ["123", 123];
-    $data[] = ["1.23", 1.23];
-    $data[] = ["123", "123"];
-    $data[] = ["1", TRUE];
+    $test->color = 'test';
+    $data[] = [NULL, $test];
+    $test->color = '123456';
+    $data[] = [NULL, $test];
+    $data[] = ['#123456', '#123456'];
+    $data[] = [NULL, '1'];
 
     return $data;
   }
@@ -49,7 +48,7 @@ class JQueryColorpickerTest extends UnitTestCase {
   public function testValidateElementEmpty() {
     $element = ['#value' => ''];
     $form_state = $this->prophesize(FormStateInterface::class)->reveal();
-    $this->assertSame(NULL, JQueryColorpicker::validateElement($element, $form_state));
+    $this->assertSame(NULL, JQueryColorpickerElement::validateElement($element, $form_state));
   }
 
 }

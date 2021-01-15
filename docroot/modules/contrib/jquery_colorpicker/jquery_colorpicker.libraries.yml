@@ -2,9 +2,9 @@ library:
   version: 1.0.1
   css:
     theme:
-      /libraries/jquery_colorpicker/css/colorpicker.css: {}
+      vendor://jaypan/jquery-colorpicker/css/colorpicker.css: {}
   js:
-    /libraries/jquery_colorpicker/js/colorpicker.js: {}
+    vendor://jaypan/jquery-colorpicker/js/colorpicker.js: {}
   dependencies:
     - core/jquery
 
@@ -15,3 +15,4 @@ element:
   dependencies:
     - jquery_colorpicker/library
     - core/drupalSettings
+    - core/jquery.once

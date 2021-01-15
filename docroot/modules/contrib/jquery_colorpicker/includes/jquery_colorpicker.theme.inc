@@ -17,14 +17,16 @@ function template_preprocess_jquery_colorpicker(&$vars) {
   $vars['name'] = isset($element['#name']) ? $element['#name'] : $element['#id'];
   $vars['value'] = isset($element['#value']) ? $element['#value'] : '';
 
+  $colorapi_service = \Drupal::service('colorapi.service');
+
   $default_color = '';
   if (isset($element['#value'])) {
-    if (is_string($element['#value']) && strlen($element['#value'])) {
-      $default_color = '#' . $element['#value'];
+    if ($colorapi_service->isValidHexadecimalColorString($element['#value'])) {
+      $default_color = $element['#value'];
     }
   }
-  elseif (isset($element['#default_value']) && strlen($element['#default_value']) == 6 && preg_match('/^[0-9a-f]{6}$/i', $element['#default_value'])) {
-    $default_color = '#' . strtolower($element['#default_value']);
+  elseif (isset($element['#default_value']) && $colorapi_service->isValidHexadecimalColorString($element['#value'])) {
+    $default_color = $element['#default_value'];
   }
 
   $vars['default_color'] = $default_color;

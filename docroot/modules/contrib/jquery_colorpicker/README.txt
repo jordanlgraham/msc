@@ -1,28 +1,58 @@
-The Drupal 8 branch of Jquery Colorpicker offers a form element than can be
-included in any form in this way:
+CONTENTS OF THIS FILE
+---------------------
+
+ * Introduction
+ * Requirements
+ * Installation
+ * Maintainers
+
+INTRODUCTION
+------------
+
+The Drupal 8 branch of Jquery Colorpicker offers jQuery Colorpicker widget for
+the (Hexidecimal) Color field, and a Form API form element than can be used as
+follows:
 
 <?php
 $form['element'] = [
-	'#type' => 'jquery_colorpicker',
-	'#title' => t('Color'),
-	'#default_value' => 'FFFFFF',
+  '#type' => 'jquery_colorpicker',
+  '#title' => t('Color'),
+  '#default_value' => 'FFFFFF',
 ];
 ?>
 
-This module includes Field API integration. A colorpicker field can be added to
-any content type with the JQuery Colorpicker widget
 
-==================
-Installation guide
-==================
+REQUIREMENTS
+------------
 
-Manual installation:
- 1.- Navigate to the /libraries folder in the Drupal webroot. Create this directory if it does not exist.
- 2.- Go to www.eyecon.ro/colorpicker/ and download colorpicker.zip.
-      The library can also be found at https://github.com/jaypan/jquery_colorpicker
- 3.- Extract the the zip file content to the
-      /libraries/jquery_colorpicker folder.
- 4.- If you have extracted the contents correctly, the following file should
-      exist: /libraries/jquery_colorpicker/js/colorpicker.js
- 5.- Install the module same as any other Drupal module
- 6.- Enjoy your colors!!
+This module depends upon:
+
+- The jQuery Colorpicker library (https://www.eyecon.ro/colorpicker/)
+- The Drupal (Hexidecimal) Color module
+  (https://www.drupal.org/project/hexidecimal_color)
+- The Drupal Vendor Stream Wrapper module
+   (https://www.drupal.org/project/vendor_stream_wrapper).
+
+These dependencies are managed through Composer when the module is installed
+using:
+
+composer require drupal/jquery_colorpicker
+
+
+INSTALLATION
+------------
+
+Add the module to your project using:
+
+composer require drupal/jquery_colorpicker
+
+Then enable the module as you would any Drupal module.
+
+
+MAINTAINERS
+-----------
+
+This module is maintained by:
+
+* Jaypan (https://www.jaypan.com)
+* Plopesc (https://www.drupal.org/u/plopesc)

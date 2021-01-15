@@ -72,6 +72,8 @@
     // label is only as wide as the text.
     element.parent().siblings("label").css("display",  "inline");
 
+    element.parent().siblings(".description:first").hide();
+
     // Next get the background color of the element.
     defaultColor = element.find(".color_picker:first").css("background-color");
 
@@ -100,7 +102,7 @@
 
         element.find(".color_picker:first").css({
           backgroundColor: "#" + hex
-        }).find("input").val(hex).change();
+        }).find("input").val("#" + hex).change();
       }
     });
   }
