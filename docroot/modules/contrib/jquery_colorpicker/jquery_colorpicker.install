@@ -50,7 +50,6 @@ function jquery_colorpicker_update_8200() {
   if ($field_storage_configs = $entity_manager->getStorage('field_storage_config')->loadByProperties(['type' => 'jquery_colorpicker'])) {
     /** @var \Drupal\field\FieldStorageConfigInterface $field_storage */
     // Update the field storage settings.
-    $merp = 'derp';
     foreach ($field_storage_configs as $field_storage) {
       $entity_type_id = $field_storage->getTargetEntityTypeId();
       $field_name = $field_storage->getName();
@@ -145,7 +144,6 @@ function jquery_colorpicker_update_8200() {
         /** @var \Drupal\field\FieldConfigInterface $field */
         // Update the field settings.
         foreach ($fields as $field) {
-          $merp = 'derp';
           $new_field = $field->toArray();
           $new_field['dependencies']['module'][array_search('jquery_colorpicker', $new_field['dependencies']['module'])] = 'colorapi';
           $new_field['default_value'][0]['color'] = '#' . $new_field['default_value'][0]['value'];
