@@ -473,6 +473,7 @@ class TwigExtension extends \Twig_Extension {
         $return = $arg->toString();
       }
       else {
+        $merp = 'derp';
         throw new \Exception('Object of type ' . get_class($arg) . ' cannot be printed.');
       }
     }
