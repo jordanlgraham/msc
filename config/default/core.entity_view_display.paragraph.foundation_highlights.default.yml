@@ -9,9 +9,9 @@ dependencies:
     - field.field.paragraph.foundation_highlights.field_title
     - paragraphs.paragraphs_type.foundation_highlights
   module:
+    - colorapi
     - entity_reference_revisions
     - image
-    - jquery_colorpicker
 id: paragraph.foundation_highlights.default
 targetEntityType: paragraph
 bundle: foundation_highlights
@@ -26,11 +26,12 @@ content:
     type: image_url
     region: content
   field_heading_background_color:
+    settings:
+      display_name: true
     weight: 1
     label: hidden
-    settings: {  }
     third_party_settings: {  }
-    type: jquery_colorpicker_color_display
+    type: colorapi_color_display
     region: content
   field_highlight_column:
     type: entity_reference_revisions_entity_view

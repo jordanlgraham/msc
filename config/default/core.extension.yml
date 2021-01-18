@@ -15,6 +15,7 @@ module:
   captcha: 0
   ckeditor: 0
   color: 0
+  colorapi: 0
   comment: 0
   config: 0
   config_filter: 0
@@ -83,6 +84,7 @@ module:
   msca_discourse: 0
   msca_donate: 0
   msca_job: 0
+  msca_misc: 0
   msca_theme_tweaks: 0
   msca_tweet_block: 0
   netforum_event_sync: 0
@@ -118,8 +120,10 @@ module:
   tour: 0
   twig_tweak: 0
   twig_xdebug: 0
+  update: 0
   user: 0
   vendor_search: 0
+  vendor_stream_wrapper: 0
   views_infinite_scroll: 0
   views_ui: 0
   webform: 0

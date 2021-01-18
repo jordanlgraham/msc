@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
-    - jquery_colorpicker
+    - colorapi
     - paragraphs
 id: paragraph.field_heading_background_color
 field_name: field_heading_background_color
 entity_type: paragraph
-type: jquery_colorpicker
+type: colorapi_color_field
 settings: {  }
-module: jquery_colorpicker
+module: colorapi
 locked: false
 cardinality: 1
 translatable: true

@@ -6,7 +6,7 @@ dependencies:
     - field.storage.paragraph.field_heading_background_color
     - paragraphs.paragraphs_type.foundation_highlights
   module:
-    - jquery_colorpicker
+    - colorapi
 id: paragraph.foundation_highlights.field_heading_background_color
 field_name: field_heading_background_color
 entity_type: paragraph
@@ -17,7 +17,7 @@ required: false
 translatable: false
 default_value:
   -
-    value: FFFFFF
+    color: '#FFFFFF'
 default_value_callback: ''
 settings: {  }
-field_type: jquery_colorpicker
+field_type: colorapi_color_field

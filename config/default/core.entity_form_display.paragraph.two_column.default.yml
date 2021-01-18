@@ -15,9 +15,8 @@ bundle: two_column
 mode: default
 content:
   field_background_color:
+    settings: {  }
     weight: 1
-    settings:
-      color: FFFFFF
     third_party_settings: {  }
     type: jquery_colorpicker
     region: content

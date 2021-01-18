@@ -6,7 +6,7 @@ dependencies:
     - field.storage.paragraph.field_background_color
     - paragraphs.paragraphs_type.two_column
   module:
-    - jquery_colorpicker
+    - colorapi
 id: paragraph.two_column.field_background_color
 field_name: field_background_color
 entity_type: paragraph
@@ -17,7 +17,7 @@ required: false
 translatable: false
 default_value:
   -
-    value: FFFFFF
+    color: '#FFFFFF'
 default_value_callback: ''
 settings: {  }
-field_type: jquery_colorpicker
+field_type: colorapi_color_field
