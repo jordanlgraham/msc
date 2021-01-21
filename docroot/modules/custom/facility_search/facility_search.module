@@ -39,9 +39,13 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
   if (!empty($cities)) {
     $city_filter = $form['#info']['filter-field_address_locality']['value'];
     $cities = array_combine(array_values($cities), $cities);
+
+    // Add our default 'Any' option.
+    $cities = array_merge(["Any" => "- Any -"], $cities);
+    array_unshift($form['#submit'], 'facility_search_exposed_form_submit');
+
     $form[$city_filter]['#type'] = 'select';
     $form[$city_filter]['#size'] = 1;
-    $form[$city_filter]['#empty_option'] = t('-Select-');
     $form[$city_filter]['#options'] = $cities;
   }
 
@@ -67,6 +71,21 @@ function facility_search_form_views_exposed_form_alter(&$form, FormStateInterfac
 
   // Remove validation for the city field.
   $form['city']['#validated'] = TRUE;
+}
+
+/**
+ * Custom submit function for facility search exposed form.
+ *
+ * @param array $form
+ * @param FormStateInterface $form_state
+ * @return void
+ */
+function facility_search_exposed_form_submit(&$form, &$form_state) {
+  $city_values = $form_state->getValue('city');
+  if (!empty($city_values) && $city_values == 'Any') {
+    $form_state->set('city', []);
+    $form_state->setValue('city', []);
+  }
 }
 
 function _facility_search_get_coordinates($zip) {
