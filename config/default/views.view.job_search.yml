@@ -162,7 +162,7 @@ display:
           relationship: none
           group_type: group
           admin_label: 'Zip code'
-          operator: starts
+          operator: '='
           value: ''
           group: 1
           exposed: true
@@ -172,8 +172,6 @@ display:
             description: ''
             use_operator: false
             operator: field_job_posting_org_address_postal_code_op
-            operator_limit_selection: false
-            operator_list: {  }
             identifier: postal
             required: false
             remember: false
@@ -183,8 +181,9 @@ display:
               anonymous: '0'
               administrator: '0'
               content_author: '0'
-              member: '0'
             placeholder: ''
+            operator_limit_selection: false
+            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
