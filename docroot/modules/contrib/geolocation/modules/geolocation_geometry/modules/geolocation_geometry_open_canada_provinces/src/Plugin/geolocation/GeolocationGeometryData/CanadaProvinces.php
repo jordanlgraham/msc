@@ -2,7 +2,8 @@
 
 namespace Drupal\geolocation_geometry_open_canada_provinces\Plugin\geolocation\GeolocationGeometryData;
 
-use Shapefile\ShapefileException;
+use ShapeFile\ShapeFile;
+use ShapeFile\ShapeFileException;
 use Drupal\geolocation_geometry_data\GeolocationGeometryDataBase;
 
 /**
@@ -19,12 +20,12 @@ class CanadaProvinces extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public $sourceUri = 'https://www.weather.gov/source/gis/Shapefiles/Misc/province.zip';
+  public $sourceUri = 'http://ftp.maps.canada.ca/pub/nrcan_rncan/vector/canvec/shp/Admin/canvec_15M_CA_Admin_shp.zip';
 
   /**
    * {@inheritdoc}
    */
-  public $sourceFilename = 'province.zip';
+  public $sourceFilename = 'canvec_15M_CA_Admin_shp.zip';
 
   /**
    * {@inheritdoc}
@@ -34,44 +35,46 @@ class CanadaProvinces extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public $shapeFilename = 'province.shp';
+  public $shapeFilename = 'canvec_15M_CA_Admin/geo_political_region_2.shp';
 
   /**
    * {@inheritdoc}
    */
-  public function import(&$context) {
-    parent::import($context);
+  public function import() {
+    parent::import();
     $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     $logger = \Drupal::logger('geolocation_provinces_of_canada');
 
     try {
-      /** @var \Shapefile\Geometry\Geometry $record */
-      while ($record = $this->shapeFile->fetchRecord()) {
-        if ($record->isDeleted()) {
+      while ($record = $this->shapeFile->getRecord(ShapeFile::GEOMETRY_GEOJSON_GEOMETRY)) {
+        if ($record['dbf']['_deleted']) {
           continue;
         }
-
-        $name = $record->getData('NAME');
-        if (empty($name)) {
-          continue;
+        else {
+          if (utf8_decode($record['dbf']['ctry_en']) !== 'Canada') {
+            continue;
+          }
+          $name = utf8_decode($record['dbf']['juri_en']);
+          if (empty($name)) {
+            continue;
+          }
+          /** @var \Drupal\taxonomy\TermInterface $term */
+          $term = $taxonomy_storage->create([
+            'vid' => 'geolocation_provinces_of_canada',
+            'name' => $name,
+          ]);
+          $term->set('field_geometry_data_geometry', [
+            'geojson' => $record['shp'],
+          ]);
+          $term->save();
         }
-
-        /** @var \Drupal\taxonomy\TermInterface $term */
-        $term = $taxonomy_storage->create([
-          'vid' => 'geolocation_provinces_of_canada',
-          'name' => $name,
-        ]);
-        $term->set('field_geometry_data_geometry', [
-          'geojson' => $record->getGeoJSON(),
-        ]);
-        $term->save();
       }
-      return ('Done importing Provinces of Canada.');
     }
-    catch (ShapefileException $e) {
+    catch (ShapeFileException $e) {
       $logger->warning($e->getMessage());
-      return t('Error importing Provinces of Canada.');
+      return FALSE;
     }
+    return TRUE;
   }
 
 }

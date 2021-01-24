@@ -92,7 +92,8 @@
     },
     "require-dev": {
         "drupal/console": "^1.9",
-        "drupal/devel": "^2.1"
+        "drupal/devel": "^2.1",
+        "drupal/stage_file_proxy": "^1.1"
     },
     "conflict": {
       "drupal/drupal": "*"

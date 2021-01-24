@@ -18,14 +18,4 @@ use Drupal\file\Plugin\Field\FieldType\FileItem;
  */
 class GeolocationGpxFile extends FileItem {
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function defaultFieldSettings() {
-    $default_settings = parent::defaultFieldSettings();
-    $default_settings['file_extensions'] = 'gpx xml';
-
-    return $default_settings;
-  }
-
 }

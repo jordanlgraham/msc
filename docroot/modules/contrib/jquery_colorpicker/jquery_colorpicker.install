@@ -59,7 +59,6 @@ function jquery_colorpicker_update_8200() {
       $revision_table_name = $entity_type_id . '_revision__' . $field_name;
 
       $database->schema()->addField($entity_table_name, $field_name . '_color', $new_schema['columns']['color']);
-      $database->schema()->addField($entity_table_name, $field_name . '_name', $new_schema['columns']['name']);
       $entity_table_data = $database->select($entity_table_name, 'field_table')
         ->fields('field_table', [
           'bundle',

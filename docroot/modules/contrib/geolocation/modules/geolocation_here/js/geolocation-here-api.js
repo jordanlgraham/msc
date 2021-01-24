@@ -23,7 +23,6 @@
    * @inheritDoc
    *
    * @prop {Object} settings.here_settings - HERE Maps specific settings.
-   * @prop {H.Map} hereMap
    */
   function GeolocationHereMap(mapSettings) {
     if (typeof H === 'undefined') {

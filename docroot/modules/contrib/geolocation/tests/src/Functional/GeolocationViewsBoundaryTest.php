@@ -38,7 +38,7 @@ class GeolocationViewsBoundaryTest extends BrowserTestBase {
   /**
    * Tests the boundary filter.
    */
-  public function testBoundaryNoLocations() {
+  public function testProximityNoLocations() {
     $this->drupalGet($this->viewsPath);
     $this->assertSession()->statusCodeEquals(200);
   }

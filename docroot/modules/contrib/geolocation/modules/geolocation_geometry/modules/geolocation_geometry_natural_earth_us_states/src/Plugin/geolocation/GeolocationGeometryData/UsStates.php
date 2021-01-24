@@ -2,7 +2,8 @@
 
 namespace Drupal\geolocation_geometry_natural_earth_us_states\Plugin\geolocation\GeolocationGeometryData;
 
-use Shapefile\ShapefileException;
+use ShapeFile\ShapeFile;
+use ShapeFile\ShapeFileException;
 use Drupal\geolocation_geometry_data\GeolocationGeometryDataBase;
 
 /**
@@ -39,34 +40,34 @@ class UsStates extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public function import(&$context) {
-    parent::import($context);
+  public function import() {
+    parent::import();
     $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     $logger = \Drupal::logger('geolocation_us_states');
 
     try {
-      /** @var \Shapefile\Geometry\Geometry $record */
-      while ($record = $this->shapeFile->fetchRecord()) {
-        if ($record->isDeleted()) {
+      while ($record = $this->shapeFile->getRecord(ShapeFile::GEOMETRY_GEOJSON_GEOMETRY)) {
+        if ($record['dbf']['_deleted']) {
           continue;
         }
-
-        /** @var \Drupal\taxonomy\TermInterface $term */
-        $term = $taxonomy_storage->create([
-          'vid' => 'geolocation_us_states',
-          'name' => $record->getData('NAME'),
-        ]);
-        $term->set('field_geometry_data_geometry', [
-          'geojson' => $record->getGeoJSON(),
-        ]);
-        $term->save();
+        else {
+          /** @var \Drupal\taxonomy\TermInterface $term */
+          $term = $taxonomy_storage->create([
+            'vid' => 'geolocation_us_states',
+            'name' => utf8_decode($record['dbf']['name']),
+          ]);
+          $term->set('field_geometry_data_geometry', [
+            'geojson' => $record['shp'],
+          ]);
+          $term->save();
+        }
       }
-      return t('Done importing US States.');
     }
-    catch (ShapefileException $e) {
+    catch (ShapeFileException $e) {
       $logger->warning($e->getMessage());
-      return t('ERROR importing US States.');
+      return FALSE;
     }
+    return TRUE;
   }
 
 }

@@ -81,7 +81,6 @@ abstract class GeolocationMapFormatterBase extends FormatterBase {
     $settings['title'] = '';
     $settings['set_marker'] = TRUE;
     $settings['common_map'] = TRUE;
-    $settings['show_delta_label'] = FALSE;
     $settings['data_provider_settings'] = [];
     $settings['map_provider_id'] = '';
     if (\Drupal::moduleHandler()->moduleExists('geolocation_google_maps')) {
@@ -192,12 +191,6 @@ abstract class GeolocationMapFormatterBase extends FormatterBase {
         '#description' => $this->t('By default, each value will be displayed in a separate map. Settings this option displays all values on a common map instead. This settings is only useful on multi-value fields.'),
         '#default_value' => $settings['common_map'],
       ];
-      $element['show_delta_label'] = [
-        '#type' => 'checkbox',
-        '#title' => $this->t('Show item cardinality as marker label'),
-        '#description' => $this->t('By default markers will not have labels, if shown on the common map it might be useful for AODA to show cardinality'),
-        '#default_value' => $settings['show_delta_label'],
-      ];
     }
 
     $element['centre'] = $this->mapCenterManager->getCenterOptionsForm((array) $settings['centre'], ['formatter' => $this]);
@@ -289,9 +282,6 @@ abstract class GeolocationMapFormatterBase extends FormatterBase {
       if (!empty($settings['common_map'])) {
         $summary[] = $this->t('Common Map Display: Yes');
       }
-      if (!empty($settings['show_delta_label'])) {
-        $summary[] = $this->t('Show Cardinality as Label: Yes');
-      }
     }
 
     if ($this->mapProvider) {
@@ -340,9 +330,6 @@ abstract class GeolocationMapFormatterBase extends FormatterBase {
       ];
       $elements[0]['#id'] = uniqid("map-");
       foreach ($locations as $delta => $location) {
-        if (!empty($settings['show_delta_label'])) {
-          $location['#label'] = $delta + 1;
-        }
         $elements[0][$delta] = $location;
       }
 

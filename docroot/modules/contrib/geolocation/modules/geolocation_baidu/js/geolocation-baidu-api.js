@@ -23,7 +23,6 @@
    * @inheritDoc
    *
    * @prop {Object} settings.baidu_settings - Baidu Maps specific settings.
-   * @prop {BMap.Map} baiduMap
    */
   function GeolocationBaiduMap(mapSettings) {
     if (typeof BMap === 'undefined') {

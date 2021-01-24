@@ -29,13 +29,6 @@ class BoundaryFilter extends FilterPluginBase implements ContainerFactoryPluginI
   public $no_operator = TRUE;
 
   /**
-   * Can be used for CommonMap interactive filtering.
-   *
-   * @var bool
-   */
-  public $isGeolocationCommonMapOption = TRUE;
-
-  /**
    * {@inheritdoc}
    */
   protected $alwaysMultiple = TRUE;
