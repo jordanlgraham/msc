@@ -887,9 +887,6 @@ class ConfigImporter {
           if ($entity_type_id = $this->configManager->getEntityTypeIdByName($name)) {
             $entity_storage = $this->configManager->getEntityTypeManager()->getStorage($entity_type_id);
             $entity_type = $this->configManager->getEntityTypeManager()->getDefinition($entity_type_id);
-            $entity = $entity_storage->load($entity_storage->getIDFromConfigName($name, $entity_type->getConfigPrefix()));
-            $entity->delete();
-            $this->logError($this->t('Deleted and replaced configuration entity "@name"', ['@name' => $name]));
           }
           else {
             $this->storageComparer->getTargetStorage($collection)->delete($name);

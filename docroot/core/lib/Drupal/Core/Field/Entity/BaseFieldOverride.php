@@ -109,7 +109,8 @@ class BaseFieldOverride extends FieldConfigBase {
    * {@inheritdoc}
    */
   public function getFieldStorageDefinition() {
-    return $this->getBaseFieldDefinition()->getFieldStorageDefinition();
+    $baseFieldDefinition = $this->getBaseFieldDefinition();
+    return $baseFieldDefinition ? $baseFieldDefinition->getFieldStorageDefinition(): NULL;
   }
 
   /**

@@ -13,6 +13,7 @@
         "abraham/twitteroauth": "^0.7.4",
         "composer/installers": "^1.0.21",
         "cviebrock/discourse-php": "0.9.3",
+        "cweagans/composer-patches": "^1.7",
         "drupal/acquia_connector": "~1.8",
         "drupal/address": "~1.0",
         "drupal/admin_toolbar": "^2.2",
@@ -134,6 +135,11 @@
         "docroot/themes/custom/{$name}": [
           "type:drupal-custom-theme"
         ]
+      },
+      "patches": {
+        "drupal/core": {
+          "Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-02-07/protect_against_invalid_ids_in_import_delete-3051453-5.patch"
+        }
       }
     }
   }

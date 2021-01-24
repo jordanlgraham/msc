@@ -287,9 +287,11 @@ abstract class FieldConfigBase extends ConfigEntityBase implements FieldConfigIn
     \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
 
     // Invalidate the render cache for all affected entities.
-    $entity_type = $this->getFieldStorageDefinition()->getTargetEntityTypeId();
-    if ($this->entityTypeManager()->hasHandler($entity_type, 'view_builder')) {
-      $this->entityTypeManager()->getViewBuilder($entity_type)->resetCache();
+    if ($fieldStorageDefinition = $this->getFieldStorageDefinition()) {
+      $entity_type = $fieldStorageDefinition->getTargetEntityTypeId();
+      if ($this->entityTypeManager()->hasHandler($entity_type, 'view_builder')) {
+        $this->entityTypeManager()->getViewBuilder($entity_type)->resetCache();
+      }
     }
   }
 
