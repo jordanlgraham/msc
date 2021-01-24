@@ -50,7 +50,7 @@ function _get_curl_options_update($zip) {
   $config = \Drupal::config('mapquest.open');
   $key = $config->get('key');
   return [
-    CURLOPT_URL => "https://open.mapquestapi.com/geocoding/v1/address?key=$key&location=$zip",
+    CURLOPT_URL => "https://www.mapquestapi.com/geocoding/v1/address?key=$key&location=$zip",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
