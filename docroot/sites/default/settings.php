@@ -24,7 +24,7 @@ $settings['install_profile'] = 'standard';
 // Scaffolding for Lando-based local development.
 $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
 if (!empty($lando_info)) {
-  $base_url = "https://msca.lndo.site";
+  $base_url = "https://msc.lndo.site";
 
   // Database credentials
   $databases['default']['default'] = array(
