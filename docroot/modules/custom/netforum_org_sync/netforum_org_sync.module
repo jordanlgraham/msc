@@ -53,11 +53,17 @@ function netforum_org_sync_cron() {
 /**
  * Implements hook_ENTITY_TYPE_presave().
  *
+ * For facility nodes, set field_ge coordinates in presave.
+ *
  * @param Drupal\Core\Entity\EntityInterface $entity
  * @return void
  */
 function netforum_org_sync_node_presave(EntityInterface $entity) {
-  if ($entity->getType() !== 'facility' && (!empty($entity->field_ge->value) && $entity->field_ge->value !== '0, 0')) {
+  if ($entity->getType() !== 'facility') {
+    return;
+  }
+
+  if  (!empty($entity->field_ge->value) && $entity->field_ge->value !== '0, 0') {
     return;
   }
 
