@@ -1,5 +1,10 @@
 name: msca
 recipe: drupal8
+config:
+  php: 7.3
+  webroot: docroot
+  database: mysql:5.7
+  xdebug: "debug,develop"
 proxy:
   appserver:
     - msc.lndo.site
@@ -26,9 +31,3 @@ services:
       confd: lando/mysql/conf.d
   cache:
     type: memcached:1.5.12
-config:
-  php: 7.3 # or other as appropriate
-  # modify webroot sub dir as needed
-  webroot: docroot
-  database: mysql:5.7
-  xdebug: true
