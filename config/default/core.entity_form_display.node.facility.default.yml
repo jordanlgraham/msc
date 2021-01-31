@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_edit
-    - entity_browser.browser.image_browser
     - field.field.node.facility.field_acronym
     - field.field.node.facility.field_address
     - field.field.node.facility.field_administrator
@@ -85,12 +84,12 @@ dependencies:
     - node.type.facility
   module:
     - address
-    - entity_browser
     - entity_browser_entity_form
     - field_group
     - geolocation
     - inline_entity_form
     - link
+    - media_library
     - path
     - scheduler
 third_party_settings:
@@ -137,7 +136,6 @@ third_party_settings:
       weight: 1
       format_type: details
       format_settings:
-        label: 'Manually Entered Information'
         open: true
         required_fields: true
         id: ''
@@ -259,8 +257,7 @@ content:
     region: content
   field_address:
     weight: 34
-    settings:
-      default_country: null
+    settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
@@ -438,16 +435,11 @@ content:
   field_facility_image:
     weight: 45
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: default
-      open: false
-    third_party_settings: {  }
-    type: entity_browser_entity_reference
+      media_types: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: media_library_widget
     region: content
   field_facility_price_range_max:
     weight: 44

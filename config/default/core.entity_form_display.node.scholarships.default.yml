@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.node.inline_edit
-    - entity_browser.browser.image_browser
     - field.field.node.scholarships.body
     - field.field.node.scholarships.field_gated
     - field.field.node.scholarships.field_past_recipient_s_
@@ -13,9 +12,9 @@ dependencies:
     - field.field.node.scholarships.field_scholar_image
     - node.type.scholarships
   module:
-    - entity_browser
     - entity_browser_entity_form
     - inline_entity_form
+    - media_library
     - path
     - scheduler
     - text
@@ -95,16 +94,11 @@ content:
   field_scholar_image:
     weight: 3
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: default
-      open: false
-    third_party_settings: {  }
-    type: entity_browser_entity_reference
+      media_types: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: media_library_widget
     region: content
   path:
     type: path
