@@ -1,14 +1,13 @@
 name: Forward
 type: module
-description: 'Forward pages and other site elements to a friend'
-# core: 8.x
+description: 'Forward pages to a friend.'
+package: Fields
+core_version_requirement: ^8.8 || ^9
 configure: forward.settings
-package: 'User Interface'
 dependencies:
-  - node
+  - drupal:field
 
-# Information added by Drupal.org packaging script on 2017-04-30
-version: '8.x-2.0-rc2'
-core: '8.x'
+# Information added by Drupal.org packaging script on 2020-06-03
+version: '4.0.0'
 project: 'forward'
-datestamp: 1493584155
+datestamp: 1591143377

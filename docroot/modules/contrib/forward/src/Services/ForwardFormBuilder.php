@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\forward;
+namespace Drupal\forward\Services;
 
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Core\Database\Connection;
@@ -11,10 +11,12 @@ use Drupal\Core\Flood\FloodInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Mail\MailManager;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
 use Drupal\Core\Utility\LinkGenerator;
 use Drupal\Core\Utility\Token;
 use Drupal\forward\Form\ForwardForm;
+use Egulias\EmailValidator\EmailValidator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -29,6 +31,13 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
    * @var \Drupal\Core\Form\FormBuilderInterface
    */
   protected $formBuilder;
+
+  /**
+   * The current route match.
+   *
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  protected $routeMatch;
 
   /**
    * The module handler service.
@@ -108,35 +117,61 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
   protected $linkGenerator;
 
   /**
+   * The email validation service.
+   *
+   * @var Egulias\EmailValidator\EmailValidator
+   */
+  protected $emailValidator;
+
+  /**
    * Constructs a ForwardFormBuilder object.
    *
    * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
    *   The form builder service.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface
+   * @param Drupal\Core\Routing\RouteMatchInterface $route_match
+   *   The core route match interface.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   The module handler service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
-   * @param \Drupal\Core\Database\Connection
+   * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
-   * @param \Drupal\Core\Utility\Token
+   * @param \Drupal\Core\Utility\Token $token_service
    *   The token service.
-   * @param \Drupal\Core\Flood\FloodInterface
+   * @param \Drupal\Core\Flood\FloodInterface $flood_interface
    *   The flood interface.
-   * @param \Drupal\Core\Session\AccountSwitcherInterface
+   * @param \Drupal\Core\Session\AccountSwitcherInterface $account_switcher
    *   The account switcher service.
-   * @param \Drupal\Core\Render\RendererInterface
+   * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The render service.
-   * @param \Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher
+   * @param \Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher $event_dispatcher
    *   The event dispatcher service.
-   * @param \Drupal\Core\Mail\MailManager
+   * @param \Drupal\Core\Mail\MailManager $mailer
    *   The mail service.
-   * @param \Drupal\Core\Utility\LinkGenerator
+   * @param \Drupal\Core\Utility\LinkGenerator $link_generator
    *   The link generation service.
+   * @param Egulias\EmailValidator\EmailValidator $email_validator
+   *   The email validation service.
    */
-  public function __construct(FormBuilderInterface $form_builder, ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_type_manager, RequestStack $request_stack, Connection $database, Token $token_service, FloodInterface $flood_interface, AccountSwitcherInterface $account_switcher, RendererInterface $renderer, ContainerAwareEventDispatcher $event_dispatcher, MailManager $mailer, LinkGenerator $link_generator) {
+  public function __construct(FormBuilderInterface $form_builder,
+    RouteMatchInterface $route_match,
+    ModuleHandlerInterface $module_handler,
+    EntityTypeManagerInterface $entity_type_manager,
+    RequestStack $request_stack,
+    Connection $database,
+    Token $token_service,
+    FloodInterface $flood_interface,
+    AccountSwitcherInterface $account_switcher,
+    RendererInterface $renderer,
+    ContainerAwareEventDispatcher $event_dispatcher,
+    MailManager $mailer,
+    LinkGenerator $link_generator,
+    EmailValidator $email_validator) {
+
     $this->formBuilder = $form_builder;
+    $this->routeMatch = $route_match;
     $this->moduleHandler = $module_handler;
     $this->entityTypeManager = $entity_type_manager;
     $this->requestStack = $request_stack;
@@ -148,6 +183,7 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
     $this->eventDispatcher = $event_dispatcher;
     $this->mailer = $mailer;
     $this->linkGenerator = $link_generator;
+    $this->emailValidator = $email_validator;
   }
 
   /**
@@ -156,6 +192,7 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('form_builder'),
+      $container->get('current_route_match'),
       $container->get('module_handler'),
       $container->get('entity_type.manager'),
       $container->get('request'),
@@ -166,20 +203,70 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
       $container->get('renderer'),
       $container->get('event_dispatcher'),
       $container->get('plugin.manager.mail'),
-      $container->get('link_generator')
+      $container->get('link_generator'),
+      $container->get('email_validator')
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForwardEntityForm(EntityInterface $entity, array $settings) {
-    // The entity must be injected first, since it is used to compute the form ID.
-    $form = new ForwardForm($entity);
-    // Now inject the services.
-    $form->injectServices($this->moduleHandler, $this->entityTypeManager, $this->requestStack, $this->database, $this->tokenService, $this->floodInterface, $this->accountSwitcher, $this->renderer, $this->eventDispatcher, $this->mailer, $this->linkGenerator);
-    $render_array = $this->formBuilder->getForm($form, $settings);
-    $render_array['#weight'] = $settings['forward_interface_weight'];
+  public function buildForm(EntityInterface $entity) {
+    $render_array = [];
+
+    if ($entity->access('view')) {
+      $form = new ForwardForm(
+        $entity,
+        $this->routeMatch,
+        $this->moduleHandler,
+        $this->entityTypeManager,
+        $this->requestStack,
+        $this->database,
+        $this->tokenService,
+        $this->floodInterface,
+        $this->accountSwitcher,
+        $this->renderer,
+        $this->eventDispatcher,
+        $this->mailer,
+        $this->linkGenerator,
+        $this->emailValidator
+      );
+
+      $render_array = $this->formBuilder->getForm($form);
+    }
+
     return $render_array;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildInlineForm(EntityInterface $entity) {
+    $render_array = [];
+
+    if ($entity->access('view')) {
+      $form = new ForwardForm(
+        $entity,
+        $this->routeMatch,
+        $this->moduleHandler,
+        $this->entityTypeManager,
+        $this->requestStack,
+        $this->database,
+        $this->tokenService,
+        $this->floodInterface,
+        $this->accountSwitcher,
+        $this->renderer,
+        $this->eventDispatcher,
+        $this->mailer,
+        $this->linkGenerator,
+        $this->emailValidator
+      );
+
+      $details = TRUE;
+      $render_array = $this->formBuilder->getForm($form, $details);
+    }
+
+    return $render_array;
+  }
+
 }

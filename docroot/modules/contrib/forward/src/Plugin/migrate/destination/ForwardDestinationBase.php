@@ -2,12 +2,8 @@
 
 namespace Drupal\forward\Plugin\migrate\destination;
 
-use Drupal\Core\Database;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\migrate\Plugin\migrate\destination\DestinationBase;
-use Drupal\migrate\Plugin\MigrateDestinationInterface;
 use Drupal\migrate\Plugin\MigrationInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base class for Forward migrate destination classes.
@@ -29,13 +25,16 @@ abstract class ForwardDestinationBase extends DestinationBase {
   protected $database;
 
   /**
-   * Constructs a Display Suite field plugin.
+   * Base class for forward migrate destination classes.
    *
    * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
    * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
    * @param mixed $plugin_definition
+   *   The plugin implementation definition.
    * @param \Drupal\migrate\Plugin\MigrationInterface $migration
-   * @param \Drupal\Core\Database $database
+   *   The migration.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration);

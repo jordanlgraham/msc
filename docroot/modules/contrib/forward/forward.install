@@ -3,10 +3,7 @@
 /**
  * @file
  * Install, update and uninstall functions for the forward module.
- *
  */
-
-use Drupal\Core\Entity\Entity\EntityViewMode;
 
 /**
  * Implements hook_install().
@@ -17,9 +14,10 @@ function forward_install() {
     ->set('forward_email_from_address', \Drupal::config('system.site')->get('mail'))
     ->save();
 
-  // Add the Forward mail plugin that sends HTML email for the 'send_entity' key only.
-  // All other emails from Forward or any other module will use the standard plugin.
-  // If a different mail plug becomes the default, that plugin will be used instead.
+  // Add the Forward mail plugin that sends HTML email for the 'send_entity'
+  // key only. All other emails from Forward or any other module will use the
+  // standard plugin. If a different mail plug becomes the default, that
+  // plugin will be used instead.
   $config = \Drupal::configFactory()->getEditable('system.mail');
   $interface = $config->get('interface');
   $interface['forward_send_entity'] = 'forward_mail';
@@ -27,44 +25,60 @@ function forward_install() {
     ->set('interface', $interface)
     ->save();
 
-  // Add a custom view mode.
-  EntityViewMode::create(array(
-    'id' => 'node.forward',
-    'label' => 'Forward',
-    'status' => 0,
-    'targetEntityType' => 'node'
-  ))->save();
+  // If the MailSystem module is enabled, add the Forward module setting.
+  // This enables Forward mail to be sent as HTML format.
+  if (\Drupal::service('module_handler')->moduleExists('mailsystem')) {
+    $config = \Drupal::configFactory()->get('mailsystem.settings')->get('modules');
+    $config['forward']['send_entity'] = [
+      'formatter' => 'forward_mail',
+      'sender' => 'forward_mail',
+    ];
+    \Drupal::configFactory()->getEditable('mailsystem.settings')
+      ->set('modules', $config)
+      ->save();
+  }
 }
 
 /**
  * Implements hook_uninstall().
  */
 function forward_uninstall() {
-  // Clear default values for config which require dynamic values.
-  \Drupal::configFactory()->getEditable('forward.settings')
-    ->clear('forward_email_from_address')
-    ->save();
-
   // Remove the Forward mail plugin.
   $config = \Drupal::configFactory()->getEditable('system.mail');
   $mail_plugins = $config->get('interface');
   unset($mail_plugins['forward_send_entity']);
   $config->set('interface', $mail_plugins)->save();
 
-  // Remove the custom view mode.
-  $view_mode = EntityViewMode::load('node.forward');
-  if ($view_mode) {
-    $view_mode->delete();
+  // If the MailSystem module is enabled, remove the Forward module setting.
+  if (\Drupal::service('module_handler')->moduleExists('mailsystem')) {
+    $config = \Drupal::configFactory()->get('mailsystem.settings')->get('modules');
+    if (!empty($config['forward'])) {
+      unset($config['forward']);
+      if (empty($config)) {
+        \Drupal::configFactory()->getEditable('mailsystem.settings')
+          ->clear('modules')
+          ->save();
+      }
+      else {
+        \Drupal::configFactory()->getEditable('mailsystem.settings')
+          ->set('modules', $config)
+          ->save();
+      }
+    }
   }
 
   // Remove the Forward logs view.
-  $view = \Drupal::service('entity_type.manager')->getStorage('view')->load('forward_logs');
+  $view = \Drupal::service('entity_type.manager')
+    ->getStorage('view')
+    ->load('forward_logs');
   if ($view) {
     $view->delete();
   }
 
   // Remove the Forward statistics view.
-  $view = \Drupal::service('entity_type.manager')->getStorage('view')->load('forward_statistics');
+  $view = \Drupal::service('entity_type.manager')
+    ->getStorage('view')
+    ->load('forward_statistics');
   if ($view) {
     $view->delete();
   }
@@ -74,36 +88,148 @@ function forward_uninstall() {
  * Implements hook_schema().
  */
 function forward_schema() {
-  $schema['forward_log'] = array(
-    'fields' => array(
-      'logid'     => array('type' => 'serial', 'not null' => TRUE, 'description' => 'Primary Key: Unique log ID.',),
-      'type'      => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
-      'id'        => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
-      'path'      => array('type' => 'varchar', 'not null' => TRUE, 'default' => '<front>', 'length' => 255),
-      'action'    => array('type' => 'varchar', 'not null' => TRUE, 'length' => 8),
-      'timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'uid'       => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'hostname'  => array('type' => 'varchar', 'length' => 128, 'not null' => TRUE, 'default' => '', 'description' => 'Hostname of the user who triggered the event.',),
-    ),
-    'primary key' => array('logid'),
-    'indexes' => array(
-      'forward_entity'   => array('type', 'id'),
-      'forward_uid'      => array('uid'),
-    ),
-  );
-  $schema['forward_statistics'] = array(
-    'fields' => array(
-      'type'                   => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
-      'bundle'                 => array('type' => 'varchar', 'not null' => TRUE, 'default' => '', 'length' => 128),
-      'id'                     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
-      'last_forward_timestamp' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'forward_count'          => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
-      'clickthrough_count'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
-    ),
-    'primary key' => array('type', 'bundle', 'id'),
-    'indexes' => array(
-      'forward_timestamp' => array('last_forward_timestamp'),
-    ),
-  );
+  $schema['forward_log'] = [
+    'fields' => [
+      'logid' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique log ID.',
+      ],
+      'type' => [
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'default' => '',
+        'length' => 128,
+      ],
+      'id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'path' => [
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'default' => '<front>',
+        'length' => 255,
+      ],
+      'action' => ['type' => 'varchar', 'not null' => TRUE, 'length' => 8],
+      'timestamp' => ['type' => 'int', 'not null' => TRUE, 'default' => 0],
+      'uid' => ['type' => 'int', 'not null' => TRUE, 'default' => 0],
+      'hostname' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Hostname of the user who triggered the event.',
+      ],
+    ],
+    'primary key' => ['logid'],
+    'indexes' => [
+      'forward_entity' => ['type', 'id'],
+      'forward_uid' => ['uid'],
+    ],
+  ];
+  $schema['forward_statistics'] = [
+    'fields' => [
+      'type' => [
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'default' => '',
+        'length' => 128,
+      ],
+      'bundle' => [
+        'type' => 'varchar',
+        'not null' => TRUE,
+        'default' => '',
+        'length' => 128,
+      ],
+      'id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'last_forward_timestamp' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'forward_count' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'clickthrough_count' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['type', 'bundle', 'id'],
+    'indexes' => [
+      'forward_timestamp' => ['last_forward_timestamp'],
+    ],
+  ];
   return $schema;
+}
+
+/**
+ * Sets default value for new variables.
+ */
+function forward_update_8001() {
+  $config_factory = \Drupal::configFactory();
+  $config_factory->getEditable('forward.settings')
+    ->set('forward_max_recipients', 1)
+    ->set('forward_max_recipients_error', "You can't send email to more than @number recipient(s) at a time.")
+    ->save();
+}
+
+/**
+ * Add the default configuration value for 'forward_form_allow_plain_text'.
+ */
+function forward_update_8200() {
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->set('forward_form_allow_plain_text', FALSE)
+    ->save(TRUE);
+}
+
+/**
+ * Split 'forward_filter_format' setting into HTML vs. plain text filters.
+ */
+function forward_update_8201() {
+  $forward_settings = \Drupal::configFactory()->getEditable('forward.settings');
+  $format = $forward_settings->get('forward_filter_format');
+  $forward_settings->set('forward_filter_format_html', $format);
+  $forward_settings->set('forward_filter_format_plain_text', '');
+  $forward_settings->save(TRUE);
+}
+
+/**
+ * Add the default configuration value for 'forward_email_footer'.
+ */
+function forward_update_8202() {
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->set('forward_email_footer', '')
+    ->save(TRUE);
+}
+
+/**
+ * Remove the configuration value for 'forward_max_recipients_error'.
+ */
+function forward_update_8203() {
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->clear('forward_max_recipients_error')
+    ->save(TRUE);
+}
+
+/**
+ * Purge the stale configuration value for 'forward_filter_format'.
+ */
+function forward_update_8204() {
+  \Drupal::configFactory()->getEditable('forward.settings')
+    ->clear('forward_filter_format')
+    ->save();
 }

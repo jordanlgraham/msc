@@ -1,5 +1,5 @@
 
-FORWARD MODULE - DRUPAL 8 VERSION
+FORWARD MODULE - DRUPAL 9 VERSION
 ______________________________________________________________________________
 
 NAME:       Forward
