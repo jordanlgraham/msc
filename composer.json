@@ -138,7 +138,8 @@
       },
       "patches": {
         "drupal/core": {
-          "Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-02-07/protect_against_invalid_ids_in_import_delete-3051453-5.patch"
+          "Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-02-07/protect_against_invalid_ids_in_import_delete-3051453-5.patch",
+          "BlockPluginTrait cannot call ::addContextAssignmentElement()": "https://www.drupal.org/files/issues/2020-07-21/3160629-block-2.patch"
         }
       }
     }
