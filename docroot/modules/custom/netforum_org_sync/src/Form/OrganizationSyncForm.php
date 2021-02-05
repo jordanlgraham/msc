@@ -249,10 +249,11 @@ class OrganizationSyncForm extends ConfigFormBase {
    * @param $timer
    */
   public static function importFinished($success, $results, $operations, $timer) {
-    if (!$success) {
+    if (!array_key_exists('success', $results)) {
       drupal_set_message(t('Sync failed.'));
       return;
     }
+
     drupal_set_message(t('Synced @count organizations in @time', ['@count' => count($results['success']), '@time' => $timer]));
     if (!empty($results['error'])) {
       foreach ($results['error'] as $err) {
