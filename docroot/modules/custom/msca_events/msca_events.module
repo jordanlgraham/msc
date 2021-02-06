@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Contains msca_events.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function msca_events_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the msca_events module.
+    case 'help.page.msca_events':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides functionality related to the education_events content type.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param string $form_id
+ * @return void
+ */
+function msca_events_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $node = $form_state->getformObject()->getEntity();
+  if ($node->getType() !== 'education_events') {
+    return;
+  }
+
+  $merp = 'derp';
+  // Act on field_location based on the value of field_virtual_event.
+  $form['field_location']['#states'] = [
+    'invisible' => [
+      '#edit-field-virtual-event-value' => [
+        'checked' => TRUE,
+      ],
+    ],
+  ];
+
+  $default_location = [
+    'langcode' => NULL,
+    'country_code' => 'us',
+    'administrative_area' => NULL,
+    'locality' => NULL,
+    'dependent_locality' => NULL,
+    'postal_code' => NULL,
+    'sorting_code' => NULL,
+    'address_line_1' => NULL,
+    'address_line_2' => NULL,
+    'organization' => NULL,
+    'given_name' => NULL,
+    'additional_name' => NULL,
+    'family_name' => NULL,
+  ];
+
+  $form['field_location']['widget'][0]['address']['#default_value']['#states'] = [
+    $default_location => [
+      '#edit-field-virtual-event-value' => [
+        'checked' => TRUE,
+      ],
+    ],
+  ];
+
+}
