@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
     - address
@@ -74,4 +75,5 @@ hidden:
   field_file: true
   field_gated: true
   field_sponsors: true
+  field_virtual_event: true
   links: true

@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
     - address
@@ -33,7 +34,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 6
+    weight: 7
     settings:
       rows: 9
       summary_rows: 3
@@ -43,12 +44,12 @@ content:
     region: content
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 13
     region: content
     settings: {  }
     third_party_settings: {  }
   field_call_to_action:
-    weight: 7
+    weight: 8
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -56,13 +57,13 @@ content:
     type: link_default
     region: content
   field_date:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
     region: content
   field_end_date:
-    weight: 5
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -83,7 +84,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_event_related_content:
-    weight: 12
+    weight: 11
     settings:
       form_mode: default
       label_singular: ''
@@ -98,7 +99,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_file:
-    weight: 8
+    weight: 9
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
@@ -112,15 +113,14 @@ content:
     type: boolean_checkbox
     region: content
   field_location:
-    weight: 3
-    settings:
-      default_country: null
+    weight: 4
+    settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
   field_sponsors:
     type: paragraphs
-    weight: 9
+    weight: 10
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -130,11 +130,22 @@ content:
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: sponsors
+      closed_mode_threshold: 0
+      features:
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
     third_party_settings: {  }
+    region: content
+  field_virtual_event:
+    weight: 3
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   path:
     type: path
-    weight: 17
+    weight: 16
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -142,12 +153,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 14
     region: content
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 18
+    weight: 17
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -155,14 +166,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 20
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 15
     region: content
     third_party_settings: {  }
   title:
@@ -175,7 +186,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 12
     settings:
       match_operator: CONTAINS
       size: 60
@@ -185,12 +196,12 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 19
+    weight: 18
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
