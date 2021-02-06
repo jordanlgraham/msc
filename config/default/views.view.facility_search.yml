@@ -1010,8 +1010,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
@@ -1078,15 +1076,11 @@ display:
         options:
           geolocation_field: field_ge
           data_provider_id: geolocation_field_provider
-          title_field: ''
-          label_field: ''
+          title_field: none
+          label_field: none
           marker_icon_path: ''
           marker_row_number: 0
           centre:
-            client_location:
-              weight: 0
-              enable: false
-              map_center_id: client_location
             fixed_boundaries:
               settings:
                 north: ''
@@ -1096,13 +1090,16 @@ display:
               weight: 0
               enable: false
               map_center_id: fixed_boundaries
-            fit_bounds:
-              enable: true
-              settings:
-                min_zoom: null
-                reset_zoom: false
+            client_location:
               weight: 0
-              map_center_id: fit_bounds
+              enable: false
+              map_center_id: client_location
+            freeogeoip:
+              weight: 0
+              enable: false
+              map_center_id: location_plugins
+              settings:
+                location_option_id: freeogeoip
             fixed_value:
               settings:
                 latitude: null
@@ -1111,6 +1108,12 @@ display:
               weight: 0
               enable: false
               map_center_id: location_plugins
+            views_proximity_filter:
+              weight: 0
+              enable: false
+              map_center_id: location_plugins
+              settings:
+                location_option_id: field_ge_proximity
             first_row:
               enable: true
               weight: 0
@@ -1124,18 +1127,13 @@ display:
               weight: 0
               enable: false
               map_center_id: location_plugins
-            freeogeoip:
+            fit_bounds:
+              settings:
+                min_zoom: null
+                reset_zoom: false
               weight: 0
               enable: false
-              map_center_id: location_plugins
-              settings:
-                location_option_id: freeogeoip
-            views_proximity_filter:
-              weight: 0
-              enable: false
-              map_center_id: location_plugins
-              settings:
-                location_option_id: field_ge_proximity
+              map_center_id: fit_bounds
           even_empty: 1
           map_provider_id: google_maps
           map_provider_settings:
@@ -1988,8 +1986,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
@@ -3047,8 +3043,6 @@ display:
         - 'config:core.entity_view_display.node.file_browser.default'
         - 'config:core.entity_view_display.node.forum.default'
         - 'config:core.entity_view_display.node.forum.teaser'
-        - 'config:core.entity_view_display.node.geolocation_default_article.default'
-        - 'config:core.entity_view_display.node.geolocation_default_article.teaser'
         - 'config:core.entity_view_display.node.job_posting.default'
         - 'config:core.entity_view_display.node.job_posting.teaser'
         - 'config:core.entity_view_display.node.newsletter.default'
