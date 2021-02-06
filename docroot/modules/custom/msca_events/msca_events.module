@@ -38,38 +38,66 @@ function msca_events_form_node_form_alter(&$form, FormStateInterface $form_state
     return;
   }
 
-  $merp = 'derp';
-  // Act on field_location based on the value of field_virtual_event.
+  // Add a validation function.
+  $form['#validate'][] = 'msca_events_validate';
+
+  // Add a submit function.
+  array_unshift($form['actions']['submit']['#submit'], 'msca_events_submit');
+
+  $form['field_location']['#prefix'] = '<div id="field_location_ajax_wrapper">';
+  $form['field_location']['#suffix'] = '</div>';
+
   $form['field_location']['#states'] = [
-    'invisible' => [
+    'visible' => [
       '#edit-field-virtual-event-value' => [
-        'checked' => TRUE,
+        'checked' => FALSE,
       ],
     ],
   ];
+}
 
-  $default_location = [
-    'langcode' => NULL,
-    'country_code' => 'us',
-    'administrative_area' => NULL,
-    'locality' => NULL,
-    'dependent_locality' => NULL,
-    'postal_code' => NULL,
-    'sorting_code' => NULL,
-    'address_line_1' => NULL,
-    'address_line_2' => NULL,
-    'organization' => NULL,
-    'given_name' => NULL,
-    'additional_name' => NULL,
-    'family_name' => NULL,
-  ];
+/**
+ * Validation function for education_events node form.
+ *
+ * @param array $form
+ * @param FormStateInterface $form_state
+ * @return void
+ */
+function msca_events_validate(&$form, FormStateInterface $form_state) {
+  $virtual = $form_state->getValue('field_virtual_event')['value'];
+  if (!$virtual) {
+    $country = $form_state->getValue('field_location')[0]['address']['country_code'];
+    if ($country == "") {
+      $form_state->setErrorByName('field_location', 'Events that are not virtual must have a location. Please select United States from the country field and complete the address.');
+    }
+  }
+}
 
-  $form['field_location']['widget'][0]['address']['#default_value']['#states'] = [
-    $default_location => [
-      '#edit-field-virtual-event-value' => [
-        'checked' => TRUE,
-      ],
-    ],
-  ];
-
+/**
+ * Submit function for education_events node form.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @return void
+ */
+function msca_events_submit($form, FormStateInterface $form_state) {
+  $virtual = $form_state->getValue('field_virtual_event')['value'];
+  if ($virtual) {
+    $default_value = [
+      'langcode' => NULL,
+      'country_code' => NULL,
+      'administrative_area' => NULL,
+      'locality' => NULL,
+      'dependent locality' => NULL,
+      'postal_code' => NULL,
+      'sorting_code' => NULL,
+      'address_line1' => NULL,
+      'address_line2' => NULL,
+      'organization' => NULL,
+      'given_name' => NULL,
+      'additional_name' => NULL,
+      'family_name' => NULL,
+    ];
+    $form_state->setValue('field_location', [['address' => $default_value]]);
+  }
 }
