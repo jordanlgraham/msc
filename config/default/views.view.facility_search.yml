@@ -1362,7 +1362,7 @@ display:
             height: 400px
             width: 100%
             type: ROADMAP
-            zoom: 10
+            zoom: 8
             maxZoom: 20
             minZoom: 0
             gestureHandling: auto
