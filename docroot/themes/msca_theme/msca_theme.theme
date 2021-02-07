@@ -57,7 +57,6 @@ function msca_theme_preprocess_node(&$variables) {
   }
 
   $node = \Drupal::routeMatch()->getParameter('node');
-  $merp = 'derp';
   if ($node  && !is_string($node)) {
     $nid = $node->id();
     $allContent = views_embed_view('all_content', 'embed_1', $nid);
