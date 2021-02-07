@@ -26,10 +26,13 @@ function msca_theme_preprocess_menu(&$vars) {
   }
 }
 
+/**
+ * Implements template_preprocess_node().
+ *
+ * @param array $variables
+ * @return void
+ */
 function msca_theme_preprocess_node(&$variables) {
-  if ($variables['node']->bundle() == 'education_events') {
-    $a = 1;
-  }
   //Upcoming Education and Events section needs field_date and field_end_date to
   //appear in a couple different formats.
 
@@ -54,12 +57,12 @@ function msca_theme_preprocess_node(&$variables) {
   }
 
   $node = \Drupal::routeMatch()->getParameter('node');
-  	if ($node  && !is_string($node)) {
-  		$nid = $node->id();
-
-  	  	$allContent = views_embed_view('all_content', 'embed_1', $nid);
-  	  	$variables["all_content"] = drupal_render($allContent);
-  	}
+  $merp = 'derp';
+  if ($node  && !is_string($node)) {
+    $nid = $node->id();
+    $allContent = views_embed_view('all_content', 'embed_1', $nid);
+    $variables["all_content"] = drupal_render($allContent);
+  }
 }
 
 /**

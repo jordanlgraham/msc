@@ -28,7 +28,7 @@ bundle: education_events
 mode: homepage
 content:
   field_call_to_action:
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       link_text: ''
@@ -38,6 +38,10 @@ content:
       url_plain: false
       rel: 0
       target: 0
+      btn_size: ''
+      btn_block: null
+      icon_class: ''
+      disable_btn_role: 0
     third_party_settings: {  }
     type: button_link
     region: content
@@ -58,12 +62,22 @@ content:
     type: datetime_plain
     region: content
   field_location:
-    weight: 2
+    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: address_default
     region: content
+  field_virtual_event:
+    type: boolean
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
 hidden:
   body: true
   entity_print_view_epub: true
@@ -75,5 +89,4 @@ hidden:
   field_file: true
   field_gated: true
   field_sponsors: true
-  field_virtual_event: true
   links: true

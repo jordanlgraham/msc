@@ -42,11 +42,23 @@
   }
 }
 
-//need to vertically align content, also need to rearrange items for anything smaller than a large screen
-.upcoming-events .event-category-location {
+// Need to vertically align content, also need to rearrange items for anything smaller than a large screen.
+.upcoming-events .event-category-location,
+.upcoming-events .event-category-virtual {
   @extend .col-lg-2;
   @extend .col-md-6;
   @extend .col-12;
+}
+
+.upcoming-events .event-virtual-event-icon {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+
+.upcoming-events .event-category-virtual h4.virtual-event {
+  text-align: center;
+  margin-bottom: 0;
 }
 
 //this helps center the address vertically
