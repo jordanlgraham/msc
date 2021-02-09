@@ -84,6 +84,7 @@ module:
   msca_constant_contact: 0
   msca_discourse: 0
   msca_donate: 0
+  msca_events: 0
   msca_job: 0
   msca_misc: 0
   msca_theme_tweaks: 0

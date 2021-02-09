@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
     - address
@@ -31,14 +32,14 @@ content:
     type: smart_trim
     weight: 3
     settings:
-      trim_length: '80'
+      trim_length: 80
       trim_type: chars
       trim_suffix: ''
-      more_link: '0'
+      more_link: false
       more_text: More
       summary_handler: full
       trim_options:
-        text: text
+        text: true
       more_class: more-link
     third_party_settings: {  }
     region: content
@@ -77,4 +78,5 @@ hidden:
   field_file: true
   field_gated: true
   field_sponsors: true
+  field_virtual_event: true
   links: true
