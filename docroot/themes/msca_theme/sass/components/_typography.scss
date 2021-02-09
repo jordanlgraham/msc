@@ -109,3 +109,11 @@ a {
 .video-thumbnail-text {
   clear: both;
 }
+
+.sidebar-block article.sponsor .node-sponsor a {
+  color: $orange;
+}
+
+.sidebar-block article.sponsor .node-sponsor a:hover {
+  color: $white;
+}
