@@ -11,14 +11,9 @@
       "role": "Maintainer"
     }
   ],
-  "support": {
-    "issues": "http://drupal.org/project/forward",
-    "irc": "irc://irc.freenode.org/drupal-contribute",
-    "source": "http://cgit.drupalcode.org/forward"
-  },
   "license": "GPL-2.0+",
   "minimum-stability": "dev",
   "require": {
-    "drupal/node": "8.*"
+    "drupal/core": "^8.8 || ^9"
   }
 }

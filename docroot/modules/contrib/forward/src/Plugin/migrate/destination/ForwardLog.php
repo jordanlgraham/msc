@@ -17,10 +17,10 @@ class ForwardLog extends ForwardDestinationBase {
   /**
    * {@inheritdoc}
    */
-  public function import(Row $row, array $old_destination_id_values = array()) {
+  public function import(Row $row, array $old_destination_id_values = []) {
     $destination = $row->getDestination();
     $this->database->insert('forward_log')
-      ->fields(array(
+      ->fields([
         'type' => $destination['type'],
         'id' => intval($destination['id']),
         'path' => $destination['path'],
@@ -28,9 +28,12 @@ class ForwardLog extends ForwardDestinationBase {
         'timestamp' => $destination['timestamp'],
         'uid' => $destination['uid'],
         'hostname' => $destination['hostname'],
-      ))
+      ])
       ->execute();
-    return [$row->getDestinationProperty('type'), $row->getDestinationProperty('id')];
+    return [
+      $row->getDestinationProperty('type'),
+      $row->getDestinationProperty('id'),
+    ];
   }
 
   /**
@@ -53,7 +56,7 @@ class ForwardLog extends ForwardDestinationBase {
       'path' => $this->t('The internal path of the logged item.'),
       'action' => $this->t('The log action, SENT for a forward or REF for a clickthrough.'),
       'timestamp' => $this->t('The date and time the activity was recorded.'),
-      'uid'   => $this->t('The user ID of the person who performed the action.'),
+      'uid' => $this->t('The user ID of the person who performed the action.'),
       'hostname' => $this->t('The IP address of the person who performed the action.'),
     ];
   }

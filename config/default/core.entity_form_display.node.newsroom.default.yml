@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
-    - entity_browser.browser.image_browser
     - field.field.node.newsroom.body
     - field.field.node.newsroom.field_gated
     - field.field.node.newsroom.field_news_release_date
@@ -17,10 +16,10 @@ dependencies:
     - node.type.newsroom
   module:
     - datetime
-    - entity_browser
     - entity_browser_entity_form
     - inline_entity_form
     - link
+    - media_library
     - scheduler
     - text
 id: node.newsroom.default
@@ -70,16 +69,11 @@ content:
   field_news_teaser_image:
     weight: 4
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: default
-      open: false
-    third_party_settings: {  }
-    type: entity_browser_entity_reference
+      media_types: {  }
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+    type: media_library_widget
     region: content
   field_newsroom_category:
     weight: 2

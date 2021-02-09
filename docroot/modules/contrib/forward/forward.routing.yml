@@ -10,7 +10,7 @@ forward.form:
   path: '/forward/{entity_type}/{entity}'
   defaults:
     _title: 'Forward this page to a friend'
-    _controller: 'Drupal\forward\Controller\ForwardController::buildForm'
+    _form: '\Drupal\forward\Form\ForwardForm'
   requirements:
     _permission: 'access forward'
     _entity_access: 'entity.view'
