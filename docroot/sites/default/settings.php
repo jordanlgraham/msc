@@ -51,4 +51,4 @@ if (!empty($lando_info)) {
   }
 }
 
-$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap'];
+$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper'];
