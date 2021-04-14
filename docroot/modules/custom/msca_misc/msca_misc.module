@@ -5,7 +5,11 @@
  * Contains msca_misc.module.
  */
 
+use Drupal\views\Views;
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 /**
  * Implements hook_help().
@@ -21,4 +25,14 @@ function msca_misc_help($route_name, RouteMatchInterface $route_match) {
 
     default:
   }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function msca_misc_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form['#id'] !== 'views-exposed-form-preferred-vendors-page-1') {
+    return;
+  }
+  $form['field_additional_services_target_id']['#type'] = 'hidden';
 }
