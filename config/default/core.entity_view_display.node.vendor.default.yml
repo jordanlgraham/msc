@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
+    - field.field.node.vendor.field_all_services
     - field.field.node.vendor.field_contact
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_customer_key
@@ -62,7 +63,7 @@ content:
     type: string
     region: content
   field_customer_key:
-    weight: 12
+    weight: 11
     label: above
     settings:
       link_to_entity: false
@@ -129,7 +130,7 @@ content:
     type: link
     region: content
   field_vendor_image:
-    weight: 13
+    weight: 12
     label: hidden
     settings:
       image_style: vendor_logo
@@ -149,6 +150,9 @@ content:
       url_only: ''
       url_plain: ''
       rel: 0
+      btn_block: null
+      icon_class: ''
+      disable_btn_role: 0
     third_party_settings: {  }
     type: button_link
     region: content
@@ -156,5 +160,6 @@ hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_all_services: true
   field_gated: true
   links: true

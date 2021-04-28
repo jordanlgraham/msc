@@ -59,13 +59,30 @@ function netforum_org_sync_cron() {
  * @return void
  */
 function netforum_org_sync_node_presave(EntityInterface $entity) {
-  if ($entity->getType() !== 'facility') {
-    return;
-  }
+  switch ($entity->getType()) {
+    case 'facility':
+      if  (!empty($entity->field_ge->value) && $entity->field_ge->value !== '0, 0') {
+        return;
+      }
 
-  if  (!empty($entity->field_ge->value) && $entity->field_ge->value !== '0, 0') {
-    return;
-  }
+      \Drupal::service('netforum_org_sync.geocode')->setCoordinates($entity);
+      break;
 
-  \Drupal::service('netforum_org_sync.geocode')->setCoordinates($entity);
+    case 'vendor':
+
+      $fields = [
+        'field_primary_services',
+        'field_additional_services',
+      ];
+      $service_ids = [];
+      foreach ($fields as $field) {
+        foreach ($entity->$field as $key => $service) {
+          $service_ids[] = $service->target_id;
+        }
+      }
+      $entity->set('field_all_services', $service_ids);
+      break;
+
+    }
+
 }

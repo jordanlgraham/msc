@@ -255,9 +255,12 @@ class OrgSync {
         $node->setPublished();
       }
     }
-    //fields specific to vendor nodes
+    // Fields specific to vendor nodes.
     $primary_services = $this->helper->cleanSoapField($org['org_custom_text_03'], 'array');
     $additional_services = $this->helper->cleanSoapField($org['org_custom_text_04'], 'array');
+
+    // Merge all services for use in the preferred vendors view.
+    $all_services = array_merge($primary_services, $additional_services);
 
     if (!empty($primary_services)) {
       $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services, 'vendor_services_offered');
@@ -265,6 +268,10 @@ class OrgSync {
     if (!empty($additional_services)) {
       $node->field_additional_services = $this->loadOrCreateTermsByName($additional_services, 'vendor_services_offered');
     }
+    if (!empty($all_services)) {
+      $node->field_all_services = $this->loadOrCreateTermsByName($all_services, 'vendor_services_offered');
+    }
+
 
     try {
       $node->save();

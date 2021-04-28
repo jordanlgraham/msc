@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
+    - field.field.node.vendor.field_all_services
     - field.field.node.vendor.field_contact
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_customer_key
@@ -40,6 +41,7 @@ third_party_settings:
         - field_email
         - field_primary_services
         - field_additional_services
+        - field_all_services
       parent_name: ''
       weight: 2
       format_type: details
@@ -71,7 +73,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -91,6 +93,16 @@ content:
     third_party_settings: {  }
     type: address_default
     region: content
+  field_all_services:
+    weight: 14
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_contact:
     weight: 8
     settings:
@@ -108,7 +120,7 @@ content:
     type: string_textfield
     region: content
   field_customer_key:
-    weight: 26
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -189,7 +201,7 @@ content:
     region: content
   path:
     type: path
-    weight: 16
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     region: content
@@ -197,12 +209,12 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 17
+    weight: 7
     third_party_settings: {  }
     region: content
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -210,14 +222,14 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 121
+    weight: 13
     third_party_settings: {  }
     region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 18
+    weight: 8
     third_party_settings: {  }
     region: content
   title:
@@ -230,7 +242,7 @@ content:
     region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 5
     settings:
       match_operator: CONTAINS
       size: 60
@@ -240,12 +252,12 @@ content:
     region: content
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }

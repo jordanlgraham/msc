@@ -2,15 +2,18 @@ name: msca
 recipe: drupal8
 config:
   php: 7.3
-  webroot: docroot
   database: mysql:5.7
-  xdebug: "debug,develop"
 proxy:
   appserver:
     - msc.lndo.site
     - foundation.lndo.site
 # add additional auxiliary services
 services:
+  appserver:
+    webroot: docroot
+    xdebug: true
+    config:
+      php: .vscode/php.ini
   msc:
     type: mysql:5.7
     creds:

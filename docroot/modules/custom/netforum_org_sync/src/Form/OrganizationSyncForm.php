@@ -72,6 +72,9 @@ class OrganizationSyncForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form = parent::buildForm($form, $form_state);
+
     $config = $this->config('netforum_org_sync.organizationsync');
     $form['org_types'] = [
       '#type' => 'textarea',
@@ -92,7 +95,8 @@ class OrganizationSyncForm extends ConfigFormBase {
       '#title' => $this->t('Sync Everything'),
       '#description' => $this->t('Ignore Dates Above and Completely Re-sync'),
     ];
-    return parent::buildForm($form, $form_state);
+
+    return $form;
   }
 
   /**

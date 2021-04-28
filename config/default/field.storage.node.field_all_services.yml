@@ -1,0 +1,20 @@
+uuid: e2ec32e1-35fe-4c2b-a6c2-6674fa51169b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_all_services
+field_name: field_all_services
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
+    - field.field.node.vendor.field_all_services
     - field.field.node.vendor.field_contact
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_customer_key
@@ -75,6 +76,7 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_address: true
+  field_all_services: true
   field_contact: true
   field_contact_title: true
   field_customer_key: true

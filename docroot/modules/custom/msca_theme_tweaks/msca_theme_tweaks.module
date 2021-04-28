@@ -113,7 +113,7 @@ function msca_theme_tweaks_form_views_exposed_form_alter(&$form, FormStateInterf
 
   // Change the placeholders
   $form['title']['#placeholder'] = t('Vendor Name');
-  $form['field_primary_services_target_id']['#options']['All'] = t('Filter by Service');
+  $form['field_all_services_target_id']['#options']['All'] = t('Filter by Service');
 }
 
 /**
