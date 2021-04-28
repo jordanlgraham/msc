@@ -80,7 +80,7 @@ function netforum_org_sync_node_presave(EntityInterface $entity) {
           $service_ids[] = $service->target_id;
         }
       }
-      $entity->set('field_all_services', $service_ids);
+      $entity->set('field_all_services', array_unique($service_ids));
       break;
 
     }
