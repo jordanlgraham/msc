@@ -40,11 +40,11 @@ function field_group_library_info_alter(&$libraries, $extension) {
   // Swap jQuery.ui library if available.
   // See https://www.drupal.org/project/field_group/issues/3109552 for more
   // background on the logic.
-  if (version_compare(\Drupal::VERSION, 9) > 0 && $extension == 'field_group') {
+  if ($extension == 'field_group') {
     if (\Drupal::moduleHandler()->moduleExists('jquery_ui_accordion')) {
       $libraries['formatter.accordion']['dependencies'] = ['jquery_ui_accordion/accordion'];
     }
-    else {
+    elseif (version_compare(\Drupal::VERSION, 9) > 0 ) {
       $libraries['formatter.accordion']['js'] = [];
       $libraries['formatter.accordion']['dependencies'] = [];
     }

@@ -16,9 +16,19 @@ class ConstantContactAuthController extends ControllerBase {
 
   public function authResponse() {
     $code = \Drupal::request()->get('code');
-    $redirectUri = 'https://www.maseniorcare.org/admin/config/services/constantcontact/authresponse';
+
+    $host = \Drupal::request()->getSchemeAndHttpHost();
+    $redirectUri = $host . '/admin/config/services/constantcontact/authresponse';
+    // $redirectUri = 'https://www.maseniorcare.org/admin/config/services/constantcontact/authresponse';
     $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
     $secret = 'vR3zg9VuBZzrt0ykhNkPEQ';
+    // If testing in a lando-based local dev environment, set the alternate
+    // credentials.
+    $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
+    if (!empty($lando_info)) {
+      $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
+      $secret = 'fs2XuQcOI2KathBXXIg9MA';
+    }
     $token = $this->getAccessToken($redirectUri, $pubkey, $secret, $code);
     $_SESSION['token'] = json_decode($token)->access_token;
     $path = '/admin/content';

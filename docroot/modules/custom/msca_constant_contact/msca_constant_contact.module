@@ -1,0 +1,44 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * @file
+ * Contains msca_events.module.
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ *
+ * For newsletter nodes, add color style to any links in the sponsor 'about'.
+ *   - style="color: #ff7e00;"
+ */
+function msca_constant_contact_node_presave(EntityInterface $entity) {
+  $dom = new DOMDocument();
+  if ($entity->getType() !== 'sponsor') {
+    return;
+  }
+
+  $body = $entity->body->value;
+  $dom->loadHTML($body);
+  $links =  $dom->getElementsByTagName('a');
+  foreach ($links as $key => $link) {
+    switch ($link->hasAttribute('style')) {
+      case TRUE:
+        if (strpos($link->getAttribute('style'), 'color: #ff7e00') !== false) {
+          break;
+        }
+        $link->setAttribute('style', $link->getAttribute('style') . 'color: #ff7e00');
+        break;
+
+      default:
+        $link->setAttribute('style', 'color: #ff7e00');
+    }
+
+  }
+  $entity->set('body', [
+    'value' => $dom->saveHTML($dom),
+    'summary' => '',
+    'format' => $entity->body->format,
+  ]);
+}

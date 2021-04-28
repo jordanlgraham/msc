@@ -19,13 +19,20 @@ class ConstantContactAuth {
 
   public function auth() {
     $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
-
+    // If testing in a lando-based local dev environment, set the alternate
+    // public key value.
+    $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
+    if (!empty($lando_info)) {
+      $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
+    }
     $baseUrl = 'https://api.cc.email/v3/idfed?';
     $client = 'client_id=' . $pubkey;
-    $redirectUri = '&redirect_uri=https://www.maseniorcare.org/admin/config/services/constantcontact/authresponse';
+    $host = \Drupal::request()->getSchemeAndHttpHost();
+    $redirectUri = '&redirect_uri=' . $host . '/admin/config/services/constantcontact/authresponse';
     $responseType = '&response_type=code';
     $scope = '&scope=campaign_data';
     $url = $baseUrl . $client . $redirectUri . $responseType . $scope;
+    // return new TrustedRedirectResponse('https://msc.lndo.site');
     return new TrustedRedirectResponse($url);
   }
 
