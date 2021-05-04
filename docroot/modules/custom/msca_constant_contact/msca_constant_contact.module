@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\user\Entity\User;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
@@ -14,11 +15,40 @@ use Drupal\Core\Entity\EntityInterface;
  *   - style="color: #ff7e00;"
  */
 function msca_constant_contact_node_presave(EntityInterface $entity) {
-  $dom = new DOMDocument();
+  switch ($entity->getType()) {
+    case 'sponsor':
+      _add_link_color_attribute($entity);
+      break;
+
+    case 'newsletter':
+      // If there is a sponsor node, pass that sponsor entity through our
+      // helper function and save it.
+      if (!empty($entity->field_sponsor->target_id)) {
+        $sponsor_node = \Drupal::service('entity_type.manager')
+          ->getStorage('node')
+          ->load($entity->field_sponsor->target_id);
+        $sponsor_node->setNewRevision(TRUE);
+        $sponsor_node->revision_log = 'Added link color attributes for sponsor ' . $entity->field_sponsor->target_id;
+        $sponsor_node->setRevisionCreationTime(REQUEST_TIME);
+        $sponsor_node->setRevisionUserId(\Drupal::currentUser()->id());
+        $sponsor_node->save();
+      }
+      break;
+
+  }
+
+}
+
+/**
+ * Adds our orange color to links in sponsor node body.
+ *
+ * @param EntityInterface $entity
+ */
+function _add_link_color_attribute(EntityInterface &$entity) {
   if ($entity->getType() !== 'sponsor') {
     return;
   }
-
+  $dom = new DOMDocument();
   $body = $entity->body->value;
   $dom->loadHTML($body);
   $links =  $dom->getElementsByTagName('a');
