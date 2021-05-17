@@ -9,6 +9,9 @@
       "type": "php",
       "request": "launch",
       "port": 9003,
+      "xdebugSettings": {
+        "max_children": 999,
+      },
       "pathMappings": {
         "/app/docroot": "${workspaceFolder}/docroot",
       }
