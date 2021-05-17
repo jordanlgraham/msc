@@ -1,0 +1,6 @@
+services:
+  msca_maps.config_overrider:
+    class: Drupal\msca_maps\Config\MscaMapsConfigOverrider
+    arguments: ['@key.repository']
+    tags:
+      - {name: config.factory.override, priority: 5}

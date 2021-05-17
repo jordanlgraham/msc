@@ -58,6 +58,7 @@
         "drupal/inline_entity_form": "1.0-beta1",
         "drupal/insert": "^2.0@beta",
         "drupal/jquery_colorpicker": "^2.0",
+        "drupal/key": "^1.14",
         "drupal/maillog": "^1.0@beta",
         "drupal/masquerade": "2.0-beta1",
         "drupal/media_entity": "^2.0",
