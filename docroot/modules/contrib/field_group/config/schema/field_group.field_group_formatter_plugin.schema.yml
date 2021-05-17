@@ -112,6 +112,9 @@ field_group.field_group_formatter_plugin.tabs:
     direction:
       type: string
       label: 'Direction of the tabs'
+    width_breakpoint:
+      type: integer
+      label: 'Disable Tabs widget if the window width is equal or smaller'
 
 field_group.field_group_formatter_plugin.base:
   type: mapping
@@ -123,6 +126,9 @@ field_group.field_group_formatter_plugin.base:
     classes:
       type: string
       label:  'Classes of the fieldgroup'
+    show_empty_fields:
+      type: boolean
+      label: 'Show Empty Fields'
     id:
       type: string
       label: 'Html id of the fieldgroup'
