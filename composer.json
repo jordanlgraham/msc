@@ -31,7 +31,7 @@
         "drupal/core-composer-scaffold": "^8.9",
         "drupal/core-project-message": "^8.9",
         "drupal/core-recommended": "^8.9",
-        "drupal/ctools": "3.0.0",
+        "drupal/ctools": "^3.6",
         "drupal/current_page_crumb": "1.1",
         "drupal/easy_breadcrumb": "^1.13",
         "drupal/editor_advanced_link": "1.4",
