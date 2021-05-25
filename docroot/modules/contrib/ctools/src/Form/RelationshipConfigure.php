@@ -8,13 +8,15 @@ use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ctools\TypedDataResolver;
-use Drupal\user\SharedTempStoreFactory;
+use Drupal\Core\TempStore\SharedTempStoreFactory;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 abstract class RelationshipConfigure extends FormBase {
 
   /**
-   * @var \Drupal\user\SharedTempStoreFactory
+   * @var \Drupal\Core\TempStore\SharedTempStoreFactory
    */
   protected $tempstore;
 
@@ -29,7 +31,7 @@ abstract class RelationshipConfigure extends FormBase {
   protected $tempstore_id;
 
   /**
-   * @var string;
+   * @var string
    */
   protected $machine_name;
 
@@ -37,8 +39,9 @@ abstract class RelationshipConfigure extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('user.shared_tempstore'), $container->get('ctools.typed_data.resolver'));
+    return new static($container->get('tempstore.shared'), $container->get('ctools.typed_data.resolver'));
   }
+
 
   public function __construct(SharedTempStoreFactory $tempstore, TypedDataResolver $resolver) {
     $this->tempstore = $tempstore;
@@ -65,7 +68,7 @@ abstract class RelationshipConfigure extends FormBase {
     $context_object = $this->resolver->convertTokenToContext($context_id, $contexts);
     $form['id'] = [
       '#type' => 'value',
-      '#value' => $context_id
+      '#value' => $context_id,
     ];
     $form['context_object'] = [
       '#type' => 'value',
@@ -87,7 +90,7 @@ abstract class RelationshipConfigure extends FormBase {
       '#value' => $this->t('Save'),
       '#ajax' => [
         'callback' => [$this, 'ajaxSave'],
-      ]
+      ],
     ];
     return $form;
   }
@@ -111,7 +114,8 @@ abstract class RelationshipConfigure extends FormBase {
     $cached_values = $this->tempstore->get($this->tempstore_id)->get($this->machine_name);
     list($route_name, $route_parameters) = $this->getParentRouteInfo($cached_values);
     $response = new AjaxResponse();
-    $response->addCommand(new RedirectCommand($this->url($route_name, $route_parameters)));
+    $url = Url::fromRoute($route_name, $route_parameters);
+    $response->addCommand(new RedirectCommand($url->toString()));
     $response->addCommand(new CloseModalDialogCommand());
     return $response;
   }
@@ -122,8 +126,8 @@ abstract class RelationshipConfigure extends FormBase {
    * @param array $cached_values
    *
    * @return array In the format of
-   * In the format of
-   * return ['route.name', ['machine_name' => $this->machine_name, 'step' => 'step_name']];
+   *   In the format of
+   *   return ['route.name', ['machine_name' => $this->machine_name, 'step' => 'step_name']];
    */
   abstract protected function getParentRouteInfo($cached_values);
 
