@@ -3,8 +3,9 @@
 namespace Drupal\services\Plugin\ServiceDefinition;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Flood\FloodInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\services\ServiceDefinitionBase;
@@ -31,6 +32,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginInterface {
 
+  use MessengerTrait;
+
   /**
    * Constructs a HTTP basic authentication provider object.
    *
@@ -40,11 +43,11 @@ class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginI
    *   The user authentication service.
    * @param \Drupal\Core\Flood\FloodInterface $flood
    *   The flood service.
-   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
    *   The entity manager service.
-   * @param Session $session
+   * @param \Symfony\Component\HttpFoundation\Session\Session $session
    */
-  public function __construct($configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, UserAuthInterface $user_auth, FloodInterface $flood, EntityManagerInterface $entity_manager, Session $session) {
+  public function __construct($configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, UserAuthInterface $user_auth, FloodInterface $flood, EntityTypeManagerInterface $entity_manager, Session $session) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->configFactory = $config_factory;
     $this->userAuth = $user_auth;
@@ -64,7 +67,7 @@ class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginI
       $container->get('config.factory'),
       $container->get('user.auth'),
       $container->get('flood'),
-      $container->get('entity.manager'),
+      $container->get('entity_type.manager'),
       $container->get('session')
     );
   }
@@ -84,10 +87,10 @@ class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginI
       $content = $serializer->decode($request->getContent(), $request->getContentType());
     }
     else {
-      throw new HttpException(500, $this->t('The appropriate DecoderInterface was not found.'));
+      throw new HttpException(500, 'The appropriate DecoderInterface was not found.');
     }
     if (!isset($content)) {
-      throw new HttpException(500, $this->t('The content of the request was empty.'));
+      throw new HttpException(500, 'The content of the request was empty.');
     }
     $flood_config = $this->configFactory->get('user.flood');
     $username = $content['username'];
@@ -100,7 +103,7 @@ class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginI
     // in to many different user accounts.  We have a reasonably high limit
     // since there may be only one apparent IP for all users at an institution.
     if ($this->flood->isAllowed('services.failed_login_ip', $flood_config->get('ip_limit'), $flood_config->get('ip_window'))) {
-      $accounts = $this->entityManager->getStorage('user')->loadByProperties(array('name' => $username, 'status' => 1));
+      $accounts = $this->entityManager->getStorage('user')->loadByProperties(['name' => $username, 'status' => 1]);
       $account = reset($accounts);
       if ($account) {
         if ($flood_config->get('uid_only')) {
@@ -122,7 +125,7 @@ class UserLogin extends ServiceDefinitionBase implements ContainerFactoryPluginI
             $this->flood->clear('services.failed_login_user', $identifier);
             $this->session->start();
             user_login_finalize($account);
-            drupal_set_message(t('User successfully logged in'), 'status', FALSE);
+            $this->messenger()->addMessage(t('User successfully logged in'), 'status', FALSE);
 
             return [
               'id' => $this->session->getId(),

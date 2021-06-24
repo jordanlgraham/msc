@@ -1,7 +1,7 @@
 services:
   services.entity_access:
     class: Drupal\services\Entity\ServicesEntityCreateAccessCheck
-    arguments: ['@entity.manager', '@serializer']
+    arguments: ['@entity_type.manager', '@serializer']
     tags:
       - { name: access_check, applies_to: _services_entity_access_create }
 

@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class EntityView extends ServiceDefinitionBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @var RendererInterface
+   * @var \Drupal\Core\Render\RendererInterface
    */
   protected $renderer;
 
@@ -42,7 +42,7 @@ class EntityView extends ServiceDefinitionBase implements ContainerFactoryPlugin
    * @param array $configuration
    * @param string $plugin_id
    * @param mixed $plugin_definition
-   * @param RendererInterface $renderer
+   * @param \Drupal\Core\Render\RendererInterface $renderer
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer, AssetResolverInterface $asset_resolver, AssetCollectionRendererInterface $css_collection_renderer, AssetCollectionRendererInterface $js_collection_renderer) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -67,9 +67,9 @@ class EntityView extends ServiceDefinitionBase implements ContainerFactoryPlugin
     if ($request->query->has('view_mode')) {
       $view_mode = $request->query->get('view_mode');
     }
-    /* @var $entity \Drupal\Core\Entity\EntityInterface */
+    /** @var \Drupal\Core\Entity\EntityInterface $entity */
     $entity = $this->getContextValue($this->getDerivativeId());
-    $view_builder = \Drupal::entityManager()->getViewBuilder($entity->getEntityTypeId());
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId());
     $render_array = $view_builder->view($entity, $view_mode);
 
     $result = [];
@@ -100,6 +100,7 @@ class EntityView extends ServiceDefinitionBase implements ContainerFactoryPlugin
 
     return $result;
   }
+
   /**
    * Gathers the markup for each type of asset.
    *

@@ -115,10 +115,10 @@ class DataFilterTest extends KernelTestBase {
     $this->assertSame($data->getDataDefinition(), $filter->filtersTo($data->getDataDefinition(), ['default']));
 
     $fails = $filter->validateArguments($data->getDataDefinition(), []);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $this->assertStringContainsString('Missing arguments', (string) $fails[0]);
     $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass()]);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
 
     $this->assertEquals('default', $filter->filter($data->getDataDefinition(), $data->getValue(), ['default']));
@@ -139,15 +139,15 @@ class DataFilterTest extends KernelTestBase {
     $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
 
     $fails = $filter->validateArguments($data->getDataDefinition(), []);
-    $this->assertEquals(0, count($fails));
+    $this->assertCount(0, $fails);
     $fails = $filter->validateArguments($data->getDataDefinition(), ['medium']);
-    $this->assertEquals(0, count($fails));
+    $this->assertCount(0, $fails);
     $fails = $filter->validateArguments($data->getDataDefinition(), ['invalid-format']);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $fails = $filter->validateArguments($data->getDataDefinition(), ['custom']);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $fails = $filter->validateArguments($data->getDataDefinition(), ['custom', 'Y']);
-    $this->assertEquals(0, count($fails));
+    $this->assertCount(0, $fails);
 
     /** @var \Drupal\Core\Datetime\DateFormatterInterface $date_formatter */
     $date_formatter = $this->container->get('date.formatter');
@@ -183,10 +183,10 @@ class DataFilterTest extends KernelTestBase {
     $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), ['full_html'])->getDataType());
 
     $fails = $filter->validateArguments($data->getDataDefinition(), []);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $this->assertStringContainsString('Missing arguments', (string) $fails[0]);
     $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass()]);
-    $this->assertEquals(1, count($fails));
+    $this->assertCount(1, $fails);
     $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
 
     $this->assertEquals(

@@ -43,12 +43,12 @@ class Services extends ControllerBase {
    * Processing the service API request.
    */
   public function processRequest(Request $request, RouteMatchInterface $route_match, $service_endpoint_id, $service_definition_id) {
-    /* @var $service_endpoint \Drupal\services\ServiceEndpointInterface */
-    $service_endpoint = $this->entityManager()->getStorage('service_endpoint')->load($service_endpoint_id);
+    /** @var \Drupal\services\ServiceEndpointInterface $service_endpoint */
+    $service_endpoint = $this->entityTypeManager()->getStorage('service_endpoint')->load($service_endpoint_id);
     $service_resource = $service_endpoint->loadResourceProvider($service_definition_id);
 
-    // TODO - pull in settings from service API and alter response.
-    /* @var $service_def \Drupal\services\ServiceDefinitionInterface */
+    // @todo pull in settings from service API and alter response.
+    /** @var \Drupal\services\ServiceDefinitionInterface $service_def */
     $service_def = $service_resource->createServicePluginInstance([]);
 
     /*
@@ -68,7 +68,7 @@ class Services extends ControllerBase {
     $data = $service_def->processRequest($request, $route_match, $this->serializer);
     $code = $service_def->getPluginDefinition()['response_code'];
     $headers = [];
-    $messages = drupal_get_messages();
+    $messages = $this->messenger()->all();
     if ($messages) {
       foreach ($messages as $type => $type_message) {
         $headers["X-Drupal-Services-Messages-$type"] = implode('; ', $type_message);
@@ -99,7 +99,7 @@ class Services extends ControllerBase {
   /**
    * Generate a CSRF session token.
    *
-   * @return \Symfony\Component\HttpFoundation\Response.
+   * @return \Symfony\Component\HttpFoundation\Response
    *   A HTTP response object.
    */
   public function csrfToken() {

@@ -24,7 +24,7 @@ class ServiceEndpointListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    $row['label'] = $this->getLabel($entity);
+    $row['label'] = $entity->label();
     $row['id'] = $entity->id();
     // You probably want a few more properties here...
     return $row + parent::buildRow($entity);
@@ -39,7 +39,7 @@ class ServiceEndpointListBuilder extends ConfigEntityListBuilder {
     if ($entity->hasLinkTemplate('resources')) {
       $operations['resource'] = [
         'title' => $this->t('Resources'),
-        'url' => $entity->urlInfo('resources'),
+        'url' => $entity->toUrl('resources'),
         'weight' => 10,
       ];
     }

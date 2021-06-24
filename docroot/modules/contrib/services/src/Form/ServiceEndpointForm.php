@@ -44,7 +44,7 @@ class ServiceEndpointForm extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
-    /* @var $service_endpoint \Drupal\services\Entity\ServiceEndpoint */
+    /** @var \Drupal\services\Entity\ServiceEndpoint $service_endpoint */
     $service_endpoint = $this->entity;
     $form['label'] = [
       '#type' => 'textfield',
@@ -84,16 +84,16 @@ class ServiceEndpointForm extends EntityForm {
     $status = $service_endpoint->save();
 
     if ($status) {
-      drupal_set_message($this->t('Saved the %label service endpoint.', [
+      $this->messenger()->addMessage($this->t('Saved the %label service endpoint.', [
         '%label' => $service_endpoint->label(),
       ]));
     }
     else {
-      drupal_set_message($this->t('The %label service endpoint was not saved.', [
+      $this->messenger()->addMessage($this->t('The %label service endpoint was not saved.', [
         '%label' => $service_endpoint->label(),
       ]));
     }
-    $form_state->setRedirectUrl($service_endpoint->urlInfo('collection'));
+    $form_state->setRedirectUrl($service_endpoint->toUrl('collection'));
   }
 
 }

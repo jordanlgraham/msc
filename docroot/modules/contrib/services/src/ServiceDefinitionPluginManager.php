@@ -7,6 +7,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 
 class ServiceDefinitionPluginManager extends DefaultPluginManager {
+
   /**
    * Constructs a new ServiceDefinitionPluginManager.
    *

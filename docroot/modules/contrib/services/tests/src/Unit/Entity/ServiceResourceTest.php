@@ -13,14 +13,14 @@ use Drupal\Tests\UnitTestCase;
 class ServiceResourceTest extends UnitTestCase {
 
   public function testCanConstructDefaultResource() {
-    /* @var ServiceResource $resource */
+    /** @var \Drupal\services\Entity\ServiceResource $resource */
     $resource = new ServiceResource(
       [
         'service_plugin_id' => 'test:plugin:id',
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => ['json'],
         'authentication' => ['cookie'],
-        'no_cache' => 0
+        'no_cache' => 0,
       ],
       'service_endpoint_resource'
     );
@@ -32,14 +32,14 @@ class ServiceResourceTest extends UnitTestCase {
   }
 
   public function testCanConstructResourceNoCacheFalse() {
-    /* @var ServiceResource $resource */
+    /** @var \Drupal\services\Entity\ServiceResource $resource */
     $resource = new ServiceResource(
       [
         'service_plugin_id' => 'test:plugin:id',
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => [],
         'authentication' => [],
-        'no_cache' => FALSE
+        'no_cache' => FALSE,
       ],
       'service_endpoint_resource'
     );
@@ -48,14 +48,14 @@ class ServiceResourceTest extends UnitTestCase {
   }
 
   public function testCanConstructResourceNoCacheTrue() {
-    /* @var ServiceResource $resource */
+    /** @var \Drupal\services\Entity\ServiceResource $resource */
     $resource = new ServiceResource(
       [
         'service_plugin_id' => 'test:plugin:id',
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => [],
         'authentication' => [],
-        'no_cache' => TRUE
+        'no_cache' => TRUE,
       ],
       'service_endpoint_resource'
     );
@@ -64,14 +64,14 @@ class ServiceResourceTest extends UnitTestCase {
   }
 
   public function testCanConstructResourceNoCache1() {
-    /* @var ServiceResource $resource */
+    /** @var \Drupal\services\Entity\ServiceResource $resource */
     $resource = new ServiceResource(
       [
         'service_plugin_id' => 'test:plugin:id',
         'service_endpoint_id' => 'test_endpoint_id',
         'formats' => [],
         'authentication' => [],
-        'no_cache' => 1
+        'no_cache' => 1,
       ],
       'service_endpoint_resource'
     );

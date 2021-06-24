@@ -24,7 +24,7 @@ class ServiceResourceDeleteForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return $this->entity->getEndpoint()->urlInfo('resources');
+    return $this->entity->getEndpoint()->toUrl('resources');
   }
 
   /**
@@ -40,7 +40,7 @@ class ServiceResourceDeleteForm extends EntityConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->entity->delete();
 
-    drupal_set_message(
+    $this->messenger()->addMessage(
       $this->t('Resource "@label" configurations have been deleted!', [
         '@label' => $this->entity->label(),
       ])
