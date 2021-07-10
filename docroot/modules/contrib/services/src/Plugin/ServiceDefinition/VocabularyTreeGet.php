@@ -35,7 +35,7 @@ class VocabularyTreeGet extends ServiceDefinitionBase implements ContainerFactor
    * {@inheritdoc}
    */
   /*public function processRoute(Route $route) {
-  // TODO - Check perms of taxonomy vocabulary access.
+  // @todo Check perms of taxonomy vocabulary access.
   //$route->setRequirement('_entity_access', $this->getDerivativeId() .'.view');
   }*/
 
@@ -50,13 +50,13 @@ class VocabularyTreeGet extends ServiceDefinitionBase implements ContainerFactor
     }*/
 
     $vocabulary_id = $request->get('vocabulary');
-    /* @var $termStorage \Drupal\taxonomy\TermStorageInterface */
+    /** @var \Drupal\taxonomy\TermStorageInterface $termStorage */
     $termStorage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     // Load taxonomy terms for tax menu vocab.
-    /* @var $terms \Drupal\taxonomy\TermInterface[] */
+    /** @var \Drupal\taxonomy\TermInterface[] $terms */
     $terms = $termStorage->loadTree($vocabulary_id);
     $terms_array = [];
-    /* @var $term \Drupal\taxonomy\TermInterface */
+    /** @var \Drupal\taxonomy\TermInterface $term */
     foreach ($terms as $term) {
       $terms_array[] = (array) $term;
     }

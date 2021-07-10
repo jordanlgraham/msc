@@ -28,7 +28,7 @@ interface ServiceResourceInterface extends ConfigEntityInterface {
   /**
    * Get resource no caching option.
    *
-   * @return boolean
+   * @return bool
    */
   public function getNoCache();
 

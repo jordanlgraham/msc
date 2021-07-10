@@ -28,6 +28,13 @@ use Drupal\services\ServiceResourceInterface;
  *   links = {
  *     "config-form" = "/admin/structure/service_endpoint/{service_endpoint}/resource/{plugin_id}",
  *     "delete-form" = "/admin/structure/service_endpoint/{service_endpoint}/resource/{plugin_id}/delete"
+ *    },
+ *   config_export = {
+ *     "id",
+ *     "service_plugin_id",
+ *     "service_endpoint_id",
+ *     "formats",
+ *     "authentication",
  *   }
  * )
  */
@@ -255,7 +262,7 @@ class ServiceResource extends ConfigEntityBase implements ServiceResourceInterfa
   /**
    * Authentication collector.
    *
-   * @return \Drupal\Core\Authentication\AuthenticationCollectorInterface.
+   * @return \Drupal\Core\Authentication\AuthenticationCollectorInterface
    *   An authentication collection object.
    */
   protected function authenticationCollector() {

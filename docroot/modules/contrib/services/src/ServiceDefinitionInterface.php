@@ -93,7 +93,7 @@ interface ServiceDefinitionInterface extends ContextAwarePluginInterface, Cachea
   /**
    * Allow plugins to alter the response object before it is returned.
    *
-   * @param Response $response
+   * @param \Symfony\Component\HttpFoundation\Response $response
    *   The response object that is about to be returned.
    */
   public function processResponse(Response $response);

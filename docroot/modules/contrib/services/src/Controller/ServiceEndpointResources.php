@@ -17,7 +17,7 @@ class ServiceEndpointResources extends ControllerBase {
   /**
    * Service definition plugin manager.
    *
-   * @var \Drupal\Component\Plugin\PluginManagerInterface.
+   * @var \Drupal\Component\Plugin\PluginManagerInterface
    */
   protected $pluginManager;
 
@@ -71,12 +71,12 @@ class ServiceEndpointResources extends ControllerBase {
         $rows[] = $row;
       }
 
-      $build[$category]['table'] = array(
+      $build[$category]['table'] = [
         '#type' => 'table',
         '#rows' => $rows,
         '#header' => $this->buildHeader(),
         '#empty' => $this->t('No service definitions exist'),
-      );
+      ];
     }
 
     return $build;
@@ -143,7 +143,7 @@ class ServiceEndpointResources extends ControllerBase {
       if ($service_resource->hasLinkTemplate('delete-form')) {
         $links['disable'] = [
           'title' => $this->t('Disable'),
-          'url' => $service_resource->urlInfo('delete-form'),
+          'url' => $service_resource->toUrl('delete-form'),
           'attributes' => $this->getModalAttributes(),
         ];
       }

@@ -32,6 +32,11 @@ use Drupal\services\ServiceEndpointInterface;
  *     "edit-form" = "/admin/structure/service_endpoint/{service_endpoint}/edit",
  *     "delete-form" = "/admin/structure/service_endpoint/{service_endpoint}/delete",
  *     "resources" =  "/admin/structure/service_endpoint/{service_endpoint}/resources"
+ *   },
+ *     config_export = {
+ *      "id",
+ *      "label",
+ *      "endpoint",
  *   }
  * )
  */

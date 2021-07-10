@@ -2,7 +2,7 @@
 
 namespace Drupal\services;
 
-use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ServiceDefinitionEntityRequestContentBase extends ServiceDefinitionBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @var \Drupal\Core\Entity\EntityManagerInterface
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $manager;
 
@@ -23,16 +23,16 @@ class ServiceDefinitionEntityRequestContentBase extends ServiceDefinitionBase im
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static ($configuration, $plugin_id, $plugin_definition, $container->get('entity.manager'));
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('entity_type.manager'));
   }
 
   /**
    * @param array $configuration
    * @param string $plugin_id
    * @param mixed $plugin_definition
-   * @param EntityManagerInterface $manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $manager
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityManagerInterface $manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->manager = $manager;
   }
@@ -47,7 +47,7 @@ class ServiceDefinitionEntityRequestContentBase extends ServiceDefinitionBase im
     $content = $request->getContent();
     if (!empty($content)) {
       $entity_type_id = $this->getDerivativeId();
-      /* @var $entity_type \Drupal\Core\Entity\EntityTypeInterface */
+      /** @var \Drupal\Core\Entity\EntityTypeInterface $entity_type */
       $entity_type = $this->manager->getDefinition($entity_type_id);
 
       return $serializer->deserialize($content, $entity_type->getClass(), $request->getContentType(), ['entity_type' => $entity_type_id]);

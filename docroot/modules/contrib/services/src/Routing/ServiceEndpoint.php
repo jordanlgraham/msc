@@ -15,9 +15,9 @@ class ServiceEndpoint {
    * @todo does this implement some interface that we're not documenting?
    */
   public function routes() {
-    $routes = array();
+    $routes = [];
 
-    foreach (\Drupal::entityManager()->getStorage('service_endpoint')->loadMultiple() as $endpoint) {
+    foreach (\Drupal::entityTypeManager()->getStorage('service_endpoint')->loadMultiple() as $endpoint) {
       foreach ($endpoint->loadResourceProviders() as $resource) {
 
         $instance = $resource->createServicePluginInstance();
@@ -48,7 +48,7 @@ class ServiceEndpoint {
           $route->setRequirement('_format', implode('|', array_keys($formats)));
         }
 
-        if($resource->getNoCache()) {
+        if ($resource->getNoCache()) {
           $route->setOption('no_cache', TRUE);
         }
 

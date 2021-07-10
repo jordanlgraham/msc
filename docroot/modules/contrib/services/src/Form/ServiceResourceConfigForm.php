@@ -40,7 +40,7 @@ class ServiceResourceConfigForm extends ServiceResourceBaseForm {
       '#type' => 'checkbox',
       '#title' => $this->t('Disable cache'),
       '#description' => $this->t('Do not cache the response of the resource.'),
-      '#default_value' => $entity->getNoCache()
+      '#default_value' => $entity->getNoCache(),
     ];
 
     return $form;
@@ -53,10 +53,10 @@ class ServiceResourceConfigForm extends ServiceResourceBaseForm {
     $status = $this->entity->save();
 
     if ($status) {
-      drupal_set_message('Resource has been saved successfully.');
+      $this->messenger()->addMessage('Resource has been saved successfully.');
     }
 
-    $form_state->setRedirectUrl($this->entity->getEndpoint()->urlInfo('resources'));
+    $form_state->setRedirectUrl($this->entity->getEndpoint()->toUrl('resources'));
   }
 
 }

@@ -21,6 +21,7 @@ use Symfony\Component\Routing\Route;
  * )
  */
 class EntityPut extends ServiceDefinitionEntityRequestContentBase {
+
   /**
    * {@inheritdoc}
    */
@@ -34,7 +35,7 @@ class EntityPut extends ServiceDefinitionEntityRequestContentBase {
   public function processRequest(Request $request, RouteMatchInterface $route_match, SerializerInterface $serializer) {
     try {
       $updated_entity = parent::processRequest($request, $route_match, $serializer);
-      /* @var $entity \Drupal\Core\Entity\EntityInterface */
+      /** @var \Drupal\Core\Entity\EntityInterface $entity */
       $entity = $this->getContextValue($this->getDerivativeId());
       if ($entity instanceof ContentEntityInterface) {
         foreach ($updated_entity as $field_name => $field) {
@@ -42,7 +43,7 @@ class EntityPut extends ServiceDefinitionEntityRequestContentBase {
         }
       }
       else {
-        /* @var $updated_entity \Drupal\Core\Config\Entity\ConfigEntityInterface */
+        /** @var \Drupal\Core\Config\Entity\ConfigEntityInterface $updated_entity */
         foreach ($updated_entity->toArray() as $field_name => $field) {
           $entity->set($field_name, $field);
         }

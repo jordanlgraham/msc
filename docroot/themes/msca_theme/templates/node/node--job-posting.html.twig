@@ -109,6 +109,13 @@
       </div>
     {% endif %}
 
+    {% if content.field_job_posting_org_website|render %}
+      <div class="row">
+        <span class="col-md-4">{{ 'Website'|t }}</span>
+        <span class="col-md-8">{{ content.field_job_posting_org_website }}</span>
+      </div>
+    {% endif %}
+
     {% if content.field_job_posting_hours|render %}
       <div class="row">
         <span class="col-md-4">{{ 'Hours'|t }}</span>
@@ -150,7 +157,7 @@
         <span class="col-md-8">{{ content.field_job_posting_contact_email }}</span>
       </div>
     {% endif %}
-    
+
     <div class="row">
       <span class="col-md-4">{{ 'Posted'|t }}</span>
       <span class="col-md-8">{{ date }}</span>

@@ -3,7 +3,6 @@
 namespace Drupal\services\Plugin\ServiceDefinition;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\services\ServiceDefinitionBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -24,13 +23,6 @@ use Drupal\Core\Routing\RouteMatchInterface;
 class EntityIndex extends ServiceDefinitionBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactoryInterface
-   */
-  protected $queryFactory;
-
-  /**
    * The entity type manager.
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -45,7 +37,6 @@ class EntityIndex extends ServiceDefinitionBase implements ContainerFactoryPlugi
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('entity.query'),
       $container->get('entity_type.manager')
     );
   }
@@ -54,12 +45,10 @@ class EntityIndex extends ServiceDefinitionBase implements ContainerFactoryPlugi
    * @param array $configuration
    * @param string $plugin_id
    * @param mixed $plugin_definition
-   * @param \Drupal\Core\Entity\Query\QueryFactory $query_factory
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, QueryFactory $query_factory, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->queryFactory = $query_factory;
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -76,7 +65,7 @@ class EntityIndex extends ServiceDefinitionBase implements ContainerFactoryPlugi
     if ($request->query->has('limit') && is_numeric($request->query->get('limit'))) {
       $limit = $request->query->get('limit');
     }
-    $result = $this->queryFactory->get($entity_type_id, 'AND')
+    $result = $this->entityTypeManager->getStorage($entity_type_id)->getQuery()
       ->range($start, $limit)
       ->execute();
 

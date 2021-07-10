@@ -2,6 +2,7 @@
 
 namespace Drupal\services\Plugin\ServiceDefinition;
 
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\services\ServiceDefinitionBase;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class UserLogout extends ServiceDefinitionBase {
 
+  use MessengerTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -34,7 +37,7 @@ class UserLogout extends ServiceDefinitionBase {
    */
   public function processRequest(Request $request, RouteMatchInterface $route_match, SerializerInterface $serializer) {
     user_logout();
-    drupal_set_message(t('User successfully logged out'), 'status', FALSE);
+    $this->messenger()->addMessage(t('User successfully logged out'), 'status', FALSE);
 
     return [];
   }

@@ -3,6 +3,7 @@
 namespace Drupal\services\Plugin\ServiceDefinition;
 
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\services\ServiceDefinitionEntityRequestContentBase;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,6 +23,9 @@ use Symfony\Component\Serializer\SerializerInterface;
  * )
  */
 class EntityPost extends ServiceDefinitionEntityRequestContentBase {
+
+  use MessengerTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -38,7 +42,7 @@ class EntityPost extends ServiceDefinitionEntityRequestContentBase {
       try {
         $entity->save();
         if ($entity->id()) {
-          drupal_set_message($this->t('Entity of type @type was created.', ['@type' => $entity->getEntityType()->id()]));
+          $this->messenger()->addMessage($this->t('Entity of type @type was created.', ['@type' => $entity->getEntityType()->id()]));
 
           return $entity->toArray();
         }
