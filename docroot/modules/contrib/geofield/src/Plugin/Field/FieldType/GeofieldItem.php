@@ -190,20 +190,15 @@ class GeofieldItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty() {
-    try {
-      $value = $this->get('value')->getValue();
-      if (!empty($value)) {
-        /* @var \Drupal\geofield\GeoPHP\GeoPHPInterface $geo_php_wrapper */
-        // Note: Geofield FieldType doesn't support Dependency Injection yet
-        // (https://www.drupal.org/node/2053415).
-        $geo_php_wrapper = \Drupal::service('geofield.geophp');
-        /* @var \Geometry|null $geometry */
-        $geometry = $geo_php_wrapper->load($value);
-        return $geometry instanceof \Geometry ? $geometry->isEmpty() : TRUE;
-      }
-    }
-    catch (\Exception $e) {
-      watchdog_exception('geofield get value exception', $e);
+    $value = $this->get('value')->getValue();
+    if (!empty($value)) {
+      /* @var \Drupal\geofield\GeoPHP\GeoPHPInterface $geo_php_wrapper */
+      // Note: Geofield FieldType doesn't support Dependency Injection yet
+      // (https://www.drupal.org/node/2053415).
+      $geo_php_wrapper = \Drupal::service('geofield.geophp');
+      /* @var \Geometry|null $geometry */
+      $geometry = $geo_php_wrapper->load($value);
+      return $geometry instanceof \Geometry ? $geometry->isEmpty() : FALSE;
     }
     return TRUE;
   }
