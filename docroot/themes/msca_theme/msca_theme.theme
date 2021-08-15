@@ -216,7 +216,8 @@ function msca_theme_views_pre_render(&$view) {
     if ($view->current_display == 'newsroom') {
       $filter_value = $view->exposed_data['news_category'][0]['target_id'];
     }
-    else if ($view->current_display == 'events') {
+    else if ($view->current_display == 'events'
+      && !is_null($view->exposed_data['event_type'])) {
       $filter_value = $view->exposed_data['event_type'][0]['target_id'];
     }
     else if ($view->current_display == 'member_resources') {
