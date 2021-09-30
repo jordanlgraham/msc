@@ -40,7 +40,7 @@ class Fast404ExtensionTest extends BrowserTestBase {
 
     // Add .doc to the default extension list.
     $settings['settings']['fast404_exts'] = (object) [
-      'value' => '/^(?!robots).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp|doc)$/i',
+      'value' => '/^(?!\/robots)^(?!\/system\/files).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp|doc)$/i',
       'required' => TRUE,
     ];
     $this->writeSettings($settings);

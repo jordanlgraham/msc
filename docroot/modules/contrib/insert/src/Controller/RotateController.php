@@ -3,42 +3,40 @@
 namespace Drupal\insert\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Image\ImageInterface;
 use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- *
- */
 class RotateController extends ControllerBase {
 
   /**
    * Rotates an image regenerating image derivatives for every image style and
    * saving the corresponding entity with the updated image dimensions.
    *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *
-   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   * @param Request $request
+   * @return JsonResponse
    */
   public function rotate(Request $request) {
-    $fid = $request->query->get('fid', NULL);
-    $degree = $request->query->get('degree', NULL);
-    $nid = $request->query->get('nid', NULL);
-    $absolute = \Drupal::config('insert.config')->get('absolute');
+    $fid = $request->query->get('fid', null);
+    $degree = $request->query->get('degree', null);
+    $nid = $request->query->get('nid', null);
+    $absolute = !!$request->query->get('absolute', FALSE);
 
-    if ($fid === NULL || $degree === NULL || $nid === NULL) {
+    if ($fid === null || $degree === null || $nid === null) {
       return new JsonResponse([]);
     }
 
     $file = File::load($fid);
 
-    if ($file === NULL) {
+    if ($file === null) {
       return new JsonResponse([]);
     }
 
-    /** @var \Drupal\Core\Image\ImageInterface $image */
+    /** @var ImageInterface $image */
     $image = \Drupal::service('image.factory')->get($file->getFileUri());
 
     if (!$image->isValid()) {
@@ -56,18 +54,21 @@ class RotateController extends ControllerBase {
     /* @var ImageStyle $style */
     foreach (ImageStyle::loadMultiple() as $style) {
       $style->flush($image->getSource());
+      $uri = $style->buildUri($image->getSource());
+      $style->createDerivative($file->getFileUri(), $uri);
+
       $url = $style->buildUrl($image->getSource());
       $styleUrls[$style->getName()] = $this->convertUrl($url, $absolute);
     }
 
-    $revision = NULL;
+    $revision = null;
 
     // Update dimensions in node.
     $node = Node::load($nid);
-    if ($node !== NULL) {
+    if ($node !== null) {
 
-      /** @var \Drupal\Core\Field\FieldDefinitionInterface $definition */
-      foreach ($node->getFieldDefinitions() as $field_name => $definition) {
+      /** @var FieldDefinitionInterface $definition */
+      foreach($node->getFieldDefinitions() as $field_name => $definition) {
         if ($definition->getType() === 'image') {
           $value = $node->get($field_name)->getValue();
           $found = FALSE;

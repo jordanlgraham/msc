@@ -39,10 +39,10 @@ class Fast404Test extends UnitTestCase {
   public function testBlockPath() {
     $fast404 = $this->getFast404();
     // Default value is FALSE for respond404.
-    $this->assertAttributeEquals(FALSE, 'respond404', $fast404);
+    $this->assertEquals(FALSE, $fast404->isPathBlocked());
     $fast404->blockPath();
     // A block path's value is TRUE for respond404.
-    $this->assertAttributeEquals(TRUE, 'respond404', $fast404);
+    $this->assertEquals(TRUE, $fast404->isPathBlocked());
   }
 
   /**

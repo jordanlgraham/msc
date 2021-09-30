@@ -50,7 +50,7 @@ class Fast404EventSubscriberTest extends UnitTestCase {
     $subscriber = $this->getFast404EventSubscriber();
     $subscriber->onNotFoundException($this->event);
     $e = $this->event->getException();
-    $this->assertTrue($e instanceof NotFoundHttpException);
+    $this->assertInstanceOf(NotFoundHttpException::class, $e);
   }
 
   /**

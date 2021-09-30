@@ -3,4 +3,4 @@ description: Control access to certain content
 package: MSC
 
 type: module
-core: 8.x
+core_version_requirement: ^8 || ^9

@@ -1,5 +1,5 @@
 insert:
-  version: 2.x
+  version: 1.x
   js:
     js/insert.js: {}
   dependencies:
@@ -8,54 +8,12 @@ insert:
     - insert/namespace
     - insert/editors
     - insert/EditorManager
-    - insert/FileHandler
+    - insert/FileInserter
     - insert/FocusManager
-    - insert/ImageHandler
-    - insert/Inserter
-
-Inserter:
-  version: 2.x
-  js:
-    js/Inserter.js: {}
-  dependencies:
-    - core/jquery
-    - insert/namespace
-
-Handler:
-  version: 2.x
-  js:
-    js/Handler.js: {}
-  dependencies:
-    - core/jquery
-    - insert/namespace
-
-FileHandler:
-  version: 2.x
-  js:
-    js/FileHandler.js: {}
-  css:
-    theme:
-      css/FileHandler.css: {}
-  dependencies:
-    - core/jquery
-    - insert/Handler
-    - insert/namespace
-
-ImageHandler:
-  version: 2.x
-  js:
-    js/ImageHandler.js: {}
-  css:
-    theme:
-      css/ImageHandler.css: {}
-  dependencies:
-    - core/jquery
-    - insert/FileHandler
-    - insert/namespace
-    - insert/Rotator
+    - insert/ImageInserter
 
 editors:
-  version: 2.x
+  version: 1.x
   js:
     js/editors/CKEditor.js: {}
   dependencies:
@@ -64,14 +22,14 @@ editors:
     - insert/EditorInterface
 
 editors.namespace:
-  version: 2.x
+  version: 1.x
   js:
     js/editors/namespace.js: {}
   dependencies:
     - insert/namespace
 
 EditorInterface:
-  version: 2.x
+  version: 1.x
   js:
     js/EditorInterface.js: {}
   dependencies:
@@ -79,23 +37,47 @@ EditorInterface:
     - insert/namespace
 
 EditorManager:
-  version: 2.x
+  version: 1.x
   js:
     js/EditorManager.js: {}
   dependencies:
     - core/jquery
     - insert/namespace
 
+FileInserter:
+  version: 1.x
+  js:
+    js/FileInserter.js: {}
+  css:
+    component:
+      css/FileInserter.css: {}
+  dependencies:
+    - core/jquery
+    - insert/namespace
+
 FocusManager:
-  version: 2.x
+  version: 1.x
   js:
     js/FocusManager.js: {}
   dependencies:
     - core/jquery
     - insert/namespace
 
+ImageInserter:
+  version: 1.x
+  js:
+    js/ImageInserter.js: {}
+  css:
+    component:
+      css/ImageInserter.css: {}
+  dependencies:
+    - core/jquery
+    - insert/FileInserter
+    - insert/namespace
+    - insert/Rotator
+
 Rotator:
-  version: 2.x
+  version: 1.x
   js:
     js/Rotator.js: {}
   dependencies:
@@ -103,6 +85,6 @@ Rotator:
     - insert/namespace
 
 namespace:
-  version: 2.x
+  version: 1.x
   js:
     js/namespace.js: {}

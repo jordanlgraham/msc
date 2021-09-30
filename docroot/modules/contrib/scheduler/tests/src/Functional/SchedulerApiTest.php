@@ -16,16 +16,16 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
    *
    * @var array
    *
-   * @TODO 'menu_ui' is in the exported node.type definition, and 'path' is in
+   * @todo 'menu_ui' is in the exported node.type definition, and 'path' is in
    * the entity_form_display. Could these be removed from the config files and
    * then not needed here?
    */
-  public static $modules = ['scheduler_api_test', 'menu_ui', 'path'];
+  protected static $modules = ['scheduler_api_test', 'menu_ui', 'path'];
 
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Load the custom node type. It will be enabled for Scheduler automatically
@@ -59,7 +59,7 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
     $this->drupalLogin($this->webUser);
     // Check the 'approved for publishing' field is shown on the node form.
     $this->drupalGet('node/add/' . $this->customName);
-    $this->assertFieldById('edit-field-approved-publishing-value', NULL, 'The "Approved for publishing" field is shown on the node form');
+    $this->assertSession()->fieldExists('edit-field-approved-publishing-value');
 
     // Check that the message is shown when scheduling a node for publishing
     // which is not yet allowed to be published.
@@ -68,8 +68,8 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
       'publish_on[0][value][date]' => date('Y-m-d', time() + 3),
       'publish_on[0][value][time]' => date('H:i:s', time() + 3),
     ];
-    $this->drupalPostForm('node/add/' . $this->customName, $edit, t('Save'));
-    $this->assertText('is scheduled for publishing, but will not be published until approved.', 'The message is shown when scheduling a node which is not yet allowed to be published.');
+    $this->drupalPostForm('node/add/' . $this->customName, $edit, 'Save');
+    $this->assertSession()->pageTextContains('is scheduled for publishing, but will not be published until approved.');
 
     // Create a node that is scheduled but not approved for publication. Then
     // simulate a cron run, and check that the node is still not published.
@@ -105,7 +105,7 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
 
     // Check that a node can be approved and published via edit form.
     $node = $this->createUnapprovedNode('publish_on');
-    $this->drupalPostForm('node/' . $node->id() . '/edit', ['field_approved_publishing[value]' => '1'], t('Save'));
+    $this->drupalPostForm('node/' . $node->id() . '/edit', ['field_approved_publishing[value]' => '1'], 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     $this->assertTrue($node->isPublished(), 'An approved node with a date in the past is published immediately after saving via edit form.');
@@ -126,7 +126,7 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
     $this->drupalLogin($this->webUser);
     // Check the 'approved for unpublishing' field is shown on the node form.
     $this->drupalGet('node/add/' . $this->customName);
-    $this->assertFieldById('edit-field-approved-unpublishing-value', NULL, 'The "Approved for unpublishing" field is shown on the node form');
+    $this->assertSession()->fieldExists('edit-field-approved-unpublishing-value');
 
     // Check that the message is shown when scheduling a node for unpublishing
     // which is not yet allowed to be unpublished.
@@ -135,8 +135,8 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
       'unpublish_on[0][value][date]' => date('Y-m-d', time() + 3),
       'unpublish_on[0][value][time]' => date('H:i:s', time() + 3),
     ];
-    $this->drupalPostForm('node/add/' . $this->customName, $edit, t('Save'));
-    $this->assertText('is scheduled for unpublishing, but will not be unpublished until approved.', 'The message is shown when scheduling a node which is not yet allowed to be unpublished.');
+    $this->drupalPostForm('node/add/' . $this->customName, $edit, 'Save');
+    $this->assertSession()->pageTextContains('is scheduled for unpublishing, but will not be unpublished until approved.');
 
     // Create a node that is scheduled but not approved for unpublication. Then
     // simulate a cron run, and check that the node is still published.
@@ -254,16 +254,16 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
 
     // Edit the node and set a publish-on date in the past.
     $edit = [
-      'publish_on[0][value][date]' => date('Y-m-d', strtotime('-2 day', REQUEST_TIME)),
-      'publish_on[0][value][time]' => date('H:i:s', strtotime('-2 day', REQUEST_TIME)),
+      'publish_on[0][value][date]' => date('Y-m-d', strtotime('-2 day', $this->requestTime)),
+      'publish_on[0][value][time]' => date('H:i:s', strtotime('-2 day', $this->requestTime)),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, t('Save'));
+    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
     // Verify that the values have been altered as expected.
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     $this->assertTrue($node->isSticky(), 'API action "PRE_PUBLISH_IMMEDIATELY" has changed the node to sticky.');
     $this->assertTrue($node->isPromoted(), 'API action "PUBLISH_IMMEDIATELY" has changed the node to promoted.');
-    $this->assertEqual($node->title->value, 'Published immediately', 'API action "PUBLISH_IMMEDIATELY" has changed the node title correctly.');
+    $this->assertEquals('Published immediately', $node->title->value, 'API action "PUBLISH_IMMEDIATELY" has changed the node title correctly.');
   }
 
   /**
@@ -375,6 +375,125 @@ class SchedulerApiTest extends SchedulerBrowserTestBase {
     $this->assertTrue($node2->isPublished(), 'After cron, node 2 "' . $node2->title->value . '" is published.');
     $this->assertTrue($node3->isPublished(), 'After cron, node 3 "' . $node3->title->value . '" is still published.');
     $this->assertFalse($node4->isPublished(), 'After cron, node 4 "' . $node4->title->value . '" is unpublished.');
+  }
+
+  /**
+   * Test the hooks which allow hiding of scheduler input fields.
+   *
+   * This covers hook_scheduler_hide_publish_on_field and
+   * hook_scheduler_hide_unpublish_on_field.
+   */
+  public function testHideField() {
+    $this->drupalLogin($this->schedulerUser);
+
+    // Create test nodes.
+    $node1 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'title' => 'Red will not have either field hidden',
+    ]);
+    $node2 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'title' => 'Orange will have the publish-on field hidden',
+    ]);
+    $node3 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'title' => 'Yellow will have the unpublish-on field hidden',
+    ]);
+    $node4 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'title' => 'Green will have both Scheduler fields hidden',
+    ]);
+
+    /** @var \Drupal\Tests\WebAssert $assert */
+    $assert = $this->assertSession();
+
+    // Node 1 'red' should have both fields displayed.
+    $this->drupalGet('node/' . $node1->id() . '/edit');
+    $assert->ElementExists('xpath', '//input[@id = "edit-publish-on-0-value-date"]');
+    $assert->ElementExists('xpath', '//input[@id = "edit-unpublish-on-0-value-date"]');
+
+    // Node 2 'orange' should have only the publish-on field hidden.
+    $this->drupalGet('node/' . $node2->id() . '/edit');
+    $assert->ElementNotExists('xpath', '//input[@id = "edit-publish-on-0-value-date"]');
+    $assert->ElementExists('xpath', '//input[@id = "edit-unpublish-on-0-value-date"]');
+
+    // Node 3 'yellow' should have only the unpublish-on field hidden.
+    $this->drupalGet('node/' . $node3->id() . '/edit');
+    $assert->ElementExists('xpath', '//input[@id = "edit-publish-on-0-value-date"]');
+    $assert->ElementNotExists('xpath', '//input[@id = "edit-unpublish-on-0-value-date"]');
+
+    // Node 4 'green' should have both publish-on and unpublish-on hidden.
+    $this->drupalGet('node/' . $node4->id() . '/edit');
+    $assert->ElementNotExists('xpath', '//input[@id = "edit-publish-on-0-value-date"]');
+    $assert->ElementNotExists('xpath', '//input[@id = "edit-unpublish-on-0-value-date"]');
+  }
+
+  /**
+   * Test when other modules process the publish and unpublish actions.
+   *
+   * This covers hook_scheduler_publish_action and
+   * hook_scheduler_unpublish_action.
+   */
+  public function testHookPublishUnpublishAction() {
+    $this->drupalLogin($this->schedulerUser);
+
+    // Create test nodes.
+    $node1 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'status' => FALSE,
+      'title' => 'Red will cause a failure on publishing',
+      'publish_on' => strtotime('-1 day'),
+    ]);
+    $node2 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'status' => TRUE,
+      'title' => 'Orange will be unpublished by the API test module not Scheduler',
+      'unpublish_on' => strtotime('-1 day'),
+    ]);
+    $node3 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'status' => FALSE,
+      'title' => 'Yellow will be published by the API test module not Scheduler',
+      'publish_on' => strtotime('-1 day'),
+    ]);
+    // 'green' nodes will have both fields hidden so is harder to test manually.
+    // Therefore introduce a different colour.
+    $node4 = $this->drupalCreateNode([
+      'type' => $this->type,
+      'status' => TRUE,
+      'title' => 'Blue will cause a failure on unpublishing',
+      'unpublish_on' => strtotime('-1 day'),
+    ]);
+
+    // Simulate a cron run.
+    scheduler_cron();
+
+    // Check the red node.
+    $this->nodeStorage->resetCache([$node1->id()]);
+    $node1 = $this->nodeStorage->load($node1->id());
+    $this->assertFalse($node1->isPublished(), 'The red node is still unpublished.');
+    $this->assertNotEmpty($node1->publish_on->value, 'The red node still has a publish-on date.');
+
+    // Check the orange node.
+    $this->nodeStorage->resetCache([$node2->id()]);
+    $node2 = $this->nodeStorage->load($node2->id());
+    $this->assertFalse($node2->isPublished(), 'The orange node was unpublished by the API test module.');
+    $this->assertNotEmpty(stristr($node2->title->value, 'unpublishing processed by API test module'), 'The orange node was processed by the API test module.');
+    $this->assertEmpty($node2->unpublish_on->value, 'The orange node no longer has an unpublish-on date.');
+
+    // Check the yellow node.
+    $this->nodeStorage->resetCache([$node3->id()]);
+    $node3 = $this->nodeStorage->load($node3->id());
+    $this->assertTrue($node3->isPublished(), 'The yellow node was published by the API test module.');
+    $this->assertNotEmpty(stristr($node3->title->value, 'publishing processed by API test module'), 'The yellow node was processed by the API test module.');
+    $this->assertEmpty($node3->publish_on->value, 'The yellow node no longer has a publish-on date.');
+
+    // Check the blue node.
+    $this->nodeStorage->resetCache([$node4->id()]);
+    $node4 = $this->nodeStorage->load($node4->id());
+    $this->assertTrue($node4->isPublished(), 'The green node is still published.');
+    $this->assertNotEmpty($node4->unpublish_on->value, 'The green node still has an unpublish-on date.');
+
   }
 
 }

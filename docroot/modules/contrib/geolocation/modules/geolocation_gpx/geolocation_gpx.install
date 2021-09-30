@@ -8,7 +8,7 @@ function geolocation_gpx_requirements($phase) {
   $requirements['geolocation_gpx_composer'] = [
     'title' => t('Geolocation GPX - Composer dependency'),
     'value' => t('Libraries installed'),
-    'description' => t('Use "composer require sibyx/phpgpx:@RC" to install required library. See geolocation/modules/geolocation_gpx/composer.json for details.'),
+    'description' => t('Use "composer require sibyx/phpgpx:@RC" to install required library.'),
     'severity' => REQUIREMENT_OK,
   ];
 

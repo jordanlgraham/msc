@@ -50,12 +50,12 @@ webform_element_composite_advanced:
   last_name:
     '#type': textfield
     '#title': 'Last name'
-  gender:
+  sex:
     '#type': select
     '#options':
       Male: Male
       Female: Female
-    '#title': Gender
+    '#title': Sex
   martial_status:
     '#type': webform_select_other
     '#options': marital_status
@@ -90,12 +90,12 @@ webform_element_composite_advanced:
   last_name:
     '#type': textfield
     '#title': 'Last name'
-  gender:
+  sex:
     '#type': select
     '#options':
       Male: Male
       Female: Female
-    '#title': Gender
+    '#title': Sex
   martial_status:
     '#type': webform_select_other
     '#options': marital_status
@@ -118,10 +118,10 @@ webform_element_composite_advanced:
     $this->drupalGet('/webform/test_element_composite_wrapper');
 
     // Check fieldset wrapper.
-    $this->assertRaw('<fieldset data-drupal-selector="edit-radios-wrapper-fieldset" id="edit-radios-wrapper-fieldset--wrapper" class="radios--wrapper fieldgroup form-composite webform-composite-visible-title required js-webform-type-radios webform-type-radios js-form-item form-item js-form-wrapper form-wrapper" aria-required="true">');
+    $this->assertRaw('<fieldset data-drupal-selector="edit-radios-wrapper-fieldset" id="edit-radios-wrapper-fieldset--wrapper" class="radios--wrapper fieldgroup form-composite webform-composite-visible-title required js-webform-type-radios webform-type-radios js-form-item form-item js-form-wrapper form-wrapper">');
 
     // Check fieldset wrapper with hidden title.
-    $this->assertRaw('<fieldset data-drupal-selector="edit-radios-wrapper-fieldset-hidden-title" id="edit-radios-wrapper-fieldset-hidden-title--wrapper" class="radios--wrapper fieldgroup form-composite webform-composite-hidden-title required js-webform-type-radios webform-type-radios js-form-item form-item js-form-wrapper form-wrapper" aria-required="true">');
+    $this->assertRaw('<fieldset data-drupal-selector="edit-radios-wrapper-fieldset-hidden-title" id="edit-radios-wrapper-fieldset-hidden-title--wrapper" class="radios--wrapper fieldgroup form-composite webform-composite-hidden-title required js-webform-type-radios webform-type-radios js-form-item form-item js-form-wrapper form-wrapper">');
 
     // Check form element wrapper.
     $this->assertRaw('<div class="js-form-item form-item js-form-type-radios form-item-radios-wrapper-form-element js-form-item-radios-wrapper-form-element">');

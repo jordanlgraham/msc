@@ -33,10 +33,10 @@ class UnescoWorldHeritage extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public function import() {
+  public function import(&$context) {
     $filename = \Drupal::service('file_system')->getTempDirectory() . '/' . $this->sourceFilename;
     if (!file_exists($filename)) {
-      return FALSE;
+      return t('Error importing World heritage sites.');
     }
 
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
@@ -51,13 +51,13 @@ class UnescoWorldHeritage extends GeolocationGeometryDataBase {
           'format' => filter_default_format(),
         ],
         'field_geometry_data_point' => [
-          'wkt' => 'POINT(' . $site->longitude . ' ' . $site->latitude . ')',
+          'geojson' => '{"type": "Point", "coordinates": [' . $site->longitude . ', ' . $site->latitude . ']}',
         ],
       ]);
       $node->save();
     }
 
-    return TRUE;
+    return t('Done importing World heritage sites.');
   }
 
 }

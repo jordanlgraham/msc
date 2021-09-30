@@ -51,10 +51,6 @@ yaml_array:
   one: One
   two: Two
   three: Three
-yaml_indexed_array:
-  - one
-yaml_indexed_associative_array:
-  - one: One
 yaml_decode_value:
   test: hello");
 

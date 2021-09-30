@@ -2,14 +2,28 @@
 
 namespace Drupal\media_entity_image\Tests;
 
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\TestFileCreationTrait;
 
 /**
  * Tests for media entity image.
  *
  * @group media_entity_image
  */
-class MediaEntityImageTest extends WebTestBase {
+class MediaEntityImageTest extends BrowserTestBase {
+
+  use TestFileCreationTrait {
+    getTestFiles as drupalGetTestFiles;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  use TestFileCreationTrait {
+    getTestFiles as drupalGetTestFiles;
+  }
 
   /**
    * Modules to install.
@@ -18,9 +32,9 @@ class MediaEntityImageTest extends WebTestBase {
    */
   public static $modules = [
     'block',
-    'media_entity',
+    'media',
     'entity_browser',
-    'media_entity_image_test',
+    'media_entity_image_test'
   ];
 
   /**
@@ -38,8 +52,8 @@ class MediaEntityImageTest extends WebTestBase {
       'files[upload][]' => $this->container->get('file_system')->realpath($image->uri),
     ];
     $this->drupalPostForm(NULL, $edit, t('Select'));
-    $this->assertText('Labels:');
-    $this->assertNoText('The media bundle is not configured correctly.');
+    $this->assertSession()->pageTextContains('Labels:');
+    $this->assertSession()->pageTextNotContains('The media bundle is not configured correctly.');
   }
 
 }

@@ -1,4 +1,0 @@
-services:
-  term_csv_tree_import.collectCsvData:
-    class: Drupal\term_csv_tree_import\Service\CollectCsvData
-    arguments: ['@entity_type.manager']

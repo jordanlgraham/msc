@@ -481,15 +481,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'enhancement',
     ];
 
-
-    // Enhancement: Webform GeoIP Restriction.
-    $projects['webform_geoip_restriction'] = [
-      'title' => $this->t('Webform GeoIP Restriction'),
-      'description' => $this->t('Adds the possibility of restricting access to webforms by country using the geoip system.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_geoip_restriction'),
-      'category' => 'enhancement',
-    ];
-
     // Enhancement: Webform IP Geo.
     $projects['webform_ip_geo'] = [
       'title' => $this->t('Webform IP Geo'),
@@ -1022,14 +1013,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'category' => 'integration',
     ];
 
-    // Integrations: OS Tickets Webform Handler.
-    $projects['ostickets'] = [
-      'title' => $this->t('OS Tickets Webform Handler'),
-      'description' => $this->t('Provides a webform handler that will POST OS tickets on submissions.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/ostickets'),
-      'category' => 'integration',
-    ];
-
     // Integrations: Webform Pardot.
     $projects['webform_pardot'] = [
       'title' => $this->t('Webform Pardot'),
@@ -1394,7 +1377,7 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     // Submissions: Webform Views Integration.
     $projects['webform_views'] = [
       'title' => $this->t('Webform Views'),
-      'description' => $this->t('Integrates Webform 8.x-5.x and Views modules.'),
+      'description' => $this->t('Integrates Webform 8.x-5.x/6.x and Views modules.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_views'),
       'category' => 'submission',
       'recommended' => TRUE,
@@ -1480,14 +1463,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
       'title' => $this->t('Webform Scheduled Tasks'),
       'description' => $this->t('Allows the regular cleansing/sanitization of sensitive fields in Webform.'),
       'url' => Url::fromUri('https://www.drupal.org/project/webform_scheduled_tasks'),
-      'category' => 'submission',
-    ];
-
-    // Submissions: Webform Submission Anonymisation.
-    $projects['webform_submission_anonymisation'] = [
-      'title' => $this->t('Webform Submission Anonymisation'),
-      'description' => $this->t('Remove personal datas from webform submissions.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/webform_submission_anonymisation'),
       'category' => 'submission',
     ];
 
@@ -1687,14 +1662,6 @@ class WebformAddonsManager implements WebformAddonsManagerInterface {
     /**************************************************************************/
     // Web services.
     /**************************************************************************/
-
-    // Web services: Decoupled Kit.
-    $projects['decoupled_kit'] = [
-      'title' => $this->t('Decoupled Kit'),
-      'description' => $this->t('allows to solve some tasks of the decoupled Drupal.'),
-      'url' => Url::fromUri('https://www.drupal.org/project/decoupled_kit'),
-      'category' => 'web_services',
-    ];
 
     // Web services: Gatsby Drupal Webform.
     $projects['gatsby_drupal_webform'] = [

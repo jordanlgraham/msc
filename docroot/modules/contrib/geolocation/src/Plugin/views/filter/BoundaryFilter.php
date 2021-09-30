@@ -29,6 +29,13 @@ class BoundaryFilter extends FilterPluginBase implements ContainerFactoryPluginI
   public $no_operator = TRUE;
 
   /**
+   * Can be used for CommonMap interactive filtering.
+   *
+   * @var bool
+   */
+  public $isGeolocationCommonMapOption = TRUE;
+
+  /**
    * {@inheritdoc}
    */
   protected $alwaysMultiple = TRUE;
@@ -196,7 +203,6 @@ class BoundaryFilter extends FilterPluginBase implements ContainerFactoryPluginI
       && !empty($form[$identifier])
       && !empty($this->options['expose']['geocoder_plugin_settings'])
     ) {
-
       $geocoder_configuration = $this->options['expose']['geocoder_plugin_settings']['settings'];
 
       /** @var \Drupal\geolocation\GeocoderInterface $geocoder_plugin */
@@ -265,7 +271,10 @@ class BoundaryFilter extends FilterPluginBase implements ContainerFactoryPluginI
         $geocoder_configuration
       );
 
-      if (!empty($geocoder_plugin)) {
+      if (
+        !empty($geocoder_plugin)
+        && !empty($input[$this->options['expose']['identifier']]['geolocation_geocoder_address'])
+      ) {
         $location_data = $geocoder_plugin->geocode($input[$this->options['expose']['identifier']]['geolocation_geocoder_address']);
 
         // Location geocoded server-side. Add to input for later processing.

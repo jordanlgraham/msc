@@ -2,13 +2,12 @@
 
 namespace Drupal\media_entity\Plugin\Action;
 
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\media\MediaInterface;
+use Drupal\media_entity\Entity\Media;
 
 /**
- * Publishes a media item.
+ * Publishes a media entity.
  *
  * @Action(
  *   id = "media_publish_action",
@@ -21,14 +20,19 @@ class PublishMedia extends ActionBase {
   /**
    * {@inheritdoc}
    */
-  public function execute(MediaInterface $entity = NULL) {}
+  public function execute(Media $entity = NULL) {
+    $entity->setPublished(TRUE)->save();
+  }
 
   /**
    * {@inheritdoc}
    */
   public function access($object, AccountInterface $account = NULL, $return_as_object = FALSE) {
-    $access = AccessResult::allowed();
-    return $return_as_object ? $access : $access->isAllowed();
+    /** @var \Drupal\media_entity\MediaInterface $object */
+    $result = $object->access('update', $account, TRUE)
+      ->andIf($object->status->access('edit', $account, TRUE));
+
+    return $return_as_object ? $result : $result->isAllowed();
   }
 
 }

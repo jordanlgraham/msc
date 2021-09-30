@@ -1,7 +1,7 @@
 name: msca
-recipe: drupal8
+recipe: drupal9
 config:
-  php: 7.4
+  php: '8.0'
   database: mysql:5.7
 proxy:
   appserver:
@@ -17,8 +17,8 @@ services:
   msc:
     type: mysql:5.7
     creds:
-      user: drupal8
-      password: drupal8
+      user: drupal9
+      password: drupal9
       database: msc
     portforward: true
     config:

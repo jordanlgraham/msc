@@ -11,7 +11,7 @@ use Drupal\rules\Core\RulesActionBase;
  *   id = "scheduler_unpublish_now_action",
  *   label = @Translation("Unpublish the content immediately"),
  *   category = @Translation("Scheduler"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition("entity:node",
  *       label = @Translation("Node"),
  *       description = @Translation("The node to be unpublished now"),
@@ -30,7 +30,7 @@ class UnpublishNow extends RulesActionBase {
    */
   public function doExecute() {
     $node = $this->getContextValue('node');
-    $node->setPublished(FALSE);
+    $node->setUnpublished();
   }
 
 }

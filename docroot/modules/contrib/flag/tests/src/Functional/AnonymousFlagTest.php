@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\flag\Functional;
 
-use Behat\Mink\Session;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\flag\Entity\Flag;
 use Drupal\flag\Entity\Flagging;
@@ -16,6 +14,11 @@ use Drupal\user\Entity\Role;
  * @group flag
  */
 class AnonymousFlagTest extends BrowserTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * {@inheritdoc}
@@ -52,13 +55,13 @@ class AnonymousFlagTest extends BrowserTestBase {
       'flagTypeConfig' => [],
       'linkTypeConfig' => [],
       'flag_short' => 'switch_this_on',
-      'unflag_short' => 'switch_this_off'
+      'unflag_short' => 'switch_this_off',
     ]);
     $this->flag->save();
 
     Role::load(Role::ANONYMOUS_ID)
-      ->grantPermission('flag '. $flag_id)
-      ->grantPermission('unflag '. $flag_id)
+      ->grantPermission('flag ' . $flag_id)
+      ->grantPermission('unflag ' . $flag_id)
       ->save();
   }
 
@@ -67,6 +70,11 @@ class AnonymousFlagTest extends BrowserTestBase {
    */
   public function testAnonymousFlagging() {
     $this->drupalGet(Url::fromRoute('entity.node.canonical', ['node' => $this->node->id()]));
+
+    // Assert that just visiting a page as anonymous user does not initialize
+    // the session.
+    $this->assertEmpty($this->getSession()->getCookie($this->getSessionName()));
+
     $this->getSession()->getPage()->clickLink('switch_this_on');
     $this->assertNotEmpty($this->getSession()->getPage()->findLink('switch_this_off'));
     // Warning: $this->getDatabaseConnection() is the original database
@@ -78,6 +86,7 @@ class AnonymousFlagTest extends BrowserTestBase {
     // Check that the session ID value in the flagging is the same as the user's
     // cookie ID.
     $session_id = $this->getSession()->getCookie($this->getSessionName());
+    $this->assertNotEmpty($session_id);
     $this->assertEqual($flagging->get('session_id')->value, $session_id, "The flagging entity has the session ID set.");
 
     // Try another anonymous user.

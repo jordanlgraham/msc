@@ -24,7 +24,7 @@ services:
 
   entity_print.asset_collector:
     class: Drupal\entity_print\Asset\AssetCollector
-    arguments: ['@theme_handler', '@info_parser', '@event_dispatcher']
+    arguments: ['@theme_handler', '@extension.list.theme', '@event_dispatcher']
 
   entity_print.asset_renderer:
     class: Drupal\entity_print\Asset\AssetRenderer

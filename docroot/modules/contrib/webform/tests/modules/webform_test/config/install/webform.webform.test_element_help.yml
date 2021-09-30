@@ -37,10 +37,6 @@ elements: |
     '#type': textfield
     '#title': help_xss
     '#help': '{This is an example of help with <b>XSS <script>alert("XSS")</b>}'
-  help_empty:
-    '#type': textfield
-    '#title': help_empty
-    '#help': '[webform_submission:values:not_valid:clear]'
   help_checkbox:
     '#type': checkbox
     '#title': help_checkbox
@@ -156,7 +152,7 @@ settings:
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false

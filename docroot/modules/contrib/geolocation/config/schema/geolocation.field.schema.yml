@@ -5,12 +5,18 @@ geolocation.field.formatter.map.base:
     set_marker:
       type: boolean
       label: 'Set marker at map center'
+    show_label:
+      type: boolean
+      label: 'Show title as label'
     data_provider:
       type: geolocation.data_provider.geolocation
       label: 'Data provider'
     common_map:
       type: boolean
       label: 'Display results on a common map'
+    show_delta_label:
+      type: boolean
+      label: 'Show delta marker label'
     use_overridden_map_settings:
       type: boolean
       label: 'Use overridden map settings.'

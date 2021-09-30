@@ -17,6 +17,7 @@
    * @inheritDoc
    *
    * @prop {Object} settings.yandex_settings - Yandex Maps specific settings.
+   * @prop {ymaps} yandexMap
    */
   function GeolocationYandexMap(mapSettings) {
     if (typeof ymaps === 'undefined') {
@@ -59,9 +60,13 @@
           map.clickCallback({lat: coords[1], lng: coords[0]});
         });
 
-        map.yandexMap.events.add('contextmenu', function (e) {
+        map.yandexMap.events.add('contextmenu', /** @param {IEvent} e */ function (e) {
           var coords = e.get('coords');
           map.contextClickCallback({lat: coords[1], lng: coords[0]});
+        });
+
+        map.yandexMap.events.add('boundschange', /** @param {IEvent} e */ function (e) {
+          map.boundsChangedCallback(e.get('newBounds'));
         });
       });
 

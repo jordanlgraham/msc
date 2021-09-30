@@ -59,10 +59,19 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
   protected $hasRendered;
 
   /**
+   * The current request.
+   *
+   * @var \Symfony\Component\HttpFoundation\Request
+   */
+  protected $request;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, ExportTypeInterface $export_type, Request $request) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $export_type);
+
+    $this->request = $request;
 
     $this->dompdfOptions = new DompdfLibOptions($this->configuration);
 
@@ -257,6 +266,17 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
       $context_options['http']['header'] = [
         'Authorization: Basic ' . $auth,
       ];
+    }
+
+    // When embedding images from Drupal's private file system,
+    // the DomPdf library uses file_get_contents to retrieve the image.
+    // Without the cookie header, the request will be redirect to
+    // the site's login page.
+    // See \DomPdf\Image\Cache::resolve_url for details.
+    $session = $this->request->getSession();
+    if ($session) {
+      $cookie = 'Cookie: ' . $session->getName() . '=' . $session->getId();
+      $context_options['http']['header'][] = $cookie;
     }
 
     $http_context = stream_context_create($context_options);
