@@ -140,7 +140,7 @@ function msca_theme_theme_suggestions_page_title_alter(array &$suggestions, arra
   }
   else {
     $current_path = \Drupal::service('path.current')->getPath();
-    $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+    $result = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 
     $path_alias = trim($result, '/');
     $path_alias = str_replace('/', '-', $path_alias);

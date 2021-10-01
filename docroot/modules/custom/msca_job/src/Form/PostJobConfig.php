@@ -57,7 +57,7 @@ class PostJobConfig extends FormBase {
     return new static(
       $container->get('state'),
       $container->get('router.request_context'),
-      $container->get('path.alias_manager'),
+      $container->get('path_alias.manager'),
       $container->get('path.validator')
     );
   }
