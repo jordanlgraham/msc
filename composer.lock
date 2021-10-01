@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd9ceea5f712ed4caba2f0eed693a98",
+    "content-hash": "d8c148a3949b7608ff8c9271521de20e",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -5653,6 +5653,54 @@
             }
         },
         {
+            "name": "drupal/recreate_block_content",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/recreate_block_content.git",
+                "reference": "8.x-2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/recreate_block_content-8.x-2.1.zip",
+                "reference": "8.x-2.1",
+                "shasum": "415c9787c171e0e2863c3b0cc5d67c697aca781a"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.1",
+                    "datestamp": "1604512966",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Joao Sausen",
+                    "homepage": "https://www.drupal.org/user/1504028"
+                }
+            ],
+            "description": "Recreates the block content for a exported block.",
+            "homepage": "https://www.drupal.org/project/recreate_block_content",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/recreate_block_content",
+                "issues": "https://www.drupal.org/project/issues/recreate_block_content"
+            }
+        },
+        {
             "name": "drupal/redirect",
             "version": "1.6.0",
             "source": {
@@ -6149,24 +6197,21 @@
         },
         {
             "name": "drupal/twig_tweak",
-            "version": "3.1.2",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/twig_tweak.git",
-                "reference": "3.1.2"
+                "reference": "8.x-2.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/twig_tweak-3.1.2.zip",
-                "reference": "3.1.2",
-                "shasum": "b0482fd5414a51d6f93b1c4fc181cdb28ec42677"
+                "url": "https://ftp.drupal.org/files/projects/twig_tweak-8.x-2.9.zip",
+                "reference": "8.x-2.9",
+                "shasum": "c45ba1a41e323a432d1ff36d0a72344b88595a39"
             },
             "require": {
-                "drupal/core": "^9.0",
-                "ext-json": "*",
-                "php": ">=7.3",
-                "symfony/polyfill-php80": "^1.17",
-                "twig/twig": "^2.12"
+                "drupal/core": "^8.7 || ^9.0",
+                "twig/twig": "^1.41 || ^2.12"
             },
             "suggest": {
                 "symfony/var-dumper": "Better dump() function for debugging Twig variables"
@@ -6174,8 +6219,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.1.2",
-                    "datestamp": "1625377167",
+                    "version": "8.x-2.9",
+                    "datestamp": "1608093728",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6184,7 +6229,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
