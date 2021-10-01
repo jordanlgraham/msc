@@ -15,19 +15,12 @@ use Drupal\Core\Session\AccountInterface;
  *   category = @Translation("Twig Tweak")
  * )
  */
-final class FooBlock extends BlockBase {
+class FooBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
    */
-  public function defaultConfiguration(): array {
-    return ['content' => 'Foo'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function blockAccess(AccountInterface $account): AccessResult {
+  protected function blockAccess(AccountInterface $account) {
     $result = AccessResult::allowedIf($account->getAccountName() == 'User 1');
     $result->addCacheTags(['tag_from_' . __FUNCTION__]);
     $result->setCacheMaxAge(35);
@@ -38,17 +31,21 @@ final class FooBlock extends BlockBase {
   /**
    * {@inheritdoc}
    */
-  public function build(): array {
+  public function build() {
     return [
-      '#markup' => $this->getConfiguration()['content'],
-      '#attributes' => [
-        'id' => 'foo',
-      ],
+      '#markup' => 'Foo',
       '#cache' => [
         'contexts' => ['url'],
         'tags' => ['tag_from_' . __FUNCTION__],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return ['tag_twig_tweak_test_foo_plugin'];
   }
 
 }
