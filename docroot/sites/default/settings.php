@@ -52,3 +52,5 @@ if (!empty($lando_info)) {
 }
 
 $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps'];
+
+$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/default';

@@ -1,0 +1,6 @@
+name: MSC Search
+type: module
+description: Provides custom search functionality
+package: MSC
+core: 8.x
+core_version_requirement: ^8 || ^9

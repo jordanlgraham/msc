@@ -5,6 +5,8 @@
  * A module for testing Entity Print.
  */
 
+use Drupal\Core\Extension\Extension;
+
 /**
  * Implements hook_system_theme_info().
  */
@@ -24,5 +26,14 @@ function entity_print_test_entity_print_pdf_engine_alter(&$definitions) {
     if (isset($definitions[$id]['class'])) {
       $definitions[$id]['class'] = 'Drupal\entity_print_test\Plugin\EntityPrint\PrintEngine\NotAvailablePrintEngine';
     }
+  }
+}
+
+/**
+ * Implements hook_system_info_alter().
+ */
+function entity_print_test_system_info_alter(array &$info, Extension $file, $type) {
+  if ($type === 'theme' && $file->getName() === 'entity_print_test_theme') {
+    $info['entity_print']['node']['page'] = 'entity_print_test_theme/page';
   }
 }

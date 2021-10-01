@@ -69,6 +69,9 @@ entity_print_print_engine.phpwkhtmltopdf:
     binary_location:
       type: string
       label: 'Path to the wkhtmltopdf binary'
+    zoom:
+      type: float
+      label: 'Zoom page level'
     toc_generate:
       type: boolean
       label: 'Generate table of content'

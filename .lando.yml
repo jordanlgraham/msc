@@ -19,7 +19,7 @@ services:
     creds:
       user: drupal8
       password: drupal8
-      database: msc
+      database: drupal8
     portforward: true
     config:
       confd: local/mysql/conf.d
