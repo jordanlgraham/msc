@@ -2,17 +2,45 @@
 
 namespace Drupal\msca_constant_contact\Controller;
 
-use Drupal\Component\Datetime\TimeInterface;
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal;
 use Drupal\Core\Url;
-use Drupal\msca_constant_contact\ConstantContactAuth;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\msca_discourse\DiscourseHelper;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\msca_constant_contact\ConstantContactAuth;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ConstantContactAuthController extends ControllerBase {
+
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs an AccessDeniedRedirectSubscriber object.
+   * 
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger')
+    );
+  }
 
   public function authResponse() {
     $code = \Drupal::request()->get('code');
@@ -32,7 +60,8 @@ class ConstantContactAuthController extends ControllerBase {
     $token = $this->getAccessToken($redirectUri, $pubkey, $secret, $code);
     $_SESSION['token'] = json_decode($token)->access_token;
     $path = '/admin/content';
-    drupal_set_message($this->t('You have successfully authenticated with Constant Contact. To create a email campaign to Constant Contact, go to any Newsletter node, click Edit, and click the Send to Constant Contact tab.'));
+    $message = 'You have successfully authenticated with Constant Contact. To create a email campaign to Constant Contact, go to any Newsletter node, click Edit, and click the Send to Constant Contact tab.';
+    $this->messenger->addMessage($this->t($message));
     $url = Url::fromUserInput(($path))->toString();
     $redirect = new RedirectResponse($url);
     $redirect->send();

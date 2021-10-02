@@ -29,7 +29,7 @@ function msca_constant_contact_node_presave(EntityInterface $entity) {
           ->load($entity->field_sponsor->target_id);
         $sponsor_node->setNewRevision(TRUE);
         $sponsor_node->revision_log = 'Added link color attributes for sponsor ' . $entity->field_sponsor->target_id;
-        $sponsor_node->setRevisionCreationTime(REQUEST_TIME);
+        $sponsor_node->setRevisionCreationTime(\Drupal::time()->getRequestTime());
         $sponsor_node->setRevisionUserId(\Drupal::currentUser()->id());
         $sponsor_node->save();
       }

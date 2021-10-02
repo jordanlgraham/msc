@@ -2,17 +2,18 @@
 
 namespace Drupal\netforum_event_sync;
 
+use DateTime;
+use \Exception;
 use DateTimeZone;
-use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Datetime\DateFormatterInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Psr\Log\LoggerInterface;
+use Drupal\netforum_soap\GetClient;
 use Drupal\Core\State\StateInterface;
 use Drupal\geocoder\GeocoderInterface;
-use Psr\Log\LoggerInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
-use Drupal\netforum_soap\GetClient;
-use \Exception;
-use DateTime;
+use Drupal\Core\Datetime\DateFormatterInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 class EventSync {
 
@@ -117,7 +118,7 @@ class EventSync {
     $time_obj = DateTime::createFromFormat('g:ia', $time);
     $date_obj->setTime($time_obj->format('H'), $time_obj->format('i'));
     $date_obj->setTimezone($utc);
-    $formatted = $date_obj->format(DATETIME_DATETIME_STORAGE_FORMAT);
+    $formatted = $date_obj->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT);
     return $formatted;
   }
 

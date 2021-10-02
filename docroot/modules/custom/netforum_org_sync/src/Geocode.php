@@ -13,9 +13,20 @@ class Geocode {
    */
   protected $node_storage;
 
+  /**
+   * Constructs a Geocode object.
+   * 
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
+   */
   public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->config = $configFactory->get('mapquest.open');
+    $this->time = $time ?: \Drupal::service('datetime.time');
   }
 
   public function getCurlOptions($zip) {
@@ -42,7 +53,8 @@ class Geocode {
       // Create a new revision.
       $node->setNewRevision(TRUE);
       $node->revision_log = 'Created revision for node ' . $node->Id() . ', setting correct geo coordinates.';
-      $node->setRevisionCreationTime(REQUEST_TIME);
+      $request_time = $this->time->getRequestTime();
+      $node->setRevisionCreationTime($request_time);
       $node->setRevisionUserId(1);
     }
   }

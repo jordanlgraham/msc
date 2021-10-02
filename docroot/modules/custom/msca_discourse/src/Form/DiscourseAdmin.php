@@ -2,12 +2,13 @@
 
 namespace Drupal\msca_discourse\Form;
 
+use Drupal\Core\Url;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\ConfigFormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
-use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\msca_discourse\DiscourseHelper;
+use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DiscourseAdmin extends ConfigFormBase {
@@ -17,15 +18,36 @@ class DiscourseAdmin extends ConfigFormBase {
    */
   protected $stateService;
 
-  public function __construct(StateInterface $state) {
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs an AccessDeniedRedirectSubscriber object.
+   * 
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The StateInterface.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(StateInterface $state, MessengerInterface $messenger) {
     $this->stateService = $state;
+    $this->messenger = $messenger;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('state')
+      $container->get('state'),
+      $container->get('messenger')
     );
   }
+
 
   /**
    * {@inheritdoc}
@@ -122,7 +144,8 @@ class DiscourseAdmin extends ConfigFormBase {
     if (isset($submit['#regenerate'])) {
       $sso_secret = self::generateSsoSecret();
       $this->stateService->set(DiscourseHelper::SSO_SECRET_STATE_KEY, $sso_secret);
-      drupal_set_message($this->t('SSO secret updated.'));
+      $message = 'SSO secret updated.';
+      $this->messenger->addMessage($this->t($message));
     }
     else {
       // Update the configuration.

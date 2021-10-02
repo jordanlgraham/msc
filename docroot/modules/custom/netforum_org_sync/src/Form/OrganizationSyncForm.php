@@ -2,15 +2,15 @@
 
 namespace Drupal\netforum_org_sync\Form;
 
-use Drupal\Component\Datetime\TimeInterface;
+use Psr\Log\LoggerInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\ConfigFormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\State\StateInterface;
-use Psr\Log\LoggerInterface;
 use Drupal\netforum_org_sync\OrgSync;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class OrganizationSyncForm.
@@ -21,34 +21,68 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 class OrganizationSyncForm extends ConfigFormBase {
 
   /**
-   * @var \Drupal\netforum_org_sync\OrgSync
-   */
-  protected $sync;
-
-  protected $state;
-
-  protected $time;
-  /**
    * @var LoggerInterface
    */
   private $logger;
 
-  public function __construct(ConfigFactoryInterface $config_factory, OrgSync $orgSync,
-                              StateInterface $state, TimeInterface $time, LoggerInterface $logger) {
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * The state interface.
+   * 
+   * @var \Drupal\Core\State\StateInterface $state
+   */
+  protected $state;
+
+  /**
+   * @var \Drupal\netforum_org_sync\OrgSync
+   */
+  protected $sync;
+
+  /**
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
+   * Constructs an OrganizationSyncForm object.
+   * 
+   * @param \Drupal\netforum_org_sync\OrgSync $sync
+   *   The OrgSync object.
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state interface.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time interface.
+   * @param \Psr\Log\LoggerInterface $logger
+   *   The logger interface. 
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, OrgSync $orgSync, StateInterface $state, TimeInterface $time, LoggerInterface $logger, MessengerInterface $messenger) {
     $this->sync = $orgSync;
     $this->state = $state;
     $this->time = $time;
     $this->logger = $logger;
     parent::__construct($config_factory);
+    $this->messenger = $messenger;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
       $container->get('netforum_org_sync.org_sync'),
       $container->get('state'),
       $container->get('datetime.time'),
-      $container->get('logger.factory')->get('netforum_org_sync')
+      $container->get('logger.factory')->get('netforum_org_sync'),
+      $container->get('messenger')
     );
   }
 
@@ -123,7 +157,8 @@ class OrganizationSyncForm extends ConfigFormBase {
       $this->syncByDate($start_date, $end_date);
     }
     catch (\Exception $exception) {
-      drupal_set_message($this->t('Unable to complete organization sync. See logs for error.'), 'error');
+      $message = 'Unable to complete organization sync. See logs for error.';
+      $this->messenger->addError($this->t($message));
       $form_state->setRebuild(TRUE);
     }
   }
@@ -254,14 +289,17 @@ class OrganizationSyncForm extends ConfigFormBase {
    */
   public static function importFinished($success, $results, $operations, $timer) {
     if (!array_key_exists('success', $results)) {
-      drupal_set_message(t('Sync failed.'));
+      $message = 'Sync failed.';
+      $this->messenger->addMessage($this->t($message));
       return;
     }
 
-    drupal_set_message(t('Synced @count organizations in @time', ['@count' => count($results['success']), '@time' => $timer]));
+    $message = $this->t('Synced @count organizations in @time', ['@count' => count($results['success']), '@time' => $timer]);
+    $this->messenger->addMessage($message);
     if (!empty($results['error'])) {
       foreach ($results['error'] as $err) {
-        drupal_set_message(t('Error: %err', ['%err' => $err]), 'error');
+        $message = $this->t('Error: %err', ['%err' => $err]);
+        $this->messenger->addError($message);
       }
     }
   }
