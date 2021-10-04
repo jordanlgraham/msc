@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8c148a3949b7608ff8c9271521de20e",
+    "content-hash": "5c9efd8ecf8b57e42391d862774dd38b",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1944,17 +1944,17 @@
         },
         {
             "name": "drupal/contact_block",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/contact_block.git",
-                "reference": "8.x-1.5"
+                "reference": "8.x-1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "5a5d7febd240fc3673ca755d475bfd4ad4f5a8f3"
+                "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "bca712537dac0f3b91fcdefbaecaa00033fe9a74"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -1962,8 +1962,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1587219506",
+                    "version": "8.x-1.6",
+                    "datestamp": "1633292142",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -1972,7 +1972,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -3071,70 +3071,6 @@
             "homepage": "https://www.drupal.org/project/embed",
             "support": {
                 "source": "https://git.drupalcode.org/project/embed"
-            }
-        },
-        {
-            "name": "drupal/entity",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/entity.git",
-                "reference": "8.x-1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "7e7cb12ea65d9f986b59935eda316387cf511079"
-            },
-            "require": {
-                "drupal/core": "^8.8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1606399149",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Berdir",
-                    "homepage": "https://www.drupal.org/user/214652"
-                },
-                {
-                    "name": "bojanz",
-                    "homepage": "https://www.drupal.org/user/86106"
-                },
-                {
-                    "name": "dawehner",
-                    "homepage": "https://www.drupal.org/user/99340"
-                },
-                {
-                    "name": "dixon_",
-                    "homepage": "https://www.drupal.org/user/239911"
-                },
-                {
-                    "name": "fago",
-                    "homepage": "https://www.drupal.org/user/16747"
-                },
-                {
-                    "name": "mglaman",
-                    "homepage": "https://www.drupal.org/user/2416470"
-                }
-            ],
-            "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
-            "homepage": "http://drupal.org/project/entity",
-            "support": {
-                "source": "https://git.drupalcode.org/project/entity"
             }
         },
         {
@@ -5018,102 +4954,6 @@
                 "source": "https://git.drupal.org/project/masquerade.git",
                 "issues": "https://www.drupal.org/project/issues/masquerade",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
-            }
-        },
-        {
-            "name": "drupal/media_entity",
-            "version": "1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/media_entity.git",
-                "reference": "8.x-1.8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/media_entity-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "c0ab77156c0e431f958d615f043e0255486db155"
-            },
-            "require": {
-                "drupal/entity": "*"
-            },
-            "require-dev": {
-                "drupal/entity": "*",
-                "drupal/inline_entity_form": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1532693881",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Berdir",
-                    "homepage": "https://www.drupal.org/user/214652"
-                },
-                {
-                    "name": "Dave Reid",
-                    "homepage": "https://www.drupal.org/user/53892"
-                },
-                {
-                    "name": "Drupal Media Team",
-                    "homepage": "https://www.drupal.org/user/3260690"
-                },
-                {
-                    "name": "Drupal media CI",
-                    "homepage": "https://www.drupal.org/user/3057985"
-                },
-                {
-                    "name": "Primsi",
-                    "homepage": "https://www.drupal.org/user/282629"
-                },
-                {
-                    "name": "boztek",
-                    "homepage": "https://www.drupal.org/user/134410"
-                },
-                {
-                    "name": "chr.fritsch",
-                    "homepage": "https://www.drupal.org/user/2103716"
-                },
-                {
-                    "name": "jcisio",
-                    "homepage": "https://www.drupal.org/user/210762"
-                },
-                {
-                    "name": "katzilla",
-                    "homepage": "https://www.drupal.org/user/260398"
-                },
-                {
-                    "name": "marcoscano",
-                    "homepage": "https://www.drupal.org/user/1288796"
-                },
-                {
-                    "name": "phenaproxima",
-                    "homepage": "https://www.drupal.org/user/205645"
-                },
-                {
-                    "name": "seanB",
-                    "homepage": "https://www.drupal.org/user/545912"
-                },
-                {
-                    "name": "slashrsm",
-                    "homepage": "https://www.drupal.org/user/744628"
-                }
-            ],
-            "description": "Media entity API.",
-            "homepage": "https://www.drupal.org/project/media_entity",
-            "support": {
-                "source": "https://git.drupalcode.org/project/media_entity"
             }
         },
         {
