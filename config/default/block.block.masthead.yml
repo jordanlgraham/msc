@@ -5,6 +5,7 @@ dependencies:
   config:
     - system.menu.masthead
   module:
+    - block_class
     - system
   theme:
     - msca_theme

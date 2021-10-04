@@ -10,6 +10,9 @@ dependencies:
     - views
   theme:
     - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
 id: msca_theme_views_block__vendor_search_block_1
 theme: msca_theme
 region: content

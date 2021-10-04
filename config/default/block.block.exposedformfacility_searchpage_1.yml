@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.facility_search
   module:
+    - block_class
     - system
     - views
   theme:

@@ -7,6 +7,9 @@ dependencies:
     - system
   theme:
     - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
 _core:
   default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
 id: msca_theme_branding

@@ -20,6 +20,7 @@ module:
   config: 0
   config_filter: 0
   config_ignore: 0
+  config_split: 0
   contact: 0
   contact_block: 0
   contact_storage: 0
@@ -138,7 +139,6 @@ module:
   standard: 1000
 theme:
   stable: 0
-  classy: 0
   seven: 0
   adminimal_theme: 0
   msca_theme: 0

@@ -11,13 +11,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: title
-    plugins: {  }
     dumper: wkt
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
+    providers: {  }
 id: node.newsletter_article.field_news_subtitle
 field_name: field_news_subtitle
 entity_type: node

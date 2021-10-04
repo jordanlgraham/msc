@@ -7,6 +7,9 @@ dependencies:
     - msca_tweet_block
   theme:
     - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
 id: tweetblock
 theme: msca_theme
 region: gutter

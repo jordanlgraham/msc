@@ -12,14 +12,14 @@ third_party_settings:
   geocoder_field:
     method: source
     field: field_address
-    plugins:
-      - googlemaps
     dumper: geolocation
     delta_handling: default
     failure:
       handling: empty
       status_message: false
       log: true
+    providers:
+      - googlemaps
 id: node.facility.field_ge
 field_name: field_ge
 entity_type: node

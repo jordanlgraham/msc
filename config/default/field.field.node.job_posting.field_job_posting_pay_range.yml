@@ -11,13 +11,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: title
-    plugins: {  }
     dumper: wkt
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
+    providers: {  }
 id: node.job_posting.field_job_posting_pay_range
 field_name: field_job_posting_pay_range
 entity_type: node
