@@ -210,7 +210,11 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<div class=\"date-square\">\n  <span class=\"date-square-month\">{{ created }}</span>\n  <span class=\"date-square-day\">{{ created_1 }}</span>\n</div>"
+            text: |-
+              <div class="date-square">
+                <span class="date-square-month">{{ created }}</span>
+                <span class="date-square-day">{{ created_1 }}</span>
+              </div>
             make_link: false
             path: ''
             absolute: false

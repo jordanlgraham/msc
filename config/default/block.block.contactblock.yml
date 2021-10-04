@@ -9,9 +9,6 @@ dependencies:
     - contact_block
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: contactblock
 theme: msca_theme
 region: gutter

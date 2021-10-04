@@ -6036,7 +6036,9 @@ display:
           group_type: group
           admin_label: ''
           empty: false
-          content: "<h2> Facility Count</h2>\n<h3>Displaying @start - @end of @total</h3>"
+          content: |-
+            <h2> Facility Count</h2>
+            <h3>Displaying @start - @end of @total</h3>
           plugin_id: result
       footer: {  }
       empty: {  }

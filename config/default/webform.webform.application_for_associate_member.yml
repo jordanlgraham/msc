@@ -12,7 +12,202 @@ id: application_for_associate_member
 title: 'Application for Associate Membership'
 description: ''
 category: ''
-elements: "company_name:\n  '#type': textfield\n  '#title': 'Company Name'\ntelephone:\n  '#type': tel\n  '#title': Telephone\nmailing_address:\n  '#type': webform_address\n  '#title': 'Mailing Address'\n  '#address_2__access': false\n  '#country__access': false\nfax_number:\n  '#type': tel\n  '#title': 'Fax Number'\nwebsite:\n  '#type': textfield\n  '#title': Website\ntype_of_business:\n  '#type': textarea\n  '#title': 'Type of Business'\n  '#help': 'Please give a brief description of your company and how it relates to senior care.'\n  '#description': 'Please give a brief description of your company and how it relates to senior care.'\n  '#rows': 1\nplease_list_two_references:\n  '#type': webform_section\n  '#title': 'Please List Two References'\n  '#description': '(One of your references must be a Mass Senior Care facility member or AHCA affiliate organization)'\n  reference_1:\n    '#type': webform_section\n    '#title': 'Reference 1'\n    '#title_tag': h3\n    reference_1_name:\n      '#type': textfield\n      '#title': Name\n    reference_1_organization_name:\n      '#type': textfield\n      '#title': 'Organization Name'\n    reference_1_phone_number:\n      '#type': tel\n      '#title': 'Phone Number'\n    reference_1_email:\n      '#type': email\n      '#title': Email\n  reference_2:\n    '#type': webform_section\n    '#title': 'Reference 2'\n    '#title_tag': h3\n    reference_2_name:\n      '#type': textfield\n      '#title': Name\n    reference_2_organization_name:\n      '#type': textfield\n      '#title': 'Organization Name'\n    reference_2_phone:\n      '#type': tel\n      '#title': 'Phone Number'\n    reference_2_email:\n      '#type': email\n      '#title': Email\nplease_list_other_professional_associations_with_which_you_are_a:\n  '#type': textarea\n  '#title': 'Please List Other Professional Associations with Which You Are Affiliated'\n  '#rows': 6\nbusiness_contacts:\n  '#type': webform_section\n  '#title': 'Business Contacts'\n  '#description': '<span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Gill Sans MT&quot;\"><span style=\"layout-grid-mode:line\">Who is the best contact for each area?&nbsp; Please list their <strong>name, title and email address</strong>:</span></span></span>'\n  primary_contact:\n    '#type': webform_section\n    '#title': 'Primary Contact'\n    '#title_tag': h3\n    primary_contact_name:\n      '#type': textfield\n      '#title': Name\n      '#description': '(to be listed on our website)'\n    primary_contact_title:\n      '#type': textfield\n      '#title': Title\n    primary_contact_email:\n      '#type': email\n      '#title': Email\n  billing_dues:\n    '#type': webform_section\n    '#title': Billing/Dues\n    '#title_tag': h3\n    billing_dues_name:\n      '#type': textfield\n      '#title': Name\n    billing_dues_title:\n      '#type': textfield\n      '#title': Title\n    billing_dues_email:\n      '#type': email\n      '#title': Email\n  marketing_and_advertising:\n    '#type': webform_section\n    '#title': 'Marketing and Advertising'\n    '#title_tag': h3\n    name:\n      '#type': textfield\n      '#title': Name\n    title:\n      '#type': textfield\n      '#title': Title\n    email:\n      '#type': email\n      '#title': Email\n  trade_shows:\n    '#type': webform_section\n    '#title': 'Trade Shows'\n    '#title_tag': h3\n    trade_show_name:\n      '#type': textfield\n      '#title': Name\n    trade_show_title:\n      '#type': textfield\n      '#title': Title\n    trade_show_email:\n      '#type': email\n      '#title': Email\n  other_contacts:\n    '#type': webform_section\n    '#title': 'Other Contacts'\n    '#description': 'Who else in your company should receive Mass Senior Care member news and updates?'\n    '#title_tag': h3\n    other_name:\n      '#type': textfield\n      '#title': Name\n    other_title:\n      '#type': textfield\n      '#title': Title\n    other_email:\n      '#type': textfield\n      '#title': Email\npreferred_vendor_listing:\n  '#type': webform_section\n  '#title': 'Preferred Vendor Listing'\n  would_you_like_an_email_address_added_to_your_preferred_vendor_l:\n    '#type': checkboxes\n    '#title': 'Would you like an email address added to your “Preferred Vendor” listing on our website www.maseniorcare.org? '\n    '#title_display': before\n    '#options': yes_no\n  if_yes_the_email:\n    '#type': email\n    '#title': 'If yes, the email'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_an_email_address_added_to_your_preferred_vendor_l[Yes]\"]':\n          checked: true\n  would_you_like_your_company_facebook_page_added_to_your_preferre:\n    '#type': checkboxes\n    '#title': 'Would you like your company Facebook page added to your “Preferred Vendor” listing on our website?'\n    '#options': yes_no\n  if_yes_the_link:\n    '#type': url\n    '#title': 'If yes, the link'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_your_company_facebook_page_added_to_your_preferre[Yes]\"]':\n          checked: true\n  would_you_like_your_company_twitter_page_added_to_your_preferred:\n    '#type': checkboxes\n    '#title': 'Would you like your company Twitter page added to your “Preferred Vendor” listing on our website?  '\n    '#options': yes_no\n  if_yes_the_link_twitter:\n    '#type': url\n    '#title': 'If yes, the link'\n    '#states':\n      visible:\n        ':input[name=\"would_you_like_your_company_twitter_page_added_to_your_preferred[Yes]\"]':\n          checked: true\nservices_for_your_preferred_vendor_listing:\n  '#type': webform_section\n  '#title': 'Services for Your Preferred Vendor Listing'\n  '#description': 'Using the chart below, please choose the services that best reflect your business.'\n  one_primary_service:\n    '#type': webform_term_select\n    '#title': 'One Primary Service'\n    '#description': 'Begin typing a term to see options that best match your entry.'\n    '#vocabulary': vendor_services_offered\n    '#breadcrumb_delimiter': ''\n  up_to_three_secondary_services:\n    '#type': webform_term_select\n    '#title': 'Up to Three Secondary Services'\n    '#multiple': 3\n    '#description': 'Begin typing a term to see options that best match your entry.'\n    '#vocabulary': vendor_services_offered\n    '#breadcrumb_delimiter': ''\ni_certify_that_the_information_supplied_above_is_true_and_accura:\n  '#type': webform_section\n  '#title': 'I certify that the information supplied above is true and accurate as of the date of this application.  If accepted as an Associate Member, I pledge to abide by the Code of Ethics of the Association.'\n  '#title_tag': h3\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
+elements: |
+  company_name:
+    '#type': textfield
+    '#title': 'Company Name'
+  telephone:
+    '#type': tel
+    '#title': Telephone
+  mailing_address:
+    '#type': webform_address
+    '#title': 'Mailing Address'
+    '#address_2__access': false
+    '#country__access': false
+  fax_number:
+    '#type': tel
+    '#title': 'Fax Number'
+  website:
+    '#type': textfield
+    '#title': Website
+  type_of_business:
+    '#type': textarea
+    '#title': 'Type of Business'
+    '#help': 'Please give a brief description of your company and how it relates to senior care.'
+    '#description': 'Please give a brief description of your company and how it relates to senior care.'
+    '#rows': 1
+  please_list_two_references:
+    '#type': webform_section
+    '#title': 'Please List Two References'
+    '#description': '(One of your references must be a Mass Senior Care facility member or AHCA affiliate organization)'
+    reference_1:
+      '#type': webform_section
+      '#title': 'Reference 1'
+      '#title_tag': h3
+      reference_1_name:
+        '#type': textfield
+        '#title': Name
+      reference_1_organization_name:
+        '#type': textfield
+        '#title': 'Organization Name'
+      reference_1_phone_number:
+        '#type': tel
+        '#title': 'Phone Number'
+      reference_1_email:
+        '#type': email
+        '#title': Email
+    reference_2:
+      '#type': webform_section
+      '#title': 'Reference 2'
+      '#title_tag': h3
+      reference_2_name:
+        '#type': textfield
+        '#title': Name
+      reference_2_organization_name:
+        '#type': textfield
+        '#title': 'Organization Name'
+      reference_2_phone:
+        '#type': tel
+        '#title': 'Phone Number'
+      reference_2_email:
+        '#type': email
+        '#title': Email
+  please_list_other_professional_associations_with_which_you_are_a:
+    '#type': textarea
+    '#title': 'Please List Other Professional Associations with Which You Are Affiliated'
+    '#rows': 6
+  business_contacts:
+    '#type': webform_section
+    '#title': 'Business Contacts'
+    '#description': '<span style="font-size:12.0pt"><span style="font-family:&quot;Gill Sans MT&quot;"><span style="layout-grid-mode:line">Who is the best contact for each area?&nbsp; Please list their <strong>name, title and email address</strong>:</span></span></span>'
+    primary_contact:
+      '#type': webform_section
+      '#title': 'Primary Contact'
+      '#title_tag': h3
+      primary_contact_name:
+        '#type': textfield
+        '#title': Name
+        '#description': '(to be listed on our website)'
+      primary_contact_title:
+        '#type': textfield
+        '#title': Title
+      primary_contact_email:
+        '#type': email
+        '#title': Email
+    billing_dues:
+      '#type': webform_section
+      '#title': Billing/Dues
+      '#title_tag': h3
+      billing_dues_name:
+        '#type': textfield
+        '#title': Name
+      billing_dues_title:
+        '#type': textfield
+        '#title': Title
+      billing_dues_email:
+        '#type': email
+        '#title': Email
+    marketing_and_advertising:
+      '#type': webform_section
+      '#title': 'Marketing and Advertising'
+      '#title_tag': h3
+      name:
+        '#type': textfield
+        '#title': Name
+      title:
+        '#type': textfield
+        '#title': Title
+      email:
+        '#type': email
+        '#title': Email
+    trade_shows:
+      '#type': webform_section
+      '#title': 'Trade Shows'
+      '#title_tag': h3
+      trade_show_name:
+        '#type': textfield
+        '#title': Name
+      trade_show_title:
+        '#type': textfield
+        '#title': Title
+      trade_show_email:
+        '#type': email
+        '#title': Email
+    other_contacts:
+      '#type': webform_section
+      '#title': 'Other Contacts'
+      '#description': 'Who else in your company should receive Mass Senior Care member news and updates?'
+      '#title_tag': h3
+      other_name:
+        '#type': textfield
+        '#title': Name
+      other_title:
+        '#type': textfield
+        '#title': Title
+      other_email:
+        '#type': textfield
+        '#title': Email
+  preferred_vendor_listing:
+    '#type': webform_section
+    '#title': 'Preferred Vendor Listing'
+    would_you_like_an_email_address_added_to_your_preferred_vendor_l:
+      '#type': checkboxes
+      '#title': 'Would you like an email address added to your “Preferred Vendor” listing on our website www.maseniorcare.org? '
+      '#title_display': before
+      '#options': yes_no
+    if_yes_the_email:
+      '#type': email
+      '#title': 'If yes, the email'
+      '#states':
+        visible:
+          ':input[name="would_you_like_an_email_address_added_to_your_preferred_vendor_l[Yes]"]':
+            checked: true
+    would_you_like_your_company_facebook_page_added_to_your_preferre:
+      '#type': checkboxes
+      '#title': 'Would you like your company Facebook page added to your “Preferred Vendor” listing on our website?'
+      '#options': yes_no
+    if_yes_the_link:
+      '#type': url
+      '#title': 'If yes, the link'
+      '#states':
+        visible:
+          ':input[name="would_you_like_your_company_facebook_page_added_to_your_preferre[Yes]"]':
+            checked: true
+    would_you_like_your_company_twitter_page_added_to_your_preferred:
+      '#type': checkboxes
+      '#title': 'Would you like your company Twitter page added to your “Preferred Vendor” listing on our website?  '
+      '#options': yes_no
+    if_yes_the_link_twitter:
+      '#type': url
+      '#title': 'If yes, the link'
+      '#states':
+        visible:
+          ':input[name="would_you_like_your_company_twitter_page_added_to_your_preferred[Yes]"]':
+            checked: true
+  services_for_your_preferred_vendor_listing:
+    '#type': webform_section
+    '#title': 'Services for Your Preferred Vendor Listing'
+    '#description': 'Using the chart below, please choose the services that best reflect your business.'
+    one_primary_service:
+      '#type': webform_term_select
+      '#title': 'One Primary Service'
+      '#description': 'Begin typing a term to see options that best match your entry.'
+      '#vocabulary': vendor_services_offered
+      '#breadcrumb_delimiter': ''
+    up_to_three_secondary_services:
+      '#type': webform_term_select
+      '#title': 'Up to Three Secondary Services'
+      '#multiple': 3
+      '#description': 'Begin typing a term to see options that best match your entry.'
+      '#vocabulary': vendor_services_offered
+      '#breadcrumb_delimiter': ''
+  i_certify_that_the_information_supplied_above_is_true_and_accura:
+    '#type': webform_section
+    '#title': 'I certify that the information supplied above is true and accurate as of the date of this application.  If accepted as an Associate Member, I pledge to abide by the Code of Ethics of the Association.'
+    '#title_tag': h3
+    i_accept:
+      '#type': checkbox
+      '#title': 'I Accept'
 css: ''
 javascript: ''
 settings:
@@ -33,7 +228,7 @@ settings:
   form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false

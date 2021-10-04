@@ -12,7 +12,83 @@ id: application_for_professional_mem
 title: 'Application for Professional Membership'
 description: ''
 category: ''
-elements: "criteria:\n  '#type': webform_section\n  '#title': Criteria\n  '#description': '<div style=\"text-align: justify;\"><span style=\"tab-stops:0in\"><span style=\"font-family:&quot;Gill Sans MT&quot;\"><span style=\"letter-spacing:-.1pt\">&quot;To be eligible for <strong>Professional Membership</strong> in the Massachusetts Senior Care Association, an individual must NOT qualify for either facility membership or associate membership.&quot;</span></span></span></div>'\nname:\n  '#type': textfield\n  '#title': Name\ntelephone:\n  '#type': tel\n  '#title': Telephone\nmailing_address:\n  '#type': webform_address\n  '#title': 'Mailing Address'\n  '#address_2__access': false\n  '#country__access': false\nemail_address:\n  '#type': email\n  '#title': 'Email Address'\ncurrent_position:\n  '#type': textfield\n  '#title': 'Current Position'\nname_address_of_current_employer:\n  '#type': webform_section\n  '#title': 'Name & Address of Current Employer'\n  current_employer:\n    '#type': textfield\n    '#title': 'Current Employer'\n  address_of_current_employer:\n    '#type': webform_address\n    '#title': 'Address of Current Employer'\n    '#address_2__access': false\n    '#country__access': false\n  current_employer_phone_number:\n    '#type': tel\n    '#title': 'Current Employer Phone Number'\n  type_of_business:\n    '#type': textarea\n    '#title': 'Type of Business'\nhow_does_your_profession_relate_to_long_term_health_care_:\n  '#type': textarea\n  '#title': 'How Does Your Profession Relate to Long Term Health Care?'\n  '#rows': 6\nhave_you_had_a_prior_relationship_with_the_massachusetts_senior_:\n  '#type': checkboxes\n  '#title': 'Have You Had a Prior Relationship with the Massachusetts Senior Care Association or a Member Facility?'\n  '#options': yes_no\nif_yes_in_what_capacity_was_your_relationship_or_which_facility_:\n  '#type': textarea\n  '#title': 'If Yes, in What Capacity Was Your Relationship or Which Facility?'\n  '#states':\n    visible:\n      ':input[name=\"have_you_had_a_prior_relationship_with_the_massachusetts_senior_[Yes]\"]':\n        checked: true\nnames_and_addresses_of_two_references:\n  '#type': webform_section\n  '#title': 'Names and Addresses of Two References'\n  '#description': 'One should be from a Mass Senior Care Member, if known'\n  reference_1_name:\n    '#type': textfield\n    '#title': 'Reference 1 Name'\n  reference_1_phone_number:\n    '#type': tel\n    '#title': 'Reference 1 Phone Number'\n  reference_2_name:\n    '#type': textfield\n    '#title': 'Reference 2 Name'\n  reference_2_phone_number:\n    '#type': tel\n    '#title': 'Reference 2 Phone Number'\ni_certify_that_the_information_supplied_above_is_true_and_accura:\n  '#type': webform_section\n  '#title': 'I certify that the information supplied above is true and accurate as of the date of this application.  If accepted as a Professional Member, I pledge to abide by the Code of Ethics of the Association. '\n  '#title_tag': h3\n  i_accept:\n    '#type': checkbox\n    '#title': 'I Accept'\n"
+elements: |
+  criteria:
+    '#type': webform_section
+    '#title': Criteria
+    '#description': '<div style="text-align: justify;"><span style="tab-stops:0in"><span style="font-family:&quot;Gill Sans MT&quot;"><span style="letter-spacing:-.1pt">&quot;To be eligible for <strong>Professional Membership</strong> in the Massachusetts Senior Care Association, an individual must NOT qualify for either facility membership or associate membership.&quot;</span></span></span></div>'
+  name:
+    '#type': textfield
+    '#title': Name
+  telephone:
+    '#type': tel
+    '#title': Telephone
+  mailing_address:
+    '#type': webform_address
+    '#title': 'Mailing Address'
+    '#address_2__access': false
+    '#country__access': false
+  email_address:
+    '#type': email
+    '#title': 'Email Address'
+  current_position:
+    '#type': textfield
+    '#title': 'Current Position'
+  name_address_of_current_employer:
+    '#type': webform_section
+    '#title': 'Name & Address of Current Employer'
+    current_employer:
+      '#type': textfield
+      '#title': 'Current Employer'
+    address_of_current_employer:
+      '#type': webform_address
+      '#title': 'Address of Current Employer'
+      '#address_2__access': false
+      '#country__access': false
+    current_employer_phone_number:
+      '#type': tel
+      '#title': 'Current Employer Phone Number'
+    type_of_business:
+      '#type': textarea
+      '#title': 'Type of Business'
+  how_does_your_profession_relate_to_long_term_health_care_:
+    '#type': textarea
+    '#title': 'How Does Your Profession Relate to Long Term Health Care?'
+    '#rows': 6
+  have_you_had_a_prior_relationship_with_the_massachusetts_senior_:
+    '#type': checkboxes
+    '#title': 'Have You Had a Prior Relationship with the Massachusetts Senior Care Association or a Member Facility?'
+    '#options': yes_no
+  if_yes_in_what_capacity_was_your_relationship_or_which_facility_:
+    '#type': textarea
+    '#title': 'If Yes, in What Capacity Was Your Relationship or Which Facility?'
+    '#states':
+      visible:
+        ':input[name="have_you_had_a_prior_relationship_with_the_massachusetts_senior_[Yes]"]':
+          checked: true
+  names_and_addresses_of_two_references:
+    '#type': webform_section
+    '#title': 'Names and Addresses of Two References'
+    '#description': 'One should be from a Mass Senior Care Member, if known'
+    reference_1_name:
+      '#type': textfield
+      '#title': 'Reference 1 Name'
+    reference_1_phone_number:
+      '#type': tel
+      '#title': 'Reference 1 Phone Number'
+    reference_2_name:
+      '#type': textfield
+      '#title': 'Reference 2 Name'
+    reference_2_phone_number:
+      '#type': tel
+      '#title': 'Reference 2 Phone Number'
+  i_certify_that_the_information_supplied_above_is_true_and_accura:
+    '#type': webform_section
+    '#title': 'I certify that the information supplied above is true and accurate as of the date of this application.  If accepted as a Professional Member, I pledge to abide by the Code of Ethics of the Association. '
+    '#title_tag': h3
+    i_accept:
+      '#type': checkbox
+      '#title': 'I Accept'
 css: ''
 javascript: ''
 settings:
@@ -33,7 +109,7 @@ settings:
   form_previous_submissions: false
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
