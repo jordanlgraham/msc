@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a82ba2ea3d2504ead33d3b25a8c3a785",
+    "content-hash": "bc31ba4344367f6af02f8bc258fd0093",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -993,32 +993,32 @@
         },
         {
             "name": "consolidation/robo",
-            "version": "1.4.13",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/consolidation/Robo.git",
-                "reference": "fd28dcca1b935950ece26e63541fbdeeb09f7343"
+                "reference": "12bf6b608057604a283e9e597edfed36ba071631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/consolidation/Robo/zipball/fd28dcca1b935950ece26e63541fbdeeb09f7343",
-                "reference": "fd28dcca1b935950ece26e63541fbdeeb09f7343",
+                "url": "https://api.github.com/repos/consolidation/Robo/zipball/12bf6b608057604a283e9e597edfed36ba071631",
+                "reference": "12bf6b608057604a283e9e597edfed36ba071631",
                 "shasum": ""
             },
             "require": {
-                "consolidation/annotated-command": "^2.12.1|^4.1",
+                "consolidation/annotated-command": "^2.12.1 || ^4.1",
                 "consolidation/config": "^1.2.1",
-                "consolidation/log": "^1.1.1|^2",
-                "consolidation/output-formatters": "^3.5.1|^4.1",
-                "consolidation/self-update": "^1.1.5",
+                "consolidation/log": "^1.1.1 || ^2",
+                "consolidation/output-formatters": "^3.5.1 || ^4.1",
+                "consolidation/self-update": "^1.1.5 || ^2",
                 "grasmash/yaml-expander": "^1.4",
                 "league/container": "^2.4.1",
                 "php": ">=5.5.0",
-                "symfony/console": "^2.8|^3|^4",
-                "symfony/event-dispatcher": "^2.5|^3|^4",
-                "symfony/filesystem": "^2.5|^3|^4",
-                "symfony/finder": "^2.5|^3|^4|^5",
-                "symfony/process": "^2.5|^3|^4"
+                "symfony/console": "^2.8 || ^3 || ^4",
+                "symfony/event-dispatcher": "^2.5 || ^3 || ^4",
+                "symfony/filesystem": "^2.5 || ^3 || ^4",
+                "symfony/finder": "^2.5 || ^3 || ^4 || ^5",
+                "symfony/process": "^2.5 || ^3 || ^4"
             },
             "replace": {
                 "codegyre/robo": "< 1.0"
@@ -1106,9 +1106,9 @@
             "description": "Modern task runner",
             "support": {
                 "issues": "https://github.com/consolidation/Robo/issues",
-                "source": "https://github.com/consolidation/Robo/tree/1.4.13"
+                "source": "https://github.com/consolidation/Robo/tree/1.5.0"
             },
-            "time": "2020-10-11T04:51:34+00:00"
+            "time": "2021-10-08T03:51:31+00:00"
         },
         {
             "name": "consolidation/self-update",
@@ -2195,7 +2195,7 @@
             "extra": {
                 "drupal": {
                     "version": "3.0.3",
-                    "datestamp": "1632322068",
+                    "datestamp": "1632322497",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2523,17 +2523,17 @@
         },
         {
             "name": "drupal/button_link",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/button_link.git",
-                "reference": "8.x-1.2"
+                "reference": "8.x-1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "9518a70e4facbbabfa6680f7ee0fbeb066c3a483"
+                "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "9fb98f81db28538901645abdd10a4f5741270500"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -2541,8 +2541,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1589051511",
+                    "version": "8.x-1.3",
+                    "datestamp": "1633318640",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2918,17 +2918,17 @@
         },
         {
             "name": "drupal/contact_block",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/contact_block.git",
-                "reference": "8.x-1.5"
+                "reference": "8.x-1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.5.zip",
-                "reference": "8.x-1.5",
-                "shasum": "5a5d7febd240fc3673ca755d475bfd4ad4f5a8f3"
+                "url": "https://ftp.drupal.org/files/projects/contact_block-8.x-1.6.zip",
+                "reference": "8.x-1.6",
+                "shasum": "bca712537dac0f3b91fcdefbaecaa00033fe9a74"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -2936,8 +2936,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.5",
-                    "datestamp": "1587219506",
+                    "version": "8.x-1.6",
+                    "datestamp": "1633292142",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2946,7 +2946,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -3963,26 +3963,26 @@
         },
         {
             "name": "drupal/embed",
-            "version": "1.0.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/embed.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "cc746ad807260e01c7788dd82110dcebbb4d678a"
+                "url": "https://ftp.drupal.org/files/projects/embed-8.x-1.4.zip",
+                "reference": "8.x-1.4",
+                "shasum": "09a2bda039bfbb3fff01c91964384bf3d924b8c5"
             },
             "require": {
-                "drupal/core": "~8.0"
+                "drupal/core": "^8.7.7 || ^9"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1575666184",
+                    "version": "8.x-1.4",
+                    "datestamp": "1590176831",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3991,7 +3991,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -4019,12 +4019,10 @@
                     "homepage": "https://www.drupal.org/user/744628"
                 }
             ],
-            "description": "Provide a framework for various different types of embeds in WYSIWYG editors, common functionality, interfaces, and standards.",
+            "description": "Provides a framework for different types of embeds in text editors.",
             "homepage": "https://www.drupal.org/project/embed",
             "support": {
-                "source": "https://git.drupalcode.org/project/embed",
-                "issues": "https://www.drupal.org/project/issues/embed",
-                "irc": "irc://irc.freenode.org/drupal-media"
+                "source": "https://git.drupalcode.org/project/embed"
             }
         },
         {
@@ -4250,29 +4248,29 @@
         },
         {
             "name": "drupal/entity_embed",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_embed.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "abd37a54162a702cf696ef0e5f8b2b1082263c21"
+                "url": "https://ftp.drupal.org/files/projects/entity_embed-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "e1d4c9d6931984836c1ea550c32ae40f42367525"
             },
             "require": {
-                "drupal/core": "^8.4.0",
-                "drupal/embed": "*"
+                "drupal/core": "^8.8 || ^9",
+                "drupal/embed": "^1.3"
             },
             "require-dev": {
-                "drupal/entity_browser": "*"
+                "drupal/entity_browser": "^2.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0",
+                    "version": "8.x-1.2",
                     "datestamp": "1631726164",
                     "security-coverage": {
                         "status": "covered",
@@ -4950,17 +4948,17 @@
         },
         {
             "name": "drupal/forward",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/forward.git",
-                "reference": "4.0.0"
+                "reference": "4.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/forward-4.0.0.zip",
-                "reference": "4.0.0",
-                "shasum": "1ec84b706ef22e3f72227f6816e66e1753bea176"
+                "url": "https://ftp.drupal.org/files/projects/forward-4.0.1.zip",
+                "reference": "4.0.1",
+                "shasum": "a4d26cf5e971ba78eef6e51bd85a0770e2f311ea"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -4968,8 +4966,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.0",
-                    "datestamp": "1591143443",
+                    "version": "4.0.1",
+                    "datestamp": "1633312096",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6116,6 +6114,7 @@
                 "shasum": "953bc6a54217bbb971746990fb9ba22f0b1d00c3"
             },
             "require": {
+                "drupal/core": "^8",
                 "drupal/entity": "*"
             },
             "require-dev": {
@@ -7834,16 +7833,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "10.6.0",
+            "version": "10.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "c86d327359baddb0a2f51bb458703826469a0445"
+                "reference": "d36bca3322555a6f94edc94439873afcde2bbe90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/c86d327359baddb0a2f51bb458703826469a0445",
-                "reference": "c86d327359baddb0a2f51bb458703826469a0445",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/d36bca3322555a6f94edc94439873afcde2bbe90",
+                "reference": "d36bca3322555a6f94edc94439873afcde2bbe90",
                 "shasum": ""
             },
             "require": {
@@ -7851,14 +7850,14 @@
                 "composer/semver": "^1.4 || ^3",
                 "consolidation/config": "^1.2",
                 "consolidation/filter-via-dot-access-data": "^1",
-                "consolidation/robo": "^1.4.11 || ^2",
+                "consolidation/robo": "^1.4.11 || ^2 || ^3",
                 "consolidation/site-alias": "^3.0.0@stable",
                 "consolidation/site-process": "^2.1 || ^4",
                 "enlightn/security-checker": "^1",
                 "ext-dom": "*",
                 "grasmash/yaml-expander": "^1.1.1",
                 "guzzlehttp/guzzle": "^6.3 || ^7.0",
-                "league/container": "~2",
+                "league/container": "^2.5 || ^3.4",
                 "php": ">=7.1.3",
                 "psr/log": "~1.0",
                 "psy/psysh": "~0.6",
@@ -7967,7 +7966,7 @@
                 "irc": "irc://irc.freenode.org/drush",
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/10.6.0"
+                "source": "https://github.com/drush-ops/drush/tree/10.6.1"
             },
             "funding": [
                 {
@@ -7975,7 +7974,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-13T10:40:40+00:00"
+            "time": "2021-10-05T11:14:14+00:00"
         },
         {
             "name": "easyrdf/easyrdf",
@@ -10166,16 +10165,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.10.8",
+            "version": "v0.10.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "e4573f47750dd6c92dca5aee543fa77513cbd8d3"
+                "reference": "01281336c4ae557fe4a994544f30d3a1bc204375"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/e4573f47750dd6c92dca5aee543fa77513cbd8d3",
-                "reference": "e4573f47750dd6c92dca5aee543fa77513cbd8d3",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/01281336c4ae557fe4a994544f30d3a1bc204375",
+                "reference": "01281336c4ae557fe4a994544f30d3a1bc204375",
                 "shasum": ""
             },
             "require": {
@@ -10235,9 +10234,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.10.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.10.9"
             },
-            "time": "2021-04-10T16:23:39+00:00"
+            "time": "2021-10-10T13:37:39+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
