@@ -1,4 +1,5 @@
-.paragraph--type--map-and-contact .contact-message-feedback-form h2 {
+.paragraph--type--map-and-contact .contact-message-feedback-form h2,
+.paragraph--type--block-embed .contact-message-feedback-form h2 {
   @extend .thin-heading;
   color: $blue;
 }
@@ -13,7 +14,8 @@
   margin-right: 0;
 }
 
-.paragraph--type--map-and-contact .homepage-contact {
+.paragraph--type--map-and-contact .homepage-contact,
+.paragraph--type--block-embed .contact-message-feedback-form {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
@@ -28,47 +30,66 @@
   }
 }
 
+.paragraph--type--block-embed .contact-message-feedback-form {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  @include media-breakpoint-down(md) {
+    max-width: none;
+  }
+}
+
 //form elements shouldn't have borders or curved corners at all
 .paragraph--type--map-and-contact .contact-message-feedback-form input,
 .paragraph--type--map-and-contact .contact-message-feedback-form .form-select,
-.paragraph--type--map-and-contact .contact-message-feedback-form .form-textarea{
+.paragraph--type--map-and-contact .contact-message-feedback-form .form-textarea,
+.paragraph--type--block-embed .contact-message-feedback-form input,
+.paragraph--type--block-embed .contact-message-feedback-form .form-select,
+.paragraph--type--block-embed .contact-message-feedback-form .form-textarea {
   border-radius: 0;
   border-width: 0;
 }
 
 //give some breathing room to each form element
-.paragraph--type--map-and-contact .form-item {
+.paragraph--type--map-and-contact .form-item,
+.paragraph--type--block-embed .form-item {
   margin-bottom: 1rem;
 }
 
 //make labels a little tighter with the form elements themselves
-.paragraph--type--map-and-contact label {
+.paragraph--type--map-and-contact label,
+.paragraph--type--block-embed label {
   margin-bottom: 0;
 }
 
-.paragraph--type--map-and-contact .form-submit {
+.paragraph--type--map-and-contact .form-submit,
+.paragraph--type--block-embed .form-submit {
   @extend .btn;
   @extend .btn-secondary;
   cursor: pointer;
 }
 
-.paragraph--type--map-and-contact .form-select {
+.paragraph--type--map-and-contact .form-select,
+.paragraph--type--block-embed .form-select {
   @extend .form-control;
 }
 
-.paragraph--type--map-and-contact .form-textarea {
+.paragraph--type--map-and-contact .form-textarea,
+.paragraph--type--block-embed .form-textarea {
   width: 100%;
   border: 1px solid rgba(0,0,0,0.15);
   resize: none;
   max-height: 60px;
 }
 
-.paragraph--type--map-and-contact input[type="checkbox"] {
+.paragraph--type--map-and-contact input[type="checkbox"],
+.paragraph--type--block-embed input[type="checkbox"] {
   display: inline-block;
   width: auto;
 }
 
-.homepage-contact, .homepage-map {
+.homepage-contact, .homepage-map,
+.paragraph--type--block-embed .contact-block-wrapper {
   background-color: $light-gray;
 }
 
@@ -80,14 +101,16 @@
 }
 
 // Inputs can't have pseudo elements, so the pseudo arrow is applied to the input wrapper
-.paragraph--type--map-and-contact .contact-message-feedback-form .form-actions {
+.paragraph--type--map-and-contact .contact-message-feedback-form .form-actions,
+.paragraph--type--block-embed .contact-message-feedback-form .form-actions {
   position: relative;
   &:after {
     @extend %button-arrow-after;
   }
 }
 
-.paragraph--type--map-and-contact .contact-message-feedback-form input.form-submit {
+.paragraph--type--map-and-contact .contact-message-feedback-form input.form-submit,
+.paragraph--type--block-embed .contact-message-feedback-form input.form-submit {
   @extend .btn;
   @extend .btn-lg;
   @extend .btn-secondary;
