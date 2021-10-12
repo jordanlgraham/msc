@@ -22,6 +22,7 @@ function button_link_theme() {
         'type' => NULL, 
         'size' => NULL,
         'block' => NULL,
+        'additional_class' => NULL,
         'icon_class' => NULL],
     ],
   ];
@@ -51,6 +52,7 @@ function template_preprocess_link_formatter_button_link(&$variables) {
   $attributes['class'][] = $variables['type'];
   $attributes['class'][] = $variables['size'];
   $attributes['class'][] = $variables['block'];
+  $attributes['class'][] = $variables['additional_class'];
   
   $attributes['href'] = $url->toString();
   $url->setOption('attributes', $attributes);

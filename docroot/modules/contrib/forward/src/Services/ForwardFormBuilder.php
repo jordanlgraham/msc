@@ -2,6 +2,7 @@
 
 namespace Drupal\forward\Services;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
@@ -117,6 +118,13 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
   protected $linkGenerator;
 
   /**
+   * The time service.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
    * The email validation service.
    *
    * @var Egulias\EmailValidator\EmailValidator
@@ -152,6 +160,8 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
    *   The mail service.
    * @param \Drupal\Core\Utility\LinkGenerator $link_generator
    *   The link generation service.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
    * @param Egulias\EmailValidator\EmailValidator $email_validator
    *   The email validation service.
    */
@@ -168,8 +178,10 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
     ContainerAwareEventDispatcher $event_dispatcher,
     MailManager $mailer,
     LinkGenerator $link_generator,
+    TimeInterface $time,
     EmailValidator $email_validator) {
 
+    $this->time = $time;
     $this->formBuilder = $form_builder;
     $this->routeMatch = $route_match;
     $this->moduleHandler = $module_handler;
@@ -204,6 +216,7 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
       $container->get('event_dispatcher'),
       $container->get('plugin.manager.mail'),
       $container->get('link_generator'),
+      $container->get('datetime.time'),
       $container->get('email_validator')
     );
   }
@@ -229,6 +242,7 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
         $this->eventDispatcher,
         $this->mailer,
         $this->linkGenerator,
+        $this->time,
         $this->emailValidator
       );
 
@@ -259,6 +273,7 @@ class ForwardFormBuilder implements ForwardFormBuilderInterface {
         $this->eventDispatcher,
         $this->mailer,
         $this->linkGenerator,
+        $this->time,
         $this->emailValidator
       );
 

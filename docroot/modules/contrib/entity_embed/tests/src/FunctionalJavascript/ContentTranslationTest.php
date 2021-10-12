@@ -53,12 +53,16 @@ class ContentTranslationTest extends EntityEmbedTestBase {
    *   The text of the autocomplete suggestions.
    */
   protected function getAutocompleteSuggestions($search_string) {
-    $this->assertSession()
-      ->fieldExists('entity_id')
-      ->setValue($search_string);
-    return $this->assertSession()
-      ->waitForElementVisible('css', '#drupal-modal .ui-widget-content.ui-autocomplete')
-      ->getText();
+    $page = $this->getSession()->getPage();
+    $autocomplete_field = $field = $page->findField('entity_id');
+    $this->assertNotEmpty($autocomplete_field);
+    $autocomplete_field->setValue($search_string);
+    $this->getSession()->getDriver()->keyDown($autocomplete_field->getXpath(), ' ');
+    $this->assertSession()->waitOnAutocomplete();
+    $suggestions = $this->assertSession()
+      ->waitForElementVisible('css', '.ui-autocomplete');
+    $this->assertNotEmpty($suggestions);
+    return $suggestions->getText();
   }
 
   /**
@@ -124,19 +128,17 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     $this->drupalLogin($this->translator);
     $this->drupalGet('node/' . $host->id() . '/edit');
     $this->waitForEditor();
-    $this->assertSession()
-      ->waitForElementVisible('css', 'a.cke_button__test_node')
-      ->click();
-    $this->assertSession()->waitForId('drupal-modal');
+    $this->pressEditorButton('test_node');
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#entity-embed-dialog-form'));
 
     // Assert autocomplete suggestions are in host entity language (en).
     $suggestions = $this->getAutocompleteSuggestions('clar');
-    $this->assertContains('Clark Kent', $suggestions);
+    $this->assertStringContainsString('Clark Kent', $suggestions);
 
     // Assert autocomplete does not show suggestions for translations not
     // matching the host entity language.
     $suggestions = $this->getAutocompleteSuggestions('super');
-    $this->assertNotContains('Superhomme', $suggestions);
+    $this->assertStringNotContainsString('Superhomme', $suggestions);
 
     // Select the suggestion matching the host entity language, and proceed to
     // the review step.
@@ -149,8 +151,8 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     // Assert that the review step displays the selected entity with the label
     // in the host language.
     $text = $form->getText();
-    $this->assertContains('Clark Kent', $text);
-    $this->assertNotContains('Superhomme', $text);
+    $this->assertStringContainsString('Clark Kent', $text);
+    $this->assertStringNotContainsString('Superhomme', $text);
 
     // Repeat the same test pattern, but now for a Media entity instead of Node.
     $this->getSession()->reload();
@@ -161,12 +163,12 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert autocomplete suggestions are in host entity language (en).
     $suggestions = $this->getAutocompleteSuggestions('Smeagol likes cheese');
-    $this->assertContains('Smeagol likes cheese', $suggestions);
+    $this->assertStringContainsString('Smeagol likes cheese', $suggestions);
 
     // Assert autocomplete does not show suggestions for translations not
     // matching the host entity language.
     $suggestions = $this->getAutocompleteSuggestions("Gollum n'aime que la bague");
-    $this->assertNotContains("Gollum n'aime que la bague", $suggestions);
+    $this->assertStringNotContainsString("Gollum n'aime que la bague", $suggestions);
 
     // Select the suggestion matching the host entity language, and proceed to
     // the review step.
@@ -179,25 +181,23 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     // Assert that the review step displays the selected entity with the label
     // in the host language.
     $text = $form->getText();
-    $this->assertContains('Smeagol likes cheese', $text);
-    $this->assertNotContains("Gollum n'aime que la bague", $text);
+    $this->assertStringContainsString('Smeagol likes cheese', $text);
+    $this->assertStringNotContainsString("Gollum n'aime que la bague", $text);
 
     // Get translation of host entity.
     $this->drupalGet('/fr/node/' . $host->id() . '/edit');
     $this->waitForEditor();
-    $this->assertSession()
-      ->waitForElementVisible('css', 'a.cke_button__test_node')
-      ->click();
-    $this->assertSession()->waitForId('drupal-modal');
+    $this->pressEditorButton('test_node');
+    $this->assertNotEmpty($this->assertSession()->waitForElementVisible('css', '#entity-embed-dialog-form'));
 
     // Assert autocomplete suggestions are in host entity language (fr).
     $suggestions = $this->getAutocompleteSuggestions('super');
-    $this->assertContains('Superhomme', $suggestions);
+    $this->assertStringContainsString('Superhomme', $suggestions);
 
     // Assert autocomplete does not show suggestions for translations not
     // matching the host entity language.
     $suggestions = $this->getAutocompleteSuggestions('clark');
-    $this->assertNotContains('Clark Kent', $suggestions);
+    $this->assertStringNotContainsString('Clark Kent', $suggestions);
 
     // Select the suggestion matching the host entity language, and proceed to
     // the review step.
@@ -209,8 +209,8 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert the translated label appears, not the original.
     $text = $form->getText();
-    $this->assertContains('Superhomme', $text);
-    $this->assertNotContains('Clark Kent', $text);
+    $this->assertStringContainsString('Superhomme', $text);
+    $this->assertStringNotContainsString('Clark Kent', $text);
 
     // Choose to display as label without link.
     $this->assertSession()
@@ -238,12 +238,12 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert autocomplete suggestions are in host entity language (fr).
     $suggestions = $this->getAutocompleteSuggestions("Gollum n'aime que la bague");
-    $this->assertContains("Gollum n'aime que la bague", $suggestions);
+    $this->assertStringContainsString("Gollum n'aime que la bague", $suggestions);
 
     // Assert autocomplete does not show suggestions for translations not
     // matching the host entity language.
     $suggestions = $this->getAutocompleteSuggestions('Smeagol likes cheese');
-    $this->assertNotContains('Smeagol likes cheese', $suggestions);
+    $this->assertStringNotContainsString('Smeagol likes cheese', $suggestions);
 
     // Select the suggestion matching the host entity language, and proceed to
     // the review step.
@@ -255,8 +255,8 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert the translated label appears, not the original.
     $text = $form->getText();
-    $this->assertContains("Gollum n'aime que la bague", $text);
-    $this->assertNotContains('Smeagol likes cheese', $text);
+    $this->assertStringContainsString("Gollum n'aime que la bague", $text);
+    $this->assertStringNotContainsString('Smeagol likes cheese', $text);
 
     // Choose to display as thumbnail with 'medium' image style.
     $this->assertSession()
@@ -274,7 +274,7 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     $this->assignNameToCkeditorIframe();
     $this->getSession()->switchToIFrame('ckeditor');
     $img = $this->assertSession()->elementExists('css', 'img');
-    $this->assertContains('Smeagol.jpg', $img->getAttribute('src'));
+    $this->assertStringContainsString('Smeagol.jpg', $img->getAttribute('src'));
     $this->assertEquals("Gollum n'aime que la bague alt", $img->getAttribute('alt'));
 
     // Save the host entity, verify that it also shows up the same way on the
@@ -283,7 +283,7 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     $this->getSession()->switchToIFrame();
     $this->assertSession()->buttonExists('Save')->press();
     $img = $this->assertSession()->elementExists('css', 'img');
-    $this->assertContains('Smeagol.jpg', $img->getAttribute('src'));
+    $this->assertStringContainsString('Smeagol.jpg', $img->getAttribute('src'));
     $this->assertEquals("Gollum n'aime que la bague alt", $img->getAttribute('alt'));
 
     // Verify that editing the host entity and then triggering the Entity Embed
@@ -299,8 +299,8 @@ class ContentTranslationTest extends EntityEmbedTestBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
     $form = $this->assertSession()->waitForElementVisible('css', 'form.entity-embed-dialog-step--embed');
     $text = $form->getText();
-    $this->assertContains("Gollum n'aime que la bague", $text);
-    $this->assertNotContains('Smeagol likes cheese', $text);
+    $this->assertStringContainsString("Gollum n'aime que la bague", $text);
+    $this->assertStringNotContainsString('Smeagol likes cheese', $text);
 
     // Close the Entity Embed Dialog, and enter CKEditor's "source" mode.
     $this->assertSession()->elementExists('css', '.ui-dialog-titlebar-close')->press();
@@ -326,7 +326,7 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert that the image appears with correct alt text (en).
     $img = $this->assertSession()->waitForElementVisible('css', 'img');
-    $this->assertContains('Smeagol.jpg', $img->getAttribute('src'));
+    $this->assertStringContainsString('Smeagol.jpg', $img->getAttribute('src'));
     $this->assertEquals("Smeagol likes cheese alt", $img->getAttribute('alt'));
 
     // Save the host entity, verify that it also shows up the same way on the
@@ -337,7 +337,7 @@ class ContentTranslationTest extends EntityEmbedTestBase {
 
     // Assert that the image appears with correct alt text.
     $img = $this->assertSession()->elementExists('css', 'img');
-    $this->assertContains('Smeagol.jpg', $img->getAttribute('src'));
+    $this->assertStringContainsString('Smeagol.jpg', $img->getAttribute('src'));
     $this->assertEquals("Smeagol likes cheese alt", $img->getAttribute('alt'));
   }
 

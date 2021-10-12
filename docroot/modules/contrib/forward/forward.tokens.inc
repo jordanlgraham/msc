@@ -91,7 +91,7 @@ function forward_tokens($type, $tokens, array $data, array $options, BubbleableM
         case 'entity-url':
           if (isset($data['forward']['entity'])) {
             $entity = $data['forward']['entity'];
-            $entity_url = $entity->access('view') ? $entity->url('canonical', ['absolute' => TRUE]) : t('a URL');
+            $entity_url = $entity->access('view') ? $entity->toUrl('canonical', ['absolute' => TRUE])->toString() : t('a URL');
           }
           $replacements[$original] = isset($data['forward']['entity']) ?
             Markup::create(Xss::filter($entity_url)) : t('a URL');

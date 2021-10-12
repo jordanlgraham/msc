@@ -7,7 +7,7 @@ dependencies:
  - drupal:block
  - drupal:contact
 
-# Information added by Drupal.org packaging script on 2020-04-18
-version: '8.x-1.5'
+# Information added by Drupal.org packaging script on 2021-10-03
+version: '8.x-1.6'
 project: 'contact_block'
-datestamp: 1587219508
+datestamp: 1633292144

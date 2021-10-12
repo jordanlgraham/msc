@@ -66,25 +66,35 @@
       }
       dtd['a']['drupal-entity'] = 1;
 
-      // drupallink has a hardcoded integration with drupalimage. Work around that, to reuse the same integration.
-      var originalGetFocusedWidget = null;
-      if (CKEDITOR.plugins.drupalimage) {
-        originalGetFocusedWidget = CKEDITOR.plugins.drupalimage.getFocusedWidget;
-      }
-      else {
-        CKEDITOR.plugins.drupalimage = {};
-      }
-      CKEDITOR.plugins.drupalimage.getFocusedWidget = function () {
-        var ourFocusedWidget = getFocusedWidget(editor);
-        if (ourFocusedWidget) {
-          return ourFocusedWidget;
+      // The drupallink plugin has a hardcoded integration with
+      // drupalimage.  If the drupallink plugin has the
+      // registerLinkableWidget() method (which was added in Drupal 8.8), we
+      // don't need this workaround.
+      if (editor.plugins.drupallink) {
+        if (CKEDITOR.plugins.drupallink.hasOwnProperty('registerLinkableWidget')) {
+          CKEDITOR.plugins.drupallink.registerLinkableWidget('drupalentity');
+        } else {
+          // drupallink has a hardcoded integration with drupalimage. Workaround
+          // that, to reuse the same integration.
+          var originalGetFocusedWidget = null;
+          if (CKEDITOR.plugins.drupalimage) {
+            originalGetFocusedWidget = CKEDITOR.plugins.drupalimage.getFocusedWidget;
+          } else {
+            CKEDITOR.plugins.drupalimage = {};
+          }
+          CKEDITOR.plugins.drupalimage.getFocusedWidget = function () {
+            var ourFocusedWidget = getFocusedWidget(editor);
+            if (ourFocusedWidget) {
+              return ourFocusedWidget;
+            }
+            // If drupalimage is loaded, call that next, to not break its link command integration.
+            if (originalGetFocusedWidget) {
+              return originalGetFocusedWidget(editor);
+            }
+            return null;
+          };
         }
-        // If drupalimage is loaded, call that next, to not break its link command integration.
-        if (originalGetFocusedWidget) {
-          return originalGetFocusedWidget(editor);
-        }
-        return null;
-      };
+      }
 
       // Generic command for adding/editing entities of all types.
       editor.addCommand('editdrupalentity', {
@@ -205,6 +215,7 @@
             this._loadPreview(function (widget) {
               widget._setUpDynamicEditables();
               editor.fire('unlockSnapshot');
+              editor.fire('saveSnapshot');
             });
           }
           // @todo Remove in https://www.drupal.org/project/entity_embed/issues/3060397
@@ -312,6 +323,9 @@
           jQuery.get({
             url: Drupal.url('entity-embed/preview/' + editor.config.drupal.format + '?text=' + encodeURIComponent(this.downcast().getOuterHtml())),
             dataType: 'html',
+            headers: {
+              'X-Drupal-EntityPreview-CSRF-Token': editor.config.drupalEntity_previewCsrfToken,
+            }
           }).done(function(previewHtml) {
             widget.element.setHtml(previewHtml);
             callback(widget);

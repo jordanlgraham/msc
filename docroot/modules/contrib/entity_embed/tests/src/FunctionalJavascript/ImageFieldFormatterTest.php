@@ -13,6 +13,13 @@ use Drupal\filter\Entity\FilterFormat;
  */
 class ImageFieldFormatterTest extends WebDriverTestBase {
 
+  use SortableTestTrait;
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
   /**
    * {@inheritdoc}
    */
@@ -152,9 +159,13 @@ class ImageFieldFormatterTest extends WebDriverTestBase {
     $this->assertSession()->buttonExists('Add group')->press();
     $this->assertSession()->waitForElementVisible('css', '[name="group-name"]')->setValue('Embeds');
     $this->assertSession()->buttonExists('Apply')->press();
-    $target = $this->assertSession()->waitForElementVisible('css', 'ul.ckeditor-toolbar-group-buttons');
-    $imageButton = $this->assertSession()->elementExists('xpath', '//li[@data-drupal-ckeditor-button-name="' . $this->button->id() . '"]');
-    $imageButton->dragTo($target);
+
+    $item = 'li[data-drupal-ckeditor-button-name="' . $this->button->id() . '"]';
+    $from = "ul $item";
+    $target = 'ul.ckeditor-toolbar-group-buttons';
+
+    $this->assertSession()->waitForElementVisible('css', $target);
+    $this->sortableTo($item, $from, $target);
 
     // Verify filter checkbox exists, then check it.
     $page = $this->getSession()->getPage();
@@ -173,7 +184,7 @@ class ImageFieldFormatterTest extends WebDriverTestBase {
     $settings = $filterFormat->filters('filter_html')->settings;
     $allowed_html = $settings['allowed_html'];
 
-    $this->assertContains('drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode alt title', $allowed_html);
+    $this->assertStringContainsString('drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button data-langcode alt title', $allowed_html);
 
     $this->drupalGet('/node/add/page');
     $this->assertSession()->waitForElement('css', 'a.cke_button__' . $this->button->id())->click();
@@ -204,7 +215,7 @@ class ImageFieldFormatterTest extends WebDriverTestBase {
     $this->assertEquals('Hello world alt text', $drupal_entity->getAttribute('alt'));
     $this->assertEquals('Hello world title text', $drupal_entity->getAttribute('title'));
     $image = $drupal_entity->find('css', 'img');
-    $this->assertContains('rainbow-kitten.png', $image->getAttribute('src'));
+    $this->assertStringContainsString('rainbow-kitten.png', $image->getAttribute('src'));
     $this->getSession()->switchToIFrame();
 
     $this->assertSession()->fieldExists('title[0][value]')->setValue('Testing Page with Embed');
@@ -213,7 +224,7 @@ class ImageFieldFormatterTest extends WebDriverTestBase {
     $wrapper = $this->assertSession()
       ->elementExists('xpath', "//div[contains(@data-embed-button, 'image_embed')]");
     $img = $wrapper->find('css', 'img');
-    $this->assertContains('rainbow-kitten.png', $img->getAttribute('src'));
+    $this->assertStringContainsString('rainbow-kitten.png', $img->getAttribute('src'));
     $this->assertEquals('Hello world alt text', $img->getAttribute('alt'));
     $this->assertEquals('Hello world title text', $img->getAttribute('title'));
 
