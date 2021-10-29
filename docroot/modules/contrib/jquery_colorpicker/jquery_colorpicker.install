@@ -40,6 +40,7 @@ function jquery_colorpicker_requirements($phase) {
 function jquery_colorpicker_update_8200() {
   // If the Color API Color Field is not enabled, an error is thrown, so it is
   // enabled here.
+  \Drupal::service('module_installer')->install(['colorapi']);
   \Drupal::configFactory()->getEditable('colorapi.settings')->set('enable_color_field', TRUE)->save();
   drupal_flush_all_caches();
   // TODO: Drupal Rector Notice: Please delete the following comment after you've made any necessary changes.

@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\fast404\Functional;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Tests\BrowserTestBase;
 
@@ -11,6 +12,8 @@ use Drupal\Tests\BrowserTestBase;
  * @group fast404
  */
 class Fast404PathTest extends BrowserTestBase {
+
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -24,6 +27,9 @@ class Fast404PathTest extends BrowserTestBase {
    */
   public static $modules = ['fast404', 'node', 'path', 'taxonomy'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
     parent::setUp();
 
@@ -34,7 +40,15 @@ class Fast404PathTest extends BrowserTestBase {
     }
 
     // Create test user and log in.
-    $web_user = $this->drupalCreateUser(['create page content', 'edit own page content', 'administer url aliases', 'create url aliases', 'access content overview', 'administer taxonomy', 'access administration pages']);
+    $web_user = $this->drupalCreateUser([
+      'create page content',
+      'edit own page content',
+      'administer url aliases',
+      'create url aliases',
+      'access content overview',
+      'administer taxonomy',
+      'access administration pages',
+    ]);
     $this->drupalLogin($web_user);
   }
 
@@ -60,11 +74,9 @@ class Fast404PathTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Not Found');
     $this->assertSession()->responseContains('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "/does_not_exist" was not found on this server.</p></body></html>');
 
-
     // Ensure requests to the front page are not blocked.
     $this->drupalGet('');
     $this->assertSession()->statusCodeEquals(200);
-
 
     // Ensure items in the router are not blocked.
     $this->drupalGet('/user');
@@ -72,14 +84,13 @@ class Fast404PathTest extends BrowserTestBase {
     $this->drupalGet('user/1');
     $this->assertSession()->statusCodeEquals(403);
 
-
     // Ensure nodes with URL aliases are not blocked.
     $node1 = $this->drupalCreateNode();
 
     // Create alias.
     $edit = [];
     $edit['path[0][alias]'] = '/' . $this->randomMachineName(8);
-    $this->drupalPostForm('node/' . $node1->id() . '/edit', $edit, t('Save'));
+    $this->drupalPostForm('node/' . $node1->id() . '/edit', $edit, $this->t('Save'));
 
     // Confirm that the alias works.
     $this->drupalGet($edit['path[0][alias]']);
@@ -91,10 +102,9 @@ class Fast404PathTest extends BrowserTestBase {
     $this->assertText($node1->label(), 'Alias works.');
     $this->assertResponse(200);
 
-
     // Ensure terms with URL aliases are not blocked.
     $vocabulary = Vocabulary::create([
-      'name' => t('Tags'),
+      'name' => $this->t('Tags'),
       'vid' => 'tags',
     ]);
     $vocabulary->save();
@@ -107,11 +117,12 @@ class Fast404PathTest extends BrowserTestBase {
       'description[0][value]' => $description,
       'path[0][alias]' => '/' . $this->randomMachineName(),
     ];
-    $this->drupalPostForm('admin/structure/taxonomy/manage/' . $vocabulary->id() . '/add', $edit, t('Save'));
+    $this->drupalPostForm('admin/structure/taxonomy/manage/' . $vocabulary->id() . '/add', $edit, $this->t('Save'));
 
     // Confirm that the alias works.
     $this->drupalGet($edit['path[0][alias]']);
     $this->assertText($description, 'Term can be accessed on URL alias.');
 
   }
+
 }

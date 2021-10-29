@@ -5,3 +5,6 @@ block.settings.contact_block:
     contact_form:
       type: string
       label: 'Contact form'
+    form_display:
+      type: string
+      label: 'Form display'

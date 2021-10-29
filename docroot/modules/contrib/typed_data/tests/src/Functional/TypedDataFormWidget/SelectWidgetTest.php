@@ -8,7 +8,7 @@ use Drupal\Core\TypedData\ListDataDefinition;
 use Drupal\Core\TypedData\MapDataDefinition;
 
 /**
- * Class SelectWidgetTest.
+ * Tests operation of the 'select' TypedDataForm widget plugin.
  *
  * @group typed_data
  *
@@ -45,7 +45,7 @@ class SelectWidgetTest extends FormWidgetBrowserTestBase {
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('any')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('binary')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('boolean')));
-    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));;
+    $this->assertFalse($this->widget->isApplicable(DataDefinition::create('datetime_iso8601')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('duration_iso8601')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('email')));
     $this->assertFalse($this->widget->isApplicable(DataDefinition::create('float')));

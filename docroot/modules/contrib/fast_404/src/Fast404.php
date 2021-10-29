@@ -113,7 +113,7 @@ class Fast404 {
       }
     }
 
-    $extensions = Settings::get('fast404_exts', '/^(?!robots).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i');
+    $extensions = Settings::get('fast404_exts', '/^(?!\/robots)^(?!\/system\/files).*\.(txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i');
     // Determine if URL contains a blacklisted extension.
     if (isset($extensions) && preg_match($extensions, $path, $m)) {
       $this->loadHtml = FALSE;
@@ -199,24 +199,19 @@ class Fast404 {
     $message = Settings::get('fast404_html', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>');
     $return_gone = Settings::get('fast404_return_gone', FALSE);
     $custom_404_path = Settings::get('fast404_HTML_error_page', FALSE);
-    if ($return_gone) {
-      header((Settings::get('fast404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 410 Gone');
-    }
-    else {
-      header((Settings::get('fast404_HTTP_status_method', 'mod_php') == 'FastCGI' ? 'Status:' : 'HTTP/1.0') . ' 404 Not Found');
-    }
     // If a file is set to provide us with Fast 404 joy, load it.
     if (($this->loadHtml || Settings::get('fast404_HTML_error_all_paths', FALSE) === TRUE) && file_exists($custom_404_path)) {
       $message = @file_get_contents($custom_404_path, FALSE);
     }
-    $response = new Response(new FormattableMarkup($message, ['@path' => $this->request->getPathInfo()]), 404);
+    $headers = [
+      Settings::get('fast404_HTTP_status_method', 'mod_php') === 'FastCGI' ? 'Status:' : 'HTTP/1.0' => $return_gone ? '410 Gone' : '404 Not Found',
+    ];
+    $response = new Response(new FormattableMarkup($message, ['@path' => $this->request->getPathInfo()]), $return_gone ? 410 : 404, $headers);
     if ($return) {
       return $response;
     }
-    else {
-      $response->send();
-      throw new ServiceUnavailableHttpException(3, $this->t('The requested URL "@path" was not found on this server. Try again shortly.', ['@path' => $this->request->getPathInfo()]));
-    }
+    $response->send();
+    throw new ServiceUnavailableHttpException(3, 'The requested URL "@path" was not found on this server. Try again shortly.', ['@path' => $this->request->getPathInfo()]);
   }
 
   /**

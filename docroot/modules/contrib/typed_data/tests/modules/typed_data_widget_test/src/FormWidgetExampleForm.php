@@ -12,7 +12,7 @@ use Drupal\typed_data\Widget\FormWidgetManagerTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class FormWidgetExampleForm.
+ * Provides a form to demonstrate all TypedDataFormWidgets.
  */
 class FormWidgetExampleForm extends FormBase {
 

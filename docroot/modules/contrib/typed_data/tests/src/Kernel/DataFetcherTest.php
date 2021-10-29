@@ -12,7 +12,7 @@ use Drupal\Core\TypedData\Exception\MissingDataException;
 use Drupal\typed_data\Exception\InvalidArgumentException;
 
 /**
- * Class DataFetcherTest.
+ * Tests operation of the DataFetcher class.
  *
  * @group typed_data
  *

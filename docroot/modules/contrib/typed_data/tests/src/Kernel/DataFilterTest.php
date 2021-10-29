@@ -88,6 +88,23 @@ class DataFilterTest extends KernelTestBase {
   }
 
   /**
+   * Tests the operation of the 'count' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\CountFilter
+   */
+  public function testCountFilter() {
+    $filter = $this->dataFilterManager->createInstance('count');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'No one shall speak to the Man at the Helm.');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('integer', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals(42, $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
    * @covers \Drupal\typed_data\Plugin\TypedDataFilter\LowerFilter
    */
   public function testLowerFilter() {
@@ -100,6 +117,67 @@ class DataFilterTest extends KernelTestBase {
     $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
 
     $this->assertEquals('test', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
+   * Tests the operation of the 'replace' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\ReplaceFilter
+   */
+  public function testReplaceFilter() {
+    $filter = $this->dataFilterManager->createInstance('replace');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'Text with mispeling to correct');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    // Verify that two arguments are required.
+    $fails = $filter->validateArguments($data->getDataDefinition(), [/* No arguments given */]);
+    $this->assertEquals(1, count($fails));
+    $this->assertStringContainsString('Missing arguments for filter', (string) $fails[0]);
+
+    $fails = $filter->validateArguments($data->getDataDefinition(), [new \stdClass(), new \stdClass()]);
+    $this->assertEquals(2, count($fails));
+    $this->assertEquals('This value should be of the correct primitive type.', $fails[0]);
+    $this->assertEquals('This value should be of the correct primitive type.', $fails[1]);
+
+    $this->assertEquals('Text with misspelling to correct', $filter->filter($data->getDataDefinition(), $data->getValue(), ['mispeling', 'misspelling']));
+  }
+
+  /**
+   * Tests the operation of the 'trim' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\TrimFilter
+   */
+  public function testTrimFilter() {
+    $filter = $this->dataFilterManager->createInstance('trim');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), ' Text with whitespace ');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals('Text with whitespace', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
+  }
+
+  /**
+   * Tests the operation of the 'upper' data filter.
+   *
+   * @covers \Drupal\typed_data\Plugin\TypedDataFilter\UpperFilter
+   */
+  public function testUpperFilter() {
+    $filter = $this->dataFilterManager->createInstance('upper');
+    $data = $this->typedDataManager->create(DataDefinition::create('string'), 'tEsT');
+
+    $this->assertTrue($filter->canFilter($data->getDataDefinition()));
+    $this->assertFalse($filter->canFilter(DataDefinition::create('any')));
+
+    $this->assertEquals('string', $filter->filtersTo($data->getDataDefinition(), [])->getDataType());
+
+    $this->assertEquals('TEST', $filter->filter($data->getDataDefinition(), $data->getValue(), []));
   }
 
   /**
@@ -230,7 +308,7 @@ class DataFilterTest extends KernelTestBase {
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
 
-    /* @var \Drupal\node\NodeInterface $node */
+    /** @var \Drupal\node\NodeInterface $node */
     $node = Node::create([
       'title' => 'Test node',
       'type' => 'page',
@@ -256,7 +334,7 @@ class DataFilterTest extends KernelTestBase {
    */
   public function testFileEntityUrlFilter() {
     file_put_contents('public://example.txt', $this->randomMachineName());
-    /* @var \Drupal\file\FileInterface $file */
+    /** @var \Drupal\file\FileInterface $file */
     $file = File::create([
       'uri' => 'public://example.txt',
     ]);

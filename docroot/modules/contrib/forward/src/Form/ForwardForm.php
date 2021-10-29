@@ -2,6 +2,7 @@
 
 namespace Drupal\forward\Form;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
@@ -117,6 +118,13 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
   protected $linkGenerator;
 
   /**
+   * The time service.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
    * The email validation service.
    *
    * @var Egulias\EmailValidator\EmailValidator
@@ -166,6 +174,8 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
    *   The mail service.
    * @param \Drupal\Core\Utility\LinkGeneratorInterface $link_generator
    *   The link generation service.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
    * @param Egulias\EmailValidator\EmailValidator $email_validator
    *   The email validation service.
    */
@@ -183,8 +193,10 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
     ContainerAwareEventDispatcher $event_dispatcher,
     MailManager $mailer,
     LinkGeneratorInterface $link_generator,
+    TimeInterface $time,
     EmailValidator $email_validator) {
 
+    $this->time = $time;
     $this->entity = $entity ?? $route_match->getParameter('entity');
     $this->moduleHandler = $module_handler;
     $this->entityTypeManager = $entity_type_manager;
@@ -221,6 +233,7 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
       $container->get('event_dispatcher'),
       $container->get('plugin.manager.mail'),
       $container->get('link_generator'),
+      $container->get('datetime.time'),
       $container->get('email.validator')
     );
   }
@@ -730,7 +743,7 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
     $uid = $this->currentUser()->id();
     $path = substr($entity->toUrl()->toString(), 1);
     $ip_address = $this->requestStack->getCurrentRequest()->getClientIp();
-    $timestamp = REQUEST_TIME;
+    $timestamp = $this->time->getRequestTime();
 
     // Insert into log.
     $this->database->insert('forward_log')

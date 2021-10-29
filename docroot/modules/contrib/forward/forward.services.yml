@@ -15,6 +15,7 @@ services:
       '@event_dispatcher',
       '@plugin.manager.mail',
       '@link_generator',
+      '@datetime.time',
       '@email.validator']
 
   forward.link_generator:
