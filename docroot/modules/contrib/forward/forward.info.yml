@@ -7,7 +7,7 @@ configure: forward.settings
 dependencies:
   - drupal:field
 
-# Information added by Drupal.org packaging script on 2020-06-03
-version: '4.0.0'
+# Information added by Drupal.org packaging script on 2021-10-04
+version: '4.0.1'
 project: 'forward'
-datestamp: 1591143377
+datestamp: 1633312100

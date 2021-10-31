@@ -35,6 +35,7 @@ class ButtonLinkFormatter extends LinkFormatter {
       'link_text' => '',
       'btn_type' => 'btn-default',
       'btn_size' => '',
+      'additional_class' => '',
       'btn_block' => NULL,
       'icon_class' => '',
       'disable_btn_role' => 0,
@@ -82,6 +83,12 @@ class ButtonLinkFormatter extends LinkFormatter {
       ],
     ];
 
+    $form['additional_class'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Additional classes to add, separated by a space'),
+      '#default_value' => $settings['additional_class'],
+    ];
+
     $form['icon_class'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Classes for icons, example: "fa fa-anchor".'),
@@ -119,6 +126,9 @@ class ButtonLinkFormatter extends LinkFormatter {
     }
     if (!empty($settings['btn_block'])) {
       $summary[] = $this->t('Block level button: @text', ['@text' => $settings['btn_block']]);
+    }
+    if (!empty($settings['additional_class'])) {
+      $summary[] = $this->t('Additional class: "@rel"', ['@rel' => $settings['additional_class']]);
     }
     if (!empty($settings['icon_class'])) {
       $summary[] = $this->t('Icon class: "@rel"', ['@rel' => $settings['icon_class']]);
@@ -176,6 +186,7 @@ class ButtonLinkFormatter extends LinkFormatter {
         '#type' => $settings['btn_type'],
         '#size' => $settings['btn_size'],
         '#block' => $settings['btn_block'],
+        '#additional_class' => $settings['additional_class'],
         '#icon_class' => $settings['icon_class'],
       );
 

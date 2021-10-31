@@ -9,7 +9,7 @@ dependencies:
   - vendor_stream_wrapper:vendor_stream_wrapper
   - colorapi:colorapi
 
-# Information added by Drupal.org packaging script on 2020-10-27
-version: '8.x-2.0-rc2'
+# Information added by Drupal.org packaging script on 2021-10-18
+version: '8.x-2.0'
 project: 'jquery_colorpicker'
-datestamp: 1603808816
+datestamp: 1634571121

@@ -50,6 +50,7 @@ class ForwardStatistics extends DrupalSqlBase {
    */
   public function getIds() {
     $ids['nid']['type'] = 'integer';
+    $ids['nid']['alias'] = 'n';
 
     return $ids;
   }
