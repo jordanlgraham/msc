@@ -144,7 +144,7 @@ class SimpleFacilitySearch extends FormBase {
       }
     }
     
-    $form_state->setRedirect('view.facility_search.page_1', [], ['query' => $query]);
+    $form_state->setRedirect('view.d9_facility_search.page_1', [], ['query' => $query]);
   }
 
 }

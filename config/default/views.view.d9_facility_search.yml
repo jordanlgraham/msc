@@ -1768,7 +1768,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: find-facility
+      path: find-a-facility
       exposed_block: true
     cache_metadata:
       max-age: -1
