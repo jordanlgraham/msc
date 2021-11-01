@@ -7,4 +7,4 @@ services:
       arguments: ['netforum_org_sync']
   netforum_org_sync.geocode:
     class: '\Drupal\netforum_org_sync\Geocode'
-    arguments: ['@entity_type.manager', '@config.factory']
+    arguments: ['@entity_type.manager', '@config.factory', '@datetime.time', '@geocoder']
