@@ -15,6 +15,7 @@ dependencies:
     - options
     - taxonomy
     - user
+    - views_infinite_scroll
 id: d9_facility_search
 label: 'Facility search'
 module: views
@@ -55,12 +56,15 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
-        type: mini
+        type: infinite_scroll
         options:
-          items_per_page: 10
+          items_per_page: 15
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -69,9 +73,10 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
+          views_infinite_scroll:
+            button_text: 'Load More'
+            automatically_load_content: false
+            initially_load_all_pages: false
       style:
         type: default
         options:
@@ -404,6 +409,164 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
+          group: 1
+        field_ge_proximity:
+          id: field_ge_proximity
+          table: node__field_ge
+          field: field_ge_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: '5'
+            center: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_ge_proximity_op
+            label: Proximity
+            description: ''
+            use_operator: false
+            operator: field_ge_proximity_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: proximity
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_author: '0'
+              member: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          location_input:
+            geocoder:
+              enable: true
+              settings:
+                plugin_id: google_geocoding_api
+                settings:
+                  label: Location
+                  description: 'Enter city or zip code and choose from suggestions'
+                  autocomplete_min_length: 1
+                  component_restrictions:
+                    route: ''
+                    locality: ''
+                    administrative_area: ''
+                    postal_code: ''
+                    country: ''
+                  boundary_restriction:
+                    south: ''
+                    west: ''
+                    north: ''
+                    east: ''
+                  region: US
+                hide_form: true
+                auto_submit: false
+              weight: 0
+              location_input_id: geocoder
+            client_location:
+              weight: 0
+              enable: false
+              location_input_id: client_location
+              settings:
+                auto_submit: false
+                hide_form: false
+            'fixed_value:fixed_value':
+              settings:
+                location_settings:
+                  settings:
+                    latitude: ''
+                    longitude: ''
+                location_plugin_id: fixed_value
+              weight: 0
+              enable: false
+              location_input_id: location_plugins
+            'ipstack:ipstack':
+              settings:
+                location_settings:
+                  settings:
+                    access_key: ''
+                location_plugin_id: ipstack
+              weight: 0
+              enable: false
+              location_input_id: location_plugins
+            'freeogeoip:freeogeoip':
+              weight: 0
+              enable: false
+              location_input_id: location_plugins
+              settings:
+                location_plugin_id: freeogeoip
+            coordinates:
+              weight: 0
+              enable: false
+              location_input_id: coordinates
+          unit: mi
+          entity_type: node
+          plugin_id: geolocation_filter_proximity
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: 'Facility Name'
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              content_author: '0'
+              member: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
         field_facility_type_target_id:
           id: field_facility_type_target_id
           table: node__field_facility_type
@@ -497,101 +660,6 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-        field_ge_proximity:
-          id: field_ge_proximity
-          table: node__field_ge
-          field: field_ge_proximity
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: '0'
-            center: {  }
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          location_input:
-            geocoder:
-              enable: true
-              settings:
-                plugin_id: google_geocoding_api
-                settings:
-                  label: Location
-                  description: 'Enter city or zip code and choose from suggestions'
-                hide_form: true
-                auto_submit: false
-              weight: 0
-              location_input_id: geocoder
-            client_location:
-              weight: 0
-              enable: false
-              location_input_id: client_location
-              settings:
-                auto_submit: false
-                hide_form: false
-            'fixed_value:fixed_value':
-              settings:
-                location_settings:
-                  settings:
-                    latitude: ''
-                    longitude: ''
-                location_plugin_id: fixed_value
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'ipstack:ipstack':
-              settings:
-                location_settings:
-                  settings:
-                    access_key: ''
-                location_plugin_id: ipstack
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-            'freeogeoip:freeogeoip':
-              weight: 0
-              enable: false
-              location_input_id: location_plugins
-              settings:
-                location_plugin_id: freeogeoip
-            coordinates:
-              weight: 0
-              enable: false
-              location_input_id: coordinates
-          unit: mi
-          entity_type: node
-          plugin_id: geolocation_filter_proximity
         field_service_type_value:
           id: field_service_type_value
           table: node__field_service_type
@@ -724,35 +792,31 @@ display:
             group_items: {  }
           reduce_duplicates: false
           plugin_id: list_field
-        title:
-          id: title
+        title_1:
+          id: title_1
           table: node_field_data
           field: title
           relationship: none
           group_type: group
           admin_label: ''
-          operator: contains
-          value: ''
+          operator: '!='
+          value: 'Massachusetts Senior Care Association'
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: title_op
-            label: 'Facility Name'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: title_op
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
-            identifier: title
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              content_author: '0'
-              member: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -772,11 +836,111 @@ display:
       sorts: {  }
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'No results. Please change your search criteria.'
+            format: basic_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
       title: 'Facility search'
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:core.entity_view_display.node.education_events.calendar'
+        - 'config:core.entity_view_display.node.education_events.default'
+        - 'config:core.entity_view_display.node.education_events.email'
+        - 'config:core.entity_view_display.node.education_events.featured'
+        - 'config:core.entity_view_display.node.education_events.homepage'
+        - 'config:core.entity_view_display.node.education_events.newsletter'
+        - 'config:core.entity_view_display.node.education_events.sidebar'
+        - 'config:core.entity_view_display.node.education_events.teaser'
+        - 'config:core.entity_view_display.node.facility.default'
+        - 'config:core.entity_view_display.node.facility.facility_map'
+        - 'config:core.entity_view_display.node.facility.teaser'
+        - 'config:core.entity_view_display.node.file_browser.default'
+        - 'config:core.entity_view_display.node.forum.default'
+        - 'config:core.entity_view_display.node.forum.teaser'
+        - 'config:core.entity_view_display.node.job_posting.default'
+        - 'config:core.entity_view_display.node.job_posting.teaser'
+        - 'config:core.entity_view_display.node.newsletter.default'
+        - 'config:core.entity_view_display.node.newsletter.email'
+        - 'config:core.entity_view_display.node.newsletter.teaser'
+        - 'config:core.entity_view_display.node.newsletter.text'
+        - 'config:core.entity_view_display.node.newsletter_article.default'
+        - 'config:core.entity_view_display.node.newsletter_article.email'
+        - 'config:core.entity_view_display.node.newsletter_article.featured'
+        - 'config:core.entity_view_display.node.newsletter_article.homepage'
+        - 'config:core.entity_view_display.node.newsletter_article.newsletter'
+        - 'config:core.entity_view_display.node.newsletter_article.teaser'
+        - 'config:core.entity_view_display.node.newsroom.default'
+        - 'config:core.entity_view_display.node.newsroom.email'
+        - 'config:core.entity_view_display.node.newsroom.featured'
+        - 'config:core.entity_view_display.node.newsroom.homepage'
+        - 'config:core.entity_view_display.node.newsroom.newsletter'
+        - 'config:core.entity_view_display.node.newsroom.teaser'
+        - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.teaser'
+        - 'config:core.entity_view_display.node.paragraph_assembler.default'
+        - 'config:core.entity_view_display.node.paragraph_assembler.teaser'
+        - 'config:core.entity_view_display.node.resources.default'
+        - 'config:core.entity_view_display.node.resources.email'
+        - 'config:core.entity_view_display.node.resources.featured'
+        - 'config:core.entity_view_display.node.resources.newsletter'
+        - 'config:core.entity_view_display.node.resources.teaser'
+        - 'config:core.entity_view_display.node.scholarship_recipient.default'
+        - 'config:core.entity_view_display.node.scholarship_recipient.sidebar'
+        - 'config:core.entity_view_display.node.scholarship_recipient.teaser'
+        - 'config:core.entity_view_display.node.scholarships.default'
+        - 'config:core.entity_view_display.node.scholarships.teaser'
+        - 'config:core.entity_view_display.node.sponsor.bronze_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.default'
+        - 'config:core.entity_view_display.node.sponsor.email'
+        - 'config:core.entity_view_display.node.sponsor.gold_sponsors'
+        - 'config:core.entity_view_display.node.sponsor.newsletter'
+        - 'config:core.entity_view_display.node.sponsor.silver_sponsor'
+        - 'config:core.entity_view_display.node.sponsor.teaser'
+        - 'config:core.entity_view_display.node.vendor.default'
+        - 'config:core.entity_view_display.node.vendor.teaser'
+        - 'config:core.entity_view_display.node.video.default'
+        - 'config:core.entity_view_display.node.video.email'
+        - 'config:core.entity_view_display.node.video.featured'
+        - 'config:core.entity_view_display.node.video.newsletter'
+        - 'config:core.entity_view_display.node.video.teaser'
+        - 'config:core.entity_view_display.node.webform.default'
+        - 'config:core.entity_view_display.node.webform.teaser'
+        - 'config:field.storage.node.field_address'
+        - 'config:field.storage.node.field_ge'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: find-facility
     cache_metadata:
       max-age: -1
       contexts:
