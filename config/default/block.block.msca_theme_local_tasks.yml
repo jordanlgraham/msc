@@ -7,9 +7,6 @@ dependencies:
     - user
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 _core:
   default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
 id: msca_theme_local_tasks
