@@ -184,7 +184,6 @@ third_party_settings:
       region: content
     group_miscellaneous:
       children:
-        - field_ge
         - field_companion_units
         - field_studio
         - field_one_bedroom
@@ -226,6 +225,7 @@ third_party_settings:
         - field_facility_type
         - field_facility_price_range_min
         - field_facility_price_range_max
+        - field_ge
       parent_name: group_netforum_data_auto_synchro
       weight: 56
       format_type: details
@@ -473,7 +473,7 @@ content:
     type: boolean_checkbox
     region: content
   field_ge:
-    weight: 17
+    weight: 59
     settings: {  }
     third_party_settings: {  }
     type: geolocation_latlng
