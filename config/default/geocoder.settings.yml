@@ -1,4 +1,4 @@
-cache: false
-_core:
-  default_config_hash: 51p0N1fcuoTUrOlPIReSbz6lCjo-zJRgB5VSq7FGk3Y
 geocoder_presave_disabled: false
+cache: true
+_core:
+  default_config_hash: 5P0QjCOMc-OzCEJUXsMfJWVEj_K97A4OFOhGqnb5Seg
