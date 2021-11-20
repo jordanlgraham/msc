@@ -111,6 +111,22 @@
       "drupal-scaffold": {
         "locations": {
           "web-root": "docroot/"
+        },
+        "file-mapping": {
+          "[web-root]/README.txt": false,
+          "[web-root]/INSTALL.txt": false,
+          "[web-root]/robots.txt": false,
+          "[web-root]/sites/README.txt": false,
+          "[web-root]/themes/README.txt": false,
+          "[web-root]/modules/README.txt": false,
+          "[web-root]/profiles/README.txt": false,
+          "[web-root]/example.gitignore": false,
+          "[web-root]/sites/development.services.yml": false,
+          "[web-root]/sites/example.settings.local.php": false,
+          "[web-root]/.htaccess": {
+              "mode": "append",
+              "append": "assets/htaccess-force-ssl.txt"
+          }
         }
       },
       "installer-paths": {
