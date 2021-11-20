@@ -9,3 +9,13 @@ require $app_root . '/sites/settings.common.php';
 // $config['config_split.config_split.foundation']['status'] = TRUE;
 
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/foundation/local.services.yml';
+
+// Disable Shield module on production environment.
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  switch ($_ENV['AH_SITE_ENVIRONMENT']) {
+      case 'prod':
+      // Set the shield user variable to NULL.
+      $config['shield.settings']['credentials']['shield']['user'] = NULL;
+      break;
+  }
+}

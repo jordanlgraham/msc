@@ -75,7 +75,7 @@
         "drupal/scheduler": "1.0",
         "drupal/seckit": "^1.0@alpha",
         "drupal/services": "^4.0@beta",
-        "drupal/shield": "^1.0",
+        "drupal/shield": "^1.4",
         "drupal/smart_trim": "^1.0",
         "drupal/svg_image": "^1.2",
         "drupal/token": "1.0.0",
