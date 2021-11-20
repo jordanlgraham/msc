@@ -25,14 +25,16 @@
  * @see template_preprocess_block()
  */
 #}
-<div{{ attributes }}>
-    {{ title_prefix }}
-    {% if label %}
-        <h2{{ title_attributes }}>{{ label }}</h2>
-    {% endif %}
-    {{ title_suffix }}
-    {% block content %}
-        <p class="text-center">{{ 'We look forward to assisting you.'|t }}</p>
-        {{ content }}
-    {% endblock %}
+<div class="contact-block-wrapper">
+    <div{{ attributes }}>
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{ title_attributes }}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
+        {% block content %}
+            <p class="text-center">{{ 'We look forward to assisting you.'|t }}</p>
+            {{ content }}
+        {% endblock %}
+    </div>
 </div>

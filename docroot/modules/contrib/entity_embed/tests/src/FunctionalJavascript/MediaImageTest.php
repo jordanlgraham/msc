@@ -45,6 +45,11 @@ class MediaImageTest extends EntityEmbedTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $defaultTheme = 'stable';
+
+  /**
+   * {@inheritdoc}
+   */
   public static $modules = ['entity_embed_test'];
 
   /**
@@ -117,7 +122,7 @@ class MediaImageTest extends EntityEmbedTestBase {
 
     // Assert that the review step displays the selected entity with the label.
     $text = $form->getText();
-    $this->assertContains('Red-lipped batfish', $text);
+    $this->assertStringContainsString('Red-lipped batfish', $text);
 
     $select = $this->assertSession()
       ->selectExists('attributes[data-entity-embed-display]');
@@ -158,7 +163,7 @@ class MediaImageTest extends EntityEmbedTestBase {
 
     // Assert that the review step displays the selected entity with the label.
     $text = $form->getText();
-    $this->assertContains('Screaming hairy armadillo', $text);
+    $this->assertStringContainsString('Screaming hairy armadillo', $text);
 
     $select = $this->assertSession()
       ->selectExists('attributes[data-entity-embed-display]');
@@ -503,8 +508,8 @@ class MediaImageTest extends EntityEmbedTestBase {
     $this->pressEditorButton('source');
     $source = $this->assertSession()->elementExists('css', "textarea.cke_source");
     $value = $source->getValue();
-    $this->assertContains('https://www.drupal.org/project/drupal', $value);
-    $this->assertNotContains('data-cke-saved-href', $value);
+    $this->assertStringContainsString('https://www.drupal.org/project/drupal', $value);
+    $this->assertStringNotContainsString('data-cke-saved-href', $value);
 
     // Save the entity.
     $this->assertSession()->buttonExists('Save')->press();
@@ -625,7 +630,9 @@ class MediaImageTest extends EntityEmbedTestBase {
     $this->getSession()->switchToIFrame('ckeditor');
 
     // Select the CKEditor Widget and click the "link" button.
-    $this->assertSession()->elementExists('css', 'drupal-entity')->click();
+    $drupal_entity = $this->assertSession()->waitForElementVisible('css', 'drupal-entity');
+    $this->assertNotEmpty($drupal_entity);
+    $drupal_entity->click();
     $this->pressEditorButton('drupallink');
     $this->assertSession()->waitForId('drupal-modal');
 
@@ -725,13 +732,13 @@ class MediaImageTest extends EntityEmbedTestBase {
     $element = $this->assertSession()->elementExists('css', '[data-entity-embed-test-active-theme]');
     $this->assertSame('stable', $element->getAttribute('data-entity-embed-test-active-theme'));
 
-    // Assert that the first preview request transferred >2 KB over the wire.
+    // Assert that the first preview request transferred data over the wire.
     // Then toggle source mode on and off. This causes the CKEditor widget to be
     // destroyed and then reconstructed. Assert that during this reconstruction,
     // a second request is sent. This second request should have transferred 0
     // bytes: the browser should have cached the response, thus resulting in a
     // much better user experience.
-    $this->assertGreaterThan(2048, $this->getLastPreviewRequestTransferSize());
+    $this->assertGreaterThan(0, $this->getLastPreviewRequestTransferSize());
     $this->pressEditorButton('source');
     $this->assertSession()->waitForElement('css', 'textarea.cke_source');
     $this->pressEditorButton('source');
@@ -745,6 +752,7 @@ class MediaImageTest extends EntityEmbedTestBase {
    * Gets the transfer size of the last preview request.
    *
    * @return int
+   *   The transfer size in octets.
    */
   protected function getLastPreviewRequestTransferSize() {
     $this->getSession()->switchToIFrame();
