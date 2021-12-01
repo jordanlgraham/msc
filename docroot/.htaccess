@@ -115,6 +115,18 @@ AddEncoding gzip svgz
   # uncomment the following line:
   # RewriteBase /
 
+  # Force www prefix in production environment.
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  RewriteCond %{HTTP_HOST} .
+  RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirect HTTP to HTTPS.
+  RewriteCond %{HTTPS} off
+  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]  
+
   # Redirect common PHP files to their new locations.
   RewriteCond %{REQUEST_URI} ^(.*)?/(install.php) [OR]
   RewriteCond %{REQUEST_URI} ^(.*)?/(rebuild.php)
@@ -179,25 +191,4 @@ AddEncoding gzip svgz
   Header always set X-Content-Type-Options nosniff
   # Disable Proxy header, since it's an attack vector.
   RequestHeader unset Proxy
-</IfModule>
-
-<IfModule mod_rewrite.c>
-  # Force www prefix in production environment.
-  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
-  RewriteCond %{HTTP_HOST} .
-  RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
-  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Redirect HTTP to HTTPS.
-  RewriteCond %{HTTPS} off
-  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-  # Pass all requests not referring directly to files in the filesystem to
-  # index.php.
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !=/favicon.ico
-  RewriteRule ^ index.php [L]
 </IfModule>
