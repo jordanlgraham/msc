@@ -121,12 +121,12 @@ AddEncoding gzip svgz
   RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
   RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # Redirect HTTPS to HTTP.
-  RewriteCond %{HTTPS} on
+  # Force www prefix in production environment.
   RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
-  RewriteCond %{HTTP:X-Forwarded-Proto} !http
-  RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]  
-
+  RewriteCond %{HTTP_HOST} .
+  RewriteCond %{HTTP_HOST} ^maseniorcare\.org [NC]
+  RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
   # Redirect common PHP files to their new locations.
   RewriteCond %{REQUEST_URI} ^(.*)?/(install.php) [OR]
   RewriteCond %{REQUEST_URI} ^(.*)?/(rebuild.php)
