@@ -124,7 +124,7 @@ AddEncoding gzip svgz
   # Redirect HTTPS to HTTP.
   RewriteCond %{HTTPS} on
   RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP:X-Forwarded-Proto} !http
   RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]  
 
   # Redirect common PHP files to their new locations.
