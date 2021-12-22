@@ -122,10 +122,10 @@ AddEncoding gzip svgz
   RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Redirect HTTP to HTTPS.
-  RewriteCond %{HTTPS} off
-  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
-  RewriteCond %{HTTP:X-Forwarded-Proto} !https
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]  
+  # RewriteCond %{HTTPS} off
+  # RewriteCond %{ENV:AH_SITE_ENVIRONMENT} prod [NC] # only prod
+  # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]  
 
   # Redirect common PHP files to their new locations.
   RewriteCond %{REQUEST_URI} ^(.*)?/(install.php) [OR]
