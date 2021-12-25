@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - msca_tweet_block
   theme:
     - msca_theme

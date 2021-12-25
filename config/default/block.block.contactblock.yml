@@ -5,7 +5,6 @@ dependencies:
   config:
     - contact.form.feedback
   module:
-    - block_class
     - contact_block
   theme:
     - msca_theme

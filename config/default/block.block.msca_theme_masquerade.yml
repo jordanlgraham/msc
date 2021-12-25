@@ -3,7 +3,6 @@ langcode: en
 status: false
 dependencies:
   module:
-    - block_class
     - masquerade
   theme:
     - msca_theme
