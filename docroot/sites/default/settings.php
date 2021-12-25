@@ -16,6 +16,18 @@ if (!empty($_ENV['AH_PRODUCTION'])) {
   }
 }
 
+
+// Disable the shield module on the Acquia production environment.
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  switch ($_ENV['AH_SITE_ENVIRONMENT']) {
+      case 'prod':
+      // Disable Shield on prod by setting the
+      // shield user variable to NULL
+      $config['shield.settings']['credentials']['shield']['user'] = NULL;
+      break;
+  }
+}
+
 // Include local settings.
 require $app_root . '/sites/settings.common.php';
 // Required for config sync.
@@ -49,8 +61,12 @@ if (!empty($lando_info)) {
   if (file_exists(__DIR__ . '/settings.local.php')) {
     include __DIR__ . '/settings.local.php';
   }
+
+  // Disable Shield on local dev by setting the
+  // shield user variable to NULL
+  $config['shield.settings']['credentials']['shield']['user'] = NULL;
 }
 
-$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug'];
-
 $settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/default';
+
+$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
