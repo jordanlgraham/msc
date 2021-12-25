@@ -90,6 +90,34 @@ class OrgSyncForm extends FormBase {
   /**
    * {@inheritdoc}
    */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Set error if 'Sync Everything' checkbox is empty and start and end dates
+    // are the same.
+    $values = $form_state->getValues();
+    if (empty($values['org_types'])) {
+      $form_state->setErrorByName('org_types', $this->t('No org types have been selected.'));
+    }
+    switch ($values['start_date'] == $values['end_date']) {
+      case TRUE:
+        $form_state->setErrorByName('end_date', $this->t('Start and end dates need to have different values.'));
+        break;
+
+      default:
+        $merp = 'derp';
+        $time = [];
+        foreach (['start_date', 'end_date'] as $endpoint) {
+          $time[] = strtotime($values[$endpoint]);
+        }
+        if ($time[1] < $time[0]) {
+          $form_state->setErrorByName('end_date', $this->t('End date must be after start date.'));
+        }
+    }
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     // Sync all option overrides other settings.
@@ -151,16 +179,22 @@ class OrgSyncForm extends FormBase {
 
   public function generateBatchByDate($form_state) {
     $operations = [];
-    $start_date = false;
-    $end_date = false;
-
-    if(!empty($form_state->getValue('start_date'))
-      && !empty($form_state->getValue('end_date'))){
+ 
+    // By default, set both endpoints to current timestamp.
+    $start_date = $end_date = time();
+    if(!empty($form_state->getValue('start_date'))) {
       $start_date = strtotime($form_state->getValue('start_date'));
+    }
+    if(!empty($form_state->getValue('end_date'))){
       $end_date = strtotime($form_state->getValue('end_date'));
     }
 
-    $types = $this->sync->typesToSync();
+    $org_type_tids = $form_state->getValue('org_types');
+    $types = [];
+    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadMultiple($org_type_tids);
+    foreach ($terms as $tid => $term) {
+      $types[$tid] = $term->label();
+    }
     $start = new \DateTime();
     $start->setTimestamp($start_date);
     $start->setTime('0', '0', '0');
@@ -186,6 +220,8 @@ class OrgSyncForm extends FormBase {
       'operations' => $operations,
       'finished' => 'netforum_org_sync_finished',
     ];
+
+    return $batch;
   }
 
   public static function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
