@@ -97,6 +97,8 @@ class OrgSyncForm extends FormBase {
     if (empty($values['org_types'])) {
       $form_state->setErrorByName('org_types', $this->t('No org types have been selected.'));
     }
+
+    // Handle errors relating to the start and end dates.
     switch ($values['start_date'] == $values['end_date']) {
       case TRUE:
         $form_state->setErrorByName('end_date', $this->t('Start and end dates need to have different values.'));
@@ -112,6 +114,9 @@ class OrgSyncForm extends FormBase {
           $form_state->setErrorByName('end_date', $this->t('End date must be after start date.'));
         }
     }
+
+    // Return error if no organization types have been selected.
+    $merp = 'derp';
 
   }
 
