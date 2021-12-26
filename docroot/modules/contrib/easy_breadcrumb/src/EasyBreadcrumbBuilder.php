@@ -39,7 +39,7 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityRepositoryInterface;
-use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Primary implementation for the Easy Breadcrumb builder.
@@ -224,17 +224,6 @@ class EasyBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      // $container->get('easy_breadcrumb.title_resolver'),.
-      $definition = $container->getDefinition('easy_breadcrumb.title_resolver'),
-      $definition->setClass('Drupal\easy_breadcrumb\TitleResolver')
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function applies(RouteMatchInterface $route_match) {
     $applies_admin_routes = $this->config->get(EasyBreadcrumbConstants::APPLIES_ADMIN_ROUTES);
 
@@ -287,7 +276,7 @@ class EasyBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     // Give the option to keep the breadcrumb on the front page.
     $keep_front = !empty($this->config->get(EasyBreadcrumbConstants::HOME_SEGMENT_TITLE))
                   && $this->config->get(EasyBreadcrumbConstants::HOME_SEGMENT_KEEP);
-    $exclude[$front] = $keep_front;
+    $exclude[$front] = !$keep_front;
     $exclude[''] = !$keep_front;
     $exclude['/user'] = TRUE;
 
@@ -492,7 +481,7 @@ class EasyBreadcrumbBuilder implements BreadcrumbBuilderInterface {
               foreach ($parameters as $name => $options) {
                 if (isset($options['type']) && strpos($options['type'], 'entity:') === 0) {
                   $entity = $route_match->getParameter($name);
-                  if ($entity instanceof ContentEntityInterface && $entity->hasLinkTemplate('canonical')) {
+                  if ($entity instanceof EntityInterface && $entity->hasLinkTemplate('canonical')) {
                     $title = $entity->label();
                     if ($this->config->get(EasyBreadcrumbConstants::TRUNCATOR_MODE)) {
                       $title = $this->truncator($title);
