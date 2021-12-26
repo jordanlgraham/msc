@@ -2,17 +2,17 @@
 
 /**
  * @file
- * Contains \Drupal\Tests\redirect\Kernel\Migrate\d7\PathRedirectTest.
+ * Contains \Drupal\Tests\redirect\Kernel\Migrate\d7\PathRedirectWithoutDefaultTest.
  */
 
 namespace Drupal\Tests\redirect\Kernel\Migrate\d7;
 
 /**
- * Tests the d7_path_redirect source plugin.
+ * Tests the d7_path_redirect source plugin, without d7 default status code.
  *
  * @group redirect
  */
-class PathRedirectTest extends PathRedirectTestBase {
+class PathRedirectWithoutDefaultTest extends PathRedirectTestBase {
 
   /**
    * {@inheritdoc}
@@ -20,7 +20,7 @@ class PathRedirectTest extends PathRedirectTestBase {
   protected function setUp() {
     parent::setUp();
     $this->installEntitySchema('redirect');
-    $this->loadFixture(__DIR__ . '/../../../../fixtures/drupal7.php');
+    $this->loadFixture(__DIR__ . '/../../../../fixtures/drupal7-no-default.php');
     $this->executeMigration('d7_path_redirect');
   }
 
@@ -29,7 +29,7 @@ class PathRedirectTest extends PathRedirectTestBase {
    */
   public function testPathRedirect() {
     $this->assertEntity(5, '/test/source/url', 'base:test/redirect/url', '301');
-    $this->assertEntity(7, '/test/source/url2', 'http://test/external/redirect/url?foo=bar&biz=buz#fragment-1', '307');
+    $this->assertEntity(7, '/test/source/url2', 'http://test/external/redirect/url?foo=bar&biz=buz#fragment-1', '301');
   }
 
 }
