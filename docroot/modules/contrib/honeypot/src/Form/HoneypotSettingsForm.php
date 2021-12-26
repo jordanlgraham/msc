@@ -1,13 +1,11 @@
 <?php
 
-namespace Drupal\honeypot\Controller;
+namespace Drupal\honeypot\Form;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\node\Entity\NodeType;
-use Drupal\comment\Entity\CommentType;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -18,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Returns responses for Honeypot module routes.
  */
-class HoneypotSettingsController extends ConfigFormBase {
+class HoneypotSettingsForm extends ConfigFormBase {
 
   /**
    * The module handler service.
@@ -222,7 +220,7 @@ class HoneypotSettingsController extends ConfigFormBase {
 
     // Node types for node forms.
     if ($this->moduleHandler->moduleExists('node')) {
-      $types = NodeType::loadMultiple();
+      $types = $this->entityTypeManager->getStorage('node_type')->loadMultiple();
       if (!empty($types)) {
         // Node forms.
         $form['form_settings']['node_forms'] = ['#markup' => '<h5>' . $this->t('Node Forms') . '</h5>'];
@@ -239,7 +237,7 @@ class HoneypotSettingsController extends ConfigFormBase {
 
     // Comment types for comment forms.
     if ($this->moduleHandler->moduleExists('comment')) {
-      $types = CommentType::loadMultiple();
+      $types = $this->entityTypeManager->getStorage('comment_type')->loadMultiple();
       if (!empty($types)) {
         $form['form_settings']['comment_forms'] = ['#markup' => '<h5>' . $this->t('Comment Forms') . '</h5>'];
         foreach ($types as $type) {
