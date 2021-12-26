@@ -167,6 +167,11 @@
         "recurse": false,
         "replace": false,
         "merge-extra": false
+    },
+    "patches": {
+        "drupal/flag": {
+          "Issue 3110955: Field definition update": "https://www.drupal.org/files/issues/2020-02-04/3110955-entity-definition-update-manager-2.patch"
+        }
     }
   }
 }
