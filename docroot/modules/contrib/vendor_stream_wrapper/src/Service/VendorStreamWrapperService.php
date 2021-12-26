@@ -29,7 +29,7 @@ class VendorStreamWrapperService implements VendorStreamWrapperServiceInterface 
   public function creatUrlFromUri($uri) {
     if (strpos($uri, 'vendor://') === 0) {
       if ($wrapper = $this->streamWrapperService->getViaUri($uri)) {
-        return $wrapper->getExternalUrl()->toString();
+        return $wrapper->getExternalUrl();
       }
     }
     else {

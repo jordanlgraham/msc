@@ -4,7 +4,7 @@ core: '8.x'
 core_version_requirement: ^8 || ^9
 type: module
 
-# Information added by Drupal.org packaging script on 2020-10-23
-version: '8.x-1.6'
+# Information added by Drupal.org packaging script on 2021-11-03
+version: '8.x-1.8'
 project: 'vendor_stream_wrapper'
-datestamp: 1603458331
+datestamp: 1635918253
