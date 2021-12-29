@@ -15,6 +15,6 @@ plugin: facility_search_login
 settings:
   id: facility_search_login
   label: 'Find a Facility/User login'
-  provider: facility_search
   label_display: '0'
+  provider: facility_search
 visibility: {  }

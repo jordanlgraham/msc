@@ -26,13 +26,13 @@ bundle: education_events
 mode: sidebar
 content:
   field_date:
-    weight: 0
+    type: datetime_custom
     label: hidden
     settings:
       timezone_override: ''
       date_format: 'F j \a\t g:i a'
     third_party_settings: {  }
-    type: datetime_custom
+    weight: 0
     region: content
 hidden:
   body: true

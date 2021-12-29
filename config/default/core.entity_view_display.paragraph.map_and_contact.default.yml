@@ -14,19 +14,21 @@ bundle: map_and_contact
 mode: default
 content:
   field_block_to_embed:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_location:
-    weight: 0
+    type: geolocation_map
     label: hidden
     settings:
       set_marker: true
+      common_map: false
+      use_overridden_map_settings: false
       title: 'Massachusetts Senior Care'
       info_text: |-
         <div class="location-content">
@@ -53,32 +55,30 @@ content:
             </tbody>
           </table>
         </div>
-      use_overridden_map_settings: false
-      common_map: false
       map_provider_id: google_maps
       map_provider_settings:
-        height: 750px
-        width: 100%
         type: ROADMAP
         zoom: 15
-        maxZoom: 18
         minZoom: 0
+        maxZoom: 18
+        rotateControl: false
+        height: 750px
+        width: 100%
+        gestureHandling: cooperative
         zoomControl: 1
         scrollwheel: 1
-        gestureHandling: cooperative
         draggable: 1
         style: ''
         info_auto_display: 1
         marker_icon_path: ''
         mapTypeControl: 0
         streetViewControl: 0
-        rotateControl: false
         fullscreenControl: 0
         preferScrollingToZooming: 0
         disableDoubleClickZoom: 0
         disableAutoPan: 0
     third_party_settings: {  }
-    type: geolocation_map
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true

@@ -23,24 +23,24 @@ plugin: 'views_block:news-block_2'
 settings:
   id: 'views_block:news-block_2'
   label: ''
-  provider: views
   label_display: visible
+  provider: views
   views_label: ''
   items_per_page: none
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       newsletter_article: newsletter_article
       newsroom: newsroom
       page: page
       resources: resources
       video: video
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   request_path:
     id: request_path
-    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"
     negate: true
     context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

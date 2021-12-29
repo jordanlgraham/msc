@@ -11,15 +11,15 @@ pattern: '[node:title]'
 selection_criteria:
   503a1303-b93e-4fb4-acca-d347bb7bcf93:
     id: node_type
+    negate: false
+    uuid: 503a1303-b93e-4fb4-acca-d347bb7bcf93
+    context_mapping:
+      node: node
     bundles:
       article: article
       facility: facility
       page: page
       vendor: vendor
-    negate: false
-    context_mapping:
-      node: node
-    uuid: 503a1303-b93e-4fb4-acca-d347bb7bcf93
 selection_logic: and
 weight: -5
 relationships: {  }

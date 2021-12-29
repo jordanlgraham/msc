@@ -12,13 +12,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: parent_id
+    providers: {  }
     dumper: geolocation
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
-    providers: {  }
 id: paragraph.map_and_contact.field_location
 field_name: field_location
 entity_type: paragraph

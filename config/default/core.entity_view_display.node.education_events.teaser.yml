@@ -27,38 +27,38 @@ bundle: education_events
 mode: teaser
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 2
+    label: hidden
     settings:
       trim_length: 80
       trim_type: words
       trim_suffix: ''
       more_link: false
+      more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
         text: true
-      more_class: more-link
     third_party_settings: {  }
+    weight: 2
     region: content
   field_date:
     type: datetime_custom
-    weight: 0
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       date_format: n/j
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_event_category:
     type: entity_reference_label
-    weight: 1
-    region: content
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

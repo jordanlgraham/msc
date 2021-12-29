@@ -14,21 +14,21 @@ bundle: map_and_contact
 mode: default
 content:
   field_block_to_embed:
+    type: entity_reference_autocomplete
     weight: 1
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   field_location:
+    type: geolocation_latlng
     weight: 0
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: geolocation_latlng
-    region: content
 hidden:
   created: true
   status: true

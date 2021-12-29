@@ -37,8 +37,8 @@ settings:
         weight: 12
         enabled: false
       foundation_highlights_column:
-        enabled: true
         weight: 13
+        enabled: true
       two_column:
         weight: 14
         enabled: false

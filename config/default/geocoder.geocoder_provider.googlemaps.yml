@@ -6,8 +6,8 @@ id: googlemaps
 label: GoogleMaps
 plugin: googlemaps
 configuration:
-  region: US
-  apiKey: AIzaSyCRtD9G-UzlK2eDG_rOBHGiYlPTsPfUUjU
   throttle:
     period: null
     limit: null
+  apiKey: AIzaSyCRtD9G-UzlK2eDG_rOBHGiYlPTsPfUUjU
+  region: US

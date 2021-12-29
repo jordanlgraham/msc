@@ -21,9 +21,9 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       newsletter_section: newsletter_section
+    negate: 0
     target_bundles_drag_drop:
       block_embed:
         weight: 12
@@ -44,8 +44,8 @@ settings:
         weight: 17
         enabled: false
       newsletter_section:
-        enabled: true
         weight: 18
+        enabled: true
       two_column:
         weight: 19
         enabled: false

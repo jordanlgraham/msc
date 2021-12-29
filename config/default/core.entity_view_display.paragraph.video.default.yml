@@ -17,7 +17,7 @@ bundle: video
 mode: default
 content:
   field_call_to_action:
-    weight: 4
+    type: button_link
     label: hidden
     settings:
       link_text: ''
@@ -28,30 +28,30 @@ content:
       rel: 0
       target: 0
     third_party_settings: {  }
-    type: button_link
+    weight: 4
     region: content
   field_subtitle:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   field_youtube_id:
-    weight: 3
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 3
     region: content
 hidden:
   entity_print_view_epub: true

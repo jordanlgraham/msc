@@ -21,26 +21,26 @@ bundle: video
 mode: featured
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    label: hidden
     settings:
       trim_length: 300
     third_party_settings: {  }
+    weight: 0
     region: content
   field_youtube_id:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
   links:
-    weight: 2
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

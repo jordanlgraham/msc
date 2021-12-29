@@ -15,6 +15,6 @@ plugin: tweet_block
 settings:
   id: tweet_block
   label: 'Tweet block'
-  provider: msca_tweet_block
   label_display: '0'
+  provider: msca_tweet_block
 visibility: {  }

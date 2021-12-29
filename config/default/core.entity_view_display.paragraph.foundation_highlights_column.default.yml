@@ -18,7 +18,7 @@ bundle: foundation_highlights_column
 mode: default
 content:
   field_call_to_action:
-    weight: 3
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -27,29 +27,29 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 3
     region: content
   field_foundation_icon:
-    weight: 4
+    type: file_url_plain
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: file_url_plain
+    weight: 4
     region: content
   field_subtitle:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
 hidden:
   entity_print_view_epub: true

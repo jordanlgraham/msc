@@ -21,22 +21,22 @@ plugin: vendor_search
 settings:
   id: vendor_search
   label: 'Find a Preferred Vendor'
-  provider: vendor_search
   label_display: visible
+  provider: vendor_search
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       newsletter_article: newsletter_article
       newsroom: newsroom
       page: page
       scholarships: scholarships
       video: video
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   request_path:
     id: request_path
-    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"
     negate: true
     context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

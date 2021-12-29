@@ -22,12 +22,12 @@ plugin: 'views_exposed_filter_block:all_content-newsroom'
 settings:
   id: 'views_exposed_filter_block:all_content-newsroom'
   label: ''
-  provider: views
   label_display: '0'
+  provider: views
   views_label: 'Search Newsroom'
 visibility:
   request_path:
     id: request_path
-    pages: /about/newsroom
     negate: false
     context_mapping: {  }
+    pages: /about/newsroom

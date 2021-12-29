@@ -15,21 +15,21 @@ bundle: two_column
 mode: default
 content:
   field_background_color:
+    type: colorapi_color_display
+    label: hidden
     settings:
       display_name: true
-    weight: 1
-    label: hidden
     third_party_settings: {  }
-    type: colorapi_color_display
+    weight: 1
     region: content
   field_two_column_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true

@@ -11,12 +11,12 @@ pattern: 'sponsor/[node:title]'
 selection_criteria:
   3e59b5a6-f520-47bf-9f6a-22845918da5c:
     id: node_type
-    bundles:
-      sponsor: sponsor
     negate: false
+    uuid: 3e59b5a6-f520-47bf-9f6a-22845918da5c
     context_mapping:
       node: node
-    uuid: 3e59b5a6-f520-47bf-9f6a-22845918da5c
+    bundles:
+      sponsor: sponsor
 selection_logic: and
 weight: -5
 relationships: {  }

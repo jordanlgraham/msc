@@ -25,61 +25,61 @@ bundle: sponsor
 mode: silver_sponsor
 content:
   field_facebook:
-    weight: 1
+    type: link
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 1
     region: content
   field_linkedin:
-    weight: 3
+    type: link
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 3
     region: content
   field_logo:
     type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: sponsor_logo_large_190x110_
+    third_party_settings: {  }
     weight: 0
     region: content
-    label: hidden
-    settings:
-      image_style: sponsor_logo_large_190x110_
-      image_link: ''
-    third_party_settings: {  }
   field_twitter:
-    weight: 2
+    type: link
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 2
     region: content
   field_web_address:
-    weight: 4
+    type: link
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 4
     region: content
 hidden:
   body: true

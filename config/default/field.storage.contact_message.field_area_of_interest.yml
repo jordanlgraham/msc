@@ -12,28 +12,28 @@ type: contact_storage_options_email
 settings:
   allowed_values:
     -
-      key: 'General Question'
       value: 'General Question'
+      key: 'General Question'
       emails: lnguyen@maseniorcare.org
     -
-      key: 'Care Options'
       value: 'Care Options'
+      key: 'Care Options'
       emails: lnguyen@maseniorcare.org
     -
-      key: 'Membership Inquiry'
       value: 'Membership Inquires'
+      key: 'Membership Inquiry'
       emails: jchen@maseniorcare.org
     -
-      key: Reimbursement
       value: Reimbursement
+      key: Reimbursement
       emails: gabrahams@maseniorcare.org
     -
-      key: Regulatory
       value: Regulatory
+      key: Regulatory
       emails: hmagliozzi@maseniorcare.org
     -
-      key: Other
       value: Other
+      key: Other
       emails: jchen@maseniorcare.org
   allowed_values_function: ''
 module: contact_storage

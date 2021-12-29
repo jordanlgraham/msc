@@ -11,13 +11,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: title
+    providers: {  }
     dumper: wkt
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
-    providers: {  }
 id: node.facility.field_previous_manager
 field_name: field_previous_manager
 entity_type: node

@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 module:
   acquia_connector: 0
   address: 0
@@ -57,6 +59,7 @@ module:
   geocoder_address: 0
   geocoder_field: 0
   geolocation: 0
+  geolocation_demo: 0
   google_analytics: 0
   help: 0
   history: 0
@@ -109,7 +112,6 @@ module:
   scheduler: 0
   search: 0
   seckit: 0
-  shield: 0
   shortcut: 0
   smart_trim: 0
   svg_image: 0
@@ -142,6 +144,4 @@ theme:
   seven: 0
   adminimal_theme: 0
   msca_theme: 0
-_core:
-  default_config_hash: m2GVq11UAOVuNgj8x0t5fMOPujpvQQ_zxLoaly1BMEU
 profile: standard

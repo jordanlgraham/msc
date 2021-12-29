@@ -23,46 +23,46 @@ bundle: newsletter
 mode: text
 content:
   field_calendar:
-    weight: 5
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: newsletter
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 5
     region: content
   field_featured_article:
     type: entity_reference_entity_view
-    weight: 1
-    region: content
     label: above
     settings:
       view_mode: newsletter
       link: false
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_newsletter_date:
-    weight: 3
+    type: datetime_custom
     label: hidden
     settings:
       timezone_override: ''
       date_format: 'F j, Y'
     third_party_settings: {  }
-    type: datetime_custom
+    weight: 3
     region: content
   field_sponsor:
-    weight: 4
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: newsletter
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 4
     region: content
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

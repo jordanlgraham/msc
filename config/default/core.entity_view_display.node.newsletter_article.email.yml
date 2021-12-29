@@ -32,43 +32,43 @@ mode: email
 content:
   body:
     type: smart_trim
-    weight: 1
-    region: content
     label: hidden
     settings:
       trim_length: 80
       trim_type: words
       trim_suffix: ''
       more_link: false
+      more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
         text: true
-      more_class: more-link
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_news_release_date:
-    weight: 2
+    type: datetime_custom
     label: hidden
     settings:
       timezone_override: ''
       date_format: M/j
     third_party_settings: {  }
-    type: datetime_custom
+    weight: 2
     region: content
   field_news_teaser_image:
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: thumbnail
       image_link: ''
+      image_style: thumbnail
     third_party_settings: {  }
-    type: media_thumbnail
+    weight: 0
     region: content
   flag_bookmark:
-    weight: 9
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 9
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

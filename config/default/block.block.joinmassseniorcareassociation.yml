@@ -21,8 +21,8 @@ plugin: 'block_content:0536f0ad-e64b-4fba-97a2-2c2c4f33037e'
 settings:
   id: 'block_content:0536f0ad-e64b-4fba-97a2-2c2c4f33037e'
   label: 'Join Massachusetts Senior Care Association'
-  provider: block_content
   label_display: visible
+  provider: block_content
   status: true
   info: ''
   view_mode: full

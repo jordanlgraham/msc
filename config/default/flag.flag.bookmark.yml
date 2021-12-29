@@ -12,7 +12,6 @@ label: Bookmark
 bundles: {  }
 entity_type: node
 global: false
-weight: 0
 flag_short: 'Bookmark this'
 flag_long: 'Add this article to your bookmarks'
 flag_message: 'This article has been added to your bookmarks'
@@ -20,6 +19,7 @@ unflag_short: 'Remove bookmark'
 unflag_long: 'Remove this article from your bookmarks'
 unflag_message: 'This article has been removed from your bookmarks'
 unflag_denied_text: ''
+weight: 0
 flag_type: 'entity:node'
 link_type: ajax_link
 flagTypeConfig:

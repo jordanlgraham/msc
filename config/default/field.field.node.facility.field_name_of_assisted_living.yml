@@ -11,13 +11,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: title
+    providers: {  }
     dumper: wkt
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
-    providers: {  }
 id: node.facility.field_name_of_assisted_living
 field_name: field_name_of_assisted_living
 entity_type: node

@@ -21,29 +21,29 @@ bundle: scholarships
 mode: default
 content:
   body:
-    label: hidden
     type: text_default
-    weight: 1
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 1
     region: content
   field_recipient:
-    weight: 2
+    type: entity_reference_entity_view
     label: above
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 2
     region: content
   field_scholar_image:
-    weight: 0
+    type: media_thumbnail
     label: hidden
     settings:
-      image_style: c
       image_link: ''
+      image_style: c
     third_party_settings: {  }
-    type: media_thumbnail
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true

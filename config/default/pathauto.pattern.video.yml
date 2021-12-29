@@ -11,12 +11,12 @@ pattern: 'member-resource/videos/[node:title]'
 selection_criteria:
   2a5fc3b0-4de5-4465-82db-c7907145feff:
     id: node_type
-    bundles:
-      video: video
     negate: false
+    uuid: 2a5fc3b0-4de5-4465-82db-c7907145feff
     context_mapping:
       node: node
-    uuid: 2a5fc3b0-4de5-4465-82db-c7907145feff
+    bundles:
+      video: video
 selection_logic: and
 weight: -5
 relationships: {  }

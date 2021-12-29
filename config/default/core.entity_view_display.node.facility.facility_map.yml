@@ -92,15 +92,13 @@ mode: facility_map
 content:
   field_ge:
     type: geolocation_map
-    weight: 0
-    region: content
     label: hidden
     settings:
-      title: ''
       set_marker: true
       common_map: false
-      info_text: ''
       use_overridden_map_settings: false
+      title: ''
+      info_text: ''
       map_provider_id: google_maps
       map_provider_settings:
         type: ROADMAP
@@ -108,6 +106,9 @@ content:
         minZoom: 0
         maxZoom: 18
         rotateControl: false
+        height: 400px
+        width: 100%
+        gestureHandling: auto
         mapTypeControl: 1
         streetViewControl: 1
         zoomControl: 1
@@ -115,15 +116,14 @@ content:
         scrollwheel: 1
         disableDoubleClickZoom: 0
         draggable: 1
-        height: 400px
-        width: 100%
         info_auto_display: 1
         marker_icon_path: ''
         disableAutoPan: 1
         style: ''
         preferScrollingToZooming: 0
-        gestureHandling: auto
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

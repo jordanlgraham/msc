@@ -2,11 +2,11 @@ uuid: 39293e2d-1c61-418d-a15f-a16835b452fa
 langcode: en
 status: true
 dependencies:
+  module:
+    - redirect
   enforced:
     module:
       - redirect
-  module:
-    - redirect
 id: redirect_delete_action
 label: 'Delete redirect'
 type: redirect

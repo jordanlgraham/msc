@@ -12,13 +12,13 @@ third_party_settings:
   geocoder_field:
     method: none
     field: title
+    providers: {  }
     dumper: wkt
     delta_handling: default
     failure:
       handling: preserve
       status_message: true
       log: true
-    providers: {  }
 id: node.scholarships.body
 field_name: body
 entity_type: node

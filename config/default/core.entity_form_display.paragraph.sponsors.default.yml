@@ -16,28 +16,28 @@ bundle: sponsors
 mode: default
 content:
   field_sponsor:
+    type: inline_entity_form_complex
     weight: 1
+    region: content
     settings:
       form_mode: newsletter
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
   field_sponsorship_category:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
 hidden:
   created: true
   status: true

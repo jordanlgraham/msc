@@ -21,34 +21,34 @@ bundle: video
 mode: teaser
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 0
+    label: hidden
     settings:
-      trim_length: '80'
+      trim_length: 80
       trim_type: words
       trim_suffix: ''
-      more_link: '0'
+      more_link: false
+      more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
-        text: text
-      more_class: more-link
+        text: true
     third_party_settings: {  }
+    weight: 0
     region: content
   field_youtube_id:
     type: string
-    weight: 1
-    region: content
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  links:
-    weight: 2
+    weight: 1
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

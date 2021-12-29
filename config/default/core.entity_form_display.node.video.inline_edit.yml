@@ -23,20 +23,20 @@ bundle: video
 mode: inline_edit
 content:
   field_event_category:
+    type: inline_entity_form_complex
     weight: 3
+    region: content
     settings:
       form_mode: simplified_taxonomy_term
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
   field_gated:
     type: boolean_checkbox
     weight: 1
@@ -45,41 +45,41 @@ content:
       display_label: true
     third_party_settings: {  }
   field_tags:
+    type: inline_entity_form_complex
     weight: 5
+    region: content
     settings:
       form_mode: simplified_taxonomy_term
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
-    type: inline_entity_form_complex
-    region: content
   field_video_date:
+    type: datetime_default
     weight: 4
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: datetime_default
-    region: content
   field_youtube_id:
+    type: string_textfield
     weight: 2
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   title:
     type: string_textfield
     weight: 0

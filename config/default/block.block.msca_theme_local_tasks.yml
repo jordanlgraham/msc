@@ -17,17 +17,17 @@ plugin: local_tasks_block
 settings:
   id: local_tasks_block
   label: Tabs
-  provider: core
   label_display: '0'
+  provider: core
   primary: true
   secondary: true
 visibility:
   user_role:
     id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
     roles:
       authenticated: authenticated
       administrator: administrator
       content_author: content_author
-    negate: false
-    context_mapping:
-      user: '@user.current_user_context:current_user'
