@@ -63,7 +63,6 @@
     "drupal/maillog": "^1.0@beta",
     "drupal/masquerade": "^2.0@beta",
     "drupal/media_entity_browser": "^2.0@alpha",
-    "drupal/media_entity_image": "^1.3",
     "drupal/metatag": "^1.16",
     "drupal/module_filter": "^3.2",
     "drupal/paragraphs": "^1.12",
@@ -77,6 +76,7 @@
     "drupal/services": "^4.0@beta",
     "drupal/shield": "^1.4",
     "drupal/smart_trim": "^1.3",
+    "drupal/stage_file_proxy": "^1.1",
     "drupal/svg_image": "^1.15",
     "drupal/token": "^1.9",
     "drupal/twig_tweak": "^2.9",
@@ -92,7 +92,6 @@
   },
   "require-dev": {
       "drupal/devel": "^4.1",
-      "drupal/stage_file_proxy": "^1.1",
       "drupal/twig_vardumper": "^3.0",
       "drupal/twig_xdebug": "^1.2"
   },
