@@ -94,8 +94,9 @@ function netforum_org_sync_finished($success, $results, $operations) {
   $messenger = \Drupal::messenger();
   if ($success) {
     // Display the number of organizations we synced.
-    $messenger->addMessage(t('@count organizations processed.', ['@count' => count($results['success'])]));
-    $messenger->addMessage(t('The final result was "%final"', ['%final' => end($results['success'])]));
+    $total = (!empty($results['success'])) ? count($results['success']) : 0;
+    $messenger->addMessage(t('@count organizations processed.', ['@count' => $total]));
+    // $messenger->addMessage(t('The final result was "%final"', ['%final' => end($results['success'])]));
   }
   else {
     // An error occurred.

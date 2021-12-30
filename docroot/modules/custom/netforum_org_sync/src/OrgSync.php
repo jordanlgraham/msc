@@ -150,7 +150,6 @@ class OrgSync {
    * @return \Drupal\node\NodeInterface
    */
   private function saveOrgNode(array $org, NodeInterface $node) {
-    //for non-static functions from the SoapHelper class.
 
     $individual = $this->getIndividual($org['con__cst_key']);
     //first handle fields that exist in both the Facility and Vendor content types

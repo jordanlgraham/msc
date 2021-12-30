@@ -72,6 +72,7 @@ class OrgSyncForm extends FormBase {
     $form['end_date'] = [
       '#type' => 'date',
       '#title' => $this->t('Sync End Date'),
+      '#description' => $this->t('Leave blank to sync until now.')
     ];
     $form['sync_all'] = [
       '#type' => 'checkbox',
@@ -105,18 +106,19 @@ class OrgSyncForm extends FormBase {
         break;
 
       default:
-        $merp = 'derp';
         $time = [];
         foreach (['start_date', 'end_date'] as $endpoint) {
           $time[] = strtotime($values[$endpoint]);
         }
-        if ($time[1] < $time[0]) {
+        if ($time[1] && $time[1] < $time[0]) {
           $form_state->setErrorByName('end_date', $this->t('End date must be after start date.'));
         }
     }
 
     // Return error if no organization types have been selected.
-    $merp = 'derp';
+    if (empty($values['org_types']) && !$values['sync_all']) {
+      $form_state->setErrorByName('org_types', $this->t('Please select some org type(s) or check the \'Sync Everything\' box.'));
+    }
 
   }
 
