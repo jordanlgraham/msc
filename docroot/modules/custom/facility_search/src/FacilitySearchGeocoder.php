@@ -66,9 +66,7 @@ class FacilitySearchGeocoder {
    *   The facility node to geocode.
    */
   public function setCoordinates($node) {
-    $merp = 'derp';
     if (!empty($node->field_address->postal_code)) {
-      $merp = 'derp';
       $address = $node->field_address->getString();
       $provider_ids = ['googlemaps'];
       $providers = $this->entityTypeManager->getStorage('geocoder_provider')->loadMultiple($provider_ids);
