@@ -4,9 +4,9 @@
  *  Drupal hooks for facility_search.module
  */
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\ViewExecutable;
-
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
 
 /**
  * Custom submit function for facility search exposed form.
@@ -23,42 +23,6 @@ use Drupal\views\ViewExecutable;
 //   }
 // }
 
-// function _facility_search_get_coordinates($zip) {
-//   $curl = curl_init();
-//   $options = _get_curl_options($zip);
-//   curl_setopt_array($curl, $options);
-
-//   $response = curl_exec($curl);
-//   $response_json = json_decode($response);
-
-//   // Filter out results for ZIP codes that come from other countries.
-//   foreach ($response_json->results[0]->locations as $location) {
-//     if ($location->adminArea1 == "US" && $location->adminArea3 = "MA") {
-//       $coordinates['latitude'] = $location->latLng->lat;
-//       $coordinates['longitude'] = $location->latLng->lng;
-//     }
-//   }
-
-//   $err = curl_error($curl);
-
-//   curl_close($curl);
-//   return $coordinates;
-// }
-
-// function _get_curl_options($zip) {
-//   $config = \Drupal::config('mapquest.open');
-//   $key = $config->get('key');
-//   return [
-//       CURLOPT_URL => "https://open.mapquestapi.com/geocoding/v1/address?key=$key&location=$zip",
-//       CURLOPT_RETURNTRANSFER => true,
-//       CURLOPT_ENCODING => "",
-//       CURLOPT_MAXREDIRS => 10,
-//       CURLOPT_TIMEOUT => 30,
-//       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//       CURLOPT_CUSTOMREQUEST => "GET",
-//       CURLOPT_POSTFIELDS => "",
-//   ];
-// }
 
 /**
  * Implements hook_form_alter().
@@ -89,24 +53,6 @@ function facility_search_geocoder_provider_info_alter(&$providers) {
   //   }
   // };
 }
-
-/**
- * Implements hook_views_pre_view().
- */
-// function facility_search_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
-//   if ($view->id() !== 'facility_search') {
-//     return;
-//   }
-//   $input = $view->getExposedInput();
-//   // If other filters are being used, don't use the "keys" filter.
-//   foreach ($input as $key => $value) {
-//     if ($key !== 'keys' && !empty($value)) {
-//       $input['keys'] = '';
-//       break;
-//     }
-//   }
-//   $view->setExposedInput($input);
-// }
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -204,4 +150,22 @@ function facility_search_geocoder_provider_info_alter(&$providers) {
 //   }
 // }
 
+/**
+ * Implements hook_views_query_alter().
+ */
+function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() !== 'd9_facility_search') {
+    return;
+  }
+  $input = $view->exposed_raw_input;
 
+  // If there is no more granularity than a city, remove proximity
+  // sort and sort alphabetically.
+  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
+  if (count($address_parts) < 4) {
+    $query->orderby[0] = [
+      'field' => 'title',
+      'direction' => 'ASC'
+    ];
+  }
+}
