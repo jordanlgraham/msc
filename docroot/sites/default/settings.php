@@ -803,6 +803,11 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
       $config['shield.settings']['credentials']['shield']['user'] = NULL;
       break;
   }
+  // Set the hash salt.
+  $path = '/mnt/files/msca.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
+  if (file_exists($path . '/salt.txt')) {
+    $settings['hash_salt'] = file_get_contents($path . '/salt.txt');
+  }
 }
 
 /**
