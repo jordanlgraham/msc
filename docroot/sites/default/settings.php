@@ -810,6 +810,8 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   }
 }
 
+$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
+
 /**
  * Load local development override configuration, if available.
  *
