@@ -168,8 +168,11 @@
         "merge-extra": false
     },
     "patches": {
+        "drupal/media_entity_image": {
+            "Remove 'core' declaration in info.yml": "patches/media_entity_image-remove_core.patch"
+        },
         "drupal/flag": {
-          "Issue 3110955: Field definition update": "https://www.drupal.org/files/issues/2020-02-04/3110955-entity-definition-update-manager-2.patch"
+            "Issue 3110955: Field definition update": "https://www.drupal.org/files/issues/2020-02-04/3110955-entity-definition-update-manager-2.patch"
         }
     }
   }
