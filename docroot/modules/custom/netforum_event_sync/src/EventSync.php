@@ -13,9 +13,15 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 class EventSync {
+
+  /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * @var \Drupal\Core\Entity\EntityStorageInterface
@@ -26,11 +32,6 @@ class EventSync {
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $term_storage;
-
-  /**
-   * @var \Drupal\Core\Config\ImmutableConfig
-   */
-  protected $config;
 
   /**
    * @var \Psr\Log\LoggerInterface
@@ -52,10 +53,16 @@ class EventSync {
    */
   protected $geocoder;
 
+  /**
+   * @var \Symfony\Component\Serializer\SerializerInterface
+   */
+  protected $serializer;
+
   const LAST_SYNC_STATE_KEY = 'netforum_event_sync.last_sync';
+  const CRON_STATE_KEY = 'netforum_event_sync.event_sync';
+  const DATE_FORMAT = 'm/d/Y H:i:s A';
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager,
-                              ConfigFactoryInterface $configFactory,
                               GetClient $getClient,
                               LoggerInterface $logger,
                               DateFormatterInterface $dateFormatter,
@@ -63,12 +70,12 @@ class EventSync {
                               GeocoderInterface $geocoder) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
-    $this->config = $configFactory->get('netforum_event_sync.eventsync');
     $this->dateFormatter = $dateFormatter;
     $this->logger = $logger;
     $this->get_client = $getClient;
     $this->state = $state;
     $this->geocoder = $geocoder;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -142,6 +149,30 @@ class EventSync {
     return $tids;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function syncEvent($event) {
+    $evt_key = $event['evt_key'];
+    $node = $this->loadOrCreateEventNode($evt_key);
+    // Event nodes get manually updated, so don't blow away changes.
+    if (!$node->isNew()) {
+      return NULL;
+    }
+    $node->body->value = $event['description']; //formatted text
+    $node->title = $event['name'];
+    $node->field_date = $this->formatNetForumDateTime($event['start_date'], $event['start_time']); //date w/time 2017-08-15T18:00:00
+    $node->field_end_date = $this->formatNetForumDateTime($event['end_date'], $event['end_time']); //date w/time 2017-08-15T18:00:00
+    $node->field_event_category = $this->loadOrCreateEventTermsByName(array($event['event_category'])); //taxonomy
+    $node->field_event_key = $evt_key; //text
+    $node->status = 1;
+    if (!empty($event['location'])) {
+      $node->field_location->set(0, $event['location']);
+    }
+    $node->save();
+    return $node;
+  }
+
   private function createOrUpdateEvents(array $events) {
     foreach($events as $evt_key => $event) {
       $node = $this->loadOrCreateEventNode($evt_key);
@@ -182,15 +213,16 @@ class EventSync {
     if (!$timestamp) {
       $timestamp = $this->state->get(self::LAST_SYNC_STATE_KEY, strtotime('1/1/2017'));
     }
-    //get stored event types
-    $event_types = explode("\n", str_replace("\r", "", $this->config->get('event_types')));
+    // Get stored event types.
+    $event_types = $this->getEventTypes();
+
     $netforum_service = $this->get_client;
     $response_headers = $netforum_service->getResponseHeaders();
     $client = $netforum_service->getClient();
-    //store all the customer keys from the GetOrganizationByType calls
+    
     if(!empty($event_types)) {
-      //Build an array of events keyed by Event Key <evt_key> so we can
-      //save or update them.
+      // Build an array of events keyed by Event Key <evt_key> so we can
+      // save or update them.
       $events = [];
       $i = 0;
       foreach ($event_types as $type) {
@@ -201,9 +233,9 @@ class EventSync {
         try {
           $response = $client->__soapCall('GetEventListByType', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $response_headers);
           if(!empty($response->GetEventListByTypeResult->any)) {
-            //Let's make things easy on ourselves and turn this XML into an
-            //array. Note that this should be replaced with the Serialization
-            //API since it handles this sort of thing.
+            // Let's make things easy on ourselves and turn this XML into an
+            // array. Note that this should be replaced with the Serialization
+            // API since it handles this sort of thing.
             $xml = simplexml_load_string($response->GetEventListByTypeResult->any);
             $json = json_encode($xml);
             $array = json_decode($json, TRUE);
@@ -259,6 +291,113 @@ class EventSync {
       $this->createOrUpdateEvents($events);
       return $i;
     }
+  }
+
+  /**
+   * Obtain array of events from Netforum.
+   *
+   * @param int $timestamp
+   *  Unix timestamp to start event sync from.
+   */
+  public function getEvents($timestamp = NULL) {
+    $events = [];
+    if (!$timestamp) {
+      $timestamp = $this->state->get(self::LAST_SYNC_STATE_KEY, strtotime('1/1/2017'));
+    }
+    // Get stored event types.
+    $event_types = $this->getEventTypes();
+    $netforum_service = $this->get_client;
+    $response_headers = $netforum_service->getResponseHeaders();
+    $client = $netforum_service->getClient();
+    
+    if(!empty($event_types)) {
+      // Build an array of events keyed by Event Key <evt_key> so we can
+      // save or update them.
+      $events = [];
+      $i = 0;
+      foreach ($event_types as $type) {
+        $params = array(
+          'typeCode' => $type,
+          'szRecordDate' => $this->dateFormatter->format($timestamp, 'custom', 'm/d/Y'),
+        );
+        try {
+          $response = $client->__soapCall('GetEventListByType', array('parameters' => $params), NULL, $netforum_service->getAuthHeaders(), $response_headers);
+          if(!empty($response->GetEventListByTypeResult->any)) {
+            // Convert xml response to array.
+            $xml = simplexml_load_string($response->GetEventListByTypeResult->any);
+            $json = json_encode($xml);
+            $array = json_decode($json, TRUE);
+            $plugins = ['googlemaps' => 'googlemaps'];
+            if(!empty($array['Result'])) {
+              // If there is only one event in $array['Result'], wrap it in an
+              // array.
+              $array['Result'] = (array_key_first($array['Result']) !== 'evt_key')
+                ? $array['Result']
+                : [$array['Result']];
+
+              foreach ($array['Result'] as $result) {
+                if (!empty($result['evt_key'])) {
+                  if(!empty($result['evt_location_html']) && is_string($result['evt_location_html'])) {
+                    $location = $this->cleanupNetForumHTML($result['evt_location_html']);
+                    // Attempt to geocode the location string.
+                    $geocoded = $this->geocoder->geocode($location, $plugins, []);
+                    if ($geocoded) {
+                      $geocoded_location = $geocoded->first();
+                      $admin_levels = $geocoded_location->getAdminLevels();
+                      $location = [
+                        'address_line1' => $geocoded_location->getStreetNumber() . ' ' . $geocoded_location->getStreetName(),
+                        'locality' => $geocoded_location->getLocality(),
+                        'postal_code' => $geocoded_location->getPostalCode(),
+                        'country_code' => $geocoded_location->getCountryCode(),
+                        'administrative_area' => $admin_levels->first()->getCode(),
+                      ];
+                    }
+                    else {
+                      $location = [];
+                    }
+                  } else {
+                    $location = [];
+                  }
+                  if(!empty($result['prd_description_html'])) {
+                    $description = $this->cleanupNetForumHTML($result['prd_description_html']);
+                  } else {
+                    $description = '';
+                  }
+                  $events[] = [
+                    'evt_key' => $result['evt_key'],
+                    'name' => (string) $result['prd_name'],
+                    'start_date' => (string) $result['evt_start_date'],
+                    'end_date' => (string) $result['evt_end_date'],
+                    'start_time' => (string) $result['evt_start_time'],
+                    'end_time' => (string) $result['evt_end_time'],
+                    'event_category' => (string) $result['etp_code'],
+                    'description' => $description,
+                    'location' => $location,
+                  ];
+                  $i++;
+                }
+              }
+            }
+          }
+        } catch (Exception $e) {
+          watchdog_exception('netforum_event_sync', $e, 'Error retrieving @type type events.', ['@type' => $type]);
+        }
+      }
+    }
+    return $events;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getEventTypes() {
+    $term_data = [];
+    $vid = 'event_types';
+    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadTree($vid);
+    foreach ($terms as $term) {
+      $term_data[$term->tid] =  $term->name;
+    }
+    return $term_data;
   }
 
 }
