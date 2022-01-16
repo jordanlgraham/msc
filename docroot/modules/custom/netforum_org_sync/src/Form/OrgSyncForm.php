@@ -149,6 +149,9 @@ class OrgSyncForm extends FormBase {
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getFacilityTypes() {
     $term_data = [];
     $vid = 'facility_type';
@@ -159,6 +162,9 @@ class OrgSyncForm extends FormBase {
     return $term_data;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function generateSyncAllBatch() {
     $operations = [];
     
@@ -184,6 +190,9 @@ class OrgSyncForm extends FormBase {
     return $batch;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function generateBatchByDate($form_state) {
     $operations = [];
  
@@ -231,6 +240,9 @@ class OrgSyncForm extends FormBase {
     return $batch;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
     /** @var OrgSync $sync */
     $sync = \Drupal::service('netforum_org_sync.org_sync');
