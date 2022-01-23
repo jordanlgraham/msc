@@ -159,35 +159,31 @@ function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase
   }
   $input = $view->exposed_raw_input;
 
+  // If there is no location input, unset the location filter from the query.
+  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
+  if ($address_parts == [0 => '']) {
+    unset($query->where[0]);
+  }
+
   // If there is no more granularity than a city, remove proximity
   // sort and sort alphabetically.
-  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
   if (count($address_parts) < 4) {
     $query->orderby[0] = [
       'field' => 'title',
       'direction' => 'ASC'
     ];
   }
-
-  // We have more granularity than just the city. Strip proximity from the proximity condition and use result as sort
-  // pseudo field.
-  // $field = substr($query->where[1]['conditions'][2]['field'], 0, strpos($query->where[1]['conditions'][2]['field'], '<')-1) . ' AS msc_proximity';
-
-  // $query->orderby[0] = [
-  //   'field' => $field,
-  //   'direction' => 'ASC',
-  // ];
 }
 
 /**
  * Implements hook_views_data().
  */
 function facility_search_views_data() {
-  $data['views']['result_plus_selected'] = [
-    'title' => t('Result Summary plus Exposed Summary'),
-    'help' => t('Displays Summary plus Exposed Filter Summary.'),
+  $data['views']['result_plus_proximity'] = [
+    'title' => t('Result Summary plus Proximity'),
+    'help' => t('Displays Summary plus Proximity Summary.'),
     'area' => [
-      'id' => 'result_plus_selected',
+      'id' => 'result_plus_proximity',
     ],
   ];
 
