@@ -796,7 +796,7 @@ display:
             operator: field_facility_type_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_facility_type_target_id
+            identifier: facility_type
             required: false
             remember: false
             multiple: false
@@ -845,7 +845,7 @@ display:
             operator: field_languages_spoken_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_languages_spoken_value
+            identifier: languages
             required: false
             remember: false
             multiple: true
@@ -889,7 +889,7 @@ display:
             operator: field_service_type_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_service_type_value
+            identifier: service_type
             required: false
             remember: false
             multiple: true
@@ -933,7 +933,7 @@ display:
             operator: field_populations_served_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_populations_served_value
+            identifier: populations_served
             required: false
             remember: false
             multiple: true
@@ -977,7 +977,7 @@ display:
             operator: field_specialized_unit_value_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_specialized_unit_value
+            identifier: specialized_units
             required: false
             remember: false
             multiple: true
@@ -1070,7 +1070,22 @@ display:
           query_tags: {  }
       relationships: {  }
       header: {  }
-      footer: {  }
+      footer:
+        result_plus_selected:
+          id: result_plus_selected
+          table: views
+          field: result_plus_selected
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result_plus_selected
+          empty: false
+          content: 'Displaying @start - @end of @total with @exposed_filter_summary.'
+          term_filter_indentifiers: term_identifer
+          text_filter_indentifiers: text_identifer
+          item_type_singular: facility
+          item_type_plural: facilities
+          exposed_summary_prefix: for
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -1888,6 +1903,26 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      defaults:
+        header: false
+        footer: false
+      header:
+        result_plus_proximity:
+          id: result_plus_proximity
+          table: views
+          field: result_plus_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result_plus_proximity
+          empty: false
+          content: 'Displaying @start - @end of @total @proximity_string'
+          term_filter_indentifiers: term_identifer
+          text_filter_indentifiers: text_identifer
+          item_type_singular: facility
+          item_type_plural: facilities
+          exposed_summary_prefix: for
+      footer: {  }
       exposed_block: true
       display_extenders: {  }
       path: find-a-facility
