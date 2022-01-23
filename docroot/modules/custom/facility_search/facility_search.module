@@ -179,18 +179,19 @@ function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase
   // ];
 }
 
-function facility_search_schmiews_pre_render(ViewExecutable $view) {
-  if ($view->id() !== 'd9_facility_search') {
-    return;
-  }
-  $results_original = $view->result;
-  foreach ($view->result as $key => $result) {
-    // Get the proximity formula from the view's query.
-    $formula = substr($view->query->where[1]['conditions'][2]['field'], 0, strpos($view->query->where[1]['conditions'][2]['field'], '<')-1);
-    // Substitute values from this $result for the placeholders in the $formula.
+/**
+ * Implements hook_views_data().
+ */
+function facility_search_views_data() {
+  $data['views']['result_plus_selected'] = [
+    'title' => t('Result Summary plus Exposed Summary'),
+    'help' => t('Displays Summary plus Exposed Filter Summary.'),
+    'area' => [
+      'id' => 'result_plus_selected',
+    ],
+  ];
 
-  }
-
+  return $data;
 }
 
 /**
@@ -199,5 +200,4 @@ function facility_search_schmiews_pre_render(ViewExecutable $view) {
 function facility_search_views_data_alter(&$data) {
   $data['node__field_ge']['field_ge_geocoder_argument']['argument']['id'] = 'facility_search_geolocation_geocoder_argument';
   $data['node__field_ge']['field_ge_geocoder_argument']['title short'] = t('MSC Facility Search Geocoder Address Argument');
-  $merp = 'derp';
 }
