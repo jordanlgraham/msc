@@ -60,7 +60,7 @@ function msca_theme_preprocess_node(&$variables) {
   if ($node  && !is_string($node)) {
     $nid = $node->id();
     $allContent = views_embed_view('all_content', 'embed_1', $nid);
-    $variables["all_content"] = \Drupal::service('renderer')->render($allContent);
+    $variables['all_content'] = \Drupal::service('renderer')->render($allContent);
   }
 }
 
@@ -257,5 +257,11 @@ function msca_theme_views_pre_render(&$view) {
       }
 
     }
+  }
+}
+
+function msca_theme_preprocess_block(&$variables) {
+  if ($variables['plugin_id'] == 'search_form_block') {
+    $variables['content']['actions']['submit']['#value'] = t('Search content');
   }
 }

@@ -51,11 +51,13 @@
   width: 100%;
 }
 
-.advanced-search {
+.advanced-search,
+#facility-search-link {
   text-align: center;
 }
 
-.header-menu .navbar-light ul li .advanced-search a {
+.header-menu .navbar-light ul li .advanced-search a,
+.header-menu .navbar-light ul li #facility-search-link a {
   font-size: 1rem;
   font-weight: 200;
   color: white;
