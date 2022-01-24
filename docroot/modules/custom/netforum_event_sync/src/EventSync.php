@@ -11,12 +11,20 @@ use Drupal\Core\State\StateInterface;
 use Drupal\geocoder\GeocoderInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 class EventSync {
+
+  /**
+   * The country manager service.
+   *
+   * @var \Drupal\Core\Locale\CountryManagerInterface
+   */
+  protected $countryManager;
 
   /**
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -67,7 +75,8 @@ class EventSync {
                               LoggerInterface $logger,
                               DateFormatterInterface $dateFormatter,
                               StateInterface $state,
-                              GeocoderInterface $geocoder) {
+                              GeocoderInterface $geocoder,
+                              CountryManagerInterface $countryManager) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->term_storage = $entityTypeManager->getStorage('taxonomy_term');
     $this->dateFormatter = $dateFormatter;
@@ -76,6 +85,7 @@ class EventSync {
     $this->state = $state;
     $this->geocoder = $geocoder;
     $this->entityTypeManager = $entityTypeManager;
+    $this->countryManager = $countryManager;
   }
 
   /**
@@ -343,13 +353,15 @@ class EventSync {
                     $geocoded = $this->geocoder->geocode($location, $plugins, []);
                     if ($geocoded) {
                       $geocoded_location = $geocoded->first();
-                      $admin_levels = $geocoded_location->getAdminLevels();
+                      $address = $geocoded_location->getFormattedAddress();
+                      $addressBits = explode(',', $address);
+                      $countries = $this->countryManager->getList();
                       $location = [
-                        'address_line1' => $geocoded_location->getStreetNumber() . ' ' . $geocoded_location->getStreetName(),
-                        'locality' => $geocoded_location->getLocality(),
-                        'postal_code' => $geocoded_location->getPostalCode(),
-                        'country_code' => $geocoded_location->getCountryCode(),
-                        'administrative_area' => $admin_levels->first()->getCode(),
+                        'address_line1' => !empty($addressBits[0]) ? $addressBits[0] : '',
+                        'locality' => !empty($addressBits[1]) ? trim($addressBits[1]) : '',
+                        'postal_code' => !empty($addressBits[2]) ? substr(trim($addressBits[2]), strpos(trim($addressBits[2]), " ") + 1) : '',
+                        'country_code' => !empty($addressBits[3]) ? 'US' : '',
+                        'administrative_area' => !empty($addressBits[2]) ? substr(trim($addressBits[2]), 0, strpos(trim($addressBits[2]), " ")) : '',
                       ];
                     }
                     else {
