@@ -3,13 +3,9 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - facility_search
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: findafacilityuserlogin
 theme: msca_theme
 region: gutter
@@ -19,6 +15,6 @@ plugin: facility_search_login
 settings:
   id: facility_search_login
   label: 'Find a Facility/User login'
-  provider: facility_search
   label_display: '0'
+  provider: facility_search
 visibility: {  }

@@ -5,13 +5,9 @@ dependencies:
   config:
     - contact.form.feedback
   module:
-    - block_class
     - contact_block
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: contactblock
 theme: msca_theme
 region: gutter
@@ -21,7 +17,8 @@ plugin: contact_block
 settings:
   id: contact_block
   label: 'Contact Us'
-  provider: contact_block
   label_display: visible
+  provider: contact_block
   contact_form: feedback
+  form_display: default
 visibility: {  }

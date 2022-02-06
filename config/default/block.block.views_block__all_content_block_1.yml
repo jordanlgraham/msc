@@ -22,14 +22,14 @@ plugin: 'views_block:all_content-block_1'
 settings:
   id: 'views_block:all_content-block_1'
   label: ''
-  provider: views
   label_display: visible
+  provider: views
+  context_mapping: {  }
   views_label: ''
   items_per_page: none
-  context_mapping: {  }
 visibility:
   request_path:
     id: request_path
-    pages: "/press-release\r\n/news\r\n"
     negate: false
     context_mapping: {  }
+    pages: "/press-release\r\n/news\r\n"

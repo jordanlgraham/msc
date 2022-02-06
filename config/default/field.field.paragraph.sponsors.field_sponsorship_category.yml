@@ -11,7 +11,7 @@ third_party_settings:
   geocoder_field:
     method: none
     field: parent_id
-    plugins: {  }
+    providers: {  }
     dumper: wkt
     delta_handling: default
     failure:

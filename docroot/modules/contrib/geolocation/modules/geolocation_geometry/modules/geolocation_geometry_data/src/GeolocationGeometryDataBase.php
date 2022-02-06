@@ -2,11 +2,11 @@
 
 namespace Drupal\geolocation_geometry_data;
 
-use ShapeFile\ShapeFile;
-use ShapeFile\ShapeFileException;
+use Shapefile\ShapefileReader;
+use Shapefile\ShapefileException;
 
 /**
- * Class ShapeFileImportBatch.
+ * Class GeolocationGeometryDataBase.
  *
  * @package Drupal\geolocation_geometry_data
  */
@@ -43,7 +43,7 @@ abstract class GeolocationGeometryDataBase {
   /**
    * Shape file.
    *
-   * @var \ShapeFile\ShapeFile|null
+   * @var \Shapefile\ShapefileReader|null
    */
   public $shapeFile;
 
@@ -61,7 +61,6 @@ abstract class GeolocationGeometryDataBase {
 
     return [
       'title' => t('Import Shapefile'),
-      'finished' => [$this, 'finished'],
       'operations' => $operations,
       'progress_message' => t('Finished step @current / @total.'),
       'init_message' => t('Import is starting.'),
@@ -72,7 +71,7 @@ abstract class GeolocationGeometryDataBase {
   /**
    * Download batch callback.
    *
-   * @return bool
+   * @return string
    *   Batch return.
    */
   public function download() {
@@ -91,20 +90,23 @@ abstract class GeolocationGeometryDataBase {
         $zip->close();
       }
       else {
-        return FALSE;
+        return t('ERROR downloading @url', ['@url' => $this->sourceUri]);
       }
     }
 
-    return TRUE;
+    return t('Successfully downloaded @url', ['@url' => $this->sourceUri]);
   }
 
   /**
    * Import batch callback.
    *
+   * @param mixed $context
+   *   Batch context.
+   *
    * @return bool
    *   Batch return.
    */
-  public function import() {
+  public function import(&$context) {
     $logger = \Drupal::logger('geolocation_geometry_data');
 
     if (empty($this->shapeFilename)) {
@@ -112,25 +114,12 @@ abstract class GeolocationGeometryDataBase {
     }
 
     try {
-      $this->shapeFile = new ShapeFile(\Drupal::service('file_system')->getTempDirectory() . '/' . $this->localDirectory . '/' . $this->shapeFilename);
+      $this->shapeFile = new ShapefileReader(\Drupal::service('file_system')->getTempDirectory() . '/' . $this->localDirectory . '/' . $this->shapeFilename);
     }
-    catch (ShapeFileException $e) {
+    catch (ShapefileException $e) {
       $logger->warning($e->getMessage());
       return FALSE;
     }
-    return TRUE;
-  }
-
-  /**
-   * Batch result handling.
-   *
-   * @param mixed $result
-   *   Batch result.
-   *
-   * @return bool
-   *   Result.
-   */
-  public function finished($result) {
     return TRUE;
   }
 

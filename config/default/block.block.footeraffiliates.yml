@@ -21,8 +21,8 @@ plugin: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
 settings:
   id: 'block_content:8147e3ed-952e-46d8-ba48-196709c933fa'
   label: FooterAffiliates
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

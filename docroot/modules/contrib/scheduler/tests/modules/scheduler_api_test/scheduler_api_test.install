@@ -21,8 +21,10 @@ function scheduler_api_test_uninstall() {
     ->condition('n.type', ['scheduler_api_test'], 'IN')
     ->execute();
   if ($nids = $nids_query->fetchCol()) {
-    entity_delete_multiple('node', $nids);
-    drupal_set_message(t('@number %type node(s) have been deleted.', [
+    $storage = \Drupal::entityTypeManager()->getStorage('node');
+    $entities = $storage->loadMultiple($nids);
+    $storage->delete($entities);
+    \Drupal::messenger()->addMessage(t('@number %type node(s) have been deleted.', [
       '@number' => count($nids),
       '%type' => 'scheduler_api_test',
     ]));

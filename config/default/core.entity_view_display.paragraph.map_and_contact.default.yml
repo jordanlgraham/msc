@@ -14,47 +14,71 @@ bundle: map_and_contact
 mode: default
 content:
   field_block_to_embed:
-    weight: 1
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 1
     region: content
   field_location:
-    weight: 0
+    type: geolocation_map
     label: hidden
     settings:
       set_marker: true
-      title: 'Massachusetts Senior Care'
-      info_text: "<div class=\"location-content\">\n  <div class=\"map-address\">800 South Street - Suite 280<br>\nWaltham, MA 02453<br>\n<a href=\"/\">Directions/Parking</a>\n</div>\n<br>\n  <table>\n    <tbody>\n      <tr>\n        <td><i class=\"fa fa-envelope-o\" aria-hidden=\"true\"></i></td>\n        <td><a href=\"mailto:info@maseniorcare.org\">info@maseniorcare.org</a></td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-phone\" aria-hidden=\"true\"></i></td>\n        <td>+1 (617) 558-0202<br>\n            +1 (800) CARE-FOR</td>\n      </tr>\n      <tr>\n        <td><i class=\"fa fa-fax\" aria-hidden=\"true\"></i></td>\n        <td>Fax (617) 558-3546</td>\n      </tr>\n    </tbody>\n  </table>\n</div>"
-      use_overridden_map_settings: false
       common_map: false
+      use_overridden_map_settings: false
+      title: 'Massachusetts Senior Care'
+      info_text: |-
+        <div class="location-content">
+          <div class="map-address">800 South Street - Suite 280<br>
+        Waltham, MA 02453<br>
+        <a href="/">Directions/Parking</a>
+        </div>
+        <br>
+          <table>
+            <tbody>
+              <tr>
+                <td><i class="fa fa-envelope-o" aria-hidden="true"></i></td>
+                <td><a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-phone" aria-hidden="true"></i></td>
+                <td>+1 (617) 558-0202<br>
+                    +1 (800) CARE-FOR</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-fax" aria-hidden="true"></i></td>
+                <td>Fax (617) 558-3546</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       map_provider_id: google_maps
       map_provider_settings:
-        height: 750px
-        width: 100%
         type: ROADMAP
         zoom: 15
-        maxZoom: 18
         minZoom: 0
+        maxZoom: 18
+        rotateControl: false
+        height: 750px
+        width: 100%
+        gestureHandling: cooperative
         zoomControl: 1
         scrollwheel: 1
-        gestureHandling: cooperative
         draggable: 1
         style: ''
         info_auto_display: 1
         marker_icon_path: ''
         mapTypeControl: 0
         streetViewControl: 0
-        rotateControl: false
         fullscreenControl: 0
         preferScrollingToZooming: 0
         disableDoubleClickZoom: 0
         disableAutoPan: 0
     third_party_settings: {  }
-    type: geolocation_map
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true

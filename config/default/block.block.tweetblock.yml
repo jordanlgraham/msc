@@ -3,13 +3,9 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - msca_tweet_block
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: tweetblock
 theme: msca_theme
 region: gutter
@@ -19,6 +15,6 @@ plugin: tweet_block
 settings:
   id: tweet_block
   label: 'Tweet block'
-  provider: msca_tweet_block
   label_display: '0'
+  provider: msca_tweet_block
 visibility: {  }

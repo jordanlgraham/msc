@@ -11,12 +11,12 @@ pattern: 'member-resources/preferred-vendors/[node:title]'
 selection_criteria:
   eb91d48a-2619-45ad-bfe0-1bfeaf71f559:
     id: node_type
-    bundles:
-      vendor: vendor
     negate: false
+    uuid: eb91d48a-2619-45ad-bfe0-1bfeaf71f559
     context_mapping:
       node: node
-    uuid: eb91d48a-2619-45ad-bfe0-1bfeaf71f559
+    bundles:
+      vendor: vendor
 selection_logic: and
 weight: -5
 relationships: {  }

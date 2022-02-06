@@ -11,12 +11,12 @@ pattern: 'about/newsroom/[node:title]'
 selection_criteria:
   a85cf158-1603-4a3e-984e-ca2ab76024df:
     id: node_type
-    bundles:
-      newsroom: newsroom
     negate: false
+    uuid: a85cf158-1603-4a3e-984e-ca2ab76024df
     context_mapping:
       node: node
-    uuid: a85cf158-1603-4a3e-984e-ca2ab76024df
+    bundles:
+      newsroom: newsroom
 selection_logic: and
 weight: -5
 relationships: {  }

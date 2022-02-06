@@ -45,6 +45,13 @@
   padding-right: 0;
 }
 
+.facility-search-results header {
+  background-color: #dff8ce;
+  padding: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
 .facility-search-results article,
 .vendor-search-results article {
   margin-top: $grid-gutter-width-base;

@@ -4,12 +4,41 @@ namespace Drupal\msca_tweet_block\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal;
 
-/**
- * Class TwitterForm.
- */
-class TwitterForm extends FormBase {
+  /**
+   * Class TwitterForm.
+   */
+  class TwitterForm extends FormBase {
 
+
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs an AccessDeniedRedirectSubscriber object.
+   * 
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -105,8 +134,8 @@ class TwitterForm extends FormBase {
       ->set('facebook_url', $form_state->getValue('facebook_url'))
       ->set('twitter_url', $form_state->getValue('twitter_url'))
       ->save();
-
-      drupal_set_message(t('Twitter API Values Updated'));
+      $message = 'Twitter API Values Updated';
+      $this->messenger->addMessage($this->t($message));
 
   }
 

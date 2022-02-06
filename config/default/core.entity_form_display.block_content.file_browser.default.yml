@@ -15,10 +15,10 @@ content:
   info:
     type: string_textfield
     weight: -5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
 hidden:
   field_file_browser_reference: true

@@ -26,90 +26,90 @@ bundle: sponsor
 mode: newsletter
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 5
+    label: hidden
     settings:
       trim_length: 80
       trim_type: words
       trim_suffix: ''
-      wrap_class: trimmed
-      more_text: More
-      more_class: more-link
-      summary_handler: full
       wrap_output: false
+      wrap_class: trimmed
       more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
       trim_options:
         text: false
         trim_zero: false
     third_party_settings: {  }
+    weight: 5
     region: content
   field_facebook:
     type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
     weight: 2
     region: content
-    label: hidden
-    settings:
-      trim_length: 80
-      url_only: true
-      url_plain: true
-      target: _blank
-      rel: '0'
-    third_party_settings: {  }
   field_linkedin:
     type: link
-    weight: 4
-    region: content
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
+    weight: 4
+    region: content
   field_logo:
-    weight: 0
+    type: image
     label: hidden
     settings:
-      image_style: sponsor_logo_largest
       image_link: ''
+      image_style: sponsor_logo_largest
       svg_attributes:
         width: null
         height: null
       svg_render_as_image: true
     third_party_settings: {  }
-    type: image
+    weight: 0
     region: content
   field_twitter:
     type: link
-    weight: 3
-    region: content
     label: hidden
     settings:
       trim_length: 80
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
+    weight: 3
+    region: content
   field_web_address:
-    weight: 1
+    type: link
     label: hidden
     settings:
       trim_length: null
       url_only: true
       url_plain: true
-      target: _blank
       rel: '0'
+      target: _blank
     third_party_settings: {  }
-    type: link
+    weight: 1
     region: content
   links:
-    weight: 6
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 6
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

@@ -15,7 +15,7 @@ use Drupal\Core\Render\BubbleableMetadata;
  * @Geocoder(
  *   id = "photon",
  *   name = @Translation("Photon"),
- *   description = @Translation("See https://photon.komoot.de for details."),
+ *   description = @Translation("See https://photon.komoot.io for details."),
  *   locationCapable = true,
  *   boundaryCapable = true,
  *   frontendCapable = true,
@@ -30,7 +30,7 @@ class Photon extends GeocoderBase implements GeocoderInterface {
    * @var string
    *   Photon URL.
    */
-  public $requestBaseUrl = 'https://photon.komoot.de';
+  public $requestBaseUrl = 'https://photon.komoot.io';
 
   /**
    * {@inheritdoc}
@@ -44,6 +44,8 @@ class Photon extends GeocoderBase implements GeocoderInterface {
       'lat' => '',
       'lng' => '',
     ];
+
+    $default_settings['remove_duplicates'] = FALSE;
 
     return $default_settings;
   }
@@ -74,6 +76,13 @@ class Photon extends GeocoderBase implements GeocoderInterface {
       ],
     ];
 
+    $form['remove_duplicates'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Remove duplicates from the Photon API'),
+      '#default_value' => $settings['remove_duplicates'],
+      '#description' => $this->t('The Photon API can generate duplicates for some locations (i.e. cities that are states for example), this option will remove them.'),
+    ];
+
     return $form;
   }
 
@@ -100,6 +109,7 @@ class Photon extends GeocoderBase implements GeocoderInterface {
                   'lat' => $settings['location_priority']['lat'],
                   'lon' => $settings['location_priority']['lng'],
                 ],
+                'removeDuplicates' => $settings['remove_duplicates'],
               ],
             ],
           ],

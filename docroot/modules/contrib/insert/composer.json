@@ -1,0 +1,8 @@
+{
+    "name": "drupal/insert",
+    "description": "Assists in inserting files, images, or other media into the body field or other text areas.",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "stable",
+    "require": {}
+}

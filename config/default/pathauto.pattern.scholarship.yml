@@ -11,12 +11,12 @@ pattern: 'foundation-scholarship-program/[node:title]'
 selection_criteria:
   d17c3a3f-7e97-466b-947c-fc5abec7d37e:
     id: node_type
-    bundles:
-      scholarships: scholarships
     negate: false
+    uuid: d17c3a3f-7e97-466b-947c-fc5abec7d37e
     context_mapping:
       node: node
-    uuid: d17c3a3f-7e97-466b-947c-fc5abec7d37e
+    bundles:
+      scholarships: scholarships
 selection_logic: and
 weight: -5
 relationships: {  }

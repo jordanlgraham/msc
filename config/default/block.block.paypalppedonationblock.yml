@@ -19,21 +19,21 @@ plugin: 'block_content:c1fc49a4-af61-4dfa-9db2-be73055d564a'
 settings:
   id: 'block_content:c1fc49a4-af61-4dfa-9db2-be73055d564a'
   label: 'PayPal PPE donation block'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"
   node_type:
     id: node_type
-    bundles:
-      page: page
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
-  request_path:
-    id: request_path
-    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"
-    negate: false
-    context_mapping: {  }
+    bundles:
+      page: page

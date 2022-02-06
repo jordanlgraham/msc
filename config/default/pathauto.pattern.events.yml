@@ -11,12 +11,12 @@ pattern: 'education-and-events/upcoming-events/[node:title]'
 selection_criteria:
   34511b58-11ac-4c65-81cb-58cdce1577d5:
     id: node_type
-    bundles:
-      education_events: education_events
     negate: false
+    uuid: 34511b58-11ac-4c65-81cb-58cdce1577d5
     context_mapping:
       node: node
-    uuid: 34511b58-11ac-4c65-81cb-58cdce1577d5
+    bundles:
+      education_events: education_events
 selection_logic: and
 weight: -5
 relationships: {  }

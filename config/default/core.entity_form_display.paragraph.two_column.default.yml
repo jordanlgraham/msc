@@ -15,14 +15,15 @@ bundle: two_column
 mode: default
 content:
   field_background_color:
-    settings: {  }
-    weight: 1
-    third_party_settings: {  }
     type: jquery_colorpicker
+    weight: 1
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_two_column_paragraphs:
     type: entity_reference_paragraphs
     weight: 0
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -31,7 +32,6 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
 hidden:
   created: true
   status: true

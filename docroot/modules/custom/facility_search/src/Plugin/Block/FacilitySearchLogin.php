@@ -59,7 +59,7 @@ class FacilitySearchLogin extends BlockBase implements ContainerFactoryPluginInt
       'form' => $this->formBuilder->getForm(\Drupal\facility_search\Form\SimpleFacilitySearch::class),
       'link' => [
         '#prefix' => '<div class="bottom-link">',
-        '#url' => Url::fromRoute('view.facility_search.page_1'),
+        '#url' => Url::fromRoute('view.d9_facility_search.page_1'),
         '#title' => $this->t('Advanced Search'),
         '#type' => 'link',
         '#suffix' => '</div>',

@@ -1,8 +1,3 @@
-/**
- * @file
- * Provides horizontal tabs logic.
- */
-
 (function ($, Drupal) {
 
   'use strict';
@@ -11,7 +6,9 @@
   Drupal.FieldGroup.Effects = Drupal.FieldGroup.Effects || {};
 
   /**
-   * Transforms a set of fieldsets into a stack of horizontal tabs.
+   * This script transforms a set of fieldsets into a stack of horizontal
+   * tabs. Another tab pane can be selected by clicking on the respective
+   * tab.
    *
    * Each tab may have a summary which can be updated by another
    * script. For that to work, each fieldset has an associated
@@ -29,14 +26,14 @@
         return;
       }
 
-      $(context).find('[data-horizontal-tabs]').once('horizontal-tabs').each(function () {
+      $(context).find('[data-horizontal-tabs]').once('horizontal-tabs').each(function() {
         var horizontal_tabs_clearfix = this;
         $(this).find('> [data-horizontal-tabs-panes]').each(function () {
           var $this = $(this).addClass('horizontal-tabs-panes');
           var focusID = $(':hidden.horizontal-tabs-active-tab', this).val();
           var tab_focus;
 
-          // Check if there are some details that can be converted to horizontal-tabs.
+          // Check if there are some details that can be converted to horizontal-tabs
           var $details = $this.find('> details');
           if ($details.length === 0) {
             return;
@@ -234,7 +231,6 @@
    * @param {object} settings
    *   An object with the following keys:
    *   - title: The name of the tab.
-   *
    * @return {object}
    *   This function has to return an object with at least these keys:
    *   - item: The root tab jQuery element

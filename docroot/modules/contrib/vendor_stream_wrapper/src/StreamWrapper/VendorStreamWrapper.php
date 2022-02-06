@@ -32,7 +32,7 @@ class VendorStreamWrapper extends LocalReadOnlyStream implements StreamWrapperIn
    */
   public function getExternalUrl() {
     $path = str_replace('\\', '/', $this->getTarget());
-    return Url::fromRoute('vendor_stream_wrapper.vendor_file_download', ['filepath' => $path], ['path_processing' => FALSE]);
+    return Url::fromRoute('vendor_stream_wrapper.vendor_file_download', ['filepath' => $path], ['path_processing' => FALSE])->toString();
   }
 
   /**

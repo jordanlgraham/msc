@@ -244,7 +244,7 @@ $databases = array();
  *   );
  * @endcode
  */
-$config_directories = array();
+# $config_directories = array();
 
 /**
  * Settings:
@@ -761,8 +761,11 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
 
+<<<<<<< HEAD
 $config_directories[CONFIG_SYNC_DIRECTORY] = dirname(DRUPAL_ROOT) . '/config/default';
 
+=======
+>>>>>>> D9
 // Real Magnet API credentials config override
 if (isset($_ENV['AH_SITE_ENVIRONMENT']) && $_ENV['AH_SITE_ENVIRONMENT'] !== 'local') {
   //set private_path

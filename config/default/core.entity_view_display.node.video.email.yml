@@ -22,62 +22,62 @@ bundle: video
 mode: email
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 4
+    label: hidden
     settings:
-      trim_length: '80'
+      trim_length: 80
       trim_type: words
       trim_suffix: ''
-      more_link: '0'
+      more_link: false
+      more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
-        text: text
-      more_class: more-link
+        text: true
     third_party_settings: {  }
+    weight: 4
     region: content
   field_event_category:
-    weight: 0
+    type: entity_reference_label
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 0
     region: content
   field_related_content:
-    weight: 5
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: teaser
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 5
     region: content
   field_tags:
-    weight: 2
+    type: entity_reference_label
     label: inline
     settings:
       link: true
     third_party_settings: {  }
-    type: entity_reference_label
+    weight: 2
     region: content
   field_video_date:
-    weight: 1
+    type: datetime_default
     label: hidden
     settings:
       timezone_override: ''
       format_type: direct
     third_party_settings: {  }
-    type: datetime_default
+    weight: 1
     region: content
   field_youtube_id:
-    weight: 3
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 3
     region: content
 hidden:
   entity_print_view_epub: true

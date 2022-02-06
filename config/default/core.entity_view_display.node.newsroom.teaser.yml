@@ -25,34 +25,32 @@ bundle: newsroom
 mode: teaser
 content:
   body:
-    label: hidden
     type: smart_trim
-    weight: 0
+    label: hidden
     settings:
       trim_length: 80
       trim_type: words
       trim_suffix: ''
       more_link: false
+      more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
         text: true
-      more_class: more-link
     third_party_settings: {  }
+    weight: 0
     region: content
   field_news_release_date:
     type: datetime_custom
-    weight: 2
-    region: content
     label: hidden
     settings:
       timezone_override: ''
       date_format: M/j
     third_party_settings: {  }
+    weight: 2
+    region: content
   field_news_source:
     type: link_separate
-    weight: 1
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -61,19 +59,21 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 1
+    region: content
   field_newsroom_category:
     type: entity_reference_label
-    weight: 3
-    region: content
     label: hidden
     settings:
       link: false
     third_party_settings: {  }
-  links:
-    weight: 4
+    weight: 3
     region: content
+  links:
     settings: {  }
     third_party_settings: {  }
+    weight: 4
+    region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true

@@ -3,24 +3,14 @@
 namespace Drupal\msca_job\Form;
 
 use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Path\AliasManagerInterface;
-use Drupal\Core\Path\PathValidatorInterface;
-use Drupal\Core\Routing\RequestContext;
 use Drupal\Core\State\StateInterface;
+use Drupal\Core\Routing\RequestContext;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Path\PathValidatorInterface;
+use Drupal\path_alias\AliasManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class PostJobConfig extends FormBase {
-
-  /**
-   * @var \Drupal\Core\State\StateInterface
-   */
-  protected $state;
-
-  /**
-   * @var \Drupal\Core\Routing\RequestContext
-   */
-  protected $requestContext;
 
   /**
    * @var \Drupal\Core\Path\AliasManagerInterface
@@ -28,9 +18,26 @@ class PostJobConfig extends FormBase {
   protected $aliasManager;
 
   /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
    * @var \Drupal\Core\Path\PathValidatorInterface
    */
   protected $pathValidator;
+
+  /**
+   * @var \Drupal\Core\Routing\RequestContext
+   */
+  protected $requestContext;
+
+  /**
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
 
   /**
    * {@inheritdoc}
@@ -43,11 +50,12 @@ class PostJobConfig extends FormBase {
    * {@inheritdoc}
    */
   public function __construct(StateInterface $state, RequestContext $context, AliasManagerInterface $aliasManager,
-                              PathValidatorInterface $pathValidator) {
+                              PathValidatorInterface $pathValidator, MessengerInterface $messenger) {
     $this->state = $state;
     $this->requestContext = $context;
     $this->aliasManager = $aliasManager;
     $this->pathValidator = $pathValidator;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -57,8 +65,9 @@ class PostJobConfig extends FormBase {
     return new static(
       $container->get('state'),
       $container->get('router.request_context'),
-      $container->get('path.alias_manager'),
-      $container->get('path.validator')
+      $container->get('path_alias.manager'),
+      $container->get('path.validator'),
+      $container->get('messenger')
     );
   }
 
@@ -122,7 +131,8 @@ class PostJobConfig extends FormBase {
       'msca_job_config_redirect' => $form_state->getValue('redirect'),
       'msca_job_config_notify' => $form_state->getValue('notify'),
     ]);
-    drupal_set_message($this->t('The configuration options have been saved.'));
+    $message = 'The configuration options have been saved.';
+    $this->messenger->addMessage($this->t($message));
   }
 
 }

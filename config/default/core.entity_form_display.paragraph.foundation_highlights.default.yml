@@ -19,22 +19,23 @@ bundle: foundation_highlights
 mode: default
 content:
   field_background_image:
+    type: image_image
     weight: 2
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   field_heading_background_color:
-    settings: {  }
-    weight: 1
-    third_party_settings: {  }
     type: jquery_colorpicker
+    weight: 1
     region: content
+    settings: {  }
+    third_party_settings: {  }
   field_highlight_column:
     type: entity_reference_paragraphs
     weight: 3
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -43,15 +44,14 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    region: content
   field_title:
+    type: string_textfield
     weight: 0
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
 hidden:
   created: true
   status: true

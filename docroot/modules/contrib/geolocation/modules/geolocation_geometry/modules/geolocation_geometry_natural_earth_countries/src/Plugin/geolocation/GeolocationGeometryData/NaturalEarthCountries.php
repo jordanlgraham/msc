@@ -2,8 +2,7 @@
 
 namespace Drupal\geolocation_geometry_natural_earth_countries\Plugin\geolocation\GeolocationGeometryData;
 
-use ShapeFile\ShapeFile;
-use ShapeFile\ShapeFileException;
+use Shapefile\ShapefileException;
 use Drupal\geolocation_geometry_data\GeolocationGeometryDataBase;
 
 /**
@@ -40,34 +39,34 @@ class NaturalEarthCountries extends GeolocationGeometryDataBase {
   /**
    * {@inheritdoc}
    */
-  public function import() {
-    parent::import();
+  public function import(&$context) {
+    parent::import($context);
     $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
     $logger = \Drupal::logger('geolocation_geometry_natural_earth_countries');
 
     try {
-      while ($record = $this->shapeFile->getRecord(ShapeFile::GEOMETRY_GEOJSON_GEOMETRY)) {
-        if ($record['dbf']['_deleted']) {
+      /** @var \Shapefile\Geometry\Geometry $record */
+      while ($record = $this->shapeFile->fetchRecord()) {
+        if ($record->isDeleted()) {
           continue;
         }
-        else {
-          /** @var \Drupal\taxonomy\TermInterface $term */
-          $term = $taxonomy_storage->create([
-            'vid' => 'geolocation_geometry_countries',
-            'name' => utf8_decode($record['dbf']['NAME']),
-          ]);
-          $term->set('field_geometry_data_geometry', [
-            'geojson' => $record['shp'],
-          ]);
-          $term->save();
-        }
+
+        /** @var \Drupal\taxonomy\TermInterface $term */
+        $term = $taxonomy_storage->create([
+          'vid' => 'geolocation_geometry_countries',
+          'name' => $record->getData('NAME'),
+        ]);
+        $term->set('field_geometry_data_geometry', [
+          'geojson' => $record->getGeoJSON(),
+        ]);
+        $term->save();
       }
+      return t('Done importing Countries.');
     }
-    catch (ShapeFileException $e) {
+    catch (ShapefileException $e) {
       $logger->warning($e->getMessage());
-      return FALSE;
+      return t('ERROR importing Countries.');
     }
-    return TRUE;
   }
 
 }

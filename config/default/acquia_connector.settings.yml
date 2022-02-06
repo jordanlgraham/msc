@@ -1,19 +1,14 @@
-cloud_migration: {  }
+_core:
+  default_config_hash: RMNSHwzDEdSNEB31EpdvLaYowqBXRGgxKMoLkcRTMPU
 subscription_name: msca
 debug: false
 cron_interval: 30
 cron_interval_override: 0
-banner_service: 'https://insight.acquia.com/system/acquia-banner'
-migrate:
-  files: 1
 hide_signup_messages: 0
 spi:
   server: 'https://nspi.acquia.com'
   ssl_override: false
   ssl_verify: true
-  def_vars: {  }
-  def_waived_vars: {  }
-  def_timestamp: 0
   admin_priv: 1
   send_node_user: 1
   send_watchdog: 1
@@ -40,6 +35,11 @@ spi:
     variables: {  }
     time: 0
   cron_interval: 28800
+  site_uuid: 7ed39e1d-20a2-43c2-b5cb-0caf10690471
+  env_detection_enabled: true
+  def_vars: {  }
+  def_waived_vars: {  }
+  def_timestamp: 0
 mapping:
   acquia_spi_send_node_user:
     - acquia_connector.settings
@@ -171,5 +171,7 @@ mapping:
   http_response_debug_cacheability_headers:
     - container_parameter
     - http.response.debug_cacheability_headers
-_core:
-  default_config_hash: RMNSHwzDEdSNEB31EpdvLaYowqBXRGgxKMoLkcRTMPU
+cloud_migration: {  }
+banner_service: 'https://insight.acquia.com/system/acquia-banner'
+migrate:
+  files: 1

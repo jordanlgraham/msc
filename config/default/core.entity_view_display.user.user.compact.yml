@@ -18,22 +18,24 @@ bundle: user
 mode: compact
 content:
   masquerade:
-    weight: 50
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 50
+    region: content
   user_picture:
     type: image
-    weight: 0
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
     label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
+  field_cst_key: true
+  field_full_name: true
   field_groups: true
   member_for: true

@@ -14,13 +14,27 @@
    * @implements {GeolocationMapInterface}
    * @inheritDoc
    *
+   * @prop {Map} leafletMap
+   * @prop {L.LayerGroup} markerLayer
+   * @prop {TileLayer} tileLayer
    * @prop {Object} settings.leaflet_settings - Leaflet specific settings.
    */
   function GeolocationLeafletMap(mapSettings) {
-    if (typeof L === 'undefined') {
-      console.error('Leaflet library not loaded. Bailing out.'); // eslint-disable-line no-console.
-      return;
-    }
+    var leafletPromise = new Promise(function (resolve, reject) {
+      if (typeof L === 'undefined') {
+        setTimeout(function () {
+          if (typeof L === 'undefined') {
+            reject();
+          }
+          else {
+            resolve();
+          }
+        }, 1000);
+      }
+      else {
+        resolve();
+      }
+    });
 
     this.type = 'leaflet';
 
@@ -43,44 +57,57 @@
       width: this.settings.leaflet_settings.width
     });
 
-    /** @type {Map} */
-    var leafletMap = L.map(this.container.get(0), {
-      center: [this.lat, this.lng],
-      zoom: this.settings.leaflet_settings.zoom,
-      zoomControl: false
+    var that = this;
+
+    leafletPromise.then(function () {
+
+      var leafletMapSettings = that.settings.leaflet_settings;
+      leafletMapSettings.center = [that.lat, that.lng];
+      leafletMapSettings.zoomControl = false;
+      leafletMapSettings.attributionControl = false;
+      leafletMapSettings.crs = L.CRS[that.settings.leaflet_settings.crs];
+
+      /** @type {Map} */
+      var leafletMap = L.map(that.container.get(0), leafletMapSettings);
+
+      var markerLayer = L.layerGroup().addTo(leafletMap);
+
+      // Set the tile layer.
+      var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(leafletMap);
+
+      that.leafletMap = leafletMap;
+      that.markerLayer = markerLayer;
+      that.tileLayer = tileLayer;
+
+      that.addPopulatedCallback(function (map) {
+        var singleClick;
+        map.leafletMap.on('click', /** @param {LeafletMouseEvent} e */ function (e) {
+          singleClick = setTimeout(function () {
+            map.clickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
+          }, 500);
+        });
+
+        map.leafletMap.on('dblclick', /** @param {LeafletMouseEvent} e */ function (e) {
+          clearTimeout(singleClick);
+          map.doubleClickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
+        });
+
+        map.leafletMap.on('contextmenu', /** @param {LeafletMouseEvent} e */ function (e) {
+          map.contextClickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
+        });
+
+        map.leafletMap.on('moveend', /** @param {LeafletEvent} e */ function (e) {
+          map.boundsChangedCallback(map.leafletMap.getBounds());
+        });
+      });
+
+      that.initializedCallback();
+      that.populatedCallback();
+    })
+    .catch(function (error) {
+      console.error('Leaflet library not loaded. Bailing out. Error:'); // eslint-disable-line no-console.
+      console.error(error);
     });
-
-    var markerLayer = L.layerGroup().addTo(leafletMap);
-
-    // Set the tile layer.
-    var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(leafletMap);
-
-    this.leafletMap = leafletMap;
-    this.markerLayer = markerLayer;
-    this.tileLayer = tileLayer;
-
-    this.addPopulatedCallback(function (map) {
-      var singleClick;
-      map.leafletMap.on('click', /** @param {LeafletMouseEvent} e */ function (e) {
-        singleClick = setTimeout(function () {
-          map.clickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
-        }, 500);
-      });
-
-      map.leafletMap.on('dblclick', /** @param {LeafletMouseEvent} e */ function (e) {
-        clearTimeout(singleClick);
-        map.doubleClickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
-      });
-
-      map.leafletMap.on('contextmenu', /** @param {LeafletMouseEvent} e */ function (e) {
-        map.contextClickCallback({lat: e.latlng.lat, lng: e.latlng.lng});
-      });
-    });
-
-    this.initializedCallback();
-    this.populatedCallback();
   }
   GeolocationLeafletMap.prototype = Object.create(Drupal.geolocation.GeolocationMapBase.prototype);
   GeolocationLeafletMap.prototype.constructor = GeolocationLeafletMap;
@@ -193,7 +220,10 @@
           color: shapeSettings.strokeColor,
           opacity: shapeSettings.strokeOpacity,
           weight: shapeSettings.strokeWidth
-        }).bindTooltip(shapeSettings.title);
+        });
+        if (shapeSettings.title) {
+          shape.bindTooltip(shapeSettings.title);
+        }
         break;
 
       case 'polygon':
@@ -203,7 +233,10 @@
           weight: shapeSettings.strokeWidth,
           fillColor: shapeSettings.fillColor,
           fillOpacity: shapeSettings.fillOpacity
-        }).bindTooltip(shapeSettings.title);
+        });
+        if (shapeSettings.title) {
+          shape.bindTooltip(shapeSettings.title);
+        }
         break;
     }
 

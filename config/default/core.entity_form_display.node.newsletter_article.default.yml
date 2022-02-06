@@ -34,13 +34,13 @@ content:
   body:
     type: text_textarea_with_summary
     weight: 2
+    region: content
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 14
@@ -48,12 +48,12 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_gated:
+    type: boolean_checkbox
     weight: 3
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_news_release_date:
     type: datetime_default
     weight: 5
@@ -69,13 +69,13 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_news_subtitle:
+    type: string_textfield
     weight: 1
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_news_teaser_image:
     type: media_library_widget
     weight: 4
@@ -86,39 +86,39 @@ content:
       entity_browser_entity_form:
         entity_browser_id: _none
   field_newsletter_byline:
+    type: string_textfield
     weight: 6
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_newsletter_image:
+    type: image_widget_crop
     weight: 2
+    region: content
     settings:
-      show_default_crop: true
-      warn_multiple_usages: true
+      progress_indicator: throbber
       preview_image_style: thumbnail
       crop_preview_image_style: crop_thumbnail
       crop_list:
         - test
-      progress_indicator: throbber
+      warn_multiple_usages: true
       show_crop_area: false
+      show_default_crop: true
     third_party_settings: {  }
-    type: image_widget_crop
-    region: content
   field_related_content:
     type: inline_entity_form_complex
     weight: 9
     region: content
     settings:
       form_mode: newsletter
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
@@ -128,12 +128,12 @@ content:
     region: content
     settings:
       form_mode: newsletter
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
@@ -143,12 +143,12 @@ content:
     region: content
     settings:
       form_mode: simplified_taxonomy_term
+      override_labels: false
       label_singular: ''
       label_plural: ''
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
@@ -173,11 +173,11 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
+    weight: 121
+    region: content
     settings:
       display_label: true
-    weight: 121
     third_party_settings: {  }
-    region: content
   sticky:
     type: boolean_checkbox
     weight: 12
@@ -199,9 +199,9 @@ content:
     region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default

@@ -14,6 +14,12 @@ class SchedulerUnpublishOnConstraintValidator extends ConstraintValidator {
    * {@inheritdoc}
    */
   public function validate($entity, Constraint $constraint) {
+
+    // If the content type is not enabled for unpublishing then exit early.
+    if (!$entity->getEntity()->type->entity->getThirdPartySetting('scheduler', 'unpublish_enable', FALSE)) {
+      return;
+    }
+
     $default_unpublish_required = \Drupal::config('scheduler.settings')->get('default_unpublish_required');
     $scheduler_unpublish_required = $entity->getEntity()->type->entity->getThirdPartySetting('scheduler', 'unpublish_required', $default_unpublish_required);
     $publish_on = $entity->getEntity()->publish_on->value;
@@ -21,7 +27,7 @@ class SchedulerUnpublishOnConstraintValidator extends ConstraintValidator {
     $status = $entity->getEntity()->status->value;
 
     // When the 'required unpublishing' option is enabled the #required form
-    // attribute cannot set in every case. However a value must be entered if
+    // attribute cannot be set in every case. However a value must be entered if
     // also setting a publish-on date.
     if ($scheduler_unpublish_required && !empty($publish_on) && empty($unpublish_on)) {
       $this->context->buildViolation($constraint->messageUnpublishOnRequiredIfPublishOnEntered)
@@ -40,7 +46,7 @@ class SchedulerUnpublishOnConstraintValidator extends ConstraintValidator {
     // Check that the unpublish-on date is in the future. Unlike the publish-on
     // field, there is no option to use a past date, as this is not relevant for
     // unpublshing. The date must ALWAYS be in the future if it is entered.
-    if ($unpublish_on && $unpublish_on < REQUEST_TIME) {
+    if ($unpublish_on && $unpublish_on < \Drupal::time()->getRequestTime()) {
       $this->context->buildViolation($constraint->messageUnpublishOnDateNotInFuture)
         ->atPath('unpublish_on')
         ->addViolation();

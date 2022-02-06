@@ -1,0 +1,24 @@
+diff --git a/media_entity_image.info.yml b/media_entity_image.info.yml
+index ba6d4da..bae22fe 100644
+--- a/media_entity_image.info.yml
++++ b/media_entity_image.info.yml
+@@ -2,7 +2,6 @@ name: Media entity image
+ description: 'Provides the Image plugin for Media Entity.'
+ type: module
+ package: Media
+-core: 8.x
+ core_version_requirement: ^8 || ^9
+ 
+ test_dependencies:
+diff --git a/tests/modules/media_entity_image_test/media_entity_image_test.info.yml b/tests/modules/media_entity_image_test/media_entity_image_test.info.yml
+index 121dbb9..91e0b03 100644
+--- a/tests/modules/media_entity_image_test/media_entity_image_test.info.yml
++++ b/tests/modules/media_entity_image_test/media_entity_image_test.info.yml
+@@ -1,7 +1,6 @@
+ name: 'Media entity image test'
+ type: module
+ description: 'Provides test bundle for media entity image.'
+-core: 8.x
+ package: Testing
+ 
+ dependencies:

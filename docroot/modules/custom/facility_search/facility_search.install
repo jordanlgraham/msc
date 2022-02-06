@@ -1,8 +1,12 @@
 <?php
 
+use Drupal\netforum_org_sync\Geocode;
+use Drupal\geocoder\GeocoderInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+
 /**
- * Implements hook_update_N().
- *
  * Update facilities with empty geolocation fields.
  */
 function facility_search_update_8001(&$sandbox) {
@@ -20,7 +24,6 @@ function facility_search_update_8001(&$sandbox) {
       $node->save();
     }
   }
-
 }
 
 function _facility_search_get_coordinates_update($zip) {
@@ -59,4 +62,66 @@ function _get_curl_options_update($zip) {
     CURLOPT_CUSTOMREQUEST => "GET",
     CURLOPT_POSTFIELDS => "",
   ];
+}
+
+
+
+/**
+ * Update all facility geolocation coordinates.
+ */
+function schmacility_search_update_8002(&$sandbox) {
+  $db_connection = \Drupal::database();
+  if (!isset($sandbox['progress'])) {
+    $sandbox['progress'] = 0;
+    $nids = \Drupal::entityTypeManager()
+      ->getListBuilder('node')
+      ->getStorage()
+      ->loadByProperties([
+        'type' => 'facility',
+    ]);
+    $sandbox['max'] = count($nids);
+    $sandbox['messages'] = [];
+    $sandbox['current_node'] = -1;
+  }
+
+  // Process nodes by groups of 10 (arbitrary value).
+  // When a group is processed, the batch update engine determines
+  // whether it should continue processing in the same request or provide
+  // progress feedback to the user and wait for the next request.
+  $limit = 10;
+
+  // Retrieve the next group of nids.
+  $query = $db_connection->select('node', 'n');
+  $query->fields('n', ['nid', 'type']);
+  $result = $query
+    ->where('n.nid > :nid and n.type = :type', [':nid' => $sandbox['current_node'], ':type' => 'facility'])
+    ->range(0, $limit)
+    ->orderBy('n.nid', 'ASC')
+    ->execute();
+  foreach ($result as $row) {
+    // Load the node and geocode it.
+    $node = \Drupal::service('entity_type.manager')
+      ->getStorage('node')
+      ->load($row->nid);
+    if (!empty($node->field_address->postal_code)) {
+      $geocoder = \Drupal::service('facility_search.geocoder');
+      $geocoder->setCoordinates($node);
+      $node->save();
+    }
+    // Update our progress information.
+    $sandbox['progress']++;
+    $sandbox['current_node'] = $row->nid;
+  }
+
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+  $sandbox_status = $sandbox;
+  unset($sandbox_status['messages']);
+  $sandbox['messages'][] = t('$sandbox=') . print_r($sandbox_status, TRUE);
+
+  if ($sandbox['#finished']) {
+    // hook_update_N() may optionally return a string which will be displayed
+    // to the user.
+    $final_message = '<ul><li>' . implode('</li><li>', $sandbox['messages']) . "</li></ul>";
+    return t('The facility search module\'s database update did what it was supposed to do: @message', ['@message' => $final_message]);
+  }
 }

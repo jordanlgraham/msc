@@ -39,6 +39,13 @@ class WebformCompositeCustomTest extends WebformBrowserTestBase {
     // Check advanced custom composite.
     $this->assertRaw('<span class="field-suffix"> yrs. old</span>');
 
+    // Check composite in fieldset.
+    $this->assertRaw('<fieldset class="fieldgroup form-composite js-webform-type-webform-custom-composite webform-type-webform-custom-composite js-form-item form-item js-form-wrapper form-wrapper" data-drupal-selector="edit-webform-custom-composite-fieldset" id="edit-webform-custom-composite-fieldset">');
+    $this->assertRaw('<span class="fieldset-legend">webform_custom_composite_fieldset</span>');
+
+    // Check composite in container.
+    $this->assertRaw('<div id="webform_custom_composite_container_table"><div class="custom-class js-form-wrapper form-wrapper" data-drupal-selector="edit-webform-custom-composite-container" id="edit-webform-custom-composite-container">');
+
     /* Processing */
 
     // Check contact composite value.
@@ -49,7 +56,7 @@ class WebformCompositeCustomTest extends WebformBrowserTestBase {
 webform_custom_composite_advanced:
   - first_name: John
     last_name: Smith
-    gender: Male
+    sex: Male
     martial_status: Single
     employment_status: Unemployed
     age: '20'");

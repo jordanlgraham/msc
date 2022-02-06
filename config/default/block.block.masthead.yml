@@ -5,7 +5,6 @@ dependencies:
   config:
     - system.menu.masthead
   module:
-    - block_class
     - system
   theme:
     - msca_theme
@@ -18,8 +17,8 @@ plugin: 'system_menu_block:masthead'
 settings:
   id: 'system_menu_block:masthead'
   label: Masthead
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false

@@ -29,20 +29,20 @@ class SchedulerMetaInformationTest extends SchedulerBrowserTestBase {
 
     // Since we did not set an unpublish date, there should be no X-Robots-Tag
     // header on the response.
-    $this->assertFalse($this->drupalGetHeader('X-Robots-Tag'), 'X-Robots-Tag is not present when no unpublish date is set.');
+    $this->assertNull($this->drupalGetHeader('X-Robots-Tag'), 'X-Robots-Tag is not present when no unpublish date is set.');
 
     // Set a scheduler unpublish date on the node.
     $unpublish_date = strtotime('+1 day');
     $edit = [
-      'unpublish_on[0][value][date]' => \Drupal::service('date.formatter')->format($unpublish_date, 'custom', 'Y-m-d'),
-      'unpublish_on[0][value][time]' => \Drupal::service('date.formatter')->format($unpublish_date, 'custom', 'H:i:s'),
+      'unpublish_on[0][value][date]' => $this->dateFormatter->format($unpublish_date, 'custom', 'Y-m-d'),
+      'unpublish_on[0][value][time]' => $this->dateFormatter->format($unpublish_date, 'custom', 'H:i:s'),
     ];
-    $this->drupalPostForm('node/' . $published_node->id() . '/edit', $edit, t('Save'));
+    $this->drupalPostForm('node/' . $published_node->id() . '/edit', $edit, 'Save');
 
     // The node page should now have an X-Robots-Tag header with an
     // unavailable_after-directive and RFC850 date- and time-value.
     $this->drupalGet('node/' . $published_node->id());
-    $this->assertSession()->responseHeaderEquals('X-Robots-Tag', 'unavailable_after: ' . date(DATE_RFC850, $unpublish_date), 'X-Robots-Tag is present with correct timestamp derived from unpublish_on date.');
+    $this->assertSession()->responseHeaderEquals('X-Robots-Tag', 'unavailable_after: ' . date(DATE_RFC850, $unpublish_date));
   }
 
 }

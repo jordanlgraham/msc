@@ -7,7 +7,7 @@ services:
     class: '\Drupal\msca_access\EventSubscriber\AccessDeniedRedirectSubscriber'
     tags:
        - { name: event_subscriber}
-    arguments: ['@current_user']
+    arguments: ['@current_user', '@messenger']
   msca_access.lacks_permission_access:
     class: '\Drupal\msca_access\Access\LacksPermission'
     tags:

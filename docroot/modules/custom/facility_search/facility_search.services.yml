@@ -1,0 +1,4 @@
+services:
+  facility_search.geocoder:
+    class: Drupal\facility_search\FacilitySearchGeocoder
+    arguments: ['@entity_type.manager', '@config.factory', '@datetime.time', '@geocoder']

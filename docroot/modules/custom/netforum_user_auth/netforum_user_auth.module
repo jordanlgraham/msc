@@ -5,13 +5,14 @@
  * Contains netforum_user_auth.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\netforum_user_auth\Controller\NetforumSso;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\netforum_user_auth\Controller\NetforumSso;
 use Drupal\netforum_user_auth\PasswordExpiredException;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -199,7 +200,8 @@ function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state)
   catch (Exception $exception) {
     watchdog_exception('netforum_user_auth', $exception);
     \Drupal::logger('netforum_user_auth')->error('Unable to complete NetForum SSO.');
-    drupal_set_message(t('An error occurred while signing in.'));
+    $message = 'An error occurred while signing in.';
+    MessengerInterface::addMessage(t($message));
   }
 }
 

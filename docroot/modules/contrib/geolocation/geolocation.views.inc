@@ -16,17 +16,18 @@ function geolocation_field_views_data(FieldStorageConfigInterface $field_storage
 
   $entity_storage = \Drupal::entityTypeManager()->getStorage($field_storage->getTargetEntityTypeId());
   $entity_definition = \Drupal::entityTypeManager()->getDefinition($field_storage->getTargetEntityTypeId());
-  $table_mapping = $entity_storage->getTableMapping();
-  $field_table_name = $table_mapping->getFieldTableName($field_storage->getName());
 
   // Get the default data from the views module.
   $data = views_field_default_views_data($field_storage);
 
   $title_short = $help = '';
 
-  if (!empty($data[$field_table_name][$field_storage->getName()])) {
-    $title_short = $data[$field_table_name][$field_storage->getName()]['title short'];
-    $help = $data[$field_table_name][$field_storage->getName()]['help'];
+  if ($table_mapping = $entity_storage->getTableMapping()) {
+    $field_table_name = $table_mapping->getFieldTableName($field_storage->getName());
+    if (!empty($data[$field_table_name][$field_storage->getName()])) {
+      $title_short = $data[$field_table_name][$field_storage->getName()]['title short'];
+      $help = $data[$field_table_name][$field_storage->getName()]['help'];
+    }
   }
 
   $args = ['@field_name' => $field_storage->getName()];

@@ -92,6 +92,21 @@ function _scheduler_form_node_type_form_alter(array &$form, FormStateInterface $
       'schedule' => t('Schedule the content for publication on the next cron run'),
     ],
   ];
+  $form['scheduler']['publish']['advanced']['scheduler_publish_past_date_created'] = [
+    '#type' => 'checkbox',
+    '#title' => t("Change content creation time to match the published time for dates before the content was created"),
+    '#description' => t("The created time will only be altered when the scheduled publishing time is earlier than the existing content creation time"),
+    '#default_value' => $type->getThirdPartySetting('scheduler', 'publish_past_date_created', $config->get('default_publish_past_date_created')),
+    // This option is not relevant if the full 'change creation time' option is
+    // selected, or when past dates are not allowed. Hence only show it when
+    // the main option is not checked and the past dates option is not 'error'.
+    '#states' => [
+      'visible' => [
+        ':input[name="scheduler_publish_touch"]' => ['checked' => FALSE],
+        ':input[name="scheduler_publish_past_date"]' => ['!value' => 'error'],
+      ],
+    ],
+  ];
 
   // Unpublishing options.
   $form['scheduler']['unpublish'] = [
@@ -131,7 +146,7 @@ function _scheduler_form_node_type_form_alter(array &$form, FormStateInterface $
   // node edit pages.
   $form['scheduler']['node_edit_layout'] = [
     '#type' => 'details',
-    '#title' => t('Node edit page layout'),
+    '#title' => t('Node edit page'),
     '#weight' => 3,
     '#group' => 'scheduler',
     // The #states processing only caters for AND and does not do OR. So to set
@@ -144,7 +159,6 @@ function _scheduler_form_node_type_form_alter(array &$form, FormStateInterface $
       ],
     ],
   ];
-  // @todo Worthwhile to port this to D8 now form displays are configurable?
   $form['scheduler']['node_edit_layout']['scheduler_fields_display_mode'] = [
     '#type' => 'radios',
     '#title' => t('Display scheduling options as'),
@@ -164,6 +178,12 @@ function _scheduler_form_node_type_form_alter(array &$form, FormStateInterface $
       'always' => t('Always open the fieldset or vertical tab'),
     ],
   ];
+  $form['scheduler']['node_edit_layout']['scheduler_show_message_after_update'] = [
+    '#type' => 'checkbox',
+    '#prefix' => '<strong>' . t('Show message') . '</strong>',
+    '#title' => t('Show a confirmation message when scheduled content is saved'),
+    '#default_value' => $type->getThirdPartySetting('scheduler', 'show_message_after_update', $config->get('default_show_message_after_update')),
+  ];
 
   $form['#entity_builders'][] = 'scheduler_form_node_type_form_builder';
 }
@@ -176,9 +196,11 @@ function scheduler_form_node_type_form_builder($entity_type, NodeTypeInterface $
   $type->setThirdPartySetting('scheduler', 'fields_display_mode', $form_state->getValue('scheduler_fields_display_mode'));
   $type->setThirdPartySetting('scheduler', 'publish_enable', $form_state->getValue('scheduler_publish_enable'));
   $type->setThirdPartySetting('scheduler', 'publish_past_date', $form_state->getValue('scheduler_publish_past_date'));
+  $type->setThirdPartySetting('scheduler', 'publish_past_date_created', $form_state->getValue('scheduler_publish_past_date_created'));
   $type->setThirdPartySetting('scheduler', 'publish_required', $form_state->getValue('scheduler_publish_required'));
   $type->setThirdPartySetting('scheduler', 'publish_revision', $form_state->getValue('scheduler_publish_revision'));
   $type->setThirdPartySetting('scheduler', 'publish_touch', $form_state->getValue('scheduler_publish_touch'));
+  $type->setThirdPartySetting('scheduler', 'show_message_after_update', $form_state->getValue('scheduler_show_message_after_update'));
   $type->setThirdPartySetting('scheduler', 'unpublish_enable', $form_state->getValue('scheduler_unpublish_enable'));
   $type->setThirdPartySetting('scheduler', 'unpublish_required', $form_state->getValue('scheduler_unpublish_required'));
   $type->setThirdPartySetting('scheduler', 'unpublish_revision', $form_state->getValue('scheduler_unpublish_revision'));

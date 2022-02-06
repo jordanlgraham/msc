@@ -90,14 +90,7 @@
               // Use the link title or the file name as text with a collapsed
               // cursor.
               if (range.collapsed) {
-                var text;
-                if (returnValues.attributes.title && returnValues.attributes.title.length) {
-                  text = returnValues.attributes.title;
-                }
-                else {
-                  text = returnValues.attributes.href;
-                  text = text.substr(text.lastIndexOf('/') + 1);
-                }
+                var text = returnValues.attributes.filename;
                 text = new CKEDITOR.dom.text(text, editor.document);
                 range.insertNode(text);
                 range.selectNodeContents(text);
@@ -159,7 +152,7 @@
         var element = getSelectedFile(editor) || evt.data.element;
 
         if (!element.isReadOnly()) {
-          if (element.is('a') && element.getAttribute('data-entity-uuid')) {
+          if (element.is('a') && element.getAttribute('data-entity-type') === 'file') {
             editor.getSelection().selectElement(element);
             editor.getCommand('drupalfile').exec();
           }
@@ -217,7 +210,6 @@
    *
    * @return {?HTMLElement}
    *   The selected file element, or null.
-   *
    */
   function getSelectedFile(editor) {
     var selection = editor.getSelection();

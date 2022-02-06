@@ -2,12 +2,13 @@
 
 namespace Drupal\msca_access\EventSubscriber;
 
-use Drupal\Core\EventSubscriber\HttpExceptionSubscriberBase;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Drupal\Core\Url;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\EventSubscriber\HttpExceptionSubscriberBase;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class AccessDeniedRedirectSubscriber extends HttpExceptionSubscriberBase {
 
@@ -18,9 +19,35 @@ class AccessDeniedRedirectSubscriber extends HttpExceptionSubscriberBase {
    */
   protected $user;
 
-  public function __construct(AccountInterface $user) {
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs an AccessDeniedRedirectSubscriber object.
+   * 
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   The current user.
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger.
+   */
+  public function __construct(AccountInterface $user, MessengerInterface $messenger) {
     $this->user = $user;
+    $this->messenger = $messenger;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger')
+    );
+  }
+
 
   /**
    * {@inheritdoc}
@@ -39,7 +66,7 @@ class AccessDeniedRedirectSubscriber extends HttpExceptionSubscriberBase {
       $query['destination'] = Url::fromRoute('<current>')->toString();
       $login_uri = Url::fromRoute('user.login', [], ['query' => $query])->toString();
       $returnResponse = new RedirectResponse($login_uri);
-      drupal_set_message($this->t('Please login to access this page.'));
+      $this->messenger->addMessage($this->t('Please login to access this page.'));
       $event->setResponse($returnResponse);
     }
   }

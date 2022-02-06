@@ -36,7 +36,7 @@ class GeometryConstraintValidator extends ConstraintValidator {
           $query = \Drupal::database()->query("SELECT ST_GeometryType(ST_GeomFromText('" . $value . "', 4326)) as type");
         }
         elseif ($constraint->type === 'GeoJSON') {
-          $query = \Drupal::database()->query("SELECT ST_GeometryType(ST_GeomFromGeoJSON(':json')) as type", [':json' => $value]);
+          $query = \Drupal::database()->query("SELECT ST_GeometryType(ST_GeomFromGeoJSON(:json)) as type", [':json' => $value]);
         }
 
         $result_ = $query->fetchAll();

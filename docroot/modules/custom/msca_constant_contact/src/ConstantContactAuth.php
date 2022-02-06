@@ -2,12 +2,21 @@
 
 namespace Drupal\msca_constant_contact;
 
-use Drupal\Core\Routing\TrustedRedirectResponse;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ConstantContactAuth {
+
+  /**
+   * The messenger.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
 
   /**
    * ConstantContactAuth constructor.
@@ -15,6 +24,16 @@ class ConstantContactAuth {
   public function __construct() {
     $this->base_uri = 'https://api.cc.email/v3';
     $this->http_client = new Client();
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger')
+    );
   }
 
   public function auth() {
@@ -66,21 +85,19 @@ class ConstantContactAuth {
     }
     catch (\GuzzleHttp\Exception\ServerException $e) {
       $message = $e->getMessage();
-      \Drupal::logger('msca_constant_contact')->notice("62:" . $message);
-      print_r($message);
-      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      \Drupal::logger('msca_constant_contact')->notice("ConstantContactAuth::createEmailCampaign() - line 88:" . $message);
+      $this->messenger->addMessage($this->t('Sending to Constant Contact failed for the following reason: ' . $message, 'error'));
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       $redirect->send();
     }
     catch (\GuzzleHttp\Exception\ClientException $e) {
       $message = $e->getMessage();
       \Drupal::logger('msca_constant_contact')->notice("70: " . $message);
-      print_r($message);
-      drupal_set_message('Sending to Constant Contact failed for the following reason: ' . $message, 'error');
+      $this->messenger->addMessage($this->t('Sending to Constant Contact failed for the following reason: ' . $message, 'error'));
       $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
       // $redirect->send();
     }
-    drupal_set_message(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
+    $this->messenger->addMessage(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
     $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
     $redirect->send();
   }

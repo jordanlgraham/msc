@@ -11,7 +11,7 @@ use Drupal\rules\Core\RulesActionBase;
  *   id = "scheduler_publish_now_action",
  *   label = @Translation("Publish the content immediately"),
  *   category = @Translation("Scheduler"),
- *   context = {
+ *   context_definitions = {
  *     "node" = @ContextDefinition("entity:node",
  *       label = @Translation("Node"),
  *       description = @Translation("The node to be published now"),
@@ -30,7 +30,7 @@ class PublishNow extends RulesActionBase {
    */
   public function doExecute() {
     $node = $this->getContextValue('node');
-    $node->setPublished(TRUE);
+    $node->setPublished();
   }
 
 }

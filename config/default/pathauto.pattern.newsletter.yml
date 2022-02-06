@@ -11,12 +11,12 @@ pattern: 'member-resources/e-news-update/[node:title]'
 selection_criteria:
   431313f4-a2c0-4579-b999-1a2d9b090e6d:
     id: node_type
-    bundles:
-      newsletter: newsletter
     negate: false
+    uuid: 431313f4-a2c0-4579-b999-1a2d9b090e6d
     context_mapping:
       node: node
-    uuid: 431313f4-a2c0-4579-b999-1a2d9b090e6d
+    bundles:
+      newsletter: newsletter
 selection_logic: and
 weight: -5
 relationships: {  }

@@ -101,10 +101,6 @@
       _updatePreviewImage: function(json) {
         var $previewImg = this._$node.parents('.image-widget').find('.image-preview img');
 
-        if (!$previewImg.length) {
-          return;
-        }
-
         $.each($previewImg.attr('class').split(/\s+/), function() {
           var styleClass = this.match('^image-style-(.+)');
 
@@ -134,10 +130,10 @@
               var widthMatches = template.match(/width[ ]*=[ ]*"(\d*)"/i);
               var heightMatches = template.match(/height[ ]*=[ ]*"(\d*)"/i);
 
-              if (heightMatches && heightMatches.length === 2) {
+              if (heightMatches.length === 2) {
                 template = template.replace(/(width[ ]*=[ ]*")(\d*)"/i, 'width="' + heightMatches[1] + '"');
               }
-              if (widthMatches && widthMatches.length === 2) {
+              if (widthMatches.length === 2) {
                 template = template.replace(/(height[ ]*=[ ]*")(\d*)"/i, 'height="' + widthMatches[1] + '"');
               }
 

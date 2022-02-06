@@ -60,7 +60,7 @@ function msca_theme_preprocess_node(&$variables) {
   if ($node  && !is_string($node)) {
     $nid = $node->id();
     $allContent = views_embed_view('all_content', 'embed_1', $nid);
-    $variables["all_content"] = drupal_render($allContent);
+    $variables['all_content'] = \Drupal::service('renderer')->render($allContent);
   }
 }
 
@@ -140,7 +140,7 @@ function msca_theme_theme_suggestions_page_title_alter(array &$suggestions, arra
   }
   else {
     $current_path = \Drupal::service('path.current')->getPath();
-    $result = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+    $result = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 
     $path_alias = trim($result, '/');
     $path_alias = str_replace('/', '-', $path_alias);
@@ -257,5 +257,11 @@ function msca_theme_views_pre_render(&$view) {
       }
 
     }
+  }
+}
+
+function msca_theme_preprocess_block(&$variables) {
+  if ($variables['plugin_id'] == 'search_form_block') {
+    $variables['content']['actions']['submit']['#value'] = t('Search content');
   }
 }

@@ -89,86 +89,36 @@
       /**
        * @inheritDoc
        */
-      setCaption: function(editor, syncId, text) {
-        if (!editor.widgets) {
-          // Since captions are managed by widgets, no caption to update is
-          // present if there are no widgets.
-          return;
+      getUUID: function(editor, element) {
+        var widget = editor.widgets.getByElement(new CKEDITOR.dom.element(element));
+
+        if (widget && widget.data['data-entity-uuid']) {
+          return widget.data['data-entity-uuid'];
         }
 
-        $.each(editor.widgets.instances, function() {
-          var $element = $(this.element.$);
-          var attach = $element
-            .find('[data-insert-attach]')
-            .addBack('[data-insert-attach]')
-            .data('insert-attach');
-
-          if (!attach || syncId !== attach.id) {
-            return true;
-          }
-
-          // Since setData will trigger events, avoid calling if there is no
-          // reason to.
-          if (text === '' && this.data.hasCaption) {
-            this.setData('hasCaption', false);
-          }
-          else if (text !== '' && !this.data.hasCaption) {
-            this.setData('hasCaption', true);
-          }
-
-          if (text !== '') {
-            // Text will not be set when caption is just being added by setting
-            // hasCaption to true, because setData is running asynchronously.
-            // CKEDITOR.plugins.widget.setData does not support providing a
-            // callback like CKEDITOR.editor.setData and
-            // CKEDITOR.plugins.widget's data event is triggered before changes
-            // are applied.
-            $element.find('[data-caption]').attr('data-caption', text);
-            $element.closest('.caption-img').find('figcaption').text(text);
-          }
-        });
+        return null;
       },
 
       /**
        * @inheritDoc
        */
-      getAlign: function(editor, uuid) {
-        var align = undefined;
+      setAltAttribute: function(editor, element, text) {
+        var widget = editor.widgets.getByElement(new CKEDITOR.dom.element(element));
 
-        $.each(this._filterInstances(editor, uuid), function() {
-          align = this.data.align;
-          return false;
-        });
-
-        return align;
+        if (widget) {
+          widget.setData('alt', text);
+        }
       },
 
       /**
        * @inheritDoc
        */
-      setAlign: function(editor, uuid, value) {
-        $.each(this._filterInstances(editor, uuid), function() {
-          this.setData('align', value);
-        });
-      },
+      setTitleAttribute: function(editor, element, text) {
+        var widget = editor.widgets.getByElement(new CKEDITOR.dom.element(element));
 
-      /**
-       * @param {CKEDITOR.editor} editor
-       * @param {string} uuid
-       * @return {CKEDITOR.plugins.widget[]}
-       */
-      _filterInstances: function(editor, uuid) {
-        var instances = [];
-        var regExp = new RegExp(uuid + '$');
-
-        $.each(editor.widgets.instances, function() {
-          var instanceUUID = this.data['data-entity-uuid'];
-          if (instanceUUID && instanceUUID.match(regExp)) {
-            instances.push(this);
-          }
-        });
-
-        return instances;
+        if (widget) {
+          widget.setData('title', text);
+        }
       }
 
     });

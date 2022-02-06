@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - search
   theme:
     - msca_theme
@@ -16,7 +15,7 @@ plugin: search_form_block
 settings:
   id: search_form_block
   label: 'Search form'
-  provider: search
   label_display: '0'
+  provider: search
   page_id: ''
 visibility: {  }
