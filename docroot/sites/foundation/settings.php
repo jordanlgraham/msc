@@ -7,7 +7,6 @@ if (file_exists('/var/www/site-php')) {
 // require $app_root . '/sites/settings.common.php';
 // Enable the foundation config split.
 // $config['config_split.config_split.foundation']['status'] = TRUE;
-<<<<<<< HEAD
 
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/foundation/local.services.yml';
 
@@ -20,5 +19,3 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
       break;
   }
 }
-=======
->>>>>>> D9
