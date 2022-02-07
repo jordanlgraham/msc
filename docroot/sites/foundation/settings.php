@@ -19,3 +19,4 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
       break;
   }
 }
+$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/default';
