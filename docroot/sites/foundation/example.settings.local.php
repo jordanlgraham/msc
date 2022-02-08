@@ -111,14 +111,14 @@ $settings['hash_salt'] = 'tacos';
 // Scaffolding for Lando-based local development.
 $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
 if (!empty($lando_info)) {
-  $base_url = "https://msc.lndo.site";
+  $base_url = "https://foundation.lndo.site";
 
   // Database credentials
   $databases['default']['default'] = [
-    'database' => $lando_info['msc']['creds']['database'],
-    'username' => $lando_info['msc']['creds']['user'],
-    'password' => $lando_info['msc']['creds']['password'],
-    'host' => 'msc',
+    'database' => $lando_info['foundation']['creds']['database'],
+    'username' => $lando_info['foundation']['creds']['user'],
+    'password' => $lando_info['foundation']['creds']['password'],
+    'host' => 'foundation',
     'driver' => 'mysql',
   ];
 
@@ -133,5 +133,3 @@ if (!empty($lando_info)) {
   // shield user variable to NULL
   $config['shield.settings']['credentials']['shield']['user'] = NULL;
 }
-
-$settings['config_sync_directory'] = '/app/config/default';
