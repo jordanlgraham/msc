@@ -1,0 +1,10 @@
+uuid: c14367c7-bb9d-4be8-bc76-5174dfb4aabe
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.sidebar
+label: Sidebar
+targetEntityType: node
+cache: true

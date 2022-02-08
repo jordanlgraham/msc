@@ -1,0 +1,23 @@
+uuid: b54fa2bc-3e18-4c99-8d3e-d9f8cb70997f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_linkedin
+    - node.type.facility
+  module:
+    - link
+id: node.facility.field_linkedin
+field_name: field_linkedin
+entity_type: node
+bundle: facility
+label: LinkedIn
+description: 'Optional. Enter URL of the facility''s LinkedIn page (e.g., https://linkedin.com/example).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

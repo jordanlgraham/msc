@@ -1,0 +1,87 @@
+uuid: 6f0b83eb-d435-4f37-a456-aeb5f5132cd5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.newsletter
+    - field.field.node.video.body
+    - field.field.node.video.field_event_category
+    - field.field.node.video.field_gated
+    - field.field.node.video.field_related_content
+    - field.field.node.video.field_tags
+    - field.field.node.video.field_video_date
+    - field.field.node.video.field_youtube_id
+    - node.type.video
+  module:
+    - datetime
+    - smart_trim
+    - user
+id: node.video.newsletter
+targetEntityType: node
+bundle: video
+mode: newsletter
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 80
+      trim_type: words
+      trim_suffix: ''
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_event_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_related_content:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_video_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: direct
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_youtube_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  links: true

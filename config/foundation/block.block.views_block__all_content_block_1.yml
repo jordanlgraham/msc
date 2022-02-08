@@ -1,0 +1,35 @@
+uuid: 3e6019ed-1f60-42c2-a85a-aeade31c12ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: press-releases
+id: views_block__all_content_block_1
+theme: msca_theme
+region: content
+weight: -20
+provider: null
+plugin: 'views_block:all_content-block_1'
+settings:
+  id: 'views_block:all_content-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/press-release\r\n/news\r\n"

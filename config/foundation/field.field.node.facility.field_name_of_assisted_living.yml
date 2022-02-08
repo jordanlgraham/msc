@@ -1,0 +1,32 @@
+uuid: f36b6300-9ced-4767-9b54-526d567e6c8e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_name_of_assisted_living
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_name_of_assisted_living
+field_name: field_name_of_assisted_living
+entity_type: node
+bundle: facility
+label: 'Name of Assisted Living Res'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

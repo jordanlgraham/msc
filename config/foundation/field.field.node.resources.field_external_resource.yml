@@ -1,0 +1,23 @@
+uuid: 44db9aec-4c2d-45d3-8ef7-dc6ba240d946
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_resource
+    - node.type.resources
+  module:
+    - link
+id: node.resources.field_external_resource
+field_name: field_external_resource
+entity_type: node
+bundle: resources
+label: 'External Resource'
+description: 'Add one or more URLs to external website resources.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 16
+field_type: link

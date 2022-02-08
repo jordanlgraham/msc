@@ -1,0 +1,20 @@
+uuid: 5c45e21b-79ab-48f2-8a3b-13c0906f9ffb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_total_annual_admissions
+field_name: field_total_annual_admissions
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

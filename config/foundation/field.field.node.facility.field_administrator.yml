@@ -1,0 +1,32 @@
+uuid: 5069e794-f981-492b-9888-985bfe202f47
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_administrator
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_administrator
+field_name: field_administrator
+entity_type: node
+bundle: facility
+label: Administrator
+description: 'The administrator of this facility.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

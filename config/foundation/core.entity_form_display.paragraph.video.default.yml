@@ -1,0 +1,54 @@
+uuid: 5bec3315-ef1b-4499-a48e-67e47fec647c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video.field_call_to_action
+    - field.field.paragraph.video.field_subtitle
+    - field.field.paragraph.video.field_title
+    - field.field.paragraph.video.field_youtube_id
+    - paragraphs.paragraphs_type.video
+  module:
+    - link
+    - text
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_call_to_action:
+    type: link_default
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_subtitle:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_youtube_id:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,20 @@
+uuid: b21964f7-09ac-4268-abcb-a75d927f8638
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_oasis_participation
+field_name: field_oasis_participation
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

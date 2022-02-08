@@ -1,0 +1,23 @@
+uuid: 97eae992-073b-4808-a561-baa6a9e96609
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color
+    - paragraphs.paragraphs_type.two_column
+  module:
+    - colorapi
+id: paragraph.two_column.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+bundle: two_column
+label: 'Background Color'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    color: '#FFFFFF'
+default_value_callback: ''
+settings: {  }
+field_type: colorapi_color_field

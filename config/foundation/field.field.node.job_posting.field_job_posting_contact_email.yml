@@ -1,0 +1,19 @@
+uuid: bcddb9b4-5540-4c8e-aff1-9f0bc1ff1cf7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_posting_contact_email
+    - node.type.job_posting
+id: node.job_posting.field_job_posting_contact_email
+field_name: field_job_posting_contact_email
+entity_type: node
+bundle: job_posting
+label: Email
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

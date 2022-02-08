@@ -1,0 +1,25 @@
+uuid: c2c64e35-24cb-4deb-ba93-b7b8f0c7ef8a
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - msca_donate
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: home-join-msca
+id: donateform
+theme: msca_theme
+region: gutter
+weight: 0
+provider: null
+plugin: donate_form
+settings:
+  id: donate_form
+  label: 'Donate Now'
+  label_display: visible
+  provider: msca_donate
+  message: 'Thank you for your generous support of Mass Senior Care foundation.'
+visibility: {  }

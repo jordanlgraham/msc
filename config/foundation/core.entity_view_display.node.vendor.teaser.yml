@@ -1,0 +1,86 @@
+uuid: 1841850e-8010-45f1-9e51-02f9ee32db21
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.vendor.field_additional_services
+    - field.field.node.vendor.field_address
+    - field.field.node.vendor.field_contact
+    - field.field.node.vendor.field_contact_title
+    - field.field.node.vendor.field_customer_key
+    - field.field.node.vendor.field_email
+    - field.field.node.vendor.field_facebook
+    - field.field.node.vendor.field_gated
+    - field.field.node.vendor.field_linkedin
+    - field.field.node.vendor.field_phone
+    - field.field.node.vendor.field_primary_services
+    - field.field.node.vendor.field_twitter
+    - field.field.node.vendor.field_vendor_image
+    - field.field.node.vendor.field_web_address
+    - node.type.vendor
+  module:
+    - link
+    - user
+id: node.vendor.teaser
+targetEntityType: node
+bundle: vendor
+mode: teaser
+content:
+  field_additional_services:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_email:
+    type: email_mailto
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_phone:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_primary_services:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_web_address:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_address: true
+  field_contact: true
+  field_contact_title: true
+  field_customer_key: true
+  field_facebook: true
+  field_gated: true
+  field_linkedin: true
+  field_twitter: true
+  field_vendor_image: true
+  links: true

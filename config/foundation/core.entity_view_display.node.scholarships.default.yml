@@ -1,0 +1,55 @@
+uuid: d56ba362-fe24-4e65-98e9-d8f61682d2f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.scholarships.body
+    - field.field.node.scholarships.field_gated
+    - field.field.node.scholarships.field_past_recipient_s_
+    - field.field.node.scholarships.field_recipient
+    - field.field.node.scholarships.field_related_content
+    - field.field.node.scholarships.field_scholar_image
+    - image.style.c
+    - node.type.scholarships
+  module:
+    - media
+    - text
+    - user
+id: node.scholarships.default
+targetEntityType: node
+bundle: scholarships
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_recipient:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_scholar_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: c
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_past_recipient_s_: true
+  field_related_content: true
+  links: true

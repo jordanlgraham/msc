@@ -1,0 +1,15 @@
+uuid: 32d8e4dc-fd3c-475a-b744-2c79f980eaa6
+langcode: en
+status: true
+dependencies: {  }
+name: sponsor_logo_largest
+label: 'Sponsor Logo Largest (300px W)'
+effects:
+  f5d65067-b1d9-4148-ba2f-54cb78d94090:
+    uuid: f5d65067-b1d9-4148-ba2f-54cb78d94090
+    id: image_scale
+    weight: 1
+    data:
+      width: 300
+      height: null
+      upscale: false

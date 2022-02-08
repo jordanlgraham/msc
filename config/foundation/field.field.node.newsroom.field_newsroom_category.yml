@@ -1,0 +1,28 @@
+uuid: 1691bd1f-e793-49a6-9779-d4424b221d65
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_newsroom_category
+    - node.type.newsroom
+    - taxonomy.vocabulary.news_types
+id: node.newsroom.field_newsroom_category
+field_name: field_newsroom_category
+entity_type: node
+bundle: newsroom
+label: 'Newsroom Category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      news_types: news_types
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: news_types
+field_type: entity_reference

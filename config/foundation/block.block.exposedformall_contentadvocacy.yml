@@ -1,0 +1,33 @@
+uuid: 498c9b07-41ba-4287-8feb-fb8319bc34c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: views-search
+id: exposedformall_contentadvocacy
+theme: msca_theme
+region: content
+weight: -15
+provider: null
+plugin: 'views_exposed_filter_block:all_content-advocacy'
+settings:
+  id: 'views_exposed_filter_block:all_content-advocacy'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /advocacy

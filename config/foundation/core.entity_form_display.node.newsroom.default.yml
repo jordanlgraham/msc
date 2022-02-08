@@ -1,0 +1,166 @@
+uuid: 522ba436-b9ec-4f6f-b095-0b7232e9c434
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.taxonomy_term.simplified_taxonomy_term
+    - entity_browser.browser.image_browser
+    - field.field.node.newsroom.body
+    - field.field.node.newsroom.field_gated
+    - field.field.node.newsroom.field_news_release_date
+    - field.field.node.newsroom.field_news_source
+    - field.field.node.newsroom.field_news_subtitle
+    - field.field.node.newsroom.field_news_teaser_image
+    - field.field.node.newsroom.field_newsroom_category
+    - field.field.node.newsroom.field_related_content
+    - field.field.node.newsroom.field_tags
+    - node.type.newsroom
+  module:
+    - datetime
+    - entity_browser
+    - entity_browser_entity_form
+    - inline_entity_form
+    - link
+    - scheduler
+    - text
+id: node.newsroom.default
+targetEntityType: node
+bundle: newsroom
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 7
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_gated:
+    type: boolean_checkbox
+    weight: 8
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_news_release_date:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_news_source:
+    type: link_default
+    weight: 9
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_news_subtitle:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_news_teaser_image:
+    type: entity_browser_entity_reference
+    weight: 4
+    region: content
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: false
+      field_widget_display_settings:
+        view_mode: default
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_newsroom_category:
+    type: inline_entity_form_complex
+    weight: 2
+    region: content
+    settings:
+      form_mode: simplified_taxonomy_term
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_related_content:
+    type: inline_entity_form_complex
+    weight: 10
+    region: content
+    settings:
+      form_mode: inline_edit
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_tags:
+    type: inline_entity_form_complex
+    weight: 6
+    region: content
+    settings:
+      form_mode: simplified_taxonomy_term
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 121
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

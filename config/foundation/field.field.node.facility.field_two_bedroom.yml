@@ -1,0 +1,23 @@
+uuid: 4fa3b3d0-8bf9-4bb7-80b0-e9865a055738
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_two_bedroom
+    - node.type.facility
+id: node.facility.field_two_bedroom
+field_name: field_two_bedroom
+entity_type: node
+bundle: facility
+label: 'Two Bedroom'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

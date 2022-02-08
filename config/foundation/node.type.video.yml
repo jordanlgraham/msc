@@ -1,0 +1,17 @@
+uuid: 8f449a7f-c85d-47fa-a231-e1e66e4efb27
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Video
+type: video
+description: 'Use the <em>Video</em> content type for displaying youtube video content.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,161 @@
+uuid: 4f3ec92f-37b4-4c05-bc9e-caadfdefa3a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.job_posting.field_job_contact_telephone
+    - field.field.node.job_posting.field_job_posting_category
+    - field.field.node.job_posting.field_job_posting_contact_email
+    - field.field.node.job_posting.field_job_posting_contact_fax
+    - field.field.node.job_posting.field_job_posting_contact_loc
+    - field.field.node.job_posting.field_job_posting_contact_name
+    - field.field.node.job_posting.field_job_posting_description
+    - field.field.node.job_posting.field_job_posting_hours
+    - field.field.node.job_posting.field_job_posting_org
+    - field.field.node.job_posting.field_job_posting_org_address
+    - field.field.node.job_posting.field_job_posting_org_fax
+    - field.field.node.job_posting.field_job_posting_org_phone
+    - field.field.node.job_posting.field_job_posting_org_website
+    - field.field.node.job_posting.field_job_posting_pay_range
+    - field.field.node.job_posting.field_job_posting_shift
+    - node.type.job_posting
+  module:
+    - address
+    - link
+    - options
+    - telephone
+    - user
+id: node.job_posting.default
+targetEntityType: node
+bundle: job_posting
+mode: default
+content:
+  field_job_contact_telephone:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_job_posting_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 15
+    region: content
+  field_job_posting_contact_email:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_job_posting_contact_fax:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  field_job_posting_contact_loc:
+    type: address_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_job_posting_contact_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_job_posting_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_job_posting_hours:
+    type: list_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_job_posting_org:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: facility_map
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_job_posting_org_address:
+    type: address_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_job_posting_org_fax:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_job_posting_org_phone:
+    type: telephone_link
+    label: hidden
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_job_posting_org_website:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_job_posting_pay_range:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_job_posting_shift:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

@@ -1,0 +1,92 @@
+uuid: df325a30-a5d1-4d8a-9e91-eacbb465055c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.silver_sponsor
+    - field.field.node.sponsor.body
+    - field.field.node.sponsor.field_address
+    - field.field.node.sponsor.field_facebook
+    - field.field.node.sponsor.field_gated
+    - field.field.node.sponsor.field_linkedin
+    - field.field.node.sponsor.field_logo
+    - field.field.node.sponsor.field_primary_services
+    - field.field.node.sponsor.field_twitter
+    - field.field.node.sponsor.field_web_address
+    - image.style.sponsor_logo_large_190x110_
+    - node.type.sponsor
+  module:
+    - link
+    - svg_image
+    - user
+id: node.sponsor.silver_sponsor
+targetEntityType: node
+bundle: sponsor
+mode: silver_sponsor
+content:
+  field_facebook:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_linkedin:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_logo:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: sponsor_logo_large_190x110_
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_twitter:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_web_address:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  body: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_address: true
+  field_gated: true
+  field_primary_services: true
+  links: true

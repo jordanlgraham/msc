@@ -1,0 +1,23 @@
+uuid: de8c4566-4e41-4e23-944e-b413ea24a3f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_twitter
+    - node.type.sponsor
+  module:
+    - link
+id: node.sponsor.field_twitter
+field_name: field_twitter
+entity_type: node
+bundle: sponsor
+label: Twitter
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

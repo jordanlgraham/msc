@@ -1,0 +1,22 @@
+uuid: 6bbce11a-4734-4e56-a32f-b869a22e134e
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - msca_theme
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: msca_theme_content
+theme: msca_theme
+region: content
+weight: -12
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,27 @@
+uuid: ff367038-47eb-4425-b7dd-958d73047dd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_foundation_icon
+    - paragraphs.paragraphs_type.foundation_highlights_column
+  module:
+    - file
+id: paragraph.foundation_highlights_column.field_foundation_icon
+field_name: field_foundation_icon
+entity_type: paragraph
+bundle: foundation_highlights_column
+label: 'Foundation Icon'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: svg
+  max_filesize: ''
+  description_field: false
+field_type: file

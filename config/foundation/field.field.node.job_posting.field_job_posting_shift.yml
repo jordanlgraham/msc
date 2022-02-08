@@ -1,0 +1,32 @@
+uuid: dda3be83-8f94-46ea-b0c6-9fa753c5923d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_posting_shift
+    - node.type.job_posting
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.job_posting.field_job_posting_shift
+field_name: field_job_posting_shift
+entity_type: node
+bundle: job_posting
+label: Shift
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

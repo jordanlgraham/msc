@@ -1,0 +1,33 @@
+uuid: f4f4a6ae-8ab2-4779-b9c0-863e60d51636
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: views-search
+id: exposedformall_contentenews_updates
+theme: msca_theme
+region: content
+weight: -16
+provider: null
+plugin: 'views_exposed_filter_block:all_content-enews_updates'
+settings:
+  id: 'views_exposed_filter_block:all_content-enews_updates'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /member-resources/e-news-updates

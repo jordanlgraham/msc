@@ -1,0 +1,43 @@
+uuid: 6bd3dc6c-f141-4c03-97f9-8aa81f223a7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.two_column_2_1_ratio.field_1_3_column
+    - field.field.paragraph.two_column_2_1_ratio.field_2_3_column
+    - paragraphs.paragraphs_type.two_column_2_1_ratio
+  module:
+    - paragraphs
+id: paragraph.two_column_2_1_ratio.default
+targetEntityType: paragraph
+bundle: two_column_2_1_ratio
+mode: default
+content:
+  field_1_3_column:
+    type: entity_reference_paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  field_2_3_column:
+    type: entity_reference_paragraphs
+    weight: 0
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,65 @@
+uuid: 7e97e996-f6f6-4a21-9948-7eec3b9f5b27
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.featured
+    - field.field.node.education_events.body
+    - field.field.node.education_events.field_call_to_action
+    - field.field.node.education_events.field_date
+    - field.field.node.education_events.field_end_date
+    - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_file
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
+    - node.type.education_events
+  module:
+    - address
+    - datetime
+    - text
+    - user
+id: node.education_events.featured
+targetEntityType: node
+bundle: education_events
+mode: featured
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 300
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: short_month_and_day
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_location:
+    type: address_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_call_to_action: true
+  field_end_date: true
+  field_event_category: true
+  field_event_key: true
+  field_event_related_content: true
+  field_file: true
+  field_gated: true
+  field_sponsors: true
+  links: true

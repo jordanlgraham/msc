@@ -1,0 +1,9 @@
+uuid: ba3daefd-7a36-41b8-a45d-fa6d9385162a
+langcode: en
+status: true
+dependencies: {  }
+id: two_column_2_1_ratio
+label: 'Two Column — 2:1 ratio'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

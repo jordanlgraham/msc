@@ -1,0 +1,45 @@
+uuid: 91189905-6a78-4fa5-9d3f-cbbc945888f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+    - contact_storage
+id: contact_message.field_area_of_interest
+field_name: field_area_of_interest
+entity_type: contact_message
+type: contact_storage_options_email
+settings:
+  allowed_values:
+    -
+      value: 'General Question'
+      key: 'General Question'
+      emails: lnguyen@maseniorcare.org
+    -
+      value: 'Care Options'
+      key: 'Care Options'
+      emails: lnguyen@maseniorcare.org
+    -
+      value: 'Membership Inquires'
+      key: 'Membership Inquiry'
+      emails: jchen@maseniorcare.org
+    -
+      value: Reimbursement
+      key: Reimbursement
+      emails: gabrahams@maseniorcare.org
+    -
+      value: Regulatory
+      key: Regulatory
+      emails: hmagliozzi@maseniorcare.org
+    -
+      value: Other
+      key: Other
+      emails: jchen@maseniorcare.org
+  allowed_values_function: ''
+module: contact_storage
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

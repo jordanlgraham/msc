@@ -1,0 +1,45 @@
+uuid: 4f4032e2-8cbf-4c27-aef0-9b25944a859a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.view_embed.field_header_icon
+    - field.field.paragraph.view_embed.field_title
+    - field.field.paragraph.view_embed.field_view_to_embed
+    - paragraphs.paragraphs_type.view_embed
+  module:
+    - image
+id: paragraph.view_embed.default
+targetEntityType: paragraph
+bundle: view_embed
+mode: default
+content:
+  field_header_icon:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_view_to_embed:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

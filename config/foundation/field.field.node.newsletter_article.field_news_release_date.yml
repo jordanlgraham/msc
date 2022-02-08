@@ -1,0 +1,24 @@
+uuid: 3351508a-6d9a-49f3-81fd-0df85c5eced8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_release_date
+    - node.type.newsletter_article
+  module:
+    - datetime
+id: node.newsletter_article.field_news_release_date
+field_name: field_news_release_date
+entity_type: node
+bundle: newsletter_article
+label: 'News Release Date'
+description: 'Add date of publication. This will display between title and body text on individual Newsletter Article pages.'
+required: false
+translatable: true
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

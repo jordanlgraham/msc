@@ -1,0 +1,7 @@
+uuid: d1024f4d-1988-450a-acea-80cff315de2b
+langcode: en
+status: true
+dependencies: {  }
+id: block_embed
+label: 'Block Embed'
+behavior_plugins: {  }

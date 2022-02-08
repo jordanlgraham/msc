@@ -1,0 +1,23 @@
+uuid: 12c1071f-940d-4c8a-916e-f962826c829f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_social_worker
+    - node.type.facility
+id: node.facility.field_social_worker
+field_name: field_social_worker
+entity_type: node
+bundle: facility
+label: 'Social Worker Accreditation'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

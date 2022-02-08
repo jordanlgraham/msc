@@ -1,0 +1,32 @@
+uuid: 772e33f3-d1ad-4cac-9ad7-628263827b1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_representative_district
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_representative_district
+field_name: field_representative_district
+entity_type: node
+bundle: facility
+label: 'Representative District'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

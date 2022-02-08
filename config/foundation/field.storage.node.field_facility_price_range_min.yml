@@ -1,0 +1,20 @@
+uuid: a646010f-091a-481e-8475-b13dcf103453
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_facility_price_range_min
+field_name: field_facility_price_range_min
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

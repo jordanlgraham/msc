@@ -1,0 +1,23 @@
+uuid: a173d4bd-d95b-47bf-8b44-fbd5f4c5f941
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_massmap_member
+    - node.type.facility
+id: node.facility.field_massmap_member
+field_name: field_massmap_member
+entity_type: node
+bundle: facility
+label: 'MassMAP Member'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

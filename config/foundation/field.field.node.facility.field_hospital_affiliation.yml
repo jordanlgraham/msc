@@ -1,0 +1,32 @@
+uuid: f051ebc3-dd3b-4e6d-b4cf-205177d92c98
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hospital_affiliation
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_hospital_affiliation
+field_name: field_hospital_affiliation
+entity_type: node
+bundle: facility
+label: 'Hospital Affiliation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

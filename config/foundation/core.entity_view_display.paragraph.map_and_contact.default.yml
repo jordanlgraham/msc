@@ -1,0 +1,86 @@
+uuid: 17f108fd-a723-4686-9185-a387548b0181
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.map_and_contact.field_block_to_embed
+    - field.field.paragraph.map_and_contact.field_location
+    - paragraphs.paragraphs_type.map_and_contact
+  module:
+    - geolocation
+id: paragraph.map_and_contact.default
+targetEntityType: paragraph
+bundle: map_and_contact
+mode: default
+content:
+  field_block_to_embed:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_location:
+    type: geolocation_map
+    label: hidden
+    settings:
+      set_marker: true
+      common_map: false
+      use_overridden_map_settings: false
+      title: 'Massachusetts Senior Care'
+      info_text: |-
+        <div class="location-content">
+          <div class="map-address">800 South Street - Suite 280<br>
+        Waltham, MA 02453<br>
+        <a href="/">Directions/Parking</a>
+        </div>
+        <br>
+          <table>
+            <tbody>
+              <tr>
+                <td><i class="fa fa-envelope-o" aria-hidden="true"></i></td>
+                <td><a href="mailto:info@maseniorcare.org">info@maseniorcare.org</a></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-phone" aria-hidden="true"></i></td>
+                <td>+1 (617) 558-0202<br>
+                    +1 (800) CARE-FOR</td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-fax" aria-hidden="true"></i></td>
+                <td>Fax (617) 558-3546</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      map_provider_id: google_maps
+      map_provider_settings:
+        type: ROADMAP
+        zoom: 15
+        minZoom: 0
+        maxZoom: 18
+        rotateControl: false
+        height: 750px
+        width: 100%
+        gestureHandling: cooperative
+        zoomControl: 1
+        scrollwheel: 1
+        draggable: 1
+        style: ''
+        info_auto_display: 1
+        marker_icon_path: ''
+        mapTypeControl: 0
+        streetViewControl: 0
+        fullscreenControl: 0
+        preferScrollingToZooming: 0
+        disableDoubleClickZoom: 0
+        disableAutoPan: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

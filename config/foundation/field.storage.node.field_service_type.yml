@@ -1,0 +1,60 @@
+uuid: bb60602a-98ab-4261-99dd-38df8d2434ca
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_service_type
+field_name: field_service_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Adult Day Health Care'
+      label: 'Adult Day Health Care'
+    -
+      value: 'Dementia Care'
+      label: 'Dementia Care'
+    -
+      value: 'Group Adult Foster Care'
+      label: 'Group Adult Foster Care'
+    -
+      value: 'Hospice Care'
+      label: 'Hospice Care'
+    -
+      value: 'Kosher Meals'
+      label: 'Kosher Meals'
+    -
+      value: 'Licensed Outpatient Rehab'
+      label: 'Licensed Outpatient Rehab'
+    -
+      value: 'Limited Medication Administration'
+      label: 'Limited Medication Administration'
+    -
+      value: 'On-Site Child Care'
+      label: 'On-Site Child Care'
+    -
+      value: 'Pets Allowed'
+      label: 'Pets Allowed'
+    -
+      value: 'Respite Care'
+      label: 'Respite Care'
+    -
+      value: SAMM
+      label: SAMM
+    -
+      value: 'Transportation Services'
+      label: 'Transportation Services'
+    -
+      value: 'Ventilator Care'
+      label: 'Ventilator Care'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

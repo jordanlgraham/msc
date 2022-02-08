@@ -1,0 +1,8 @@
+uuid: b06e57b1-1d3e-4501-ab21-1eb64a0a7c71
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event Types'
+vid: event_types
+description: 'Type of Education/Event (e.g., webinar).'
+weight: 0

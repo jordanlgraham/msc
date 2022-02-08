@@ -1,0 +1,910 @@
+uuid: 80d3106a-7e30-4ea8-ad6b-ce3f1f8a185d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.node.inline_edit
+    - entity_browser.browser.image_browser
+    - field.field.node.facility.field_acronym
+    - field.field.node.facility.field_address
+    - field.field.node.facility.field_administrator
+    - field.field.node.facility.field_administrator_in_training
+    - field.field.node.facility.field_ahca_member
+    - field.field.node.facility.field_assisted_living_beds
+    - field.field.node.facility.field_assisted_living_on_campus
+    - field.field.node.facility.field_chapter_affiliate
+    - field.field.node.facility.field_cna_training_site
+    - field.field.node.facility.field_companion_units
+    - field.field.node.facility.field_congressional_district
+    - field.field.node.facility.field_contact
+    - field.field.node.facility.field_contract_with_aco
+    - field.field.node.facility.field_contracted_acos
+    - field.field.node.facility.field_county
+    - field.field.node.facility.field_customer_fax_number
+    - field.field.node.facility.field_customer_id
+    - field.field.node.facility.field_customer_key
+    - field.field.node.facility.field_customer_phone_number
+    - field.field.node.facility.field_customer_type
+    - field.field.node.facility.field_customer_web_site
+    - field.field.node.facility.field_dementia_care_beds
+    - field.field.node.facility.field_dph_region
+    - field.field.node.facility.field_ep_region
+    - field.field.node.facility.field_facebook
+    - field.field.node.facility.field_facility_image
+    - field.field.node.facility.field_facility_price_range_max
+    - field.field.node.facility.field_facility_price_range_min
+    - field.field.node.facility.field_facility_type
+    - field.field.node.facility.field_for_profit
+    - field.field.node.facility.field_ge
+    - field.field.node.facility.field_hmo_accepted
+    - field.field.node.facility.field_hospital_affiliation
+    - field.field.node.facility.field_hospital_based_nf_tcu_beds
+    - field.field.node.facility.field_income_subsidies
+    - field.field.node.facility.field_independent_living_beds
+    - field.field.node.facility.field_languages_spoken
+    - field.field.node.facility.field_licensed_nursing_facility_
+    - field.field.node.facility.field_licensed_rest_home_beds
+    - field.field.node.facility.field_linkedin
+    - field.field.node.facility.field_manager
+    - field.field.node.facility.field_massmap_member
+    - field.field.node.facility.field_medicaid
+    - field.field.node.facility.field_medicaid_occupancy
+    - field.field.node.facility.field_medicare
+    - field.field.node.facility.field_medicare_occupancy_percent
+    - field.field.node.facility.field_member_flag
+    - field.field.node.facility.field_name_of_assisted_living
+    - field.field.node.facility.field_ncal_member
+    - field.field.node.facility.field_network
+    - field.field.node.facility.field_number_of_beds_oos
+    - field.field.node.facility.field_number_of_employees
+    - field.field.node.facility.field_number_of_residents
+    - field.field.node.facility.field_oasis_participation
+    - field.field.node.facility.field_one_bedroom
+    - field.field.node.facility.field_owner
+    - field.field.node.facility.field_pace_program
+    - field.field.node.facility.field_populations_served
+    - field.field.node.facility.field_preferred_provider_acos
+    - field.field.node.facility.field_preferred_provider_of_aco
+    - field.field.node.facility.field_previous_manager
+    - field.field.node.facility.field_private_ltc_insurance
+    - field.field.node.facility.field_related_content
+    - field.field.node.facility.field_representative_district
+    - field.field.node.facility.field_retirement_community_aff
+    - field.field.node.facility.field_sco_accepted
+    - field.field.node.facility.field_senate_district
+    - field.field.node.facility.field_service_type
+    - field.field.node.facility.field_social_worker
+    - field.field.node.facility.field_specialized_unit
+    - field.field.node.facility.field_state_id
+    - field.field.node.facility.field_studio
+    - field.field.node.facility.field_total_annual_admissions
+    - field.field.node.facility.field_twitter
+    - field.field.node.facility.field_two_bedroom
+    - field.field.node.facility.field_va_contract
+    - field.field.node.facility.field_wib_region
+    - node.type.facility
+  module:
+    - address
+    - entity_browser
+    - entity_browser_entity_form
+    - field_group
+    - geolocation
+    - inline_entity_form
+    - link
+    - path
+    - scheduler
+third_party_settings:
+  field_group:
+    group_facility_participates_in:
+      children:
+        - field_medicaid
+        - field_medicare
+        - field_va_contract
+        - field_pace_program
+      label: 'Facility Participates in'
+      region: content
+      parent_name: group_netforum_data_auto_synchro
+      weight: 43
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_social_links:
+      children:
+        - field_facebook
+        - field_twitter
+        - field_linkedin
+        - field_ge
+      label: 'Social Links'
+      region: content
+      parent_name: group_netforum_data_auto_synchro
+      weight: 55
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_manually_entered_informati:
+      children:
+        - field_related_content
+        - field_facility_image
+      label: 'Manually Entered Information'
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: details
+      format_settings:
+        label: 'Manually Entered Information'
+        classes: ''
+        id: ''
+        open: true
+        required_fields: true
+    group_netforum_data_auto_synchro:
+      children:
+        - field_contact
+        - field_customer_id
+        - field_customer_key
+        - field_customer_type
+        - field_service_type
+        - field_member_flag
+        - field_address
+        - field_customer_phone_number
+        - field_customer_fax_number
+        - field_customer_web_site
+        - field_administrator
+        - field_licensed_nursing_facility_
+        - field_languages_spoken
+        - field_specialized_unit
+        - field_populations_served
+        - group_facility_participates_in
+        - field_dph_region
+        - field_hospital_affiliation
+        - field_retirement_community_aff
+        - field_ep_region
+        - field_representative_district
+        - field_senate_district
+        - field_name_of_assisted_living
+        - field_network
+        - field_manager
+        - field_previous_manager
+        - field_wib_region
+        - group_social_links
+        - group_miscellaneous
+      label: 'NetForum Data (Auto-synchronized)'
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: false
+        required_fields: true
+    group_miscellaneous:
+      children:
+        - field_companion_units
+        - field_studio
+        - field_one_bedroom
+        - field_two_bedroom
+        - field_assisted_living_beds
+        - field_dementia_care_beds
+        - field_hospital_based_nf_tcu_beds
+        - field_independent_living_beds
+        - field_licensed_rest_home_beds
+        - field_medicaid_occupancy
+        - field_medicare_occupancy_percent
+        - field_number_of_beds_oos
+        - field_number_of_residents
+        - field_total_annual_admissions
+        - field_acronym
+        - field_state_id
+        - field_congressional_district
+        - field_preferred_provider_acos
+        - field_contracted_acos
+        - field_county
+        - field_owner
+        - field_number_of_employees
+        - field_chapter_affiliate
+        - field_social_worker
+        - field_massmap_member
+        - field_for_profit
+        - field_income_subsidies
+        - field_ahca_member
+        - field_preferred_provider_of_aco
+        - field_contract_with_aco
+        - field_cna_training_site
+        - field_administrator_in_training
+        - field_assisted_living_on_campus
+        - field_ncal_member
+        - field_hmo_accepted
+        - field_sco_accepted
+        - field_private_ltc_insurance
+        - field_oasis_participation
+        - field_facility_type
+        - field_facility_price_range_min
+        - field_facility_price_range_max
+      label: Miscellaneous
+      region: content
+      parent_name: group_netforum_data_auto_synchro
+      weight: 56
+      format_type: details
+      format_settings:
+        classes: ''
+        id: ''
+        open: false
+        required_fields: true
+id: node.facility.default
+targetEntityType: node
+bundle: facility
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_acronym:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 34
+    region: content
+    settings:
+      default_country: null
+    third_party_settings: {  }
+  field_administrator:
+    type: string_textfield
+    weight: 38
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_administrator_in_training:
+    type: boolean_checkbox
+    weight: 35
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_ahca_member:
+    type: boolean_checkbox
+    weight: 31
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_assisted_living_beds:
+    type: number
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_assisted_living_on_campus:
+    type: boolean_checkbox
+    weight: 36
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_chapter_affiliate:
+    type: options_select
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_cna_training_site:
+    type: boolean_checkbox
+    weight: 34
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_companion_units:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_congressional_district:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contact:
+    type: string_textfield
+    weight: 28
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_contract_with_aco:
+    type: boolean_checkbox
+    weight: 33
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_contracted_acos:
+    type: entity_reference_autocomplete
+    weight: 22
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_county:
+    type: options_select
+    weight: 23
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_customer_fax_number:
+    type: string_textfield
+    weight: 36
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_customer_id:
+    type: number
+    weight: 29
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_customer_key:
+    type: string_textfield
+    weight: 30
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_customer_phone_number:
+    type: string_textfield
+    weight: 35
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_customer_type:
+    type: options_select
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_customer_web_site:
+    type: string_textfield
+    weight: 37
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_dementia_care_beds:
+    type: number
+    weight: 9
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_dph_region:
+    type: string_textfield
+    weight: 44
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ep_region:
+    type: string_textfield
+    weight: 47
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_facebook:
+    type: link_default
+    weight: 14
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_facility_image:
+    type: entity_browser_entity_reference
+    weight: 45
+    region: content
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: false
+      field_widget_display_settings:
+        view_mode: default
+      selection_mode: selection_append
+    third_party_settings: {  }
+  field_facility_price_range_max:
+    type: number
+    weight: 44
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_facility_price_range_min:
+    type: number
+    weight: 43
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_facility_type:
+    type: entity_reference_autocomplete
+    weight: 42
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_for_profit:
+    type: boolean_checkbox
+    weight: 29
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_ge:
+    type: geolocation_latlng
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_hmo_accepted:
+    type: entity_reference_autocomplete
+    weight: 38
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_hospital_affiliation:
+    type: string_textfield
+    weight: 45
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_hospital_based_nf_tcu_beds:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_income_subsidies:
+    type: boolean_checkbox
+    weight: 30
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_independent_living_beds:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_languages_spoken:
+    type: options_select
+    weight: 40
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_licensed_nursing_facility_:
+    type: number
+    weight: 39
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_licensed_rest_home_beds:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_linkedin:
+    type: link_default
+    weight: 16
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_manager:
+    type: string_textfield
+    weight: 52
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_massmap_member:
+    type: boolean_checkbox
+    weight: 28
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_medicaid:
+    type: boolean_checkbox
+    weight: 18
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_medicaid_occupancy:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_medicare:
+    type: boolean_checkbox
+    weight: 19
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_medicare_occupancy_percent:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_member_flag:
+    type: boolean_checkbox
+    weight: 33
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_name_of_assisted_living:
+    type: string_textfield
+    weight: 50
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ncal_member:
+    type: boolean_checkbox
+    weight: 37
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_network:
+    type: string_textfield
+    weight: 51
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_number_of_beds_oos:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_number_of_employees:
+    type: string_textfield
+    weight: 25
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_number_of_residents:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_oasis_participation:
+    type: entity_reference_autocomplete
+    weight: 41
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_one_bedroom:
+    type: number
+    weight: 6
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_owner:
+    type: string_textfield
+    weight: 24
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pace_program:
+    type: boolean_checkbox
+    weight: 22
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_populations_served:
+    type: options_select
+    weight: 42
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_preferred_provider_acos:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_preferred_provider_of_aco:
+    type: boolean_checkbox
+    weight: 32
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_previous_manager:
+    type: string_textfield
+    weight: 53
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_private_ltc_insurance:
+    type: entity_reference_autocomplete
+    weight: 40
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_related_content:
+    type: inline_entity_form_complex
+    weight: 3
+    region: content
+    settings:
+      form_mode: inline_edit
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_representative_district:
+    type: string_textfield
+    weight: 48
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_retirement_community_aff:
+    type: string_textfield
+    weight: 46
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_sco_accepted:
+    type: entity_reference_autocomplete
+    weight: 39
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_senate_district:
+    type: string_textfield
+    weight: 49
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_service_type:
+    type: options_select
+    weight: 32
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_social_worker:
+    type: boolean_checkbox
+    weight: 27
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_specialized_unit:
+    type: options_select
+    weight: 41
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_state_id:
+    type: string_textfield
+    weight: 19
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_studio:
+    type: number
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_total_annual_admissions:
+    type: number
+    weight: 17
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_twitter:
+    type: link_default
+    weight: 15
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_two_bedroom:
+    type: number
+    weight: 7
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_va_contract:
+    type: boolean_checkbox
+    weight: 21
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_wib_region:
+    type: string_textfield
+    weight: 54
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 7
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 121
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

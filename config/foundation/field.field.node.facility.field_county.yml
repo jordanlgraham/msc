@@ -1,0 +1,21 @@
+uuid: 77db41de-38e0-4066-bcab-9b2294812cc7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_county
+    - node.type.facility
+  module:
+    - options
+id: node.facility.field_county
+field_name: field_county
+entity_type: node
+bundle: facility
+label: County
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

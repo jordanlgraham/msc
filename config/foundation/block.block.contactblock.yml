@@ -1,0 +1,27 @@
+uuid: 65699a59-3c0a-4c00-9230-95464ed61e21
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.feedback
+  module:
+    - block_class
+    - contact_block
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: contactblock
+theme: msca_theme
+region: gutter
+weight: -12
+provider: null
+plugin: contact_block
+settings:
+  id: contact_block
+  label: 'Contact Us'
+  label_display: visible
+  provider: contact_block
+  contact_form: feedback
+visibility: {  }

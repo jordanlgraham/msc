@@ -1,0 +1,32 @@
+uuid: 405255db-1093-460e-a92c-0d9cc136c449
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_number_of_employees
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_number_of_employees
+field_name: field_number_of_employees
+entity_type: node
+bundle: facility
+label: 'Number of Employees'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

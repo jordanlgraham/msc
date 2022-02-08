@@ -1,0 +1,33 @@
+uuid: b03f35fb-f9b2-4312-9914-510a9d6596ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.job_search
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: 'views-search job-search'
+id: exposedformjob_searchjob_search
+theme: msca_theme
+region: content
+weight: -14
+provider: null
+plugin: 'views_exposed_filter_block:job_search-job_search'
+settings:
+  id: 'views_exposed_filter_block:job_search-job_search'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /careers/job-search

@@ -1,0 +1,32 @@
+uuid: 6b2b4e4f-aade-45a0-8595-aef020f72adb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_retirement_community_aff
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_retirement_community_aff
+field_name: field_retirement_community_aff
+entity_type: node
+bundle: facility
+label: 'Retirement Community Aff'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

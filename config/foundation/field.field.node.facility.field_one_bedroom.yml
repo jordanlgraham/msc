@@ -1,0 +1,23 @@
+uuid: ee880f72-376f-4fb2-ad38-0bb45c506143
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_one_bedroom
+    - node.type.facility
+id: node.facility.field_one_bedroom
+field_name: field_one_bedroom
+entity_type: node
+bundle: facility
+label: 'One Bedroom'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

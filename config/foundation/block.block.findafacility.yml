@@ -20,11 +20,14 @@ plugin: facility_search
 settings:
   id: facility_search
   label: 'Find a Facility'
-  provider: facility_search
   label_display: visible
+  provider: facility_search
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       newsletter_article: newsletter_article
       newsroom: newsroom
@@ -33,6 +36,3 @@ visibility:
       scholarships: scholarships
       vendor: vendor
       video: video
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

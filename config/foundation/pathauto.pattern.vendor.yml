@@ -1,0 +1,22 @@
+uuid: d80a81a6-e5bb-43e9-b17f-4ba63f04fb9c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: vendor
+label: Vendor
+type: 'canonical_entities:node'
+pattern: 'member-resources/preferred-vendors/[node:title]'
+selection_criteria:
+  eb91d48a-2619-45ad-bfe0-1bfeaf71f559:
+    id: node_type
+    negate: false
+    uuid: eb91d48a-2619-45ad-bfe0-1bfeaf71f559
+    context_mapping:
+      node: node
+    bundles:
+      vendor: vendor
+selection_logic: and
+weight: -5
+relationships: {  }

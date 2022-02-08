@@ -1,0 +1,8 @@
+uuid: 197e73d6-acd0-44a1-8234-0ae8bcacaeaa
+langcode: en
+status: true
+dependencies: {  }
+name: Tags
+vid: tags
+description: 'Topical terms to be applied to any content type.'
+weight: 0

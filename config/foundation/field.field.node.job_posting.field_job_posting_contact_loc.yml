@@ -1,0 +1,39 @@
+uuid: be6de43b-48b9-4005-81f7-8642382189c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_job_posting_contact_loc
+    - node.type.job_posting
+  module:
+    - address
+id: node.job_posting.field_job_posting_contact_loc
+field_name: field_job_posting_contact_loc
+entity_type: node
+bundle: job_posting
+label: Address
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    country_code: US
+default_value_callback: ''
+settings:
+  available_countries:
+    US: US
+  langcode_override: ''
+  field_overrides: {  }
+  fields:
+    administrativeArea: administrativeArea
+    locality: locality
+    dependentLocality: dependentLocality
+    postalCode: postalCode
+    addressLine1: addressLine1
+    addressLine2: addressLine2
+    sortingCode: '0'
+    organization: '0'
+    givenName: '0'
+    additionalName: '0'
+    familyName: '0'
+field_type: address

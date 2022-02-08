@@ -1,0 +1,48 @@
+uuid: fc65b171-dca6-458c-a79a-a8c1f8a40743
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.scholarships.body
+    - field.field.node.scholarships.field_gated
+    - field.field.node.scholarships.field_past_recipient_s_
+    - field.field.node.scholarships.field_recipient
+    - field.field.node.scholarships.field_related_content
+    - field.field.node.scholarships.field_scholar_image
+    - node.type.scholarships
+  module:
+    - smart_trim
+    - user
+id: node.scholarships.teaser
+targetEntityType: node
+bundle: scholarships
+mode: teaser
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 80
+      trim_type: words
+      trim_suffix: ''
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_past_recipient_s_: true
+  field_recipient: true
+  field_related_content: true
+  field_scholar_image: true
+  field_scholars_name: true
+  links: true

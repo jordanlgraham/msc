@@ -1,0 +1,8 @@
+uuid: b8933c96-8105-44d5-a931-51c82155fa0d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Private LTC Insurance Accepted'
+vid: private_ltc_insurance_accepted
+description: ''
+weight: 0

@@ -1,0 +1,32 @@
+uuid: 1bb8c9d1-a66b-472e-8c18-04034dd27b8d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_network
+    - node.type.facility
+  module:
+    - geocoder_field
+third_party_settings:
+  geocoder_field:
+    method: none
+    field: title
+    providers: {  }
+    dumper: wkt
+    delta_handling: default
+    failure:
+      handling: preserve
+      status_message: true
+      log: true
+id: node.facility.field_network
+field_name: field_network
+entity_type: node
+bundle: facility
+label: Network
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

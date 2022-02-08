@@ -1,0 +1,29 @@
+uuid: 94ddb9b0-f436-4024-bec0-f3bca358b8ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_past_recipient_s_
+    - node.type.scholarship_recipient
+    - node.type.scholarships
+id: node.scholarships.field_past_recipient_s_
+field_name: field_past_recipient_s_
+entity_type: node
+bundle: scholarships
+label: 'Past Recipient(s)'
+description: 'Enter one or more past recipients of this scholarship.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      scholarship_recipient: scholarship_recipient
+    sort:
+      field: field_last_name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

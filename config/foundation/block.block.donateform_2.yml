@@ -1,0 +1,31 @@
+uuid: 0351e4f1-e62a-4003-b076-9e7e00a53dc0
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - msca_donate
+    - system
+  theme:
+    - msca_theme
+third_party_settings:
+  block_class:
+    classes: ''
+id: donateform_2
+theme: msca_theme
+region: sidebar_second
+weight: -18
+provider: null
+plugin: donate_form
+settings:
+  id: donate_form
+  label: 'Donate form'
+  label_display: '0'
+  provider: msca_donate
+  message: 'Thank you for your donation!'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /donate-now

@@ -1,0 +1,8 @@
+uuid: e48213c0-e23b-43a6-b125-029f8f4000a0
+langcode: en
+status: true
+dependencies: {  }
+name: 'OASIS Participation'
+vid: oasis_participation
+description: ''
+weight: 0
