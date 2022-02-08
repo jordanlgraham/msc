@@ -829,7 +829,8 @@ $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_so
  *
  * Keep this code block at the end of this file to take full effect.
  */
-
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
+// Temporary fix because drush9 blocks superglobals.
+$_SERVER['PWD']=DRUPAL_ROOT;

@@ -20,3 +20,30 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   }
 }
 $settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/default';
+
+
+
+$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
+
+/**
+ * Load local development override configuration, if available.
+ *
+ * Create a settings.local.php file to override variables on secondary (staging,
+ * development, etc.) installations of this site.
+ *
+ * Typical uses of settings.local.php include:
+ * - Disabling caching.
+ * - Disabling JavaScript/CSS compression.
+ * - Rerouting outgoing emails.
+ *
+ * Keep this code block at the end of this file to take full effect.
+ */
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}
+
+// Temporary fix because drush9 blocks superglobals.
+$_SERVER['PWD']=DRUPAL_ROOT;
+
+// Separate config sync directory from the default site.
+$settings['config_sync_directory'] = '/app/config/foundation';

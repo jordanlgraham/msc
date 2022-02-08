@@ -16,21 +16,9 @@ services:
       php: .vscode/php.ini
   msc:
     type: mysql:5.7
-    creds:
-      user: drupal9
-      password: drupal9
-      database: msc
-    portforward: true
-    config:
-      confd: local/mysql/conf.d
+    portforward: 3307
   foundation:
     type: mysql:5.7
-    creds:
-      user: drupal8
-      password: drupal8
-      database: foundation
-    portforward: true
-    config:
-      confd: lando/mysql/conf.d
+    portforward: 3308
   cache:
     type: memcached:1.5.12

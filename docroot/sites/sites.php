@@ -56,6 +56,7 @@
 
 $sites['foundation-dev.msca'] = 'foundation';
 $sites['foundation-test.msca'] = 'foundation';
+$sites['foundation.lndo.site'] = 'foundation';
 
 $sites['dev.maseniorcarefoundation.org'] = 'foundation';
 $sites['stage.maseniorcarefoundation.org'] = 'foundation';
