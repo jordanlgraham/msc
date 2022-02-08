@@ -34,6 +34,8 @@
   {% block content %}
     {{ content }}
     <div class="advanced-search"><a href="{{ path('search.view') }}">{{ 'Advanced Search'|t }}</a></div>
-    <div id="facility-search-link"><a href="{{ path('view.d9_facility_search.page_1') }}">{{ 'Search Facilities Instead'|t }}</a></div>
+    {% if is_default_site %}
+      <div id="facility-search-link"><a href="{{ path('view.d9_facility_search.page_1') }}">{{ 'Search Facilities Instead'|t }}</a></div>
+    {% endif %}
   {% endblock %}
 </div>

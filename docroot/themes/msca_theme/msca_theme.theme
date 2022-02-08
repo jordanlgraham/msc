@@ -262,6 +262,7 @@ function msca_theme_views_pre_render(&$view) {
 
 function msca_theme_preprocess_block(&$variables) {
   if ($variables['plugin_id'] == 'search_form_block') {
+    $variables['is_default_site'] = strpos(\Drupal::request()->getHost(), 'foundation') == 'FALSE';
     $variables['content']['actions']['submit']['#value'] = t('Search content');
   }
 }
