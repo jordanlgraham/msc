@@ -2,7 +2,6 @@ name: msca
 recipe: drupal9
 config:
   php: '8.0'
-  database: mysql:5.7
 proxy:
   appserver:
     - msc.lndo.site
