@@ -127,7 +127,6 @@ class ResultPlusProximity extends Result {
    * {@inheritdoc}
    */
   public function render($empty = FALSE) {
-    $merp = 'derp';
     // Must have options and does not work on summaries.
     if (!isset($this->options['content']) || $this->view->style_plugin instanceof DefaultSummary) {
       return [];

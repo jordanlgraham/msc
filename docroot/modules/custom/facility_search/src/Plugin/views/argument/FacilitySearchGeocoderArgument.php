@@ -157,7 +157,6 @@ class FacilitySearchGeocoderArgument extends ProximityArgument implements Contai
   }
 
   public function getValue() {
-    $merp = 'derp';
     $queryParams = \Drupal::request()->query->all();
     if (empty($queryParams['center'])) {
       return '';

@@ -2,14 +2,17 @@
 
 namespace Drupal\msca_constant_contact;
 
+use Drupal\Core\Url;
 use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ConstantContactAuth {
+
+  use StringTranslationTrait;
 
   /**
    * The messenger.
@@ -21,7 +24,7 @@ class ConstantContactAuth {
   /**
    * ConstantContactAuth constructor.
    */
-  public function __construct() {
+  public function __construct(MessengerInterface $messenger) {
     $this->base_uri = 'https://api.cc.email/v3';
     $this->http_client = new Client();
     $this->messenger = $messenger;
@@ -56,6 +59,7 @@ class ConstantContactAuth {
   }
 
   public function createEmailCampaign($nid) {
+    $url = $host = \Drupal::request()->getSchemeAndHttpHost() . '/admin/content';
     // Load the node so we can send it as message body.
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     $node_viewer = \Drupal::entityTypeManager()->getViewBuilder('node');
@@ -86,20 +90,17 @@ class ConstantContactAuth {
     catch (\GuzzleHttp\Exception\ServerException $e) {
       $message = $e->getMessage();
       \Drupal::logger('msca_constant_contact')->notice("ConstantContactAuth::createEmailCampaign() - line 88:" . $message);
-      $this->messenger->addMessage($this->t('Sending to Constant Contact failed for the following reason: ' . $message, 'error'));
-      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      $redirect->send();
+      $this->messenger->addError($this->t('Sending to Constant Contact failed for the following reason: ' . $message));
+      $this->sendRedirect($url);
     }
     catch (\GuzzleHttp\Exception\ClientException $e) {
       $message = $e->getMessage();
-      \Drupal::logger('msca_constant_contact')->notice("70: " . $message);
-      $this->messenger->addMessage($this->t('Sending to Constant Contact failed for the following reason: ' . $message, 'error'));
-      $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-      // $redirect->send();
+      \Drupal::logger('msca_constant_contact')->notice("ConstantContactAuth line 99: " . $message);
+      $this->messenger->addError($this->t('Sending to Constant Contact failed for the following reason: ' . $message));
+      $this->sendRedirect($url);
     }
-    $this->messenger->addMessage(t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
-    $redirect = new RedirectResponse($_SERVER["HTTP_REFERER"]);
-    $redirect->send();
+    $this->messenger->addStatus($this->t('A new Constant Contact Email Campaign has been successfully created. Please proceed to the <a href="https://campaign-ui.constantcontact.com/campaign/dashboard">Constant Contact Campaign Dashboard</a>.'));
+    $this->sendRedirect($url);
   }
 
   /**
@@ -170,6 +171,17 @@ class ConstantContactAuth {
             }
           }]
       }';
+  }
+
+  public function sendRedirect(string $url) {
+    $response = new RedirectResponse($url);
+    $request = \Drupal::request();
+    // Save the session so things like messages get saved.
+    $request->getSession()->save();
+    $response->prepare($request);
+    // Make sure to trigger kernel events.
+    \Drupal::service('kernel')->terminate($request, $response);
+    $response->send();
   }
 }
 
