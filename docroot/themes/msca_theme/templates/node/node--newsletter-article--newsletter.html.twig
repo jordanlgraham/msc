@@ -9,16 +9,13 @@
 <article{{ attributes.addClass('pb-5') }} name="testarticle" title="testarticle">
   <table>
     <tr>
-{#      <td style="vertical-align: top; width: 180px;">#}
-{#        <img src="https://www.maseniorcare.org/themes/msca_theme/images/news-default.png" style="width: 180px;" />#}
-{#      </td>#}
       <td style="padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
         <h2{{ title_attributes }} style="margin: 0">
           {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
           <a href="http://{{ base_path }}{{ url }}" rel="bookmark" style="text-decoration: none; color: #005A84 !important; font-size: 18px;">{{ label }}</a>
         </h2>
         <div style="padding-top: 16px; padding-bottom: 16px; line-height: 24px; color: #5A7683">
-        {{ content.field_news_teaser_image }}
+        {{ content.field_news_teaser_image | image_style('logo')}}
         {{ content.body }}
         </div>
         <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="text-decoration: none; font-weight: bold; color: #2278CB !important; text-transform: uppercase">{{ 'Read'|t }}<span style="color: orange; margin-left: 5px;"> ></span></a>
