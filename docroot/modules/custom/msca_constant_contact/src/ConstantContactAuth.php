@@ -59,7 +59,7 @@ class ConstantContactAuth {
   }
 
   public function createEmailCampaign($nid) {
-    $url = $host = \Drupal::request()->getSchemeAndHttpHost() . '/admin/content';
+    $url = \Drupal::request()->getSchemeAndHttpHost() . '/admin/content';
     // Load the node so we can send it as message body.
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($nid);
     $node_viewer = \Drupal::entityTypeManager()->getViewBuilder('node');
