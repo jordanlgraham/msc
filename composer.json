@@ -91,9 +91,9 @@
     "geocoder-php/google-maps-provider": "^4.6"
   },
   "require-dev": {
-      "drupal/devel": "^4.1",
-      "drupal/twig_vardumper": "^3.0",
-      "drupal/twig_xdebug": "^1.2"
+    "drupal/devel": "^4.1",
+    "drupal/twig_vardumper": "^3.0",
+    "drupal/twig_xdebug": "^1.2"
   },
   "conflict": {
       "drupal/drupal": "*"

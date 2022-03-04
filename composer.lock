@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9da91c18e48ab8e77cc9b7feb9fecdb",
+    "content-hash": "02c5d8dfcf2741f84f8dd13fcacf2e2d",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -4140,59 +4140,6 @@
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
                 "source": "https://git.drupalcode.org/project/entity_reference_revisions"
-            }
-        },
-        {
-            "name": "drupal/entity_update",
-            "version": "2.0.0-rc2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/entity_update.git",
-                "reference": "2.0.0-rc2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_update-2.0.0-rc2.zip",
-                "reference": "2.0.0-rc2",
-                "shasum": "493c6c4e4b35bccd53c9e838afa49ed213dbeb84"
-            },
-            "require": {
-                "drupal/core": "^8.7.7 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.0-rc2",
-                    "datestamp": "1596024141",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                },
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL"
-            ],
-            "authors": [
-                {
-                    "name": "Nuwantha",
-                    "homepage": "https://www.drupal8.ovh",
-                    "role": "Admin"
-                },
-                {
-                    "name": "iwsp",
-                    "homepage": "https://www.drupal.org/user/3514484"
-                }
-            ],
-            "description": "Update Drupal 8/9 Entity schema.",
-            "homepage": "https://www.drupal.org/project/entity_update",
-            "support": {
-                "source": "http://git.drupal.org/project/entity_update.git",
-                "issues": "https://www.drupal.org/project/issues/entity_update"
             }
         },
         {
@@ -13981,17 +13928,17 @@
         },
         {
             "name": "drupal/devel",
-            "version": "4.1.3",
+            "version": "4.1.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel.git",
-                "reference": "4.1.3"
+                "reference": "4.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel-4.1.3.zip",
-                "reference": "4.1.3",
-                "shasum": "f82261ca19a43379742e1df4c5a3795ef7a70441"
+                "url": "https://ftp.drupal.org/files/projects/devel-4.1.5.zip",
+                "reference": "4.1.5",
+                "shasum": "7d0b4397215f615a67ba80aab777e93918d497f9"
             },
             "require": {
                 "doctrine/common": "^2.7",
@@ -14010,8 +13957,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.1.3",
-                    "datestamp": "1639534069",
+                    "version": "4.1.5",
+                    "datestamp": "1646072825",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
