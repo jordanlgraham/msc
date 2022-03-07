@@ -1,3 +1,4 @@
+uuid: eb6b4d01-2afd-4283-a38a-016474e3d1e6
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,10 @@ dependencies:
     - field.storage.node.field_ge
     - node.type.facility
     - taxonomy.vocabulary.facility_type
+  content:
+    - 'taxonomy_term:facility_type:4f70517c-5f46-4751-953c-d888e4655217'
+    - 'taxonomy_term:facility_type:64cbaae3-06b5-43a9-a1f9-6af79dcc2501'
+    - 'taxonomy_term:facility_type:b2aede37-ab54-4286-8e1f-8d7eeefe7258'
   module:
     - address
     - better_exposed_filters
@@ -785,7 +790,10 @@ display:
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
-          value: {  }
+          value:
+            2626: 2626
+            1861: 1861
+            1856: 1856
           group: 1
           exposed: true
           expose:
