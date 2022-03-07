@@ -6,7 +6,7 @@ dependencies:
     - views.view.news
   module:
     - block_class
-    - ctools
+    - node
     - system
     - views
   theme:

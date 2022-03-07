@@ -159,14 +159,9 @@ function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase
   }
   $input = $view->exposed_raw_input;
 
-  // If there is no location input, unset the location filter from the query.
-  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
-  if ($address_parts == [0 => '']) {
-    unset($query->where[0]);
-  }
-
   // If there is no more granularity than a city, remove proximity
   // sort and sort alphabetically.
+  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
   if (count($address_parts) < 4) {
     $query->orderby[0] = [
       'field' => 'title',

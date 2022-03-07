@@ -82,49 +82,51 @@ class SimpleFacilitySearch extends FormBase {
     $provider_ids = ['googlemaps'];
     $providers = $this->entityTypeManager->getStorage('geocoder_provider')->loadMultiple($provider_ids);
     $addressCollection = $this->geocoder->geocode($keys, $providers);
-    
+
     // Try any locations in $addressCollection to see if they're in MA.
-    foreach ($addressCollection->all() as $location) {
-      // Is this $location in MA?
-      $formattedAddress = $location->getFormattedAddress();
-      if (!empty($formattedAddress)) {
-        $addressArray = explode(',', $formattedAddress);
-        // Skip this location if it's not in MA.
-        switch (is_numeric($keys)) {
-          case TRUE:
-            if (count($addressArray) !== 3
-              || $addressArray[2] !== ' USA'
-              || $addressArray[1] !== ' MA ' . $keys
-              ) {
-                continue 2;
-            }
+    if (!empty($addressCollection)) {
+      foreach ($addressCollection->all() as $location) {
+        // Is this $location in MA?
+        $formattedAddress = $location->getFormattedAddress();
+        if (!empty($formattedAddress)) {
+          $addressArray = explode(',', $formattedAddress);
+          // Skip this location if it's not in MA.
+          switch (is_numeric($keys)) {
+            case TRUE:
+              if (count($addressArray) !== 3
+                || $addressArray[2] !== ' USA'
+                || $addressArray[1] !== ' MA ' . $keys
+                ) {
+                  continue 2;
+              }
 
-            break;
+              break;
 
-          default:
-            if (count($addressArray) !== 3
-              || $addressArray[2] !== ' USA'
-              || $addressArray[1] !== ' MA'
-              ) {
-                continue 2;
-            }
+            default:
+              if (count($addressArray) !== 3
+                || $addressArray[2] !== ' USA'
+                || $addressArray[1] !== ' MA'
+                ) {
+                  continue 2;
+              }
+          }
+
+          // This is a MA address. Pass its info as a proximity filter.
+          $query = [
+            'center' => [
+              'coordinates' => [
+                'lat' => $location->getCoordinates()->getLatitude(),
+                'lng' => $location->getCoordinates()->getLongitude(),
+              ],
+              'geocoder' => [
+                'geolocation_geocoder_address' => $location->getFormattedAddress(),
+              ],
+            ],
+            'proximity' => 5,
+          ];
+          $addressInMA = TRUE;
+          break; // Stop looping through $addressCollection.
         }
-
-        // This is a MA address. Pass its info as a proximity filter.
-        $query = [
-          'center' => [
-            'coordinates' => [
-              'lat' => $location->getCoordinates()->getLatitude(),
-              'lng' => $location->getCoordinates()->getLongitude(),
-            ],
-            'geocoder' => [
-              'geolocation_geocoder_address' => $location->getFormattedAddress(),
-            ],
-          ],
-          'proximity' => 5,
-        ];
-        $addressInMA = TRUE;
-        break; // Stop looping through $addressCollection.
       }
     }
 

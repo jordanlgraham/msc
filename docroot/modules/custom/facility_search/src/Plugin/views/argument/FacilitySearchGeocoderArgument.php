@@ -144,8 +144,11 @@ class FacilitySearchGeocoderArgument extends ProximityArgument implements Contai
       if (empty($queryParams['center'])) {
         return $values;
       }
+      $address = (array_key_exists('geolocation_geocoder_address', $queryParams['center']['geocoder']))
+        ? $queryParams['center']['geocoder']['geolocation_geocoder_address']
+        : '';
       $values = [
-        'address' => $queryParams['center']['geocoder']['geolocation_geocoder_address'],
+        'address' => $address,
         'lat' => $queryParams['center']['coordinates']['lat'],
         'lng' => $queryParams['center']['coordinates']['lng'],
         'distance' => floatval($queryParams['proximity']),
@@ -161,7 +164,11 @@ class FacilitySearchGeocoderArgument extends ProximityArgument implements Contai
     if (empty($queryParams['center'])) {
       return '';
     }
-    $value = $queryParams['center']['geocoder']['geolocation_geocoder_address'];
+
+    $value = (array_key_exists('geolocation_geocoder_address', $queryParams['center']['geocoder']))
+        ? $queryParams['center']['geocoder']['geolocation_geocoder_address']
+        : NULL;
+
     return $value;
   }
 
