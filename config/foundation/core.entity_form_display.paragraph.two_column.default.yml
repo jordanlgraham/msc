@@ -7,7 +7,7 @@ dependencies:
     - field.field.paragraph.two_column.field_two_column_paragraphs
     - paragraphs.paragraphs_type.two_column
   module:
-    - jquery_colorpicker
+    - colorapi
     - paragraphs
 id: paragraph.two_column.default
 targetEntityType: paragraph
@@ -15,8 +15,8 @@ bundle: two_column
 mode: default
 content:
   field_background_color:
-    type: jquery_colorpicker
-    weight: 1
+    type: colorapi_color_widget
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }

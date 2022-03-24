@@ -68,7 +68,6 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   insert: 0
-  jquery_colorpicker: 0
   link: 0
   maillog: 0
   masquerade: 0
@@ -122,7 +121,6 @@ module:
   update: 0
   user: 0
   vendor_search: 0
-  vendor_stream_wrapper: 0
   views_infinite_scroll: 0
   views_ui: 0
   webform: 0

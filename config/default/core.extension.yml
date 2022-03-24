@@ -95,7 +95,6 @@ module:
   msca_tweet_block: 0
   netforum_event_sync: 0
   netforum_org_sync: 0
-  netforum_soap: 0
   netforum_user_auth: 0
   node: 0
   options: 0

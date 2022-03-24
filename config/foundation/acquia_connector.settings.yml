@@ -35,6 +35,9 @@ spi:
     variables: {  }
     time: 0
   cron_interval: 28800
+  site_environment: prod
+  site_uuid: fe86680f-7383-4c00-8e88-0b1d83530a5f
+  env_detection_enabled: true
   def_vars: {  }
   def_waived_vars: {  }
   def_timestamp: 0
@@ -169,7 +172,7 @@ mapping:
   http_response_debug_cacheability_headers:
     - container_parameter
     - http.response.debug_cacheability_headers
-cloud_migration: {  }
 banner_service: 'https://insight.acquia.com/system/acquia-banner'
+cloud_migration: {  }
 migrate:
   files: 1
