@@ -4,7 +4,7 @@ use Drupal\Core\Database\Database;
 
 /**
  * @file
- * Holds install hooks for the jQuery Colorpicker module.
+ * Holds install hooks for the MSCA Misc module.
  */
 
 /**

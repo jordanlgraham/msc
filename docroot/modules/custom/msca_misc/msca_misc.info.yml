@@ -3,6 +3,3 @@ type: module
 description: 'Provides miscellaneous functionality and database updates'
 core_version_requirement: ^8 || ^9
 package: 'Custom'
-dependencies:
-  - jquery_colorpicker
-  - colorapi
