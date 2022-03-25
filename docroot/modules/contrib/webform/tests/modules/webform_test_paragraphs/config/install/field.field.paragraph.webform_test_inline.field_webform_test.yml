@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_webform
-    - paragraphs.paragraphs_type.webform
+    - field.storage.paragraph.field_webform_test
+    - paragraphs.paragraphs_type.webform_test_inline
   module:
     - webform
-id: paragraph.webform.field_webform
-field_name: field_webform
+id: paragraph.webform_test_inline.field_webform_test
+field_name: field_webform_test
 entity_type: paragraph
-bundle: webform
-label: Webform
+bundle: webform_test_inline
+label: 'Webform test inline'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -21,8 +21,4 @@ settings:
   handler_settings:
     target_bundles: null
     auto_create: false
-  default_data: ''
-  status: open
-  open: ''
-  close: ''
 field_type: webform
