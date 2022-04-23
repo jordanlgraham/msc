@@ -6,7 +6,7 @@ dependencies:
     - views.view.related_content
   module:
     - block_class
-    - node
+    - ctools
     - views
   theme:
     - msca_theme

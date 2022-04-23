@@ -237,7 +237,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/2020-spring-conference-trade-show" class="btn btn-primary">View All Sponsors</a>'
+            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/mass-senior-care-association-2022-spring-conference-trade-show" class="btn btn-primary">View All Sponsors</a>'
             format: full_html
           tokenize: false
       display_extenders: {  }

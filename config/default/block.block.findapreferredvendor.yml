@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - block_class
-    - node
+    - ctools
     - system
     - vendor_search
   theme:
