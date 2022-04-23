@@ -6,7 +6,7 @@ dependencies:
     - views.view.scholars
   module:
     - block_class
-    - node
+    - ctools
     - views
   theme:
     - msca_theme

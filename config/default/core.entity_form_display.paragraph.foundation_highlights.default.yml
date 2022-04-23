@@ -10,6 +10,7 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.foundation_highlights
   module:
+    - jquery_colorpicker
     - paragraphs
     - svg_image
 id: paragraph.foundation_highlights.default
@@ -26,7 +27,7 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
   field_heading_background_color:
-    type: text_textfield
+    type: jquery_colorpicker
     weight: 1
     region: content
     settings: {  }

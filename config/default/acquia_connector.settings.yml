@@ -35,6 +35,7 @@ spi:
     variables: {  }
     time: 0
   cron_interval: 28800
+  site_environment: prod
   site_uuid: 7ed39e1d-20a2-43c2-b5cb-0caf10690471
   env_detection_enabled: true
   def_vars: {  }

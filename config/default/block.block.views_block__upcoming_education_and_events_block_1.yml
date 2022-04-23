@@ -6,7 +6,7 @@ dependencies:
     - views.view.upcoming_education_and_events
   module:
     - block_class
-    - node
+    - ctools
     - system
     - views
   theme:
