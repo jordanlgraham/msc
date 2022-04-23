@@ -17,10 +17,6 @@ echo "Applying DB updates..."
 /usr/local/bin/drush10 @${drush_alias} updb -y --strict=0
 echo "DB updates run in $SECONDS seconds."
 SECONDS=0
-echo "Applying entity updates..."
-/usr/local/bin/drush10 @${drush_alias} entup -y --strict=0
-echo "Entity updates applied in $SECONDS seconds."
-SECONDS=0
 echo "Importing configuration..."
 /usr/local/bin/drush10 @${drush_alias} cim -y --strict=0
 echo "Configuration imported in $SECONDS seconds."
