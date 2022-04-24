@@ -15,14 +15,6 @@ use Drupal\views\Plugin\views\query\QueryPluginBase;
  * @param FormStateInterface $form_state
  * @return void
  */
-// function facility_search_exposed_form_submit(&$form, &$form_state) {
-//   $city_values = $form_state->getValue('city');
-//   if (!empty($city_values) && $city_values == 'Any') {
-//     $form_state->set('city', []);
-//     $form_state->setValue('city', []);
-//   }
-// }
-
 
 /**
  * Implements hook_form_alter().
@@ -34,121 +26,19 @@ function facility_search_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     $form['name']['#attributes']['autofocus'] = FALSE;
     $form['pass']['#placeholder'] = t('Password');
   }
-}
 
-/**
- * Implements hook_geocoder_provider_info_alter().
-*/
-function facility_search_geocoder_provider_info_alter(&$providers) {
-  // Alter the google maps geocoder.
-  // if (isset($providers['googlemaps'])) {
-  //   $providers['googlemaps']['arguments']['useSsl'] = TRUE;
-  //   $config = \Drupal::config('geolocation.settings');
-  //   // Use the Google Map API key variable provided by the geolocation module.
-  //   if (!empty($config->get('google_map_api_key'))) {
-  //     $api_arg_key = array_search('apiKey', $providers['googlemaps']['arguments'], TRUE);
-  //     // This is a numbered array, so have to remove the original key or there will be an extra argument.
-  //     unset($providers['googlemaps']['arguments'][$api_arg_key]);
-  //     $providers['googlemaps']['arguments']['apiKey'] = $config->get('google_map_api_key');
-  //   }
-  // };
+  // Alter the facility search view's exposed filters form.
+  if ($form['#id'] == 'views-exposed-form-d9-facility-search-page-1') {
+    $form['facility_type']['#empty_option'] = 'All';
+    // $request = \Drupal::request();
+    // if (is_null($request->get('EXPOSED_FILTER_FIELD_MACHINE_NAME'))) {
+    //   // get all input fields first then modify the one you want to change
+    //   $input = $form_state->getUserInput();
+    //   $input['facility_type'] = 'All';
+    //   $form_state->setUserInput($input);
+    // }
+  }
 }
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-// function facility_search_preprocess_views_view(&$variables) {
-//   /** @var ViewExecutable $view */
-//   // Prepare a display of the location.
-//   $view = $variables['view'];
-//   if ($view->current_display !== 'page_1' ||
-//       $view->id() !== 'facility_search') {
-//     return;
-//   }
-//   $input = $view->getExposedInput();
-//   $header = '';
-//   if (!empty($input['title'])) {
-//     $header = t('Searching for @title', ['@title' => $input['title']]);
-//   }
-//   if (!empty($input['geocode_state']) && $input['geocode_state'] && !empty($input['geocode_postal'])) {
-//     $distance = !empty($input['proximity']) ? $input['proximity'] : 5;
-//     if (!empty($header)) {
-//       $header .= ' ' . t('within @distance miles of @postal', ['@distance' => $distance, '@postal' => $input['geocode_postal']]);
-//     }
-//     else {
-//       $header .= t('Searching within @distance miles of @postal', ['@distance' => $distance, '@postal' => $input['geocode_postal']]);
-//     }
-//   }
-//   if (!empty($input['city'])) {
-//     if (!empty($header)) {
-//       $header .= ' ' . t('in @city', ['@city' => $input['city']]);
-//     }
-//     else {
-//       $header = t('Searching in @city', ['@city' => $input['city']]);
-//     }
-//   }
-//   if (!empty($input['keys'])) {
-//     $header = t('Searching for "@keys"', ['@keys' => $input['keys']]);
-//   }
-//   $filter_values = [];
-//   $input_display_blacklist = [
-//     'title',
-//     'proximity',
-//   ];
-//   foreach ($view->display_handler->getOption('filters') as $filter) {
-//     if (
-//       !isset($filter['expose']['identifier']) ||
-//       !isset($input[$filter['expose']['identifier']]) ||
-//       empty($filter['exposed']) ||
-//       in_array($filter['expose']['identifier'], $input_display_blacklist)) {
-//       continue;
-//     }
-//     $value = $input[$filter['expose']['identifier']];
-//     if (empty($value)) {
-//       continue;
-//     }
-//     if (is_array($value)) {
-//       $value = implode(', ', array_values($value));
-//     }
-//     if (isset($filter['vid']) && is_numeric($value)) {
-//       $value = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($value)->label();
-//     }
-//     $filter_values[$filter['expose']['label']] = $value;
-//   }
-//   // Prepare a display of the additional tags.
-//   $variables['header']['location_input'] = [
-//     '#type' => 'html_tag',
-//     '#tag' => 'h2',
-//     '#value' => $header,
-//     '#cache' => [
-//       'contexts' => [
-//         'url.query_args',
-//       ],
-//       'max-age' => \Drupal\Core\Cache\Cache::PERMANENT,
-//     ],
-//   ];
-//   // Add the other search filters.
-//   if (!empty($filter_values)) {
-//     $search_input = [];
-//     foreach ($filter_values as $filter => $value) {
-//       $search_input[] = [
-//         '#markup' => "<em>$filter:</em> $value",
-//         '#wrapper_attributes' => [
-//           'class' => ['list-inline-item'],
-//         ],
-//       ];
-//     }
-//     $variables['header']['search_input'] = [
-//       '#theme' => 'item_list',
-//       '#items' => $search_input,
-//       '#attributes' => [
-//         'class' => [
-//           'list-inline',
-//         ],
-//       ]
-//     ];
-//   }
-// }
 
 /**
  * Implements hook_views_query_alter().
@@ -168,6 +58,15 @@ function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase
       'direction' => 'ASC'
     ];
   }
+
+  // If there is no geocoder address in the exposed filter input, remove
+  // 'center' from the query.
+  if (!empty($input['center']) && !empty($input['center']['geocoder'])
+    && $input['center']['geocoder']['geolocation_geocoder_address'] == '') {
+    unset($input['center']);
+  }
+
+  $view->exposed_raw_input = $input;
 }
 
 /**

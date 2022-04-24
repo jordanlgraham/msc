@@ -141,7 +141,10 @@ class FacilitySearchGeocoderArgument extends ProximityArgument implements Contai
     if (!isset($values)) {
       $values = [];
       $queryParams = \Drupal::request()->query->all();
-      if (empty($queryParams['center'])) {
+      if (empty($queryParams['center'])
+        || (!empty($queryParams['center']['coordinates'])
+          && $queryParams['center']['coordinates']['lat'] == ''
+          && $queryParams['center']['coordinates']['lng'] == '')) {
         return $values;
       }
       $address = (array_key_exists('geolocation_geocoder_address', $queryParams['center']['geocoder']))
