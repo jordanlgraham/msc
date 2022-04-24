@@ -41,5 +41,5 @@ tooling:
     user: root
 excludes:
   - vendor
-  - web/libraries
-  - web/sites/default/files
+  - docroot/libraries
+  - docroot/sites/default/files
