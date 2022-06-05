@@ -4,6 +4,7 @@ namespace Drupal\msca_constant_contact;
 
 use Drupal\Core\Url;
 use GuzzleHttp\Client;
+use Drupal\Component\Utility\Random;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,15 +48,34 @@ class ConstantContactAuth {
     if (!empty($lando_info)) {
       $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
     }
-    $baseUrl = 'https://api.cc.email/v3/idfed?';
+
+    // Build the request url.
+    $baseUrl = 'https://authz.constantcontact.com/oauth2/default/v1/authorize?';
     $client = 'client_id=' . $pubkey;
     $host = \Drupal::request()->getSchemeAndHttpHost();
     $redirectUri = '&redirect_uri=' . $host . '/admin/config/services/constantcontact/authresponse';
     $responseType = '&response_type=code';
     $scope = '&scope=campaign_data';
-    $url = $baseUrl . $client . $redirectUri . $responseType . $scope;
-    // return new TrustedRedirectResponse('https://msc.lndo.site');
+    $sessionString = '&state=' . $this->generateRandomString(23, TRUE);
+    $url = $baseUrl . $client . $redirectUri . $responseType  . $scope . $sessionString;
+
     return new TrustedRedirectResponse($url);
+  }
+
+  /**
+   * Generate a random string with letters, numbers and url-safe special chars.
+   *
+   * @param int $length
+   * @return string
+   */
+  public function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~()\'!*:@,;';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
   }
 
   public function createEmailCampaign($nid) {
