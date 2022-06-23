@@ -2,9 +2,8 @@
 
 namespace Drupal\geolocation\Plugin\Geocoder\Dumper;
 
-use Geocoder\Location;
-use Geocoder\Model\Address;
 use Drupal\geocoder\DumperBase;
+use Geocoder\Model\Address;
 
 /**
  * Provides a geolocation geocoder dumper plugin.
@@ -19,8 +18,7 @@ class GeolocationGeocoderV2 extends DumperBase {
   /**
    * {@inheritdoc}
    */
-
-  public function schmump(Address $address) {
+  public function dump(Address $address) {
     $data = $address->toArray();
     $lat = $data['latitude'];
     $lng = $data['longitude'];
@@ -35,13 +33,6 @@ class GeolocationGeocoderV2 extends DumperBase {
       'lng_rad' => deg2rad($lng),
       'data' => $data,
     ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function dump(Location $location) {
-    return $this->getHandler()->dump($location);
   }
 
 }
