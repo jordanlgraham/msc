@@ -51,7 +51,7 @@ function facility_search_views_query_alter(ViewExecutable $view, QueryPluginBase
 
   // If there is no more granularity than a city, remove proximity
   // sort and sort alphabetically.
-  $address_parts = explode(',', $input['center']['geocoder']['geolocation_geocoder_address']);
+  $address_parts = explode(',', $input['proximity_center']['geocoder']['geolocation_geocoder_address']);
   if (count($address_parts) < 4) {
     $query->orderby[0] = [
       'field' => 'title',

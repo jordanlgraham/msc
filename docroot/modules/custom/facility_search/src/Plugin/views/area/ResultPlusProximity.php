@@ -196,8 +196,8 @@ class ResultPlusProximity extends Result {
 
     // Get proximity and location info.
     $proximity = 'within ' . $exposed['proximity'] . ' miles of ';
-    $location = $exposed['center']['geocoder']['geolocation_geocoder_address'];
-    
+    $location = $exposed['proximity_center']['geocoder']['geolocation_geocoder_address'];
+
     // Get the search information.
     $replacements = [];
     $replacements['@exposed_filter_summary'] = $exposed_filter_summary;
@@ -211,7 +211,7 @@ class ResultPlusProximity extends Result {
     $replacements['@page_count'] = $page_count;
     // Add proximity and location info if user has specified a location.
     $replacements['@proximity_string'] = '';
-    $addressParts = explode(',', $exposed['center']['geocoder']['geolocation_geocoder_address']); 
+    $addressParts = explode(',', $exposed['proximity_center']['geocoder']['geolocation_geocoder_address']);
     if ($addressParts !== [0 => '']) {
       $replacements['@proximity_string'] = $proximity . $location;
     }
