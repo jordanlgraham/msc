@@ -7,7 +7,7 @@ hidden: true
 dependencies:
   - entity_print:entity_print_views
 
-# Information added by Drupal.org packaging script on 2021-09-22
-version: '8.x-2.4'
+# Information added by Drupal.org packaging script on 2022-04-11
+version: '8.x-2.5'
 project: 'entity_print'
-datestamp: 1632300403
+datestamp: 1649710510
