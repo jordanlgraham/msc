@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\entity_browser_entity_form\Tests;
+namespace Drupal\Tests\entity_browser_entity_form\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 
