@@ -387,7 +387,8 @@ select.form-control-lg {
   }
 }
 
-form label.form-required:after {
+form label.form-required:after,
+form fieldset legend .form-required:after {
   content: " *";
   color: red;
 }
