@@ -386,3 +386,8 @@ select.form-control-lg {
     }
   }
 }
+
+form input.form-required:after {
+  content: " *";
+  color: red;
+}
