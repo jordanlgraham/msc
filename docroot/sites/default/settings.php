@@ -59,13 +59,6 @@
  */
 
 /**
- * Acquia base settings setting.
- */
-if (file_exists('/var/www/site-php')) {
-  require('/var/www/site-php/msca/msca-settings.inc');
-}
-
-/**
  * Database settings:
  *
  * The $databases array specifies the database connection or
@@ -96,6 +89,13 @@ if (file_exists('/var/www/site-php')) {
  * @endcode
  */
 $databases = [];
+
+/**
+ * Acquia base settings setting.
+ */
+if (file_exists('/var/www/site-php')) {
+  require('/var/www/site-php/msca/msca-settings.inc');
+}
 
 /**
  * Customizing database settings.
