@@ -68,6 +68,10 @@ module:
   image_widget_crop: 0
   inline_entity_form: 0
   insert: 0
+  jquery_ui: 0
+  jquery_ui_datepicker: 0
+  jquery_ui_slider: 0
+  jquery_ui_touch_punch: 0
   key: 0
   link: 0
   masquerade: 0
@@ -92,6 +96,7 @@ module:
   msca_misc: 0
   msca_theme_tweaks: 0
   msca_tweet_block: 0
+  mysql: 0
   netforum_event_sync: 0
   netforum_org_sync: 0
   netforum_user_auth: 0

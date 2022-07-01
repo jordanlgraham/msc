@@ -8,7 +8,7 @@ dependencies:
     - field.field.paragraph.view_embed.field_view_to_embed
     - paragraphs.paragraphs_type.view_embed
   module:
-    - image
+    - svg_image
 id: paragraph.view_embed.default
 targetEntityType: paragraph
 bundle: view_embed
@@ -20,6 +20,12 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
     third_party_settings: {  }
     weight: 1
     region: content

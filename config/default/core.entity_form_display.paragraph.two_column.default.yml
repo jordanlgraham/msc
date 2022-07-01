@@ -35,5 +35,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_background_color: true
   status: true
   uid: true
