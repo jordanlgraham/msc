@@ -25,7 +25,7 @@ class ConstantContactAuthController extends ControllerBase {
 
   /**
    * Constructs an AccessDeniedRedirectSubscriber object.
-   * 
+   *
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger.
    */
@@ -48,15 +48,10 @@ class ConstantContactAuthController extends ControllerBase {
     $host = \Drupal::request()->getSchemeAndHttpHost();
     $redirectUri = $host . '/admin/config/services/constantcontact/authresponse';
     // $redirectUri = 'https://www.maseniorcare.org/admin/config/services/constantcontact/authresponse';
-    $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
-    $secret = 'vR3zg9VuBZzrt0ykhNkPEQ';
-    // If testing in a lando-based local dev environment, set the alternate
-    // credentials.
-    $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
-    if (!empty($lando_info)) {
-      $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
-      $secret = 'fs2XuQcOI2KathBXXIg9MA';
-    }
+
+    $pubkey = '313f267c-9d51-46c2-8466-f1a8bec2705c';
+    $secret = Drupal::service('key.repository')->getKey('constant_contact_secret')->getKeyValue();
+    $secret = substr($secret, 0, -1);
     $token = $this->getAccessToken($redirectUri, $pubkey, $secret, $code);
     $_SESSION['token'] = json_decode($token)->access_token;
     $path = '/admin/content';
@@ -64,7 +59,7 @@ class ConstantContactAuthController extends ControllerBase {
     $this->messenger->addMessage($this->t($message));
     $url = Url::fromUserInput(($path))->toString();
     $redirect = new RedirectResponse($url);
-    $redirect->send();
+    return $redirect->send();
   }
 
   public function createEmailCampaign() {
@@ -74,25 +69,36 @@ class ConstantContactAuthController extends ControllerBase {
     $authService->createEmailCampaign($nid);
   }
 
+  /*
+   * This function can be used to exchange an authorization code for an access token.
+   * Make this call by passing in the code present when the account owner is redirected back to you.
+   * The response will contain an 'access_token' and 'refresh_token'
+   *
+   * @param $redirectURI - URL Encoded Redirect URI
+   * @param $clientId - API Key
+   * @param $clientSecret - API Secret
+   * @param $code - Authorization Code
+   * @return string - JSON String of results
+   */
   private function getAccessToken($redirectURI, $clientId, $clientSecret, $code) {
     // Use cURL to get access token and refresh token
     $ch = curl_init();
 
-    // Define base URL
-    $base = 'https://idfed.constantcontact.com/as/token.oauth2';
+    // Define base URL.
+    $base = 'https://authz.constantcontact.com/oauth2/default/v1/token';
 
-    // Create full request URL
-    $url = $base . '?code=' . $code . '&redirect_uri=' . $redirectURI . '&grant_type=authorization_code&scope=campaign_data';
+    // Create full request URL.
+    $url = $base . '?code=' . $code . '&redirect_uri=' . $redirectURI . '&grant_type=authorization_code';
     curl_setopt($ch, CURLOPT_URL, $url);
 
-    // Set authorization header
-    // Make string of "API_KEY:SECRET"
+    // Set authorization header.
+    // Make string of "API_KEY:SECRET".
     $auth = $clientId . ':' . $clientSecret;
-    // Base64 encode it
+    // Base64 encode it.
     $credentials = base64_encode($auth);
-    // Create and set the Authorization header to use the encoded credentials
+    // Create and set the Authorization header to use the encoded credentials, and set the Content-Type header.
     $authorization = 'Authorization: Basic ' . $credentials;
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array($authorization));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array($authorization, 'Content-Type: application/x-www-form-urlencoded'));
 
     // Set method and to expect response
     curl_setopt($ch, CURLOPT_POST, true);

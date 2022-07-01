@@ -4,6 +4,7 @@ namespace Drupal\msca_constant_contact;
 
 use Drupal\Core\Url;
 use GuzzleHttp\Client;
+use Drupal\Component\Utility\Random;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -40,22 +41,51 @@ class ConstantContactAuth {
   }
 
   public function auth() {
-    $pubkey = '9fdc2e05-0e19-4847-b6e0-17e49f9f47a4';
-    // If testing in a lando-based local dev environment, set the alternate
-    // public key value.
-    $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
-    if (!empty($lando_info)) {
-      $pubkey = '5e36e7a6-5c46-4de6-bdbc-66de3921192b';
-    }
-    $baseUrl = 'https://api.cc.email/v3/idfed?';
-    $client = 'client_id=' . $pubkey;
+    $clientId = '313f267c-9d51-46c2-8466-f1a8bec2705c';
+
     $host = \Drupal::request()->getSchemeAndHttpHost();
-    $redirectUri = '&redirect_uri=' . $host . '/admin/config/services/constantcontact/authresponse';
-    $responseType = '&response_type=code';
-    $scope = '&scope=campaign_data';
-    $url = $baseUrl . $client . $redirectUri . $responseType . $scope;
-    // return new TrustedRedirectResponse('https://msc.lndo.site');
+    $redirectUri = $host . '/admin/config/services/constantcontact/authresponse';
+    $scope = 'campaign_data';
+    $state = $this->generateRandomString(23, TRUE);
+
+    $url = $this->getAuthorizationURL($clientId, $redirectUri, $scope, $state);
+
     return new TrustedRedirectResponse($url);
+  }
+
+  /**
+   * Builds the authorization url.
+   *
+   * See https://v3.developer.constantcontact.com/api_guide/server_flow.html#PHP.
+   *
+   * @param $redirectURI - URL Encoded Redirect URI
+   * @param $clientId - API Key
+   * @param $scope - URL encoded, plus sign delimited list of scopes that your application requires. The 'offline_access' scope needed to request a refresh token is added by default.
+   * @param $state - Arbitrary string value(s) to verify response and preserve application state
+   * @return string - Full Authorization URL
+   */
+  function getAuthorizationURL($clientId, $redirectURI, $scope, $state) {
+    // Create authorization URL
+    $baseURL = "https://authz.constantcontact.com/oauth2/default/v1/authorize";
+    $authURL = $baseURL . "?client_id=" . $clientId . "&scope=" . $scope . "+offline_access&response_type=code&state=" . $state . "&redirect_uri=" . $redirectURI;
+
+    return $authURL;
+  }
+
+  /**
+   * Generate a random string with letters, numbers and url-safe special chars.
+   *
+   * @param int $length
+   * @return string
+   */
+  public function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-._~()\'!*:@,;';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
   }
 
   public function createEmailCampaign($nid) {
