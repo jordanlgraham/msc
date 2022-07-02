@@ -19,7 +19,6 @@ services:
         DRUSH_OPTIONS_URI: "https://msc.lndo.site"
         PHP_IDE_CONFIG: "serverName=appserver"
         XDEBUG_SESSION_START: LANDO
-        PANTHEON_ENVIRONMENT: lando
   msc:
     type: mysql:5.7
     portforward: 3307
