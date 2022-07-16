@@ -19,9 +19,7 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
       break;
   }
 }
-$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/default';
-
-
+$settings['config_sync_directory'] = dirname(DRUPAL_ROOT) . '/config/foundation';
 
 $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
 
@@ -44,6 +42,3 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 
 // Temporary fix because drush9 blocks superglobals.
 $_SERVER['PWD']=DRUPAL_ROOT;
-
-// Separate config sync directory from the default site.
-$settings['config_sync_directory'] = '/app/config/foundation';
