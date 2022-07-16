@@ -26,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Thank You to Our Donors'
+      title: 'Thank You to Our Sponsors'
       fields:
         field_logo_1:
           id: field_logo_1
@@ -82,6 +82,8 @@ display:
           settings:
             image_link: ''
             image_style: short_logo
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -209,7 +211,7 @@ display:
           admin_label: 'Content queue'
           entity_type: node
           plugin_id: entity_queue
-          required: false
+          required: true
           limit_queue: homepage_sponsors
       css_class: homepage-sponsors
       header:
@@ -223,7 +225,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: 'Mass Senior Care would like to thank all of our generous donors.'
+            value: 'Mass Senior Care would like to thank all of our generous sponsors. '
             format: basic_html
           tokenize: false
       footer:
@@ -237,7 +239,7 @@ display:
           plugin_id: text
           empty: false
           content:
-            value: '<a href="/donors" class="btn btn-primary">View All Donors</a>'
+            value: '<a href="https://www.maseniorcare.org/education-and-events/upcoming-events/mass-senior-care-association-2022-spring-conference-trade-show" class="btn btn-primary">View All Sponsors</a>'
             format: full_html
           tokenize: false
       display_extenders: {  }

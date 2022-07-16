@@ -32,12 +32,15 @@ content:
       trim_length: 80
       trim_type: words
       trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
       more_link: false
       more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
-        text: true
+        text: false
+        trim_zero: false
     third_party_settings: {  }
     weight: 5
     region: content
@@ -71,6 +74,12 @@ content:
     settings:
       image_link: ''
       image_style: sponsor_logo_largest
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
@@ -90,7 +99,7 @@ content:
     type: link
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: null
       url_only: true
       url_plain: true
       rel: '0'

@@ -10,7 +10,6 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.foundation_highlights
   module:
-    - colorapi
     - paragraphs
     - svg_image
 id: paragraph.foundation_highlights.default
@@ -27,10 +26,12 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
   field_heading_background_color:
-    type: colorapi_color_widget
-    weight: 4
+    type: string_textfield
+    weight: 0
     region: content
-    settings: {  }
+    settings:
+      size: 10
+      placeholder: ''
     third_party_settings: {  }
   field_highlight_column:
     type: entity_reference_paragraphs

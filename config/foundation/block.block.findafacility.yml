@@ -4,8 +4,9 @@ status: true
 dependencies:
   module:
     - block_class
-    - ctools
     - facility_search
+    - node
+    - system
   theme:
     - msca_theme
 third_party_settings:
@@ -13,8 +14,8 @@ third_party_settings:
     classes: sidebar-block
 id: findafacility
 theme: msca_theme
-region: gutter
-weight: -10
+region: sidebar_second
+weight: -14
 provider: null
 plugin: facility_search
 settings:
@@ -36,3 +37,8 @@ visibility:
       scholarships: scholarships
       vendor: vendor
       video: video
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

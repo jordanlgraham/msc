@@ -10,7 +10,7 @@ type: 'canonical_entities:node'
 pattern: 'education-and-events/upcoming-events/[node:title]'
 selection_criteria:
   34511b58-11ac-4c65-81cb-58cdce1577d5:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: 34511b58-11ac-4c65-81cb-58cdce1577d5
     context_mapping:

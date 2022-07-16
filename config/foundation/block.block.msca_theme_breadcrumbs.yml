@@ -3,13 +3,9 @@ langcode: en
 status: true
 dependencies:
   module:
-    - block_class
     - system
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 _core:
   default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
 id: msca_theme_breadcrumbs

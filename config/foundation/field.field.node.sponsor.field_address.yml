@@ -20,6 +20,7 @@ default_value_callback: ''
 settings:
   available_countries: {  }
   langcode_override: ''
+  field_overrides: {  }
   fields:
     administrativeArea: administrativeArea
     locality: locality

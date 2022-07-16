@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_tags
-    - image.style.thumbnail
     - node.type.newsletter_article
   module:
     - datetime
@@ -36,15 +35,18 @@ content:
     type: smart_trim
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: 30
       trim_type: words
       trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
       more_link: false
       more_class: more-link
       more_text: More
       summary_handler: full
       trim_options:
         text: true
+        trim_zero: false
     third_party_settings: {  }
     weight: 2
     region: content
@@ -61,8 +63,8 @@ content:
     type: media_thumbnail
     label: hidden
     settings:
-      image_link: ''
-      image_style: thumbnail
+      image_link: content
+      image_style: ''
     third_party_settings: {  }
     weight: 0
     region: content

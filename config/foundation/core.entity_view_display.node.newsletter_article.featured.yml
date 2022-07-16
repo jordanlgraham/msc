@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.newsletter_article.field_related_content
     - field.field.node.newsletter_article.field_sponsor
     - field.field.node.newsletter_article.field_tags
-    - image.style.max_325x325
     - node.type.newsletter_article
   module:
     - datetime
@@ -52,7 +51,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: max_325x325
+      image_style: ''
     third_party_settings: {  }
     weight: 0
     region: content

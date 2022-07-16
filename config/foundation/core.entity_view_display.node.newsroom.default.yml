@@ -12,7 +12,7 @@ dependencies:
     - field.field.node.newsroom.field_newsroom_category
     - field.field.node.newsroom.field_related_content
     - field.field.node.newsroom.field_tags
-    - image.style.featured_image_130x190_
+    - image.style.featured_image_130x190
     - node.type.newsroom
   module:
     - datetime
@@ -66,7 +66,7 @@ content:
     label: hidden
     settings:
       image_link: ''
-      image_style: featured_image_130x190_
+      image_style: featured_image_130x190
     third_party_settings: {  }
     weight: 3
     region: content

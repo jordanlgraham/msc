@@ -696,30 +696,23 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-            filter:
-              field_address_organization:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              tid:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: true
-                  is_secondary: false
+            field_address_organization:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            tid:
+              bef_format: default
+              more_options:
+                bef_select_all_none: true
+                bef_collapsible: true
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
       access:
         type: perm
         options:
@@ -998,30 +991,23 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-            filter:
-              field_address_organization:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              tid:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: true
-                  is_secondary: false
+            field_address_organization:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            tid:
+              bef_format: default
+              more_options:
+                bef_select_all_none: true
+                bef_collapsible: true
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
       defaults:
         exposed_form: false
       exposed_block: false

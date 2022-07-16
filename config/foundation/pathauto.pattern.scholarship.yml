@@ -10,7 +10,7 @@ type: 'canonical_entities:node'
 pattern: 'foundation-scholarship-program/[node:title]'
 selection_criteria:
   d17c3a3f-7e97-466b-947c-fc5abec7d37e:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: d17c3a3f-7e97-466b-947c-fc5abec7d37e
     context_mapping:

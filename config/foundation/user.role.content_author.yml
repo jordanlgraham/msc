@@ -1,49 +1,7 @@
 uuid: 32f53533-3f77-4cd9-afa5-06cb6823bd98
 langcode: en
 status: true
-dependencies:
-  config:
-    - filter.format.full_html
-    - node.type.education_events
-    - node.type.facility
-    - node.type.file_browser
-    - node.type.forum
-    - node.type.newsletter
-    - node.type.newsletter_article
-    - node.type.newsroom
-    - node.type.page
-    - node.type.paragraph_assembler
-    - node.type.resources
-    - node.type.scholarship_recipient
-    - node.type.scholarships
-    - node.type.sponsor
-    - node.type.vendor
-    - node.type.video
-    - taxonomy.vocabulary.event_types
-    - taxonomy.vocabulary.forums
-    - taxonomy.vocabulary.group
-    - taxonomy.vocabulary.job_categories
-    - taxonomy.vocabulary.job_regions
-    - taxonomy.vocabulary.news_types
-    - taxonomy.vocabulary.resource_category
-    - taxonomy.vocabulary.resource_type
-    - taxonomy.vocabulary.tags
-    - taxonomy.vocabulary.vendor_services_offered
-  module:
-    - contextual
-    - entity_browser
-    - file
-    - filter
-    - media
-    - node
-    - path
-    - quickedit
-    - real_magnet
-    - redirect
-    - shortcut
-    - system
-    - taxonomy
-    - toolbar
+dependencies: {  }
 id: content_author
 label: 'Content Author'
 weight: 3
@@ -61,6 +19,7 @@ permissions:
   - 'administer nodes'
   - 'administer redirects'
   - 'administer taxonomy'
+  - 'create job_listings content'
   - 'create newsletter content'
   - 'create newsletter_article content'
   - 'create newsroom content'
@@ -85,6 +44,7 @@ permissions:
   - 'edit any facility content'
   - 'edit any file_browser content'
   - 'edit any forum content'
+  - 'edit any job_listings content'
   - 'edit any newsletter content'
   - 'edit any newsletter_article content'
   - 'edit any newsroom content'
@@ -100,6 +60,7 @@ permissions:
   - 'edit own facility content'
   - 'edit own file_browser content'
   - 'edit own forum content'
+  - 'edit own job_listings content'
   - 'edit own newsletter content'
   - 'edit own newsletter_article content'
   - 'edit own newsroom content'
@@ -126,6 +87,7 @@ permissions:
   - 'revert facility revisions'
   - 'revert file_browser revisions'
   - 'revert forum revisions'
+  - 'revert job_listings revisions'
   - 'revert newsletter revisions'
   - 'revert newsletter_article revisions'
   - 'revert newsroom revisions'
@@ -144,6 +106,7 @@ permissions:
   - 'view facility revisions'
   - 'view file_browser revisions'
   - 'view forum revisions'
+  - 'view job_listings revisions'
   - 'view newsletter revisions'
   - 'view newsletter_article revisions'
   - 'view newsroom revisions'

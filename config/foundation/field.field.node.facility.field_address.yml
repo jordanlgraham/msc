@@ -21,6 +21,7 @@ settings:
   available_countries:
     US: US
   langcode_override: ''
+  field_overrides: {  }
   fields:
     administrativeArea: administrativeArea
     locality: locality

@@ -1,20 +1,6 @@
 _core:
   default_config_hash: 15D6dRw1i0hm-4oGA1S1efHREHSxhSQYvdzQzVBn4c8
-text_formats:
-  - basic_html
-  - full_html
+text_formats: {  }
 css_classes:
-  file: {  }
-  image: {  }
-absolute: false
-file_field_images_enabled: false
-widgets:
-  file:
-    - file_generic
-  image:
-    - image_image
-file_extensions:
-  audio:
-    - mp3
-  video:
-    - mp4
+  file: ''
+  image: ''

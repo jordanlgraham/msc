@@ -13,3 +13,15 @@ definitions:
     weight: -50
     expanded: false
     enabled: false
+  msca_access__sign_in:
+    menu_name: masthead
+    parent: ''
+    weight: -50
+    expanded: false
+    enabled: true
+  msca_access__sign_out:
+    menu_name: masthead
+    parent: ''
+    weight: -49
+    expanded: false
+    enabled: true

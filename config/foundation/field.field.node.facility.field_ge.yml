@@ -6,25 +6,12 @@ dependencies:
     - field.storage.node.field_ge
     - node.type.facility
   module:
-    - geocoder_field
     - geolocation
-third_party_settings:
-  geocoder_field:
-    method: source
-    field: field_address
-    providers:
-      - googlemaps
-    dumper: geolocation
-    delta_handling: default
-    failure:
-      handling: empty
-      status_message: false
-      log: true
 id: node.facility.field_ge
 field_name: field_ge
 entity_type: node
 bundle: facility
-label: geo
+label: Geolocation
 description: ''
 required: false
 translatable: false

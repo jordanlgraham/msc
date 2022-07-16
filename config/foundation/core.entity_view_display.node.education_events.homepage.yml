@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
     - address
@@ -37,8 +38,12 @@ content:
       url_plain: false
       rel: 0
       target: 0
+      btn_size: ''
+      btn_block: null
+      icon_class: ''
+      disable_btn_role: 0
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_date:
     type: datetime_plain
@@ -60,6 +65,16 @@ content:
     type: address_default
     label: hidden
     settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_virtual_event:
+    type: boolean
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
     weight: 2
     region: content

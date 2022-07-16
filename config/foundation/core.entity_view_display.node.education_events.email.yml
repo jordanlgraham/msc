@@ -1,0 +1,82 @@
+uuid: 1ff26cc6-4229-4dbd-ab19-70081a7062f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.email
+    - field.field.node.education_events.body
+    - field.field.node.education_events.field_call_to_action
+    - field.field.node.education_events.field_date
+    - field.field.node.education_events.field_end_date
+    - field.field.node.education_events.field_event_category
+    - field.field.node.education_events.field_event_key
+    - field.field.node.education_events.field_event_related_content
+    - field.field.node.education_events.field_file
+    - field.field.node.education_events.field_gated
+    - field.field.node.education_events.field_location
+    - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
+    - node.type.education_events
+  module:
+    - address
+    - datetime
+    - smart_trim
+    - user
+id: node.education_events.email
+targetEntityType: node
+bundle: education_events
+mode: email
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 80
+      trim_type: chars
+      trim_suffix: ''
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: n/j
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_event_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_location:
+    type: address_plain
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_call_to_action: true
+  field_end_date: true
+  field_event_key: true
+  field_event_related_content: true
+  field_file: true
+  field_gated: true
+  field_sponsors: true
+  field_virtual_event: true
+  links: true

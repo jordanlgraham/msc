@@ -1,0 +1,83 @@
+uuid: 8e06aed7-67d8-46bc-85e1-61c5e4b8ab63
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.email
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_gated
+    - field.field.node.newsletter_article.field_news_release_date
+    - field.field.node.newsletter_article.field_news_source
+    - field.field.node.newsletter_article.field_news_subtitle
+    - field.field.node.newsletter_article.field_news_teaser_image
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_related_content
+    - field.field.node.newsletter_article.field_sponsor
+    - field.field.node.newsletter_article.field_tags
+    - image.style.thumbnail
+    - node.type.newsletter_article
+  module:
+    - datetime
+    - entity_print
+    - media
+    - smart_trim
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'Print this Article'
+id: node.newsletter_article.email
+targetEntityType: node
+bundle: newsletter_article
+mode: email
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 80
+      trim_type: words
+      trim_suffix: ''
+      more_link: false
+      more_class: more-link
+      more_text: More
+      summary_handler: full
+      trim_options:
+        text: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_release_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: M/j
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_news_teaser_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  flag_bookmark:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_news_source: true
+  field_news_subtitle: true
+  field_newsletter_byline: true
+  field_related_content: true
+  field_sponsor: true
+  field_tags: true
+  links: true

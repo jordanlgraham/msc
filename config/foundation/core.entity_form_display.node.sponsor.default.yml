@@ -49,8 +49,7 @@ content:
     type: address_default
     weight: 5
     region: content
-    settings:
-      default_country: null
+    settings: {  }
     third_party_settings: {  }
   field_facebook:
     type: link_default

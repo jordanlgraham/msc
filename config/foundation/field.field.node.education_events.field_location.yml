@@ -21,16 +21,12 @@ settings:
   available_countries:
     US: US
   langcode_override: ''
-  fields:
-    administrativeArea: administrativeArea
-    locality: locality
-    dependentLocality: dependentLocality
-    postalCode: postalCode
-    sortingCode: sortingCode
-    addressLine1: addressLine1
-    addressLine2: addressLine2
-    organization: organization
-    givenName: '0'
-    additionalName: '0'
-    familyName: '0'
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+  fields: {  }
 field_type: address

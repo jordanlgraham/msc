@@ -27,10 +27,10 @@ widgets:
     weight: 1
     settings:
       extensions: 'jpg jpeg png gif'
+      media_type: image
       upload_location: 'public://images'
       multiple: false
       submit_text: Upload
-      media_type: image
   8f762a1c-6ed6-4c41-84b1-1f48b16d69c2:
     id: view
     uuid: 8f762a1c-6ed6-4c41-84b1-1f48b16d69c2

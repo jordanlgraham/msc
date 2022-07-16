@@ -3,9 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
     - field.field.node.vendor.field_additional_services
     - field.field.node.vendor.field_address
+    - field.field.node.vendor.field_all_services
     - field.field.node.vendor.field_contact
     - field.field.node.vendor.field_contact_title
     - field.field.node.vendor.field_customer_key
@@ -21,9 +21,9 @@ dependencies:
     - node.type.vendor
   module:
     - address
-    - entity_browser
     - field_group
     - link
+    - media_library
     - path
     - scheduler
 third_party_settings:
@@ -41,6 +41,7 @@ third_party_settings:
         - field_email
         - field_primary_services
         - field_additional_services
+        - field_all_services
       label: 'NetForum Data (Auto-synchronized)'
       region: content
       parent_name: ''
@@ -61,7 +62,6 @@ third_party_settings:
       weight: 1
       format_type: details
       format_settings:
-        label: 'Manually Entered Information'
         classes: ''
         id: ''
         open: true
@@ -73,7 +73,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -91,8 +91,17 @@ content:
     type: address_default
     weight: 7
     region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_all_services:
+    type: entity_reference_autocomplete
+    weight: 14
+    region: content
     settings:
-      default_country: null
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_contact:
     type: string_textfield
@@ -112,7 +121,7 @@ content:
     third_party_settings: {  }
   field_customer_key:
     type: string_textfield
-    weight: 26
+    weight: 9
     region: content
     settings:
       size: 60
@@ -176,18 +185,11 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_vendor_image:
-    type: entity_browser_entity_reference
+    type: media_library_widget
     weight: 27
     region: content
     settings:
-      entity_browser: image_browser
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      open: false
-      field_widget_display_settings:
-        view_mode: default
-      selection_mode: selection_append
+      media_types: {  }
     third_party_settings: {  }
   field_web_address:
     type: link_default
@@ -199,33 +201,33 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 16
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 17
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 121
+    weight: 13
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 18
+    weight: 8
     region: content
     settings:
       display_label: true
@@ -240,7 +242,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 15
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -250,12 +252,12 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }

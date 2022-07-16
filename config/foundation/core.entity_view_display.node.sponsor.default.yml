@@ -69,6 +69,12 @@ content:
     settings:
       image_link: ''
       image_style: sponsor_logo_large_190x110_
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 0
     region: content
@@ -96,7 +102,7 @@ content:
     type: link
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: 120
       url_only: true
       url_plain: true
       rel: '0'

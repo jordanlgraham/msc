@@ -13,3 +13,4 @@ settings:
   cafile: ''
   verify_peer: true
   verify_peer_name: true
+  disable_log: false

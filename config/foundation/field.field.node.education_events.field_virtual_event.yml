@@ -1,0 +1,23 @@
+uuid: f25ab9ca-d91c-46bd-9e42-ad91a8343a0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_virtual_event
+    - node.type.education_events
+id: node.education_events.field_virtual_event
+field_name: field_virtual_event
+entity_type: node
+bundle: education_events
+label: 'Virtual event'
+description: 'Check this box if this is a virtual event. (Leaving this box unchecked means that the event will be at a specific location, in person.)'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

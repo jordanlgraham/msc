@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
     - address
@@ -47,6 +48,9 @@ content:
       url_plain: false
       rel: 0
       target: 0
+      btn_block: null
+      icon_class: ''
+      disable_btn_role: 0
     third_party_settings: {  }
     weight: 5
     region: content
@@ -82,7 +86,7 @@ content:
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 7
+    weight: 6
     region: content
   field_location:
     type: address_default
@@ -98,7 +102,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 8
+    weight: 7
     region: content
 hidden:
   entity_print_view_epub: true
@@ -107,4 +111,5 @@ hidden:
   field_event_key: true
   field_event_related_content: true
   field_gated: true
+  field_virtual_event: true
   links: true

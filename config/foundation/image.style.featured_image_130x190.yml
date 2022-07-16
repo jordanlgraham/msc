@@ -1,0 +1,15 @@
+uuid: 6ad35451-78b2-4858-bd0a-6626488bac31
+langcode: en
+status: true
+dependencies: {  }
+name: featured_image_130x190
+label: 'Featured Image (130 x 190)'
+effects:
+  2b6acecc-f036-4911-9e90-a2f89f7e76a3:
+    uuid: 2b6acecc-f036-4911-9e90-a2f89f7e76a3
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 130
+      height: 190
+      anchor: center-center

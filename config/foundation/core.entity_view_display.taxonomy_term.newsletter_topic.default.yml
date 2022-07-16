@@ -1,0 +1,24 @@
+uuid: bc66d7c2-47a6-4abe-be15-2185815f7877
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.newsletter_topic
+  module:
+    - text
+id: taxonomy_term.newsletter_topic.default
+targetEntityType: taxonomy_term
+bundle: newsletter_topic
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

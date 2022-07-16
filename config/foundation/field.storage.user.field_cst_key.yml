@@ -1,0 +1,21 @@
+uuid: 82b818f3-3703-43a0-b2a2-ff1f738b402e
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_cst_key
+field_name: field_cst_key
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

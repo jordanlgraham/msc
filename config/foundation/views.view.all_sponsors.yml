@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Donors
+      title: Sponsors
       fields:
         title:
           id: title
@@ -216,7 +216,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: donors
+      path: sponsors
     cache_metadata:
       max-age: -1
       contexts:

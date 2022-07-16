@@ -15,25 +15,16 @@ dependencies:
     - field.field.node.education_events.field_gated
     - field.field.node.education_events.field_location
     - field.field.node.education_events.field_sponsors
+    - field.field.node.education_events.field_virtual_event
     - node.type.education_events
   module:
-    - address
     - datetime
-    - text
     - user
 id: node.education_events.newsletter
 targetEntityType: node
 bundle: education_events
 mode: newsletter
 content:
-  body:
-    type: text_summary_or_trimmed
-    label: hidden
-    settings:
-      trim_length: 200
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_date:
     type: datetime_custom
     label: hidden
@@ -43,34 +34,19 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_event_category:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_location:
-    type: address_plain
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 3
-    region: content
-  links:
-    settings: {  }
-    third_party_settings: {  }
-    weight: 5
-    region: content
 hidden:
+  body: true
   entity_print_view_epub: true
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_call_to_action: true
   field_end_date: true
+  field_event_category: true
   field_event_key: true
   field_event_related_content: true
   field_file: true
   field_gated: true
+  field_location: true
   field_sponsors: true
+  field_virtual_event: true
+  links: true

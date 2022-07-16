@@ -1,0 +1,82 @@
+uuid: de8ba861-4aaa-4f32-a566-3f6a41505ae1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.email
+    - field.field.node.newsroom.body
+    - field.field.node.newsroom.field_gated
+    - field.field.node.newsroom.field_news_release_date
+    - field.field.node.newsroom.field_news_source
+    - field.field.node.newsroom.field_news_subtitle
+    - field.field.node.newsroom.field_news_teaser_image
+    - field.field.node.newsroom.field_newsroom_category
+    - field.field.node.newsroom.field_related_content
+    - field.field.node.newsroom.field_tags
+    - image.style.thumbnail
+    - node.type.newsroom
+  module:
+    - datetime
+    - link
+    - media
+    - text
+    - user
+id: node.newsroom.email
+targetEntityType: node
+bundle: newsroom
+mode: email
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_release_date:
+    type: datetime_custom
+    label: hidden
+    settings:
+      timezone_override: ''
+      date_format: M/j
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_news_source:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_news_teaser_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_newsroom_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_news_subtitle: true
+  field_related_content: true
+  field_tags: true
+  links: true

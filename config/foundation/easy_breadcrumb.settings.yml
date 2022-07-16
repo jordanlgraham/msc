@@ -2,11 +2,8 @@ _core:
   default_config_hash: MymgTM4i959vZLJ3F-hpn_ntX-johso5eQqRm-03r0Y
 include_invalid_paths: false
 excluded_paths: ''
-replaced_titles: ''
-custom_paths: ''
 include_home_segment: true
 home_segment_title: Home
-home_segment_keep: false
 include_title_segment: true
 title_from_page_when_available: true
 title_segment_as_link: false
@@ -14,9 +11,3 @@ segments_separator: null
 use_menu_title_as_fallback: false
 remove_repeated_segments: true
 language_path_prefix_as_segment: false
-add_structured_data_json_ld: false
-capitalizator_ignored_words: {  }
-capitalizator_forced_words: {  }
-capitalizator_forced_words_case_sensitivity: false
-capitalizator_forced_words_first_letter: false
-follow_redirects: true

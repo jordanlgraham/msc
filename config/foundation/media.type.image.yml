@@ -12,7 +12,7 @@ label: Image
 description: 'For Image files.'
 source: image
 queue_thumbnail_downloads: false
-new_revision: true
+new_revision: false
 source_configuration:
   source_field: field_image
   gather_exif: false

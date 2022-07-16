@@ -7,6 +7,7 @@ dependencies:
   module:
     - block_class
     - ctools
+    - system
     - views
   theme:
     - msca_theme
@@ -39,3 +40,8 @@ visibility:
       resources: resources
       scholarships: scholarships
       video: video
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

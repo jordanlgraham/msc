@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.page.body
     - field.field.node.page.field_gated
     - field.field.node.page.field_related_content
-    - field.field.node.page.field_restrict_to_groups
     - node.type.page
   module:
     - text
@@ -24,14 +23,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_restrict_to_groups:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 1
     region: content
 hidden:
   entity_print_view_epub: true

@@ -1,9 +1,7 @@
 uuid: 6a90c3c1-0016-40ad-8825-0f91b36fb38a
 langcode: en
 status: true
-dependencies:
-  module:
-    - msca_access
+dependencies: {  }
 id: member
 label: Member
 weight: 4

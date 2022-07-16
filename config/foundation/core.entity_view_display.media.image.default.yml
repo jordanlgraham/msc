@@ -1,0 +1,45 @@
+uuid: 311a91df-bb44-46d5-8a48-835cdb8857e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_image
+    - image.style.cropped_preview_thumbnail
+    - media.type.image
+  module:
+    - svg_image
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: cropped_preview_thumbnail
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_image: true
+  uid: true

@@ -1,6 +1,0 @@
-name: Config Split Imitator
-type: module
-description: Dummy module, standing in for unused and not-ready-for-D9 contrib module of the same machine name.
-package: Custom
-core: 8.x
-core_version_requirement: ^8 || ^9

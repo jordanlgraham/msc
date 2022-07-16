@@ -3,13 +3,9 @@ langcode: en
 status: false
 dependencies:
   module:
-    - block_class
     - masquerade
   theme:
     - msca_theme
-third_party_settings:
-  block_class:
-    classes: ''
 id: msca_theme_masquerade
 theme: msca_theme
 region: content

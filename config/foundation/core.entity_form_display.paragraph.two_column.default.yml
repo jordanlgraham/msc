@@ -7,18 +7,19 @@ dependencies:
     - field.field.paragraph.two_column.field_two_column_paragraphs
     - paragraphs.paragraphs_type.two_column
   module:
-    - colorapi
     - paragraphs
 id: paragraph.two_column.default
 targetEntityType: paragraph
 bundle: two_column
 mode: default
 content:
-  field_background_color:
-    type: colorapi_color_widget
-    weight: 2
+  field_heading_background_color:
+    type: string_textfield
+    weight: 0
     region: content
-    settings: {  }
+    settings:
+      size: 10
+      placeholder: ''
     third_party_settings: {  }
   field_two_column_paragraphs:
     type: entity_reference_paragraphs
@@ -34,5 +35,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_background_color: true
   status: true
   uid: true

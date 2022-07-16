@@ -14,6 +14,8 @@ dependencies:
     - taxonomy.vocabulary.event_types
     - taxonomy.vocabulary.news_types
     - taxonomy.vocabulary.tags
+  content:
+    - 'taxonomy_term:tags:d0a8bcae-f09f-4616-801e-04bf60c9815f'
   module:
     - better_exposed_filters
     - datetime
@@ -435,32 +437,20 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_tags_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_tags_target_id:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       filters:
         status:
           id: status
@@ -728,59 +718,39 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              type_1:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              field_event_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              field_date_value:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              field_tags_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            type_1:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_event_category_target_id:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            field_date_value:
+              bef_format: default
+              more_options:
+                is_secondary: false
+            field_tags_target_id:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
       filters:
         status:
           id: status
@@ -1145,41 +1115,27 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              type_1:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              name:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              name_1:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            type_1:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            name:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
+            name_1:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       arguments:
         type:
           id: type
@@ -1462,32 +1418,22 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       sorts:
         field_newsletter_date_value:
           id: field_newsletter_date_value
@@ -1731,32 +1677,22 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       sorts:
         field_newsletter_date_value:
           id: field_newsletter_date_value
@@ -2014,32 +1950,22 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       sorts:
         field_date_value:
           id: field_date_value
@@ -2049,7 +1975,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: datetime
-          order: DESC
+          order: ASC
           expose:
             label: ''
             field_identifier: field_date_value
@@ -2342,32 +2268,20 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_tags_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_tags_target_id:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       filters:
         status:
           id: status
@@ -2612,32 +2526,22 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       sorts:
         field_news_release_date_value:
           id: field_news_release_date_value
@@ -2895,32 +2799,22 @@ display:
           bef:
             general:
               autosubmit: false
-              autosubmit_exclude_textfield: false
               autosubmit_hide: false
-              input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
-              text_input_required: 'Select any filter and click on Apply to see results'
-              text_input_required_format: basic_html
-            filter:
-              field_newsroom_category_target_id:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
-              title:
-                plugin_id: default
-                advanced:
-                  sort_options: false
-                  placeholder_text: ''
-                  rewrite:
-                    filter_rewrite_values: ''
-                  collapsible: false
-                  is_secondary: false
+            field_newsroom_category_target_id:
+              bef_format: default
+              more_options:
+                bef_select_all_none: false
+                bef_collapsible: false
+                is_secondary: false
+                rewrite:
+                  filter_rewrite_values: ''
+            title:
+              bef_format: default
+              more_options:
+                is_secondary: false
+                placeholder_text: ''
       sorts:
         field_news_release_date_value:
           id: field_news_release_date_value

@@ -5,6 +5,7 @@ dependencies:
   module:
     - block_class
     - ctools
+    - system
     - vendor_search
   theme:
     - msca_theme
@@ -13,8 +14,8 @@ third_party_settings:
     classes: sidebar-block
 id: findapreferredvendor
 theme: msca_theme
-region: gutter
-weight: -11
+region: sidebar_second
+weight: -12
 provider: null
 plugin: vendor_search
 settings:
@@ -34,3 +35,8 @@ visibility:
       page: page
       scholarships: scholarships
       video: video
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.image_browser
+    - entity_browser.browser.media_entity_browser_media_library
     - media.type.image
   module:
     - entity_embed
@@ -19,9 +19,7 @@ type_settings:
     - image
   display_plugins:
     - 'entity_reference:media_thumbnail'
-  entity_browser: image_browser
+  entity_browser: media_entity_browser_media_library
   entity_browser_settings:
     display_review: false
-    icon_uuid: bf44dafa-157a-432a-837d-ff17db1cc798
-icon: {  }
 icon_uuid: null
