@@ -82,6 +82,7 @@ class ColorItem extends FieldItemBase implements ColorItemInterface {
    * {@inheritdoc}
    */
   public function setValue($values, $notify = TRUE) {
+    $values['name'] = isset($values['name']) ? $values['name'] : '';
     $this->setName($values['name'], $notify);
     $color_string = isset($values['color']['hexadecimal']) ? $values['color']['hexadecimal'] : $values['color'];
     $this->setHexadecimal($color_string, $notify);
