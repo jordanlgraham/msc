@@ -4,6 +4,7 @@ namespace Drupal\devel\Routing;
 
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Drupal\Core\Routing\RoutingEvents;
 use Symfony\Component\Routing\Route;
@@ -25,13 +26,23 @@ class RouteSubscriber extends RouteSubscriberBase {
   protected $entityTypeManager;
 
   /**
+   * The router service.
+   *
+   * @var \Symfony\Component\Routing\RouterInterface
+   */
+  protected $routeProvider;
+
+  /**
    * Constructs a new RouteSubscriber object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
    *   The entity type manager.
+   * @param \Symfony\Component\Routing\RouterInterface $router_provider
+   *   The router service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_manager, RouteProviderInterface $router_provider) {
     $this->entityTypeManager = $entity_manager;
+    $this->routeProvider = $router_provider;
   }
 
   /**
@@ -62,7 +73,8 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function getEntityLoadRoute(EntityTypeInterface $entity_type) {
     if ($devel_load = $entity_type->getLinkTemplate('devel-load')) {
-      $entity_type_id = $entity_type->id();
+      // Set entities route parameters for the give template.
+      $parameters = $this->getRouteParameters($entity_type->getLinkTemplate('edit-form'));
       $route = new Route($devel_load);
       $route
         ->addDefaults([
@@ -73,10 +85,8 @@ class RouteSubscriber extends RouteSubscriberBase {
           '_permission' => 'access devel information',
         ])
         ->setOption('_admin_route', TRUE)
-        ->setOption('_devel_entity_type_id', $entity_type_id)
-        ->setOption('parameters', [
-          $entity_type_id => ['type' => 'entity:' . $entity_type_id],
-        ]);
+        ->setOption('_devel_entity_type_id', $entity_type->id())
+        ->setOption('parameters', $parameters);
 
       return $route;
     }
@@ -93,8 +103,9 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function getEntityRenderRoute(EntityTypeInterface $entity_type) {
     if ($devel_render = $entity_type->getLinkTemplate('devel-render')) {
-      $entity_type_id = $entity_type->id();
       $route = new Route($devel_render);
+      // Set entities route parameters for the give template.
+      $parameters = $this->getRouteParameters($entity_type->getLinkTemplate('canonical'));
       $route
         ->addDefaults([
           '_controller' => '\Drupal\devel\Controller\EntityDebugController::entityRender',
@@ -104,10 +115,8 @@ class RouteSubscriber extends RouteSubscriberBase {
           '_permission' => 'access devel information',
         ])
         ->setOption('_admin_route', TRUE)
-        ->setOption('_devel_entity_type_id', $entity_type_id)
-        ->setOption('parameters', [
-          $entity_type_id => ['type' => 'entity:' . $entity_type_id],
-        ]);
+        ->setOption('_devel_entity_type_id', $entity_type->id())
+        ->setOption('parameters', $parameters);
 
       return $route;
     }
@@ -124,7 +133,12 @@ class RouteSubscriber extends RouteSubscriberBase {
    */
   protected function getEntityTypeDefinitionRoute(EntityTypeInterface $entity_type) {
     if ($devel_definition = $entity_type->getLinkTemplate('devel-definition')) {
-      $entity_type_id = $entity_type->id();
+      $entity_Link = $entity_type->getLinkTemplate('edit-form');
+      if (empty($entity_Link)) {
+        $entity_Link = $entity_type->getLinkTemplate('canonical');
+      }
+      // Set entities route parameters for the given template.
+      $parameters = $this->getRouteParameters($entity_Link);
       $route = new Route($devel_definition);
       $route
         ->addDefaults([
@@ -135,13 +149,35 @@ class RouteSubscriber extends RouteSubscriberBase {
           '_permission' => 'access devel information',
         ])
         ->setOption('_admin_route', TRUE)
-        ->setOption('_devel_entity_type_id', $entity_type_id)
-        ->setOption('parameters', [
-          $entity_type_id => ['type' => 'entity:' . $entity_type_id],
-        ]);
+        ->setOption('_devel_entity_type_id', $entity_type->id())
+        ->setOption('parameters', $parameters);
 
       return $route;
     }
+  }
+
+  /**
+   * Get route parameters from the template.
+   *
+   * @param string $entity_path
+   *   Entity path.
+   *
+   * @return array
+   *   List of parameters.
+   */
+  protected function getRouteParameters($entity_path) {
+    $parameters = [];
+    if ($entity_path && preg_match_all('/{\w*}/', $entity_path, $matches)) {
+      foreach ($matches[0] as $match) {
+        $match = str_replace(['{', '}'], ['', ''], $match);
+        $parameters[$match] = [
+          'type' => "entity:{$match}",
+          'converter' => 'paramconverter.entity',
+        ];
+      }
+    }
+
+    return $parameters;
   }
 
   /**
