@@ -16,7 +16,7 @@ class EntityPrintActionTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'entity_print_test', 'views'];
+  protected static $modules = ['node', 'entity_print_test', 'views'];
 
   /**
    * {@inheritdoc}
@@ -54,7 +54,7 @@ class EntityPrintActionTest extends BrowserTestBase {
    */
   public function testDownloadPdfAction() {
     $this->drupalGet('/admin/content');
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       'action' => 'entity_print_pdf_download_action',
       'node_bulk_form[0]' => 1,
     ], 'Apply to selected items');

@@ -2,7 +2,7 @@
 
 namespace Drupal\entity_print\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * An event to alter the HTML string.

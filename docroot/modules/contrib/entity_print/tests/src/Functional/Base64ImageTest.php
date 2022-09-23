@@ -21,7 +21,7 @@ class Base64ImageTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['user', 'node', 'image', 'entity_print_test'];
+  protected static $modules = ['user', 'node', 'image', 'entity_print_test'];
 
   /**
    * {@inheritdoc}

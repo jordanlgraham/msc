@@ -75,7 +75,7 @@ class AssetCollector implements AssetCollectorInterface {
       }
     }
 
-    $this->dispatcher->dispatch(PrintEvents::CSS_ALTER, new PrintCssAlterEvent($libraries, $entities));
+    $this->dispatcher->dispatch(new PrintCssAlterEvent($libraries, $entities), PrintEvents::CSS_ALTER);
 
     return $libraries;
   }

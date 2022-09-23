@@ -14,7 +14,7 @@ class EntityPrintPluginManagerTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['entity_print', 'entity_print_test'];
+  protected static $modules = ['entity_print', 'entity_print_test'];
 
   /**
    * The plugin manager.

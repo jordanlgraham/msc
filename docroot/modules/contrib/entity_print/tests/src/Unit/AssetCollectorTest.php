@@ -34,8 +34,9 @@ class AssetCollectorTest extends UnitTestCase {
   public function testAlterCss() {
     $event_dispatcher = $this->prophesize(EventDispatcherInterface::class);
     $event_dispatcher->dispatch(Argument::cetera())->will(function ($args) {
-      // Argument 1 is the PrintCssAlterEvent.
-      $args[1]->getBuild()[] = 'my_theme/my_css';
+      // Argument 0 is the PrintCssAlterEvent.
+      $args[0]->getBuild()[] = 'my_theme/my_css';
+      return $args[0];
     });
     $asset_collector = new AssetCollector($this->getThemeHandlerMock()->reveal(), $this->getThemeExtensionMock()->reveal(), $event_dispatcher->reveal());
     $this->assertEquals(['my_theme/my_css'], $asset_collector->getCssLibraries([]));
