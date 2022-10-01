@@ -55,7 +55,7 @@ function _netforum_user_auth_login_form_alter(&$form, FormStateInterface $form_s
   $t_args = $form['name']['#description']->getArguments();
   $form['name']['#description'] = '';
   $form['pass']['#description'] = '';
-  
+
   // Wrap the form elements in a container.
   $form['form_elements'] = [
     '#type' => 'fieldset',
@@ -185,7 +185,7 @@ function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state)
       $destination = \Drupal::destination()->get();
       // Don't redirect to the user page but preserve other set destinations.
       if ($destination === '/user/login') {
-        $destination = '<front>';
+        $destination = '/';
       }
       $query['redirect'] = $destination;
     }
