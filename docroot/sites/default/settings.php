@@ -809,10 +809,6 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   if (file_exists($path . '/salt.txt')) {
     $settings['hash_salt'] = file_get_contents($path . '/salt.txt');
   }
-
-  // Disable Shield on local dev by setting the
-  // shield user variable to NULL
-  // $config['shield.settings']['credentials']['shield']['user'] = NULL;
 }
 
 $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
