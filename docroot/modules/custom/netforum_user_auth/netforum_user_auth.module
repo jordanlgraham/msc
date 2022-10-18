@@ -166,7 +166,7 @@ function netforum_user_auth_validate_membership($form, FormStateInterface $form_
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function netforum_user_auth_login_submit(&$form, FormStateInterface $form_state) {
-  if (\Drupal::currentUser()->isAnonymous()) {
+  if (\Drupal::currentUser()->isAnonymous() || \Drupal::currentUser()->id() == 1) {
     return;
   }
   // Construct a URL with the token.
