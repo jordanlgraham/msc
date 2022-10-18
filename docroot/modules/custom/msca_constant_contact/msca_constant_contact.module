@@ -50,6 +50,9 @@ function _add_link_color_attribute(EntityInterface &$entity) {
   }
   $dom = new DOMDocument();
   $body = $entity->body->value;
+  if (empty($body)) {
+    return;
+  }
   $dom->loadHTML($body);
   $links =  $dom->getElementsByTagName('a');
   foreach ($links as $key => $link) {
