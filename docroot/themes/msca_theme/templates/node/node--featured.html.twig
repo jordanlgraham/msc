@@ -14,7 +14,7 @@
       {% set file = media.field_image.entity %}
       {% set uri = file_url(file.uri.value) %}
       {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
-      <img width="325" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}"/>
+      <img src="http://{{ base_path }}{{ uri }} | image_style('featured')" alt="{{ media.name.value }}"/>
     {% endif %}
   {% endfor %}
 
