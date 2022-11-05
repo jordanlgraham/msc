@@ -20,3 +20,6 @@ private-files
 *.sql.gz
 *.mysql
 *.mysql.gz
+
+# Ignore acquia settings folder.
+.acquia/cloudapi.conf
