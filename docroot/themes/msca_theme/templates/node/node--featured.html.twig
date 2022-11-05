@@ -6,15 +6,14 @@
  */
 #}
 <a class="anchor" name="{{ node.id }}"></a>
-<article name="example" title="example">
+<article>
   {# Doing this because image urls need to be absolute for email version of newsletter. #}
   {% for key, image in content.field_news_teaser_image  %}
     {%if image.entity %}
       {% set media = image.entity %}
       {% set file = media.field_image.entity %}
-      {% set uri = file_url(file.uri.value) %}
-      {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
-      <img width="150" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" style="margin-bottom: 10px;" />
+      {% set uri = file_url(file.uri.value | image_style('logo')) %}
+      <img src="https://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" style="margin-bottom: 10px;" />
     {% endif %}
   {% endfor %}
 
