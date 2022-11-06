@@ -349,42 +349,42 @@ class GeofieldProximityFilter extends NumericFilter {
     }
 
     // Validate the Distance field as positive value.
-    if ($which !== 'minmax' && isset($form_values[$identifier]['value']) && $form_values[$identifier]['value'] < 0) {
+    if ($which !== 'minmax' && !empty($form_values[$identifier]['value']) && $form_values[$identifier]['value'] < 0) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['value'], $this->t('The @value_label value should be positive.', [
         '@value_label' => $this->valueLabel,
       ]));
     }
 
     // Validate the Min value.
-    if ($which !== 'value' && isset($form_values[$identifier]['min']) && !is_numeric($form_values[$identifier]['min'])) {
+    if ($which !== 'value' && !empty($form_values[$identifier]['min']) && !is_numeric($form_values[$identifier]['min'])) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['min'], $this->t('The @min_label value is not valid.', [
         '@min_label' => $this->minLabel,
       ]));
     }
 
     // Validate the Max value.
-    if ($which !== 'value' && isset($form_values[$identifier]['max']) && !is_numeric($form_values[$identifier]['max'])) {
+    if ($which !== 'value' && !empty($form_values[$identifier]['max']) && !is_numeric($form_values[$identifier]['max'])) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['max'], $this->t('The @max_label value is not valid.', [
         '@max_label' => $this->maxLabel,
       ]));
     }
 
     // Validate the Min value as positive value.
-    if ($which !== 'value' && isset($form_values[$identifier]['min']) && $form_values[$identifier]['min'] < 0) {
+    if ($which !== 'value' && !empty($form_values[$identifier]['min']) && $form_values[$identifier]['min'] < 0) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['min'], $this->t('The @min_label value should be positive.', [
         '@min_label' => $this->minLabel,
       ]));
     }
 
     // Validate the Max value as positive value.
-    if ($which !== 'value' && isset($form_values[$identifier]['max']) && $form_values[$identifier]['max'] < 0) {
+    if ($which !== 'value' && !empty($form_values[$identifier]['max']) && $form_values[$identifier]['max'] < 0) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['max'], $this->t('The @max_label value should be positive.', [
         '@max_label' => $this->maxLabel,
       ]));
     }
 
     // Validate the Min and Max values relationship.
-    if ($which !== 'value' && isset($form_values[$identifier]['min']) && isset($form_values[$identifier]['max'])
+    if ($which !== 'value' && !empty($form_values[$identifier]['min']) && isset($form_values[$identifier]['max'])
       && ($form_values[$identifier]['min'] > $form_values[$identifier]['max'])) {
       $form_state->setError($form[$identifier . '_wrapper'][$identifier]['min'], $this->t('The @min_label value should be smaller than the @max_label value.', [
         '@min_label' => $this->minLabel,

@@ -12,6 +12,11 @@ use Drupal\FunctionalTests\Update\UpdatePathTestBase;
 class EntityEmbedUpdateHookTest extends UpdatePathTestBase {
 
   /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+
+  /**
    * Set database dump files to be used.
    */
   protected function setDatabaseDumpFiles() {
@@ -40,8 +45,8 @@ class EntityEmbedUpdateHookTest extends UpdatePathTestBase {
    */
   protected function doSelectionTest() {
     parent::doSelectionTest();
-    $this->assertSession()->responseContains('8002 -   Updates the default mode settings.');
-    $this->assertSession()->responseContains('8003 -   Updates allowed HTML for all filter configs that have an Entity Embed button.');
+    $this->assertSession()->responseMatches('/8002\s*-\s*Updates the default mode settings./');
+    $this->assertSession()->responseMatches('/8003\s*-\s*Updates allowed HTML for all filter configs that have an Entity Embed button./');
   }
 
   /**

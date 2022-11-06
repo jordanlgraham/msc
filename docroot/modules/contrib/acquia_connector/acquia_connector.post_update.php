@@ -5,6 +5,8 @@
  * Connector updates once other modules have made their own updates.
  */
 
+use Drupal\Core\Extension\ModuleUninstallValidatorException;
+
 /**
  * Remove deprecated update functions.
  */
@@ -31,7 +33,14 @@ function acquia_connector_post_update_migrate_acquia_telemetry() {
     }
     /** @var \Drupal\Core\Extension\ModuleInstallerInterface $module_installer */
     $module_installer = \Drupal::service('module_installer');
-    $module_installer->uninstall(['acquia_telemetry']);
+    try {
+      $module_installer->uninstall(['acquia_telemetry'], FALSE);
+    }
+    catch (ModuleUninstallValidatorException $e) {
+      // Do nothing, versions of acquia_cms_common and lightning_core declared
+      // acquia_telemetry as a dependency, and we cannot automatically uninstall
+      // the module.
+    }
   }
   else {
     $api_key = 'f32aacddde42ad34f5a3078a621f37a9';

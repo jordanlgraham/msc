@@ -716,7 +716,7 @@ class MediaImageTest extends EntityEmbedTestBase {
     // Configure a different default and admin theme, like on most Drupal sites.
     $this->config('system.theme')
       ->set('default', 'stable')
-      ->set('admin', 'classy')
+      ->set('admin', 'stark')
       ->save();
 
     // Assert that when looking at an embedded entity in the CKEditor Widget,
@@ -761,7 +761,7 @@ class MediaImageTest extends EntityEmbedTestBase {
   return window.performance
     .getEntries()
     .filter(function (entry) {
-      return entry.initiatorType == 'xmlhttprequest' && entry.name.indexOf('/entity-embed/preview/') !== -1;
+      return entry.initiatorType == 'xmlhttprequest' && entry.name.indexOf('/embed/preview/') !== -1;
     })
     .pop()
     .transferSize;
