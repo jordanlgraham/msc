@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\smart_trim\Truncate;
+namespace Drupal\smart_trim;
 
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Unicode;
@@ -14,23 +14,6 @@ use Drupal\Component\Utility\Unicode;
  * with some modifications to adhere to the Drupal Coding Standards.
  */
 
-/*
- * Copyright 2011  Patrick Galbraith  (email : patrick.j.galbraith@gmail.com)
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, version 2, as published by the
- * Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 /**
  * Class TruncateHTML.
  */
@@ -39,44 +22,44 @@ class TruncateHTML {
   /**
    * Total characters.
    *
-   * @var int
+   * @type int
    */
-  protected $charCount = 0;
+  protected int $charCount = 0;
 
   /**
    * Total words.
    *
-   * @var int
+   * @type int
    */
-  protected $wordCount = 0;
+  protected int $wordCount = 0;
 
   /**
    * Character / Word limit.
    *
-   * @var int
+   * @type int
    */
-  protected $limit;
+  protected int $limit;
 
   /**
    * Element to start on.
    *
-   * @var \DOMElement
+   * @type \DOMElement
    */
-  protected $startNode;
+  protected \DOMElement $startNode;
 
   /**
    * Ellipsis character.
    *
-   * @var string
+   * @type string
    */
-  protected $ellipsis;
+  protected string $ellipsis;
 
   /**
    * Did we find the breakpoint?
    *
-   * @var bool
+   * @type bool
    */
-  protected $foundBreakpoint = FALSE;
+  protected bool $foundBreakpoint = FALSE;
 
   /**
    * Sets up object for use.
@@ -91,8 +74,7 @@ class TruncateHTML {
    * @return \DOMDocument
    *   Prepared DOMDocument to work with.
    */
-  protected function init($html, $limit, $ellipsis) {
-
+  protected function init(string $html, int $limit, string $ellipsis): \DOMDocument {
     $dom = Html::load(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 
     // The body tag node, our html fragment is automatically wrapped in
@@ -117,11 +99,10 @@ class TruncateHTML {
    * @param string $ellipsis
    *   Characters to use at the end of the text.
    *
-   * @return mixed
+   * @return string
    *   Resulting text.
    */
-  public function truncateChars($html, $limit, $ellipsis = '...') {
-
+  public function truncateChars(string $html, int $limit, string $ellipsis = '...'): string {
     if ($limit <= 0 || $limit >= strlen(strip_tags($html))) {
       return $html;
     }
@@ -141,11 +122,10 @@ class TruncateHTML {
    * @param string $ellipsis
    *   Characters to use at the end of the text.
    *
-   * @return mixed
+   * @return string
    *   Resulting text.
    */
-  public function truncateWords($html, $limit, $ellipsis = '...') {
-
+  public function truncateWords(string $html, int $limit, string $ellipsis = '...'): string {
     if ($limit <= 0 || $limit >= $this->countWords(strip_tags($html))) {
       return $html;
     }
@@ -163,7 +143,6 @@ class TruncateHTML {
    *   Object to be truncated.
    */
   protected function domNodeTruncateChars(\DOMNode $domnode) {
-
     foreach ($domnode->childNodes as $node) {
 
       if ($this->foundBreakpoint == TRUE) {
@@ -199,7 +178,6 @@ class TruncateHTML {
    *   Object to be truncated.
    */
   protected function domNodeTruncateWords(\DOMNode $domnode) {
-
     foreach ($domnode->childNodes as $node) {
 
       if ($this->foundBreakpoint == TRUE) {
@@ -217,7 +195,7 @@ class TruncateHTML {
           if ($cur_count > 1 && ($this->limit - $this->wordCount) < $cur_count) {
             // Note that PREG_SPLIT_OFFSET_CAPTURE and UTF-8 is interesting.
             // preg_split() works on the string as an array of bytes therefore
-            // in order to use it's results we need to use non unicode aware
+            // in order to use its results we need to use non unicode aware
             // functions.
             // @see https://bugs.php.net/bug.php?id=67487
             $words = preg_split("/[\n\r\t ]+/", $node->nodeValue, ($this->limit - $this->wordCount) + 1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
@@ -280,7 +258,7 @@ class TruncateHTML {
   }
 
   /**
-   * Inserts the Elipsis character to the node.
+   * Inserts the ellipsis character to the node.
    *
    * @param \DOMNode $domnode
    *   Node to be altered.
@@ -315,7 +293,7 @@ class TruncateHTML {
    * @return int
    *   Results
    */
-  protected function countWords($text) {
+  protected function countWords(string $text): int {
     $words = preg_split("/[\n\r\t ]+/", $text, -1, PREG_SPLIT_NO_EMPTY);
     return count($words);
   }

@@ -1,3 +1,24 @@
+Smart Trim 2.0
+------------------
+Issue #3301743 by Anybody, Grevil: Support tokens in more text and replace in...
+Issue #3289742 by dpineda, Project Update Bot: Automated Drupal...
+Issue #3194975: Settings form '#states' values only work on fields named 'body'
+Fixed typo and added test for multiple nested tags.
+Issue #2829817 by ultimike, markie, ruloweb: Apply dependency injection (DI) to TruncateHTML class
+Updating my short url.
+Update README.md with better config instructions
+Removed the remaining minus and plus characters from copy/paste in demo
+removed some "+"s
+switching to the markdown
+Update to readme.txt.
+Issue #3246542 by Daniel Korte, yash.rode: Support D7 migrations
+Updated Unit test for 2.x branch.
+Issue #2974633 by Greg Boggs - rerollr
+Issue #3172729 by Neslee Canil Pinto: Update source url in composer.json
+Remove 8 and add 10
+Adding patch #4 from issue
+Issue #3194955 by markie, justcaldwell: Improve more link accessibility with aria-label attribute
+
 Smart Trim 8.x-1.3
 ------------------
 Issue #3131842 by markie, Kristen Pol, PapaGrande: Read more still not translated
