@@ -9,7 +9,7 @@ proxy:
 # add additional auxiliary services
 services:
   appserver:
-    type: php
+    type: php:8.1
     webroot: docroot
     xdebug: true
     config:
