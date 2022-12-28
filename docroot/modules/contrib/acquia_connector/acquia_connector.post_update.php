@@ -77,4 +77,7 @@ function acquia_connector_post_update_deprecated_variables() {
   // Get subscription data from V4 location, and set uuid properly.
   $acquia_subscription_data = \Drupal::state()->get('acquia_connector.subscription_data');
   \Drupal::state()->set('acquia_connector.application_uuid', $acquia_subscription_data['uuid']);
+
+  // Flush caches when upgrading from 3.0.x to 4.0.x.
+  drupal_flush_all_caches();
 }
