@@ -14,7 +14,7 @@ class FileBrowserTest extends EntityBrowserWebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'file_browser',
   ];
 

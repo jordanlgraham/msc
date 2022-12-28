@@ -1,5 +1,6 @@
 /**
- * @file file_browser.preview.js
+ * @file
+ * file_browser.preview.js
  */
 
 (function ($, Drupal) {
@@ -11,9 +12,9 @@
    */
   Drupal.behaviors.fileBrowserPreview = {
     attach: function (context, settings) {
-      var $wrapper = $('#file-browser-preview-wrapper').once('file-browser-preview');
-      if ($wrapper.length) {
-        $wrapper.find('select').on('change', function () {
+      var wrapper = once('file-browser-preview', '#file-browser-preview-wrapper');
+      if (wrapper.length) {
+        $(wrapper).find('select').on('change', function () {
           Drupal.ajax({
             url: settings.file_browser.preview_path + '/' + $(this).val(),
             wrapper: 'file-browser-preview-wrapper'

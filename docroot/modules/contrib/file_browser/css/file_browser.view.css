@@ -276,6 +276,11 @@ input.entity-browser-show-selection {
   transition: opacity .2s;
 }
 
+.file-browser-preview-button:hover,
+.file-browser-preview-button:focus {
+  color: transparent;
+}
+
 .file-browser-preview-button + .ajax-progress {
   display: none;
 }

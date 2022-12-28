@@ -88,7 +88,7 @@ class FileBrowserPreview extends FieldPluginBase {
     // Use a placeholder image for now.
     // @todo See if we can use fallback formatters for this.
     else {
-      $path = drupal_get_path('module', 'file_browser');
+      $path = \Drupal::service('extension.list.module')->getPath('file_browser');
       $build = [
         '#theme' => 'image',
         '#attributes' => [

@@ -27,7 +27,7 @@ class InstallTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = ['file_browser'];
+  protected static $modules = ['file_browser'];
 
   /**
    * Tests if the module can be installed during a config sync.
