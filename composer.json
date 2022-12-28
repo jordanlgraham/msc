@@ -81,6 +81,7 @@
     "drupal/smtp": "^1.2",
     "drupal/stage_file_proxy": "^1.1",
     "drupal/svg_image": "^1.15",
+    "drupal/symfony_mailer": "^1.1@beta",
     "drupal/token": "^1.9",
     "drupal/twig_tweak": "^2.9",
     "drupal/username_enumeration_prevention": "^1.2",
@@ -89,7 +90,8 @@
     "drupal/xmlsitemap": "^1.1",
     "drush/drush": "^11",
     "geocoder-php/free-geoip-provider": "^4.4",
-    "geocoder-php/google-maps-provider": "^4.6"
+    "geocoder-php/google-maps-provider": "^4.6",
+    "tijsverkoyen/css-to-inline-styles": "^2.2"
   },
   "require-dev": {
     "drupal/devel": "^4.1",
@@ -173,11 +175,14 @@
         "drupal/core": {
             "3254169: Update aborted by system_post_update_sort_all_config": "https://www.drupal.org/files/issues/2022-01-18/drupal-n3254169-51.patch"
         },
-        "drupal/media_entity_image": {
-            "Remove 'core' declaration in info.yml": "patches/media_entity_image-remove_core.patch"
+        "drupal/entity": {
+            "3249372: (entity api) PHP 8.1: Deprecated function": "https://www.drupal.org/files/issues/2021-12-19/3249372-10.patch"
         },
         "drupal/flag": {
             "Issue 3110955: Field definition update": "https://www.drupal.org/files/issues/2020-02-04/3110955-entity-definition-update-manager-2.patch"
+        },
+        "drupal/media_entity_image": {
+            "Remove 'core' declaration in info.yml": "patches/media_entity_image-remove_core.patch"
         }
     }
   }
