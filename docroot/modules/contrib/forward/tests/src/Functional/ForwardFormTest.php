@@ -17,9 +17,9 @@ class ForwardFormTest extends ForwardTestBase {
     $article = $this->drupalCreateNode(['type' => 'article']);
     $this->drupalLogin($this->forwardUser);
     $this->drupalGet('node/' . $article->id());
-    $this->assertText('Forward this article to a friend', 'The article has a Forward link.');
+    $this->assertSession()->pageTextContains('Forward this article to a friend');
     $this->drupalGet('/forward/node/' . $article->id());
-    $this->assertText('Forward this article to a friend', 'The Forward form displays for an article.');
+    $this->assertSession()->pageTextContains('Forward this article to a friend');
 
     // Submit the Forward form.
     $edit = [
@@ -27,8 +27,8 @@ class ForwardFormTest extends ForwardTestBase {
       'recipient' => 'test@test.com',
       'message' => 'This is a test personal message.',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Send Message');
-    $this->assertText('Thank you for spreading the word about Drupal.', 'The Forward form displays a thank you message after submit.');
+    $this->submitForm($edit, 'Send Message');
+    $this->assertSession()->pageTextContains('Thank you for spreading the word about Drupal.');
 
     // Submit the Forward form without a recipient.
     $this->drupalGet('/forward/node/' . $article->id());
@@ -36,8 +36,8 @@ class ForwardFormTest extends ForwardTestBase {
       'name' => 'Test Forwarder',
       'message' => 'This is a test personal message.',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Send Message');
-    $this->assertText('Send to field is required.', 'The Forward form displays an error message when the recipient is blank.');
+    $this->submitForm($edit, 'Send Message');
+    $this->assertSession()->pageTextContains('Send to field is required.');
 
     // Submit the Forward form without a personal message when required.
     $this->drupalLogin($this->adminUser);
@@ -45,15 +45,15 @@ class ForwardFormTest extends ForwardTestBase {
     $edit = [
       'forward_personal_message' => 2,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm($edit, 'Save configuration');
     $this->drupalLogin($this->forwardUser);
     $this->drupalGet('/forward/node/' . $article->id());
     $edit = [
       'name' => 'Test Forwarder',
       'recipient' => 'test@test.com',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Send Message');
-    $this->assertText('Your personal message field is required.', 'The Forward form displays an error message when the message is blank and one is required.');
+    $this->submitForm($edit, 'Send Message');
+    $this->assertSession()->pageTextContains('Your personal message field is required.');
 
     // Submit the Forward form without a personal message when optional.
     $this->drupalLogin($this->adminUser);
@@ -61,15 +61,15 @@ class ForwardFormTest extends ForwardTestBase {
     $edit = [
       'forward_personal_message' => 1,
     ];
-    $this->drupalPostForm(NULL, $edit, 'Save configuration');
+    $this->submitForm($edit, 'Save configuration');
     $this->drupalLogin($this->forwardUser);
     $this->drupalGet('/forward/node/' . $article->id());
     $edit = [
       'name' => 'Test Forwarder',
       'recipient' => 'test@test.com',
     ];
-    $this->drupalPostForm(NULL, $edit, 'Send Message');
-    $this->assertNoText('Your personal message field is required.', 'The Forward form does not display an error message when the message is blank and optional.');
+    $this->submitForm($edit, 'Send Message');
+    $this->assertSession()->pageTextNotContains('Your personal message field is required.');
   }
 
 }

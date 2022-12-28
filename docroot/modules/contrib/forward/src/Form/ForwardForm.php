@@ -6,7 +6,6 @@ use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\EventDispatcher\ContainerAwareEventDispatcher;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Xss;
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -27,6 +26,7 @@ use Drupal\forward\Event\EntityPreforwardEvent;
 use Egulias\EmailValidator\EmailValidator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Mime\Header\UnstructuredHeader;
 
 /**
  * Forward a page to a friend.
@@ -568,9 +568,11 @@ class ForwardForm extends FormBase implements BaseFormIdInterface {
       $from = $this->config('system.site')->get('mail');
     }
     if (empty($from)) {
-      $site_mail = ini_get('sendmail_from');
+      $from = ini_get('sendmail_from');
     }
-    $params['headers']['Reply-To'] = trim(Unicode::mimeHeaderEncode($form_state->getValue('name')) . ' <' . $form_state->getValue('email') . '>');
+
+    $reply_to = (new UnstructuredHeader('reply-to', $form_state->getValue('name')))->getBodyAsString();
+    $params['headers']['Reply-To'] = trim($reply_to . ' <' . $form_state->getValue('email') . '>');
 
     // Handle plain text vs. HTML setting.
     if ($email_format == 'plain_text') {

@@ -89,7 +89,7 @@ class SettingsForm extends ConfigFormBase {
     $form['forward_form']['personal_messages']['forward_personal_message'] = [
       '#type' => 'select',
       '#title' => $this->t('Personal message'),
-      '#options' => [0 => 'Hidden', 1 => 'Optional', 2 => 'Required'],
+      '#options' => [0 => $this->t('Hidden'), 1 => $this->t('Optional'), 2 => $this->t('Required')],
       '#default_value' => $settings['forward_personal_message'],
       '#description' => $this->t('Choose whether the personal message field on the form will be hidden, optional or required.'),
     ];
@@ -186,14 +186,14 @@ class SettingsForm extends ConfigFormBase {
       ];
       $form['forward_filter_options']['forward_filter_format_html'] = [
         '#type' => 'select',
-        '#title' => t('Filter format'),
+        '#title' => $this->t('Filter format'),
         '#default_value' => $settings['forward_filter_format_html'],
         '#options' => $filter_options,
         '#description' => $this->t('Select a filter to apply to the email message body. A filter with <a href="http://drupal.org/project/pathologic">Pathologic</a> assigned to it will convert relative links to absolute links. &nbsp;<a href="http://drupal.org/project/modules">More filters</a>.'),
       ];
       $form['forward_filter_options']['forward_filter_format_plain_text'] = [
         '#type' => 'select',
-        '#title' => t('Plain text filter format'),
+        '#title' => $this->t('Plain text filter format'),
         '#default_value' => $settings['forward_filter_format_plain_text'],
         '#options' => $filter_options,
         '#description' => $this->t('Select a filter to apply to the email message body when sending as plain text.'),
