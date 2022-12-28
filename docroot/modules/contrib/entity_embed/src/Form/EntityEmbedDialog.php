@@ -122,8 +122,7 @@ class EntityEmbedDialog extends FormBase {
       $container->get('entity_type.manager'),
       $container->get('event_dispatcher'),
       $container->get('entity_field.manager'),
-      $container->get('module_handler'),
-      $container->get('language_manager')
+      $container->get('module_handler')
     );
   }
 
@@ -492,7 +491,7 @@ class EntityEmbedDialog extends FormBase {
         $entity_element['data-entity-embed-display-settings'] = [];
       }
       elseif (is_string($entity_element['data-entity-embed-display-settings'])) {
-        $entity_element['data-entity-embed-display-settings'] = Json::decode($entity_element['data-entity-embed-display-settings']);
+        $entity_element['data-entity-embed-display-settings'] = Json::decode($entity_element['data-entity-embed-display-settings']) ?: [];
       }
       $display = $this->entityEmbedDisplayManager->createInstance($plugin_id, $entity_element['data-entity-embed-display-settings']);
       $display->setContextValue('entity', $entity);
