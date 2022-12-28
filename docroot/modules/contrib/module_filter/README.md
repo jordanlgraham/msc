@@ -1,5 +1,6 @@
-CONTENTS OF THIS FILE
----------------------
+# MODULE FILTER
+
+## CONTENTS OF THIS FILE
 
  * Introduction
  * Installation
@@ -8,8 +9,7 @@ CONTENTS OF THIS FILE
  * Filter operators
  * Maintainers
 
-INTRODUCTION
-------------
+## INTRODUCTION
 
 This module provides a method for filtering modules on the modules page as well
 as for filtering projects on the update status report.
@@ -32,8 +32,7 @@ Update available, Security update, and Unknown. These directly affect the
 visibility of each project; whether it is up-to-date, there is an update
 available, a security update is available, or the status is unknown.
 
-Installation
-------------
+## Installation
 
 To install this module, do the following:
 
@@ -41,8 +40,7 @@ To install this module, do the following:
 
 2. Upload the entire directory and all its contents to your modules directory.
 
-Configuration
--------------
+## Configuration
 
 To enable and configure this module do the following:
 
@@ -51,8 +49,7 @@ To enable and configure this module do the following:
 2. Go to Admin -> Configuration -> User interface -> Module filter, and make
    any necessary configuration changes.
 
-Tabs
-----
+## Tabs
 
 By default Module Filter alters the modules page into tabs (Can be disabled on
 configuration page). In the tabs view, each package is converted to a vertical
@@ -97,8 +94,7 @@ information that pertains to each.
 10. When viewing all modules (no active tab) and mousing over modules it's tab
     becomes highlighted to signify which tab it belongs to.
 
-Filter operators
-----------------
+## Filter operators
 
 The modules page's filter has three filter operators available. Filter
 operators allow alternative filtering techniques. A filter operator is applied
@@ -121,8 +117,8 @@ the filter string 'description:ctools views' would filter down to modules with
 space within a single query wrap it within double quotes (e.g. 'requires:"chaos
 tools"' or '"bulk export"').
 
-Maintainers
-------------------
+## Maintainers
 
  - Green Skin (greenSkin) - https://www.drupal.org/u/greenskin
  - Andrey Troeglazov (andrey.troeglazov) - https://www.drupal.org/u/andreytroeglazov
+ - Stephen Mustgrave (smustgrave) - https://www.drupal.org/u/smustgrave
