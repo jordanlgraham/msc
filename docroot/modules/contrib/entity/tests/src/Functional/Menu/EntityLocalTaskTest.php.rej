@@ -1,0 +1,10 @@
+--- tests/src/Functional/Menu/EntityLocalTaskTest.php
++++ tests/src/Functional/Menu/EntityLocalTaskTest.php
+@@ -41,6 +41,7 @@ class EntityLocalTaskTest extends BrowserTestBase {
+ 
+     $entity = EnhancedEntity::create([
+       'type' => 'default',
++      'name' => 'Enhanced Entity test'
+     ]);
+     $entity->save();
+     $this->viewPath = $entity->toUrl()->toString();

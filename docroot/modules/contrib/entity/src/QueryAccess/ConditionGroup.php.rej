@@ -1,0 +1,11 @@
+--- src/QueryAccess/ConditionGroup.php
++++ src/QueryAccess/ConditionGroup.php
+@@ -181,7 +181,7 @@ final class ConditionGroup implements \Countable, RefinableCacheableDependencyIn
+   /**
+    * {@inheritdoc}
+    */
+-  public function count() {
++  public function count(): int {
+     return count($this->conditions);
+   }
+ 
