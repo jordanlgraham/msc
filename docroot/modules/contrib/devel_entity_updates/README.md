@@ -28,4 +28,4 @@ If you encounter that error you should identify which module defines the
 problematic entity type or field type and open a bug report or support request
 in its queue.
 
-This version is compatible with Drupal 9 and Drush 11+
+This version is compatible with Drupal 9+ and Drush 11+
