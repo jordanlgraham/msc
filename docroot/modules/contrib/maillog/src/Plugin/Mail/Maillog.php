@@ -2,7 +2,6 @@
 
 namespace Drupal\maillog\Plugin\Mail;
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Mail\MailInterface;
 use Drupal\Core\Mail\Plugin\Mail\PhpMail;
@@ -40,23 +39,23 @@ class Maillog implements MailInterface {
       $record = new \stdClass();
 
       // In case the subject/from/to is already encoded, decode with
-      // Unicode::mimeHeaderDecode().
+      // iconv_mime_decode().
       $record->header_message_id = isset($message['headers']['Message-ID']) ? $message['headers']['Message-ID'] : $this->t('Not delivered');
       $record->subject = $message['subject'];
-      $record->subject = mb_substr(Unicode::mimeHeaderDecode($record->subject), 0, 255);
+      $record->subject = mb_substr(iconv_mime_decode($record->subject), 0, 255);
       $record->body = $message['body'];
       $record->header_from = isset($message['from']) ? $message['from'] : NULL;
-      $record->header_from = Unicode::mimeHeaderDecode($record->header_from);
+      $record->header_from = iconv_mime_decode($record->header_from);
 
       $header_to = [];
       if (isset($message['to'])) {
         if (is_array($message['to'])) {
           foreach ($message['to'] as $value) {
-            $header_to[] = Unicode::mimeHeaderDecode($value);
+            $header_to[] = iconv_mime_decode($value);
           }
         }
         else {
-          $header_to[] = Unicode::mimeHeaderDecode($message['to']);
+          $header_to[] = iconv_mime_decode($message['to']);
         }
       }
       $record->header_to = implode(', ', $header_to);
