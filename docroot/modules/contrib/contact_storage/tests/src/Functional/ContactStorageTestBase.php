@@ -34,13 +34,13 @@ abstract class ContactStorageTestBase extends BrowserTestBase {
     // 8.2.x added the message field, which is by default empty. Conditionally
     // submit it if the field can be found.
     $xpath = '//textarea[@name=:value]|//input[@name=:value]|//select[@name=:value]';
-    if ($this->xpath($this->buildXPathQuery($xpath, [':value' => 'message']))) {
+    if ($this->xpath($this->assertSession()->buildXPathQuery($xpath, [':value' => 'message']))) {
       $edit['message'] = $message;
     }
     $edit['recipients'] = $recipients;
     $edit['selected'] = ($selected ? TRUE : FALSE);
     $edit += $third_party_settings;
-    $this->drupalPostForm(NULL, $edit, t('Save'));
+    $this->submitForm($edit, t('Save'));
   }
 
   /**
@@ -64,10 +64,12 @@ abstract class ContactStorageTestBase extends BrowserTestBase {
     $edit['subject[0][value]'] = $subject;
     $edit['message[0][value]'] = $message;
     if ($id == $this->config('contact.settings')->get('default_form')) {
-      $this->drupalPostForm('contact', $edit, t('Send message'));
+      $this->drupalGet('contact');
+      $this->submitForm($edit, t('Send message'));
     }
     else {
-      $this->drupalPostForm('contact/' . $id, $edit, t('Send message'));
+      $this->drupalGet('contact/' . $id);
+      $this->submitForm($edit, t('Send message'));
     }
   }
 

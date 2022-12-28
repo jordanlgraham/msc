@@ -23,7 +23,7 @@ class BulkFormTest extends ContactStorageTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'contact_storage',
     'contact_test_views',
     'language',
@@ -39,7 +39,7 @@ class BulkFormTest extends ContactStorageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::Setup();
     // Create and login administrative user.
     $admin_user = $this->drupalCreateUser([
@@ -49,17 +49,17 @@ class BulkFormTest extends ContactStorageTestBase {
     // Create first valid contact form.
     $mail = 'simpletest@example.com';
     $this->addContactForm('test_id', 'test_label', $mail, TRUE);
-    $this->assertText('Contact form test_label has been added.');
+    $this->assertSession()->pageTextContains('Contact form test_label has been added.');
     $this->drupalLogout();
 
     // Ensure that anonymous can submit site-wide contact form.
     user_role_grant_permissions(AccountInterface::ANONYMOUS_ROLE, ['access site-wide contact form']);
     $this->drupalGet('contact');
-    $this->assertText('Your email address');
+    $this->assertSession()->pageTextContains('Your email address');
     // Submit contact form few times.
     for ($i = 1; $i <= 5; $i++) {
       $this->submitContact($this->randomMachineName(), $mail, $this->randomMachineName(), 'test_id', $this->randomMachineName());
-      $this->assertText('Your message has been sent.');
+      $this->assertSession()->pageTextContains('Your message has been sent.');
     }
   }
 
@@ -73,9 +73,10 @@ class BulkFormTest extends ContactStorageTestBase {
     $this->drupalLogin($this->drupalCreateUser(['administer contact forms']));
     $this->drupalGet('test-contact-message-bulk-form');
     $elements = $this->xpath('//select[@id="edit-action"]//option');
-    $this->assertIdentical(count($elements), 1, 'All contact message operations are found.');
-    $this->drupalPostForm('test-contact-message-bulk-form', [], t('Apply to selected items'));
-    $this->assertText('No message selected.');
+    $this->assertSame(count($elements), 1, 'All contact message operations are found.');
+    $this->drupalGet('test-contact-message-bulk-form');
+    $this->submitForm([], t('Apply to selected items'));
+    $this->assertSession()->pageTextContains('No message selected.');
   }
 
 }

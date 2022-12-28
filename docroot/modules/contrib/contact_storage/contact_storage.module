@@ -512,6 +512,7 @@ function contact_storage_maximum_submissions_user(ContactFormInterface $contact_
     // Anonymous user, limit per submission with the same IP address.
     $ip_address = \Drupal::request()->getClientIp();
     $query = \Drupal::entityQuery('contact_message')
+      ->accessCheck()
       ->condition('contact_form', $contact_form->id())
       ->condition('ip_address', $ip_address)
       ->condition('uid', $account->id());
@@ -520,6 +521,7 @@ function contact_storage_maximum_submissions_user(ContactFormInterface $contact_
   else {
     // Limit per submission with the same uid.
     $query = \Drupal::entityQuery('contact_message')
+      ->accessCheck()
       ->condition('contact_form', $contact_form->id())
       ->condition('uid', $account->id());
     return count($query->execute());

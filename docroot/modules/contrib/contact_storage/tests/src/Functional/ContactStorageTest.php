@@ -40,7 +40,7 @@ class ContactStorageTest extends ContactStorageTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'text',
     'block',
     'contact',
@@ -51,7 +51,7 @@ class ContactStorageTest extends ContactStorageTestBase {
     'filter',
   ];
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->drupalPlaceBlock('system_breadcrumb_block');
@@ -85,7 +85,7 @@ class ContactStorageTest extends ContactStorageTestBase {
     // Create first valid contact form.
     $mail = 'simpletest@example.com';
     $this->addContactForm('test_id', 'test_label', $mail, TRUE);
-    $this->assertText('Contact form test_label has been added.');
+    $this->assertSession()->pageTextContains('Contact form test_label has been added.');
 
     // Ensure that new contact form can be cloned.
     $this->cloneContactForm('test_id', 'test_id_cloned');
@@ -97,10 +97,10 @@ class ContactStorageTest extends ContactStorageTestBase {
     user_role_grant_permissions(AccountInterface::ANONYMOUS_ROLE, ['access site-wide contact form']);
     $this->drupalLogout();
     $this->drupalGet('contact');
-    $this->assertText('Your email address');
-    $this->assertNoText(t('Form'));
+    $this->assertSession()->pageTextContains('Your email address');
+    $this->assertSession()->pageTextNotContains(t('Form'));
     $this->submitContact('Test_name', $mail, 'Test_subject', 'test_id', 'Test_message');
-    $this->assertText('Your message has been sent.');
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     // Verify that only 1 message has been sent (by default, the "Send a copy
     // to yourself" option is disabled.
@@ -123,10 +123,10 @@ class ContactStorageTest extends ContactStorageTestBase {
     $enable_html = [
       'send_html' => TRUE,
     ];
-    $this->drupalPostForm(NULL, $enable_html, t('Save configuration'));
+    $this->submitForm($enable_html, t('Save configuration'));
 
     // Check that the form POST was successful.
-    $this->assertText('The configuration options have been saved.');
+    $this->assertSession()->pageTextContains('The configuration options have been saved.');
 
     // Check that the global setting is properly updated.
     $this->assertTrue(\Drupal::config('contact_storage.settings')->get('send_html'));
@@ -140,61 +140,61 @@ class ContactStorageTest extends ContactStorageTestBase {
     // Check that the page title is correct.
     $this->drupalGet('contact/test_id');
     $this->assertTrue(!empty($this->cssSelect('h1:contains(test_label)')));
-    $this->assertTitle('test_label | Drupal');
+    $this->assertSession()->titleEquals('test_label | Drupal');
 
     // Check that the configuration edit page title is correct.
     $this->drupalGet('admin/structure/contact/manage/test_id');
     $this->assertTrue(!empty($this->cssSelect('h1:contains(test_label)')));
-    $this->assertTitle('Edit test_label | Drupal');
+    $this->assertSession()->titleEquals('Edit test_label | Drupal');
 
     // Check that name, subject and mail are configurable on display.
     $this->drupalGet('admin/structure/contact/manage/test_id/display');
     foreach ($display_fields as $label) {
-      $this->assertText($label);
+      $this->assertSession()->pageTextContains($label);
     }
 
     // Check that preview is configurable on form display.
     $this->drupalGet('admin/structure/contact/manage/test_id/form-display');
-    $this->assertText('Preview');
+    $this->assertSession()->pageTextContains('Preview');
 
     // Check the message list overview.
     $this->drupalGet('admin/structure/contact/messages');
     $rows = $this->xpath('//tbody/tr');
     // Make sure only 1 message is available.
-    $this->assertEqual(count($rows), 1);
+    $this->assertEquals(count($rows), 1);
     // Some fields should be present.
-    $this->assertText('Test_subject');
-    $this->assertText('Test_name');
-    $this->assertText('test_label');
+    $this->assertSession()->pageTextContains('Test_subject');
+    $this->assertSession()->pageTextContains('Test_name');
+    $this->assertSession()->pageTextContains('test_label');
 
     // Click the view link and make sure name, subject and email are displayed
     // by default.
     $this->clickLink(t('View'));
     foreach ($display_fields as $label) {
-      $this->assertText($label);
+      $this->assertSession()->pageTextContains($label);
     }
 
     // Make sure the stored message is correct.
     $this->drupalGet('admin/structure/contact/messages');
     $this->clickLink(t('Edit'));
-    $this->assertFieldById('edit-name', 'Test_name');
-    $this->assertFieldById('edit-mail', $mail);
-    $this->assertFieldById('edit-subject-0-value', 'Test_subject');
-    $this->assertFieldById('edit-message-0-value', 'Test_message');
+    $this->assertSession()->fieldValueEquals('edit-name', 'Test_name');
+    $this->assertSession()->fieldValueEquals('edit-mail', $mail);
+    $this->assertSession()->fieldValueEquals('edit-subject-0-value', 'Test_subject');
+    $this->assertSession()->fieldValueEquals('edit-message-0-value', 'Test_message');
     // Submit should redirect back to listing.
-    $this->drupalPostForm(NULL, [], t('Save'));
-    $this->assertUrl('admin/structure/contact/messages');
+    $this->submitForm([], t('Save'));
+    $this->assertSession()->addressEquals('admin/structure/contact/messages');
 
     // Delete the message.
     $this->clickLink(t('Delete'));
-    $this->drupalPostForm(NULL, NULL, t('Delete'));
-    $this->assertRaw(t('The @entity-type %label has been deleted.', [
+    $this->submitForm([], t('Delete'));
+    $this->assertSession()->responseContains(t('The @entity-type %label has been deleted.', [
       // See \Drupal\Core\Entity\EntityDeleteFormTrait::getDeletionMessage().
       '@entity-type' => 'contact message',
       '%label'       => 'Test_subject',
     ]));
     // Make sure no messages are available.
-    $this->assertText('There is no Contact message yet.');
+    $this->assertSession()->pageTextContains('There is no Contact message yet.');
 
     // Fill the "Submit button text" field and assert the form can still be
     // submitted.
@@ -202,7 +202,8 @@ class ContactStorageTest extends ContactStorageTestBase {
       'contact_storage_submit_text' => 'Submit the form',
       'contact_storage_preview' => FALSE,
     ];
-    $this->drupalPostForm('admin/structure/contact/manage/test_id', $edit, t('Save'));
+    $this->drupalGet('admin/structure/contact/manage/test_id');
+    $this->submitForm($edit, t('Save'));
     $edit = [
       'subject[0][value]' => 'Test subject',
       'message[0][value]' => 'Test message',
@@ -211,18 +212,18 @@ class ContactStorageTest extends ContactStorageTestBase {
     $element = $this->cssSelect('#edit-preview');
     // Preview button is hidden.
     $this->assertTrue(empty($element));
-    $this->drupalPostForm(NULL, $edit, t('Submit the form'));
-    $this->assertText('Your message has been sent.');
+    $this->submitForm($edit, t('Submit the form'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     // Add an Options email item field to the form.
     $settings = ['settings[allowed_values]' => "test_key1|test_label1|simpletest1@example.com\ntest_key2|test_label2|simpletest2@example.com"];
     $this->fieldUIAddNewField('admin/structure/contact/manage/test_id', 'category', 'Category', 'contact_storage_options_email', $settings);
     // Verify that the new field shows up correctly on the form.
     $this->drupalGet('contact');
-    $this->assertText('Category');
-    $this->assertOption('edit-field-category', '_none');
-    $this->assertOption('edit-field-category', 'test_key1');
-    $this->assertOption('edit-field-category', 'test_key2');
+    $this->assertSession()->pageTextContains('Category');
+    $this->assertSession()->optionExists('edit-field-category', '_none');
+    $this->assertSession()->optionExists('edit-field-category', 'test_key1');
+    $this->assertSession()->optionExists('edit-field-category', 'test_key2');
 
     // Send a message using the Options email item field and enable the "Send a
     // copy to yourself" option.
@@ -234,8 +235,8 @@ class ContactStorageTest extends ContactStorageTestBase {
       'field_category' => 'test_key2',
       'copy' => 'checked',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Submit the form'));
-    $this->assertText('Your message has been sent.');
+    $this->submitForm($edit, t('Submit the form'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     // Check that 2 messages were sent and that the body of the last
     // message contains the added message.
@@ -264,7 +265,7 @@ class ContactStorageTest extends ContactStorageTestBase {
     // The added field should be on the cloned form too.
     $edit['field_text_field[0][value]'] = 'Some text';
     $this->drupalGet('contact/test_id_2');
-    $this->drupalPostForm(NULL, $edit, t('Submit the form'));
+    $this->submitForm($edit, t('Submit the form'));
     $form = ContactForm::load('test_id_2');
     $this->assertNotEmpty($form->uuid());
 
@@ -272,7 +273,7 @@ class ContactStorageTest extends ContactStorageTestBase {
     // to required.
     $this->drupalGet('/admin/structure/contact/manage/test_id/fields');
     $this->clickLink('Edit');
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       'label' => 'Category-2',
       'required' => TRUE,
       'default_value_input[field_category]' => 'test_key1',
@@ -280,51 +281,54 @@ class ContactStorageTest extends ContactStorageTestBase {
 
     // Verify that the changes are visible into the contact form.
     $this->drupalGet('contact');
-    $this->assertText('Category-2');
-    $this->assertOption('edit-field-category', 'test_key1');
-    $this->assertOption('edit-field-category', 'test_key2');
+    $this->assertSession()->pageTextContains('Category-2');
+    $this->assertSession()->optionExists('edit-field-category', 'test_key1');
+    $this->assertSession()->optionExists('edit-field-category', 'test_key2');
     $this->assertNotEmpty($this->xpath('//select[@id="edit-field-category" and @required="required"]//option[@value="test_key1" and @selected="selected"]'));
 
     // Verify that the 'View messages' link exists for the 2 forms and that it
     // links to the correct view.
     $this->drupalGet('/admin/structure/contact');
-    $this->assertLinkByHref('/admin/structure/contact/messages?form=test_id');
-    $this->assertLinkByHref('/admin/structure/contact/messages?form=test_id_2');
+    $this->assertSession()->linkByHrefExists('/admin/structure/contact/messages?form=test_id');
+    $this->assertSession()->linkByHrefExists('/admin/structure/contact/messages?form=test_id_2');
 
     // Create a new contact form and assert that the disable link exists for
     // each forms.
     $this->addContactForm('test_disable_id', 'test_disable_label', 'simpletest@example.com', FALSE);
     $this->drupalGet('/admin/structure/contact');
     $contact_form_count = count(ContactForm::loadMultiple());
-    $this->assertEqual(count($this->cssSelect('li.disable a:contains(Disable)')), $contact_form_count);
+    $this->assertEquals(count($this->cssSelect('li.disable a:contains(Disable)')), $contact_form_count);
+    $this->drupalGet('/admin/structure/contact/manage/test_disable_id/disable');
 
     // Disable the form and assert that there is 1 less "Disable" button and 1
     // "Enable" button.
-    $this->drupalPostForm('/admin/structure/contact/manage/test_disable_id/disable', NULL, t('Disable'));
-    $this->assertText('Disabled contact form test_disable_label.');
+    $this->submitForm([], t('Disable'));
+    $this->assertSession()->pageTextContains('Disabled contact form test_disable_label.');
     $this->drupalGet('/admin/structure/contact');
-    $this->assertEqual(count($this->cssSelect('li.disable a:contains(Disable)')), ($contact_form_count - 1));
-    $this->assertEqual(count($this->cssSelect('li.enable a:contains(Enable)')), 1);
+    $this->assertEquals(count($this->cssSelect('li.disable a:contains(Disable)')), ($contact_form_count - 1));
+    $this->assertEquals(count($this->cssSelect('li.enable a:contains(Enable)')), 1);
 
     // Assert that the disabled form has no input or text area and the message.
     $this->drupalGet('contact/test_disable_id');
-    $this->assertEqual(count($this->cssSelect('input')), 0);
-    $this->assertEqual(count($this->cssSelect('textarea')), 0);
-    $this->assertText('This contact form has been disabled.');
+    $this->assertEquals(count($this->cssSelect('input')), 0);
+    $this->assertEquals(count($this->cssSelect('textarea')), 0);
+    $this->assertSession()->pageTextContains('This contact form has been disabled.');
+    $this->drupalGet('/admin/structure/contact/manage/test_disable_id/enable');
 
     // Try to re-enable the form and assert that it can be accessed.
-    $this->drupalPostForm('/admin/structure/contact/manage/test_disable_id/enable', NULL, t('Enable'));
-    $this->assertText('Enabled contact form test_disable_label.');
+    $this->submitForm([], t('Enable'));
+    $this->assertSession()->pageTextContains('Enabled contact form test_disable_label.');
     $this->drupalGet('contact/test_disable_id');
-    $this->assertNoText('This contact form has been disabled.');
+    $this->assertSession()->pageTextNotContains('This contact form has been disabled.');
 
     // Create a new contact form with a custom disabled message, disable it and
     // assert that the message displayed is correct.
     $this->addContactForm('test_disable_id_2', 'test_disable_label_2', 'simpletest@example.com', FALSE, ['contact_storage_disabled_form_message' => 'custom disabled message']);
-    $this->drupalPostForm('/admin/structure/contact/manage/test_disable_id_2/disable', NULL, t('Disable'));
-    $this->assertText('Disabled contact form test_disable_label_2.');
+    $this->drupalGet('/admin/structure/contact/manage/test_disable_id_2/disable');
+    $this->submitForm([], t('Disable'));
+    $this->assertSession()->pageTextContains('Disabled contact form test_disable_label_2.');
     $this->drupalGet('contact/test_disable_id_2');
-    $this->assertText('custom disabled message');
+    $this->assertSession()->pageTextContains('custom disabled message');
   }
 
   /**
@@ -343,49 +347,54 @@ class ContactStorageTest extends ContactStorageTestBase {
     $mail = 'simpletest@example.com';
     // Test for alias without slash.
     $this->addContactForm('form_alias_1', 'contactForm', $mail, FALSE, ['contact_storage_url_alias' => 'form51']);
-    $this->assertText('The alias path has to start with a slash.');
+    $this->assertSession()->pageTextContains('The alias path has to start with a slash.');
     $this->drupalGet('form51');
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
 
     // Test for correct alias. Verify that we land on the correct contact form.
     $this->addContactForm('form_alias_2', 'contactForm', $mail, FALSE, ['contact_storage_url_alias' => '/form51']);
-    $this->assertText('Contact form contactForm has been added.');
+    $this->assertSession()->pageTextContains('Contact form contactForm has been added.');
     $this->drupalGet('form51');
-    $this->assertResponse(200);
-    $this->assertText('contactForm');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('contactForm');
     $this->assertSession()->buttonExists('Send message');
+    $this->drupalGet('admin/structure/contact/manage/form_alias_2');
 
     // Edit the contact form without changing anything. Verify that the existing
     // alias continues to work.
-    $this->drupalPostForm('admin/structure/contact/manage/form_alias_2', [], 'Save');
-    $this->assertText('Contact form contactForm has been updated.');
+    $this->submitForm([], 'Save');
+    $this->assertSession()->pageTextContains('Contact form contactForm has been updated.');
     $this->drupalGet('form51');
-    $this->assertResponse(200);
+    $this->assertSession()->statusCodeEquals(200);
+    $this->drupalGet('admin/structure/contact/manage/form_alias_2');
 
     // Edit the contact form by changing the alias. Verify that the new alias
     // is generated and the old one removed.
-    $this->drupalPostForm('admin/structure/contact/manage/form_alias_2', ['contact_storage_url_alias' => '/form52'], 'Save');
-    $this->assertText('Contact form contactForm has been updated.');
+    $this->submitForm(['contact_storage_url_alias' => '/form52'], 'Save');
+    $this->assertSession()->pageTextContains('Contact form contactForm has been updated.');
     $this->drupalGet('form51');
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
     $this->drupalGet('form52');
-    $this->assertResponse(200);
-    $this->assertText('contactForm');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('contactForm');
+    $this->drupalGet('admin/structure/contact/manage/form_alias_2');
 
     // Edit the contact form by removing the alias. Verify that is is deleted.
-    $this->drupalPostForm('admin/structure/contact/manage/form_alias_2', ['contact_storage_url_alias' => ''], 'Save');
-    $this->assertText('Contact form contactForm has been updated.');
+    $this->submitForm(['contact_storage_url_alias' => ''], 'Save');
+    $this->assertSession()->pageTextContains('Contact form contactForm has been updated.');
     $this->drupalGet('form52');
-    $this->assertResponse(404);
+    $this->assertSession()->statusCodeEquals(404);
+    $this->drupalGet('admin/structure/contact/manage/form_alias_2');
 
     // Add an alias back and delete the contact form. Verify that the alias is
     // deleted along with the contact form.
-    $this->drupalPostForm('admin/structure/contact/manage/form_alias_2', ['contact_storage_url_alias' => '/form52'], 'Save');
-    $this->assertText('Contact form contactForm has been updated.');
+    $this->submitForm(['contact_storage_url_alias' => '/form52'], 'Save');
+    $this->assertSession()->pageTextContains('Contact form contactForm has been updated.');
     $this->drupalGet('form52');
-    $this->assertResponse(200);
-    $this->assertText('contactForm');
-    $this->drupalPostForm('admin/structure/contact/manage/form_alias_2/delete', [], 'Delete');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('contactForm');
+    $this->drupalGet('admin/structure/contact/manage/form_alias_2/delete');
+    $this->submitForm([], 'Delete');
     $alias = $this->loadPathAliasByConditions([
       'path' => '/contact/form_alias_2',
     ]);
@@ -395,7 +404,7 @@ class ContactStorageTest extends ContactStorageTestBase {
   public function testMaximumSubmissionLimit() {
     // Create a new contact form with a maximum submission limit of 2.
     $this->addContactForm('test_id_3', 'test_label', 'simpletest@example.com', FALSE, ['contact_storage_maximum_submissions_user' => 2]);
-    $this->assertText('Contact form test_label has been added.');
+    $this->assertSession()->pageTextContains('Contact form test_label has been added.');
 
     // Sends 2 messages with "Send yourself a copy" option activated, shouldn't
     // reach the limit even if 2 messages are sent twice.
@@ -405,15 +414,15 @@ class ContactStorageTest extends ContactStorageTestBase {
       'message[0][value]' => 'Test message',
       'copy' => 'checked',
     ];
-    $this->drupalPostForm(NULL, $edit, t('Send message'));
-    $this->assertText('Your message has been sent.');
+    $this->submitForm($edit, t('Send message'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
     $this->drupalGet('contact/test_id_3');
-    $this->drupalPostForm(NULL, $edit, t('Send message'));
-    $this->assertText('Your message has been sent.');
+    $this->submitForm($edit, t('Send message'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     // Try accessing the form after the limit has been reached.
     $this->drupalGet('contact/test_id_3');
-    $this->assertText('You have reached the maximum submission limit of 2 for this form.');
+    $this->assertSession()->pageTextContains('You have reached the maximum submission limit of 2 for this form.');
   }
 
   /**
@@ -422,7 +431,7 @@ class ContactStorageTest extends ContactStorageTestBase {
   public function testAutoReplyField() {
     // Create a new contact form with an auto-reply.
     $this->addContactForm('test_auto_reply_id_1', 'test_auto_reply_label_1', 'simpletest@example.com', TRUE, ['reply[value]' => "auto_reply_1\nsecond_line"]);
-    $this->assertText('Contact form test_auto_reply_label_1 has been added.');
+    $this->assertSession()->pageTextContains('Contact form test_auto_reply_label_1 has been added.');
 
     // Verify that the auto-reply shows up in the field and only offers
     // one format (plain text), since html e-mails are disabled.
@@ -435,20 +444,22 @@ class ContactStorageTest extends ContactStorageTestBase {
       'subject[0][value]' => 'Test subject',
       'message[0][value]' => 'Test message',
     ];
-    $this->drupalPostForm('contact', $edit, t('Send message'));
-    $this->assertText('Your message has been sent.');
+    $this->drupalGet('contact');
+    $this->submitForm($edit, t('Send message'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     $captured_emails = $this->drupalGetMails();
 
     // Checks that the last captured email is the auto-reply, has a correct
     // body and is in html format.
-    $this->assertEqual(end($captured_emails)['key'], 'page_autoreply');
+    $this->assertEquals(end($captured_emails)['key'], 'page_autoreply');
     $this->assertStringContainsString("auto_reply_1\nsecond_line", end($captured_emails)['body']);
     $this->assertStringContainsString('text/plain', end($captured_emails)['headers']['Content-Type']);
+    $this->drupalGet('/admin/structure/contact/settings');
 
     // Enable sending messages in html format and verify that the available
     // formats correctly show up on the contact form edit page.
-    $this->drupalPostForm('/admin/structure/contact/settings', ['send_html' => TRUE], t('Save configuration'));
+    $this->submitForm(['send_html' => TRUE], t('Save configuration'));
     $this->drupalGet('admin/structure/contact/manage/test_auto_reply_id_1');
     $this->assertNotEmpty($this->xpath('//select[@name="reply[format]"]//option[@value="plain_text" and @selected="selected"]'));
     $this->assertNotEmpty($this->xpath('//select[@name="reply[format]"]//option[@value="full_html"]'));
@@ -464,17 +475,19 @@ class ContactStorageTest extends ContactStorageTestBase {
       'subject[0][value]' => 'Test subject',
       'message[0][value]' => 'Test message',
     ];
-    $this->drupalPostForm('contact', $edit, t('Send message'));
-    $this->assertText('Your message has been sent.');
+    $this->drupalGet('contact');
+    $this->submitForm($edit, t('Send message'));
+    $this->assertSession()->pageTextContains('Your message has been sent.');
 
     $captured_emails = $this->drupalGetMails();
-    $this->assertEqual(end($captured_emails)['key'], 'page_autoreply');
+    $this->assertEquals(end($captured_emails)['key'], 'page_autoreply');
     $this->assertTrue(strpos(end($captured_emails)['body'], "auto_reply_1<br />\nsecond_line") !== FALSE);
-    $this->assertEqual(end($captured_emails)['headers']['Content-Type'], 'text/html');
+    $this->assertEquals(end($captured_emails)['headers']['Content-Type'], 'text/html');
+    $this->drupalGet('admin/structure/contact/manage/test_auto_reply_id_1');
 
     // Select full html format (not selected by default) and verify that it is
     // properly set.
-    $this->drupalPostForm('admin/structure/contact/manage/test_auto_reply_id_1', ['reply[format]' => 'full_html'], t('Save'));
+    $this->submitForm(['reply[format]' => 'full_html'], t('Save'));
     $this->drupalGet('admin/structure/contact/manage/test_auto_reply_id_1');
     $this->assertNotEmpty($this->xpath('//select[@name="reply[format]"]//option[@value="full_html" and @selected="selected"]'));
 
@@ -490,7 +503,7 @@ class ContactStorageTest extends ContactStorageTestBase {
    */
   protected function cloneContactForm($original_form_id, $clone_form_id) {
     $this->drupalGet("admin/structure/contact/manage/$original_form_id/clone");
-    $this->drupalPostForm(NULL, [
+    $this->submitForm([
       'id' => $clone_form_id,
       'label' => 'Cloned',
     ], t('Clone'));

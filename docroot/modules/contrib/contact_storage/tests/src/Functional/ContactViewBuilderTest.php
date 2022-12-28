@@ -14,7 +14,7 @@ class ContactViewBuilderTest extends ContactStorageTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'user',
     'node',
     'contact',
@@ -38,7 +38,7 @@ class ContactViewBuilderTest extends ContactStorageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create Article node type.
@@ -70,7 +70,7 @@ class ContactViewBuilderTest extends ContactStorageTestBase {
     // Create first valid contact form.
     $mail = 'simpletest@example.com';
     $this->addContactForm('test_id', 'test_label', $mail, TRUE);
-    $this->assertText('Contact form test_label has been added.');
+    $this->assertSession()->pageTextContains('Contact form test_label has been added.');
 
     $field_name = 'contact';
     $entity_type = 'node';
@@ -126,16 +126,17 @@ class ContactViewBuilderTest extends ContactStorageTestBase {
     $edit[$title_key] = $this->randomMachineName(8);
     $edit[$body_key] = $this->randomMachineName(16);
     $edit[$contact_key] = 'test_id';
-    $this->drupalPostForm('node/add/article', $edit, t('Save'));
+    $this->drupalGet('node/add/article');
+    $this->submitForm($edit, t('Save'));
     // Check that the node exists in the database.
     $node = $this->drupalGetNodeByTitle($edit[$title_key]);
     $this->drupalGet('node/' . $node->id());
     // Some fields should be present.
-    $this->assertText('Your email address');
-    $this->assertText('Subject');
-    $this->assertText('Message');
-    $this->assertFieldByName('subject[0][value]');
-    $this->assertFieldByName('message[0][value]');
+    $this->assertSession()->pageTextContains('Your email address');
+    $this->assertSession()->pageTextContains('Subject');
+    $this->assertSession()->pageTextContains('Message');
+    $this->assertSession()->fieldExists('subject[0][value]');
+    $this->assertSession()->fieldExists('message[0][value]');
   }
 
 }

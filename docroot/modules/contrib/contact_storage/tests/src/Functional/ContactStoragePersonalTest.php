@@ -23,7 +23,7 @@ class ContactStoragePersonalTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['contact', 'contact_storage', 'dblog'];
+  protected static $modules = ['contact', 'contact_storage', 'dblog'];
 
   /**
    * A user with some administrative permissions.
@@ -51,7 +51,7 @@ class ContactStoragePersonalTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create an admin user.
@@ -73,22 +73,22 @@ class ContactStoragePersonalTest extends BrowserTestBase {
     $this->drupalLogin($this->webUser);
 
     $this->drupalGet('user/' . $this->contactUser->id() . '/contact');
-    $this->assertEscaped($mail);
+    $this->assertSession()->assertEscaped($mail);
     $message = $this->submitPersonalContact($this->contactUser);
     $mails = $this->drupalGetMails();
-    $this->assertEqual(1, count($mails));
+    $this->assertEquals(1, count($mails));
     $mail = $mails[0];
-    $this->assertEqual($mail['to'], $this->contactUser->getEmail());
-    $this->assertEqual($mail['from'], $this->config('system.site')->get('mail'));
-    $this->assertEqual($mail['reply-to'], $this->webUser->getEmail());
-    $this->assertEqual($mail['key'], 'user_mail');
+    $this->assertEquals($mail['to'], $this->contactUser->getEmail());
+    $this->assertEquals($mail['from'], $this->config('system.site')->get('mail'));
+    $this->assertEquals($mail['reply-to'], $this->webUser->getEmail());
+    $this->assertEquals($mail['key'], 'user_mail');
     $variables = [
       '@site-name' => $this->config('system.site')->get('name'),
       '@subject' => $message['subject[0][value]'],
       '@recipient-name' => $this->contactUser->getDisplayName(),
     ];
     $subject = PlainTextOutput::renderFromHtml(t('[@site-name] @subject', $variables));
-    $this->assertEqual($mail['subject'], $subject, 'Subject is in sent message.');
+    $this->assertEquals($mail['subject'], $subject, 'Subject is in sent message.');
     $this->assertTrue(strpos($mail['body'], 'Hello ' . $variables['@recipient-name']) !== FALSE, 'Recipient name is in sent message.');
     $this->assertTrue(strpos($mail['body'], $this->webUser->getDisplayName()) !== FALSE, 'Sender name is in sent message.');
     $this->assertTrue(strpos($mail['body'], $message['message[0][value]']) !== FALSE, 'Message body is in sent message.');
@@ -99,13 +99,13 @@ class ContactStoragePersonalTest extends BrowserTestBase {
     // Verify that the correct watchdog message has been logged.
     $this->drupalGet('/admin/reports/dblog');
     $placeholders = [
-      '@sender_name' => $this->webUser->username,
+      '@sender_name' => $this->webUser->getAccountName(),
       '@sender_email' => $this->webUser->getEmail(),
-      '@recipient_name' => $this->contactUser->getDisplayName(),
+      '@recipient_name' => $this->contactUser->getAccountName(),
     ];
-    $this->assertRaw(new FormattableMarkup('@sender_name (@sender_email) sent @recipient_name an email.', $placeholders));
+    $this->assertSession()->responseContains(new FormattableMarkup('@sender_name (@sender_email) sent @recipient_name an email.', $placeholders));
     // Ensure an unescaped version of the email does not exist anywhere.
-    $this->assertNoRaw($this->webUser->getEmail());
+    $this->assertSession()->responseNotContains($this->webUser->getEmail());
   }
 
   /**
@@ -125,7 +125,8 @@ class ContactStoragePersonalTest extends BrowserTestBase {
       'subject[0][value]' => $this->randomMachineName(16),
       'message[0][value]' => $this->randomMachineName(64),
     ];
-    $this->drupalPostForm('user/' . $account->id() . '/contact', $message, t('Send message'));
+    $this->drupalGet('user/' . $account->id() . '/contact');
+    $this->submitForm($message, t('Send message'));
     return $message;
   }
 
