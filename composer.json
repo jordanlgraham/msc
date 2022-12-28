@@ -42,9 +42,10 @@
     "drupal/editor_advanced_link": "^2.0",
     "drupal/editor_file": "^1.5",
     "drupal/embed": "^1.5",
+    "drupal/entity": "1.x-dev@dev",
     "drupal/entity_browser": "^2.6",
     "drupal/entity_embed": "^1.2",
-    "drupal/entity_print": "^2.6",
+    "drupal/entity_print": "^2.9",
     "drupal/entityqueue": "^1.2",
     "drupal/externalauth": "^1.4",
     "drupal/fast_404": "2.x-dev",
@@ -175,11 +176,11 @@
         "drupal/core": {
             "3254169: Update aborted by system_post_update_sort_all_config": "https://www.drupal.org/files/issues/2022-01-18/drupal-n3254169-51.patch"
         },
-        "drupal/entity": {
-            "3249372: (entity api) PHP 8.1: Deprecated function": "https://www.drupal.org/files/issues/2021-12-19/3249372-10.patch"
-        },
         "drupal/flag": {
             "Issue 3110955: Field definition update": "https://www.drupal.org/files/issues/2020-02-04/3110955-entity-definition-update-manager-2.patch"
+        },
+        "drupal/google_analytics": {
+            "3258588: Deprecated function - php8.1 compatibility": "https://www.drupal.org/files/issues/2022-09-26/google_analytics-deprecated_function-3258588-57.patch"
         },
         "drupal/media_entity_image": {
             "Remove 'core' declaration in info.yml": "patches/media_entity_image-remove_core.patch"
