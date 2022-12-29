@@ -1,0 +1,5 @@
+name: MSC YourMembership Soap
+type: module
+description: Provides SOAP logic for YourMembership integration.
+package: Custom
+core_version_requirement: ^9 || ^10
