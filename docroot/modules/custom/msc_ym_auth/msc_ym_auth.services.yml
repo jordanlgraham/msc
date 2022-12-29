@@ -1,0 +1,11 @@
+services:
+  msc_ym_auth.event_subscriber:
+    class: Drupal\msc_ym_auth\EventSubscriber\MscYmAuthSubscriber
+    arguments: ['@messenger']
+    tags:
+      - { name: event_subscriber }
+
+  msc_ym_auth.auth:
+    class: Drupal\msc_ym_auth\Auth
+    arguments: ['@entity_type.manager', '@externalauth.externalauth']
+
