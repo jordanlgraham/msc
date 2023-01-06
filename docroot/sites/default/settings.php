@@ -813,9 +813,6 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
 
 $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
 
-// Add smtp password from environment variable.
-$config['symfony_mailer.mailer_transport.smtp'] = $_ENV['SMTP_PWD'] ?? ['pass' => getenv('SMTP_PWD')];
-
 /**
  * Load local development override configuration, if available.
  *
