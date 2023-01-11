@@ -58,7 +58,7 @@ class EntityEmbedDisplayManagerTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->imageButton = $this->container->get('entity_type.manager')

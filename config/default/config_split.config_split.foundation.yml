@@ -1,0 +1,21 @@
+uuid: 24f2c816-cf03-466e-b019-1d8a8c52de79
+langcode: en
+status: true
+dependencies: {  }
+id: foundation
+label: Foundation
+description: ''
+weight: 0
+folder: ../config/foundation
+module: {  }
+theme: {  }
+blacklist:
+  - block.block.findafacility
+  - block.block.findafacilityuserlogin
+  - block.block.findapreferredvendor
+graylist:
+  - system.site
+  - views.view.all_sponsors
+  - views.view.sponsors
+graylist_dependents: true
+graylist_skip_equal: true

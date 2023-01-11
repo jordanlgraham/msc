@@ -7,6 +7,7 @@
         "drupal/embed": "^1.5"
     },
     "require-dev": {
+        "drupal/ckeditor": "^1",
         "drupal/entity_browser": "^2.2"
     }
 }
