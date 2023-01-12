@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b36dc5dc61988738004aafbdcfedd717",
+    "content-hash": "0b8960a918a915773241303d6dbb9bcf",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -5940,26 +5940,32 @@
         },
         {
             "name": "drupal/insert",
-            "version": "dev-1.x",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/insert.git",
-                "reference": "af6af9fe0619024456cdb3f902b2da0a0dc93b84"
+                "reference": "8.x-2.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/insert-8.x-2.0-beta3.zip",
+                "reference": "8.x-2.0-beta3",
+                "shasum": "bb03f0cc8eda55a48c8e688a83c0523c250654c4"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
             },
+            "require-dev": {
+                "drupal/colorbox": "*"
+            },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-1.0+3-dev",
-                    "datestamp": "1621866532",
+                    "version": "8.x-2.0-beta3",
+                    "datestamp": "1641051127",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -5977,7 +5983,7 @@
                     "homepage": "https://www.drupal.org/user/35821"
                 }
             ],
-            "description": "Assists in inserting files, images, or other media into the body field or other text areas.",
+            "description": "Assists in inserting files, images, or other media into the body field as well as other editor and text areas.",
             "homepage": "https://www.drupal.org/project/insert",
             "support": {
                 "source": "https://git.drupalcode.org/project/insert"
@@ -14430,6 +14436,7 @@
         "drupal/field_formatter": 15,
         "drupal/flag": 10,
         "drupal/inline_entity_form": 5,
+        "drupal/insert": 10,
         "drupal/maillog": 10,
         "drupal/masquerade": 10,
         "drupal/media_entity_browser": 15,
@@ -14440,5 +14447,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
