@@ -8,3 +8,8 @@ configure: insert.config
 dependencies:
   - drupal:image (>= 8.5)
   - drupal:file
+
+# Information added by Drupal.org packaging script on 2022-01-01
+version: '8.x-2.0-beta3'
+project: 'insert'
+datestamp: 1641051129
