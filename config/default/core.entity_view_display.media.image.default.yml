@@ -13,14 +13,6 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
-  name:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   thumbnail:
     type: image
     label: hidden
@@ -42,4 +34,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_image: true
+  name: true
   uid: true
