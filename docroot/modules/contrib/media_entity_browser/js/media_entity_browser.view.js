@@ -30,7 +30,7 @@
       });
 
       // Add a checked class when clicked.
-      $('.views-row', context).once().click(function () {
+      $(once('media-entity-browser-checked', '.views-row', context)).click(function () {
         var $row = $(this);
         var $input = $row.find('.views-field-entity-browser-select input');
         $input.prop('checked', !$input.prop('checked'));

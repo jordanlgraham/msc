@@ -3,7 +3,7 @@
  * Defines the behavior of the media entity browser view.
  */
 
-(function ($, Drupal) {
+(function ($, Drupal, once) {
 
   "use strict";
 
@@ -12,7 +12,7 @@
    */
   Drupal.behaviors.mediaEntityBrowserView = {
     attach: function (context) {
-      const $view = $('.js-media-library-view', context).once('media-library-remaining');
+      const $view = $(once('media-library-remaining', '.js-media-library-view', context));
       $view
         .find('.js-media-library-item input[type="checkbox"]')
         .on('change', function () {
@@ -35,4 +35,4 @@
     }
   };
 
-}(jQuery, Drupal));
+}(jQuery, Drupal, once));
