@@ -5,7 +5,7 @@
 
 # This is a PHP's official Debian buster-based Docker image.
 # The image is build from https://github.com/acquia/devops-orca-container
-ARG BASE_IMAGE=devops-orca-container:latest
+ARG BASE_IMAGE=devops-orca-container:php81
 
 # Jfrog is used by default in REPO_LOCATION
 # Solving dockerhub rate limiting and improving security scanning
@@ -15,7 +15,7 @@ ARG REPO_LOCATION
 # release, dev-develop to track Dev/HEAD, or any other Composer version
 # string.
 # @see https://getcomposer.org/doc/articles/versions.md
-ARG ORCA_VERSION=^3
+ARG ORCA_VERSION=3.26.0
 
 FROM ${REPO_LOCATION}${BASE_IMAGE}
 

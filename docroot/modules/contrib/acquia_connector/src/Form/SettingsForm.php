@@ -209,7 +209,7 @@ class SettingsForm extends ConfigFormBase {
       '#maxlength' => 255,
       '#required' => TRUE,
       '#disabled' => TRUE,
-      '#default_value' => $this->state->get('spi.site_name') ?? $this->siteProfile->getSiteName($subscription['uuid']),
+      '#default_value' => $this->siteProfile->getSiteName($this->subscription->getSettings()->getApplicationUuid()),
     ];
 
     if (!empty($form['identification']['site']['name']['#default_value']) && $this->siteProfile->checkAcquiaHosted()) {
