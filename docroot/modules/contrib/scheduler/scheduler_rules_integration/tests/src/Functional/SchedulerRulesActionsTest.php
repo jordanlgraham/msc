@@ -1,14 +1,15 @@
 <?php
 
-namespace Drupal\Tests\scheduler\Functional;
+namespace Drupal\Tests\scheduler_rules_integration\Functional;
 
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\rules\Context\ContextConfig;
+use Drupal\Tests\scheduler\Functional\SchedulerBrowserTestBase;
 
 /**
  * Tests the six actions that Scheduler provides for use in Rules module.
  *
- * @group scheduler
+ * @group scheduler_rules_integration
  */
 class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
 
@@ -27,6 +28,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
 
     $this->rulesStorage = $this->container->get('entity_type.manager')->getStorage('rules_reaction_rule');
     $this->expressionManager = $this->container->get('plugin.manager.rules_expression');
+    // Login as adminUser so that we can also test the non-enabled node type.
     $this->drupalLogin($this->adminUser);
 
     // Create node A which is published and enabled for Scheduling.
@@ -118,7 +120,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'New node - Trigger Action Rule 1',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle('New node - Trigger Action Rule 1');
     $this->assertSession()->pageTextContains(sprintf('%s is scheduled to be published %s', 'New node - Trigger Action Rule 1', $publish_on_formatted));
 
@@ -137,7 +140,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - but no rules will be triggered',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that neither of the rules are triggered, no publish and unpublish
@@ -153,7 +157,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - Trigger Action Rule 1',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that rule 1 is triggered and rule 2 is not. Check that a publishing
@@ -169,7 +174,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - Trigger Action Rule 2',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that rule 2 is triggered and rule 1 is not. Check that the
@@ -185,7 +191,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'New non-enabled node - Trigger Action Rule 1',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->nonSchedulerNodeType->id(), $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->nonSchedulerNodeType->id());
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle('New non-enabled node - Trigger Action Rule 1');
     // Check that rule 1 issued a warning message.
     $assert->pageTextContains('warning message');
@@ -198,7 +205,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(1, $log, 'There is 1 watchdog warning message from Scheduler');
 
     // Fourthly, edit a pre-existing node which is not enabled for Scheduler.
@@ -209,7 +216,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit non-enabled node - Trigger Action Rule 1',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     // Check that rule 1 issued a warning message.
     $assert->pageTextContains('warning message');
     $assert->elementExists('xpath', '//div[@aria-label="Warning message" and contains(string(), "Action")]');
@@ -221,7 +229,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(2, $log, 'There are now 2 watchdog warning messages from Scheduler');
 
     // Edit the node, triggering rule 2.
@@ -229,7 +237,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit non-enabled node - Trigger Action Rule 2',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     // Check that rule 2 issued a warning message.
     $assert->pageTextContains('warning message');
     $assert->elementExists('xpath', '//div[@aria-label="Warning message" and contains(string(), "Action")]');
@@ -239,7 +248,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(3, $log, 'There are now 3 watchdog warning messages from Scheduler');
   }
 
@@ -315,7 +324,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'New node - Trigger Action Rule 3',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle('New node - Trigger Action Rule 3');
     $this->assertSession()->pageTextContains(sprintf('%s is scheduled to be unpublished %s', 'New node - Trigger Action Rule 3', $unpublish_on_formatted));
 
@@ -334,7 +344,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - but no rules will be triggered',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that neither of the rules are triggered, no publish and unpublish
@@ -350,7 +361,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - Trigger Action Rule 3',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that rule 3 is triggered and rule 4 is not. Check that an
@@ -366,7 +378,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node - Trigger Action Rule 4',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $this->nodeStorage->resetCache([$node->id()]);
     $node = $this->nodeStorage->load($node->id());
     // Check that rule 4 is triggered and rule 3 is not. Check that the
@@ -382,7 +395,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'New non-enabled node - Trigger Action Rule 3',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->nonSchedulerNodeType->id(), $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->nonSchedulerNodeType->id());
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle('New non-enabled node - Trigger Action Rule 3');
     // Check that rule 3 issued a warning message.
     $assert->pageTextContains('warning message');
@@ -395,7 +409,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(1, $log, 'There is 1 watchdog warning message from Scheduler');
 
     // Fourthly, edit a pre-existing node which is not enabled for Scheduler.
@@ -406,7 +420,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit non-enabled node - Trigger Action Rule 3',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     // Check that rule 3 issued a warning message.
     $assert->pageTextContains('warning message');
     $assert->elementExists('xpath', '//div[@aria-label="Warning message" and contains(string(), "Action")]');
@@ -418,7 +433,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(2, $log, 'There are now 2 watchdog warning messages from Scheduler');
 
     // Edit the node, triggering rule 4.
@@ -426,7 +441,8 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit non-enabled node - Trigger Action Rule 4',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     // Check that rule 4 issued a warning message.
     $assert->pageTextContains('warning message');
     $assert->elementExists('xpath', '//div[@aria-label="Warning message" and contains(string(), "Action")]');
@@ -436,7 +452,7 @@ class SchedulerRulesActionsTest extends SchedulerBrowserTestBase {
       ->condition('severity', RfcLogLevel::WARNING)
       ->countQuery()
       ->execute()
-      ->fetchColumn();
+      ->fetchField();
     $this->assertEquals(3, $log, 'There are now 3 watchdog warning messages from Scheduler');
   }
 

@@ -1,13 +1,14 @@
 <?php
 
-namespace Drupal\Tests\scheduler\Functional;
+namespace Drupal\Tests\scheduler_rules_integration\Functional;
 
 use Drupal\rules\Context\ContextConfig;
+use Drupal\Tests\scheduler\Functional\SchedulerBrowserTestBase;
 
 /**
  * Tests the four conditions that Scheduler provides for use in Rules module.
  *
- * @group scheduler
+ * @group scheduler_rules_integration
  */
 class SchedulerRulesConditionsTest extends SchedulerBrowserTestBase {
 
@@ -229,7 +230,8 @@ class SchedulerRulesConditionsTest extends SchedulerBrowserTestBase {
     $edit = [
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $this->node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $this->node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
 
     $assert->pageTextContains($message5);
     $assert->pageTextContains($message6);
@@ -241,7 +243,8 @@ class SchedulerRulesConditionsTest extends SchedulerBrowserTestBase {
       'publish_on[0][value][date]' => date('Y-m-d', strtotime('+1 day', $this->requestTime)),
       'publish_on[0][value][time]' => date('H:i:s', strtotime('+1 day', $this->requestTime)),
     ];
-    $this->drupalPostForm('node/' . $this->node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $this->node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
 
     $assert->pageTextNotContains($message5);
     $assert->pageTextContains($message6);
@@ -253,7 +256,8 @@ class SchedulerRulesConditionsTest extends SchedulerBrowserTestBase {
       'unpublish_on[0][value][date]' => date('Y-m-d', strtotime('+2 day', $this->requestTime)),
       'unpublish_on[0][value][time]' => date('H:i:s', strtotime('+2 day', $this->requestTime)),
     ];
-    $this->drupalPostForm('node/' . $this->node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $this->node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
 
     $assert->pageTextNotContains($message5);
     $assert->pageTextNotContains($message6);

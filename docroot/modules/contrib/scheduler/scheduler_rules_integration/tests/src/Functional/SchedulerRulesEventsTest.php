@@ -1,15 +1,16 @@
 <?php
 
-namespace Drupal\Tests\scheduler\Functional;
+namespace Drupal\Tests\scheduler_rules_integration\Functional;
 
 use Drupal\rules\Context\ContextConfig;
+use Drupal\Tests\scheduler\Functional\SchedulerBrowserTestBase;
 
 /**
  * Tests the six events that Scheduler provides for use in Rules module.
  *
  * phpcs:set Drupal.Arrays.Array lineLimit 140
  *
- * @group scheduler
+ * @group scheduler_rules_integration
  */
 class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
 
@@ -78,7 +79,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Test for no events',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
@@ -91,7 +93,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
     $edit = [
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
     $assert->pageTextNotContains($this->message[3]);
@@ -114,7 +117,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'publish_on[0][value][time]' => date('H:i:s', time() + 3),
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $assert->pageTextContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
@@ -128,7 +132,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node with publish-on date',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextContains($this->message[2]);
     $assert->pageTextNotContains($this->message[3]);
@@ -140,7 +145,7 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
     // will be processed during cron, and assert that only event 3 is triggered.
     sleep(5);
     $this->cronRun();
-    $this->drupalGet('admin/reports/dblog');
+    $this->drupalGet('node');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
     $assert->pageTextContains($this->message[3]);
@@ -163,7 +168,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'unpublish_on[0][value][time]' => date('H:i:s', time() + 3),
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
@@ -177,7 +183,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node with unpublish-on date',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
     $assert->pageTextNotContains($this->message[3]);
@@ -189,7 +196,7 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
     // will be processed during cron, and assert that only event 6 is triggered.
     sleep(5);
     $this->cronRun();
-    $this->drupalGet('admin/reports/dblog');
+    $this->drupalGet('node');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
     $assert->pageTextNotContains($this->message[3]);
@@ -214,7 +221,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'unpublish_on[0][value][time]' => date('H:i:s', time() + 4),
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/add/' . $this->type, $edit, 'Save');
+    $this->drupalGet('node/add/' . $this->type);
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $assert->pageTextContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
@@ -228,7 +236,8 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
       'title[0][value]' => 'Edit node with both dates',
       'body[0][value]' => $this->randomString(30),
     ];
-    $this->drupalPostForm('node/' . $node->id() . '/edit', $edit, 'Save');
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $this->submitForm($edit, 'Save');
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextContains($this->message[2]);
@@ -241,7 +250,7 @@ class SchedulerRulesEventsTest extends SchedulerBrowserTestBase {
     // be processed during cron, and assert that events 3, 5 & 6 are triggered.
     sleep(6);
     $this->cronRun();
-    $this->drupalGet('admin/reports/dblog');
+    $this->drupalGet('node');
     $assert->pageTextNotContains($this->message[1]);
     $assert->pageTextNotContains($this->message[2]);
     $assert->pageTextContains($this->message[3]);
