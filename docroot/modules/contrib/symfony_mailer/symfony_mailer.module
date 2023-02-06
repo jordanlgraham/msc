@@ -45,7 +45,10 @@ function symfony_mailer_mailer_builder_info_alter(array &$email_builders) {
   // Add EmailBuilder definitions for any implementations of hook_mail() that
   // don't already have one, using LegacyEmailBuilder.
   $module_handler = \Drupal::moduleHandler();
-  $mail_hooks = $module_handler->getImplementations('mail');
+  $mail_hooks = [];
+  $module_handler->invokeAllWith('mail', function (callable $hook, string $module) use (&$mail_hooks) {
+    $mail_hooks[] = $module;
+  });
   $missing = array_diff($mail_hooks, array_keys($email_builders));
 
   foreach ($missing as $type) {

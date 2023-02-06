@@ -2,7 +2,7 @@
 
 namespace Drupal\symfony_mailer\Plugin\EmailAdjuster;
 
-use Drupal\Component\Utility\HTML;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -103,7 +103,7 @@ class WrapAndConvertEmailAdjuster extends EmailAdjusterBase implements Container
       // convert URLs to links.
       // @todo Inefficient? Could set second parameter to `{{ body }}` then
       // search and replace with the actual body after.
-      $plain = $this->render($email, _filter_autop(HTML::escape($orig_plain)), FALSE);
+      $plain = $this->render($email, _filter_autop(Html::escape($orig_plain)), FALSE);
     }
     elseif ($orig_html) {
       // Wrap plain text.
