@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efa166b5a99ef9496a12bace516bd896",
+    "content-hash": "989767516e59aa82a604162a329ade31",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -7708,17 +7708,17 @@
         },
         {
             "name": "drupal/symfony_mailer",
-            "version": "1.2.0-beta2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/symfony_mailer.git",
-                "reference": "1.2.0-beta2"
+                "reference": "1.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/symfony_mailer-1.2.0-beta2.zip",
-                "reference": "1.2.0-beta2",
-                "shasum": "39325edd12036189ce47921d2f11815747ba4506"
+                "url": "https://ftp.drupal.org/files/projects/symfony_mailer-1.2.1.zip",
+                "reference": "1.2.1",
+                "shasum": "22673c30cba976097cdcd0b33c7324d552f73c0d"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10",
@@ -7729,11 +7729,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.2.0-beta2",
-                    "datestamp": "1673606001",
+                    "version": "1.2.1",
+                    "datestamp": "1681472755",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 },
                 "drush": {
@@ -14448,8 +14448,7 @@
         "drupal/maillog": 10,
         "drupal/masquerade": 10,
         "drupal/media_entity_browser": 15,
-        "drupal/services": 10,
-        "drupal/symfony_mailer": 10
+        "drupal/services": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -1,11 +1,12 @@
-name: Symfony Mailer Test
+name: Drupal Symfony Mailer Test
 type: module
+description: For testing of Drupal Symfony Mailer.
 package: Testing
 hidden: true
 dependencies:
   - symfony_mailer:symfony_mailer
 
-# Information added by Drupal.org packaging script on 2023-01-13
-version: '1.2.0-beta2'
+# Information added by Drupal.org packaging script on 2023-04-14
+version: '1.2.1'
 project: 'symfony_mailer'
-datestamp: 1673606005
+datestamp: 1681472758
