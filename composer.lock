@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "989767516e59aa82a604162a329ade31",
+    "content-hash": "a19b85824f7345bfcc04df846c777407",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -5377,17 +5377,17 @@
         },
         {
             "name": "drupal/geocoder",
-            "version": "3.31.0",
+            "version": "3.34.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/geocoder.git",
-                "reference": "8.x-3.31"
+                "reference": "8.x-3.34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geocoder-8.x-3.31.zip",
-                "reference": "8.x-3.31",
-                "shasum": "f6a24695f1fefa1c52a6119dd02c329410d22ce6"
+                "url": "https://ftp.drupal.org/files/projects/geocoder-8.x-3.34.zip",
+                "reference": "8.x-3.34",
+                "shasum": "6eb44d0b055f4239a4bd65f3fedef5829a761fce"
             },
             "require": {
                 "davedevelopment/stiphle": "^0.9.2",
@@ -5430,8 +5430,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.31",
-                    "datestamp": "1663974561",
+                    "version": "8.x-3.34",
+                    "datestamp": "1682585666",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
