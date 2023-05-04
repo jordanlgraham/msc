@@ -1,6 +1,4 @@
---- modules/system/system.post_update.php
-+++ modules/system/system.post_update.php
-@@ -222,7 +222,10 @@ function system_post_update_sort_all_config(&$sandbox) {
+@@ -222,7 +222,10 @@
    $start = $sandbox['progress'];
    $end = min($sandbox['max'], $start + $iteration_size);
    for ($i = $start; $i < $end; $i++) {

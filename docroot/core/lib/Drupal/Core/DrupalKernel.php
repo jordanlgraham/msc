@@ -230,7 +230,12 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
   protected static $isEnvironmentInitialized = FALSE;
 
   /**
-   * The site directory.
+   * The site path directory.
+   *
+   * Site path is relative to the app root directory.
+   * Usually defined as "sites/default".
+   *
+   * By default, Drupal uses sites/default.
    *
    * @var string
    */
@@ -1030,7 +1035,14 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     }
 
     // Enforce E_STRICT, but allow users to set levels not part of E_STRICT.
-    error_reporting(E_STRICT | E_ALL);
+    $error_reporting = E_STRICT | E_ALL;
+
+    // Drupal 9 uses PHP syntax that's deprecated in PHP 8.2.
+    if (PHP_VERSION_ID >= 80200) {
+      $error_reporting &= ~E_DEPRECATED;
+    }
+
+    error_reporting($error_reporting);
 
     // Override PHP settings required for Drupal to work properly.
     // sites/default/default.settings.php contains more runtime settings.
@@ -1584,7 +1596,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
    * @see \Drupal\Core\Http\TrustedHostsRequestFactory
    */
   protected static function setupTrustedHosts(Request $request, $host_patterns) {
-    $request->setTrustedHosts($host_patterns);
+    Request::setTrustedHosts($host_patterns);
 
     // Get the host, which will validate the current request.
     try {
