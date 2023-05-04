@@ -16,7 +16,7 @@ abstract class InsertImageTestBase extends InsertFileTestBase {
   /**
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'node', 'file', 'image', 'insert', 'editor', 'field_ui',
   ];
 

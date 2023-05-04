@@ -6,6 +6,7 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'insert.update.php';
 
+use Drupal\insert\Utility\MigrateInsertWidgetSettings;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Field\WidgetInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -15,6 +16,10 @@ use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\insert\Utility\InsertUtility;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\migrate\Plugin\MigrateSourceInterface;
+use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\migrate\Row;
+use Drupal\migrate_drupal\Plugin\migrate\source\DrupalSqlBase;
 use Drupal\node\Entity\Node;
 
 const INSERT_TYPE_FILE = 'file';
@@ -538,7 +543,7 @@ function insert_insert_variables($insertType, array &$element, $styleName, array
     'entity_type' => $file->getEntityTypeId(),
     'mime_type' => $file->getMimeType(),
     'uuid' => $file->uuid(),
-    'url' => file_create_url($file->getFileUri()),
+    'url' => \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri()),
   ];
 
   if (!$config->get('absolute')) {
@@ -1035,4 +1040,44 @@ function insert_help($route_name) {
     $output .= '</p>';
     return $output;
   }
+}
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function insert_migration_plugins_alter(array &$migrations) {
+  if (
+    !empty($migrations['d7_field_instance_widget_insert_settings']) &&
+    !MigrateInsertWidgetSettings::standaloneMigrationIsOmittable()
+  ) {
+    return;
+  }
+
+  unset($migrations['d7_field_instance_widget_insert_settings']);
+
+  $field_instance_widget_settings_migrations = array_filter(
+    $migrations,
+    function ($definition) {
+      return $definition['id'] === 'd7_field_instance_widget_settings';
+    }
+  );
+
+  foreach (array_keys($field_instance_widget_settings_migrations) as $plugin_id) {
+    $migrations[$plugin_id]['migration_tags'][] = 'insert';
+    $migrations[$plugin_id]['process']['options/third_party_settings/insert'] = 'insert_config';
+  }
+}
+
+/**
+ * Implements hook_migrate_prepare_row().
+ */
+function insert_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
+  if (!in_array('insert', $migration->getMigrationTags())) {
+    return;
+  }
+  if (!$source instanceof DrupalSqlBase) {
+    return;
+  }
+  $insert_settings = $row->getSourceProperty('widget/settings');
+  $row->setSourceProperty('insert_config', MigrateInsertWidgetSettings::getInsertWidgetSettings($insert_settings));
 }

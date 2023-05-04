@@ -1,55 +1,38 @@
-CONTENTS OF THIS FILE
----------------------
+# Insert
 
- * Introduction
- * Requirements
- * Recommended Modules
- * Installation
- * Configuration
- * Maintainers
+Insert is a utility that makes inserting images and links to files into the
+body field and other WYSIWYG editors or text areas much easier by adding a
+simple JavaScript-based button and optional controls to file and image fields.
+Images may be inserted using any image style preset. Insert may also be
+interfaced to by other modules for inserting custom content.
 
+For a full description of the module, visit the
+[project page](https://www.drupal.org/project/insert).
 
-INTRODUCTION
-------------
-
-Insert is a utility that makes inserting images and links to files into text
-areas or WYSIWYGs much easier by adding a simple JavaScript-based button to file
-and image fields. Images may be inserted using any image style preset.
-
- * For a full description of the module visit:
-   https://www.drupal.org/project/insert
- * Module specific documentation is at:
-   https://www.drupal.org/docs/8/modules/insert
- * To submit bug reports and feature suggestions, or to track changes visit:
-   https://www.drupal.org/project/issues/insert
+Submit bug reports and feature suggestions, or track changes in the
+[issue queue](https://www.drupal.org/project/issues/insert).
 
 
-REQUIREMENTS
-------------
+## Requirements
 
 This module requires no modules outside of Drupal core.
 
 
-INSTALLATION
-------------
+## Installation
 
- * Install the Insert module as you would normally install a contributed Drupal
-   module. Visit https://www.drupal.org/docs/8/extending-drupal-8/installing-drupal-8-modules
-   for further information.
-
-
-CONFIGURATION
--------------
-
-See https://www.drupal.org/docs/8/modules/insert/configuration on how to
-configure the module.
+Install as you would normally install a contributed Drupal module. For further
+information, see
+[Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
 
 
-MAINTAINERS
------------
+## Configuration
 
-The original Insert module for Drupal 6 and 7 was written by Nate Lampton.
- * https://www.drupal.org/u/quicksketch
+See the
+[module's documentation pages](https://www.drupal.org/docs/8/modules/insert) on
+how to configure the module.
 
-Rewritten for Drupal 8 by [H. Snater](www.snater.com).
- * https://www.drupal.org/u/snater
+
+## Maintainers
+
+- Nate Lampton - [quicksketch](https://www.drupal.org/u/quicksketch)
+- Snater - [Snater](https://www.snater.com)

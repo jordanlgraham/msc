@@ -158,10 +158,19 @@
           var updatedImageCleanUrl = url.split('?')[0];
           fManager.getTextareas().each(function() {
             var $textarea = $(this);
+            var textareaString = $textarea.val();
             var $newDom = self._updateDom($('<div>').html($(this).val()), url, updatedImageCleanUrl);
 
             if ($newDom !== null) {
-              $textarea.val($newDom.html());
+              $newDom.find('img').each(function(index) {
+                var i = 0;
+                textareaString.replace(
+                  /<img[^>]*>/g,
+                  match => i++ !== index ? match : $('<div>').append($(this)).html()
+                );
+              });
+
+              $textarea.val(textareaString);
             }
           });
 

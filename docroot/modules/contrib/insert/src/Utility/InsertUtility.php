@@ -148,6 +148,10 @@ class InsertUtility {
     $config = \Drupal::config('insert.config');
     $text_formats = $config->get('text_formats');
 
+    if ($text_formats === null) {
+      return;
+    }
+
     foreach (array_keys($settings['editor']['formats']) as $text_format_id) {
       if (in_array($text_format_id, $text_formats)) {
         static::combineEditorExtraAllowedContent(

@@ -58,11 +58,11 @@ function insert_responsive_image_insert_variables($insertType, array &$element, 
   $style = ImageStyle::load($responsiveStyle->getFallbackImageStyle());
 
   $vars['url'] = $style === NULL
-    ? file_create_url($file->getFileUri())
+    ? \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri())
     : $style->buildUrl($file->getFileUri());
 
   if (!\Drupal::config('insert.config')->get('absolute')) {
-    $vars['url'] = file_url_transform_relative($vars['url']);
+    $vars['url'] = \Drupal::service('file_url_generator')->transformRelative($vars['url']);
   }
 
   // Have Responsive Image module generate the srcset and sizes attributes:

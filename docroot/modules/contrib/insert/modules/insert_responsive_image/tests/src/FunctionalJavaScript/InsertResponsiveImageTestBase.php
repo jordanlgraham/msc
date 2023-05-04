@@ -13,7 +13,7 @@ abstract class InsertResponsiveImageTestBase extends InsertImageTestBase {
   /**
    * @inheritdoc
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'image',
     'insert',
@@ -25,7 +25,7 @@ abstract class InsertResponsiveImageTestBase extends InsertImageTestBase {
   /**
    * @inheritdoc
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Install the 'wide' responsive image style.

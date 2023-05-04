@@ -51,11 +51,6 @@ function _insert_media_settings($plugin) {
     $settings['view_modes'] = array_fill_keys($viewModeIds, $viewModeIds);
   }
 
-  // Ensure default view mode is in the set of view modes.
-  if (!in_array($settings['default'], $settings['view_modes'], TRUE)) {
-    $settings['view_modes'][$settings['default']] = $settings['default'];
-  }
-
   return $settings;
 }
 
@@ -124,8 +119,9 @@ function insert_media_insert_process(&$insertType, array &$element) {
   $element['#insert']['settings']['styles'] = $settings['view_modes'];
   $element['#insert']['settings']['default'] = $settings['default'];
 
-  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager */
-  $entityTypeManager = \Drupal::entityTypeManager();
+  if (!array_filter($settings['view_modes'])) {
+    return FALSE;
+  }
 
   foreach ($element['selection'] as $key => &$selectionElement) {
     if (!is_int($key)) {

@@ -25,7 +25,7 @@ abstract class InsertFileTestBase extends WebDriverTestBase {
   /**
    * @var array
    */
-  public static $modules = ['node', 'file', 'insert', 'field_ui'];
+  protected static $modules = ['node', 'file', 'insert', 'field_ui'];
 
   /**
    * @var \Drupal\user\UserInterface
@@ -40,7 +40,7 @@ abstract class InsertFileTestBase extends WebDriverTestBase {
   /**
    *
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->contentTypeName = 'article';

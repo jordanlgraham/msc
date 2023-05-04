@@ -42,4 +42,4 @@ destination:
   plugin: component_entity_form_display_insert
 migration_dependencies:
   required:
-    - d7_field_instance
+    - d7_field_instance_widget_settings

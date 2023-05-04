@@ -12,7 +12,7 @@ abstract class InsertColorboxTestBase extends InsertImageTestBase {
   /**
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'node', 'file', 'image', 'insert', 'insert_colorbox', 'field_ui',
   ];
 

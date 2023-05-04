@@ -13,14 +13,14 @@ abstract class InsertImageCKEditorTestBase extends InsertImageTestBase {
   /**
    * @inheritdoc
    */
-  public static $modules = [
+  protected static $modules = [
     'node', 'file', 'image', 'insert', 'editor', 'field_ui', 'ckeditor',
   ];
 
   /**
    * @inheritdoc
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create text format and associate CKEditor.

@@ -231,12 +231,20 @@
 
             self._inserter.getFocusManager().getTextareas().each(function() {
               var $textarea = $(this);
-              var $dom = $('<div>').html($textarea.val());
+              var textareaString = $textarea.val();
+              var $dom = $('<div>').html(textareaString);
               var $instances = self._findByUUID($dom, self._uuid);
 
               if ($instances.length) {
                 $instances.attr('data-align', value);
-                $textarea.val($dom.html());
+                $dom.find('img').each(function(index) {
+                  var i = 0;
+                  textareaString.replace(
+                    /<img[^>]*>/g,
+                    match => i++ !== index ? match : $('<div>').append($(this)).html()
+                  );
+                });
+                $textarea.val(textareaString);
               }
             });
 
