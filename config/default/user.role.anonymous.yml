@@ -1,7 +1,18 @@
 uuid: bceab67c-6873-4389-9ef7-0fc7540ff40a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.restricted_html
+  module:
+    - comment
+    - contact
+    - entity_print
+    - filter
+    - forward
+    - media
+    - search
+    - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous

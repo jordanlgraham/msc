@@ -1,4 +1,4 @@
-uuid: d4e08a69-3f30-402b-970b-5361c916ffc9
+uuid: c91356ea-aeb0-4b6d-aa92-a8f69e13493f
 langcode: en
 status: true
 dependencies: {  }
@@ -6,11 +6,10 @@ _core:
   default_config_hash: UKAWomTpkBsRaG2cDv6a-j36Y3kT3Yr4qTW2jd4SLNk
 id: _
 configuration:
-  mailer_default_headers: {  }
-  mailer_inline_css: {  }
-  email_theme:
-    theme: _active_fallback
   mailer_url_to_absolute: {  }
+  mailer_inline_css: {  }
   mailer_wrap_and_convert:
     plain: false
     swiftmailer: false
+  email_theme:
+    theme: _active_fallback

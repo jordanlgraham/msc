@@ -12,7 +12,7 @@ id: application_for_associate_member
 title: 'Application for Associate Membership'
 description: ''
 category: ''
-elements: |
+elements: |-
   company_name:
     '#type': textfield
     '#title': 'Company Name'
@@ -84,16 +84,20 @@ elements: |
       '#type': webform_section
       '#title': 'Primary Contact'
       '#title_tag': h3
+      '#required': true
       primary_contact_name:
         '#type': textfield
         '#title': Name
         '#description': '(to be listed on our website)'
+        '#required': true
       primary_contact_title:
         '#type': textfield
         '#title': Title
+        '#required': true
       primary_contact_email:
         '#type': email
         '#title': Email
+        '#required': true
     billing_dues:
       '#type': webform_section
       '#title': Billing/Dues

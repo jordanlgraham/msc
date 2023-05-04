@@ -2,9 +2,13 @@ uuid: 7acb893e-bec3-45c5-accb-d7338d751c0b
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.media.logo_small
   module:
     - editor
     - entity_embed
+    - media
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
@@ -14,46 +18,77 @@ filters:
   filter_html:
     id: filter_html
     provider: filter
-    status: false
-    weight: -10
+    status: true
+    weight: -50
     settings:
-      allowed_html: '<em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <br> <span class=""> <img title src alt data-entity-type data-entity-uuid data-align data-caption width height class=""> <a type title rel target id href hreflang data-entity-type data-entity-uuid class=""> <oembed> <div data-oembed-url> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button> <sup> <sub> <table> <caption> <tbody> <thead> <tfoot> <th> <td> <tr>'
-      filter_html_help: false
+      allowed_html: '<br> <p class="text-align-left text-align-center text-align-right text-align-justify"> <h2 class="text-align-left text-align-center text-align-right text-align-justify"> <h3 class="text-align-left text-align-center text-align-right text-align-justify"> <h4 class="text-align-left text-align-center text-align-right text-align-justify"> <h5 class="text-align-left text-align-center text-align-right text-align-justify"> <h6 class="text-align-left text-align-center text-align-right text-align-justify"> <strong> <em> <u> <blockquote> <a href title target="_blank" rel> <ul> <ol reversed start> <li> <table> <tr> <td rowspan colspan> <th rowspan colspan> <thead> <tbody> <tfoot> <caption> <img src alt height width data-entity-uuid data-entity-type data-caption data-align> <drupal-media data-entity-type data-entity-uuid alt data-caption data-align>'
+      filter_html_help: true
       filter_html_nofollow: false
   filter_align:
     id: filter_align
     provider: filter
     status: true
-    weight: 7
+    weight: -47
     settings: {  }
   filter_caption:
     id: filter_caption
     provider: filter
     status: true
-    weight: 8
+    weight: -46
     settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
     status: true
-    weight: 11
+    weight: -45
     settings: {  }
   entity_embed:
     id: entity_embed
     provider: entity_embed
     status: true
-    weight: 0
+    weight: -43
     settings: {  }
   filter_autop:
     id: filter_autop
     provider: filter
     status: true
-    weight: 0
+    weight: -49
     settings: {  }
   filter_url:
     id: filter_url
     provider: filter
     status: true
-    weight: 0
+    weight: -48
     settings:
       filter_url_length: 72
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: -44
+    settings:
+      default_view_mode: logo_small
+      allowed_view_modes:
+        default: default
+        full: full
+        logo_small: logo_small
+      allowed_media_types:
+        image: image
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: false
+    weight: -41
+    settings: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: false
+    weight: -40
+    settings: {  }
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: false
+    weight: -42
+    settings: {  }

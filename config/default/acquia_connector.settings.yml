@@ -3,5 +3,3 @@ cron_interval: 30
 cron_interval_override: 0
 hide_signup_messages: 0
 third_party_settings: null
-spi:
-  amplitude_api_key: f32aacddde42ad34f5a3078a621f37a9

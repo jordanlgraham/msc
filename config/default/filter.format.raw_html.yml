@@ -1,8 +1,35 @@
 uuid: 1c7f3718-3ea9-4f87-afeb-b11075212543
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - entity_embed
+    - media
 name: 'Raw HTML'
 format: raw_html
 weight: 0
-filters: {  }
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: ''
+      filter_html_help: true
+      filter_html_nofollow: false
+  media_embed:
+    id: media_embed
+    provider: media
+    status: true
+    weight: 100
+    settings:
+      default_view_mode: default
+      allowed_view_modes: {  }
+      allowed_media_types: {  }
+  entity_embed:
+    id: entity_embed
+    provider: entity_embed
+    status: true
+    weight: 100
+    settings: {  }

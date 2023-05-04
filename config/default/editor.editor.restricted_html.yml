@@ -1,12 +1,12 @@
-uuid: 43253215-a0b7-4061-8a60-071eaab2aca2
+uuid: 6cb46ac1-6f56-4e71-99f6-a93a7aadcd57
 langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.basic_html
+    - filter.format.restricted_html
   module:
     - ckeditor5
-format: basic_html
+format: restricted_html
 editor: ckeditor5
 settings:
   toolbar:
@@ -14,20 +14,15 @@ settings:
       - heading
       - bold
       - italic
-      - underline
-      - blockQuote
-      - removeFormat
+      - '|'
       - link
+      - blockQuote
+      - code
       - bulletedList
       - numberedList
-      - insertTable
-      - alignment
-      - outdent
-      - indent
       - sourceEditing
-      - undo
-      - redo
       - drupalInsertImage
+      - '|'
       - drupalMedia
   plugins:
     ckeditor5_heading:
@@ -38,27 +33,37 @@ settings:
         - heading5
         - heading6
     ckeditor5_sourceEditing:
-      allowed_tags: {  }
+      allowed_tags:
+        - '<cite>'
+        - '<dl>'
+        - '<dt>'
+        - '<dd>'
+        - '<a type title class hreflang>'
+        - '<blockquote cite>'
+        - '<ul type>'
+        - '<ol type>'
+        - '<img title alt height width src class>'
+        - '<audio type src controls contenteditable>'
+        - '<span class>'
+        - '<video type src controls contenteditable>'
+        - '<h2 id>'
+        - '<h3 id>'
+        - '<h4 id>'
+        - '<h5 id>'
+        - '<h6 id>'
     ckeditor5_list:
-      reversed: true
+      reversed: false
       startIndex: true
-    ckeditor5_alignment:
-      enabled_alignments:
-        - left
-        - center
-        - right
-        - justify
     ckeditor5_imageResize:
       allow_resize: true
     media_media:
       allow_view_mode_override: false
     editor_advanced_link_link:
       enabled_attributes:
-        - rel
-        - target
+        - class
         - title
 image_upload:
-  status: true
+  status: false
   scheme: public
   directory: inline-images
   max_size: ''

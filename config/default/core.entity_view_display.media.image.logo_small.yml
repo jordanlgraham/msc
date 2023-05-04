@@ -1,24 +1,25 @@
-uuid: 311a91df-bb44-46d5-8a48-835cdb8857e2
+uuid: 7212ccaa-e276-4546-99fc-e3fcc76ac22b
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.logo_small
     - field.field.media.image.field_image
-    - image.style.large
+    - image.style.logo
     - media.type.image
   module:
     - svg_image
-id: media.image.default
+id: media.image.logo_small
 targetEntityType: media
 bundle: image
-mode: default
+mode: logo_small
 content:
   field_image:
     type: image
     label: hidden
     settings:
       image_link: ''
-      image_style: large
+      image_style: logo
       svg_attributes:
         width: null
         height: null

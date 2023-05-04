@@ -12,8 +12,8 @@ element_name: url
 time_limit: 5
 expire: 300
 form_settings:
-  user_register_form: false
-  user_pass: false
+  user_register_form: true
+  user_pass: true
   contact_message_feedback_form: true
   contact_message_personal_form: true
   node_education_events_form: false
@@ -27,8 +27,8 @@ form_settings:
   node_page_form: false
   node_paragraph_assembler_form: false
   node_resources_form: false
-  node_scholarship_recipient_form: false
   node_scholarships_form: false
+  node_scholarship_recipient_form: false
   node_sponsor_form: false
   node_vendor_form: false
   node_video_form: false
