@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23cea8a695ea8544793150dc99358e82",
+    "content-hash": "bae7d6a21dbf3484303a0c26dfa120b0",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2797,26 +2797,26 @@
         },
         {
             "name": "drupal/button_link",
-            "version": "1.3.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/button_link.git",
-                "reference": "8.x-1.3"
+                "reference": "2.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/button_link-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "9fb98f81db28538901645abdd10a4f5741270500"
+                "url": "https://ftp.drupal.org/files/projects/button_link-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "000379ef2af4126fa4d77742d65ac5583d7ee427"
             },
             "require": {
-                "drupal/core": "^8 || ^9"
+                "drupal/core": "^8 || ^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1633318640",
+                    "version": "2.0.1",
+                    "datestamp": "1684536608",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

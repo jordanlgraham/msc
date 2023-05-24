@@ -144,7 +144,7 @@ class ButtonLinkFormatter extends LinkFormatter {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $element = array();
+    $element = [];
     $entity = $items->getEntity();
     $settings = $this->getSettings();
 
@@ -178,7 +178,7 @@ class ButtonLinkFormatter extends LinkFormatter {
         $url_title = Unicode::truncate($url_title, $settings['trim_length'], FALSE, TRUE);
       }
 
-      $element[$delta] = array(
+      $element[$delta] = [
         '#theme' => 'link_formatter_button_link',
         '#title' => $link_title,
         '#url_title' => $url_title,
@@ -188,7 +188,7 @@ class ButtonLinkFormatter extends LinkFormatter {
         '#block' => $settings['btn_block'],
         '#additional_class' => $settings['additional_class'],
         '#icon_class' => $settings['icon_class'],
-      );
+      ];
 
       if (!empty($item->_attributes)) {
         // Set our RDFa attributes on the <a> element that is being built.

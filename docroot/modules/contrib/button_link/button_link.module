@@ -10,6 +10,23 @@ use Drupal\Core\Link;
 use Drupal\Core\Template\Attribute;
 
 /**
+ * Implements hook_help().
+ */
+function button_link_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the button_link module.
+    case 'help.page.button_link':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This modules adds a link formatter that transform a link field output in
+      a "button like" Bootstrap anchor.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
  * Implements hook_theme().
  */
 function button_link_theme() {
