@@ -22,6 +22,7 @@ settings:
       - blockQuote
       - removeFormat
       - '|'
+      - drupalMedia
       - link
       - '|'
       - bulletedList
@@ -55,6 +56,8 @@ settings:
         - center
         - right
         - justify
+    media_media:
+      allow_view_mode_override: true
     editor_advanced_link_link:
       enabled_attributes:
         - aria-label

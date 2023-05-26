@@ -57,7 +57,7 @@ settings:
     ckeditor5_imageResize:
       allow_resize: true
     media_media:
-      allow_view_mode_override: false
+      allow_view_mode_override: true
     editor_advanced_link_link:
       enabled_attributes:
         - class

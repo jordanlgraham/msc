@@ -6,16 +6,10 @@ id: foundation
 label: Foundation
 description: ''
 weight: 0
+stackable: false
+storage: null
 folder: ../config/foundation
 module: {  }
 theme: {  }
-blacklist:
-  - block.block.findafacility
-  - block.block.findafacilityuserlogin
-  - block.block.findapreferredvendor
-graylist:
-  - system.site
-  - views.view.all_sponsors
-  - views.view.sponsors
-graylist_dependents: true
-graylist_skip_equal: true
+complete_list: {  }
+partial_list: {  }

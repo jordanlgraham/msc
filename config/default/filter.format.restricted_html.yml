@@ -2,6 +2,9 @@ uuid: e14397de-4f25-4d11-8da2-10caf642f78c
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.media.logo_small
   module:
     - editor
     - entity_embed
@@ -18,7 +21,7 @@ filters:
     status: true
     weight: -49
     settings:
-      allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <a type title class hreflang href> <blockquote cite> <ul type> <ol type start> <img title alt height width src class data-align> <audio type src controls contenteditable> <span class> <video type src controls contenteditable> <strong> <em> <code> <li> <drupal-media data-entity-type data-entity-uuid alt data-align>'
+      allowed_html: '<br> <p> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <cite> <dl> <dt> <dd> <a type title class hreflang href> <blockquote cite> <ul type> <ol type start> <img title alt height width src class data-align> <audio type src controls contenteditable> <span class> <video type src controls contenteditable> <strong> <em> <code> <li> <drupal-media data-entity-type data-entity-uuid alt data-view-mode data-align>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_autop:
@@ -40,9 +43,14 @@ filters:
     status: true
     weight: -41
     settings:
-      default_view_mode: default
-      allowed_view_modes: {  }
-      allowed_media_types: {  }
+      default_view_mode: logo_small
+      allowed_view_modes:
+        default: default
+        full: full
+        logo_small: logo_small
+      allowed_media_types:
+        document: document
+        image: image
   editor_file_reference:
     id: editor_file_reference
     provider: editor

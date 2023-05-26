@@ -2,6 +2,9 @@ uuid: 1c7f3718-3ea9-4f87-afeb-b11075212543
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.full
+    - core.entity_view_mode.media.logo_small
   module:
     - entity_embed
     - media
@@ -24,9 +27,14 @@ filters:
     status: true
     weight: 100
     settings:
-      default_view_mode: default
-      allowed_view_modes: {  }
-      allowed_media_types: {  }
+      default_view_mode: logo_small
+      allowed_view_modes:
+        default: default
+        full: full
+        logo_small: logo_small
+      allowed_media_types:
+        document: document
+        image: image
   entity_embed:
     id: entity_embed
     provider: entity_embed
