@@ -1,0 +1,15 @@
+uuid: 24f2c816-cf03-466e-b019-1d8a8c52de79
+langcode: en
+status: true
+dependencies: {  }
+id: foundation
+label: Foundation
+description: ''
+weight: 0
+stackable: false
+storage: null
+folder: ../config/foundation
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list: {  }
