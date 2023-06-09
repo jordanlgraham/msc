@@ -68,8 +68,9 @@ function msca_theme_preprocess_node(&$variables) {
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function msca_theme_preprocess_html(array &$variables) {
-  // Add class to body tag, if set.
-  $variables['multisite_status'] = \Drupal::config('config_split.config_split.foundation')->get('status');
+  // Indicate that we're on the foundation site if we are.
+  $site_name = \Drupal::config('system.site')->get('name');
+  $variables['multisite_status'] = ($site_name === 'Mass Senior Care Foundation');
 }
 
 /**
