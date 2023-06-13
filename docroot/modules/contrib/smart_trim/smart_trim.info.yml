@@ -8,8 +8,10 @@ dependencies:
   - drupal:text
   - token:token
 core_version_requirement: ^8 || ^9 || ^10
+test_dependencies:
+  - token_filter:token_filter
 
-# Information added by Drupal.org packaging script on 2022-10-21
-version: '2.0.0'
+# Information added by Drupal.org packaging script on 2023-06-07
+version: '2.1.0'
 project: 'smart_trim'
-datestamp: 1666374012
+datestamp: 1686152419

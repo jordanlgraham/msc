@@ -9,55 +9,54 @@ use Drupal\Component\Utility\Unicode;
  * @file
  * Contains trim functionality.
  *
- * As noted on
- *    http://www.pjgalbraith.com/2011/11/truncating-text-html-with-php/
+ * As noted on http://www.pjgalbraith.com/2011/11/truncating-text-html-with-php/
  * with some modifications to adhere to the Drupal Coding Standards.
  */
 
 /**
- * Class TruncateHTML.
+ * This class basically truncates the HTML characters.
  */
 class TruncateHTML {
 
   /**
    * Total characters.
    *
-   * @type int
+   * @var int
    */
   protected int $charCount = 0;
 
   /**
    * Total words.
    *
-   * @type int
+   * @var int
    */
   protected int $wordCount = 0;
 
   /**
    * Character / Word limit.
    *
-   * @type int
+   * @var int
    */
   protected int $limit;
 
   /**
    * Element to start on.
    *
-   * @type \DOMElement
+   * @var \DOMElement
    */
   protected \DOMElement $startNode;
 
   /**
    * Ellipsis character.
    *
-   * @type string
+   * @var string
    */
   protected string $ellipsis;
 
   /**
    * Did we find the breakpoint?
    *
-   * @type bool
+   * @var bool
    */
   protected bool $foundBreakpoint = FALSE;
 
@@ -75,7 +74,7 @@ class TruncateHTML {
    *   Prepared DOMDocument to work with.
    */
   protected function init(string $html, int $limit, string $ellipsis): \DOMDocument {
-    $dom = Html::load(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+    $dom = Html::load($html);
 
     // The body tag node, our html fragment is automatically wrapped in
     // a <html><body> etc.
@@ -103,7 +102,9 @@ class TruncateHTML {
    *   Resulting text.
    */
   public function truncateChars(string $html, int $limit, string $ellipsis = '...'): string {
-    if ($limit <= 0 || $limit >= strlen(strip_tags($html))) {
+    $html = trim($html);
+
+    if ($limit <= 0 || $limit >= mb_strlen(strip_tags($html))) {
       return $html;
     }
     $dom = $this->init($html, $limit, $ellipsis);
@@ -126,6 +127,8 @@ class TruncateHTML {
    *   Resulting text.
    */
   public function truncateWords(string $html, int $limit, string $ellipsis = '...'): string {
+    $html = trim($html);
+
     if ($limit <= 0 || $limit >= $this->countWords(strip_tags($html))) {
       return $html;
     }
@@ -142,10 +145,10 @@ class TruncateHTML {
    * @param \DOMNode $domnode
    *   Object to be truncated.
    */
-  protected function domNodeTruncateChars(\DOMNode $domnode) {
+  protected function domNodeTruncateChars(\DOMNode $domnode): void {
     foreach ($domnode->childNodes as $node) {
 
-      if ($this->foundBreakpoint == TRUE) {
+      if ($this->foundBreakpoint) {
         return;
       }
 
@@ -177,10 +180,10 @@ class TruncateHTML {
    * @param \DOMNode $domnode
    *   Object to be truncated.
    */
-  protected function domNodeTruncateWords(\DOMNode $domnode) {
+  protected function domNodeTruncateWords(\DOMNode $domnode): void {
     foreach ($domnode->childNodes as $node) {
 
-      if ($this->foundBreakpoint == TRUE) {
+      if ($this->foundBreakpoint) {
         return;
       }
 
@@ -223,9 +226,9 @@ class TruncateHTML {
    * @param \DOMNode $domnode
    *   Node to be altered.
    */
-  protected function removeTrailingPunctuation(\DOMNode $domnode) {
-    while (preg_match('/[\.,:;\?!…]$/', $domnode->nodeValue)) {
-      $domnode->nodeValue = substr($domnode->nodeValue, 0, -1);
+  protected function removeTrailingPunctuation(\DOMNode $domnode): void {
+    while (preg_match('/[\.,:;\?!…]$/u', $domnode->nodeValue)) {
+      $domnode->nodeValue = mb_substr($domnode->nodeValue, 0, -1);
     }
   }
 
@@ -235,7 +238,7 @@ class TruncateHTML {
    * @param \DOMNode $domnode
    *   Node to be altered.
    */
-  protected function removeProceedingNodes(\DOMNode $domnode) {
+  protected function removeProceedingNodes(\DOMNode $domnode): void {
     $nextnode = $domnode->nextSibling;
 
     if ($nextnode !== NULL) {
@@ -263,7 +266,7 @@ class TruncateHTML {
    * @param \DOMNode $domnode
    *   Node to be altered.
    */
-  protected function insertEllipsis(\DOMNode $domnode) {
+  protected function insertEllipsis(\DOMNode $domnode): void {
     // HTML tags to avoid appending the ellipsis to.
     $avoid = ['a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5'];
 

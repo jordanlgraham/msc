@@ -5,7 +5,6 @@
  * Smart Trim module hook definitions.
  */
 
-
 /**
  * @addtogroup hooks
  * @{
@@ -20,10 +19,11 @@
  *   The Smart Trim read more text.
  * @param string $url
  *   The Url that the link will point to.
-
+ *
  * @ingroup smart_trim
  */
-function hook_smart_trim_link_modify($entity, &$more, &$url) {}
+function hook_smart_trim_link_modify($entity, &$more, &$url) {
+}
 
 /**
  * @} End of "addtogroup hooks".
