@@ -3,6 +3,7 @@
 namespace Drupal\entity_print\Plugin\EntityPrint\PrintEngine;
 
 use Dompdf\Dompdf as DompdfLib;
+use Dompdf\Exception as DompdfLibException;
 use Dompdf\Options as DompdfLibOptions;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -91,8 +92,6 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
     $this->dompdf
       ->setBaseHost($request->getHttpHost())
       ->setProtocol($request->getScheme() . '://');
-
-    $this->setupHttpContext();
   }
 
   /**
@@ -213,12 +212,6 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
   public function send($filename, $force_download = TRUE) {
     $this->doRender();
 
-    // Dompdf doesn't have a return value for send so just check the error
-    // global it provides.
-    if ($errors = $this->getError()) {
-      throw new PrintEngineException(sprintf('Failed to generate PDF: %s', $errors));
-    }
-
     // The Dompdf library internally adds the .pdf extension so we remove it
     // from our filename here.
     $filename = preg_replace('/\.pdf$/i', '', $filename);
@@ -238,23 +231,21 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
 
   /**
    * Tell Dompdf to render the HTML into a PDF.
+   *
+   * @throws \Drupal\entity_print\PrintEngineException
    */
   protected function doRender() {
-    if (!$this->hasRendered) {
-      $this->dompdf->render();
-      $this->hasRendered = TRUE;
-    }
-  }
+    $this->setupHttpContext();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getError() {
-    global $_dompdf_warnings;
-    if (is_array($_dompdf_warnings)) {
-      return implode(', ', $_dompdf_warnings);
+    if (!$this->hasRendered) {
+      try {
+        $this->dompdf->render();
+        $this->hasRendered = TRUE;
+      }
+      catch (DompdfLibException $e) {
+        throw new PrintEngineException(sprintf('Failed to generate PDF: %s', $e));
+      }
     }
-    return FALSE;
   }
 
   /**
