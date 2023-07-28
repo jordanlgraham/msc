@@ -1,0 +1,14 @@
+name: 'Image Captcha Test'
+type: module
+description: 'Provides captcha types for tests.'
+package: Testing
+core_version_requirement: '>=8.9 <11'
+hidden: true
+dependencies:
+  - captcha:captcha
+  - captcha:image_captcha
+
+# Information added by Drupal.org packaging script on 2023-07-27
+version: '8.x-1.13'
+project: 'captcha'
+datestamp: 1690471988
