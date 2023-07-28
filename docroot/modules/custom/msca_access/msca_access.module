@@ -1,4 +1,7 @@
 <?php
+
+use Drupal\views\ViewExecutable;
+use Drupal\Core\Cache\CacheableMetadata;
 /**
  * @file msca_access.module
  */
@@ -13,4 +16,25 @@ function msca_access_theme($existing, $type, $theme, $path) {
       'variables' => ['form' => NULL],
     ],
   ];
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function msca_access_views_pre_render(ViewExecutable $view) {
+  // Check if the view is the "newsletter_article" view and the "member_updates" display.
+  if ($view->id() === 'all_content' && $view->current_display === 'member_updates') {
+    // Check if the user is authenticated.
+    $user = \Drupal::currentUser();
+    $isAuthenticated = $user->isAuthenticated();
+
+    // If the user is not authenticated, remove the results from the view.
+    if (!$isAuthenticated) {
+      $view->result = [];
+    }
+    // Add cache metadata to the view to cache separately for each user.
+    $cacheMetadata = new CacheableMetadata();
+    $cacheMetadata->setCacheContexts(['user']);
+    $view->element['#cache'] = $cacheMetadata->getCacheContexts();
+  }
 }
