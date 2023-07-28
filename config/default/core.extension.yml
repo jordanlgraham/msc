@@ -98,7 +98,6 @@ module:
   msca_maps: 0
   msca_misc: 0
   msca_theme_tweaks: 0
-  msca_tweet_block: 0
   mysql: 0
   netforum_event_sync: 0
   netforum_org_sync: 0
