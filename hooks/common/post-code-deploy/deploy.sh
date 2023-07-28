@@ -10,13 +10,13 @@ drush_alias=${site}.${target_env}
 
 SECONDS=0
 echo "Clearing caches..."
-/usr/local/bin/drush11 @${drush_alias} cr --strict=0
+/usr/local/bin/drush10 @${drush_alias} cr --strict=0
 echo "Caches cleared in $SECONDS seconds."
 SECONDS=0
 echo "Applying DB updates..."
-/usr/local/bin/drush11 @${drush_alias} updb -y --strict=0
+/usr/local/bin/drush10 @${drush_alias} updb -y --strict=0
 echo "DB updates run in $SECONDS seconds."
 SECONDS=0
 echo "Importing configuration..."
-/usr/local/bin/drush11 @${drush_alias} cim -y --strict=0
+/usr/local/bin/drush10 @${drush_alias} cim -y --strict=0
 echo "Configuration imported in $SECONDS seconds."
