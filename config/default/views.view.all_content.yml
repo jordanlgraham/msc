@@ -2804,7 +2804,7 @@ display:
         type: normal
         title: 'Member Updates'
         description: 'Newsletter articles accessible only by members'
-        weight: 1
+        weight: -70
         expanded: false
         menu_name: main
         parent: 'menu_link_content:d89d98a5-76bd-4c64-bdb0-afed35e6e297'
