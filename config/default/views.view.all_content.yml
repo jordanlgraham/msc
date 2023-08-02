@@ -2494,7 +2494,7 @@ display:
         type: full
         options:
           offset: 0
-          items_per_page: 50
+          items_per_page: 20
           total_pages: null
           id: 0
           tags:
@@ -2793,7 +2793,7 @@ display:
         filter_groups: false
         header: false
       relationships: {  }
-      css_class: ''
+      css_class: member-updates
       use_ajax: false
       display_description: 'Gated newsletter articles'
       header: {  }
