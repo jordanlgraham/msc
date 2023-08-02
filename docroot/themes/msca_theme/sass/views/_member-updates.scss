@@ -1,0 +1,42 @@
+.path-member-resources .views-row {
+  padding-left: 75px;
+  padding-right: 75px;
+  @extend .container;
+  @extend .col-md-6;
+}
+
+.path-member-resources header h2,
+.path-member-resources header p {
+  padding-left: 75px;
+  padding-right: 75px;
+  @extend .container;
+}
+
+.path-member-resources .views-element-container {
+  display: block;
+  clear: both;
+  padding-top: 4rem;
+  min-height: 40rem;
+  @extend .container;
+}
+
+.path-member-resources #block-msca-theme-page-title {
+  padding: 2rem 0 1.2rem;
+}
+
+.path-member-resources .social-links {
+  margin: 1rem auto;
+  display: table;
+}
+
+.thin-heading.sponsors {
+  color: $blue;
+  margin-top: 2rem;
+}
+
+.path-member-resources .col-md-2 {
+  flex: 0 0 20%;
+  max-width: 20%;
+  padding-left: 15px;
+  padding-right: 15px;
+}

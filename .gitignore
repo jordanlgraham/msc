@@ -23,3 +23,6 @@ private-files
 
 # Ignore acquia settings folder.
 .acquia/cloudapi.conf
+
+# Ignore local ruby gems.
+docroot/themes/msca_theme/msca_theme_gems/
