@@ -276,6 +276,6 @@ function msca_theme_theme_suggestions_views_view_alter(array &$suggestions, arra
   // Check if the view is 'newsletter_article' and the display is 'member_updates'.
   if ($variables['view']->id() === 'all_content' && $variables['view']->current_display === 'member_updates') {
     // Add a theme hook suggestion for our custom template.
-    $suggestions[] = 'views_view_unformatted__all_content__member_updates';
+    $suggestions[] = 'views_view__all_content__member_updates';
   }
 }
