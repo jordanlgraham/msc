@@ -799,10 +799,16 @@ if (!empty($_ENV['AH_PRODUCTION'])) {
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   switch ($_ENV['AH_SITE_ENVIRONMENT']) {
       case 'prod':
-      // Disable Shield on prod by setting the
-      // shield user variable to NULL
-      $config['shield.settings']['shield_enable'] = FALSE;
-      break;
+        // Disable Shield on prod by setting the
+        // shield user variable to NULL
+        // Create a dblog entry that we're in the prod environment.
+        \Drupal::logger('MSC')->notice('Production environment detected.');
+        $config['shield.settings']['shield_enable'] = FALSE;
+        break;
+      default:
+        // Create a dblog entry that we're in a non-prod environment.
+        \Drupal::logger('MSC')->notice('Non-production environment detected.');
+        break;
   }
   // Set the hash salt.
   $path = '/mnt/files/msca.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';
