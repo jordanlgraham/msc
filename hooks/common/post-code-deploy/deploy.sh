@@ -8,7 +8,7 @@ repo_url="$5"
 repo_type="$6"
 drush_alias=${site}.${target_env}
 # Set the app_root to the document root of the website.
-app_root="/var/www/html/${site}"
+app_root="/var/www/html/${drush_alias}"
 
 SECONDS=0
 echo "Clearing caches..."
