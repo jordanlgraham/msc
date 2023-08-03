@@ -1,0 +1,10 @@
+uuid: 754793af-34de-412b-9079-65309eca6df9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.member_update_teaser
+label: 'Member Update Teaser'
+targetEntityType: node
+cache: true

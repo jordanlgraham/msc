@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
+    - core.entity_view_mode.node.member_update_teaser
     - core.entity_view_mode.node.teaser
     - node.type.education_events
     - node.type.newsletter
@@ -2776,7 +2777,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: member_update_teaser
       defaults:
         empty: false
         title: false
