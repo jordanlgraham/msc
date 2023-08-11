@@ -1,0 +1,10 @@
+uuid: 73975ea7-162c-4387-9dbc-648c48942d02
+langcode: en
+status: true
+dependencies: {  }
+id: affiliate
+label: Affiliate
+icon_uuid: null
+icon_default: null
+description: 'Use this paragraph type for Affiliates.'
+behavior_plugins: {  }

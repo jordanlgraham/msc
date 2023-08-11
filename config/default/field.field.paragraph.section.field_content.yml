@@ -1,0 +1,68 @@
+uuid: 16774bf2-60d4-415a-8898-721e3cf31b29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.section
+  module:
+    - entity_reference_revisions
+id: paragraph.section.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: section
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles: null
+    negate: 1
+    target_bundles_drag_drop:
+      affiliate:
+        weight: 15
+        enabled: false
+      block_embed:
+        weight: 16
+        enabled: false
+      carousel:
+        weight: 17
+        enabled: false
+      carousel_assembler:
+        weight: 18
+        enabled: false
+      foundation_highlights:
+        weight: 19
+        enabled: false
+      foundation_highlights_column:
+        weight: 20
+        enabled: false
+      map_and_contact:
+        weight: 21
+        enabled: false
+      newsletter_section:
+        weight: 22
+        enabled: false
+      section:
+        weight: 23
+        enabled: false
+      sponsors:
+        weight: 24
+        enabled: false
+      two_column:
+        weight: 25
+        enabled: false
+      two_column_2_1_ratio:
+        weight: 26
+        enabled: false
+      video:
+        weight: 27
+        enabled: false
+      view_embed:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

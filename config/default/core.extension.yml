@@ -12,6 +12,7 @@ module:
   block: 0
   block_class: 0
   block_content: 0
+  block_field: 0
   breakpoint: 0
   button_link: 0
   captcha: 0
@@ -76,6 +77,8 @@ module:
   jquery_ui_slider: 0
   jquery_ui_touch_punch: 0
   key: 0
+  layout_discovery: 0
+  layout_paragraphs: 0
   link: 0
   masquerade: 0
   media: 0
@@ -89,6 +92,7 @@ module:
   metatag_open_graph: 0
   module_filter: 0
   msc_button_link_social: 0
+  msc_layouts: 0
   msca_access: 0
   msca_constant_contact: 0
   msca_discourse: 0
