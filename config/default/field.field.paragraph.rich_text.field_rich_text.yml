@@ -1,0 +1,21 @@
+uuid: 50da7ca2-2aec-47c9-b3f3-76846d95ae60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_rich_text
+    - paragraphs.paragraphs_type.rich_text
+  module:
+    - text
+id: paragraph.rich_text.field_rich_text
+field_name: field_rich_text
+entity_type: paragraph
+bundle: rich_text
+label: 'Rich text'
+description: 'Use this paragraph type to add rich text.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
