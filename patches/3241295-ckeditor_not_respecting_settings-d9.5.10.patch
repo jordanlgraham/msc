@@ -1,0 +1,312 @@
+diff --git a/core/misc/cspell/dictionary.txt b/core/misc/cspell/dictionary.txt
+index 85c72239cf..a0ebf70515 100644
+--- a/core/misc/cspell/dictionary.txt
++++ b/core/misc/cspell/dictionary.txt
+@@ -1159,6 +1159,7 @@ sourcearea's
+ sourcedialog
+ sourcedialog's
+ sourcedir
++sourceediting
+ spacebar
+ spagna
+ specialchar
+diff --git a/core/modules/ckeditor5/css/editor.css b/core/modules/ckeditor5/css/editor.css
+index 5c28250f97..969a0a9537 100644
+--- a/core/modules/ckeditor5/css/editor.css
++++ b/core/modules/ckeditor5/css/editor.css
+@@ -8,3 +8,14 @@
+   opacity: 1 !important;
+   fill-opacity: 1 !important;
+ }
++
++/**
++ * Set the min-height equal to configuration value for the number of rows.
++ *
++ * The `--ck-min-height` value is set on the parent `.ck-editor` element by
++ * JavaScript. We add that there because the `.ck-editor__editable` element's
++ * inline styles are cleared on focus.
++ */
++.ck-editor__main > :is(.ck-editor__editable, .ck-source-editing-area) {
++  min-height: var(--ck-min-height);
++}
+diff --git a/core/modules/ckeditor5/js/ckeditor5.es6.js b/core/modules/ckeditor5/js/ckeditor5.es6.js
+index 61e7e12854..8602bfbcd1 100644
+--- a/core/modules/ckeditor5/js/ckeditor5.es6.js
++++ b/core/modules/ckeditor5/js/ckeditor5.es6.js
+@@ -420,9 +420,55 @@
+
+       ClassicEditor.create(element, editorConfig)
+         .then((editor) => {
++          /**
++           * Injects a temporary <p> into CKEditor and then calculates the entire
++           * height of the amount of the <p> tags from the passed in rows value.
++           *
++           * This takes into account collapsing margins, and line-height of the
++           * current theme.
++           *
++           * @param {number} - the number of rows.
++           *
++           * @returns {number} - the height of a div in pixels.
++           */
++          function calculateLineHeight(rows) {
++            const element = document.createElement('p');
++            element.setAttribute('style', 'visibility: hidden;');
++            element.innerHTML = '&nbsp;';
++            editor.ui.view.editable.element.append(element);
++
++            const styles = window.getComputedStyle(element);
++            const height = element.clientHeight;
++            const marginTop = parseInt(styles.marginTop, 10);
++            const marginBottom = parseInt(styles.marginBottom, 10);
++            const mostMargin =
++              marginTop >= marginBottom ? marginTop : marginBottom;
++
++            element.remove();
++            return (
++              (height + mostMargin) * (rows - 1) +
++              marginTop +
++              height +
++              marginBottom
++            );
++          }
++
+           // Save a reference to the initialized instance.
+           Drupal.CKEditor5Instances.set(id, editor);
+
++          // Set the minimum height of the editable area to correspond with the
++          // value of the number of rows. We attach this custom property to
++          // the `.ck-editor` element, as that doesn't get its inline styles
++          // cleared on focus. The editable element is then set to use this
++          // property within the stylesheet.
++          const rows = editor.sourceElement.getAttribute('rows');
++          editor.ui.view.editable.element
++            .closest('.ck-editor')
++            .style.setProperty(
++              '--ck-min-height',
++              `${calculateLineHeight(rows)}px`,
++            );
++
+           // CKEditor 4 had a feature to remove the required attribute
+           // see: https://www.drupal.org/project/drupal/issues/1954968
+           if (element.hasAttribute('required')) {
+diff --git a/core/modules/ckeditor5/js/ckeditor5.js b/core/modules/ckeditor5/js/ckeditor5.js
+index 06f4970fd6..dcf7eb11cb 100644
+--- a/core/modules/ckeditor5/js/ckeditor5.js
++++ b/core/modules/ckeditor5/js/ckeditor5.js
+@@ -172,7 +172,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len
+       var id = setElementId(element);
+       var ClassicEditor = editorClassic.ClassicEditor;
+       ClassicEditor.create(element, editorConfig).then(function (editor) {
++        function calculateLineHeight(rows) {
++          var element = document.createElement('p');
++          element.setAttribute('style', 'visibility: hidden;');
++          element.innerHTML = '&nbsp;';
++          editor.ui.view.editable.element.append(element);
++          var styles = window.getComputedStyle(element);
++          var height = element.clientHeight;
++          var marginTop = parseInt(styles.marginTop, 10);
++          var marginBottom = parseInt(styles.marginBottom, 10);
++          var mostMargin = marginTop >= marginBottom ? marginTop : marginBottom;
++          element.remove();
++          return (height + mostMargin) * (rows - 1) + marginTop + height + marginBottom;
++        }
+         Drupal.CKEditor5Instances.set(id, editor);
++        var rows = editor.sourceElement.getAttribute('rows');
++        editor.ui.view.editable.element.closest('.ck-editor').style.setProperty('--ck-min-height', "".concat(calculateLineHeight(rows), "px"));
+         if (element.hasAttribute('required')) {
+           required.add(id);
+           element.removeAttribute('required');
+diff --git a/core/modules/ckeditor5/tests/src/Nightwatch/Tests/ckEditor5EditorHeightTest.js b/core/modules/ckeditor5/tests/src/Nightwatch/Tests/ckEditor5EditorHeightTest.js
+new file mode 100644
+index 0000000000..78ba7f221f
+--- /dev/null
++++ b/core/modules/ckeditor5/tests/src/Nightwatch/Tests/ckEditor5EditorHeightTest.js
+@@ -0,0 +1,175 @@
++module.exports = {
++  '@tags': ['core', 'ckeditor5'],
++  before(browser) {
++    browser.drupalInstall({ installProfile: 'minimal' });
++  },
++  after(browser) {
++    browser.drupalUninstall();
++  },
++  'Ensure CKEditor respects field widget row value': (browser) => {
++    browser.drupalLoginAsAdmin(() => {
++      browser
++        // Enable required modules.
++        .drupalRelativeURL('/admin/modules')
++        .click('[name="modules[ckeditor5][enable]"]')
++        .click('[name="modules[field_ui][enable]"]')
++        .submitForm('input[type="submit"]') // Submit module form.
++        .waitForElementVisible(
++          '.system-modules-confirm-form input[value="Continue"]',
++        )
++        .submitForm('input[value="Continue"]') // Confirm installation of dependencies.
++        .waitForElementVisible('.system-modules', 10000)
++
++        // Create new input format.
++        .drupalRelativeURL('/admin/config/content/formats/add')
++        .waitForElementVisible('[data-drupal-selector="edit-name"]')
++        .updateValue('[data-drupal-selector="edit-name"]', 'test')
++        .waitForElementVisible('#edit-name-machine-name-suffix')
++        .click(
++          '[data-drupal-selector="edit-editor-editor"] option[value=ckeditor5]',
++        )
++        // Wait for CKEditor 5 settings to be visible.
++        .waitForElementVisible(
++          '[data-drupal-selector="edit-editor-settings-toolbar"]',
++        )
++        .click('.ckeditor5-toolbar-button-sourceEditing') // Select the Source Editing button.
++        .keys(browser.Keys.DOWN) // Hit the down arrow key to move it to the toolbar.
++        // Wait for new source editing vertical tab to be present before continuing.
++        .waitForElementVisible(
++          '[href*=edit-editor-settings-plugins-ckeditor5-sourceediting]',
++        )
++        .submitForm('input[type="submit"]')
++        .waitForElementVisible('[data-drupal-messages]')
++        .assert.containsText('[data-drupal-messages]', 'Added text format')
++        // Create new content type.
++        .drupalRelativeURL('/admin/structure/types/add')
++        .waitForElementVisible('[data-drupal-selector="edit-name"]')
++        .updateValue('[data-drupal-selector="edit-name"]', 'test')
++        .waitForElementVisible('#edit-name-machine-name-suffix') // Wait for machine name to update.
++        .submitForm('input[type="submit"]')
++        .waitForElementVisible('[data-drupal-messages]')
++        .assert.containsText(
++          '[data-drupal-messages]',
++          'The content type test has been added',
++        )
++        // Navigate to the create content page and measure height of the editor.
++        .drupalRelativeURL('/node/add/test')
++        .waitForElementVisible('.ck-editor__editable')
++        .execute(
++          // eslint-disable-next-line func-names, prefer-arrow-callback, no-shadow
++          function () {
++            const height = document.querySelector(
++              '.ck-editor__editable',
++            ).clientHeight;
++
++            // We expect height to be 320, but test to ensure that it's greater
++            // than 300. We want to ensure that we don't hard code a very specific
++            // value because tests might break if styles change (line-height, etc).
++            // Note that the default height for CKEditor5 is 47px.
++            return height > 300;
++          },
++          [],
++          (result) => {
++            browser.assert.ok(
++              result.value,
++              'Editor height is set to 9 rows (default).',
++            );
++          },
++        )
++        .click('.ck-source-editing-button')
++        .waitForElementVisible('.ck-source-editing-area')
++        .execute(
++          // eslint-disable-next-line func-names, prefer-arrow-callback, no-shadow
++          function () {
++            const height = document.querySelector(
++              '.ck-source-editing-area',
++            ).clientHeight;
++
++            // We expect height to be 320, but test to ensure that it's greater
++            // than 300. We want to ensure that we don't hard code a very specific
++            // value because tests might break if styles change (line-height, etc).
++            // Note that the default height for CKEditor5 is 47px.
++            return height > 300;
++          },
++          [],
++          (result) => {
++            browser.assert.ok(
++              result.value,
++              'Source editing height is set to 9 rows (default).',
++            );
++          },
++        )
++
++        // Double the editor row count.
++        .drupalRelativeURL('/admin/structure/types/manage/test/form-display')
++        .waitForElementVisible(
++          '[data-drupal-selector="edit-fields-body-settings-edit"]',
++        )
++        .click('[data-drupal-selector="edit-fields-body-settings-edit"]')
++        .waitForElementVisible(
++          '[data-drupal-selector="edit-fields-body-settings-edit-form-settings-rows"]',
++        )
++        .updateValue(
++          '[data-drupal-selector="edit-fields-body-settings-edit-form-settings-rows"]',
++          '18',
++        )
++        // Save field settings.
++        .click(
++          '[data-drupal-selector="edit-fields-body-settings-edit-form-actions-save-settings"]',
++        )
++        .waitForElementVisible(
++          '[data-drupal-selector="edit-fields-body"] .field-plugin-summary',
++        )
++        .click('[data-drupal-selector="edit-submit"]')
++        .waitForElementVisible('[data-drupal-messages]')
++        .assert.containsText(
++          '[data-drupal-messages]',
++          'Your settings have been saved',
++        )
++
++        // Navigate to the create content page and measure height of the editor.
++        .drupalRelativeURL('/node/add/test')
++        .execute(
++          // eslint-disable-next-line func-names, prefer-arrow-callback, no-shadow
++          function () {
++            const height = document.querySelector(
++              '.ck-editor__editable',
++            ).clientHeight;
++
++            // We expect height to be 640, but test to ensure that it's greater
++            // than 600. We want to ensure that we don't hard code a very specific
++            // value because tests might break if styles change (line-height, etc).
++            // Note that the default height for CKEditor5 is 47px.
++            return height > 600;
++          },
++          [],
++          (result) => {
++            browser.assert.ok(result.value, 'Editor height is set to 18 rows.');
++          },
++        )
++        .click('.ck-source-editing-button')
++        .waitForElementVisible('.ck-source-editing-area')
++        .execute(
++          // eslint-disable-next-line func-names, prefer-arrow-callback, no-shadow
++          function () {
++            const height = document.querySelector(
++              '.ck-source-editing-area',
++            ).clientHeight;
++
++            // We expect height to be 640, but test to ensure that it's greater
++            // than 600. We want to ensure that we don't hard code a very specific
++            // value because tests might break if styles change (line-height, etc).
++            // Note that the default height for CKEditor5 is 47px.
++            return height > 600;
++          },
++          [],
++          (result) => {
++            browser.assert.ok(
++              result.value,
++              'Source editing height is set to 18 rows (default).',
++            );
++          },
++        );
++    });
++  },
++};
+diff --git a/core/modules/text/src/Plugin/Field/FieldWidget/TextareaWidget.php b/core/modules/text/src/Plugin/Field/FieldWidget/TextareaWidget.php
+index fc02ac1e9c..f875c538ed 100644
+--- a/core/modules/text/src/Plugin/Field/FieldWidget/TextareaWidget.php
++++ b/core/modules/text/src/Plugin/Field/FieldWidget/TextareaWidget.php
+@@ -25,7 +25,7 @@ class TextareaWidget extends StringTextareaWidget {
+    */
+   public function settingsForm(array $form, FormStateInterface $form_state) {
+     $element = parent::settingsForm($form, $form_state);
+-    $element['rows']['#description'] = $this->t('Text editors (like CKEditor) may override this setting.');
++    $element['rows']['#description'] = $this->t('Text editors may override this setting.');
+     return $element;
+   }
+ 

@@ -172,7 +172,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var id = setElementId(element);
       var ClassicEditor = editorClassic.ClassicEditor;
       ClassicEditor.create(element, editorConfig).then(function (editor) {
+        function calculateLineHeight(rows) {
+          var element = document.createElement('p');
+          element.setAttribute('style', 'visibility: hidden;');
+          element.innerHTML = '&nbsp;';
+          editor.ui.view.editable.element.append(element);
+          var styles = window.getComputedStyle(element);
+          var height = element.clientHeight;
+          var marginTop = parseInt(styles.marginTop, 10);
+          var marginBottom = parseInt(styles.marginBottom, 10);
+          var mostMargin = marginTop >= marginBottom ? marginTop : marginBottom;
+          element.remove();
+          return (height + mostMargin) * (rows - 1) + marginTop + height + marginBottom;
+        }
         Drupal.CKEditor5Instances.set(id, editor);
+        var rows = editor.sourceElement.getAttribute('rows');
+        editor.ui.view.editable.element.closest('.ck-editor').style.setProperty('--ck-min-height', "".concat(calculateLineHeight(rows), "px"));
         if (element.hasAttribute('required')) {
           required.add(id);
           element.removeAttribute('required');
