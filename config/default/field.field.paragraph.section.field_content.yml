@@ -4,7 +4,19 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.affiliate
+    - paragraphs.paragraphs_type.block
+    - paragraphs.paragraphs_type.carousel
+    - paragraphs.paragraphs_type.carousel_assembler
+    - paragraphs.paragraphs_type.foundation_highlights
+    - paragraphs.paragraphs_type.foundation_highlights_column
+    - paragraphs.paragraphs_type.map_and_contact
+    - paragraphs.paragraphs_type.newsletter_section
+    - paragraphs.paragraphs_type.rich_text
     - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.sponsors
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.view_embed
   module:
     - entity_reference_revisions
 id: paragraph.section.field_content
@@ -20,55 +32,68 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: null
-    negate: 1
+    target_bundles:
+      affiliate: affiliate
+      block: block
+      carousel_assembler: carousel_assembler
+      foundation_highlights: foundation_highlights
+      carousel: carousel
+      foundation_highlights_column: foundation_highlights_column
+      map_and_contact: map_and_contact
+      newsletter_section: newsletter_section
+      section: section
+      sponsors: sponsors
+      rich_text: rich_text
+      video: video
+      view_embed: view_embed
+    negate: 0
     target_bundles_drag_drop:
       affiliate:
-        weight: 15
-        enabled: false
+        weight: -33
+        enabled: true
       block:
-        weight: 18
-        enabled: false
+        weight: -31
+        enabled: true
       block_embed:
-        weight: 16
+        weight: -32
         enabled: false
       carousel:
-        weight: 17
-        enabled: false
+        weight: -28
+        enabled: true
       carousel_assembler:
-        weight: 18
-        enabled: false
+        weight: -30
+        enabled: true
       foundation_highlights:
-        weight: 19
-        enabled: false
+        weight: -29
+        enabled: true
       foundation_highlights_column:
-        weight: 20
-        enabled: false
+        weight: -27
+        enabled: true
       map_and_contact:
-        weight: 21
-        enabled: false
+        weight: -26
+        enabled: true
       newsletter_section:
-        weight: 22
-        enabled: false
+        weight: -25
+        enabled: true
       rich_text:
-        weight: 26
-        enabled: false
+        weight: -21
+        enabled: true
       section:
-        weight: 23
-        enabled: false
+        weight: -24
+        enabled: true
       sponsors:
-        weight: 24
-        enabled: false
+        weight: -23
+        enabled: true
       two_column:
-        weight: 25
+        weight: -22
         enabled: false
       two_column_2_1_ratio:
-        weight: 26
+        weight: -20
         enabled: false
       video:
-        weight: 27
-        enabled: false
+        weight: -19
+        enabled: true
       view_embed:
-        weight: 28
-        enabled: false
+        weight: -18
+        enabled: true
 field_type: entity_reference_revisions
