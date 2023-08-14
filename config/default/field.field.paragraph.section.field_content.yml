@@ -1,0 +1,99 @@
+uuid: 16774bf2-60d4-415a-8898-721e3cf31b29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_content
+    - paragraphs.paragraphs_type.affiliate
+    - paragraphs.paragraphs_type.block
+    - paragraphs.paragraphs_type.carousel
+    - paragraphs.paragraphs_type.carousel_assembler
+    - paragraphs.paragraphs_type.foundation_highlights
+    - paragraphs.paragraphs_type.foundation_highlights_column
+    - paragraphs.paragraphs_type.map_and_contact
+    - paragraphs.paragraphs_type.newsletter_section
+    - paragraphs.paragraphs_type.rich_text
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.sponsors
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.view_embed
+  module:
+    - entity_reference_revisions
+id: paragraph.section.field_content
+field_name: field_content
+entity_type: paragraph
+bundle: section
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      affiliate: affiliate
+      block: block
+      carousel_assembler: carousel_assembler
+      foundation_highlights: foundation_highlights
+      carousel: carousel
+      foundation_highlights_column: foundation_highlights_column
+      map_and_contact: map_and_contact
+      newsletter_section: newsletter_section
+      section: section
+      sponsors: sponsors
+      rich_text: rich_text
+      video: video
+      view_embed: view_embed
+    negate: 0
+    target_bundles_drag_drop:
+      affiliate:
+        weight: -33
+        enabled: true
+      block:
+        weight: -31
+        enabled: true
+      block_embed:
+        weight: -32
+        enabled: false
+      carousel:
+        weight: -28
+        enabled: true
+      carousel_assembler:
+        weight: -30
+        enabled: true
+      foundation_highlights:
+        weight: -29
+        enabled: true
+      foundation_highlights_column:
+        weight: -27
+        enabled: true
+      map_and_contact:
+        weight: -26
+        enabled: true
+      newsletter_section:
+        weight: -25
+        enabled: true
+      rich_text:
+        weight: -21
+        enabled: true
+      section:
+        weight: -24
+        enabled: true
+      sponsors:
+        weight: -23
+        enabled: true
+      two_column:
+        weight: -22
+        enabled: false
+      two_column_2_1_ratio:
+        weight: -20
+        enabled: false
+      video:
+        weight: -19
+        enabled: true
+      view_embed:
+        weight: -18
+        enabled: true
+field_type: entity_reference_revisions
