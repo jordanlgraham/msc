@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme implementation to display the 'affiliate' paragraph type.
+ *
+ * Available variables:
+ * - paragraph: The paragraph entity.
+ * - content: An array of paragraph items. Use {{ content }} to print them all.
+ * - attributes: HTML attributes for the containing element.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div{{ attributes.addClass(classes) }}>
+  {# Check if field_affiliate_url has a value #}
+  {% if paragraph.field_affiliate_url.uri %}
+    <a href="{{ paragraph.field_affiliate_url.uri }}">
+      {{ content.field_logo }}
+    </a>
+  {% else %}
+    {{ content.field_logo }}
+  {% endif %}
+</div>

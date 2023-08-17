@@ -3,16 +3,26 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.affiliate.field_affiliate_url
     - field.field.paragraph.affiliate.field_logo
     - field.field.paragraph.affiliate.field_title
     - paragraphs.paragraphs_type.affiliate
   module:
+    - link
     - media_library
 id: paragraph.affiliate.default
 targetEntityType: paragraph
 bundle: affiliate
 mode: default
 content:
+  field_affiliate_url:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_logo:
     type: media_library_widget
     weight: 1
