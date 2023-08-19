@@ -8,6 +8,7 @@ dependencies:
     - comment
     - contact
     - entity_print
+    - eu_cookie_compliance
     - filter
     - forward
     - media
@@ -24,6 +25,7 @@ permissions:
   - 'access content'
   - 'access forward'
   - 'access site-wide contact form'
+  - 'display eu cookie compliance popup'
   - 'entity print access bundle newsletter'
   - 'entity print access bundle newsletter_article'
   - 'search content'

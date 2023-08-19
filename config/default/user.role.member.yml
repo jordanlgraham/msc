@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - eu_cookie_compliance
     - msca_access
 id: member
 label: Member
@@ -10,3 +11,4 @@ weight: 4
 is_admin: null
 permissions:
   - 'access gated content'
+  - 'display eu cookie compliance popup'
