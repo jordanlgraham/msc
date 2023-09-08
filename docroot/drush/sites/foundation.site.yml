@@ -1,0 +1,51 @@
+# Application 'msca', environment 'dev'.
+dev:
+  root: /var/www/html/msca.dev/docroot/sites/foundation
+  ac-site: msca
+  ac-env: dev
+  ac-realm: devcloud
+  uri: dev.maseniorcarefoundation.org
+  dev.livedev:
+    parent: '@msca.dev'
+    root: /mnt/gfs/msca.dev/livedev/docroot/sites/foundation
+  host: mscazx3gzja85x.ssh.devcloud.acquia-sites.com
+  user: msca.dev
+  paths:
+    drush-script: drush9
+
+
+# Application 'msca', environment 'prod'.
+prod:
+  root: /var/www/html/msca.prod/docroot/sites/foundation
+  ac-site: msca
+  ac-env: prod
+  ac-realm: devcloud
+  uri: msca7dtcmdkimu.devcloud.acquia-sites.com
+  prod.livedev:
+    parent: '@msca.prod'
+    root: /mnt/gfs/msca.prod/livedev/docroot/sites/foundation
+  host: msca7dtcmdkimu.ssh.devcloud.acquia-sites.com
+  user: msca.prod
+  paths:
+    drush-script: drush9
+
+
+# Application 'msca', environment 'test'.
+test:
+  root: /var/www/html/msca.test/docroot/sites/foundation
+  ac-site: msca
+  ac-env: test
+  ac-realm: devcloud
+  uri: mscamxefmljcxj.devcloud.acquia-sites.com
+  test.livedev:
+    parent: '@msca.test'
+    root: /mnt/gfs/msca.test/livedev/docroot/sites/foundation
+  host: mscamxefmljcxj.ssh.devcloud.acquia-sites.com
+  user: msca.test
+  paths:
+    drush-script: drush9
+local:
+  uri: 'https://foundation.lndo.site'
+  paths:
+  - files: /app/docroot/sites/foundation'
+
