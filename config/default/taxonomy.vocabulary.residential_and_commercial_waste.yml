@@ -1,0 +1,8 @@
+uuid: 5ceb133b-3dfd-4e88-8a3f-054e487d71c1
+langcode: en
+status: true
+dependencies: {  }
+name: 'Residential and Commercial Waste Removal Services'
+vid: residential_and_commercial_waste
+description: 'Residential and Commercial Waste Removal Services'
+weight: 0
