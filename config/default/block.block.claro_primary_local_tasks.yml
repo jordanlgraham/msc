@@ -1,13 +1,13 @@
-uuid: 832bffff-10aa-4e56-9914-7fb17053aa3f
+uuid: 37704b15-fc58-4466-97a0-b32615b8add3
 langcode: en
 status: true
 dependencies:
   theme:
-    - adminimal_theme
+    - claro
 _core:
-  default_config_hash: CyX_aDKAka2_eihevNLscCHDYrzDgIqwWzFVEFRKIww
-id: adminimal_theme_primary_local_tasks
-theme: adminimal_theme
+  default_config_hash: ACjBZI5shAMiiUpsz-inLYVXDqNNXRnSzAWV3kV_8Hw
+id: claro_primary_local_tasks
+theme: claro
 region: header
 weight: 0
 provider: null
