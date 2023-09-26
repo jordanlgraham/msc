@@ -443,6 +443,9 @@ class OrgSync {
         if (isset($orgs['Result']['org_cst_key'])) {
           return [$orgs['Result']];
         }
+
+        // Use usort to sort the $org array by 'cst_name_cp'.
+        // $orgs['Result'] = usort($orgs['Result'], [self::class, 'compareByCstNameCp']);
         return $orgs['Result'];
       }
     throw new Exception('Empty organizations response.');
@@ -465,7 +468,7 @@ class OrgSync {
     }
 
     // Make sure the organization is a member.
-    if ($this->helper->cleanSoapField($org['cst_member_flag']) !== '1') {
+      if ($this->helper->cleanSoapField($org['cst_member_flag']) !== '1') {
       // A synced node may no longer be a member.
       // Check for any nodes with this key and unpublish them.
       $node = $this->unpublishOrgNode($org);
@@ -487,6 +490,17 @@ class OrgSync {
     $node = $this->loadOrCreateOrgNode($organization);
     $this->saveOrgNode($organization, $node);
     return $node;
+  }
+
+  /**
+   * Custom comparison function to sort by 'cst_name_cp'.
+   *
+   * @param array $a
+   * @param array $b
+   * @return int
+   */
+  public static function compareByCstNameCp($a, $b) {
+    return strcmp($a['cst_name_cp'], $b['cst_name_cp']);
   }
 
 }
