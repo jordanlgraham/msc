@@ -110,6 +110,7 @@ class OrgSync {
     $query->condition('status', 1);
     $query->condition('type', $type);
     $query->condition('field_customer_key', $organization['org_cst_key']);
+    $query->accessCheck(FALSE);
     $entity_ids = $query->execute();
 
     //This function simply returns the first node found.
