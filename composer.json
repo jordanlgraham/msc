@@ -100,8 +100,7 @@
     "tijsverkoyen/css-to-inline-styles": "^2.2"
   },
   "require-dev": {
-    "drupal/devel": "^4.1",
-    "drupal/twig_vardumper": "^3.0"
+    "drupal/devel": "^4.1"
   },
   "conflict": {
       "drupal/drupal": "*"
