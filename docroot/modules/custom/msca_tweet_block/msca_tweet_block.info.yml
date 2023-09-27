@@ -1,5 +1,5 @@
 name: MSCA Tweet Block
 type: module
 description: Creates block with latest tweet from MSCA account
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 package: Custom
