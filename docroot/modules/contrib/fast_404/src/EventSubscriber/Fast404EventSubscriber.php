@@ -2,10 +2,10 @@
 
 namespace Drupal\fast404\EventSubscriber;
 
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Site\Settings;
@@ -38,7 +38,7 @@ class Fast404EventSubscriber implements EventSubscriberInterface {
   /**
    * Ensures Fast 404 output returned if applicable.
    */
-  public function onKernelRequest(GetResponseEvent $event) {
+  public function onKernelRequest(RequestEvent $event) {
     $request = $this->requestStack->getCurrentRequest();
     $fast_404 = new Fast404($request);
 
@@ -56,13 +56,13 @@ class Fast404EventSubscriber implements EventSubscriberInterface {
   /**
    * Ensures Fast 404 output returned upon NotFoundHttpException.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
    *   The response for exception event.
    */
-  public function onNotFoundException(GetResponseForExceptionEvent $event) {
+  public function onNotFoundException(ExceptionEvent $event) {
     // Check to see if we will completely replace the Drupal 404 page.
     if (Settings::get('fast404_not_found_exception', FALSE)) {
-      if ($event->getException() instanceof NotFoundHttpException) {
+      if ($event->getThrowable() instanceof NotFoundHttpException) {
         $fast_404 = new Fast404($event->getRequest());
         $event->setResponse($fast_404->response(TRUE));
       }

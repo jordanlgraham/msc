@@ -19,9 +19,7 @@ class Fast404Test extends UnitTestCase {
    *   A mock fast404 object to test.
    */
   protected function getFast404() {
-    $requestStub = $this->getMockBuilder('\Symfony\Component\HttpFoundation\Request')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $requestStub = $this->createMock('\Symfony\Component\HttpFoundation\Request');
     $fast404 = $this->getMockBuilder('\Drupal\fast404\Fast404')
       ->setConstructorArgs([$requestStub])
       ->setMethods(['isCli'])

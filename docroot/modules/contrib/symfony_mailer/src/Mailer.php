@@ -19,7 +19,6 @@ use Drupal\symfony_mailer\Exception\SkipMailException;
 use Drupal\user\Entity\User;
 use Symfony\Component\Mailer\Mailer as SymfonyMailer;
 use Symfony\Component\Mailer\Transport;
-use Symfony\Component\Mailer\Transport\Dsn;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -258,8 +257,7 @@ class Mailer implements MailerInterface {
         throw new MissingTransportException();
       }
 
-      $dsn = Dsn::fromString($transport_dsn);
-      $transport = $this->transportManager->fromDsnObject($dsn);
+      $transport = $this->transportManager->fromString($transport_dsn);
       $mailer = new SymfonyMailer($transport, NULL, $this->dispatcher);
 
       // ksm($email, $symfony_email->getHeaders());

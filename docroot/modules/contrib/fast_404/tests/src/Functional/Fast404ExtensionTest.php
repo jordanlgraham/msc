@@ -21,7 +21,7 @@ class Fast404ExtensionTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['fast404'];
+  protected static $modules = ['fast404'];
 
   /**
    * Tests the extension checking functionality.

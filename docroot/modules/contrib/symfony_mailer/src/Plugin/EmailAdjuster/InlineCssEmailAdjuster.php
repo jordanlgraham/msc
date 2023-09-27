@@ -71,7 +71,7 @@ class InlineCssEmailAdjuster extends EmailAdjusterBase implements ContainerFacto
    */
   public function postRender(EmailInterface $email) {
     // Inline CSS. Request optimization so that the CssOptimizer performs
-    // essential processing such as @include.
+    // essential processing such as @import.
     $assets = (new AttachedAssets())->setLibraries($email->getLibraries());
     $css = '';
     foreach ($this->assetResolver->getCssAssets($assets, TRUE) as $file) {

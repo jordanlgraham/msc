@@ -33,6 +33,8 @@ class TestEmailTest extends SymfonyMailerTestBase {
     // Check that inline styles are preserved in the email.
     // The padding is added in email-wrap.html.twig.
     $this->assertBodyContains('style="padding: 0px 0px 0px 0px;"');
+    // This style comes from test.email.css.
+    $this->assertBodyContains('style="padding-top: 3px; padding-bottom: 3px; text-align: center; background-color: #0678be; color: white;"');
   }
 
 }

@@ -499,6 +499,7 @@ class Email implements InternalEmailInterface {
   public function initDone() {
     $this->valid(self::PHASE_INIT, self::PHASE_INIT);
     $this->phase = self::PHASE_BUILD;
+    return $this;
   }
 
   /**
@@ -509,6 +510,7 @@ class Email implements InternalEmailInterface {
     $this->langcode = $langcode;
     $this->account = $account;
     $this->phase = self::PHASE_PRE_RENDER;
+    return $this;
   }
 
   /**

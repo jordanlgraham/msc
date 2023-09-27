@@ -4,6 +4,3 @@ description: 'Allows Drupal to securely communicate with Acquia.'
 package: Acquia
 core_version_requirement: '>=8.9 <11.0.0-stable'
 configure: acquia_connector.settings
-
-dependencies:
-  - drupal:path_alias

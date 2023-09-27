@@ -7,6 +7,12 @@ symfony_mailer.settings:
     default_transport:
       type: string
       label: Default transport ID
+    override:
+      type: sequence
+      label: 'Override settings'
+      sequence:
+        type: integer
+        label: 'State'
 
 symfony_mailer.mailer_transport.*:
   type: config_entity

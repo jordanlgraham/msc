@@ -88,14 +88,14 @@ class PersistentToken {
    *   A new token.
    */
   public static function createFromString($value) {
-    list($series, $instance) = explode(':', $value);
+    [$series, $instance] = explode(':', $value);
     return new static($series, $instance);
   }
 
   /**
    * Initialize a new object from an array of values.
    *
-   * @param $values
+   * @param array $values
    *   An array of values to set object properties.
    */
   public static function createFromArray(array $values) {
@@ -106,11 +106,10 @@ class PersistentToken {
       throw new \Exception("Required property 'instance' not set.");
     }
 
-    $token = new static($values['series'], $values['instance'], $values['uid']);
-      $token = $token
-        ->setCreated(new \DateTime('@' . $values['created']))
-        ->setRefreshed(new \DateTime('@' . $values['refreshed']))
-        ->setExpiry(new \DateTime('@' . $values['expires']));
+    $token = (new static($values['series'], $values['instance'], $values['uid']))
+      ->setCreated(new \DateTime('@' . $values['created']))
+      ->setRefreshed(new \DateTime('@' . $values['refreshed']))
+      ->setExpiry(new \DateTime('@' . $values['expires']));
 
     return $token;
   }

@@ -240,7 +240,7 @@ class SettingsForm extends ConfigFormBase {
     $event = new AcquiaProductSettingsEvent($form, $form_state, $this->subscription);
 
     // @todo Remove after dropping support for Drupal 8.
-    if (version_compare(\Drupal::VERSION, '9.0', '>=')) {
+    if (version_compare(\Drupal::VERSION, '9.1', '>=')) {
       $this->dispatcher->dispatch($event, AcquiaConnectorEvents::ACQUIA_PRODUCT_SETTINGS);
     }
     else {
@@ -309,7 +309,7 @@ class SettingsForm extends ConfigFormBase {
     }
     $event = new AcquiaProductSettingsEvent($form, $form_state, $this->subscription);
     // @todo Remove after dropping support for Drupal 8.
-    if (version_compare(\Drupal::VERSION, '9.0', '>=')) {
+    if (version_compare(\Drupal::VERSION, '9.1', '>=')) {
       $this->dispatcher->dispatch($event, AcquiaConnectorEvents::ALTER_PRODUCT_SETTINGS_SUBMIT);
     }
     else {
@@ -356,10 +356,11 @@ class SettingsForm extends ConfigFormBase {
     if ($this->subscription->getProvider() !== 'acquia_cloud') {
       return FALSE;
     }
-    if ($this->subscription->getSettings()->getMetadata('ah_network_identifier') !== $this->subscription->getSettings()->getIdentifier()) {
-      return TRUE;
-    }
-    return FALSE;
+    $metadata = $this->subscription->getSettings()->getMetadata();
+    $settings = $this->subscription->getSettings();
+    return $metadata['ah_network_identifier'] !== $settings->getIdentifier() ||
+      $metadata['ah_network_key'] !== $settings->getSecretKey() ||
+      $metadata['AH_APPLICATION_UUID'] !== $settings->getApplicationUuid();
   }
 
 }

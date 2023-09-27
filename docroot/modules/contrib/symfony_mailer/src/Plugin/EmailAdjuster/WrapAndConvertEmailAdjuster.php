@@ -122,14 +122,14 @@ class WrapAndConvertEmailAdjuster extends EmailAdjusterBase implements Container
     $form['plain'] = [
       '#title' => $this->t('Plain text'),
       '#type' => 'checkbox',
-      '#default_value' => $this->configuration['plain'],
+      '#default_value' => $this->configuration['plain'] ?? NULL,
       '#description' => $this->t('Send as plain text only.'),
     ];
 
     $form['swiftmailer'] = [
       '#title' => $this->t('Emulate swiftmailer'),
       '#type' => 'checkbox',
-      '#default_value' => $this->configuration['swiftmailer'],
+      '#default_value' => $this->configuration['swiftmailer'] ?? NULL,
       '#description' => $this->t('Emulate wrapping from the swiftmailer module. This is intended as a short-term workaround and you should migrate to the new template when possible.'),
       '#access' => $this->moduleHandler->moduleExists('swiftmailer'),
     ];

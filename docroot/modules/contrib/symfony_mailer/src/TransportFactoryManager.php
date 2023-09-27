@@ -3,6 +3,7 @@
 namespace Drupal\symfony_mailer;
 
 use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\Transport\SendmailTransportFactory;
 use Symfony\Component\Mailer\Transport\TransportFactoryInterface;
 
 /**
@@ -22,6 +23,12 @@ class TransportFactoryManager implements TransportFactoryManagerInterface {
    */
   public function __construct() {
     $this->factories = iterator_to_array(Transport::getDefaultFactories());
+
+    // Replace the sendmail transport factory with our own implementation.
+    $this->factories = array_filter($this->factories, function ($factory) {
+      return !($factory instanceof SendmailTransportFactory);
+    });
+    $this->addFactory(new ReplacementSendmailTransportFactory());
   }
 
   /**

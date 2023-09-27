@@ -123,7 +123,7 @@ class Subscription {
     $event = new AcquiaSubscriptionSettingsEvent($this->configFactory);
 
     // @todo Remove after dropping support for Drupal 8.
-    if (version_compare(\Drupal::VERSION, '9.0', '>=')) {
+    if (version_compare(\Drupal::VERSION, '9.1', '>=')) {
       $this->dispatcher->dispatch($event, AcquiaConnectorEvents::GET_SETTINGS);
     }
     else {
@@ -174,6 +174,10 @@ class Subscription {
       return $this->subscriptionData;
     }
     $subscriptionData = $this->state->get('acquia_connector.subscription_data', []);
+    // Handle edge cases where acquia_connector.subscription_data is set wrong.
+    if (!is_array($subscriptionData)) {
+      $subscriptionData = [];
+    }
     if ($subscriptionData !== [] && $refresh !== TRUE) {
       // Ensure the legacy location of UUID is up-to-date.
       $subscriptionData['uuid'] = $this->settings->getApplicationUuid();
@@ -207,7 +211,7 @@ class Subscription {
     // Allow other modules to add metadata to the subscription.
     $event = new AcquiaSubscriptionDataEvent($this->configFactory, $subscriptionData);
     // @todo Remove after dropping support for Drupal 8.
-    if (version_compare(\Drupal::VERSION, '9.0', '>=')) {
+    if (version_compare(\Drupal::VERSION, '9.1', '>=')) {
       $this->dispatcher->dispatch($event, AcquiaConnectorEvents::GET_SUBSCRIPTION);
     }
     else {

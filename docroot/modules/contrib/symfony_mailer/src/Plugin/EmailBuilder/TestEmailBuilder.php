@@ -41,6 +41,16 @@ class TestEmailBuilder extends EmailBuilderBase {
     if ($to = $email->getParam('to')) {
       $email->setTo($to);
     }
+
+    // - Add a custom CSS library. The library is defined in
+    //   \Drupal\symfony_mailer\symfony_mailer.libraries.yml. The CSS is
+    //   defined in \Drupal\symfony_mailer\css\test.email.css.
+    // - Set an parameter programmatically.
+    //   The variable is used by the mailer policy which specifies the
+    //   email title and body as defined in
+    //   \Drupal\symfony_mailer\config\install\symfony_mailer.mailer_policy.symfony_mailer.test.yml.
+    $email->addLibrary('symfony_mailer/test')
+      ->setVariable('day', date("l"));
   }
 
 }

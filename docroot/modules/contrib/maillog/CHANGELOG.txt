@@ -1,3 +1,9 @@
+Maillog 8.x-1.1, 2023-06-01
+---------------------------
+#3327968 by Charchil Khandelwal, samit.310@gmail.com, Serhii Shandaliuk,
+  paraderojether, DamienMcKenna: Fix the issues reported by phpcs.
+
+
 Maillog 8.x-1.0, 2022-10-14
 ---------------------------
 #3172610 by ankithashetty, kleiton_rodrigues, TR, DamienMcKenna: t() calls
