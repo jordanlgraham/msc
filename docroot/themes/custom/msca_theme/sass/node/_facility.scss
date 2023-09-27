@@ -1,0 +1,31 @@
+.page-node-type-facility .title-icon {
+  background: url("/themes/msca_theme/svg/house-white.svg") no-repeat center;
+}
+
+.page-node-type-facility .row > .col-md-6 h3 {
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+.page-node-type-facility .node-facility-teaser-bottom {
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+
+.page-node-type-facility .node-facility-teaser-bottom .address {
+  @extend .col-md-12;
+  padding: 0;
+}
+
+.page-node-type-facility .node-facility-teaser-bottom .phone,
+.page-node-type-facility .node-facility-teaser-bottom .ownership {
+  @extend .col-md-6;
+  padding-left: 0;
+}
+
+.website {
+  height: 40px;
+  padding-left: 1rem;
+  padding-right: 3rem;
+}

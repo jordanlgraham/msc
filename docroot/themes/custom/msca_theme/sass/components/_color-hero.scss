@@ -1,0 +1,106 @@
+header.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.header-region.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Page title hero
+#block-msca-theme-page-title {
+  background-color: $blue;
+  padding: 1rem 0 1.2rem;
+  clear: left;
+  margin-top: 7rem;
+}
+
+#block-msca-theme-page-title h1 {
+  color: $white;
+  text-align: center;
+  letter-spacing: 1px;
+  @extend .container;
+}
+
+#block-sitebranding {
+  width: 260px;
+  padding: 15px 0 10px;
+  @extend .float-left;
+  @include media-breakpoint-down(md) {
+    float: none;
+  }
+}
+
+.title-underline {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title-line {
+  border-top: solid 2px $white;
+  height: 22px;
+  display: inline-block;
+}
+
+.title-icon {
+  background: $heart-pulse;
+  width: 90px;
+  height: 55px;
+  display: inline-block;
+}
+
+.title-icon.page {
+  background: $pinwheel;
+  background-size: 120%;
+  background-position-y: 28%;
+}
+
+.title-icon.job-posting,
+.title-icon.careers-job-search {
+  background: $jobs;
+}
+
+.title-icon.find-a-facility {
+  background: $facilities;
+}
+
+.title-icon.preferred-vendors,
+.title-icon.vendor {
+  background: $vendors;
+}
+
+.title-icon.about-newsroom,
+.title-icon.newsletter-article,
+.title-icon.newsroom {
+  background: $newsroom;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.title-icon.newsletter,
+.title-icon.member-resources-e-news-update,
+.title-icon.member-resources-newsletter-articles {
+  background: $newsletter;
+}
+
+.title-icon.events,
+.title-icon.education-events {
+  background: $events;
+  background-size: 60%;
+}
+
+.title-icon.member-resources,
+.title-icon.resources {
+  background: $member-resources;
+}
+
+.title-icon.scholarships,
+.title-icon.scholarship_recipient {
+  background: $scholarship;
+}
+
+.title-icon.video {
+  background: $videos;
+}
+

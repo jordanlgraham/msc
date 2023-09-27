@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme override to display a Newsletter Featured content of node types: events, newsletter article,
+ * newsroom, resource and video.
+ */
+#}
+<a class="anchor" name="{{ node.id }}"></a>
+<article>
+  {# Doing this because image urls need to be absolute for email version of newsletter. #}
+  {% for key, image in content.field_news_teaser_image  %}
+    {%if image.entity %}
+      {% set media = image.entity %}
+      {% set file = media.field_image.entity %}
+      {% set uri = file_url(file.uri.value | image_style('logo')) %}
+      <img src="https://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" style="margin-bottom: 10px;" />
+    {% endif %}
+  {% endfor %}
+
+  <div class="newsletter-article-teaser-text teaser-text" style="line-height: 24px; color: #657B85;">
+    <h2 style="margin:0;">
+      {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+      <a href="https://{{ base_path }}{{ url }}" style="text-decoration: none; color: #005A84 !important; font-size: 18px;" rel="bookmark">{{ label }}</a>
+    </h2>
+    {{ content.body }}
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding-top: 30px; padding-bottom: 60px;">
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td bgcolor="#2278CB" style="padding: 12px 18px 12px 18px;" align="center"><a href="https://{{ base_path }}{{ url }}" target="_blank" style="font-size:13px;font-weight:bold; color: #fff !important; text-decoration: none; display: inline-block; text-transform: uppercase; width:152px;">{{ 'Read Full Article'|t }}</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</article>

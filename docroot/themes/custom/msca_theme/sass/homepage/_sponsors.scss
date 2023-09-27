@@ -1,0 +1,30 @@
+.home-sponsors {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.home-sponsors h2 {
+  margin-top: 1rem;
+  color: $blue;
+  @extend .line-heading;
+  &:before, &:after {
+    background-color: $light-gray;
+  }
+}
+.home-sponsors header p {
+  @extend .container;
+  color: $gray;
+}
+
+.home-sponsors .views-row {
+  display: inline-block;
+  margin: 1rem;
+}
+
+.home-sponsors {
+  footer {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+}

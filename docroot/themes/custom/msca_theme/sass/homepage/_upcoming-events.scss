@@ -1,0 +1,123 @@
+.upcoming-events {
+  background-color: $light-blue;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.upcoming-events h2 {
+  @extend .thin-heading;
+  color: $white;
+}
+
+.upcoming-events h3 a {
+  color: $dark-gray;
+  text-transform: initial;
+}
+
+.upcoming-events .views-row {
+  background-color: rgba(255,255,255,0.8);
+  @extend .container;
+  //todo: find a way to do this with flexbox
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  &:not(:last-of-type) {
+    margin-bottom: 2rem;
+  }
+}
+
+.upcoming-events .event-start-date {
+  @extend .col-xl-1;
+  @extend .col-md-2;
+  @extend .hidden-sm-down;
+}
+
+.upcoming-events .event-date-and-title {
+  @extend .col-xl-5;
+  @extend .col-lg-4;
+  @extend .col-md-10;
+  @extend .col-12;
+  border-right: 1px solid $gray;
+
+  @include media-breakpoint-down(md){
+    border-right: 0;
+  }
+}
+
+// Need to vertically align content, also need to rearrange items for anything smaller than a large screen.
+.upcoming-events .event-category-location,
+.upcoming-events .event-category-virtual {
+  @extend .col-lg-2;
+  @extend .col-md-6;
+  @extend .col-12;
+}
+
+.upcoming-events .event-virtual-event-icon {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+}
+
+.upcoming-events .event-category-virtual h4.virtual-event {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+//this helps center the address vertically
+.upcoming-events .event-category-location .address {
+  margin-bottom: 0;
+}
+
+.upcoming-events .event-call-to-action {
+  @extend .col-lg-4;
+  @extend .col-md-6;
+  @extend .col-12;
+  //need to vertically center CTAs
+  //todo: do this using bootstrap 4 classes
+  display: flex;
+  align-items: center;
+}
+
+.upcoming-events .event-call-to-action .btn {
+  margin-bottom: .5rem;
+}
+
+//left align and give some breathing room to full event date
+.upcoming-events  .event-start-and-end-date {
+  display: block;
+}
+
+//make sure the call to action buttons are all the same width
+.upcoming-events .event-call-to-action > div {
+  width: 100%;
+  @include media-breakpoint-down(sm) {
+    //when this goes to full-width on mobile devices, give it some space on top
+    margin-top: 1rem;
+  }
+}
+
+//make sure the call to action buttons are as wide as the container div
+.upcoming-events .event-call-to-action a {
+  display: block;
+  background-color: transparent;
+  &:hover {
+    background-color: $dark-gray;
+    &:after {
+      color: $white;
+    }
+  }
+}
+.upcoming-events .event-call-to-action a:after {
+  background-color: transparent;
+  &:hover{
+    color: $white;
+  }
+}
+
+.event-map-icon img {
+  width: 16px;
+}
+
+// CTA
+.container.view-events {
+  width: 290px;
+  margin: 3rem auto 0;
+}

@@ -1,0 +1,126 @@
+.facility-search-header {
+  padding-top: $grid-gutter-width-base*2.5;
+  padding-bottom: $grid-gutter-width-base*1.5;
+  background-color: $blue;
+  text-align: center;
+}
+
+.facility-search-header h1 {
+  margin-bottom: 0;
+  color: $white;
+}
+
+.facility-search-container {
+  @extend .container;
+  padding-top: $grid-gutter-width-base;
+  padding-bottom: $grid-gutter-width-base;
+}
+
+.facility-search-row {
+  @extend .row;
+}
+
+.facility-search-filters {
+  @extend .col-md-3;
+  margin-bottom: $grid-gutter-width-base;
+}
+
+.facility-search-results {
+  @extend .col-md-9;
+}
+
+.facility-search-filters label {
+  font-weight: bold;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.facility-search-filters form > div:first-of-type label{
+  margin-top: 0;
+}
+
+.facility-search-filters .form-actions input {
+  margin-bottom: .5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.facility-search-results header {
+  background-color: #dff8ce;
+  padding: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.facility-search-results article,
+.vendor-search-results article {
+  margin-top: $grid-gutter-width-base;
+}
+
+
+.facility-search-results article {
+  background: $light-gray;
+  padding: $grid-gutter-width-base;
+}
+
+.facility-search-filters .button {
+  @extend .btn;
+  &:first-of-type {
+    @extend .btn-primary;
+  }
+  &:last-of-type {
+    @extend .btn-secondary;
+  }
+  width: 100%;
+}
+
+.node-facility-teaser-top {
+  @extend .row;
+  align-items: center;
+}
+
+.node-facility-teaser-svg {
+  @extend .col-md-1;
+  svg {
+    max-width: 50px;
+  }
+}
+
+.node-facility-teaser-title {
+  @extend .col-md-11;
+}
+
+.node-facility-teaser-title h2 {
+  font-size: $font-size-medium;
+  font-family: $font-family-sans-serif;
+}
+
+.node-facility-teaser-bottom {
+  @extend .row;
+  padding-top: $grid-gutter-width-base/2;
+  > div {
+    @extend .col-md-4;
+    padding-bottom: $grid-gutter-width-base/2;
+  }
+}
+
+.facility-read-more {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.vendor-search-results .pager,
+.facility-search-results .pager {
+  margin: $grid-gutter-width-base*2 0 0 0;
+  text-align: center;
+  padding: 0;
+  list-style: none;
+  a {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+}
+
+.facility-search .country {
+  display: none;
+}

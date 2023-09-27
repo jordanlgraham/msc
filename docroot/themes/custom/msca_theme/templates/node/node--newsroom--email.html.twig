@@ -1,0 +1,102 @@
+{#
+/**
+ * @file
+ * Theme override to display a Newsroom node email display.
+ * Tables are needed as this will be rendered in email clients like MS Outlook.
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a class="anchor" name="{{ node.id }}"></a>
+<article{{ attributes.addClass('pb-5') }}>
+  {% if content.field_news_teaser_image|render %}
+      {# We have an image so more complex table is needed. #}
+      <table>
+        <tbody>
+        <tr>
+          <td>
+            <table width="100" cellspacing="10">
+              <tbody>
+              <tr>
+                <td>
+                    {# Doing this because image urls need to be absolute for email version of newsletter. #}
+                    {% for key, image in content.field_news_teaser_image  %}
+                      {%if image.entity %}
+                        {% set media = image.entity %}
+                          {% set file = media.field_image.entity %}
+                          {% set uri = file_url(file.uri.value) %}
+                          {# Todo: figure out how to invoke absolute url to styled image so I don't have to specify width like this #}
+                        <img width="100" src="http://{{ base_path }}{{ uri }}" alt="{{ media.name.value }}" />
+                      {% endif %}
+                    {% endfor %}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+          <td valign="top">
+            <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
+                {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+              <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+            </h2>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">{{ content.body }}</td>
+        </tr>
+        </tbody>
+      </table>
+    <table width="100%">
+      <tbody>
+      <tr>
+        <td style="width: 60%;padding:0;vertical-align: top;">
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+        </td>
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
+        {#</td>#}
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-print" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
+        {#</td>#}
+      </tr>
+      </tbody>
+    </table>
+  {% else %}
+    {# No image so simplify table. #}
+    <table>
+      <tbody>
+      <tr>
+        <td valign="top">
+          <h2 style="margin:0;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;font-size: 16px;">
+              {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+            <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+          </h2>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ content.body }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <table width="100%">
+      <tbody>
+      <tr>
+        <td style="width: 60%;padding:0;vertical-align: top;">
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-weight: bold;font-size: 14px;">{{ 'Read more'|t }}</a>
+        </td>
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-envelope-o" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>#}
+        {#</td>#}
+        {#<td style="text-align:right;padding:0;vertical-align: top;">#}
+          {#<i class="fa fa-print" aria-hidden="true"></i>#}
+          {#<a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>#}
+        {#</td>#}
+      </tr>
+      </tbody>
+    </table>
+  {% endif %}
+</article>
+{# Need space between articles in Outlook. #}
+<table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>

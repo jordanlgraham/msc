@@ -1,0 +1,19 @@
+.scholarship-description img {
+  @extend .float-md-left;
+}
+
+.icon-square {
+  height: 2.5rem;
+  width: 2.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: .5rem;
+}
+
+// Teaser icons
+.icon-square svg {
+  fill: $blue;
+}

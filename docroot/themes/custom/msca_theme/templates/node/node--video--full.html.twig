@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Theme override to display a Video node full display.
+ *
+ */
+#}
+<article{{ attributes.addClass('container') }}>
+
+        {{ title_prefix }}
+        {% if not page %}
+            <h2{{ title_attributes }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {% endif %}
+        {{ title_suffix }}
+
+        {% if display_submitted %}
+            <footer>
+                {{ author_picture }}
+                <div{{ author_attributes }}>
+                    {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+                    {{ metadata }}
+                </div>
+            </footer>
+        {% endif %}
+        <div class="row">
+            <div{{ content_attributes }} class="col-md-8">
+                {% if content.field_event_category|render or content.field_video_date|render %}
+                    <div class="video-category-and-date">
+                        {% if content.field_event_category|render %}
+                            {{ content.field_event_category }}
+                        {% endif %}
+                        {% if content.field_event_category|render and content.field_video_date|render %} | {% endif %}
+                        {% if content.field_video_date|render %}
+                            {{ content.field_video_date }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if content.field_tags|render %}
+                    <div class="video-related-tags">
+                        {{ content.field_tags }}
+                    </div>
+                {% endif %}
+                {% if content.field_youtube_id|render %}
+                    <div class="video-youtube-wrapper">
+                        {{ content.field_youtube_id }}
+                    </div>
+                {% endif %}
+                {% if content.body|render %}
+                    <div class="video-description">
+                        {{ content.body }}
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="col-md-4">
+                {{ drupal_region('sidebar') }}
+            </div>
+        </div>
+
+</article>

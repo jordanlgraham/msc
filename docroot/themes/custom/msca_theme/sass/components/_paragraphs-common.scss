@@ -1,0 +1,5 @@
+.paragraph {
+  h2 {
+    @extend .thin-heading;
+  }
+}

@@ -1,0 +1,25 @@
+.page-node-type-job-posting .col-md-4 {
+  @extend .h3;
+  line-height: 25px;
+}
+
+.job-org {
+  color: $blue;
+  font-weight: bold;
+}
+
+.node-job-posting-form {
+  .field-group-tab summary {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    color: $blue;
+  }
+  details details {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+  .fieldset-legend {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,331 @@
+{#
+/**
+ * @file
+ * Theme override to display a Facility node full display.
+ *
+ */
+#}
+<article{{ attributes.addClass('container') }}>
+
+    <div class="row">
+        <div{{ content_attributes }} class="col-md-6">
+
+            <div class="node-facility-teaser-bottom">
+
+                {% if content.field_address|render or content.field_customer_web_site|render %}
+                    <div class="address">
+                      <h3>{{ label }}</h3>
+                        {% if content.field_address|render %}
+                            <h3>{{ 'Address'|t }}</h3>
+                            {{ content.field_address }}
+                        {% endif %}
+                        {% if content.field_customer_web_site|render %}
+                            <a class="btn btn-primary website mb-5" href="{{ node.field_customer_web_site.value }}" target="_blank">{{ 'Visit Our Website'|t }}</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if content.field_customer_phone_number or content.field_customer_fax_number %}
+                    <div class="phone">
+                        {% if content.field_customer_phone_number %}
+                            <h3>{{ 'Telephone Number'|t }}</h3>
+                            {{ content.field_customer_phone_number }}
+                        {% endif %}
+
+                        {% if content.field_customer_fax_number %}
+                            <h3>{{ 'Fax Number'|t }}</h3>
+                            {{ content.field_customer_fax_number|render }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if content.field_administrator|render or content.field_customer_web_site|render or content.field_for_profit|render %}
+                    <div class="ownership">
+                        {% if content.field_administrator|render %}
+                            <h3>{{ 'Administrator'|t }}</h3>
+                            {{ content.field_administrator }}
+                        {% endif %}
+                        {% if content.field_manager|render %}
+                            <h3>{{ 'Operated By'|t }}</h3>
+                            {{ content.field_manager }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div{{ content_attributes }} class="col-md-6 text-center">
+          {# If there is an image we'll display that - otherwise we'll display google map #}
+            {% if content.field_facility_image|render %}
+                <div class="pb-2">
+                    {{ content.field_facility_image }}
+                </div>
+            {% else %}
+                <div class="pb-2">
+                  {{ content.field_ge }}
+                </div>
+            {% endif %}
+            {% if content.field_facebook|render %}
+                {{ content.field_facebook }}
+            {% endif %}
+            {% if content.field_twitter|render %}
+                {{ content.field_twitter }}
+            {% endif %}
+            {% if content.field_linkedin|render %}
+                {{ content.field_linkedin }}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div{{ content_attributes }} class="col-md-6">
+
+            {# Beds #}
+
+            {# Create bed total variables for each type of bed #}
+            {% if content.field_assisted_living_beds|render %}
+                {%  set as_bed_total = node.field_assisted_living_beds.value %}
+            {% endif %}
+
+            {% if content.field_dementia_care_beds|render %}
+                {%  set dc_bed_total = node.field_dementia_care_beds.value %}
+            {% endif %}
+
+            {% if content.field_independent_living_beds|render %}
+                {% set il_bed_total = node.field_independent_living_beds.value %}
+            {% endif %}
+
+            {% if content.field_licensed_nursing_facility_|render %}
+                {%  set nf_bed_total = node.field_licensed_nursing_facility_.value %}
+            {% endif %}
+
+            {% if content.field_licensed_rest_home_beds|render %}
+                {%  set rh_bed_total = node.field_licensed_rest_home_beds.value %}
+            {% endif %}
+
+            {# Create bed total variable #}
+            {% set bed_total = as_bed_total + dc_bed_total + il_bed_total + nf_bed_total + rh_bed_total %}
+
+            {# Render the labels and numbers for Beds #}
+            {%  if content.field_assisted_living_beds|render or content.field_dementia_care_beds|render or content.field_independent_living_beds|render or content.field_licensed_nursing_facility_|render or content.field_licensed_rest_home_beds|render %}
+                <div>
+                    <h3 class="mt-5">{{ 'Total Number of Beds'|t }} ({{ bed_total }})</h3>
+                    <ul>
+                        {% if content.field_assisted_living_beds|render %}
+                            <li>{{ 'Assisted Living Beds'|t }} ({{ as_bed_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_dementia_care_beds|render %}
+                            <li>{{ 'Dementia Care Beds'|t }} ({{ dc_bed_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_independent_living_beds|render %}
+                            <li>{{ 'Independent Living Beds'|t }} ({{ il_bed_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_licensed_nursing_facility_|render %}
+                            <li>{{ 'Licensed Nursing Facility Beds'|t }} ({{ nf_bed_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_licensed_rest_home_beds|render %}
+                            <li>{{ 'Licensed Rest Home Beds'|t }} ({{ rh_bed_total }})</li>
+                        {% endif %}
+                    </ul>
+
+            {% endif %}
+            {# end Beds #}
+
+            {# Apartments #}
+
+            {# Create apartment total variables for each type of apartment #}
+            {% if content.field_studio|render %}
+                {%  set studio_apt_total = node.field_studio.value %}
+            {% endif %}
+
+            {% if content.field_one_bedroom|render %}
+                {%  set onebed_apt_total = node.field_one_bedroom.value %}
+            {% endif %}
+
+            {% if content.field_two_bedroom|render %}
+                {% set twobed_apt_total = node.field_two_bedroom.value %}
+            {% endif %}
+
+            {# Create apartment total variable #}
+            {% set apt_total = studio_apt_total + onebed_apt_total + twobed_apt_total %}
+
+            {%  if content.field_studio|render or content.field_one_bedroom|render or content.field_two_bedroom|render %}
+                <div>
+                    <h3 class="mt-5">{{ 'Apartment type(s)'|t }} ({{ apt_total }})</h3>
+                    <ul>
+                        {% if content.field_studio|render %}
+                            <li>{{ 'Studio'|t }} ({{ studio_apt_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_one_bedroom|render %}
+                            <li>{{ '1-bedroom'|t }} ({{ onebed_apt_total }})</li>
+                        {% endif %}
+
+                        {% if content.field_two_bedroom|render %}
+                            <li>{{ '2-bedroom'|t }} ({{ twobed_apt_total }})</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+            {# end Apartments #}
+
+            {% if content.field_languages_spoken|render %}
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Language(s) Spoken:'|t }}</h3>
+                    {{ content.field_languages_spoken }}
+                </div>
+            {% endif %}
+
+            {% if content.field_service_type|render %}
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Services:'|t }}</h3>
+                    {{ content.field_service_type }}
+                </div>
+            {% endif %}
+
+            {% if content.field_specialized_unit|render %}
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Specialized Unit(s):'|t }}</h3>
+                    {{ content.field_specialized_unit }}
+                </div>
+            {% endif %}
+
+            {% if content.field_populations_served|render %}
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Specialty Population(s) Served:'|t }}</h3>
+                    {{ content.field_populations_served }}
+                </div>
+            {% endif %}
+
+            {# Begin 'Facility Participates In' logic #}
+            {% if content.field_medicare['0']['#markup'] == 'Medicare' %}
+                {% set participates_medicare ='Medicare' %}
+            {% else %}
+                {% set participates_medicare ='' %}
+            {% endif %}
+
+            {% if content.field_medicaid['0']['#markup'] == 'Medicaid' %}
+                {% set participates_medicaid ='Medicaid' %}
+            {% else %}
+                {% set participates_medicaid ='' %}
+            {% endif %}
+
+            {% if content.field_va_contract['0']['#markup'] == 'VA Contract' %}
+                {% set participates_va ='Veterans Administration Contract' %}
+            {% else %}
+                {% set participates_va ='' %}
+            {% endif %}
+
+            {% if content.field_pace_program['0']['#markup'] == 'On' %}
+                {% set participates_pace ='PACE Program Contracts' %}
+            {% endif %}
+
+            {%  set participation = participates_medicare ~ ', ' ~ participates_medicaid ~ ', ' ~ participates_va ~ ', ' ~ participates_pace %}
+            {% if participates_medicare =='Medicare' or participates_medicaid =='Medicaid' or participates_va =='Veterans Administration Contract' or participates_pace =='PACE Program Contracts' %}
+                <div class="mt-5">
+                    <h3 class="float-left mr-2">{{ 'Facility Participates In:'|t }}</h3>
+                    {{ participation|trim(', ') }}
+                </div>
+            {% endif %}
+                    {{ participation_array }}
+            {# End 'Facility Participates In' logic #}
+
+            </div>
+        </div>
+      {% set dcu = 'Dementia Special Care Unit' %}
+      {% if dcu in content.field_specialized_unit[0]['#markup'] or node.field_facility_price_range_min.value > 0 or content.field_assisted_living_on_campus['0']['#markup'] == 'On' or (content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none') or (content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1) %}
+            <div{{ content_attributes }} class="col-md-6 mt-5 facility-features">
+                <h3>{{ 'Additional Details'|t }}</h3>
+
+                {# We only want to display this if 'Yes' so we're handling it differently #}
+                {% if content.field_specialized_unit|render %}
+                    {% if dcu in content.field_specialized_unit[0]['#markup'] %}
+                      {% if content.field_facility_type[0]['#title'] == 'Assisted Living' %}
+                        <div col-md-12>
+                          <div class="row mb-3">
+                            <span class="col-md-7">{{ 'Special care residences according to EOEA'|t }}</span>
+                            <span class="col-md-5">Yes</span>
+                          </div>
+                        </div>
+                        {% else %}
+                          <div col-md-12>
+                              <div class="row mb-3">
+                                  <span class="col-md-7">{{ 'Has Dementia Special Care Unit that meets MA state licensing regulations'|t }}</span>
+                                  <span class="col-md-5">Yes</span>
+                              </div>
+                          </div>
+                      {% endif %}
+                    {% endif %}
+                {% endif %}
+
+                {% if content.field_assisted_living_on_campus|render %}
+                    {% if content.field_assisted_living_on_campus['0']['#markup'] == 'On' %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-7">{{ 'Has Assisted Living Residence on-campus'|t }}</span>
+                                <span class="col-md-5">Yes</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if content.field_name_of_assisted_living|render %}
+                    <div class="col-md-12">
+                        <div class="row mb-3">
+                            <span class="col-md-7">{{ 'Name of Assisted Living Residence'|t }}</span>
+                            <span class="col-md-5">{{ node.field_name_of_assisted_living.value }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if content.field_service_type|render %}
+                    {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-7">{{ 'Part of a Continuing Care Retirement Community'|t }}</span>
+                                <span class="col-md-5">Yes</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if content.field_retirement_community_aff|render and node.field_retirement_community_aff.value != 'none' %}
+                    <div col-md-12>
+                        <div class="row mb-3">
+                            <span class="col-md-7">{{ 'Name of Retirement Community'|t }}</span>
+                            <span class="col-md-5">{{ node.field_retirement_community_aff.value }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if content.field_hospital_based_nf_tcu_beds|render and node.field_hospital_based_nf_tcu_beds.value > 1 %}
+                    <div col-md-12>
+                        <div class="row mb-3">
+                            <span class="col-md-7">{{ 'Part of a hospital-based transitioned care unit'|t }}</span>
+                            <span class="col-md-5">Yes</span>
+                        </div>
+                    </div>
+                {% endif %}
+                {%  if content.field_facility_type[0]['#title'] == 'Assisted Living' %}
+                    {% if node.field_facility_price_range_min.value > 0 or node.field_facility_price_range_max.value > 0 %}
+                        <div col-md-12>
+                            <div class="row mb-3">
+                                <span class="col-md-7">{{ 'Monthly Fee Range'|t }}</span>
+                                <span class="col-md-5">${{ node.field_facility_price_range_min.value }} - {{ node.field_facility_price_range_max.value }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="col-12 text-center mt-5">
+            <p>The above facility information is self-reported</p>
+            <a href="/find-a-facility" class="btn btn-primary mb-5">Return to Facility Search Results</a>
+        </div>
+    </div>
+
+</article>

@@ -1,0 +1,85 @@
+{#
+/**
+ * @file
+ * Theme override to display a Vendor node full display.
+ *
+ */
+#}
+<article{{ attributes.addClass('container') }}>
+
+        {{ title_prefix }}
+        {% if not page %}
+            <h2{{ title_attributes }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {% endif %}
+        {{ title_suffix }}
+
+        {% if display_submitted %}
+            <footer>
+                {{ author_picture }}
+                <div{{ author_attributes }}>
+                    {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+                    {{ metadata }}
+                </div>
+            </footer>
+        {% endif %}
+        <div class="row">
+            <div{{ content_attributes }}>
+              <div class="vendor-content-interior">
+                {% if content.field_vendor_image|render  %}
+                  <div class="vendor-logo">
+                      {{ content.field_vendor_image }}
+                  </div>
+                {% endif %}
+                <div class="vendor-info">
+                  <h3>{{ label }}</h3>
+                  {% if content.field_address|render %}
+                    {{content.field_address }}
+                  {% endif %}
+                  {% if content.field_web_address|render %}
+                    {{ content.field_web_address }}
+                  {% endif %}
+                  {% if content.field_contact|render %}
+                    {{ content.field_contact }}
+                  {% endif %}
+                  {% if content.field_contact_title|render %}
+                    {{ content.field_contact_title }}
+                  {% endif %}
+                  {% if content.field_phone|render %}
+                    {{ content.field_phone }}
+                  {% endif %}
+                  {% if content.field_email|render %}
+                    {{ content.field_email }}
+                  {% endif %}
+                  {% if content.field_primary_services|render %}
+                  {{ content.field_primary_services }}
+                    {% endif %}
+                  {% if content.field_additional_services|render %}
+                  {{ content.field_additional_services }}
+                    {% endif %}
+                  {% if content.field_facebook|render %}
+                  {{ content.field_facebook }}
+                  {% endif %}
+                    {% if content.field_twitter|render %}
+                  {{ content.field_twitter }}
+                  {% endif %}
+                  {% if content.field_linkedin|render %}
+                    {{ content.field_linkedin }}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+                {{ drupal_region('sidebar') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {% if content.field_related_content|render %}
+                    {{ content.field_related_content }}
+                {% endif %}
+            </div>
+        </div>
+
+</article>

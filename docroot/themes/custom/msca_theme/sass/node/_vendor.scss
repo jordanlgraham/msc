@@ -1,0 +1,27 @@
+.vendor-content-interior {
+  @extend .row;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.vendor-logo {
+  @extend .col-md-4;
+  display: flex;
+  justify-content: center;
+}
+
+.vendor-info {
+  @extend .col-md-8;
+}
+
+.page-node-type-vendor .field_web_address {
+  margin: .5rem 0 1.5rem;
+}
+
+.page-node-type-vendor .field_primary_services {
+  margin-top: 1rem;
+}
+
+.page-node-type-vendor  .field_additional_services {
+  margin-bottom: 1rem;
+}

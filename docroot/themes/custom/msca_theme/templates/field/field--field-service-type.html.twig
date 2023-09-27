@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme override to display Services as an unordered list.
+ *
+ */
+#}
+{% for item in items %}
+    {{ item.content }},
+    {% if loop.last %}
+        {{ item.content }}
+    {%  endif %}
+{% endfor %}

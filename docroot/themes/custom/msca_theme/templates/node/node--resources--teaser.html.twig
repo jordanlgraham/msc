@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override to display a Resources node teaser display.
+ *
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a name="{{ node.id }}"></a>
+<article{{ attributes }}>
+
+  <div{{ content_attributes }}>
+      <div class="icon-square float-left">
+          {# It's important to render it as an svg so sass fill property can control color. #}
+          {{ source(directory ~ '/svg/file.svg') }}
+      </div>
+      <div class="resources-teaser-text teaser-text">
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+          {% if content.field_resource_type|render %}
+              {# Display just the first one in case there are multiple types. #}
+              <h6>{{ content.field_resource_type.0 }}</h6>
+          {% endif %}
+          {{ content.body }}
+          <a class="read-more" href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      </div>
+
+  </div>
+
+</article>

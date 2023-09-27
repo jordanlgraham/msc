@@ -1,0 +1,3 @@
+input:not(.button):not([type="radio"]):not([type="checkbox"]) {
+  @extend .form-control;
+}

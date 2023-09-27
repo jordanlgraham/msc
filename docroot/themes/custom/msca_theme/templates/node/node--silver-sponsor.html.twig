@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override to display a Sponsor node Silver Sponsor display.
+ *
+ */
+#}
+<article{{ attributes }}>
+
+  <div class="sponsor-logo">
+      {% if content.field_logo|render %}
+          {{ content.field_logo }}
+      {% endif %}
+  </div>
+  <div class="social-links">
+      {% if content.field_facebook|render %}
+          {{ content.field_facebook }}
+      {% endif %}
+      {% if content.field_twitter|render %}
+          {{ content.field_twitter }}
+      {% endif %}
+      {% if content.field_linkedin|render %}
+          {{ content.field_linkedin }}
+      {% endif %}
+      {% if content.field_web_address|render %}
+          {{ content.field_web_address }}
+      {% endif %}
+  </div>
+
+</article>

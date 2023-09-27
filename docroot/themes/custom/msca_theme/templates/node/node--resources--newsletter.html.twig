@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme override to display a Resources node teaser display.
+ *
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a class="anchor" name="{{ node.id }}"></a>
+<article{{ attributes.addClass('pb-5') }}>
+  <div{{ content_attributes }}>
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+      {{ content.body }}
+      <a href="{{ path('entity.node.canonical', {'node': node.id }) }}">{{ 'Read more'|t }}</a>
+      <div class="utility-links float-right">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <a href="http://{{ base_path }}/forward/node/{{ node.id }}" target="_blank">E-mail</a>
+          <i class="fa fa-print" aria-hidden="true"></i>
+          <a href="http://{{ base_path }}/print/pdf/node/{{ node.id }}" target="_blank">Print</a>
+      </div>
+  </div>
+</article>

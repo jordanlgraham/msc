@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Theme override to display an Education and Events node homepage display.
+ *
+ */
+#}
+
+<article{{ attributes.addClass('container') }}>
+  <div{{ content_attributes }} class="row">
+    <div class="event-start-date">
+      <div class="date-square">
+        {% if content.square_month|render and content.square_day|render %}
+          <div class="date-square-month">{{ content.square_month }}</div>
+          <div class="date-square-day">{{ content.square_day }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="event-date-and-title">
+      <span class="event-start-and-end-date">
+        {% if content.full_start_date|render %}
+          {{ content.full_start_date  }}
+          {% if content.full_end_date|render %}
+            - {{ content.full_end_date }}
+          {% endif %}
+        {% endif %}
+      </span>
+      <h3{{ title_attributes }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h3>
+    </div>
+
+    {% if node.field_virtual_event.value %}
+      <div class="event-category-virtual">
+        <h4 class="virtual-event">{{ 'Virtual event'|t }}</h4>
+        <div class="event-virtual-event-icon"><img src="/{{ directory }}/images/laptop.png"/></div>
+      </div>
+    {% else %}
+      <div class="event-category-location">
+        {% if content.field_location|render %}
+          <div class="event-map-icon"><img src="/{{ directory }}/svg/map.svg"/></div>
+          {{ content.field_location }}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="event-call-to-action">
+      {% if content.field_call_to_action|render %}
+        {{ content.field_call_to_action }}
+      {% endif %}
+    </div>
+  </div>
+</article>

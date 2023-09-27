@@ -1,0 +1,37 @@
+{
+  "name": "msca_theme",
+  "description": "A theme based on Bootstrap 4.",
+  "browserSyncProxy" : "https://www.getbootstrap.com",
+  "bowerDir": "./bower_components",
+  "css": {
+    "file" : "scrumorg.style.scss",
+    "src": [
+      "scss/**/*.scss"
+    ],
+    "dest": "assets/css",
+    "includePaths": [
+      "./bower_components/bootstrap-sass/assets/stylesheets",
+      "./bower_components/font-awesome/scss",
+      "./bower_components/compass-mixins/lib"
+    ]
+  },
+  "js": {
+    "file" : "scrumorg.script.js",
+    "src": [
+      "js/**/*.js"
+    ],
+    "dest": "assets/js"
+  },
+  "images": {
+    "src": [
+      "assets/images/**/*"
+    ],
+    "dest": "assets/images/"
+  },
+  "fonts": {
+    "src": [
+      "./bower_components/font-awesome/fonts/**.*"
+    ],
+    "dest": "./assets/fonts/"
+  }
+}

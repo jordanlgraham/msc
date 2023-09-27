@@ -1,0 +1,28 @@
+{#
+/**
+ * @file
+ * Theme override to display a Newsroom node Full display.
+ *
+ */
+#}
+<article{{ attributes.addClass('container') }}>
+      {% if content.field_news_subtitle|render %}
+        <span class="newsletter-article-subtitle">{{ content.field_news_subtitle }}</span>
+      {% endif %}
+      <div class="newsletter-article-date">
+        {% if content.field_newsroom_category|render %}
+          {# Display just the first one in case there are multiple categories. #}
+          <p>{{ content.field_newsroom_category.0 }}</p>
+        {% else %}
+          {{ 'News'|t }}
+        {% endif %}
+        {% if content.field_news_release_date|render %}
+          &nbsp;|&nbsp;
+          {{ content.field_news_release_date }}
+        {% endif %}
+      </div>
+
+      {{ content.body }}
+      {{ content.field_news_source }}
+
+</article>

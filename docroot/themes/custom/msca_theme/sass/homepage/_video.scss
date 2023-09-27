@@ -1,0 +1,42 @@
+.paragraph--type--video {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: $darker-blue;
+  @extend .text-center;
+}
+.paragraph--type--video > div {
+  @extend .container;
+}
+
+.paragraph--type--video h2 {
+  color: $white;
+  @extend .thin-heading;
+
+}
+
+.paragraph--type--video p {
+  //this is lighter than the design calls for, but it's much more readable.
+  color: $light-gray;
+}
+
+//breathing room for the CTA
+.paragraph--type--video .btn {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.paragraph--type--video .header-image {
+  height: 5rem;
+}
+
+.paragraph--type--video h2 {
+  margin-bottom: 0;
+}
+
+.paragraph--type--video svg {
+  width: 50px;
+  fill: white;
+  height: 50px;
+  position: relative;
+  top: 15px;
+}

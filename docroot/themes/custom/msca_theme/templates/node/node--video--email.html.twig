@@ -1,0 +1,38 @@
+{#
+/**
+ * @file
+ * Theme override to display a Education and Events node email display.
+ * Tables are needed as this will be rendered in email clients like MS Outlook.
+ */
+#}
+{# For Newsletter TOC anchor links. #}
+<a class="anchor" name="{{ node.id }}"></a>
+<article{{ attributes.addClass('pb-5') }}>
+    <table>
+      <tbody>
+      <tr>
+        <td valign="top">
+          <h2 style="margin:0;font-size: 16px;font-weight:normal;font-family: 'Lato', Tahoma, sans-serif;">
+              {# intentionally making links absolute because these have to work from newsletter recipients' inboxes #}
+            <a href="http://{{ base_path }}{{ url }}" style="font-size: 16px;font-family: 'Lato', Tahoma, sans-serif;text-decoration:none;text-transform: uppercase;" rel="bookmark">{{ label }}</a>
+          </h2>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ content.body }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <table width="100%" cellspacing="10">
+      <tbody>
+      <tr>
+        <td style="width: 60%;padding:0;vertical-align: top;">
+          <a href="http://{{ base_path }}{{ path('entity.node.canonical', {'node': node.id }) }}" style="font-weight: bold;font-size: 14px;">{{ 'Read more'|t }}</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  {% endif %}
+</article>
+{# Need space between articles in Outlook. #}
+<table cellpadding="7"><tbody><tr><td>&nbsp;</td></tr></tbody></table>
