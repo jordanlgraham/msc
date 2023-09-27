@@ -36,7 +36,8 @@ class GoogleAnalyticsJavaScriptSnippet implements MarkupInterface {
   /**
    * {@inheritdoc}
    */
-  public function jsonSerialize(): mixed {
+  #[\ReturnTypeWillChange]
+  public function jsonSerialize() {
     return $this->__toString();
   }
 
