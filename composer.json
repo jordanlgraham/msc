@@ -87,7 +87,7 @@
     "drupal/svg_image": "^3.0",
     "drupal/symfony_mailer": "^1.2",
     "drupal/token": "^1.9",
-    "drupal/twig_tweak": "^2.9",
+    "drupal/twig_tweak": "^3.2",
     "drupal/upgrade_status": "^4.0",
     "drupal/username_enumeration_prevention": "^1.2",
     "drupal/views_infinite_scroll": "^1.9",
