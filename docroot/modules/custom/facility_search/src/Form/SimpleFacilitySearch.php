@@ -137,15 +137,16 @@ class SimpleFacilitySearch extends FormBase {
       $nids = $dbQuery
         ->condition('type', 'facility')
         ->condition('title', $keys, 'CONTAINS')
+        ->accessCheck(FALSE)
         ->execute();
-  
+
       if (!empty($nids)) {
         $query = [
           'title' => $keys,
         ];
       }
     }
-    
+
     $form_state->setRedirect('view.d9_facility_search.page_1', [], ['query' => $query]);
   }
 
