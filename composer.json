@@ -101,8 +101,7 @@
   },
   "require-dev": {
     "drupal/devel": "^4.1",
-    "drupal/twig_vardumper": "^3.0",
-    "drupal/twig_xdebug": "^1.2"
+    "drupal/twig_vardumper": "^3.0"
   },
   "conflict": {
       "drupal/drupal": "*"
