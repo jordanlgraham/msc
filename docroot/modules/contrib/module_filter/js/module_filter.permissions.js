@@ -11,7 +11,7 @@
    */
   Drupal.behaviors.moduleFilterPermissions = {
     attach: function (context) {
-      var $input = $('input.table-filter-text', context).once('module-filter');
+      var $input = $(once('module-filter', 'input.table-filter-text', context));
       if ($input.length) {
         var wrapperId = $input.attr('data-table');
         var selector = 'tbody tr';
@@ -72,4 +72,4 @@
     }
   };
 
-})(jQuery);
+})(jQuery, once);

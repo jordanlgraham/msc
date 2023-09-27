@@ -173,7 +173,7 @@ function module_filter_form_user_admin_permissions_alter(&$form, FormStateInterf
 function module_filter_theme_registry_alter(&$theme_registry) {
   // We need to alter the system-modules-details template so we can add
   // applicable requires and required-by classes.
-  $theme_registry['system_modules_details']['path'] = drupal_get_path('module', 'module_filter') . '/templates';
+  $theme_registry['system_modules_details']['path'] = \Drupal::service('extension.list.module')->getPath('module_filter') . '/templates';
 }
 
 /**
@@ -187,7 +187,7 @@ function module_filter_preprocess_system_modules_details(&$variables) {
       // Because core does not provide it in
       // template_preprocess_system_modules_details.
       $id = $module['name']['#parents'][1];
-      $path = drupal_get_path('module', $id);
+      $path = \Drupal::service('extension.list.module')->getPath($id);
       if (!empty($path)) {
         $module['path'] = $path;
       }
