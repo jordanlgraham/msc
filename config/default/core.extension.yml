@@ -91,6 +91,8 @@ module:
   msc_button_link_social: 0
   msca_access: 0
   msca_constant_contact: 0
+  msca_discourse: 0
+  msca_donate: 0
   msca_events: 0
   msca_job: 0
   msca_maps: 0
@@ -146,7 +148,7 @@ module:
   standard: 1000
   eu_cookie_compliance: 1001
 theme:
-  stable: 0
   msca_theme: 0
   claro: 0
+  stable9: 0
 profile: standard
