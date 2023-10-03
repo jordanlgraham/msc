@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "058d64fed6ee2b6db1bcbdc2f57a4899",
+    "content-hash": "98e9eafa5d74a2a9e296a60d92af5ccc",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -6868,69 +6868,6 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/seckit",
                 "issues": "http://drupal.org/project/issues/seckit"
-            }
-        },
-        {
-            "name": "drupal/services",
-            "version": "4.0.0-beta7",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/services.git",
-                "reference": "8.x-4.0-beta7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/services-8.x-4.0-beta7.zip",
-                "reference": "8.x-4.0-beta7",
-                "shasum": "720849a9b72e3d59c6b67699fed046c657c44775"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9",
-                "drupal/ctools": "^3.0 || ^4.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-4.0-beta7",
-                    "datestamp": "1671398956",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "See contributors",
-                    "homepage": "https://www.drupal.org/node/109640/committers",
-                    "role": "Developer"
-                },
-                {
-                    "name": "jcnventura",
-                    "homepage": "https://www.drupal.org/user/122464"
-                },
-                {
-                    "name": "kylebrowning",
-                    "homepage": "https://www.drupal.org/user/211387"
-                },
-                {
-                    "name": "marcingy",
-                    "homepage": "https://www.drupal.org/user/77320"
-                },
-                {
-                    "name": "tyler.frankenstein",
-                    "homepage": "https://www.drupal.org/user/150680"
-                }
-            ],
-            "description": "A standardized solution of integrating external applications with Drupal.",
-            "homepage": "https://www.drupal.org/project/services",
-            "support": {
-                "source": "https://git.drupalcode.org/project/services",
-                "issues": "https://www.drupal.org/project/issues/services"
             }
         },
         {
@@ -14516,7 +14453,6 @@
         "drupal/maillog": 10,
         "drupal/masquerade": 10,
         "drupal/media_entity_browser": 15,
-        "drupal/services": 10,
         "drupal/webform": 10
     },
     "prefer-stable": true,
