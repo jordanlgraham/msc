@@ -1,6 +1,0 @@
-msc_ym_soap.settings_form:
-  title: 'MSC YourMembership Soap'
-  description: 'Configure MSC YourMembership Soap.'
-  parent: system.admin_config_system
-  route_name: msc_ym_soap.settings_form
-  weight: 10
