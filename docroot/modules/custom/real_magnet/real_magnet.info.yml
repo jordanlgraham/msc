@@ -1,7 +1,7 @@
 name: Real Magnet
 type: module
 description: Send newsletter node content to Real Magnet service.
-core_version_requirement: ^9 || ^!0
+core_version_requirement: ^9 || ^10
 package: MSC
 configure: real_magnet.real_magnet_settings
 
