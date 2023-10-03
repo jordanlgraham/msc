@@ -1,0 +1,42 @@
+uuid: d75f7929-b357-49b0-b506-89275fcb9b50
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - node
+    - system
+    - vendor_search
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: sidebar-block
+id: stable9_findapreferredvendor
+theme: stable9
+region: sidebar_second
+weight: -12
+provider: null
+plugin: vendor_search
+settings:
+  id: vendor_search
+  label: 'Find a Preferred Vendor'
+  label_display: visible
+  provider: vendor_search
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      scholarships: scholarships
+      video: video
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

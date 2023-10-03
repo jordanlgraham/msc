@@ -1,0 +1,24 @@
+uuid: c5595a63-9ba6-4dfb-9110-3b6b1affb5f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - contact.form.feedback
+  module:
+    - contact_block
+  theme:
+    - stable9
+id: stable9_contactblock
+theme: stable9
+region: sidebar_first
+weight: -12
+provider: null
+plugin: contact_block
+settings:
+  id: contact_block
+  label: 'Contact Us'
+  label_display: visible
+  provider: contact_block
+  contact_form: feedback
+  form_display: default
+visibility: {  }

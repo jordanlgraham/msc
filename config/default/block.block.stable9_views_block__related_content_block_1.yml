@@ -1,0 +1,43 @@
+uuid: 04895baf-ba6a-4bd2-b128-90f747f8cda2
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.related_content
+  module:
+    - block_class
+    - node
+    - views
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: newsletter-article-bottom-row
+id: stable9_views_block__related_content_block_1
+theme: stable9
+region: sidebar_first
+weight: -21
+provider: null
+plugin: 'views_block:related_content-block_1'
+settings:
+  id: 'views_block:related_content-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      facility: facility
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      resources: resources
+      scholarships: scholarships
+      vendor: vendor

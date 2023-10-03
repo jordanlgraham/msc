@@ -1,0 +1,28 @@
+uuid: afdc9953-df4a-448d-a5f0-f2485e53552e
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.recent_news
+  module:
+    - block_class
+    - views
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: home-recent-news
+id: stable9_views_block__recent_news_recent_news
+theme: stable9
+region: sidebar_first
+weight: -9
+provider: null
+plugin: 'views_block:recent_news-recent_news'
+settings:
+  id: 'views_block:recent_news-recent_news'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility: {  }
