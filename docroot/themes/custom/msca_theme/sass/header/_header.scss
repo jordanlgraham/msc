@@ -43,12 +43,12 @@ header.container-fluid {
 body {
   margin-top: 94px;
   // Adjust fixed header offset when admin menu is present
-  &.adminimal-admin-toolbar #site-header {
+  &.user-logged-in #site-header {
     top: 80px;
   }
 }
 
-.adminimal-admin-toolbar #block-msca-theme-page-title {
+.user-logged-in #block-msca-theme-page-title {
   margin-top: 3rem;
 }
 
