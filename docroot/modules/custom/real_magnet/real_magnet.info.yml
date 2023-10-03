@@ -1,9 +1,10 @@
 name: Real Magnet
 type: module
 description: Send newsletter node content to Real Magnet service.
-core_version_requirement: ^8 || ^9
-package: Blue Coda
+core_version_requirement: ^9 || ^!0
+package: MSC
 configure: real_magnet.real_magnet_settings
+
 dependencies:
   - inline_entity_form
   - forward

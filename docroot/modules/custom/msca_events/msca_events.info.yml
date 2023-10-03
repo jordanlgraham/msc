@@ -2,4 +2,4 @@ name: 'MSCA Events'
 type: module
 description: 'Provides functionality related to the education_events content type.'
 core_version_requirement: ^9 || ^10
-package: 'Custom'
+package: MSC

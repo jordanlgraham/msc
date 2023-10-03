@@ -2,4 +2,4 @@ name: MSCA Constant Contact
 type: module
 description: MSCA Constant Contact integration.
 core_version_requirement: ^9 || ^10
-package: MSCA
+package: MSC

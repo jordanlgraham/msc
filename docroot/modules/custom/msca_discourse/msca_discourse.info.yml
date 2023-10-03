@@ -2,4 +2,4 @@ name: MSCA Discourse
 type: module
 description: MSCA Discourse integration.
 core_version_requirement: ^9 || ^10
-package: MSCA
+package: MSC

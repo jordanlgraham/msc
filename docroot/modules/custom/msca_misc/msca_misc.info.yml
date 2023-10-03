@@ -2,4 +2,4 @@ name: 'MSCA Miscellaneous'
 type: module
 description: 'Provides miscellaneous functionality and database updates'
 core_version_requirement: ^9 || ^10
-package: 'Custom'
+package: MSC
