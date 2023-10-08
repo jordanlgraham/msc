@@ -110,7 +110,6 @@ module:
   path: 0
   path_alias: 0
   pathauto: 0
-  quickedit: 0
   rdf: 0
   real_magnet: 0
   recaptcha: 0
