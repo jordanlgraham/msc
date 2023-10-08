@@ -254,7 +254,10 @@
           });
 
         var value = this._getAlign();
-        this._$align.find('[value="' + value + '"]').prop('checked', true);
+
+        if (value) {
+          this._$align.find('[value="' + value + '"]').prop('checked', true);
+        }
       },
 
       /**
@@ -283,18 +286,26 @@
        * (If there are different alignments for an image's instances, alignment
        * messed up somehow anyway.)
        *
-       * @return {string}
+       * @return {string|null}
        */
       _getAlign: function() {
         var self = this;
         var value;
+        var hasInsertedImages = false;
 
         this._inserter.getFocusManager().getTextareas().each(function() {
           var $dom = $('<div>').html($(this).val());
-          self._findByUUID($dom, self._uuid).each(function() {
+          var $nodes = self._findByUUID($dom, self._uuid);
+
+          if ($nodes.length) {
+            hasInsertedImages = true;
+          }
+
+          $nodes.each(function() {
             value = $(this).attr('data-align');
             return false;
           });
+
           return !value;
         });
 
@@ -306,10 +317,11 @@
 
         $.each(this._inserter.getFocusManager().getEditors(), function() {
           value = editorInterface.getAlign(this, self._uuid);
+          hasInsertedImages = hasInsertedImages || value !== undefined;
           return false;
         });
 
-        return value ? value : 'none';
+        return !hasInsertedImages ? null : value ? value : 'none';
       },
 
       /**
@@ -320,7 +332,7 @@
 
         var attach = $node.data('insert-attach');
 
-        if (attach.attributes['data-caption']) {
+        if (attach.attributes && attach.attributes['data-caption']) {
           var text = '';
           $.each(attach.attributes['data-caption'], function() {
             if (typeof values[this] !== 'undefined' && values[this] !== '') {

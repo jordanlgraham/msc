@@ -737,9 +737,9 @@ function insert_field_widget_settings_summary_alter(array &$summary, array $cont
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function insert_field_widget_form_alter(array &$element, FormStateInterface $form_state, array $context) {
+function insert_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context) {
   /** @var \Drupal\Core\Field\WidgetInterface $plugin */
   $plugin = $context['widget'];
   $pluginId = $plugin->getPluginId();
@@ -1046,13 +1046,6 @@ function insert_help($route_name) {
  * Implements hook_migration_plugins_alter().
  */
 function insert_migration_plugins_alter(array &$migrations) {
-  if (
-    !empty($migrations['d7_field_instance_widget_insert_settings']) &&
-    !MigrateInsertWidgetSettings::standaloneMigrationIsOmittable()
-  ) {
-    return;
-  }
-
   unset($migrations['d7_field_instance_widget_insert_settings']);
 
   $field_instance_widget_settings_migrations = array_filter(
@@ -1072,7 +1065,7 @@ function insert_migration_plugins_alter(array &$migrations) {
  * Implements hook_migrate_prepare_row().
  */
 function insert_migrate_prepare_row(Row $row, MigrateSourceInterface $source, MigrationInterface $migration) {
-  if (!in_array('insert', $migration->getMigrationTags())) {
+  if ($migration->getMigrationTags() == null || !in_array('insert', $migration->getMigrationTags())) {
     return;
   }
   if (!$source instanceof DrupalSqlBase) {
