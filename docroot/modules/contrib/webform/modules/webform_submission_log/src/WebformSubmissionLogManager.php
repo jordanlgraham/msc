@@ -80,7 +80,7 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
     ]);
 
     // User fields.
-    $query->leftJoin('users_field_data', 'user', 'log.uid = user.uid');
+    $query->leftJoin('users_field_data', 'u', 'log.uid = u.uid');
 
     // Submission fields.
     $query->leftJoin('webform_submission', 'submission', 'log.sid = submission.sid');
@@ -133,8 +133,16 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
       ->execute();
     $records = [];
     while ($record = $result->fetchObject()) {
-      $record->variables = unserialize($record->variables);
-      $record->data = unserialize($record->data);
+      $record->variables = unserialize($record->variables, [
+      'allowed_classes' => [
+        'Drupal\Core\StringTranslation\TranslatableMarkup',
+      ],
+      ]);
+      $record->data = unserialize($record->data, [
+      'allowed_classes' => [
+        'Drupal\Core\StringTranslation\TranslatableMarkup',
+      ],
+      ]);
       $records[] = $record;
     }
     return $records;

@@ -1,0 +1,24 @@
+uuid: a19a6afb-291f-4281-b811-90c9d11943e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.block_embed.field_block_to_embed
+    - paragraphs.paragraphs_type.block_embed
+id: paragraph.block_embed.preview
+targetEntityType: paragraph
+bundle: block_embed
+mode: preview
+content:
+  field_block_to_embed:
+    type: entity_reference_entity_id
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

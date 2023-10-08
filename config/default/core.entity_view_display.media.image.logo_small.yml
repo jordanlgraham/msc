@@ -1,0 +1,39 @@
+uuid: 7212ccaa-e276-4546-99fc-e3fcc76ac22b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.logo_small
+    - field.field.media.image.field_image
+    - image.style.logo
+    - media.type.image
+  module:
+    - svg_image
+id: media.image.logo_small
+targetEntityType: media
+bundle: image
+mode: logo_small
+content:
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: logo
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  name: true
+  thumbnail: true
+  uid: true

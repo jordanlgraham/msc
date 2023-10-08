@@ -1,0 +1,5 @@
+name: YourMembership Auth
+type: module
+description: Provides authentication using YourMembership API
+package: Custom
+core_version_requirement: ^9 || ^10

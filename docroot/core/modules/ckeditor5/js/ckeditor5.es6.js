@@ -326,7 +326,7 @@
       // prefixed versions of existing css in `existingCss`.
       const addedCss = [
         `${prefix} .ck.ck-content {display:block;min-height:5rem;}`,
-        `${prefix} .ck.ck-content * {display:initial;background:initial;color:initial;padding:initial;}`,
+        `${prefix} .ck.ck-content * {display:revert;background:revert;color:initial;padding:revert;}`,
         `${prefix} .ck.ck-content li {display:list-item}`,
         `${prefix} .ck.ck-content ol li {list-style-type: decimal}`,
         `${prefix} .ck[contenteditable], ${prefix} .ck[contenteditable] * {-webkit-user-modify: read-write;-moz-user-modify: read-write;}`,
@@ -420,8 +420,54 @@
 
       ClassicEditor.create(element, editorConfig)
         .then((editor) => {
+          /**
+           * Injects a temporary <p> into CKEditor and then calculates the entire
+           * height of the amount of the <p> tags from the passed in rows value.
+           *
+           * This takes into account collapsing margins, and line-height of the
+           * current theme.
+           *
+           * @param {number} - the number of rows.
+           *
+           * @returns {number} - the height of a div in pixels.
+           */
+          function calculateLineHeight(rows) {
+            const element = document.createElement('p');
+            element.setAttribute('style', 'visibility: hidden;');
+            element.innerHTML = '&nbsp;';
+            editor.ui.view.editable.element.append(element);
+
+            const styles = window.getComputedStyle(element);
+            const height = element.clientHeight;
+            const marginTop = parseInt(styles.marginTop, 10);
+            const marginBottom = parseInt(styles.marginBottom, 10);
+            const mostMargin =
+              marginTop >= marginBottom ? marginTop : marginBottom;
+
+            element.remove();
+            return (
+              (height + mostMargin) * (rows - 1) +
+              marginTop +
+              height +
+              marginBottom
+            );
+          }
+
           // Save a reference to the initialized instance.
           Drupal.CKEditor5Instances.set(id, editor);
+
+          // Set the minimum height of the editable area to correspond with the
+          // value of the number of rows. We attach this custom property to
+          // the `.ck-editor` element, as that doesn't get its inline styles
+          // cleared on focus. The editable element is then set to use this
+          // property within the stylesheet.
+          const rows = editor.sourceElement.getAttribute('rows');
+          editor.ui.view.editable.element
+            .closest('.ck-editor')
+            .style.setProperty(
+              '--ck-min-height',
+              `${calculateLineHeight(rows)}px`,
+            );
 
           // CKEditor 4 had a feature to remove the required attribute
           // see: https://www.drupal.org/project/drupal/issues/1954968
@@ -470,6 +516,10 @@
         })
         .catch((error) => {
           // eslint-disable-next-line no-console
+          console.info(
+            'Debugging can be done with an unminified version of CKEditor by installing from the source file. Consult documentation at https://www.drupal.org/node/3258901',
+          );
+          // eslint-disable-next-line no-console
           console.error(error);
         });
     },
@@ -497,38 +547,11 @@
         editor.updateSourceElement();
       } else {
         element.removeAttribute('contentEditable');
-
-        // Prepare variables that will be used when discarding Quickedit changes.
-        let textElement = null;
-        let originalValue = null;
-        const usingQuickEdit = (((Drupal || {}).quickedit || {}).editors || {})
-          .editor;
-        if (usingQuickEdit) {
-          // The revert() function in QuickEdit's text editor does not work with
-          // CKEditor 5, as it is triggered before CKEditor 5 is fully
-          // destroyed. This function is overridden so the functionality it
-          // provides can happen after the CKEditor destroy() promise is
-          // fulfilled.
-          // This pulls the necessary values from the QuickEdit Backbone Model
-          // before it is destroyed, so they can be used by
-          // `editor.destroy().then()` to perform the expected revert.
-          Drupal.quickedit.editors.editor.prototype.revert =
-            function revertQuickeditChanges() {
-              textElement = this.$textElement[0];
-              originalValue = this.model.get('originalValue');
-            };
-        }
-
-        editor
+        // Return the promise to allow external code to queue code to
+        // execute after the destroy is complete.
+        return editor
           .destroy()
           .then(() => {
-            // If textElement and originalValue are not null, a QuickEdit
-            // revert has been requested. Perform the revert here as it
-            // can't happen until the CKEditor instance is destroyed.
-            if (textElement && originalValue) {
-              textElement.innerHTML = originalValue;
-            }
-
             // Clean up stored references.
             Drupal.CKEditor5Instances.delete(id);
             callbacks.delete(id);

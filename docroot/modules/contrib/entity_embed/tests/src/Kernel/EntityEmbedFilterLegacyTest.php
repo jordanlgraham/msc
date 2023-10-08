@@ -12,7 +12,7 @@ class EntityEmbedFilterLegacyTest extends EntityEmbedFilterTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->installConfig('system');

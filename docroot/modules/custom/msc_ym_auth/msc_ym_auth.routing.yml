@@ -1,0 +1,8 @@
+msc_ym_auth.example:
+  path: '/msc-ym-auth/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\msc_ym_auth\Controller\MscYmAuthController::build'
+  requirements:
+    _permission: 'access content'
+

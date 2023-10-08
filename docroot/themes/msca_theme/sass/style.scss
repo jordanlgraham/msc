@@ -3,6 +3,7 @@
 
 // Components
 @import "components/2-3-paragraph";
+@import "components/affiliate";
 @import "components/blocks";
 @import "components/btn-custom";
 @import "components/color-hero";
@@ -16,6 +17,8 @@
 @import "components/newsletter";
 @import "components/progress-bars";
 @import "components/related_content";
+@import "components/rich-text";
+@import "components/paragraphs-common";
 @import "components/search";
 @import "components/style-guide";
 @import "components/tables";
@@ -67,3 +70,4 @@
 @import "views/newsroom";
 @import "views/sponsors";
 @import "views/vendors";
+@import "views/member-updates";

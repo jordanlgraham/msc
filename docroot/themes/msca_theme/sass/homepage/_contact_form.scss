@@ -1,7 +1,62 @@
-.paragraph--type--map-and-contact .contact-message-feedback-form h2,
-.paragraph--type--block-embed .contact-message-feedback-form h2 {
-  @extend .thin-heading;
-  color: $blue;
+.paragraph--type--block-embed .contact-message-feedback-form,
+.paragraph--type--block .contact-message-feedback-form {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  @include media-breakpoint-down(md) {
+    max-width: none;
+  }
+  h2 {
+    @extend .thin-heading;
+    color: $blue;
+  }
+  //form elements shouldn't have borders or curved corners at all
+  input,
+  .form-select,
+  .form-textarea {
+    border-radius: 0;
+    border-width: 0;
+  }
+  .form-item {
+    margin-bottom: 1rem;
+  }
+  label {
+    margin-bottom: 0;
+  }
+  .form-submit {
+    @extend .btn;
+    @extend .btn-secondary;
+    cursor: pointer;
+  }
+  .form-select {
+    @extend .form-control;
+  }
+  .form-textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    resize: none;
+    max-height: 60px;
+  }
+  input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+  }
+  .form-actions {
+    position: relative;
+
+    &:after {
+      @extend %button-arrow-after;
+    }
+  }
+  input.form-submit {
+    @extend .btn;
+    @extend .btn-lg;
+    @extend .btn-secondary;
+    width: 100%;
+  }
 }
 
 .paragraph--type--map-and-contact {
@@ -12,83 +67,71 @@
   //hacks to the padding and margins of bootstrap, except for this one.
   margin-left: 0;
   margin-right: 0;
-}
-
-.paragraph--type--map-and-contact .homepage-contact,
-.paragraph--type--block-embed .contact-message-feedback-form {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
+  .contact-message-feedback-form h2 {
+    @extend .thin-heading;
+    color: $blue;
+  }
+  // This entire section is container-fluid to accommodate the large Google Map
+  // on the left side. However, we don't want the contact form to do the same,
+  // so for large-ish displays, we're limiting it with max-width: 540px, which
+  // is half of the .container width. So it's like the left side is container-
+  // fluid but the right side is container.
+  .contact-message-feedback-form {
+    max-width: 540px;
+    @include media-breakpoint-down(md) {
+      max-width: none;
+    }
+    input,
+    .form-select,
+    .form-textarea {
+      border-radius: 0;
+      border-width: 0;
+    }
+    .form-actions {
+      position: relative;
 
-//this entire section is container-fluid to accommodate the large Google Map on the left side. However, we don't want
-//the contact form to do the same, so for large-ish displays, we're limiting it with max-width: 540px, which is half
-//of the .container width. So it's like the left side is container-fluid but the right side is container.
-.paragraph--type--map-and-contact .contact-message-feedback-form {
-  max-width: 540px;
-  @include media-breakpoint-down(md) {
-    max-width: none;
+      &:after {
+        @extend %button-arrow-after;
+      }
+    }
+    input.form-submit {
+      @extend .btn;
+      @extend .btn-lg;
+      @extend .btn-secondary;
+      width: 100%;
+    }
+  }
+  .form-item {
+    margin-bottom: 1rem;
+  }
+  label {
+    margin-bottom: 0;
+  }
+  .form-submit {
+    @extend .btn;
+    @extend .btn-secondary;
+    cursor: pointer;
+  }
+  .form-select {
+    @extend .form-control;
+  }
+  .form-textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    resize: none;
+    max-height: 60px;
+  }
+  input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
   }
 }
 
-.paragraph--type--block-embed .contact-message-feedback-form {
-  max-width: 1080px;
-  margin-left: auto;
-  margin-right: auto;
-  @include media-breakpoint-down(md) {
-    max-width: none;
-  }
-}
-
-//form elements shouldn't have borders or curved corners at all
-.paragraph--type--map-and-contact .contact-message-feedback-form input,
-.paragraph--type--map-and-contact .contact-message-feedback-form .form-select,
-.paragraph--type--map-and-contact .contact-message-feedback-form .form-textarea,
-.paragraph--type--block-embed .contact-message-feedback-form input,
-.paragraph--type--block-embed .contact-message-feedback-form .form-select,
-.paragraph--type--block-embed .contact-message-feedback-form .form-textarea {
-  border-radius: 0;
-  border-width: 0;
-}
-
-//give some breathing room to each form element
-.paragraph--type--map-and-contact .form-item,
-.paragraph--type--block-embed .form-item {
-  margin-bottom: 1rem;
-}
-
-//make labels a little tighter with the form elements themselves
-.paragraph--type--map-and-contact label,
-.paragraph--type--block-embed label {
-  margin-bottom: 0;
-}
-
-.paragraph--type--map-and-contact .form-submit,
-.paragraph--type--block-embed .form-submit {
-  @extend .btn;
-  @extend .btn-secondary;
-  cursor: pointer;
-}
-
-.paragraph--type--map-and-contact .form-select,
-.paragraph--type--block-embed .form-select {
-  @extend .form-control;
-}
-
-.paragraph--type--map-and-contact .form-textarea,
-.paragraph--type--block-embed .form-textarea {
-  width: 100%;
-  border: 1px solid rgba(0,0,0,0.15);
-  resize: none;
-  max-height: 60px;
-}
-
-.paragraph--type--map-and-contact input[type="checkbox"],
-.paragraph--type--block-embed input[type="checkbox"] {
-  display: inline-block;
-  width: auto;
-}
 
 .homepage-contact, .homepage-map,
+.paragraph--type--block .contact-block-wrapper,
 .paragraph--type--block-embed .contact-block-wrapper {
   background-color: $light-gray;
 }
@@ -98,23 +141,6 @@
   @include media-breakpoint-down(md) {
     padding-right: 0;
   }
-}
-
-// Inputs can't have pseudo elements, so the pseudo arrow is applied to the input wrapper
-.paragraph--type--map-and-contact .contact-message-feedback-form .form-actions,
-.paragraph--type--block-embed .contact-message-feedback-form .form-actions {
-  position: relative;
-  &:after {
-    @extend %button-arrow-after;
-  }
-}
-
-.paragraph--type--map-and-contact .contact-message-feedback-form input.form-submit,
-.paragraph--type--block-embed .contact-message-feedback-form input.form-submit {
-  @extend .btn;
-  @extend .btn-lg;
-  @extend .btn-secondary;
-  width: 100%;
 }
 
 //Styles for the Google Maps info window.

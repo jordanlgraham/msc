@@ -7,7 +7,7 @@ use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\system\PathBasedBreadcrumbBuilder;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Drupal\Core\Routing\RouteObjectInterface;
 
 /**
  * Adds the current page title to the breadcrumb.
@@ -34,7 +34,7 @@ class BreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
     // Do not adjust the breadcrumbs on admin paths and front page.
     if ($route && !$route->getOption('_admin_route') && !$this->pathMatcher->isFrontPage()) {
       $title = $this->titleResolver->getTitle($request, $route);
-      if (!isset($title)) {
+      if (empty($title)) {
 
         // Fallback to using the raw path component as the title if the
         // route is missing a _title or _title_callback attribute.

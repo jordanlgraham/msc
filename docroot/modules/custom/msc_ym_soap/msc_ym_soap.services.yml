@@ -1,0 +1,3 @@
+services:
+  msc_ym_soap.get_client:
+    class: Drupal\msc_ym_soap\GetClient

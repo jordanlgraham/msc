@@ -123,7 +123,7 @@ class MaillogController extends ControllerBase {
 
     if ($maillog = $result->fetchAssoc()) {
       // Unserialize values.
-      $maillog['header_all'] = unserialize($maillog['header_all']);
+      $maillog['header_all'] = unserialize($maillog['header_all'], ['allowed_classes' => FALSE]);
     }
 
     return $maillog;

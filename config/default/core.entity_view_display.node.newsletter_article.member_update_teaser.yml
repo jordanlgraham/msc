@@ -1,0 +1,100 @@
+uuid: af1e14e8-f1ff-4a3b-ba51-556f0e1a340b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.member_update_teaser
+    - field.field.node.newsletter_article.body
+    - field.field.node.newsletter_article.field_gated
+    - field.field.node.newsletter_article.field_news_release_date
+    - field.field.node.newsletter_article.field_news_source
+    - field.field.node.newsletter_article.field_news_subtitle
+    - field.field.node.newsletter_article.field_news_teaser_image
+    - field.field.node.newsletter_article.field_newsletter_byline
+    - field.field.node.newsletter_article.field_related_content
+    - field.field.node.newsletter_article.field_sponsor
+    - field.field.node.newsletter_article.field_tags
+    - node.type.newsletter_article
+  module:
+    - datetime
+    - entity_print
+    - media
+    - smart_trim
+    - user
+third_party_settings:
+  entity_print:
+    pdf_label: 'Print this Article'
+id: node.newsletter_article.member_update_teaser
+targetEntityType: node
+bundle: newsletter_article
+mode: member_update_teaser
+content:
+  body:
+    type: smart_trim
+    label: hidden
+    settings:
+      trim_length: 125
+      trim_type: chars
+      trim_suffix: ''
+      wrap_output: false
+      wrap_class: trimmed
+      more:
+        display_link: true
+        target_blank: false
+        link_trim_only: false
+        class: more-link
+        text: 'Read more'
+        aria_label: 'Read more about [node:title]'
+        token_browser: ''
+      summary_handler: full
+      trim_options:
+        text: false
+        trim_zero: false
+        replace_tokens: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_news_release_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: direct
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_news_subtitle:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_news_teaser_image:
+    type: media_thumbnail
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  flag_bookmark:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_gated: true
+  field_news_source: true
+  field_newsletter_byline: true
+  field_related_content: true
+  field_sponsor: true
+  field_tags: true
+  links: true

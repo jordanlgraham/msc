@@ -1,0 +1,18 @@
+uuid: 3d161db8-441e-4cc1-bbc5-c8fb97c6ae70
+langcode: en
+status: true
+dependencies: {  }
+id: smtp
+label: SMTP
+plugin: smtp
+configuration:
+  user: website@maseniorcare.org
+  pass: 'm&tO5D42bX!2'
+  host: smtp.office365.com
+  port: 587
+  query:
+    verify_peer: true
+    local_domain: ''
+    restart_threshold: null
+    restart_threshold_sleep: null
+    ping_threshold: null

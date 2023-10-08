@@ -1,0 +1,7 @@
+name: MSC Layouts
+type: module
+description: Provides layout functionality for the site.
+package: MSC
+core_version_requirement: ^9 || ^10
+dependencies:
+  - layout_paragraphs

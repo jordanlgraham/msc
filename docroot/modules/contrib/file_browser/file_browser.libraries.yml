@@ -20,7 +20,7 @@ view:
   dependencies:
     - core/jquery
     - core/drupal
-    - core/jquery.once
+    - core/once
     - file_browser/imagesloaded
     - file_browser/masonry
 
@@ -34,7 +34,7 @@ preview:
   dependencies:
     - core/jquery
     - core/drupal
-    - core/jquery.once
+    - core/once
 
 imagesloaded:
   remote: https://github.com/desandro/imagesloaded

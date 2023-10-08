@@ -475,6 +475,11 @@ class OrgSync {
       return FALSE;
     }
 
+    // Don't create any new facilities for 'Multi-Facility Corporate' orgs.
+    if ($org['org_ogt_code'] === 'Multi-Facility Corporate') {
+      return FALSE;
+    }
+
     //We need to get the GetFacadeObject version of this, which returns
     //more fields than GetOrganizationChangesByDate. Silly, but necessary.
     $organization = $this->getObject($org['org_cst_key']);

@@ -2,7 +2,6 @@
 
 namespace Drupal\persistent_login;
 
-use DateTime;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Access\CsrfTokenGenerator;
@@ -12,7 +11,7 @@ use Drupal\user\UserInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class TokenManager.
+ * Manage the storage and validation of tokens.
  *
  * @package Drupal\persistent_login
  */
@@ -96,22 +95,24 @@ class TokenManager {
   public function validateToken(PersistentToken $token) {
 
     $selectResult = $this->connection->select('persistent_login', 'pl')
-      ->fields('pl', ['uid', 'created', 'refreshed', 'expires'])
+      ->fields('pl', ['instance', 'uid', 'created', 'refreshed', 'expires'])
       ->condition('expires', $this->time->getRequestTime(), '>')
-      ->condition('series', $token->getSeries())
-      ->condition('instance', $token->getInstance())
+      ->condition('series', Crypt::hashBase64($token->getSeries()))
       ->execute();
 
-    if (($tokenData = $selectResult->fetchObject())) {
+    if (
+      ($storedToken = $selectResult->fetchObject())
+      &&
+      $storedToken->instance === Crypt::hashBase64($token->getInstance())
+    ) {
       return $token
-        ->setUid($tokenData->uid)
-        ->setCreated(new DateTime('@' . $tokenData->created))
-        ->setRefreshed(new DateTime('@' . $tokenData->refreshed))
-        ->setExpiry(new DateTime('@' . $tokenData->expires));
+        ->setUid($storedToken->uid)
+        ->setCreated(new \DateTime('@' . $storedToken->created))
+        ->setRefreshed(new \DateTime('@' . $storedToken->refreshed))
+        ->setExpiry(new \DateTime('@' . $storedToken->expires));
     }
-    else {
-      return $token->setInvalid();
-    }
+
+    return $token->setInvalid();
   }
 
   /**
@@ -128,23 +129,23 @@ class TokenManager {
     $config = $this->configFactory->get('persistent_login.settings');
 
     $token = new PersistentToken(
-        $this->csrfToken->get(Crypt::randomBytesBase64()),
-        $this->csrfToken->get(Crypt::randomBytesBase64()),
+        $this->generateTokenValue(),
+        $this->generateTokenValue(),
         $uid
       );
     if ($config->get('lifetime') === 0) {
-      $token->setExpiry(new DateTime("@" . 2147483647));
+      $token->setExpiry(new \DateTime("@" . 2147483647));
     }
     else {
-      $token->setExpiry(new DateTime("now +" . $config->get('lifetime') . " day"));
+      $token->setExpiry(new \DateTime("now +" . $config->get('lifetime') . " day"));
     }
 
     try {
       $this->connection->insert('persistent_login')
         ->fields([
           'uid' => $uid,
-          'series' => $token->getSeries(),
-          'instance' => $token->getInstance(),
+          'series' => Crypt::hashBase64($token->getSeries()),
+          'instance' => Crypt::hashBase64($token->getInstance()),
           'created' => $token->getCreated()->getTimestamp(),
           'refreshed' => $token->getRefreshed()->getTimestamp(),
           'expires' => $token->getExpiry()->getTimestamp(),
@@ -184,7 +185,7 @@ class TokenManager {
   /**
    * Update the provided token's instance identifier.
    *
-   * The new instance value is also propagated the to the database.
+   * The new instance value is also propagated to the database.
    *
    * @param \Drupal\persistent_login\PersistentToken $token
    *   The token.
@@ -193,18 +194,18 @@ class TokenManager {
    *   An updated token.
    */
   public function updateToken(PersistentToken $token) {
-
     $originalInstance = $token->getInstance();
-    $token = $token->updateInstance($this->csrfToken->get(Crypt::randomBytesBase64()));
+    $token = $token->updateInstance($this->generateTokenValue());
 
     try {
       $this->connection->update('persistent_login')
         ->fields([
-          'instance' => $token->getInstance(),
+          'instance' => Crypt::hashBase64($token->getInstance()),
           'refreshed' => $token->getRefreshed()->getTimestamp(),
+          'expires' => $token->getExpiry()->getTimestamp(),
         ])
-        ->condition('series', $token->getSeries())
-        ->condition('instance', $originalInstance)
+        ->condition('series', Crypt::hashBase64($token->getSeries()))
+        ->condition('instance', Crypt::hashBase64($originalInstance))
         ->execute();
     }
     catch (\Exception $e) {
@@ -225,8 +226,7 @@ class TokenManager {
   public function deleteToken(PersistentToken $token) {
     try {
       $this->connection->delete('persistent_login')
-        ->condition('series', $token->getSeries())
-        ->condition('instance', $token->getInstance())
+        ->condition('series', Crypt::hashBase64($token->getSeries()))
         ->execute();
     }
     catch (\Exception $e) {
@@ -280,6 +280,16 @@ class TokenManager {
     }
 
     return $tokens;
+  }
+
+  /**
+   * Generate a string for series or instance values.
+   *
+   * @return string
+   *   A URL-safe base64 encoded string.
+   */
+  private function generateTokenValue(): string {
+    return $this->csrfToken->get(Crypt::randomBytesBase64());
   }
 
 }

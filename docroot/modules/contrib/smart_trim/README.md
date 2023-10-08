@@ -1,61 +1,47 @@
-CONTENTS OF THIS FILE
----------------------
+# Smart Trim
 
- * Introduction
- * Requirements
- * Installation
- * Configuration
- * Maintainers
+Smart Trim implements a new field formatter for textfields (text, text_long, and
+text_with_summary, if you want to get technical) that improves upon the "Summary
+or Trimmed" formatter built into Drupal.
 
-INTRODUCTION
-------------
+For a full description of the module, visit the [project page](https://www.drupal.org/project/smart_trim) or the [documentation](https://www.drupal.org/docs/contributed-modules/smart-trim).
 
- * For the description of the module visit:
-   [project page](https://www.drupal.org/project/smart_trim)
-   or
-   [documentation page](https://www.drupal.org/docs/contributed-modules/smart-trim)
+Submit bug reports and feature suggestions, or track changes in the [issue queue](https://www.drupal.org/project/issues/smart_trim).
 
- * To submit bug reports and feature suggestions, or to track changes visit: 
+* To submit bug reports and feature suggestions, or to track changes visit:
    [issue queue](https://www.drupal.org/project/issues/smart_trim)
 
-REQUIREMENTS
-------------
+## Requirements
 
-This module requires no modules outside of Drupal core.
+Drupal contrib modules
 
-INSTALLATION
-------------
+* [Token](https://www.drupal.org/project/token)
 
-Install the Smart Trim module as you would normally install a contributed Drupal module. Visit https://www.drupal.org/node/1897420 for further information.
+## Installation
 
-CONFIGURATION
--------------
+Install as you would normally install a contributed Drupal module. For further
+information, see [Installing Drupal Modules](https://www.drupal.org/docs/extending-drupal/installing-drupal-modules).
 
-    1. Navigate to Administration > Extend and enable the module. The system
-       breadcrumb block has now been updated.
-    2. Navigate to /admin/structure/types/manage/**article**/display/**teaser**
-      * Or any content type with a text, text_long, or text_with_summary field
-      * Or any display mode. Typically teaser is trimmed text.
-    3. In the format of the text field, select _Smart trimmed_
-    4. Click the configuration wheel on the far right
-    5. Update configuration with the following settings:
-      * Trim length - Number of units to count.
-      * Trim units - Characters or Words
-      * Suffix - Charcters to display after trimmed text.
-      * Wrap trimmed content - Adds a wrapper div to trimmed content.
-      * Display more link? - Displays a link to the entity (if one exists)
-      * Summary - Set configuration if Summary of field is used.
-      * Strip HTML - Removes all HTML from field display
-      * Honor a zero trim length
-    6. Click the Update button.
-    7. Save the Display form.
+## Configuration
 
-MAINTAINERS
------------
+1. Navigate to Administration > Extend and enable the module.
+1. Navigate to /admin/structure/types/manage/article/display/teaser
+   * Or any fieldable entity with a text, text_long, or text_with_summary field
+   * Or any display mode. Typically teaser is trimmed text.
+1. In the format of the text field, select _Smart trimmed_
+1. Click the configuration wheel on the far right
+1. Update Smart Trim formatter configuration as desired. Configuration options
+include:
+   * Trim by number of characters or words.
+   * Customize the "More" link.
 
- * Mark Casias - https://www.drupal.org/u/markie
- * AmyJune Hineline - https://www.drupal.org/u/volkswagenchick
+## Maintainers
 
-Supporting organization:
+* Mark Casias - [markie](https://www.drupal.org/u/markie)
+* Michael Anello - [ultimike](https://www.drupal.org/u/ultimike)
+* AmyJune Hineline - [volkswagenchick](https://www.drupal.org/u/volkswagenchick)
 
- * Kanopi Studios - https://www.drupal.org/kanopi-studios
+### Supporting organizations
+
+* [Kanopi Studios](https://www.drupal.org/kanopi-studios)
+* [DrupalEasy](https://www.drupal.org/drupaleasy)

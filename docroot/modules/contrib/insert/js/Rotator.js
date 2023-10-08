@@ -101,6 +101,10 @@
       _updatePreviewImage: function(json) {
         var $previewImg = this._$node.parents('.image-widget').find('.image-preview img');
 
+        if (!$previewImg.length) {
+          return;
+        }
+
         $.each($previewImg.attr('class').split(/\s+/), function() {
           var styleClass = this.match('^image-style-(.+)');
 
@@ -130,10 +134,10 @@
               var widthMatches = template.match(/width[ ]*=[ ]*"(\d*)"/i);
               var heightMatches = template.match(/height[ ]*=[ ]*"(\d*)"/i);
 
-              if (heightMatches.length === 2) {
+              if (heightMatches && heightMatches.length === 2) {
                 template = template.replace(/(width[ ]*=[ ]*")(\d*)"/i, 'width="' + heightMatches[1] + '"');
               }
-              if (widthMatches.length === 2) {
+              if (widthMatches && widthMatches.length === 2) {
                 template = template.replace(/(height[ ]*=[ ]*")(\d*)"/i, 'height="' + widthMatches[1] + '"');
               }
 
@@ -154,10 +158,19 @@
           var updatedImageCleanUrl = url.split('?')[0];
           fManager.getTextareas().each(function() {
             var $textarea = $(this);
+            var textareaString = $textarea.val();
             var $newDom = self._updateDom($('<div>').html($(this).val()), url, updatedImageCleanUrl);
 
             if ($newDom !== null) {
-              $textarea.val($newDom.html());
+              $newDom.find('img').each(function(index) {
+                var i = 0;
+                textareaString.replace(
+                  /<img[^>]*>/g,
+                  match => i++ !== index ? match : $('<div>').append($(this)).html()
+                );
+              });
+
+              $textarea.val(textareaString);
             }
           });
 

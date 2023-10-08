@@ -18,7 +18,7 @@ class MediaEntityBrowserMediaLibraryTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'stable';
+  protected $defaultTheme = 'stark';
 
   /**
    * Modules to install.
@@ -57,7 +57,7 @@ class MediaEntityBrowserMediaLibraryTest extends WebDriverTestBase {
   /**
    * Test the media entity browser.
    */
-  public function testMediaBrowser() {
+  public function testMediaBrowser(): void {
     $this->drupalGet('entity-browser/iframe/media_entity_browser_media_library');
     $this->clickLink('Choose existing media');
     $this->assertSession()->assertWaitOnAjaxRequest();

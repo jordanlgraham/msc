@@ -17,18 +17,28 @@ field.formatter.settings.smart_trim:
     wrap_class:
       type: string
       label: 'Wrapped content class'
-    more_link:
-      type: boolean
-      label: 'Display more link'
-    more_class:
-      type: string
-      label: 'More link class'
-    more_text:
-      type: string
-      label: 'More link text'
-    more_aria_label:
-      type: string
-      label: 'More link aria-label value'
+    more:
+      type: mapping
+      label: 'More link configuration'
+      mapping:
+        display_link:
+          type: boolean
+          label: 'Display more link'
+        target_blank:
+          type: boolean
+          label: 'Open link in new window'
+        link_trim_only:
+          type: boolean
+          label: 'More link only when content is trimmed'
+        class:
+          type: string
+          label: 'More link class'
+        text:
+          type: string
+          label: 'More link text'
+        aria_label:
+          type: string
+          label: 'More link aria-label value'
     summary_handler:
       type: string
       label: 'Summary handler'

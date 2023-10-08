@@ -96,7 +96,7 @@ class ForwardLinkGenerator implements ForwardLinkGeneratorInterface {
 
     $html = FALSE;
     // Output the correct style of link.
-    $default_icon = drupal_get_path('module', 'forward') . '/images/forward.gif';
+    $default_icon = \Drupal::service('extension.list.module')->getPath('forward') . '/images/forward.gif';
     $custom_icon = $settings['icon'];
     $link_style = $settings['style'];
     switch ($link_style) {

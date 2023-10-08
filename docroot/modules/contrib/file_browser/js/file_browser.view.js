@@ -1,5 +1,6 @@
 /**
- * @file file_browser.view.js
+ * @file
+ * file_browser.view.js
  */
 
 (function ($, Drupal) {
@@ -9,7 +10,7 @@
   /**
    * Renders the file counter based on our internally tracked count.
    */
-  function renderFileCounter () {
+  function renderFileCounter() {
     $('.file-browser-file-counter').each(function () {
       $(this).remove();
     });
@@ -35,7 +36,7 @@
   /**
    * Adjusts the padding on the body to account for the fixed actions bar.
    */
-  function adjustBodyPadding () {
+  function adjustBodyPadding() {
     setTimeout(function () {
       $('body').css('padding-bottom', $('.file-browser-actions').outerHeight() + 'px');
     }, 2000);
@@ -47,8 +48,9 @@
   Drupal.behaviors.fileBrowserMasonry = {
     attach: function (context) {
       var $item = $('.grid-item', context);
-      var $view = $item.parent().once('file-browser-init');
-      if ($view.length) {
+      var view = once('file-browser-init', $item.parent());
+      if (view.length) {
+        var $view = $(view);
         $view.prepend('<div class="grid-sizer"></div><div class="gutter-sizer"></div>');
 
         // Indicate that images are loading.
@@ -87,7 +89,7 @@
   Drupal.behaviors.fileBrowserClickProxy = {
     attach: function (context, settings) {
       if (!settings.entity_browser_widget.auto_select) {
-        $('.grid-item', context).once('bind-click-event').click(function () {
+        $(once('bind-click-event', '.grid-item', context)).click(function () {
           var input = $(this).find('.views-field-entity-browser-select input');
           input.prop('checked', !input.prop('checked'));
           if (input.prop('checked')) {
@@ -110,14 +112,14 @@
       adjustBodyPadding();
       renderFileCounter();
       // Indicate when files have been selected.
-      var $entities = $('.entities-list', context).once('file-browser-add-count');
-      if ($entities.length) {
-        $entities.bind('add-entities', function (event, entity_ids) {
+      var entities = once('file-browser-add-count', '.entities-list', context);
+      if (entities.length) {
+        $(entities).bind('add-entities', function (event, entity_ids) {
           adjustBodyPadding();
           renderFileCounter();
         });
 
-        $entities.bind('remove-entities', function (event, entity_ids) {
+        $(entities).bind('remove-entities', function (event, entity_ids) {
           adjustBodyPadding();
           renderFileCounter();
         });

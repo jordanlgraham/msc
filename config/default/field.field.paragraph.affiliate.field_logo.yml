@@ -1,0 +1,29 @@
+uuid: 9614288c-d9b5-4499-a69a-746abf169386
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_logo
+    - media.type.image
+    - paragraphs.paragraphs_type.affiliate
+id: paragraph.affiliate.field_logo
+field_name: field_logo
+entity_type: paragraph
+bundle: affiliate
+label: Logo
+description: 'Add a logo through the media library.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

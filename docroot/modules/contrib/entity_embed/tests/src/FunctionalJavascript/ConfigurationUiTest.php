@@ -17,6 +17,11 @@ class ConfigurationUiTest extends EntityEmbedTestBase {
   /**
    * {@inheritdoc}
    */
+  protected $failOnJavascriptConsoleErrors = FALSE;
+
+  /**
+   * {@inheritdoc}
+   */
   protected static $modules = [
     'ckeditor',
     'entity_embed',
@@ -32,7 +37,7 @@ class ConfigurationUiTest extends EntityEmbedTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $format = FilterFormat::create([

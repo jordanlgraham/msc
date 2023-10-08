@@ -1,0 +1,27 @@
+uuid: 60334f5d-9d11-484b-8c52-32398a3e2e8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.section.field_content
+    - paragraphs.paragraphs_type.section
+  module:
+    - entity_reference_revisions
+id: paragraph.section.default
+targetEntityType: paragraph
+bundle: section
+mode: default
+content:
+  field_content:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true

@@ -1,0 +1,10 @@
+uuid: 48072895-21aa-4ac5-b996-19202f68a03e
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.logo_small
+label: 'Logo small'
+targetEntityType: media
+cache: true

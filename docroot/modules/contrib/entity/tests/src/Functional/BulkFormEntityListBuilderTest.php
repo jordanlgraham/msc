@@ -27,16 +27,14 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
   protected $storage;
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
-  public static $modules = ['entity_module_test', 'user', 'entity', 'block'];
+  protected static $modules = ['entity_module_test', 'user', 'entity', 'block'];
 
   /**
    * {@inheritdoc}
    */
-  protected $defaultTheme = 'classy';
+  protected $defaultTheme = 'stark';
 
   /**
    * The base permissions to grant for the test user.
@@ -52,7 +50,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     /* @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
@@ -90,7 +88,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     $this->assertSession()->buttonExists('Apply to selected items');
 
     $this->submitForm([], 'Apply to selected items');
-    $this->assertSession()->elementTextContains('css', '.messages--error', 'No items selected.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Error message"]', 'No items selected.');
   }
 
   /**
@@ -110,7 +108,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     $edit = ["entities[$id]" => $id];
     $this->submitForm($edit, 'Apply to selected items');
 
-    $this->assertSession()->elementTextContains('css', '.messages--error', 'No access to execute Delete enhanced entities with owner on the enhanced entity with owner Entity 1.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Error message"]', 'No access to execute Delete enhanced entities with owner on the enhanced entity with owner Entity 1.');
     $this->assertInstanceOf(EnhancedEntityWithOwner::class, $this->storage->load($id));
 
     $account = $this->drupalCreateUser(array_merge(
@@ -128,7 +126,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     $this->storage->resetCache([$id]);
 
     $this->assertSession()->elementTextContains('css', 'h1', 'Enhanced entities with owner');
-    $this->assertSession()->elementTextContains('css', '.messages--status', 'Deleted 1 item.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Status message"]', 'Deleted 1 item.');
     $this->assertNull($this->storage->load($id));
   }
 
@@ -153,7 +151,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     ];
     $this->submitForm($edit, 'Apply to selected items');
 
-    $this->assertSession()->elementTextContains('css', '.messages--error', 'No access to execute Publish enhanced entities with owner on the enhanced entity with owner Entity 1.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Error message"]', 'No access to execute Publish enhanced entities with owner on the enhanced entity with owner Entity 1.');
     $entity = $this->storage->load($id);
     $this->assertFalse($entity->isPublished());
 
@@ -170,7 +168,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     $this->storage->resetCache([$id]);
 
     $this->assertSession()->elementTextContains('css', 'h1', 'Enhanced entities with owner');
-    $this->assertSession()->elementTextContains('css', '.messages--status', 'Publish enhanced entities with owner was applied to 1 item.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Status message"]', 'Publish enhanced entities with owner was applied to 1 item.');
     $entity = $this->storage->load($id);
     $this->assertTrue($entity->isPublished());
   }
@@ -195,7 +193,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     ];
     $this->submitForm($edit, 'Apply to selected items');
 
-    $this->assertSession()->elementTextContains('css', '.messages--error', 'No access to execute Unpublish enhanced entities with owner on the enhanced entity with owner Entity 1.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Error message"]', 'No access to execute Unpublish enhanced entities with owner on the enhanced entity with owner Entity 1.');
     $entity = $this->storage->load($id);
     $this->assertTrue($entity->isPublished());
 
@@ -212,7 +210,7 @@ class BulkFormEntityListBuilderTest extends BrowserTestBase {
     $this->storage->resetCache([$id]);
 
     $this->assertSession()->elementTextContains('css', 'h1', 'Enhanced entities with owner');
-    $this->assertSession()->elementTextContains('css', '.messages--status', 'Unpublish enhanced entities with owner was applied to 1 item.');
+    $this->assertSession()->elementTextContains('xpath', '//div[@aria-label="Status message"]', 'Unpublish enhanced entities with owner was applied to 1 item.');
     $entity = $this->storage->load($id);
     $this->assertFalse($entity->isPublished());
   }

@@ -94,6 +94,10 @@ class FromAcquiaCloud implements EventSubscriberInterface {
     if (count($metadata) !== count(self::ENVIRONMENT_VARIABLES)) {
       return;
     }
+    // Cloud IDE environments do not have network information injected.
+    if (preg_match('/^(ide|ode\d*)$/', getenv('AH_SITE_ENVIRONMENT') ?: '') !== 0) {
+      return;
+    }
 
     // Store the default Cloud settings in the metadata storage.
     global $config;

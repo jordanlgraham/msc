@@ -4,7 +4,11 @@ dev:
   ac-site: msca
   ac-env: dev
   ac-realm: devcloud
+<<<<<<< HEAD
   uri: dev.maseniorcarefoundation.org
+=======
+  uri: mscazx3gzja85x.devcloud.acquia-sites.com
+>>>>>>> main-production-build
   dev.livedev:
     parent: '@msca.dev'
     root: /mnt/gfs/msca.dev/livedev/docroot/sites/foundation

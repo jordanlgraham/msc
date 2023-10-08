@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\entity_print\Plugin\PrintEngineBase;
 
 /**
- * The test word pring engine.
+ * The test word print engine.
  *
  * @PrintEngine(
  *   id = "test_word_print_engine",

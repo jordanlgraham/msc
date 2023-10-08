@@ -3,6 +3,7 @@
 namespace Drupal\entity_print\Plugin\EntityPrint\PrintEngine;
 
 use Dompdf\Dompdf as DompdfLib;
+use Dompdf\Exception as DompdfLibException;
 use Dompdf\Options as DompdfLibOptions;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -80,6 +81,8 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
     $this->dompdfOptions->setFontDir(\Drupal::service('file_system')->getTempDirectory());
     $this->dompdfOptions->setLogOutputFile(\Drupal::service('file_system')->getTempDirectory() . DIRECTORY_SEPARATOR . self::LOG_FILE_NAME);
     $this->dompdfOptions->setIsRemoteEnabled($this->configuration['enable_remote']);
+    $this->dompdfOptions->setIsFontSubsettingEnabled($this->configuration['font_subsetting']);
+    $this->dompdfOptions->setIsPhpEnabled($this->configuration['embedded_php']);
 
     $this->dompdf = new DompdfLib($this->dompdfOptions);
     if ($this->configuration['disable_log']) {
@@ -89,8 +92,6 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
     $this->dompdf
       ->setBaseHost($request->getHttpHost())
       ->setProtocol($request->getScheme() . '://');
-
-    $this->setupHttpContext();
   }
 
   /**
@@ -110,7 +111,7 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public static function getInstallationInstructions() {
-    return t('Please install with: @command', ['@command' => 'composer require "dompdf/dompdf 0.8.0"']);
+    return t('Please install with: @command', ['@command' => 'composer require "dompdf/dompdf ^2.0.1"']);
   }
 
   /**
@@ -121,6 +122,8 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
       'enable_html5_parser' => TRUE,
       'disable_log' => FALSE,
       'enable_remote' => TRUE,
+      'font_subsetting' => TRUE,
+      'embedded_php' => FALSE,
       'cafile' => '',
       'verify_peer' => TRUE,
       'verify_peer_name' => TRUE,
@@ -151,6 +154,20 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
       '#type' => 'checkbox',
       '#default_value' => $this->configuration['enable_remote'],
       '#description' => $this->t('This settings must be enabled for CSS and Images to work unless you manipulate the source manually.'),
+    ];
+    $form['font_subsetting'] = [
+      '#title' => $this->t('Enable font subsetting'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->configuration['font_subsetting'],
+      '#description' => $this->t('The bundled, PHP-based php-font-lib provides support for loading and sub-setting fonts.'),
+    ];
+    $form['embedded_php'] = [
+      '#title' => $this->t('Enable embedded PHP'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->configuration['embedded_php'],
+      '#description' => $this->t('If this setting is set to true then DomPdf will automatically evaluate embedded PHP. See <a href=":wiki">https://github.com/dompdf/dompdf/wiki/Usage#embedded-php-support</a>', [
+        ':wiki' => 'https://github.com/dompdf/dompdf/wiki/Usage#embedded-php-support',
+      ]),
     ];
     $form['ssl_configuration'] = [
       '#type' => 'details',
@@ -195,12 +212,6 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
   public function send($filename, $force_download = TRUE) {
     $this->doRender();
 
-    // Dompdf doesn't have a return value for send so just check the error
-    // global it provides.
-    if ($errors = $this->getError()) {
-      throw new PrintEngineException(sprintf('Failed to generate PDF: %s', $errors));
-    }
-
     // The Dompdf library internally adds the .pdf extension so we remove it
     // from our filename here.
     $filename = preg_replace('/\.pdf$/i', '', $filename);
@@ -220,23 +231,21 @@ class DomPdf extends PdfEngineBase implements ContainerFactoryPluginInterface {
 
   /**
    * Tell Dompdf to render the HTML into a PDF.
+   *
+   * @throws \Drupal\entity_print\PrintEngineException
    */
   protected function doRender() {
-    if (!$this->hasRendered) {
-      $this->dompdf->render();
-      $this->hasRendered = TRUE;
-    }
-  }
+    $this->setupHttpContext();
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getError() {
-    global $_dompdf_warnings;
-    if (is_array($_dompdf_warnings)) {
-      return implode(', ', $_dompdf_warnings);
+    if (!$this->hasRendered) {
+      try {
+        $this->dompdf->render();
+        $this->hasRendered = TRUE;
+      }
+      catch (DompdfLibException $e) {
+        throw new PrintEngineException(sprintf('Failed to generate PDF: %s', $e));
+      }
     }
-    return FALSE;
   }
 
   /**

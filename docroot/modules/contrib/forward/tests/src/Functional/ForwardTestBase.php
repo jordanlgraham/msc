@@ -45,7 +45,7 @@ abstract class ForwardTestBase extends BrowserTestBase {
   /**
    * Perform any initial set up tasks that run before every test method.
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create Basic page and Article node types.
@@ -78,13 +78,6 @@ abstract class ForwardTestBase extends BrowserTestBase {
       'label' => $this->randomMachineName(),
     ]);
     $instance->save();
-
-    $values = [
-      'targetEntityType' => $this->entityType,
-      'bundle' => $this->bundle,
-      'mode' => 'default',
-      'status' => TRUE,
-    ];
 
     $this->display = \Drupal::entityTypeManager()
       ->getStorage('entity_view_display')

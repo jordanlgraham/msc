@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.paragraph_assembler.field_paragraph
     - node.type.paragraph_assembler
   module:
-    - paragraphs
+    - layout_paragraphs
     - path
     - scheduler
 id: node.paragraph_assembler.default
@@ -21,18 +21,14 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_paragraph:
-    type: paragraphs
+    type: layout_paragraphs
     weight: 31
     region: content
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: closed
-      closed_mode: summary
-      autocollapse: none
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: _none
+      preview_view_mode: default
+      nesting_depth: 3
+      require_layouts: 0
+      empty_message: ''
     third_party_settings: {  }
   path:
     type: path

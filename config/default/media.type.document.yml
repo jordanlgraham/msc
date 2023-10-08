@@ -1,0 +1,13 @@
+uuid: ac19fb9e-06bc-4ee3-8aeb-41f1cc120dee
+langcode: en
+status: true
+dependencies: {  }
+id: document
+label: Document
+description: 'Use this type to upload pdf files.'
+source: file
+queue_thumbnail_downloads: false
+new_revision: true
+source_configuration:
+  source_field: field_media_file
+field_map: {  }

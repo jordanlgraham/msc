@@ -1,74 +1,71 @@
-uuid: e6b8d8e1-02e6-40b2-949d-873b329eb12e
+uuid: c334fed7-079a-4c98-947e-b9a9315c7ac6
 langcode: en
 status: true
 dependencies:
   config:
     - filter.format.full_html
   module:
-    - ckeditor
-    - editor_file
-third_party_settings:
-  editor_file:
-    status: true
-    scheme: public
-    directory: inline-files
-    extensions: 'txt rtf pdf doc docx odt ppt pptx odp xls xlsx ods'
-_core:
-  default_config_hash: 967ijj7p6i7rwrYl7r08WQFeCY_c23YAh0h8u-w_CXM
+    - ckeditor5
 format: full_html
-editor: ckeditor
+editor: ckeditor5
 settings:
   toolbar:
-    rows:
-      -
-        -
-          name: Formatting
-          items:
-            - Format
-            - Bold
-            - Italic
-            - Underline
-            - Strike
-            - Superscript
-            - Subscript
-            - Blockquote
-            - '-'
-            - RemoveFormat
-        -
-          name: Linking
-          items:
-            - DrupalLink
-            - DrupalUnlink
-        -
-          name: Lists
-          items:
-            - BulletedList
-            - NumberedList
-            - Table
-        -
-          name: Media
-          items:
-            - media_entity_embed
-            - node
-            - DrupalFile
-        -
-          name: 'Block Formatting'
-          items:
-            - JustifyLeft
-            - JustifyCenter
-            - JustifyRight
-            - JustifyBlock
-            - Outdent
-            - Indent
-        -
-          name: Tools
-          items:
-            - ShowBlocks
-            - HorizontalRule
-            - Source
-            - Undo
-            - Redo
-  plugins: {  }
+    items:
+      - heading
+      - codeBlock
+      - bold
+      - italic
+      - underline
+      - strikethrough
+      - superscript
+      - subscript
+      - blockQuote
+      - removeFormat
+      - '|'
+      - drupalMedia
+      - link
+      - '|'
+      - bulletedList
+      - numberedList
+      - insertTable
+      - '|'
+      - alignment
+      - outdent
+      - indent
+      - '|'
+      - horizontalLine
+      - sourceEditing
+      - undo
+      - redo
+  plugins:
+    ckeditor5_heading:
+      enabled_headings:
+        - heading2
+        - heading3
+        - heading4
+        - heading5
+        - heading6
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_list:
+      reversed: true
+      startIndex: true
+    ckeditor5_alignment:
+      enabled_alignments:
+        - left
+        - center
+        - right
+        - justify
+    media_media:
+      allow_view_mode_override: true
+    editor_advanced_link_link:
+      enabled_attributes:
+        - aria-label
+        - class
+        - id
+        - rel
+        - target
+        - title
 image_upload:
   status: true
   scheme: public

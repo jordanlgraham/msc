@@ -1,0 +1,6 @@
+.paragraph--type--rich-text {
+  h2 {
+    @extend .thin-heading;
+    color: $blue;
+  }
+}

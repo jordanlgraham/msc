@@ -6,7 +6,7 @@ dependencies:
     - field.field.node.paragraph_assembler.field_paragraph
     - node.type.paragraph_assembler
   module:
-    - entity_reference_revisions
+    - layout_paragraphs
     - user
 id: node.paragraph_assembler.default
 targetEntityType: node
@@ -14,7 +14,7 @@ bundle: paragraph_assembler
 mode: default
 content:
   field_paragraph:
-    type: entity_reference_revisions_entity_view
+    type: layout_paragraphs
     label: hidden
     settings:
       view_mode: default

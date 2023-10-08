@@ -21,4 +21,54 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles: null
+    negate: 1
+    target_bundles_drag_drop:
+      affiliate:
+        weight: 17
+        enabled: false
+      block:
+        weight: 18
+        enabled: false
+      block_embed:
+        weight: 19
+        enabled: false
+      carousel:
+        weight: 20
+        enabled: false
+      carousel_assembler:
+        weight: 21
+        enabled: false
+      foundation_highlights:
+        weight: 22
+        enabled: false
+      foundation_highlights_column:
+        weight: 23
+        enabled: false
+      map_and_contact:
+        weight: 24
+        enabled: false
+      newsletter_section:
+        weight: 25
+        enabled: false
+      rich_text:
+        weight: 26
+        enabled: false
+      section:
+        weight: 27
+        enabled: false
+      sponsors:
+        weight: 28
+        enabled: false
+      two_column:
+        weight: 29
+        enabled: false
+      two_column_2_1_ratio:
+        weight: 30
+        enabled: false
+      video:
+        weight: 31
+        enabled: false
+      view_embed:
+        weight: 32
+        enabled: false
 field_type: entity_reference_revisions

@@ -25,12 +25,12 @@ class Fast404PathTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['fast404', 'node', 'path', 'taxonomy'];
+  protected static $modules = ['fast404', 'node', 'path', 'taxonomy'];
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Create Basic page and Article node types.
@@ -90,17 +90,18 @@ class Fast404PathTest extends BrowserTestBase {
     // Create alias.
     $edit = [];
     $edit['path[0][alias]'] = '/' . $this->randomMachineName(8);
-    $this->drupalPostForm('node/' . $node1->id() . '/edit', $edit, $this->t('Save'));
+    $this->drupalGet('node/' . $node1->id() . '/edit');
+    $this->submitForm($edit, $this->t('Save'));
 
     // Confirm that the alias works.
     $this->drupalGet($edit['path[0][alias]']);
-    $this->assertText($node1->label(), 'Alias works.');
-    $this->assertResponse(200);
+    $this->assertSession()->pageTextContains($node1->label());
+    $this->assertSession()->statusCodeEquals(200);
 
     // Confirm that the alias with a trailing slash works.
     $this->drupalGet($edit['path[0][alias]'] . '/');
-    $this->assertText($node1->label(), 'Alias works.');
-    $this->assertResponse(200);
+    $this->assertSession()->pageTextContains($node1->label());
+    $this->assertSession()->statusCodeEquals(200);
 
     // Ensure terms with URL aliases are not blocked.
     $vocabulary = Vocabulary::create([
@@ -117,11 +118,12 @@ class Fast404PathTest extends BrowserTestBase {
       'description[0][value]' => $description,
       'path[0][alias]' => '/' . $this->randomMachineName(),
     ];
-    $this->drupalPostForm('admin/structure/taxonomy/manage/' . $vocabulary->id() . '/add', $edit, $this->t('Save'));
+    $this->drupalGet('admin/structure/taxonomy/manage/' . $vocabulary->id() . '/add');
+    $this->submitForm($edit, $this->t('Save'));
 
     // Confirm that the alias works.
     $this->drupalGet($edit['path[0][alias]']);
-    $this->assertText($description, 'Term can be accessed on URL alias.');
+    $this->assertSession()->pageTextContains($description);
 
   }
 

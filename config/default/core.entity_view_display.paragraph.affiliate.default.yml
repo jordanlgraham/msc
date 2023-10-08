@@ -1,0 +1,42 @@
+uuid: e6b17506-cc66-4998-b76d-3ef43d31a14b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.affiliate.field_affiliate_url
+    - field.field.paragraph.affiliate.field_logo
+    - field.field.paragraph.affiliate.field_title
+    - paragraphs.paragraphs_type.affiliate
+  module:
+    - link
+id: paragraph.affiliate.default
+targetEntityType: paragraph
+bundle: affiliate
+mode: default
+content:
+  field_affiliate_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_logo:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: logo_small
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_title: true

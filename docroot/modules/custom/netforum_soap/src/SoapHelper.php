@@ -51,6 +51,10 @@ class SoapHelper {
         return (int)str_replace(',', '', $field);
         break;
       case 'postal':
+        // If field is an empty array, return an empty string.
+        if (is_array($field) && empty($field)) {
+          return '';
+        }
         return rtrim($field, '-');
         break;
 

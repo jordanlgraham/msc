@@ -223,9 +223,11 @@ function system_post_update_sort_all_config(&$sandbox) {
   $start = $sandbox['progress'];
   $end = min($sandbox['max'], $start + $iteration_size);
   for ($i = $start; $i < $end; $i++) {
-    if (!empty($sandbox['all_config_names'][$i])) {
-      \Drupal::logger('debugging')->notice($sandbox['all_config_names'][$i]);
+    try {
       $factory->getEditable($sandbox['all_config_names'][$i])->save();
+    }
+    catch (\Exception $e) {
+      watchdog_exception('system', $e);
     }
   }
 

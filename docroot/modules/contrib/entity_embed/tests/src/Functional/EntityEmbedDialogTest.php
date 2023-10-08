@@ -16,7 +16,7 @@ class EntityEmbedDialogTest extends EntityEmbedTestBase {
    *
    * @var array
    */
-  public static $modules = ['image'];
+  protected static $modules = ['image'];
 
   /**
    * Tests the entity embed dialog.

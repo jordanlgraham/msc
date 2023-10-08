@@ -13,26 +13,18 @@ targetEntityType: media
 bundle: image
 mode: default
 content:
-  name:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   thumbnail:
     type: image
     label: hidden
     settings:
       image_link: ''
       image_style: cropped_preview_thumbnail
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
       image_loading:
         attribute: lazy
-      svg_attributes:
-        width: ''
-        height: ''
-      svg_render_as_image: true
     third_party_settings: {  }
     weight: 0
     region: content
@@ -42,4 +34,5 @@ hidden:
   entity_print_view_pdf: true
   entity_print_view_word_docx: true
   field_image: true
+  name: true
   uid: true

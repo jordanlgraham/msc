@@ -1,10 +1,14 @@
 uuid: 6a90c3c1-0016-40ad-8825-0f91b36fb38a
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - eu_cookie_compliance
+    - msca_access
 id: member
 label: Member
 weight: 4
 is_admin: null
 permissions:
   - 'access gated content'
+  - 'display eu cookie compliance popup'

@@ -344,16 +344,7 @@ class WebformElementManagedFileTest extends WebformElementManagedFileTestBase {
       $assert_session->responseContains('<label>managed_file_multiple</label>');
       $assert_session->responseContains('<ul>');
     }
-    // @todo Remove once Drupal 9.1.x is only supported.
-    if (floatval(\Drupal::VERSION) >= 9.3) {
-      $assert_session->responseContains('<span class="file file--mime-text-plain file--text"><a href="' . $file->createFileUrl() . '" type="text/plain">' . $file->getFilename() . '</a></span>');
-    }
-    elseif (floatval(\Drupal::VERSION) >= 9.1) {
-      $assert_session->responseContains('<span class="file file--mime-text-plain file--text"><a href="' . file_create_url($file->getFileUri()) . '" type="text/plain">' . $file->getFilename() . '</a></span>');
-    }
-    else {
-      $assert_session->responseContains('<span class="file file--mime-text-plain file--text"><a href="' . file_create_url($file->getFileUri()) . '" type="text/plain; length=' . $file->getSize() . '">' . $file->getFilename() . '</a></span>');
-    }
+    $assert_session->responseContains('<span class="file file--mime-text-plain file--text"><a href="' . $file->createFileUrl() . '" type="text/plain">' . $file->getFilename() . '</a></span>');
 
     // Remove the uploaded file.
     $this->drupalGet('/admin/structure/webform/manage/test_element_managed_file/submission/' . $sid . '/edit');

@@ -23,7 +23,7 @@ class OrgSyncForm extends FormBase {
 
   /**
    * Constructs an OrgSyncForm object.
-   * 
+   *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    */
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
@@ -50,7 +50,7 @@ class OrgSyncForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    
+
     $form['item'] = [
       '#type' => 'item',
       '#markup' => '<h2>New form</h2>'
@@ -99,6 +99,16 @@ class OrgSyncForm extends FormBase {
       $form_state->setErrorByName('org_types', $this->t('No org types have been selected.'));
     }
 
+    // Return error if no organization types have been selected.
+    if (empty($values['org_types']) && !$values['sync_all']) {
+      $form_state->setErrorByName('org_types', $this->t('Please select some org type(s) or check the \'Sync Everything\' box.'));
+    }
+
+    // If $form_state has sync_all == 1, don't validate start and end dates.
+    if ($values['sync_all']) {
+      return;
+    }
+
     // Handle errors relating to the start and end dates.
     switch ($values['start_date'] == $values['end_date']) {
       case TRUE:
@@ -115,11 +125,6 @@ class OrgSyncForm extends FormBase {
         }
     }
 
-    // Return error if no organization types have been selected.
-    if (empty($values['org_types']) && !$values['sync_all']) {
-      $form_state->setErrorByName('org_types', $this->t('Please select some org type(s) or check the \'Sync Everything\' box.'));
-    }
-
   }
 
   /**
@@ -129,7 +134,7 @@ class OrgSyncForm extends FormBase {
 
     // Sync all option overrides other settings.
     $syncAll = !empty($form_state->getValue('sync_all')) && $form_state->getValue('sync_all') == 1;
-    
+
     switch ($syncAll) {
       case TRUE:
         $batch = $this->generateSyncAllBatch();
@@ -167,7 +172,7 @@ class OrgSyncForm extends FormBase {
    */
   public function generateSyncAllBatch() {
     $operations = [];
-    
+
     // Get all facility type term names.
     $typesArray = $this->getFacilityTypes();
     $types = array_values($typesArray);
@@ -195,7 +200,7 @@ class OrgSyncForm extends FormBase {
    */
   public function generateBatchByDate($form_state) {
     $operations = [];
- 
+
     // By default, set both endpoints to current timestamp.
     $start_date = $end_date = time();
     if(!empty($form_state->getValue('start_date'))) {

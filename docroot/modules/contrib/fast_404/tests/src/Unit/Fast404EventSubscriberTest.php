@@ -2,10 +2,10 @@
 
 namespace Drupal\Tests\fast404\Unit;
 
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Drupal\fast404\EventSubscriber\Fast404EventSubscriber;
 use Drupal\Tests\UnitTestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -20,18 +20,18 @@ class Fast404EventSubscriberTest extends UnitTestCase {
   /**
    * The event.
    *
-   * @var \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent
+   * @var \Symfony\Component\HttpKernel\Event\ExceptionEvent
    */
   protected $event;
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $kernel = $this->createMock('\Symfony\Component\HttpKernel\HttpKernelInterface');
     $request = new Request();
-    $this->event = new GetResponseForExceptionEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, new NotFoundHttpException());
+    $this->event = new ExceptionEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, new NotFoundHttpException());
   }
 
   /**
@@ -49,7 +49,7 @@ class Fast404EventSubscriberTest extends UnitTestCase {
   public function testOnNotFoundException() {
     $subscriber = $this->getFast404EventSubscriber();
     $subscriber->onNotFoundException($this->event);
-    $e = $this->event->getException();
+    $e = $this->event->getThrowable();
     $this->assertInstanceOf(NotFoundHttpException::class, $e);
   }
 
@@ -60,9 +60,7 @@ class Fast404EventSubscriberTest extends UnitTestCase {
    *   A mock Fast404EventSubscriber object to test.
    */
   protected function getFast404EventSubscriber() {
-    $requestStackStub = $this->getMockBuilder('\Symfony\Component\HttpFoundation\RequestStack')
-      ->disableOriginalConstructor()
-      ->getMock();
+    $requestStackStub = $this->createMock('\Symfony\Component\HttpFoundation\RequestStack');
     $subscriber = $this->getMockBuilder('\Drupal\fast404\EventSubscriber\Fast404EventSubscriber')
       ->setConstructorArgs([$requestStackStub])
       ->getMock();

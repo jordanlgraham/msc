@@ -8,7 +8,7 @@ use Drupal\Tests\UnitTestCase;
 /**
  * Unit Test coverage.
  *
- * @coversDefaultClass \Drupal\smart_trim\Truncate\TruncateHTML
+ * @coversDefaultClass \Drupal\smart_trim\TruncateHTML
  *
  * @group smart_trim
  */
@@ -29,7 +29,7 @@ class TruncateHTMLTest extends UnitTestCase {
   /**
    * Data provider for testTruncateChars().
    */
-  public function truncateCharsDataProvider() {
+  public function truncateCharsDataProvider(): array {
     return [
       [
         'A test string',
@@ -49,6 +49,12 @@ class TruncateHTMLTest extends UnitTestCase {
         '',
         '“I <em>really</em>',
       ],
+      [
+        'Armenian character test Հ from issue 3334442',
+        25,
+        '',
+        'Armenian character test Հ',
+      ],
     ];
   }
 
@@ -59,7 +65,7 @@ class TruncateHTMLTest extends UnitTestCase {
    *
    * @dataProvider truncateWordsDataProvider
    */
-  public function testTruncateWords($html, $limit, $ellipsis, $expected) {
+  public function testTruncateWords($html, $limit, $ellipsis, $expected): void {
     $truncate = new TruncateHTML();
     $this->assertSame($expected, $truncate->truncateWords($html, $limit, $ellipsis));
   }
@@ -67,7 +73,7 @@ class TruncateHTMLTest extends UnitTestCase {
   /**
    * Data provider for testTruncateWords().
    */
-  public function truncateWordsDataProvider() {
+  public function truncateWordsDataProvider(): array {
     return [
       [
         'A test string',
@@ -104,7 +110,7 @@ class TruncateHTMLTest extends UnitTestCase {
         10,
         '',
         '<p><strong>Every <em>man <s>who has lotted here over the centuries, has</s></em></strong></p>',
-      ]
+      ],
     ];
   }
 

@@ -40,11 +40,11 @@ class Maillog implements MailInterface {
 
       // In case the subject/from/to is already encoded, decode with
       // iconv_mime_decode().
-      $record->header_message_id = isset($message['headers']['Message-ID']) ? $message['headers']['Message-ID'] : $this->t('Not delivered');
+      $record->header_message_id = $message['headers']['Message-ID'] ?? $this->t('Not delivered');
       $record->subject = $message['subject'];
       $record->subject = mb_substr(iconv_mime_decode($record->subject), 0, 255);
       $record->body = $message['body'];
-      $record->header_from = isset($message['from']) ? $message['from'] : NULL;
+      $record->header_from = $message['from'] ?? NULL;
       $record->header_from = iconv_mime_decode($record->header_from);
 
       $header_to = [];
@@ -60,7 +60,7 @@ class Maillog implements MailInterface {
       }
       $record->header_to = implode(', ', $header_to);
 
-      $record->header_reply_to = isset($message['headers']['Reply-To']) ? $message['headers']['Reply-To'] : '';
+      $record->header_reply_to = $message['headers']['Reply-To'] ?? '';
       $record->header_all = serialize($message['headers']);
       $record->sent_date = \Drupal::time()->getRequestTime();
 
@@ -78,7 +78,7 @@ class Maillog implements MailInterface {
         '@subject' => $message['subject'],
         '@from' => $message['from'],
         '@to' => $message['to'],
-        '@reply' => isset($message['reply_to']) ? $message['reply_to'] : NULL,
+        '@reply' => $message['reply_to'] ?? '',
         '@header' => $header_output,
         '@body' => $message['body'],
       ]);
@@ -97,7 +97,7 @@ class Maillog implements MailInterface {
     else {
       \Drupal::logger('maillog')->notice('Attempted to send an email, but sending emails is disabled.');
     }
-    return isset($result) ? $result : TRUE;
+    return $result ?? TRUE;
   }
 
 }

@@ -1,0 +1,8 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+// if (isset($paragraph_item['subform'])) {
+//   // Conditionally adjust #required based on your logic.
+//   $form['field_paragraph']['widget'][$delta]['subform']['your_form_element']['#required'] = FALSE;
+// }

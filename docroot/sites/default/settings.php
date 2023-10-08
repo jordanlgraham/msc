@@ -799,10 +799,9 @@ if (!empty($_ENV['AH_PRODUCTION'])) {
 if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   switch ($_ENV['AH_SITE_ENVIRONMENT']) {
       case 'prod':
-      // Disable Shield on prod by setting the
-      // shield user variable to NULL
-      $config['shield.settings']['credentials']['shield']['user'] = NULL;
-      break;
+        // Disable the 'shield' module.
+        $config['shield.settings']['shield_enable'] = FALSE;
+        break;
   }
   // Set the hash salt.
   $path = '/mnt/files/msca.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/files-private';

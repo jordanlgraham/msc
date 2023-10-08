@@ -1,7 +1,52 @@
 uuid: 32f53533-3f77-4cd9-afa5-06cb6823bd98
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.email_html
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - node.type.education_events
+    - node.type.facility
+    - node.type.file_browser
+    - node.type.forum
+    - node.type.newsletter
+    - node.type.newsletter_article
+    - node.type.newsroom
+    - node.type.page
+    - node.type.paragraph_assembler
+    - node.type.resources
+    - node.type.scholarship_recipient
+    - node.type.scholarships
+    - node.type.sponsor
+    - node.type.vendor
+    - node.type.video
+    - taxonomy.vocabulary.event_types
+    - taxonomy.vocabulary.forums
+    - taxonomy.vocabulary.group
+    - taxonomy.vocabulary.job_categories
+    - taxonomy.vocabulary.job_regions
+    - taxonomy.vocabulary.news_types
+    - taxonomy.vocabulary.resource_category
+    - taxonomy.vocabulary.resource_type
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.vendor_services_offered
+  module:
+    - contextual
+    - entity_browser
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - quickedit
+    - real_magnet
+    - redirect
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
 id: content_author
 label: 'Content Author'
 weight: 3
@@ -100,7 +145,10 @@ permissions:
   - 'revert vendor revisions'
   - 'revert video revisions'
   - 'send real_magnet newsletters'
+  - 'use text format basic_html'
+  - 'use text format email_html'
   - 'use text format full_html'
+  - 'use text format restricted_html'
   - 'view all revisions'
   - 'view education_events revisions'
   - 'view facility revisions'

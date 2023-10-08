@@ -43,7 +43,7 @@ final class AuthControllerTest extends AcquiaConnectorTestBase implements Logger
   /**
    * {@inheritdoc}
    */
-  public function log($level, $message, array $context = []) {
+  public function log($level, $message, array $context = []): void {
     $message_placeholders = $this->container
       ->get('logger.log_message_parser')
       ->parseMessagePlaceholders($message, $context);
@@ -153,7 +153,7 @@ final class AuthControllerTest extends AcquiaConnectorTestBase implements Logger
         $response->headers->get('Location')
       );
       self::assertEquals(
-        ['We could not retrieve account data, please re-authorize with your Acquia Cloud account'],
+        ['We could not retrieve account data, please re-authorize with your Acquia Cloud account. For more information check <a target="_blank" href="https://docs.acquia.com/cloud-platform/known-issues/#unable-to-log-in-through-acquia-connector">this link</a>.'],
         $this->container->get('messenger')->messagesByType('error')
       );
       self::assertEquals(
@@ -188,7 +188,7 @@ final class AuthControllerTest extends AcquiaConnectorTestBase implements Logger
       $response->headers->get('Location')
     );
     self::assertEquals(
-      ['We could not retrieve account data, please re-authorize with your Acquia Cloud account'],
+      ['We could not retrieve account data, please re-authorize with your Acquia Cloud account. For more information check <a target="_blank" href="https://docs.acquia.com/cloud-platform/known-issues/#unable-to-log-in-through-acquia-connector">this link</a>.'],
       $this->container->get('messenger')->messagesByType('error')
     );
     self::assertEquals(
