@@ -5,7 +5,7 @@ screenshot: screenshot.png
 # version: VERSION
 engine: twig
 type: theme
-base theme: stable
+base theme: stable9
 
 # Put regions here
 regions:
