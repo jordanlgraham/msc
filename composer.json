@@ -22,8 +22,6 @@
     "drupal/acquia_connector": "4.x-dev@dev",
     "drupal/address": "^1.12",
     "drupal/admin_toolbar": "^3.3",
-    "drupal/adminimal_admin_toolbar": "^1.11",
-    "drupal/adminimal_theme": "^1.6",
     "drupal/better_exposed_filters": "^6.0",
     "drupal/block_class": "^2.0",
     "drupal/block_field": "^1.0@RC",
@@ -34,9 +32,9 @@
     "drupal/config_split": "^2.0@RC",
     "drupal/contact_block": "^1.5",
     "drupal/contact_storage": "^1.1",
-    "drupal/core-composer-scaffold": "^9.5.11",
-    "drupal/core-project-message": "^9.5.11",
-    "drupal/core-recommended": "^9.5.11",
+    "drupal/core-composer-scaffold": "^10.1.5",
+    "drupal/core-project-message": "^10.1.5",
+    "drupal/core-recommended": "^10.1.5",
     "drupal/ctools": "^3.14",
     "drupal/current_page_crumb": "^1.3",
     "drupal/easy_breadcrumb": "^2.0",
@@ -56,14 +54,14 @@
     "drupal/file_browser": "^1.3",
     "drupal/flag": "^4.0@beta",
     "drupal/forward": "^4.0",
-    "drupal/geocoder": "^3.34",
+    "drupal/geocoder": "^4.9",
     "drupal/geofield": "^1.34",
     "drupal/geolocation": "^3.7",
     "drupal/google_analytics": "^4.0",
     "drupal/honeypot": "^2.1",
     "drupal/image_widget_crop": "^2.3",
     "drupal/inline_entity_form": "^1.0@RC",
-    "drupal/insert": "^2.0@beta",
+    "drupal/insert": "^3.0@beta",
     "drupal/key": "^1.14",
     "drupal/layout_paragraphs": "^2.0",
     "drupal/maillog": "^1.0@beta",
@@ -172,9 +170,6 @@
         "merge-extra": false
     },
     "patches": {
-        "drupal/core": {
-            "#3241295: CKEditor 5 isn't respecting field widgets row settings": "patches/3241295-ckeditor_not_respecting_settings-d9.5.10.patch"
-        },
         "drupal/entity_embed": {
             "3069448: Array to string conversion for Media Image": "https://www.drupal.org/files/issues/2022-11-08/entity-embed_array-to-string_3069448-32.patch"
         },
