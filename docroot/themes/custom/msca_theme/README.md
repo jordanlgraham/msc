@@ -9,7 +9,7 @@ If you don't have homebrew, you can use the node installer here: https://nodejs.
 
 ##Installing node modules
 
-To get going, open terminal and cd to ```themes/msca_theme```
+To get going, open terminal and cd to ```themes/custom/msca_theme```
 
 Once there, type ```npm install```. That will download a bunch of stuff to node_modules, which you can ignore.
 
