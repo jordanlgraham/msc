@@ -11,102 +11,43 @@ weight: 0
 uid: null
 template: false
 archive: false
-id: test_element_datelist
-title: 'Test: Element: Date list'
-description: 'Test date list element.'
-categories:
-  - 'Test: Element'
+id: test_element_xss
+title: 'Test: Element: XSS'
+description: 'Tests element Cross Site Scripting (XSS) vulnerabilities.'
+category: 'Test: Element'
 elements: |
-  datelist_default:
-    '#type': datelist
-    '#title': datelist_default
-    '#default_value': '2009-08-18T01:00:00-05:00'
-  datelist_no_abbreviate:
-    '#type': datelist
-    '#title': datelist_no_abbreviate
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_abbreviate': false
-  datelist_text_parts:
-    '#type': datelist
-    '#title': datelist_text_parts
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#date_text_parts':
-      - month
-      - day
-      - year
-      - hour
-      - minute
-      - second
-      - ampm
-  datelist_datetime:
-    '#type': datelist
-    '#title': datelist_datetime
-    '#date_part_order':
-      - month
-      - day
-      - year
-      - hour
-      - minute
-      - second
-      - ampm
-    '#default_value': '2009-08-18T01:00:00-05:00'
-  datelist_date:
-    '#type': datelist
-    '#title': datelist_date
-    '#date_part_order':
-      - month
-      - day
-      - year
-    '#default_value': '2009-08-18T01:00:00-00:00'
-  datelist_min_max:
-    '#type': datelist
-    '#title': datelist_min_max
-    '#description': '(2009-01-01 to 2009-12-31)'
-    '#date_date_min': '2009-01-01'
-    '#date_date_max': '2009-12-31'
-    '#default_value': '2009-08-18'
-  datelist_min_max_time:
-    '#type': datelist
-    '#title': datelist_min_max_time
-    '#description': '(2009-01-01 09:00:00 to 2009-12-31 17:00:00)'
-    '#date_min': '2009-01-01 09:00:00'
-    '#date_max': '2009-12-31 17:00:00'
-    '#default_value': '2009-01-01 09:00:00'
-  datelist_date_year_range_reverse:
-    '#type': datelist
-    '#title': datelist_date_year_range_reverse
-    '#date_year_range': '2005:2010'
-    '#date_year_range_reverse': true
-  datelist_required_error:
-    '#type': datelist
-    '#title': datelist_required_error
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#required': 'Custom required error'
-    '#required_error': 'Custom required error'
-  datelist_conditional:
-    '#type': checkbox
-    '#title': datelist_conditional
-  datelist_conditional_required:
-    '#type': datelist
-    '#title': datelist_conditional_required
-    '#states':
-      required:
-        ':input[name="datelist_conditional"]':
-          checked: true
-  datelist_multiple:
-    '#type': datelist
-    '#title': datelist_multiple
-    '#default_value': '2009-08-18T01:00:00-05:00'
-    '#multiple': true
-  datelist_custom_composite:
-    '#type': webform_custom_composite
-    '#title': datelist_custom_composite
-    '#element':
-      datelist:
-        '#type': datelist
-        '#title': datelist
-    '#default_value':
-      - datelist: '2009-08-18T01:00:00-05:00'
+  textfield:
+    '#title': textfield
+    '#type': textfield
+    '#default_value': '<img src="https://www.drupal.org/" />'
+  textarea:
+    '#title': textarea
+    '#type': textarea
+    '#default_value': '<img src="https://www.drupal.org/" />'
+  webform_select_other:
+    '#title': webform_select_other
+    '#type': webform_select_other
+    '#options':
+      one: one
+      two: two
+      three: three
+    '#default_value': '<img src="https://www.drupal.org/" />'
+  webform_checkboxes_other:
+    '#title': webform_checkboxes_other
+    '#type': webform_checkboxes_other
+    '#options':
+      one: one
+      two: two
+      three: three
+    '#default_value': '<img src="https://www.drupal.org/" />'
+  webform_radios_other:
+    '#title': webform_radios_other
+    '#type': webform_radios_other
+    '#options':
+      one: one
+      two: two
+      three: three
+    '#default_value': '<img src="https://www.drupal.org/" />'
 css: ''
 javascript: ''
 settings:
@@ -194,9 +135,7 @@ settings:
   wizard_toggle: false
   wizard_toggle_show_label: ''
   wizard_toggle_hide_label: ''
-  wizard_page_type: container
-  wizard_page_title_tag: h2
-  preview: 1
+  preview: 0
   preview_label: ''
   preview_title: ''
   preview_message: ''
@@ -213,7 +152,7 @@ settings:
   draft_pending_multiple_message: ''
   confirmation_type: page
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: '<p>[webform_submission:values:html]</p>'
   confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
@@ -290,16 +229,5 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-handlers:
-  debug:
-    id: debug
-    label: Debug
-    notes: ''
-    handler_id: debug
-    status: true
-    conditions: {  }
-    weight: 1
-    settings:
-      format: yaml
-      submission: false
+handlers: {  }
 variants: {  }
