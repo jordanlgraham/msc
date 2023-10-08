@@ -12,7 +12,7 @@ field_name: field_affiliate_url
 entity_type: paragraph
 bundle: affiliate
 label: 'Affiliate url'
-description: 'To make the affiliate''s logo clickable to their website, enter their url here.'
+description: "To make the affiliate's logo clickable to their website, enter their url here."
 required: false
 translatable: false
 default_value: {  }

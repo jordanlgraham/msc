@@ -15,7 +15,7 @@ forward_email_subject: '[forward:sender-name] has forwarded a page to you from [
 forward_email_message: '[forward:sender-name] thought you would like to see this page from the [site:name] web site.'
 forward_bypass_access_control: 0
 forward_flood_control_limit: 10
-forward_flood_control_error: 'You can''t send more than @number messages per hour. Please try again later.'
+forward_flood_control_error: "You can't send more than @number messages per hour. Please try again later."
 forward_entity_node: true
 forward_view_full: true
 forward_view_teaser: true

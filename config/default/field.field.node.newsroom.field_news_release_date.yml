@@ -12,7 +12,7 @@ field_name: field_news_release_date
 entity_type: node
 bundle: newsroom
 label: 'News Release Date'
-description: 'Select the Release Date (will display above article''s body text).'
+description: "Select the Release Date (will display above article's body text)."
 required: true
 translatable: false
 default_value:

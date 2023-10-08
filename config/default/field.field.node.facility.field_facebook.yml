@@ -12,7 +12,7 @@ field_name: field_facebook
 entity_type: node
 bundle: facility
 label: Facebook
-description: 'Optional. Enter URL of the facility''s facebook page (e.g., https://facebook.com/example).'
+description: "Optional. Enter URL of the facility's facebook page (e.g., https://facebook.com/example)."
 required: false
 translatable: true
 default_value: {  }
