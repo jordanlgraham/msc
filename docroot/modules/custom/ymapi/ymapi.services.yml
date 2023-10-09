@@ -1,0 +1,9 @@
+services:
+  logger.channel.ymapi:
+    parent: logger.channel_base
+    arguments: ['ymapi']
+
+  ymapi.client:
+    class: Drupal\ymapi\Plugin\ApiTools\Client
+    parent: apitools.client_base
+    arguments: ['ymapi']

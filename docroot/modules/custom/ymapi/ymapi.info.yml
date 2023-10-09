@@ -1,0 +1,7 @@
+name: Your Membership API
+type: module
+description: Provides functionality interacting with the Your Membership API. This is a developer module.
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - apitools
