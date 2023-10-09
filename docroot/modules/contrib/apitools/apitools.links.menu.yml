@@ -1,0 +1,2 @@
+apitools.client_config_form:
+  deriver: \Drupal\apitools\Menu\MenuLinkDeriver

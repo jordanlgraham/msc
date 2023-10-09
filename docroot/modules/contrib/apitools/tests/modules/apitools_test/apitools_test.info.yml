@@ -1,0 +1,16 @@
+name: 'API Tools Test'
+type: module
+description: 'API Tools supporting configuration and code for tests.'
+core_version_requirement: ^9 || ^10
+package: 'Other'
+hidden: true
+dependencies:
+  - drupal:rest
+  - drupal:apitools
+  - drupal:key
+  - drupal:simple_oauth
+
+# Information added by Drupal.org packaging script on 2023-05-31
+version: '2.0.0-alpha1'
+project: 'apitools'
+datestamp: 1685537964

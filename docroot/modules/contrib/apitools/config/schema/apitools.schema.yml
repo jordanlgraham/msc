@@ -1,0 +1,7 @@
+# Schema for the configuration files of the apitools module.
+
+apitools.client.*:
+  label: 'Client settings'
+  type: sequence
+  sequence:
+    type: string

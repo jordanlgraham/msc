@@ -1,0 +1,6 @@
+bypass bulk action workflow guards:
+  title: 'Bypass bulk action workflow guards'
+  description: 'Allows user to skip workflow guards for bulk actions. Requires regular entity access.'
+  restrict access: 'TRUE'
+permission_callbacks:
+  - 'plugin.manager.apitools_client::getAdminPermissions'

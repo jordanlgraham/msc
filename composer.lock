@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "deda2394134e749ac9b149f0833c19e5",
+    "content-hash": "a2b3b8526d6349b84a5a9767749fe8c4",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2624,6 +2624,63 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/adminimal_theme",
                 "issues": "https://www.drupal.org/project/issues/adminimal_theme"
+            }
+        },
+        {
+            "name": "drupal/apitools",
+            "version": "2.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/apitools.git",
+                "reference": "2.0.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/apitools-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "4765e7a7c174e39799054b90d1a3ff289571e8fe"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10",
+                "drupal/key": "^1.7"
+            },
+            "require-dev": {
+                "drupal/simple_oauth": "~3|~4|~5",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1685538252",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "asherry",
+                    "homepage": "https://www.drupal.org/user/941916"
+                },
+                {
+                    "name": "joelsteidl",
+                    "homepage": "https://www.drupal.org/user/658038"
+                },
+                {
+                    "name": "pixelwhip",
+                    "homepage": "https://www.drupal.org/user/275292"
+                }
+            ],
+            "description": "Reusable set of classes and services for APIs.",
+            "homepage": "http://drupal.org/project/apitools",
+            "support": {
+                "source": "https://git.drupalcode.org/project/apitools"
             }
         },
         {
@@ -5304,6 +5361,10 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "Anybody",
+                    "homepage": "https://www.drupal.org/user/291091"
+                },
                 {
                     "name": "Hydra",
                     "homepage": "https://www.drupal.org/user/647364"
@@ -14753,6 +14814,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/acquia_connector": 20,
+        "drupal/apitools": 15,
         "drupal/better_exposed_filters": 10,
         "drupal/block_field": 5,
         "drupal/config_split": 5,

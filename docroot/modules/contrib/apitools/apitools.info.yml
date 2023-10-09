@@ -1,0 +1,12 @@
+name: 'API Tools'
+type: module
+description: 'Plugins and classes to help build an API with models and controllers.'
+core_version_requirement: ^9 || ^10
+package: Other 
+dependencies:
+  - key:key
+
+# Information added by Drupal.org packaging script on 2023-05-31
+version: '2.0.0-alpha1'
+project: 'apitools'
+datestamp: 1685537964

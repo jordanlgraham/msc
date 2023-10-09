@@ -1,0 +1,54 @@
+services:
+  apitools.updater:
+    class: Drupal\apitools\Update\Updater
+    arguments:
+      - '@entity_type.manager'
+      - '@entity.definition_update_manager'
+      - '@entity_field.manager'
+    calls:
+      - [setContainer, ['@service_container']]
+  apitools.updater.field:
+    class: Drupal\apitools\Update\FieldUpdater
+    arguments:
+      - '@entity_type.manager'
+      - '@entity.definition_update_manager'
+      - '@entity_field.manager'
+      - '@database'
+      - '@entity.last_installed_schema.repository'
+      - '@config.storage'
+      - '@config.factory'
+  apitools.updater.content:
+    class: Drupal\apitools\Update\ContentUpdater
+    arguments:
+      [ '@entity_type.manager', '@entity.repository' ]
+  apitools.sync_manager_base:
+    class: Drupal\apitools\SyncManager
+    abstract: true
+    arguments:
+      - '@entity_type.manager'
+      - '@plugin.manager.apitools_client'
+      - '@queue'
+  apitools.client_base:
+    abstract: true
+    class: Drupal\apitools\Api\Client\ClientBase
+    factory: ['@?plugin.manager.apitools_client', 'load']
+  plugin.manager.apitools_client:
+    class: Drupal\apitools\ClientManager
+    parent: default_plugin_manager
+    arguments:
+      - '@http_handler_stack'
+      - '@http_client_factory'
+      - '@plugin.manager.apitools_client_resource'
+      - '@key.repository'
+      - '@tempstore.shared'
+      - '@entity_type.manager'
+    tags:
+      - { name: backend_overridable }
+  plugin.manager.apitools_client_resource:
+    class: Drupal\apitools\ClientResourceManager
+    parent: default_plugin_manager
+    arguments:
+      - '@class_resolver'
+      - '@entity_type.manager'
+    calls:
+      - [setContainer, ['@service_container']]
