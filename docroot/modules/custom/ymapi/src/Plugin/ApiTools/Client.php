@@ -79,7 +79,7 @@ class Client extends ClientBase {
     return parent::defaultConfiguration() + [
       'base_uri' => 'https://ws.yourmembership.com',
       'base_path' => 'Ams',
-      'auth_token_url' => 'https://zoom.us/oauth/token',
+      // 'auth_token_url' => '',
     ];
   }
 
