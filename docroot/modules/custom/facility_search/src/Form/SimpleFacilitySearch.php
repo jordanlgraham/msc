@@ -18,6 +18,13 @@ class SimpleFacilitySearch extends FormBase {
   protected $entityTypeManager;
 
   /**
+   * The geocoder service.
+   *
+   * @var \Drupal\geocoder\GeocoderInterface
+   */
+  protected $geocoder;
+
+  /**
    * SimpleFacilitySearch constructor.
    *
    * @param \Drupal\geocoder\GeocoderInterface $geocoder
