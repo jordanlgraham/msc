@@ -1,0 +1,39 @@
+uuid: 35a0941f-4ef9-4df9-8978-bc6915d54302
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c1fc49a4-af61-4dfa-9db2-be73055d564a'
+  module:
+    - block_content
+    - node
+    - system
+  theme:
+    - stable9
+id: stable9_paypalppedonationblock
+theme: stable9
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'block_content:c1fc49a4-af61-4dfa-9db2-be73055d564a'
+settings:
+  id: 'block_content:c1fc49a4-af61-4dfa-9db2-be73055d564a'
+  label: 'PayPal PPE donation block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"
+  node_type:
+    id: node_type
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      page: page

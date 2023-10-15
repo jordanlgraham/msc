@@ -12,7 +12,7 @@ field_name: field_linkedin
 entity_type: node
 bundle: facility
 label: LinkedIn
-description: 'Optional. Enter URL of the facility''s LinkedIn page (e.g., https://linkedin.com/example).'
+description: "Optional. Enter URL of the facility's LinkedIn page (e.g., https://linkedin.com/example)."
 required: false
 translatable: true
 default_value: {  }

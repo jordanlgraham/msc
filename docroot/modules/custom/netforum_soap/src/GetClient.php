@@ -75,12 +75,13 @@ class GetClient {
 
   private function getClientFromLocalWSDL($type = self::XML) {
     try {
+      $path = \Drupal::service('extension.list.module')->getPathname('netforum_soap');
       if ($type === self::SSO) {
-        $wsdl = drupal_get_path('module', 'netforum_soap') . '/src/signon.xml';
+        $wsdl = $path . '/src/signon.xml';
         $client = new SoapClient($wsdl, array('trace' => 1));
       }
       else {
-        $wsdl = drupal_get_path('module', 'netforum_soap') . '/src/netForumXMLOnDemand.xml';
+        $wsdl = $path . '/src/netForumXMLOnDemand.xml';
         $client = new SoapClient($wsdl, array('trace' => 1));
       }
       return $client;

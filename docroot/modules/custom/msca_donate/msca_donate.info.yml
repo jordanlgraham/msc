@@ -1,5 +1,5 @@
 name: MSCA Donate
 type: module
 description: Donation block for MSCA
-core_version_requirement: ^8 || ^9
-package: MSCA
+core_version_requirement: ^9 || ^10
+package: MSC

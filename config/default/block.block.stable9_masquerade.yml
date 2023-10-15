@@ -1,0 +1,21 @@
+uuid: 42979cf5-61ae-4154-8260-6bf4269206d3
+langcode: en
+status: false
+dependencies:
+  module:
+    - masquerade
+  theme:
+    - stable9
+id: stable9_masquerade
+theme: stable9
+region: content
+weight: -10
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: Masquerade
+  label_display: visible
+  provider: masquerade
+  show_unmasquerade_link: false
+visibility: {  }

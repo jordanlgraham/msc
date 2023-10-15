@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - eu_cookie_compliance
+    - file
     - msca_access
 id: member
 label: Member
@@ -11,4 +12,5 @@ weight: 4
 is_admin: null
 permissions:
   - 'access gated content'
+  - 'delete own files'
   - 'display eu cookie compliance popup'

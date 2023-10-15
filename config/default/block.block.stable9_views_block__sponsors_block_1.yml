@@ -1,0 +1,28 @@
+uuid: 0777ee25-f36d-4492-9fa3-e86c067a135a
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.sponsors
+  module:
+    - block_class
+    - views
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: home-sponsors
+id: stable9_views_block__sponsors_block_1
+theme: stable9
+region: sidebar_first
+weight: -8
+provider: null
+plugin: 'views_block:sponsors-block_1'
+settings:
+  id: 'views_block:sponsors-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility: {  }

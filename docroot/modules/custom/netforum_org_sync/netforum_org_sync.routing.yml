@@ -8,4 +8,3 @@ netforum_org_sync.org_sync_form:
     _permission: 'access administration pages'
   options:
     _admin_route: TRUE
-

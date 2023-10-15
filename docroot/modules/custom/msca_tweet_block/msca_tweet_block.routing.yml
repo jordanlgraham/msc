@@ -1,7 +1,0 @@
-msca_tweet_block.twitter_form:
-  path: '/admin/msca_tweet_block/form/twitter'
-  defaults:
-    _form: '\Drupal\msca_tweet_block\Form\TwitterForm'
-    _title: 'TwitterForm'
-  requirements:
-    _access: 'TRUE'

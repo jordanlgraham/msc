@@ -1,0 +1,44 @@
+uuid: 6cb21fac-d1e2-4350-9c60-c16b1daa0d58
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_class
+    - facility_search
+    - node
+    - system
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: sidebar-block
+id: stable9_findafacility
+theme: stable9
+region: sidebar_second
+weight: -14
+provider: null
+plugin: facility_search
+settings:
+  id: facility_search
+  label: 'Find a Facility'
+  label_display: visible
+  provider: facility_search
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      newsletter_article: newsletter_article
+      newsroom: newsroom
+      page: page
+      resources: resources
+      scholarships: scholarships
+      vendor: vendor
+      video: video
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ppe-donations-massachusetts-nursing-homes\r\n/ppe"

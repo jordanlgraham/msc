@@ -15,7 +15,7 @@ field_name: field_related_content
 entity_type: node
 bundle: video
 label: 'Related Content'
-description: 'Select up to 3 nodes of related content (e.g., events, resources, articles). These will display beneath the main body text. Enter part of the node title and autocomplete will suggest possible options. Tip: if you don''t see a node you need, make sure it is published.'
+description: "Select up to 3 nodes of related content (e.g., events, resources, articles). These will display beneath the main body text. Enter part of the node title and autocomplete will suggest possible options. Tip: if you don't see a node you need, make sure it is published."
 required: false
 translatable: true
 default_value: {  }

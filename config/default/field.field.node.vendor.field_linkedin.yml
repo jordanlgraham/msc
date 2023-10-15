@@ -12,7 +12,7 @@ field_name: field_linkedin
 entity_type: node
 bundle: vendor
 label: LinkedIn
-description: 'Enter full URL for vendor''s LinkedIn page (e.g., https://www.linkedin.com/in/example).'
+description: "Enter full URL for vendor's LinkedIn page (e.g., https://www.linkedin.com/in/example)."
 required: false
 translatable: true
 default_value: {  }

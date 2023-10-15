@@ -12,7 +12,7 @@ field_name: field_facebook
 entity_type: node
 bundle: vendor
 label: Facebook
-description: 'Enter full URL for vendor''s Facebook page (e.g., https://www.facebook.com/example).'
+description: "Enter full URL for vendor's Facebook page (e.g., https://www.facebook.com/example)."
 required: false
 translatable: false
 default_value: {  }

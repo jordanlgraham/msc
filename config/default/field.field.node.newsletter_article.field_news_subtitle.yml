@@ -23,7 +23,7 @@ field_name: field_news_subtitle
 entity_type: node
 bundle: newsletter_article
 label: 'News Subtitle'
-description: 'Optional. Add subtitle to be displayed beneath article''s title.'
+description: "Optional. Add subtitle to be displayed beneath article's title."
 required: false
 translatable: true
 default_value: {  }

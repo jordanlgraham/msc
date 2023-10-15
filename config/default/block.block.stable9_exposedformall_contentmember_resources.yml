@@ -1,0 +1,33 @@
+uuid: 20ecca37-a1ad-4999-9cae-19e3c8391feb
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: views-search
+id: stable9_exposedformall_contentmember_resources
+theme: stable9
+region: content
+weight: -17
+provider: null
+plugin: 'views_exposed_filter_block:all_content-member_resources'
+settings:
+  id: 'views_exposed_filter_block:all_content-member_resources'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /member-resources

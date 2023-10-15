@@ -15,7 +15,7 @@
    */
   Drupal.behaviors.moduleFilterModules = {
     attach: function (context, settings) {
-      var $input = $('input.table-filter-text', context).once('module-filter');
+      var $input = $(once('module-filter', 'input.table-filter-text', context));
       if ($input.length) {
         ModuleFilter.input = $input;
         ModuleFilter.selector = 'tbody tr';
@@ -171,4 +171,4 @@
     }
   };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

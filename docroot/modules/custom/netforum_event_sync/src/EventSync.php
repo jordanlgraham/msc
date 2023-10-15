@@ -9,12 +9,10 @@ use Psr\Log\LoggerInterface;
 use Drupal\netforum_soap\GetClient;
 use Drupal\Core\State\StateInterface;
 use Drupal\geocoder\GeocoderInterface;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 class EventSync {
@@ -36,6 +34,11 @@ class EventSync {
    */
   protected $node_storage;
 
+  /**
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
+  
   /**
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
@@ -99,6 +102,7 @@ class EventSync {
     $query->condition('status', 1);
     $query->condition('type', 'education_events');
     $query->condition('field_event_key', $evt_key);
+    $query->accessCheck(FALSE);
     $entity_ids = $query->execute();
 
     //This function simply returns the first node found.
@@ -229,7 +233,7 @@ class EventSync {
     $netforum_service = $this->get_client;
     $response_headers = $netforum_service->getResponseHeaders();
     $client = $netforum_service->getClient();
-    
+
     if(!empty($event_types)) {
       // Build an array of events keyed by Event Key <evt_key> so we can
       // save or update them.
@@ -319,7 +323,7 @@ class EventSync {
     $netforum_service = $this->get_client;
     $response_headers = $netforum_service->getResponseHeaders();
     $client = $netforum_service->getClient();
-    
+
     if(!empty($event_types)) {
       // Build an array of events keyed by Event Key <evt_key> so we can
       // save or update them.

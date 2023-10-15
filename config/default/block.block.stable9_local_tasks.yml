@@ -1,0 +1,33 @@
+uuid: 695f53c8-113c-431a-93aa-ec6a3440ff22
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - stable9
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: stable9_local_tasks
+theme: stable9
+region: content
+weight: -21
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      content_author: content_author
