@@ -1,7 +1,5 @@
 name: msca
-recipe: drupal9
-config:
-  php: '8.0'
+recipe: drupal10
 proxy:
   appserver:
     - msc.lndo.site
@@ -9,7 +7,7 @@ proxy:
 # add additional auxiliary services
 services:
   appserver:
-    type: php:8.1
+    type: php:8.2
     webroot: docroot
     xdebug: true
     config:
