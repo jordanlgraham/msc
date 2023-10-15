@@ -22,7 +22,7 @@ class SimpleFacilitySearch extends FormBase {
    *
    * @var \Drupal\geocoder\GeocoderInterface
    */
-  protected $geocoder;
+  protected $geocoder;$
 
   /**
    * SimpleFacilitySearch constructor.
