@@ -78,6 +78,20 @@ abstract class DateBase extends WebformElementBase {
     // Parse #default_value date input format.
     $this->parseInputFormat($element, '#default_value');
 
+    // Unset date properties that are not valid dates (i.e. tokens)
+    // to prevent date parsing errors via DateTimePlus::createFromTimestamp.
+    $date_properties = [
+      '#date_date_min',
+      '#date_min',
+      '#date_date_max',
+      '#date_max',
+    ];
+    foreach ($date_properties as $date_property) {
+      if (isset($element[$date_property]) && strtotime($element[$date_property]) === FALSE) {
+        unset($element[$date_property]);
+      }
+    }
+
     // Set date min/max attributes.
     // This overrides extra attributes set via Datetime::processDatetime.
     // @see \Drupal\Core\Datetime\Element\Datetime::processDatetime
