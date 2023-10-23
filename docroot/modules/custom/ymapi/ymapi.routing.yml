@@ -4,5 +4,12 @@ ymapi.example:
     _title: 'Example'
     _controller: '\Drupal\ymapi\Controller\YmapiController::build'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer site configuration'
 
+ymapi.test:
+  path: '/ymapi/test'
+  defaults:
+    _title: 'Test controller'
+    _controller: '\Drupal\ymapi\Controller\YmapiTestController::build'
+  requirements:
+    _permission: 'administer site configuration'
