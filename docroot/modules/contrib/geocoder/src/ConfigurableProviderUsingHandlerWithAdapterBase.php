@@ -11,9 +11,9 @@ use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\geocoder\Traits\ConfigurableProviderTrait;
-use Http\Client\HttpClient;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Http\Client\HttpClient;
 
 /**
  * Provides a base class for providers using handlers with HTTP adapter.

@@ -191,9 +191,9 @@ function _insert_media_get_view_modes() {
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function insert_media_field_widget_form_alter(array &$element, FormStateInterface $form_state, array $context) {
+function insert_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context) {
   /** @var \Drupal\Core\Field\WidgetInterface $plugin */
   $plugin = $context['widget'];
   $pluginId = $plugin->getPluginId();

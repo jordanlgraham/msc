@@ -13,7 +13,7 @@ _core:
   default_config_hash: pGdM2vjDMUs66wCBOJmTEJrkZC8jYLrkNYNHuWrxaTY
 name: 'File Browser'
 type: file_browser
-description: 'An example Custom Content type that uses File Browser''s Entity Browser and EntityReferenceImageFormatter.'
+description: "An example Custom Content type that uses File Browser's Entity Browser and EntityReferenceImageFormatter."
 help: ''
 new_revision: false
 preview_mode: 1

@@ -259,6 +259,8 @@ class OrgSyncForm extends FormBase {
       if (empty($orgs)) {
         return TRUE;
       }
+      // Use usort to sort the $org array by 'cst_name_cp'.
+      usort($orgs, [self::class, 'compareByCstNameCp']);
     }
     catch (\Exception $exception) {
       $msg = $exception->getMessage();
@@ -300,5 +302,17 @@ class OrgSyncForm extends FormBase {
       $context['finished'] = $context['sandbox'][$sandbox_key]['pointer']/$context['sandbox'][$sandbox_key]['count'];
     }
   }
+
+  /**
+   * Custom comparison function to sort by 'cst_name_cp'.
+   *
+   * @param array $a
+   * @param array $b
+   * @return int
+   */
+  public static function compareByCstNameCp($a, $b) {
+    return strcmp($a['cst_name_cp'], $b['cst_name_cp']);
+  }
+
 
 }

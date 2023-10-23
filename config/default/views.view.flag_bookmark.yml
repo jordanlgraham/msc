@@ -34,7 +34,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          plugin_id: node_type
+          plugin_id: entity_bundle:node
           label: Type
           exclude: false
           alter:

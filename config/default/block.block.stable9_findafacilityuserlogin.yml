@@ -1,0 +1,20 @@
+uuid: 33499fa3-2cdb-4f13-b794-fad788787b19
+langcode: en
+status: true
+dependencies:
+  module:
+    - facility_search
+  theme:
+    - stable9
+id: stable9_findafacilityuserlogin
+theme: stable9
+region: sidebar_first
+weight: -6
+provider: null
+plugin: facility_search_login
+settings:
+  id: facility_search_login
+  label: 'Find a Facility/User login'
+  label_display: '0'
+  provider: facility_search
+visibility: {  }

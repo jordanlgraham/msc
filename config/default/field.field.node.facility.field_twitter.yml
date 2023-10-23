@@ -12,7 +12,7 @@ field_name: field_twitter
 entity_type: node
 bundle: facility
 label: Twitter
-description: 'Optional. Enter URL of the facility''s twitter page (e.g., https://twitter.com/example).'
+description: "Optional. Enter URL of the facility's twitter page (e.g., https://twitter.com/example)."
 required: false
 translatable: true
 default_value: {  }

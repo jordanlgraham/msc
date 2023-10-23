@@ -10,47 +10,6 @@ use Drupal\migrate\Plugin\MigrationPluginManagerInterface;
 class MigrateInsertWidgetSettings {
 
   /**
-   * Determines whether the standalone insert settings migration can be skipped.
-   *
-   * We migrate Insert third party settings as part of Drupal core's
-   * "d7_field_instance_widget_settings" migration, with a
-   * migration_plugins_alter and with insert_migrate_prepare_row hook
-   * implementation. But before we remove the preexisting, standalone insert
-   * settings migration, we have to check if the map table of
-   * 'd7_field_instance_widget_insert_settings' is empty.
-   *
-   * @return bool
-   *   Whether the standalone insert settings migration can be skipped.
-   */
-  public static function standaloneMigrationIsOmittable(): bool {
-    $plugin_manager = \Drupal::service('plugin.manager.migration');
-    assert($plugin_manager instanceof MigrationPluginManagerInterface);
-    $standalone_migration = $plugin_manager->createStubMigration([
-      'id' => 'd7_field_instance_widget_insert_settings',
-      'source' => ['plugin' => 'd7_field_instance_per_form_display'],
-      'destination' => ['plugin' => 'null'],
-    ]);
-
-    // The map table of 'd7_field_instance_widget_insert_settings' is not empty.
-    if ($standalone_migration->getIdMap()->processedCount() > 0) {
-      @trigger_error(
-        "The standalone Insert settings migration 'd7_field_instance_widget_insert_settings' is deprecated in insert:8.x-2.0-beta4 and is removed in insert:8.x-3.0. Insert settings migrations are merged into Drupal core's 'd7_field_instance_widget_settings' migration. See https://drupal.org/node/123",
-        E_USER_DEPRECATED
-      );
-      return FALSE;
-    }
-
-    // The map table of 'd7_field_instance_widget_insert_settings' is empty,
-    // which means:
-    // - It wasn't ever executed.
-    // - It was rolled back.
-    // - There are no Drupal 7 fields in the source database.
-    // All of the above means that the standalone insert settings migration can
-    // be ignored.
-    return TRUE;
-  }
-
-  /**
    * Converts D7 field insert widget settings to Drupal 9 third party settings.
    *
    * @param array $widget_settings

@@ -25,15 +25,13 @@ settings:
       - sourceEditing
       - drupalMedia
   plugins:
-    ckeditor5_sourceEditing:
-      allowed_tags: {  }
+    ckeditor5_imageResize:
+      allow_resize: true
     ckeditor5_list:
       reversed: true
       startIndex: true
-    ckeditor5_imageResize:
-      allow_resize: true
-    media_media:
-      allow_view_mode_override: true
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
     editor_advanced_link_link:
       enabled_attributes:
         - aria-label
@@ -42,6 +40,8 @@ settings:
         - rel
         - target
         - title
+    media_media:
+      allow_view_mode_override: true
 image_upload:
   status: false
   scheme: public

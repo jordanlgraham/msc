@@ -4,5 +4,5 @@ external-sso:
     js/nfsso.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupalSettings

@@ -1,5 +1,5 @@
 name: MSCA Constant Contact
 type: module
 description: MSCA Constant Contact integration.
-core_version_requirement: ^8 || ^9
-package: MSCA
+core_version_requirement: ^9 || ^10
+package: MSC

@@ -1,0 +1,31 @@
+uuid: ef792e7c-9acf-4fdb-ac44-6d0297643647
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - block_class
+    - system
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: 'site-footer-left col-md-6'
+_core:
+  default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
+id: stable9_footer
+theme: stable9
+region: footer
+weight: -21
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Footer menu'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

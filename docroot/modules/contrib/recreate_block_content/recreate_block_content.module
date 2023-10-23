@@ -69,7 +69,7 @@ function recreate_block_content_rebuild() {
 function recreate_block_content_title($content) {
   $config_manager = \Drupal::service('config.manager');
   $config_name = implode(':', $content);
-  $dependents = $config_manager->findConfigEntityDependents('content', [$config_name]);
+  $dependents = $config_manager->findConfigEntityDependencies('content', [$config_name]);
 
   $title = NULL;
   // This is to set a preference on what will provide the title.

@@ -116,6 +116,13 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   protected $fileSystem;
 
   /**
+   * Webform element types.
+   *
+   * @var array
+   */
+  protected $elementTypes;
+
+  /**
    * Constructs a WebformSubmissionExportImport object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -789,10 +796,9 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       fwrite($handle, $temp_file_contents);
       $temp_file_meta_data = stream_get_meta_data($handle);
       $temp_file_path = $temp_file_meta_data['uri'];
-      $temp_file_size = filesize($temp_file_path);
 
       // Mimic Symfony and Drupal's upload file handling.
-      $temp_file_info = new UploadedFile($temp_file_path, basename($new_file_uri), NULL, $temp_file_size);
+      $temp_file_info = new UploadedFile($temp_file_path, basename($new_file_uri));
       $webform_element_key = $element_plugin->getLabel($element);
       $new_file = _webform_submission_export_import_file_save_upload_single($temp_file_info, $webform_element_key, $file_upload_validators, $file_destination);
       if ($new_file) {
@@ -1169,19 +1175,19 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   }
 
   /**
-   * Export value so that it can be editted in Excel and Google Sheets.
+   * Export value so that it can be edited in Excel and Google Sheets.
    *
    * @param string $value
    *   A value.
    *
    * @return string
-   *   A value that it can be editted in Excel and Googl Sheets.
+   *   A value that it can be edited in Excel and Google Sheets.
    */
   protected function exportValue($value) {
     // Prevent Excel and Google Sheets from convert string beginning with
     // + or - into formulas by adding a space before the string.
     // @see https://stackoverflow.com/questions/4438589/bypass-excel-csv-formula-conversion-on-fields-starting-with-or
-    if (is_string($value) && strpos($value, '+') === 0 || strpos($value, '-') === 0) {
+    if (is_string($value) && in_array(substr($value, 0, 1), ['+', '-'], TRUE)) {
       return ' ' . $value;
     }
     else {

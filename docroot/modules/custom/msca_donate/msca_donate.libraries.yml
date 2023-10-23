@@ -9,6 +9,6 @@ donate:
     js/donate.js: {minified: false}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupalSettings
     - msca_donate/paypal

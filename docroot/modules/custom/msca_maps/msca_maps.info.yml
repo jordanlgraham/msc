@@ -1,7 +1,7 @@
 name: MSCA Maps
 type: module
 description: Provides mapping-related functionality for the MA Senior Care Association site.
-package: MSCA
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
+package: MSC
 dependencies:
   - key
