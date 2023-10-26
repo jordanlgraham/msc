@@ -1,0 +1,4 @@
+services:
+  msc_your_membership.ymapi_utils:
+    class: Drupal\msc_your_membership\YmApiUtils
+    arguments: ['@key.repository', '@ymapi.client', '@config.factory', '@datetime.time', '@messenger']

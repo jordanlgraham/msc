@@ -1,0 +1,8 @@
+name: MSC Your Membership
+type: module
+description: Integrates the MSC site with Your Membership via ymapi module.
+package: MSC
+core_version_requirement: ^9 || ^10
+dependencies:
+  - ymapi
+  - apitools

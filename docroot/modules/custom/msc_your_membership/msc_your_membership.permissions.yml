@@ -1,0 +1,4 @@
+administer msc_your_membership configuration:
+  title: 'Administer msc_your_membership configuration'
+  description: 'Optional description.'
+  restrict access: true

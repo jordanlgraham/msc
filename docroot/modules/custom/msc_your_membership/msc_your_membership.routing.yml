@@ -1,0 +1,8 @@
+msc_your_membership.test:
+  path: '/msc-ym/test'
+  defaults:
+    _title: 'Test'
+    _controller: '\Drupal\msc_your_membership\Controller\MscYourMembershipController::build'
+  requirements:
+    _permission: 'access content'
+
