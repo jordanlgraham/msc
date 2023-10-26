@@ -90,6 +90,7 @@ module:
   metatag_open_graph: 0
   module_filter: 0
   msc_button_link_social: 0
+  msc_your_membership: 0
   msca_access: 0
   msca_constant_contact: 0
   msca_discourse: 0
@@ -141,6 +142,7 @@ module:
   webform_node: 0
   webform_ui: 0
   xmlsitemap: 0
+  ymapi: 0
   forum: 1
   menu_link_content: 1
   externalauth: 10
