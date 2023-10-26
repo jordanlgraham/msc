@@ -4,6 +4,7 @@ namespace Drupal\ymapi\Plugin\ApiTools;
 
 use Drupal\Component\Datetime\Time;
 use Drupal\key\KeyRepositoryInterface;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Component\Serialization\Json;
 use Drupal\apitools\Api\Client\ClientBase;
 use Drupal\apitools\ClientManagerInterface;
@@ -79,7 +80,7 @@ class Client extends ClientBase {
     return parent::defaultConfiguration() + [
       'base_uri' => 'https://ws.yourmembership.com',
       'base_path' => 'Ams',
-      // 'auth_token_url' => '',
+      'https://ws.yourmembership.com/Ams/Authenticate' => '',
     ];
   }
 
@@ -89,7 +90,7 @@ class Client extends ClientBase {
   protected function auth() {
     if ($access_token = $this->ensureAccessToken()) {
       $this->options->set('headers', [
-        'authorization' => 'Bearer ' . $access_token,
+        'x-ss-id' => $access_token,
       ]);
     }
 
@@ -100,27 +101,60 @@ class Client extends ClientBase {
    * Ensures the request is made with an access token.
    *
    * @return string
-   *   A zoom access token.
+   *   A Your Membership access token.
    */
   private function ensureAccessToken() {
     if (!$this->getToken('access_token')) {
-      $account_id = $this->getConfigValue('account_id');
-      $client_id = $this->getConfigValue('client_id');
-      $client_secret = $this->getConfigValue('client_secret');
-      $options = [
-        'auth' => [$client_id, $client_secret],
-        'form_params' => [
-          'account_id' => $account_id,
-          'grant_type' => 'account_credentials',
-        ],
+      $payload = [
+        'ClientID' => $this->getConfigValue('account_id'),
+        'Username' => $this->getConfigValue('client_id'),
+        'Password' => $this->getConfigValue('client_secret'),
+        'UserType' => 'Admin',
       ];
+
+      $headers = [
+        'Authorization' => 'Bearer Token',
+        'Content-Type' => 'application/json',
+        'Accept' => '*/*',
+        'Accept-Encoding' => 'gzip, deflate, br',
+        'Connection' => 'keep-alive',
+      ];
+
+      $options = [
+        'body' => json_encode($payload),
+        'headers' => $headers
+      ];
+
       $response_data = $this->request('POST', $this->getConfigValue('auth_token_url'), $options);
-      if (!empty($response_data['access_token']) && !empty($response_data['token_type']) && $response_data['token_type'] === 'bearer') {
-        $this->setTokenExpiresIn('access_token', $response_data['expires_in']);
-        $this->setToken('access_token', $response_data['access_token']);
+
+      if (!empty($response_data['SessionId']) && !empty($response_data['FailedLoginReason']) && $response_data['FailedLoginReason'] === 'None') {
+        $this->setToken('x-ss-id', $response_data['SessionId']);
       }
     }
-    return $this->getToken('access_token');
+    return $this->getToken('x-ss-id');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function request($method, $path, $options = []) {
+    // Make the HTTP request using dynamic method invocation.
+    $url = UrlHelper::isExternal($path) ? $path : $this->url($path);
+    // If $this->options->parameters has 'headers' element, add it to $options['headers'].
+    if ($this->options->has('headers')) {
+      $options['headers'] = $this->options->get('headers') + [
+        'Accept' => '*/*',
+        'Connection' => 'keep-alive'
+      ];
+    }
+    try {
+      $response = $this->httpClient->{$method}($url, $options);
+      $response = $response->getBody()->getContents();
+    } catch (\Exception $e) {
+      return $this->onRequestError($e);
+    }
+
+    return $this->postRequest($response);
   }
 
   /**
@@ -153,5 +187,12 @@ class Client extends ClientBase {
       return FALSE;
     }
     return $this->ensureAccessToken();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function get($path, $options = []) {
+    return $this->auth()->request('get', $path, $options);
   }
 }
