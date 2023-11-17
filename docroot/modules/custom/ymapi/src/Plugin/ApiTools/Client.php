@@ -2,6 +2,7 @@
 
 namespace Drupal\ymapi\Plugin\ApiTools;
 
+use GuzzleHttp\Psr7\Request;
 use Drupal\Component\Datetime\Time;
 use Drupal\key\KeyRepositoryInterface;
 use Drupal\Component\Utility\UrlHelper;
@@ -80,7 +81,10 @@ class Client extends ClientBase {
     return parent::defaultConfiguration() + [
       'base_uri' => 'https://ws.yourmembership.com',
       'base_path' => 'Ams',
-      'https://ws.yourmembership.com/Ams/Authenticate' => '',
+      'headers' => [
+        'Accept' => '*/*',
+        'Connection' => 'keep-alive',
+      ],
     ];
   }
 
@@ -89,12 +93,9 @@ class Client extends ClientBase {
    */
   protected function auth() {
     if ($access_token = $this->ensureAccessToken()) {
-      $this->options->set('headers', [
-        'x-ss-id' => $access_token,
-      ]);
+      return $access_token;
     }
 
-    return $this;
   }
 
   /**
@@ -104,7 +105,7 @@ class Client extends ClientBase {
    *   A Your Membership access token.
    */
   private function ensureAccessToken() {
-    if (!$this->getToken('access_token')) {
+    if (!$this->getToken('x-ss-id')) {
       $payload = [
         'ClientID' => $this->getConfigValue('account_id'),
         'Username' => $this->getConfigValue('client_id'),
@@ -118,6 +119,7 @@ class Client extends ClientBase {
         'Accept' => '*/*',
         'Accept-Encoding' => 'gzip, deflate, br',
         'Connection' => 'keep-alive',
+        'Accept' => 'application/json',
       ];
 
       $options = [
@@ -130,6 +132,11 @@ class Client extends ClientBase {
       if (!empty($response_data['SessionId']) && !empty($response_data['FailedLoginReason']) && $response_data['FailedLoginReason'] === 'None') {
         $this->setToken('x-ss-id', $response_data['SessionId']);
       }
+    } else {
+      // Add the token to the headers.
+      $this->options->add([
+        'x-ss-id' => $this->getToken('x-ss-id'),
+      ]);
     }
     return $this->getToken('x-ss-id');
   }
@@ -140,12 +147,16 @@ class Client extends ClientBase {
   public function request($method, $path, $options = []) {
     // Make the HTTP request using dynamic method invocation.
     $url = UrlHelper::isExternal($path) ? $path : $this->url($path);
-    // If $this->options->parameters has 'headers' element, add it to $options['headers'].
+    // If $this->options has 'headers' element, add it to $options['headers'].
     if ($this->options->has('headers')) {
       $options['headers'] = $this->options->get('headers') + [
         'Accept' => '*/*',
-        'Connection' => 'keep-alive'
+        'Accept-Encoding' => 'gzip, deflate, br',
+        'Connection' => 'keep-alive',
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json',
       ];
+      $options['authorization'] = 'Bearer ' . $this->getToken('x-ss-id');
     }
     try {
       $response = $this->httpClient->{$method}($url, $options);
@@ -193,6 +204,24 @@ class Client extends ClientBase {
    * {@inheritdoc}
    */
   public function get($path, $options = []) {
-    return $this->auth()->request('get', $path, $options);
+    $token = $this->auth();
+    $client = new \GuzzleHttp\Client();
+    $headers = [
+      'x-ss-id' => $token,
+      'Accept' => 'application/json',
+      'Content-Type' => 'application/json'
+    ];
+
+    // Build URL using $options['parameters'].
+    $url = UrlHelper::isExternal($path) ? $path : $this->url($path);
+    $query = UrlHelper::buildQuery($options['parameters']);
+    $url .= '?' . $query;
+    $request = new Request('GET', $url, $headers);
+    $res = $client->sendAsync($request)->wait();
+    $json = (string) $res->getBody();
+    $data = json_decode($json, TRUE);
+
+    return $data;
+
   }
 }
