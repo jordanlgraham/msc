@@ -1,0 +1,8 @@
+account_id: '131001'
+client_id: d2478bc1-aa2a-491a-aee4-1e3779062b05
+client_secret: your_membership_client_secret
+event_secret_token: ''
+event_verification_token: ''
+base_uri: 'https://ws.yourmembership.com'
+base_path: /Ams/131001
+auth_token_url: 'https://ws.yourmembership.com/Ams/Authenticate'
