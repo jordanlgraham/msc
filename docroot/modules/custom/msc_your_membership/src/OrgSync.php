@@ -16,29 +16,9 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 class OrgSync {
 
   /**
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * @var \Drupal\Core\Entity\EntityStorageInterface
-   */
-  protected $termStorage;
-
-  /**
    * @var \Drupal\Core\Config\ImmutableConfig
    */
   protected $config;
-
-  /**
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected $logger;
-
-  /**
-   * @var \Drupal\netforum_soap\GetClient
-   */
-  protected $get_client;
 
   /**
    * @var \Drupal\ymapi\Plugin\ApiTools\Client
@@ -46,14 +26,29 @@ class OrgSync {
   protected $client;
 
   /**
+   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   */
+  protected $dateFormatter;
+
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
+  protected $logger;
+
+  /**
+   * @var \Drupal\Core\Entity\EntityStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
    * @var \Drupal\Core\State\StateInterface
    */
   protected $state;
 
   /**
-   * @var \Drupal\Core\Datetime\DateFormatterInterface
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
-  protected $dateFormatter;
+  protected $termStorage;
 
   /**
    * @var \Drupal\msc_your_membership\YMApiUtils
@@ -63,20 +58,15 @@ class OrgSync {
   const CRON_STATE_KEY = 'msc_your_membership.org_sync';
   const DATE_FORMAT = 'm/d/Y H:i:s A';
 
-  /**
-   * @var \Drupal\netforum_soap\SoapHelper
-   */
-  private $helper;
-
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, Client $client, LoggerInterface $logger, DateFormatterInterface $dateFormatter, StateInterface $state, YMApiUtils $ymapi_utils, ConfigFactoryInterface $configFactory) {
-    $this->nodeStorage = $entityTypeManager->getStorage('node');
-    $this->client = $client;
-    $this->logger = $logger;
-    $this->dateFormatter = $dateFormatter;
-    $this->state = $state;
-    $this->ymApiUtils = $ymapi_utils;
+  public function __construct(ConfigFactoryInterface $configFactory, Client $client, DateFormatterInterface $dateFormatter, LoggerInterface $logger, EntityTypeManagerInterface $entityTypeManager, StateInterface $state, YMApiUtils $ymapi_utils) {
     $this->config = $configFactory->get('msc_your_membership.organizationsync');
+    $this->client = $client;
+    $this->dateFormatter = $dateFormatter;
+    $this->logger = $logger;
+    $this->nodeStorage = $entityTypeManager->getStorage('node');
+    $this->state = $state;
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
+    $this->ymApiUtils = $ymapi_utils;
   }
 
   /**

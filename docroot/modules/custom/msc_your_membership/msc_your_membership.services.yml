@@ -7,7 +7,7 @@ services:
     arguments: ['@entity_type.manager', '@ymapi.client', '@logger.channel.msc_your_membership', '@date.formatter', '@state', '@geocoder', '@msc_your_membership.ymapi_utils']
   msc_your_membership.org_sync:
     class: Drupal\msc_your_membership\OrgSync
-    arguments: ['@entity_type.manager', '@ymapi.client', '@logger.channel.msc_your_membership', '@date.formatter', '@state', '@msc_your_membership.ymapi_utils', '@config.factory']
+    arguments: ['@config.factory', '@ymapi.client', '@date.formatter', '@logger.channel.msc_your_membership', '@entity_type.manager', '@state', '@msc_your_membership.ymapi_utils']
   logger.channel.msc_your_membership:
         parent: logger.channel_base
         arguments: ['msc_your_membership']
