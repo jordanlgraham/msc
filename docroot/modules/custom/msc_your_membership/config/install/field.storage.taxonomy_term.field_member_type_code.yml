@@ -1,16 +1,16 @@
-uuid: a3a34f59-7881-43c0-a1f4-7bd5dc77aaea
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-id: taxonomy_term.field_member_type_id
-field_name: field_member_type_id
+id: taxonomy_term.field_member_type_code
+field_name: field_member_type_code
 entity_type: taxonomy_term
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1
