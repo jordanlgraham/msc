@@ -2,3 +2,9 @@ services:
   msc_your_membership.ymapi_utils:
     class: Drupal\msc_your_membership\YmApiUtils
     arguments: ['@key.repository', '@ymapi.client', '@config.factory', '@datetime.time', '@messenger']
+  msc_your_membership.event_sync:
+    class: Drupal\msc_your_membership\EventSync
+    arguments: ['@entity_type.manager', '@ymapi.client', '@logger.channel.msc_your_membership', '@date.formatter', '@state', '@geocoder', '@country_manager', '@msc_your_membership.ymapi_utils']
+  logger.channel.msc_your_membership:
+        parent: logger.channel_base
+        arguments: ['msc_your_membership']
