@@ -1,0 +1,20 @@
+uuid: a3a34f59-7881-43c0-a1f4-7bd5dc77aaea
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_member_type_id
+field_name: field_member_type_id
+entity_type: taxonomy_term
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
