@@ -63,6 +63,51 @@ class YmApiUtils {
   }
 
   /**
+   * Gets all of the events from YM.
+   *
+   * @return array
+   *   An array of events.
+   */
+  public function getEvents() {
+    $events = [];
+    $notDone = TRUE;
+    $pageNumber = 1;
+    while ($notDone) {
+      $eventBatch = $this->ymApiClient->get('/Events', [
+        'parameters' => [
+          'PageNumber' => $pageNumber,
+          'PageSize' => 100,
+        ]
+      ]);
+      // If $eventBatch['EventsList'] is not empty, merge with $events
+      // otherwise we're done.
+      if (!empty($eventBatch['EventsList'])) {
+        // Iterate over $eventBatch['EventsList'] and add to $events.
+        foreach ($eventBatch['EventsList'] as $event) {
+          $newEvents[$event['EventId']] = $event;
+        }
+        $events = array_merge($events, $newEvents);
+        $pageNumber++;
+      }
+      else {
+        $notDone = FALSE;
+      }
+    }
+
+    return $events;
+  }
+
+  /**
+   * Gets all of the event categories from YM.
+   *
+   * @return array
+   *   An array of event categories.
+   */
+  public function getEventCategories() {
+    return $this->ymApiClient->get('/EventCategories', []);
+  }
+
+  /**
    * Creates a meeting in Zoom.
    *
    * @param object $entity
