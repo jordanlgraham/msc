@@ -1,0 +1,6 @@
+msc_your_membership.org_sync_config:
+  title: Organization Sync Config Form
+  description: Configure MSC Your Membership Organization Sync
+  parent: system.admin_config_services
+  route_name: msc_your_membership.org_sync_config
+  weight: 10

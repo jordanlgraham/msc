@@ -1,0 +1,18 @@
+msc_your_membership.sync_settings:
+  type: config_object
+  label: 'Your Membership Sync Settings'
+  mapping:
+    org_types:
+      type: sequence
+      label: 'Organization Type(s)'
+      sequence:
+        - type: string
+    start_date:
+      type: string
+      label: 'Sync Start Date'
+    end_date:
+      type: string
+      label: 'Sync End Date'
+    sync_all:
+      type: boolean
+      label: 'Sync Everything'
