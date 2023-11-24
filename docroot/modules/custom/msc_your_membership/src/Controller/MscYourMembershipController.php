@@ -47,21 +47,40 @@ class MscYourMembershipController extends ControllerBase {
    * Builds the response.
    */
   public function build() {
-
-    $client = \Drupal::service('ymapi.client');
-
-    try {
-      $client->get('Events', [
-        'parameters' => [
-          'PageNumber' => 1,
-          'PageSize' => 100,
-        ]
-      ]);
-      \Drupal::messenger()->addStatus(t('Success'));
-    } catch (RequestException $exception) {
-      // YM api already logs errors, but you could log more.
-      \Drupal::messenger()->addWarning(t('Something hasn\'t worked.'));
+    $ym_api_utils = \Drupal::service('msc_your_membership.ymapi_utils');
+    $event_categories = [];
+    $response = $ym_api_utils->getEventCategories();
+    if (!empty($event_categories['EventCategoryList'])) {
+      $event_categories = $response['EventCategoryList'];
+      // Process the event categories.
+      $tids = $ym_api_utils->loadOrCreateEventTermsByName($event_categories);
     }
+    // Render the event categories array as a table.
+    $build['event_categories'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('Event ID'),
+        $this->t('Event Name'),
+        $this->t('Event Start Date'),
+        $this->t('Event End Date'),
+      ],
+      '#rows' => $tids,
+    ];
+
+    // $client = \Drupal::service('ymapi.client');
+
+    // try {
+    //   $client->get('Events', [
+    //     'parameters' => [
+    //       'PageNumber' => 1,
+    //       'PageSize' => 100,
+    //     ]
+    //   ]);
+    //   \Drupal::messenger()->addStatus(t('Success'));
+    // } catch (RequestException $exception) {
+    //   // YM api already logs errors, but you could log more.
+    //   \Drupal::messenger()->addWarning(t('Something hasn\'t worked.'));
+    // }
 
     $build['content'] = [
       '#type' => 'item',
