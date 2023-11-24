@@ -348,19 +348,6 @@ class EventSync {
   /**
    * {@inheritdoc}
    */
-  public function getEventTypes() {
-    $term_data = [];
-    $vid = 'event_types';
-    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadTree($vid);
-    foreach ($terms as $term) {
-      $term_data[$term->tid] =  $term->name;
-    }
-    return $term_data;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getEventCategories() {
     $ym_api_utils = $this->ymApiUtils;
     $event_categories = [];
