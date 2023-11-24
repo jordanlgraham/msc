@@ -105,7 +105,10 @@ class Client extends ClientBase {
    *   A Your Membership access token.
    */
   private function ensureAccessToken() {
-    if (!$this->getToken('x-ss-id')) {
+    // Get the token_time from the tempstore or use now.
+    $token_time = $this->getToken('x-ss-id_time', 0) ?? 0;
+    // If the token is older than 3 minutes, get a new one.
+    if (!$this->getToken('x-ss-id') || $this->getTime()->getRequestTime() - $token_time > 180) {
       $payload = [
         'ClientID' => $this->getConfigValue('account_id'),
         'Username' => $this->getConfigValue('client_id'),
@@ -131,13 +134,10 @@ class Client extends ClientBase {
 
       if (!empty($response_data['SessionId']) && !empty($response_data['FailedLoginReason']) && $response_data['FailedLoginReason'] === 'None') {
         $this->setToken('x-ss-id', $response_data['SessionId']);
+        $this->setToken('x-ss-id_time', $this->getTime()->getRequestTime());
       }
-    } else {
-      // Add the token to the headers.
-      $this->options->add([
-        'x-ss-id' => $this->getToken('x-ss-id'),
-      ]);
     }
+
     return $this->getToken('x-ss-id');
   }
 
@@ -214,8 +214,11 @@ class Client extends ClientBase {
 
     // Build URL using $options['parameters'].
     $url = UrlHelper::isExternal($path) ? $path : $this->url($path);
-    $query = UrlHelper::buildQuery($options['parameters']);
-    $url .= '?' . $query;
+    // Build a query string from $options['parameters'] if it exists.
+    if (isset($options['parameters'])) {
+      $query = UrlHelper::buildQuery($options['parameters']);
+      $url .= '?' . $query;
+    }
     $request = new Request('GET', $url, $headers);
     $res = $client->sendAsync($request)->wait();
     $json = (string) $res->getBody();
