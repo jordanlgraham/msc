@@ -18,13 +18,6 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 class EventSync {
 
   /**
-   * The country manager service.
-   *
-   * @var \Drupal\Core\Locale\CountryManagerInterface
-   */
-  protected $countryManager;
-
-  /**
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
@@ -78,7 +71,7 @@ class EventSync {
   const CRON_STATE_KEY = 'msc_your_membership.event_sync';
   const DATE_FORMAT = 'm/d/Y H:i:s A';
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, Client $client, LoggerInterface $logger, DateFormatterInterface $dateFormatter, StateInterface $state, GeocoderInterface $geocoder, CountryManagerInterface $countryManager, YMApiUtils $ymapi_utils) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, Client $client, LoggerInterface $logger, DateFormatterInterface $dateFormatter, StateInterface $state, GeocoderInterface $geocoder, YMApiUtils $ymapi_utils) {
     $this->node_storage = $entityTypeManager->getStorage('node');
     $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
     $this->dateFormatter = $dateFormatter;
@@ -87,7 +80,6 @@ class EventSync {
     $this->state = $state;
     $this->geocoder = $geocoder;
     $this->entityTypeManager = $entityTypeManager;
-    $this->countryManager = $countryManager;
     $this->ymApiUtils = $ymapi_utils;
   }
 
