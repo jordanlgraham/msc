@@ -108,6 +108,18 @@ class YmApiUtils {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public function getMemberTypes() {
+    $memberTypes = [];
+    $response = $this->ymApiClient->get('/MemberTypes', []);
+    if (!empty($response['MemberTypes'])) {
+      $memberTypes = $response['MemberTypes'];
+    }
+    return $memberTypes;
+  }
+
+  /**
    * Creates a meeting in Zoom.
    *
    * @param object $entity
