@@ -1,6 +1,24 @@
 <?php
 
+use Drupal\msc_your_membership\EventSync;
+
 /**
  * @file
  * Primary module hooks for MSC Your Membership module.
  */
+
+/**
+ * Implements hook_cron().
+ */
+function msc_your_membership_cron() {
+  $last = \Drupal::state()->get(EventSync::LAST_SYNC_STATE_KEY, strtotime('1/1/2017'));
+  try {
+    $count = \Drupal::service('msc_your_membership.event_sync')->syncEvents($last);
+    \Drupal::logger('msc_your_membership')->notice('Synced @count events.', ['@count' => $count]);
+    \Drupal::state()->set(EventSync::LAST_SYNC_STATE_KEY, \Drupal::time()->getRequestTime());
+  } catch (Exception $exception) {
+    \Drupal::logger('msc_your_membership')->error('Unable to sync events during cron: @message', [
+      '@message' => $exception->getMessage(),
+    ]);
+  }
+}
