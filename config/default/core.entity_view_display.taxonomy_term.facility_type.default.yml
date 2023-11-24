@@ -1,0 +1,43 @@
+uuid: d1193dc3-d96e-4f95-8cb9-2b6875e6629f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.facility_type.field_member_type_code
+    - field.field.taxonomy_term.facility_type.field_member_type_id
+    - taxonomy.vocabulary.facility_type
+  module:
+    - text
+id: taxonomy_term.facility_type.default
+targetEntityType: taxonomy_term
+bundle: facility_type
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_member_type_code:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_member_type_id:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
