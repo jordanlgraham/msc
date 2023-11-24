@@ -79,7 +79,7 @@ class OrgSyncConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // $form = parent::buildForm($form, $form_state);
+    $form = parent::buildForm($form, $form_state);
 
     $facilityTypes = $this->getFacilityTypes();
 
