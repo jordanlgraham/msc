@@ -5,8 +5,8 @@ namespace Drupal\msc_your_membership;
 use \Exception;
 use Psr\Log\LoggerInterface;
 use Drupal\node\NodeInterface;
-use Drupal\netforum_soap\GetClient;
 use Drupal\netforum_soap\SoapHelper;
+use Drupal\Core\State\StateInterface;
 use Drupal\ymapi\Plugin\ApiTools\Client;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityStorageException;
@@ -46,9 +46,19 @@ class OrgSync {
   protected $client;
 
   /**
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
+
+  /**
    * @var \Drupal\Core\Datetime\DateFormatterInterface
    */
   protected $dateFormatter;
+
+  /**
+   * @var \Drupal\msc_your_membership\YMApiUtils
+   */
+  protected $ymApiUtils;
 
   const CRON_STATE_KEY = 'msc_your_membership.org_sync';
   const DATE_FORMAT = 'm/d/Y H:i:s A';
@@ -58,15 +68,15 @@ class OrgSync {
    */
   private $helper;
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ConfigFactoryInterface $configFactory, GetClient $getClient, Client $client, LoggerInterface $logger, DateFormatterInterface $dateFormatter, SoapHelper $helper) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, Client $client, LoggerInterface $logger, DateFormatterInterface $dateFormatter, StateInterface $state, YMApiUtils $ymapi_utils, ConfigFactoryInterface $configFactory) {
     $this->nodeStorage = $entityTypeManager->getStorage('node');
-    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
-    $this->config = $configFactory->get('msc_your_membership.organizationsync');
-    $this->logger = $logger;
-    $this->get_client = $getClient;
     $this->client = $client;
+    $this->logger = $logger;
     $this->dateFormatter = $dateFormatter;
-    $this->helper = $helper;
+    $this->state = $state;
+    $this->ymApiUtils = $ymapi_utils;
+    $this->config = $configFactory->get('msc_your_membership.organizationsync');
+    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
   }
 
   /**
@@ -508,6 +518,12 @@ class OrgSync {
    */
   public static function compareByCstNameCp($a, $b) {
     return strcmp($a['cst_name_cp'], $b['cst_name_cp']);
+  }
+
+  public function getMemberTypes() {
+    $memberTypes = [];
+
+    return $memberTypes;
   }
 
 }
