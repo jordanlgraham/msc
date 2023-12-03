@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function msc_your_membership_install() {
+  // Load the CSV file.
+  $file_path = \Drupal::service('extension.list.module')->getPath('msc_your_membership') . '/migration_map.csv';
+  $csv_data = array_map('str_getcsv', file($file_path));
+
+  // Get all nodes of type 'facility'.
+  $facilities = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadByProperties(['type' => 'facility']);
+
+  foreach ($facilities as $facility) {
+    /** @var \Drupal\node\Entity\Node $facility */
+
+    // Get the API_GUID value from the node's field_customer_key.
+    $customer_key = $facility->get('field_customer_key')->value;
+    // Convert $customer_key to uppercase.
+    $customer_key = strtoupper($customer_key);
+
+    // Find the matching row in the CSV file.
+    $matching_row = array_filter($csv_data, function ($row) use ($customer_key) {
+      return $row[2] === $customer_key; // Assuming API_GUID is at index 2 in CSV.
+    });
+
+    // Process if a matching row is found.
+    if (!empty($matching_row)) {
+      $matching_row = reset($matching_row); // Get the first matching row.
+      $website_member_id = $matching_row[0]; // Web_Site_Member_ID column.
+      $master_member_id = $matching_row[1]; // Master_Member_ID column.
+
+      // Set field_website_member_id and field_master_member_id values.
+      $facility->set('field_website_member_id', $website_member_id);
+      $facility->set('field_master_member_id', $master_member_id);
+
+      // Save the updated node.
+      $facility->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function msc_your_membership_uninstall() {
+  $config_factory = \Drupal::configFactory();
+  $config_ids = [
+    'field.field.node.facility.field_master_member_id',
+    'field.field.node.facility.field_website_member_id',
+    'field.field.taxonomy_term.facility_type.field_member_type_code',
+    'field.field.taxonomy_term.facility_type.field_member_type_id',
+    'field.storage.node.field_master_member_id',
+    'field.storage.node.field_website_member_id',
+    'field.storage.taxonomy_term.field_member_type_code',
+    'field.storage.taxonomy_term.field_member_type_id',
+  ];
+
+  foreach ($config_ids as $config_id) {
+    $config = $config_factory->getEditable($config_id);
+    if ($config->isNew() === FALSE) {
+      $config->delete();
+    }
+  }
+}
