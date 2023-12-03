@@ -45,6 +45,7 @@ dependencies:
     - field.field.node.facility.field_linkedin
     - field.field.node.facility.field_manager
     - field.field.node.facility.field_massmap_member
+    - field.field.node.facility.field_master_member_id
     - field.field.node.facility.field_medicaid
     - field.field.node.facility.field_medicaid_occupancy
     - field.field.node.facility.field_medicare
@@ -79,6 +80,7 @@ dependencies:
     - field.field.node.facility.field_twitter
     - field.field.node.facility.field_two_bedroom
     - field.field.node.facility.field_va_contract
+    - field.field.node.facility.field_website_member_id
     - field.field.node.facility.field_wib_region
     - node.type.facility
   module:
@@ -289,6 +291,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 18
     region: content
@@ -337,10 +341,19 @@ content:
     label: hidden
     settings:
       set_marker: true
+      show_label: false
       common_map: false
+      show_delta_label: false
       use_overridden_map_settings: false
       title: ''
       info_text: ''
+      centre:
+        fit_bounds:
+          enable: true
+          weight: -101
+          settings:
+            reset_zoom: true
+          map_center_id: fit_bounds
       map_provider_id: google_maps
       map_provider_settings:
         type: ROADMAP
@@ -363,6 +376,7 @@ content:
         disableAutoPan: 1
         style: ''
         preferScrollingToZooming: 0
+      data_provider_settings: {  }
     third_party_settings: {  }
     weight: 72
     region: content
@@ -764,5 +778,7 @@ hidden:
   field_customer_id: true
   field_customer_key: true
   field_customer_type: true
+  field_master_member_id: true
   field_member_flag: true
+  field_website_member_id: true
   links: true

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_website_member_id
+    - node.type.facility
+id: node.facility.field_website_member_id
+field_name: field_website_member_id
+entity_type: node
+bundle: facility
+label: 'Website Member ID'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

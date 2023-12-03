@@ -46,6 +46,7 @@ dependencies:
     - field.field.node.facility.field_linkedin
     - field.field.node.facility.field_manager
     - field.field.node.facility.field_massmap_member
+    - field.field.node.facility.field_master_member_id
     - field.field.node.facility.field_medicaid
     - field.field.node.facility.field_medicaid_occupancy
     - field.field.node.facility.field_medicare
@@ -80,6 +81,7 @@ dependencies:
     - field.field.node.facility.field_twitter
     - field.field.node.facility.field_two_bedroom
     - field.field.node.facility.field_va_contract
+    - field.field.node.facility.field_website_member_id
     - field.field.node.facility.field_wib_region
     - node.type.facility
   module:
@@ -560,6 +562,13 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_master_member_id:
+    type: number
+    weight: 123
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_medicaid:
     type: boolean_checkbox
     weight: 18
@@ -832,6 +841,13 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  field_website_member_id:
+    type: number
+    weight: 122
+    region: content
+    settings:
+      placeholder: ''
     third_party_settings: {  }
   field_wib_region:
     type: string_textfield
