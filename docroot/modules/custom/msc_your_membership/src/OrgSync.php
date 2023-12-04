@@ -378,13 +378,13 @@ class OrgSync {
     if (!isset($schemas[$object_type])) {
       return FALSE;
     }
-    $responseHeaders = $this->get_client->getResponseHeaders();
+    $responseHeaders = $this->client->getResponseHeaders();
 
     try {
-      $authHeaders = $this->get_client->getAuthHeaders();
+      $authHeaders = $this->client->getAuthHeaders();
       if($authHeaders) {
         // Open a new client.
-        $client = $this->get_client->getClient();
+        $client = $this->client->getClient();
         $response = $client->__soapCall('GetFacadeObject', array('parameters' => $params), NULL, $authHeaders, $responseHeaders);
         if (!empty($response->GetFacadeObjectResult->any)) {
           //this is silly code that fixes an issue where the xsi namespace is incorrectly set to an invalid URL.
@@ -425,15 +425,15 @@ class OrgSync {
   public function getOrganizationChanges($startDate, $endDate) {
     $format = 'm/d/Y H:i:s A';
     $client = $this->client;
-    $responseHeaders = $this->get_client->getResponseHeaders();
+    $responseHeaders = $this->client->getResponseHeaders();
     $params = [
       'szStartDate' => date($format, $startDate),
       'szEndDate' => date($format, $endDate),
     ];
       if(!empty($responseHeaders['AuthorizationToken']->Token)) {
-        $authHeaders = $this->get_client->getAuthHeaders($responseHeaders['AuthorizationToken']->Token);
+        $authHeaders = $this->client->getAuthHeaders($responseHeaders['AuthorizationToken']->Token);
       } else {
-        $authHeaders = $this->get_client->getAuthHeaders();
+        $authHeaders = $this->client->getAuthHeaders();
       }
       $response = $client->__soapCall('GetOrganizationChangesByDate', array('parameters' => $params), NULL, $authHeaders, $responseHeaders);
       if (!empty($response->GetOrganizationChangesByDateResult->any)) {

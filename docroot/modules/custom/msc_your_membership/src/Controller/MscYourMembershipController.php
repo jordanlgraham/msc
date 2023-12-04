@@ -48,39 +48,39 @@ class MscYourMembershipController extends ControllerBase {
    */
   public function build() {
     $ym_api_utils = \Drupal::service('msc_your_membership.ymapi_utils');
-    $event_categories = [];
-    $response = $ym_api_utils->getEventCategories();
-    if (!empty($event_categories['EventCategoryList'])) {
-      $event_categories = $response['EventCategoryList'];
-      // Process the event categories.
-      $tids = $ym_api_utils->loadOrCreateEventTermsByName($event_categories);
-    }
-    // Render the event categories array as a table.
-    $build['event_categories'] = [
+    $member_types = $ym_api_utils->getMemberTypes();
+
+    // Build an html table of member types with fields ID, TypeCode, Name, IsDefault, Visibility, PresetType and SortOrder.
+    $member_types_table = [
       '#type' => 'table',
       '#header' => [
-        $this->t('Event ID'),
-        $this->t('Event Name'),
-        $this->t('Event Start Date'),
-        $this->t('Event End Date'),
+        $this->t('ID'),
+        $this->t('Type Code'),
+        $this->t('Name'),
+        $this->t('Is Default'),
+        $this->t('Visibility'),
+        $this->t('Preset Type'),
+        $this->t('Sort Order'),
       ],
-      '#rows' => $tids,
     ];
-
-    // $client = \Drupal::service('ymapi.client');
-
-    // try {
-    //   $client->get('Events', [
-    //     'parameters' => [
-    //       'PageNumber' => 1,
-    //       'PageSize' => 100,
-    //     ]
-    //   ]);
-    //   \Drupal::messenger()->addStatus(t('Success'));
-    // } catch (RequestException $exception) {
-    //   // YM api already logs errors, but you could log more.
-    //   \Drupal::messenger()->addWarning(t('Something hasn\'t worked.'));
-    // }
+    foreach ($member_types as $row) {
+      $member_types_table['rows'][] = [
+        'id' => ['data' => $row['ID']],
+        'type_code' => ['data' => $row['TypeCode']],
+        'name' => ['data' => $row['Name']],
+        'is_default' => ['data' => $row['IsDefault']],
+        'visibility' => ['data' => $row['Visibility']],
+        'preset_type' => ['data' => $row['PresetType']],
+        'sort_order' => ['data' => $row['SortOrder']],
+      ];
+    }
+    // Render the table directly
+    $build['member_types'] = [
+      '#type' => 'table',
+      '#caption' => $this->t('Member Types Table'),
+      '#header' => $member_types_table['#header'],
+      '#rows' => $member_types_table['rows'],
+    ];
 
     $build['content'] = [
       '#type' => 'item',

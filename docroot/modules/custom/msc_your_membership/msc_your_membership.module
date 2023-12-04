@@ -22,3 +22,13 @@ function msc_your_membership_events_cron() {
     ]);
   }
 }
+
+/**
+ * Helper function that gets an array of member types from Your Membership.
+ *
+ * @return void
+ */
+function msc_your_membership_get_member_types() {
+  $ym_api_utils = \Drupal::service('msc_your_membership.ym_api_utils');
+  return $ym_api_utils->getMemberTypes();
+}

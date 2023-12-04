@@ -1,3 +1,4 @@
+uuid: 13f5a5dc-e109-46ef-8da3-68844050ac61
 langcode: en
 status: true
 dependencies:
@@ -7,6 +8,8 @@ dependencies:
     - taxonomy.vocabulary.facility_type
   module:
     - text
+_core:
+  default_config_hash: C4N5Zm1fwL-aD5c0M3R1xBSKSfc8ruCFw7MszHATu5g
 id: taxonomy_term.facility_type.default
 targetEntityType: taxonomy_term
 bundle: facility_type

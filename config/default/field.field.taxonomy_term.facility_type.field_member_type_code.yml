@@ -1,0 +1,21 @@
+uuid: e8b7da29-17c7-48f1-9527-715aaad8b9f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_member_type_code
+    - taxonomy.vocabulary.facility_type
+_core:
+  default_config_hash: F-Se6kOzo1CaRd3ehL4825VR5mTLCPQjB0W91UjJYHA
+id: taxonomy_term.facility_type.field_member_type_code
+field_name: field_member_type_code
+entity_type: taxonomy_term
+bundle: facility_type
+label: 'Member Type Code'
+description: 'Enter the Your Membership Member Type Code here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -259,10 +259,10 @@ class OrgSyncConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
+  public static function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
     // @todo: Inject the msc_your_membership.org_sync service.
     /** @var OrgSync $sync */
-    $sync = $this->orgSync;
+    $sync = \Drupal::service('msc_your_membership.org_sync');
     $start_formatted = date(OrgSync::DATE_FORMAT, $start_date);
     $end_formatted = date(OrgSync::DATE_FORMAT, $end_date);
     $context['message'] = Html::escape("Syncing $start_formatted to $end_formatted");

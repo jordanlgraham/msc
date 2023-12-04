@@ -8,7 +8,7 @@ msc_your_membership.test:
 
 
 msc_your_membership.org_sync_config:
-  path: '/admin/config/services/org-sync-config'
+  path: '/admin/config/services/org-sync'
   defaults:
     _title: 'Organization Sync Config Form'
     _form: 'Drupal\msc_your_membership\Form\OrgSyncConfigForm'

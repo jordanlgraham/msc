@@ -1,3 +1,4 @@
+uuid: 69a60adb-509e-4110-8c0e-45d0c5fdf5e2
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
   module:
     - path
     - text
+_core:
+  default_config_hash: t9dD12ZlCArJXtiRTeUPMIyVNG6xij-R5103HncO47w
 id: taxonomy_term.facility_type.default
 targetEntityType: taxonomy_term
 bundle: facility_type
