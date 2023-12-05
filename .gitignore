@@ -26,3 +26,6 @@ private-files
 
 # Ignore local ruby gems.
 docroot/themes/custom/msca_theme/msca_theme_gems/
+
+# Ignore the vendor directory.
+vendor
