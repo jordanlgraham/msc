@@ -1,7 +1,7 @@
 name: NetForum User Auth
 type: module
 description: Automatically creates and logs in Drupal users that are able to authenticate against NetForum's CheckEWebUser method
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 package: NetForum
 dependencies:
   - netforum_soap

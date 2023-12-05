@@ -3,13 +3,10 @@
     attach: function (context, settings) {
 
       // Expand second and third level menus on click
-      $(context).find('.has-submenu').once('has-submenu').each(function() {
-        $(this).click(function(e) {
+      $(context).find('.has-submenu:not(.submenu-open)').each(function () {
+        $(this).addClass('submenu-open').click(function (e) {
           if ($(e.target).closest('li').hasClass('has-submenu')) {
-            // Find the parent of the current link and toggle it's immediate child UL.
-            // Another safeguard to keep parent classes from toggling
-            $(e.target).closest('li').toggleClass('submenu-open');
-
+            // Find the parent of the current link and toggle its immediate child UL.
             $(e.target).closest('li')
               .find('> ul')
               .toggleClass('subnav-active');
@@ -18,10 +15,8 @@
               e.stopPropagation();
             }
           }
-        })
+        });
       });
     }
   };
 })(jQuery, Drupal);
-
-

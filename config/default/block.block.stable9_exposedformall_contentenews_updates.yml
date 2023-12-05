@@ -1,0 +1,33 @@
+uuid: 5f517432-57d0-46bf-9777-993ac36117cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.all_content
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - stable9
+third_party_settings:
+  block_class:
+    classes: views-search
+id: stable9_exposedformall_contentenews_updates
+theme: stable9
+region: content
+weight: -16
+provider: null
+plugin: 'views_exposed_filter_block:all_content-enews_updates'
+settings:
+  id: 'views_exposed_filter_block:all_content-enews_updates'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /member-resources/e-news-updates

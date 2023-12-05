@@ -14,7 +14,7 @@
    */
   Drupal.behaviors.moduleFilterUpdateStatus = {
     attach: function (context, settings) {
-      var $input = $('input.table-filter-text').once('module-filter');
+      var $input = $(once('module-filter', 'input.table-filter-text'));
       if ($input.length) {
         var selector = 'tbody tr';
         var wrapperId = $input.attr('data-table');
@@ -115,4 +115,4 @@
     }
   };
 
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

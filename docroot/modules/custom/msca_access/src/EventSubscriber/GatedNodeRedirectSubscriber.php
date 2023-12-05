@@ -2,14 +2,15 @@
 
 namespace Drupal\msca_access\EventSubscriber;
 
-use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Cache\CacheableRedirectResponse;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\Core\Cache\CacheableMetadata;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Drupal\Core\Cache\CacheableRedirectResponse;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class GatedNodeRedirectSubscriber implements EventSubscriberInterface {
   use StringTranslationTrait;
@@ -28,9 +29,9 @@ class GatedNodeRedirectSubscriber implements EventSubscriberInterface {
   /**
    * Check a request to see if it's a gated node.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    */
-  public function redirectGatedNodes(GetResponseEvent $event) {
+  public function redirectGatedNodes(RequestEvent $event) {
     $request = $event->getRequest();
 
     if ($request->attributes->get('_route') !== 'entity.node.canonical') {

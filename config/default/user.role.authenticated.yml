@@ -8,6 +8,7 @@ dependencies:
     - comment
     - contact
     - entity_print
+    - file
     - forward
     - masquerade
     - media
@@ -25,6 +26,7 @@ permissions:
   - 'access forward'
   - 'access site-wide contact form'
   - 'create media'
+  - 'delete own files'
   - 'entity print access bundle newsletter'
   - 'entity print access bundle newsletter_article'
   - 'masquerade as authenticated'

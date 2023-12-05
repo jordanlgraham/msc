@@ -24,8 +24,8 @@ settings:
       value: Children/Pediatrics
       label: Children/Pediatrics
     -
-      value: 'Huntington''s Disease'
-      label: 'Huntington''s Disease'
+      value: "Huntington's Disease"
+      label: "Huntington's Disease"
     -
       value: 'Intellectual Disabilities'
       label: 'Intellectual Disabilities'

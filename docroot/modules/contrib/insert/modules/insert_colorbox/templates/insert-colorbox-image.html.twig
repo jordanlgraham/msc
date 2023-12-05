@@ -33,7 +33,7 @@
  * on how to specify the data-insert-attach attribute.
  */
 #}
-{% spaceless %}
+{% apply spaceless %}
 
 {% set classes = [] %}
 
@@ -49,4 +49,4 @@
   <img src="{{ url }}"{{ attributes }} {% if width and height %}width="{{ width }}" height="{{ height }}" {% endif %}{% if classes|length %} class="{{ classes|join(' ') }}"{% endif %} data-insert-type="{{ field_type }}" data-entity-type="{{ entity_type }}" data-entity-uuid="{{ uuid }}" data-insert-attach='{"id": "{{ id }}", "attributes": {"alt": ["alt", "description"], "title": ["title"]{% if insert_caption %}, "data-caption": ["title"]{% endif %}}}' />
 </a>
 
-{% endspaceless %}
+{% endapply %}

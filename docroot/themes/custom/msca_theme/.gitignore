@@ -1,5 +1,5 @@
 # Ignore SASS files
-/.sass-cache
+.sass-cache
 .DS_Store
 *.codekit
 .idea

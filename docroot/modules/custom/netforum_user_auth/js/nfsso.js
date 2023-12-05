@@ -1,7 +1,8 @@
 (function ($, Drupal) {
   Drupal.behaviors.nfSso = {
     attach: function (context, settings) {
-      $('body', context).once('nfsso').each(function () {
+      const elements = once('nfsso', 'body', context);
+      elements.foreach(function () {
         if (!settings.hasOwnProperty('nfsso')) {
           return;
         }

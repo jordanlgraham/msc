@@ -133,14 +133,16 @@
        * @inheritDoc
        */
       getAlign: function(editor, uuid) {
-        var align = undefined;
+        var align = null;
+        var hasInstances = false;
 
         $.each(this._filterInstances(editor, uuid), function() {
           align = this.data.align;
+          hasInstances = true;
           return false;
         });
 
-        return align;
+        return !hasInstances ? undefined : align;
       },
 
       /**

@@ -1,7 +1,7 @@
 name: NetForum Event Sync
 type: module
 description: Syncs Events from Mass Senior Care's NetForum account
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 package: NetForum
 dependencies:
   - netforum_soap

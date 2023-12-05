@@ -1,0 +1,25 @@
+uuid: c9b1b68f-d46f-4d54-b5d8-393420183519
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.masthead
+  module:
+    - system
+  theme:
+    - stable9
+id: stable9_masthead
+theme: stable9
+region: sidebar_first
+weight: -9
+provider: null
+plugin: 'system_menu_block:masthead'
+settings:
+  id: 'system_menu_block:masthead'
+  label: Masthead
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

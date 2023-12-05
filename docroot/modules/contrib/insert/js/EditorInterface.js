@@ -98,7 +98,8 @@
       /**
        * @param {*} editor
        * @param {string} uuid
-       * @return {string|undefined}
+       * @return {string|null|undefined} Either an alignment value, null if
+       *   alignment is not set, or undefined if there is no inserted image.
        */
       getAlign: function(editor, uuid) {
         throw new Error('Method not overridden.');
