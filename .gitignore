@@ -7,10 +7,6 @@
 /docroot/profiles/contrib/
 #/docroot/libraries/
 
-
-# Ignore Drupal 10's modules directory.
-modules
-
 # Ignore sensitive information.
 #/docroot/sites/*/settings.php
 /docroot/sites/*/settings.local.php
