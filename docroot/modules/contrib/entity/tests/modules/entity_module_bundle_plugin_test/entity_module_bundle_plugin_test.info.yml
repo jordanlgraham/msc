@@ -1,6 +1,0 @@
-name: 'Entity bundle plugin test'
-type: module
-description: 'Module for testing bundle plugins.'
-package: Testing
-dependencies:
-  - entity:entity

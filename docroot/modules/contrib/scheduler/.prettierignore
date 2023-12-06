@@ -1,2 +1,0 @@
-# Drupal ./core/.prettierignore has *.yml so contrib can do likewise.
-*.yml

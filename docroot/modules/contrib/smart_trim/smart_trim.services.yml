@@ -1,3 +1,0 @@
-services:
-  smart_trim.truncate_html:
-    class: Drupal\smart_trim\TruncateHTML
