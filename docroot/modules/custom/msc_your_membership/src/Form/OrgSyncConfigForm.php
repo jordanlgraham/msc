@@ -2,6 +2,7 @@
 
 namespace Drupal\msc_your_membership\Form;
 
+use Drupal\taxonomy\Entity\Term;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\msc_your_membership\OrgSync;
@@ -261,6 +262,7 @@ class OrgSyncConfigForm extends ConfigFormBase {
    */
   public static function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
     // @todo: Inject the msc_your_membership.org_sync service.
+
     /** @var OrgSync $sync */
     $sync = \Drupal::service('msc_your_membership.org_sync');
     $start_formatted = date(OrgSync::DATE_FORMAT, $start_date);
@@ -271,8 +273,20 @@ class OrgSyncConfigForm extends ConfigFormBase {
       if (empty($orgs)) {
         return TRUE;
       }
-      // Use usort to sort the $org array by 'cst_name_cp'.
-      usort($orgs, [self::class, 'compareByCstNameCp']);
+      // Change $facilityTypes to be an array of facility_type term field_facility_type_code values.
+      $facilityTypes = array_map(function ($facilityTypeId) {
+        $term = Term::load($facilityTypeId);
+        if ($term) {
+          $field_member_type_code = $term->get('field_member_type_code')->value;
+          return $field_member_type_code;
+        }
+        return null;
+      }, array_keys($facilityTypes));
+
+      // Filter $orgs to include only those with facility types in $facilityTypes.
+      $orgs = array_filter($orgs, function ($org) use ($facilityTypes) {
+        return in_array($org['MemberTypeCode'], $facilityTypes);
+      });
     } catch (\Exception $exception) {
       $msg = $exception->getMessage();
       $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period $start_formatted to $end_formatted: $msg";
@@ -280,7 +294,8 @@ class OrgSyncConfigForm extends ConfigFormBase {
     }
     $sandbox_key = $start_date . $end_date;
     if (!isset($context['sandbox'][$sandbox_key]['pointer'])) {
-      $context['sandbox'][$sandbox_key]['pointer'] = 0;
+      // Set the pointer to the index of the first element of $orgs.
+      $context['sandbox'][$sandbox_key]['pointer'] = array_key_first($orgs);
       $context['sandbox'][$sandbox_key]['count'] = count($orgs);
     }
     // Process the organizations 50 at a time.
@@ -310,17 +325,6 @@ class OrgSyncConfigForm extends ConfigFormBase {
       $context['message'] = $context['message'] . ": Completed {$context['sandbox'][$sandbox_key]['pointer']} of {$context['sandbox'][$sandbox_key]['count']}";
       $context['finished'] = $context['sandbox'][$sandbox_key]['pointer'] / $context['sandbox'][$sandbox_key]['count'];
     }
-  }
-
-  /**
-   * Custom comparison function to sort by 'cst_name_cp'.
-   *
-   * @param array $a
-   * @param array $b
-   * @return int
-   */
-  public static function compareByCstNameCp($a, $b) {
-    return strcmp($a['cst_name_cp'], $b['cst_name_cp']);
   }
 
 }

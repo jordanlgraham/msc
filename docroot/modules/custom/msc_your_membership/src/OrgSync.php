@@ -423,39 +423,18 @@ class OrgSync {
   }
 
   public function getOrganizationChanges($startDate, $endDate) {
-    $format = 'm/d/Y H:i:s A';
-    $client = $this->client;
-    $responseHeaders = $this->client->getResponseHeaders();
-    $params = [
-      'szStartDate' => date($format, $startDate),
-      'szEndDate' => date($format, $endDate),
-    ];
-      if(!empty($responseHeaders['AuthorizationToken']->Token)) {
-        $authHeaders = $this->client->getAuthHeaders($responseHeaders['AuthorizationToken']->Token);
-      } else {
-        $authHeaders = $this->client->getAuthHeaders();
-      }
-      $response = $client->__soapCall('GetOrganizationChangesByDate', array('parameters' => $params), NULL, $authHeaders, $responseHeaders);
-      if (!empty($response->GetOrganizationChangesByDateResult->any)) {
-        $xmlstring = str_replace(' xsi:schemaLocation="http://www.avectra.com/OnDemand/2005/ Organization.xsd"', '', $response->GetOrganizationChangesByDateResult->any);
-        $xmlstring = str_replace('xsi:nil="true"', '', $xmlstring);
-        $xml = simplexml_load_string($xmlstring);
-        $json = json_encode($xml);
-        $orgs = json_decode($json, TRUE);
-        if (empty($orgs['Result'])) {
-          return 0;
-        }
-        // If one result is returned, it won't be an array of results.
-        // Change to an array of results so return is consistent.
-        if (isset($orgs['Result']['org_cst_key'])) {
-          return [$orgs['Result']];
-        }
-
-        // Use usort to sort the $org array by 'cst_name_cp'.
-        // $orgs['Result'] = usort($orgs['Result'], [self::class, 'compareByCstNameCp']);
-        return $orgs['Result'];
-      }
-    throw new Exception('Empty organizations response.');
+    $memberIds = [];
+    // Build an array of members' last updated values keyed by ProfileID.
+    $memberIds = $this->ymApiUtils->getMembersInfo();
+    // Filter $memberIds to only include members with LastUpdated values
+    // between $startDate and $endDate.
+    $memberIds = array_filter($memberIds, function($member) use ($startDate, $endDate) {
+      $lastUpdated = $member['LastUpdated'];
+      // Convert $lastUpdated to a timestamp.
+      $lastUpdated = strtotime($lastUpdated);
+      return $lastUpdated >= $startDate && $lastUpdated <= $endDate;
+    });
+    return $memberIds;
   }
 
   /**
