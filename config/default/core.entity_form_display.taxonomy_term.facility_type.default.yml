@@ -7,7 +7,6 @@ dependencies:
     - field.field.taxonomy_term.facility_type.field_member_type_id
     - taxonomy.vocabulary.facility_type
   module:
-    - path
     - text
 _core:
   default_config_hash: t9dD12ZlCArJXtiRTeUPMIyVNG6xij-R5103HncO47w
@@ -17,16 +16,16 @@ bundle: facility_type
 mode: default
 content:
   description:
-    type: text_textfield
-    weight: 0
+    type: text_textarea
+    weight: 1
     region: content
     settings:
-      size: 60
+      rows: 5
       placeholder: ''
     third_party_settings: {  }
   field_member_type_code:
     type: string_textfield
-    weight: 102
+    weight: 3
     region: content
     settings:
       size: 60
@@ -34,30 +33,25 @@ content:
     third_party_settings: {  }
   field_member_type_id:
     type: number
-    weight: 101
+    weight: 2
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   name:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 30
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 100
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  path: true
