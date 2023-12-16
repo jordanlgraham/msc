@@ -1,4 +1,13 @@
 <?php
+/**
+ * @file
+ * Provides install and database update functions for msc_your_membership.
+ */
+
+/**
+ * @todo: Write a database update to populate field_member_type_code for each
+ * taxonomy term of type 'facility_type'.
+ */
 
 /**
  * Implements hook_install().
