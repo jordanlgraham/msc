@@ -1,0 +1,78 @@
+name: Acquia Build and Deploy Prod
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GIT_COMMIT_MESSAGE: 'Auto-commit: CI Build Assets'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: set NOW
+        run: |
+          echo "NOW=$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Settings Git Global Configs
+        run: |
+          git config --global pull.rebase false
+          git config --global user.name "Aten CI Bot"
+          git config --global user.email "ci@atendesigngroup.com"
+
+      - name: Add SSH Key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.ACQUIA_SSH_PRIVATE_KEY }}
+
+      - name: Disable Acquia SSH Strict Host Key Checking
+        run: 'printf "\nHost *\n\tStrictHostKeyChecking no" >> ~/.ssh/config'
+
+      - name: Set up the Acquia SSH remote
+        run: |
+          git remote add acquia ${{ vars.ACQUIA_GIT_REMOTE }}
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-vendor
+        with:
+          path: ./vendor
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+
+      - name: Composer Install
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.1"
+          php_extensions: gd
+
+      - name: Create a new tag based on the date
+        run: |
+          git fetch --tags acquia main
+          git reset --soft acquia/main
+          cp .gitignore .gitignore-source
+          mv .gitignore-build .gitignore
+          git add .
+          git commit -q -m "${{ env.GIT_COMMIT_MESSAGE }} Git Tag: ${{ env.NOW }}"
+          git tag "v${{ env.NOW }}"
+
+      - name: Deploy to Acquia
+        run: git push --tags acquia HEAD:refs/heads/main
+
+      # - name: Post to a Slack channel
+      #   if: always()
+      #   id: slack
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     channel-id: '${{ vars.SLACK_CHANNEL }}'
+      #     slack-message: "@${{ github.actor }} is pushing code today and it was a ${{ job.status }}!\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}\nUsing Workflow: ${{ github.workflow }}\nTag to deploy is: v${{ env.NOW }}"
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

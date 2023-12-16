@@ -2,13 +2,12 @@
 
 namespace Drupal\apitools\Plugin\migrate_plus\data_fetcher;
 
+use Drupal\apitools\Api\Client\ClientInterface;
 use Drupal\apitools\ClientManagerInterface;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\migrate\MigrateException;
 use Drupal\migrate\Plugin\migrate\source\SourcePluginBase;
-use Drupal\migrate\Plugin\MigrateSourceInterface;
-use Drupal\migrate_plus\DataParserPluginInterface;
 use Drupal\migrate_plus\Plugin\migrate_plus\data_fetcher\Http as HttpBase;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -32,9 +31,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class Http extends HttpBase {
 
   /**
+   * @var \Drupal\apitools\Api\Client\ClientInterface
+   */
+  protected $apitoolsClient;
+
+  /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): \Drupal\migrate_plus\DataFetcherPluginBase
+  {
     return new static(
       $configuration,
       $plugin_id,
@@ -52,7 +57,7 @@ class Http extends HttpBase {
       throw new InvalidPluginDefinitionException('apitools_http', 'Missing value for "client_plugin_id" in migration definition');
     }
     try {
-      $this->httpClient = $client_manager->load($configuration['client_plugin_id']);
+      $this->apitoolsClient = $client_manager->load($configuration['client_plugin_id']);
     }
     catch (PluginNotFoundException $e) {
       throw new InvalidPluginDefinitionException('apitools_http', 'Invalid ID for "client_plugin_id" in migration definition');
@@ -65,7 +70,7 @@ class Http extends HttpBase {
       $method = array_pop($props);
       $executable = array_reduce($props, function($carry, $value) {
         return $carry->{$value};
-      }, $this->httpClient);
+      }, $this->apitoolsClient);
 
       if ($executable && $method) {
         if (is_array($this->configuration['client_arguments']))  {
@@ -75,13 +80,14 @@ class Http extends HttpBase {
         return $executable->{$method}($options);
       }
     }
-    return $this->httpClient->get($url, $options);
+    return $this->apitoolsClient->get($url, $options);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getResponse($url, $is_count = FALSE) {
+  public function getResponse($url, $is_count = FALSE): \Psr\Http\Message\ResponseInterface
+  {
     try {
       $options = ['headers' => $this->getRequestHeaders()];
       if (!empty($this->configuration['authentication'])) {
@@ -120,7 +126,8 @@ class Http extends HttpBase {
   /**
    * {@inheritdoc}
    */
-  public function getResponseContent($url) {
+  public function getResponseContent($url): string
+  {
     $is_count = $this->isCount();
     $data = $this->getResponse($url, $is_count);
     //$events = $data['events'];

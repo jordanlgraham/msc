@@ -1,8 +1,0 @@
-insert_media:
-  version: 2.x
-  js:
-    js/insert_media.js: {}
-  dependencies:
-    - core/drupalSettings
-    - core/jquery
-    - insert/insert

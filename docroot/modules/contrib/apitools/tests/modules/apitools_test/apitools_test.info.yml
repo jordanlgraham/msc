@@ -10,7 +10,7 @@ dependencies:
   - drupal:key
   - drupal:simple_oauth
 
-# Information added by Drupal.org packaging script on 2023-05-31
-version: '2.0.0-alpha1'
+# Information added by Drupal.org packaging script on 2023-10-24
+version: '2.0.0-alpha2'
 project: 'apitools'
-datestamp: 1685537964
+datestamp: 1698110331

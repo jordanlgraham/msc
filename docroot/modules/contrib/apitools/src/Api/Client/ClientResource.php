@@ -113,7 +113,7 @@ abstract class ClientResource extends PluginBase implements ClientResourceInterf
       $definition = $this->manager->getDefinition($model_id);
       if (in_array($name, $definition['client_properties']) || isset($definition['client_properties'][$name])) {
         return $this->manager
-          ->getModelController($definition['id'])
+          ->getResourceController($definition['id'])
           ->setContext($this->configuration['id'], $this)
           ->setClient($this->controller->getClient());
       }

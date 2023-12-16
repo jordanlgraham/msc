@@ -1,0 +1,102 @@
+# Ignore configuration files that may contain sensitive information.
+*.local
+settings.local.php
+development.services.yml
+
+# Ignore drupal core.
+# docroot/core
+
+# Ignore paths that contain user-generated content.
+docroot/sites/*/files
+docroot/sites/*/files-private
+docroot/sites/*/private
+
+# Ignore lando-based local dev private files.
+private-files
+
+# Ignore contrib modules. These should be created during build process.
+files-private
+drush/contrib
+# docroot/themes/contrib
+# docroot/modules/contrib
+# docroot/profiles/contrib
+
+# Ignore the dropzone library.
+# docroot/libraries/dropzone
+
+# Ignore custom theme folders
+docroot/themes/custom/*/node_modules
+
+# Ignore build artifacts
+/build
+/deploy
+/reports
+docroot/themes/custom/*/css
+docroot/themes/custom/*/styleguide
+
+#Sass
+.sass-cache
+*.css.map
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# XHProf
+xhprof_*
+
+# Exports
+*.gz
+*.sql
+*.zip
+
+# Environment
+.env
+
+# Composer
+# vendor/
+# vendor/.git
+
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Drush
+drush/site-aliases/local.*
+
+# Docker sync
+.docker-sync/*
+
+# Ignore editor config.
+# .vscode
+# /docroot/sites/default/services.yml
+# /.csslintrc
+# /.editorconfig
+# /.eslintignore
+# /.eslintrc.json
+# /.gitattributes
+# /.ht.router.php
+# /autoload.php
+# /example.gitignore
+# /index.php
+# /INSTALL.txt
+# /LICENSE.txt
+# /README.txt
+# /robots.txt
+# /update.php
+# /web.config
+# /.drush-lock-update

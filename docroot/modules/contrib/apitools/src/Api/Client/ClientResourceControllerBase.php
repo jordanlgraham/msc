@@ -5,6 +5,7 @@ namespace Drupal\apitools\Api\Client;
 use Drupal\apitools\ClientResourceManagerInterface;
 use Drupal\Component\Plugin\Exception\InvalidDecoratedMethod;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+use Drupal\Core\Security\UntrustedCallbackException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -68,7 +69,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
    * Create a new ModelInterface instance.
    */
   protected function doCreate(array $values = []) {
-    return $this->getModel($this->modelPluginId, $values);
+    return $this->getResource($this->modelPluginId, $values);
   }
 
   /**
@@ -76,7 +77,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
    */
   protected function doGet($id, array $options = []) {
     $data = $this->sendRequest('get', 'get', $id, $options);
-    return $data ? $this->getModel($this->modelPluginId, $data) : FALSE;
+    return $data ? $this->getResource($this->modelPluginId, $data) : FALSE;
   }
 
   /**
@@ -88,7 +89,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
     }
     $models = [];
     foreach ($records as $data) {
-      $models[$data['id']] = $this->getModel($this->modelPluginId, $data);
+      $models[$data['id']] = $this->getResource($this->modelPluginId, $data);
     }
     return $models;
   }
@@ -107,9 +108,9 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
     // Allow controller to call defined "model_properties" if they are defined.
     $func = 'do' . ucwords($name);
     if (method_exists($this, $func)) {
-      $return = call_user_func_array([$this, $func], $arguments);
-      return $return;
+      return call_user_func_array([$this, $func], $arguments);
     }
+    throw new UntrustedCallbackException($name);
   }
 
   public function request($method, $path, array $options = []) {
@@ -128,7 +129,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
     return $response;
   }
 
-  protected function getModel($plugin_id, array $data = []) {
+  protected function getResource($plugin_id, array $data = []) {
     $values = [];
     if (!empty($data)) {
       $values['data'] = $data;
@@ -139,7 +140,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
     if ($this->hasContexts()) {
       $values['contexts'] = $this->contexts;
     }
-    return $this->manager->getModel($plugin_id, $values)->setController($this);
+    return $this->manager->getResource($plugin_id, $values)->setController($this);
   }
 
   /**
@@ -193,7 +194,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
       }
       $path = $this->processPath($path, "{{$context->getMachineName()}_id}", $context->id);
       if ($id) {
-        $machine_name = $this->manager->getModel($this->modelPluginId)->getMachineName();
+        $machine_name = $this->manager->getResource($this->modelPluginId)->getMachineName();
         $path = $this->processPath($path, "{{$machine_name}_id}", $id);
       }
 
@@ -211,7 +212,7 @@ abstract class ClientResourceControllerBase implements ClientResourceControllerI
     $path = !empty($paths[$method]) ? $paths[$method] : FALSE;
     if ($path) {
       if ($id) {
-        $machine_name = $this->manager->getModel($this->modelPluginId)->getMachineName();
+        $machine_name = $this->manager->getResource($this->modelPluginId)->getMachineName();
         $path = $this->processPath($path, "{{$machine_name}_id}", $id);
       }
       return $path;

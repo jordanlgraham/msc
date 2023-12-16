@@ -29,38 +29,27 @@ class WorkflowStateAction extends FieldUpdateActionBase implements ContainerFact
   protected $eventDispatcher;
 
   /**
-   * Constructs a \Drupal\download_request_action\Plugin\WorkflowStateAction object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param EventDispatcherInterface $event_dispatcher
-   *   The event dispatcher.
+   * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EventDispatcherInterface $event_dispatcher) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->eventDispatcher = $event_dispatcher;
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): WorkflowStateAction {
+    if (method_exists(parent::class, 'create')) {
+      $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    }
+    else {
+      $instance = new static(
+        $configuration,
+        $plugin_id,
+        $plugin_definition
+      );
+    }
+    $instance->eventDispatcher = $container->get('event_dispatcher');
     if (!isset($configuration['field_name'])) {
       throw new InvalidPluginDefinitionException($plugin_id, sprintf('The "%s" plugin did not specify a "field_name"', $plugin_id));
     }
     if (!isset($configuration['state_id']) && !isset($configuration['workflow_id'])) {
       throw new InvalidPluginDefinitionException($plugin_id, sprintf('The "%s" plugin requires either "workflow_id" or "state_id"', $plugin_id));
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('event_dispatcher')
-    );
+    return $instance;
   }
 
   /**
@@ -126,9 +115,9 @@ class WorkflowStateAction extends FieldUpdateActionBase implements ContainerFact
       ->setToState($this->configuration['state_id']);
 
     $this->eventDispatcher->dispatch($event, "entity.bulk_pre_update");
-    $this->eventDispatcher->dispatch("entity.$entity_type.bulk_pre_update", $event);
+    $this->eventDispatcher->dispatch($event, "entity.$entity_type.bulk_pre_update");
     parent::executeMultiple($entities);
     $this->eventDispatcher->dispatch($event, "entity.bulk_post_update");
-    $this->eventDispatcher->dispatch("entity.$entity_type.bulk_post_update", $event);
+    $this->eventDispatcher->dispatch($event, "entity.$entity_type.bulk_post_update");
   }
 }

@@ -40,15 +40,31 @@ class Delta extends Standard {
     ];
   }
 
+  private function getJoinData() {
+    if ($this->relationship) {
+      $join = $this->query->getJoinData($this->table, $this->query->relationships[$this->relationship]['base']);
+    }
+    else {
+      $relationship = $this->view->storage->get('base_table');
+      $join = $this->query->getJoinData($this->table, $this->query->relationships[$relationship]['base']);
+    }
+    $join->extra[] = [
+      'field' => 'delta',
+      'value' => $this->options['delta'],
+      'numeric' => TRUE
+    ];
+    return $join;
+  }
   public function ensureMyTable() {
     if (!isset($this->tableAlias)) {
-      $join = $this->query->getJoinData($this->table, $this->query->relationships[$this->relationship]['base']);
-      $join->extra[] = [
-        'field' => 'delta',
-        'value' => $this->options['delta'],
-        'numeric' => TRUE
-      ];
-      $this->tableAlias = $this->query->ensureTable($this->table, $this->relationship, $join);
+      //if ($join = $this->query->getJoinData($this->table, $this->query->relationships[$this->relationship]['base'])) {
+      $join = $this->getJoinData();
+      if ($this->relationship) {
+        $this->tableAlias = $this->query->ensureTable($this->table, $this->relationship, $join);
+      }
+      else {
+        $this->tableAlias = $this->query->queueTable($this->table, $this->relationship, $join, "{$this->table}__{$this->options['delta']}");
+      }
     }
     return $this->tableAlias;
   }

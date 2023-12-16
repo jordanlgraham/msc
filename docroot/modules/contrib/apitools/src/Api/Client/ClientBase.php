@@ -17,11 +17,12 @@ use Drupal\apitools\ClientResourceManagerInterface;
 use Drupal\apitools\TokenStorageTrait;
 use Drupal\apitools\Utility\ParameterBag;
 use Drupal\key\KeyRepositoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
 
 /**
- * Class ClientBase.
+ * Base class for an ApiToolsClient plugin.
  */
 abstract class ClientBase extends PluginBase implements ConfigurableInterface, PluginWithFormsInterface, PluginFormInterface, ClientInterface {
 
@@ -30,35 +31,14 @@ abstract class ClientBase extends PluginBase implements ConfigurableInterface, P
   use SerializerAwareTrait;
 
   /**
-   * @var ParameterBag
+   * @var \Drupal\apitools\ClientManagerInterface
    */
-  protected $params;
-
-  /**
-   * @var ParameterBag
-   */
-  protected $options;
-
-  /**
-   * @var \GuzzleHttp\Client
-   */
-  protected $httpClient;
+  protected $manager;
 
   /**
    * @var \Drupal\apitools\ClientResourceManagerInterface
    */
   protected $resourceManager;
-
-    /**
-     * @var \Drupal\apitools\ClientManagerInterface
-     */
-  protected $manager;
-
-  protected $apiName;
-
-  protected $controllers;
-
-  private $configKey = 'config';
 
   /**
    * @var \Drupal\Core\Config\ConfigFactoryInterface
@@ -76,18 +56,45 @@ abstract class ClientBase extends PluginBase implements ConfigurableInterface, P
   protected $time;
 
   /**
+   * @var \GuzzleHttp\Client
+   */
+  protected $httpClient;
+
+  /**
+   * @var string
+   */
+  protected $apiName;
+
+  /**
+   * @var \Drupal\apitools\Utility\ParameterBag
+   */
+  protected $options;
+
+  /**
+   * @var \Drupal\apitools\Utility\ParameterBag
+   */
+  protected $params;
+
+  /**
+   * @var \Psr\Http\Message\ResponseInterface
+   */
+  protected $lastResponse;
+
+  private $configKey = 'config';
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, ClientManagerInterface $client_manager, ClientResourceManagerInterface $resource_manager, ConfigFactoryInterface $config_factory, KeyRepositoryInterface $key_repository, Time $time) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->manager = $client_manager;
     $this->resourceManager = $resource_manager;
-    $this->apiName = !empty($plugin_definition['api']) ? $plugin_definition['api'] : NULL;
-    $this->options = new ParameterBag();
-    $this->params = new ParameterBag();
     $this->configFactory = $config_factory;
     $this->keyRepository = $key_repository;
     $this->setTime($time);
+    $this->apiName = !empty($plugin_definition['api']) ? $plugin_definition['api'] : NULL;
+    $this->options = new ParameterBag();
+    $this->params = new ParameterBag();
   }
 
   /**
@@ -210,6 +217,7 @@ abstract class ClientBase extends PluginBase implements ConfigurableInterface, P
     $url = UrlHelper::isExternal($path) ? $path : $this->url($path);
     try {
       $response = $this->httpClient->{$method}($url, $request_options->all());
+      $this->lastResponse = $response;
       $response = $response->getBody()->getContents();
     }
     catch (\Exception $e) {
@@ -408,5 +416,12 @@ abstract class ClientBase extends PluginBase implements ConfigurableInterface, P
    */
   public function getConfiguration() {
     return $this->configuration;
+  }
+
+  /**
+   * @return ResponseInterface
+   */
+  public function getLastResponse() {
+    return $this->lastResponse;
   }
 }

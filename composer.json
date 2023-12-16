@@ -95,7 +95,8 @@
     "drush/drush": "^11",
     "geocoder-php/free-geoip-provider": "^4.4",
     "geocoder-php/google-maps-provider": "^4.6",
-    "tijsverkoyen/css-to-inline-styles": "^2.2"
+    "tijsverkoyen/css-to-inline-styles": "^2.2",
+    "topfloor/composer-cleanup-vcs-dirs": "^1.1"
   },
   "conflict": {
       "drupal/drupal": "*"
@@ -109,7 +110,8 @@
       "cweagans/composer-patches": true,
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
-      "php-http/discovery": true
+      "php-http/discovery": true,
+      "topfloor/composer-cleanup-vcs-dirs": true
     }
   },
   "extra": {
