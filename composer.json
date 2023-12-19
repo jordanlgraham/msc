@@ -94,7 +94,8 @@
     "geocoder-php/free-geoip-provider": "^4.4",
     "geocoder-php/google-maps-provider": "^4.6",
     "tijsverkoyen/css-to-inline-styles": "^2.2",
-    "topfloor/composer-cleanup-vcs-dirs": "^1.1"
+    "topfloor/composer-cleanup-vcs-dirs": "^1.1",
+    "wikimedia/composer-merge-plugin": "^2.1"
   },
   "conflict": {
       "drupal/drupal": "*"
@@ -109,7 +110,8 @@
       "drupal/core-composer-scaffold": true,
       "drupal/core-project-message": true,
       "php-http/discovery": true,
-      "topfloor/composer-cleanup-vcs-dirs": true
+      "topfloor/composer-cleanup-vcs-dirs": true,
+      "wikimedia/composer-merge-plugin": true
     }
   },
   "extra": {
@@ -165,7 +167,7 @@
       },
       "merge-plugin": {
         "include": [
-            "modules/custom/msca_tweet_block/composer.json"
+            "web/modules/contrib/webform/composer.libraries.json"
         ],
         "recurse": false,
         "replace": false,
