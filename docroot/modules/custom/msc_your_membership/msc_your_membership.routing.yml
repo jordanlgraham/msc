@@ -14,3 +14,12 @@ msc_your_membership.org_sync_config:
     _form: 'Drupal\msc_your_membership\Form\OrgSyncConfigForm'
   requirements:
     _permission: 'administer site configuration'
+
+msc_your_membership.profile_getter:
+  path: '/profile/{id}'
+  defaults:
+    _title: 'Test yo shizzle'
+    _controller: '\Drupal\msc_your_membership\Controller\GetProfileController::build'
+  requirements:
+    _permission: 'administer site configuration'
+    id: '\d+'

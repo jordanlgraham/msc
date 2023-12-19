@@ -115,7 +115,7 @@ class OrgSync {
     $query = $this->nodeStorage->getQuery();
     $query->condition('status', 1);
     $query->condition('type', $type);
-    $query->condition('field_customer_key', $organization['org_cst_key']);
+    $query->condition('field_website_member_id', $organization['ProfileID']);
     $query->accessCheck(FALSE);
     $entity_ids = $query->execute();
 
@@ -157,32 +157,32 @@ class OrgSync {
    * @return \Drupal\node\NodeInterface
    */
   private function saveOrgNode(array $org, NodeInterface $node) {
-
-    $individual = $this->getIndividual($org['con__cst_key']);
+    $merp = 'derp';
+    // $individual = $this->getIndividual($org['con__cst_key']);
     //first handle fields that exist in both the Facility and Vendor content types
-    $node->set('title', $this->helper->cleanSoapField($org['org_name']));
+    $node->set('title', $org['MemberProfessionalInfo']['EmployerName']);
     $node->field_address->country_code = 'US';
-    $node->field_address->administrative_area = $this->helper->cleanSoapField($org['adr_state']);
-    $node->field_address->locality = $this->helper->cleanSoapField($org['adr_city']);
-    $node->field_address->postal_code = $this->helper->cleanSoapField($org['adr_post_code'], 'postal');
-    $node->field_address->address_line1 = $this->helper->cleanSoapField($org['adr_line1']);
-    $node->field_address->address_line2 = $this->helper->cleanSoapField($org['adr_line2']);
-    $node->field_contact = isset($individual['name']) ? $this->helper->cleanSoapField($individual['name']) : '';
-    $node->field_contact_title = isset($individual['title']) ? $this->helper->cleanSoapField($individual['title']) : '';
-    $node->field_email = isset($individual['email']) ? $this->helper->cleanSoapField($individual['email']) : '';
-    $node->field_phone = $this->helper->cleanSoapField($org['phn_number_complete']);; //not in GetFacadeObject
-    $node->field_web_address = $this->helper->cleanSoapField($org['cst_web_site'], 'url');
-    $node->field_facebook = $this->helper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
-    $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
-    $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
-    $node->field_customer_key = $this->helper->cleanSoapField($org['org_cst_key']); //Text (plain)
+    $node->field_address->administrative_area = $org['MemberProfessionalInfo']['WorkAddressLocation'];
+    $node->field_address->locality = $org['MemberProfessionalInfo']['WorkAddressCity'];
+    $node->field_address->postal_code = $org['MemberProfessionalInfo']['WorkAddressPostalCode'];
+    $node->field_address->address_line1 = $org['MemberProfessionalInfo']['WorkAddressLine1'];
+    $node->field_address->address_line2 = $org['MemberProfessionalInfo']['WorkAddressLine2'];
+    $node->field_contact = $org['MemberPersonalInfo']['FirstName'] . ' ' . $org['MemberPersonalInfo']['LastName'];
+    $node->field_contact_title = $org['MemberProfessionalInfo']['WorkTitle'];
+    $node->field_email = $org['MemberPersonalInfo']['Email'];
+    $node->field_phone = $org['MemberPersonalInfo']['HomePhoneNumber'];
+    // $node->field_web_address = $org['MemberProfessionalInfo']['WorkUrl'];
+    // $node->field_facebook = $this->helper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
+    // $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
+    // $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
+    $node->field_website_member_id = $org['ProfileID'];
     //fields specific to facility nodes
     if($node->getType() == 'facility') {
-      $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
-      $node->field_customer_fax_number = $this->helper->cleanSoapField($org['fax_number']);// Text (plain)
-      $node->field_customer_phone_number = $this->helper->cleanSoapField($org['phn_number_complete']);// Text (plain)
+      // $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
+      $node->field_customer_fax_number = $org['MemberProfessionalInfo']['WorkFaxNumber'];// Text (plain)
+      $node->field_customer_phone_number = $org['MemberProfessionalInfo']['WorkPhoneNumber'];// Text (plain)
       $node->field_customer_type = $this->helper->cleanSoapField($org['cst_type'], 'array');// List (text)
-      $node->field_customer_web_site = $this->helper->checkURLValidity($org['cst_web_site']);// Text (plain)
+      $node->field_customer_web_site = $org['MemberProfessionalInfo']['WorkUrl'];
       $node->field_languages_spoken = $this->helper->cleanSoapField($org['org_custom_text_08'], 'array');//  List (text)
       $node->field_licensed_nursing_facility_ = $this->helper->cleanSoapField($org['org_custom_integer_10']);//  Number (integer)
       $node->field_medicaid = $this->helper->cleanSoapField($org['org_custom_flag_05'], 'boolean');//  Boolean
@@ -298,7 +298,7 @@ class OrgSync {
     //If the API returns an organization as an "associate,"
     //the organization should be in the vendor content type,
     //not the facility content type.
-    $org_code = $organization['org_ogt_code'];
+    $org_code = $organization['MemberAccountInfo']['MemberTypeCode'];
     if($org_code === 'Associate') {
       return 'vendor';
     } else {
@@ -447,14 +447,15 @@ class OrgSync {
    *
    * @return bool|\Drupal\Core\Entity\EntityInterface|null
    */
-  public function syncOrganization(array $org, array $facility_types) {
-    // This API method doesn't allow filtering by facility type, so do it here.
-    if (empty($org['org_ogt_code']) || !in_array($org['org_ogt_code'], $facility_types)) {
+  public function syncOrganization(array $orgInfo, array $facility_types) {
+    // Get the full profile from YM.
+    $org = $this->ymApiUtils->getMemberProfile($orgInfo['ProfileID']);
+    // Bail if we couldn't get the profile.
+    if (empty($org)) {
       return FALSE;
     }
-
     // Make sure the organization is a member.
-      if ($this->helper->cleanSoapField($org['cst_member_flag']) !== '1') {
+    if (!$org['IsMember']) {
       // A synced node may no longer be a member.
       // Check for any nodes with this key and unpublish them.
       $node = $this->unpublishOrgNode($org);
@@ -465,16 +466,12 @@ class OrgSync {
     }
 
     // Don't create any new facilities for 'Multi-Facility Corporate' orgs.
-    if ($org['org_ogt_code'] === 'Multi-Facility Corporate') {
+    if ($org['MemberAccountInfo']['MemberTypeCode'] === 'Multi-Facility Corporate') {
       return FALSE;
     }
 
-    //We need to get the GetFacadeObject version of this, which returns
-    //more fields than GetOrganizationChangesByDate. Silly, but necessary.
-    $organization = $this->getObject($org['org_cst_key']);
-
-    $node = $this->loadOrCreateOrgNode($organization);
-    $this->saveOrgNode($organization, $node);
+    $node = $this->loadOrCreateOrgNode($org);
+    $this->saveOrgNode($org, $node);
     return $node;
   }
 
