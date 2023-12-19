@@ -99,9 +99,6 @@ module:
   msca_misc: 0
   msca_theme_tweaks: 0
   mysql: 0
-  netforum_event_sync: 0
-  netforum_org_sync: 0
-  netforum_user_auth: 0
   node: 0
   options: 0
   page_cache: 0
