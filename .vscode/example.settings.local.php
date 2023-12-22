@@ -30,8 +30,6 @@
  *
  * @see https://wiki.php.net/rfc/expectations
  */
-assert_options(ASSERT_ACTIVE, TRUE);
-\Drupal\Component\Assertion\Handle::register();
 
 /**
  * Enable local development services.
@@ -111,14 +109,14 @@ $settings['hash_salt'] = 'tacos';
 // Scaffolding for Lando-based local development.
 $lando_info = json_decode(getenv('LANDO_INFO'), TRUE);
 if (!empty($lando_info)) {
-  $base_url = "https://msc.lndo.site";
+  $merp = 'derp';
 
   // Database credentials
   $databases['default']['default'] = [
-    'database' => $lando_info['msc']['creds']['database'],
-    'username' => $lando_info['msc']['creds']['user'],
-    'password' => $lando_info['msc']['creds']['password'],
-    'host' => 'msc',
+    'database' => $lando_info['database']['creds']['database'],
+    'username' => $lando_info['database']['creds']['user'],
+    'password' => $lando_info['database']['creds']['password'],
+    'host' => 'database',
     'driver' => 'mysql',
   ];
 
@@ -132,6 +130,9 @@ if (!empty($lando_info)) {
   // Disable Shield on local dev by setting the
   // shield user variable to NULL
   $config['shield.settings']['credentials']['shield']['user'] = NULL;
+
+  $config['stage_file_proxy.settings']['origin'] =  'https://www.maseniorcare.org';
 }
 
 $settings['config_sync_directory'] = '/app/config/default';
+$config['symfony_mailer.mailer_transport.smtp']['pass'] = 'm&tO5D42bX!2';
