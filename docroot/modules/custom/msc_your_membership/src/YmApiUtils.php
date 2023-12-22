@@ -159,16 +159,16 @@ class YmApiUtils {
     $counter = 0;
     while (!$done) {
       $counter++;
-      $response = $this->ymApiClient->get('/MemberList', [
+      $response = $this->ymApiClient->get('/PeopleIDs', [
         'parameters' => [
-          'FieldSelection' => 'LastUpdated,ProfileID,MemberTypeCode',
+          'UserType' => 'All',
           'PageNumber' => $counter,
-          'PageSize' => 500,
+          'PageSize' => 10000,
         ]
       ]);
-      if (!empty($response['Members'])) {
+      if (!empty($response['IDList'])) {
         $membersLastUpdated = array_merge(
-          $membersLastUpdated, $response['Members']
+          $membersLastUpdated, $response['IDList']
         );
       } else {
         $done = TRUE;

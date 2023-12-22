@@ -422,19 +422,8 @@ class OrgSync {
     return explode("\n", str_replace("\r", "", $this->config->get('org_types')));
   }
 
-  public function getOrganizationChanges($startDate, $endDate) {
-    $memberIds = [];
-    // Build an array of members' last updated values keyed by ProfileID.
-    $memberIds = $this->ymApiUtils->getMembersInfo();
-    // Filter $memberIds to only include members with LastUpdated values
-    // between $startDate and $endDate.
-    $memberIds = array_filter($memberIds, function($member) use ($startDate, $endDate) {
-      $lastUpdated = $member['LastUpdated'];
-      // Convert $lastUpdated to a timestamp.
-      $lastUpdated = strtotime($lastUpdated);
-      return $lastUpdated >= $startDate && $lastUpdated <= $endDate;
-    });
-    return $memberIds;
+  public function getProfileIdsSince($startDate) {
+    return $this->ymApiUtils->getMembersInfo();
   }
 
   /**

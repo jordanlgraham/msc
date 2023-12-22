@@ -30,6 +30,13 @@ class OrgSyncConfigForm extends ConfigFormBase {
   protected $orgSync;
 
   /**
+   * Undocumented variable
+   *
+   * @var \Drupal\msc_your_membership\YmApiUtils
+   */
+  protected $ymApiUtils;
+
+  /**
    * Constructs an OrgSyncForm object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
@@ -37,6 +44,7 @@ class OrgSyncConfigForm extends ConfigFormBase {
   public function __construct(EntityTypeManagerInterface $entityTypeManager, OrgSync $orgSync) {
     $this->entityTypeManager = $entityTypeManager;
     $this->orgSync = $orgSync;
+    $this->ymApiUtils = \Drupal::service('msc_your_membership.ym_api_utils');
   }
 
   /**
@@ -84,26 +92,38 @@ class OrgSyncConfigForm extends ConfigFormBase {
 
     $facilityTypes = $this->getFacilityTypes();
 
+    $form['sync_all'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Sync all the things'),
+      '#description' => $this->t('Perform a complete sync of all organizations in YM.'),
+    ];
+
     $form['org_types'] = [
       '#type' => 'select',
       '#title' => $this->t('Organization Type(s)'),
       '#description' => $this->t('A list of Organization Types to search for in the GetOrganizationByType API call (i.e. Assisted Living)'),
       '#multiple' => TRUE,
       '#options' => $facilityTypes,
+      '#states' => [
+        'invisible' => [
+          ':input[name="sync_all"]' => ['checked' => TRUE],
+        ],
+        'required' => [
+          ':input[name="sync_all"]' => ['checked' => FALSE],
+        ],
+      ],
     ];
     $form['start_date'] = [
       '#type' => 'date',
-      '#title' => $this->t('Sync Start Date'),
-    ];
-    $form['end_date'] = [
-      '#type' => 'date',
-      '#title' => $this->t('Sync End Date'),
-      '#description' => $this->t('Leave blank to sync until now.')
-    ];
-    $form['sync_all'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Sync Everything'),
-      '#description' => $this->t('Ignore Dates Above and Completely Re-sync'),
+      '#title' => $this->t('Sync only changes since this date'),
+      '#states' => [
+        'invisible' => [
+          ':input[name="sync_all"]' => ['checked' => TRUE],
+        ],
+        'required' => [
+          ':input[name="sync_all"]' => ['checked' => FALSE],
+        ],
+      ],
     ];
 
     $form['actions'] = [
@@ -122,37 +142,10 @@ class OrgSyncConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Set error if 'Sync Everything' checkbox is empty and start and end dates
-    // are the same.
     $values = $form_state->getValues();
-    if (empty($values['org_types'])) {
-      $form_state->setErrorByName('org_types', $this->t('No org types have been selected.'));
-    }
-
-    // Return error if no organization types have been selected.
-    if (empty($values['org_types']) && !$values['sync_all']) {
-      $form_state->setErrorByName('org_types', $this->t('Please select some org type(s) or check the \'Sync Everything\' box.'));
-    }
-
-    // If $form_state has sync_all == 1, don't validate start and end dates.
+    // If $form_state has sync_all == 1, don't validate the other fields.
     if ($values['sync_all']) {
       return;
-    }
-
-    // Handle errors relating to the start and end dates.
-    switch ($values['start_date'] == $values['end_date']) {
-      case TRUE:
-        $form_state->setErrorByName('end_date', $this->t('Start and end dates need to have different values.'));
-        break;
-
-      default:
-        $time = [];
-        foreach (['start_date', 'end_date'] as $endpoint) {
-          $time[] = strtotime($values[$endpoint]);
-        }
-        if ($time[1] && $time[1] < $time[0]) {
-          $form_state->setErrorByName('end_date', $this->t('End date must be after start date.'));
-        }
     }
   }
 
@@ -214,40 +207,29 @@ class OrgSyncConfigForm extends ConfigFormBase {
    */
   public function generateBatchByDate($form_state) {
     $operations = [];
-
-    // By default, set both endpoints to current timestamp.
-    $start_date = $end_date = time();
-    if (!empty($form_state->getValue('start_date'))) {
-      $start_date = strtotime($form_state->getValue('start_date'));
-    }
-    if (!empty($form_state->getValue('end_date'))) {
-      $end_date = strtotime($form_state->getValue('end_date'));
-    }
-
+    // Develop an array of facility type term names.
     $org_type_tids = $form_state->getValue('org_types');
-    $types = [];
-    $terms = $this->entityTypeManager->getStorage('taxonomy_term')->loadMultiple($org_type_tids);
-    foreach ($terms as $tid => $term) {
-      $types[$tid] = $term->label();
-    }
-    $start = new \DateTime();
-    $start->setTimestamp($start_date);
-    $start->setTime('0', '0', '0');
-    $end = new \DateTime();
-    $end->setTimestamp($end_date);
-    $end->setTime('23', '59', '59');
-    $diff = $start->diff($end);
-    if ($diff->m === 0) {
-      $operations[] = [self::class . '::importOrgsBatch', [$types, $start->getTimestamp(), $end->getTimestamp()]];
-    } else {
-      // For each month difference, add an operation.
-      for ($i = 0; $i < $diff->m; $i++) {
-        $operations[] = [self::class . '::importOrgsBatch', [$types, $start->getTimeStamp(), $start->modify('+1 month')->getTimestamp()]];
+    foreach ($org_type_tids as $tid) {
+      $term = Term::load($tid);
+      if ($term) {
+        $facilityTypes[] = $term->get('field_member_type_code')->value;
       }
-      // If there are extra days, fill in the remainder of the days in one last op.
-      // Otherwise, fill in the last day (the object will be set to 12AM that morning).
-      $operations[] = [self::class . '::importOrgsBatch', [$types, $start->getTimestamp(), $end->getTimestamp()]];
     }
+
+    // Set $startDate to now by default.
+    $startDate = time();
+    if (!empty($form_state->getValue('start_date'))) {
+      $startDate = strtotime($form_state->getValue('start_date'));
+    }
+    // Format $startDate with ISO 8601 format.
+    $startDate = date('c', $startDate);
+
+    // Get an array of ProfileIDs from YM since $startDate.
+    $profileIds = $this->orgSync->getProfileIdsSince($startDate);
+    foreach($profileIds as $profileId) {
+      $operations[] = [self::class . '::processProfilesBatch', [$profileId, $facilityTypes]];
+    }
+
     $batch = [
       'title' => $this->t('Sync organizations'),
       'operations' => $operations,
@@ -260,39 +242,30 @@ class OrgSyncConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function importOrgsBatch($facilityTypes, $start_date, $end_date, &$context) {
+  public static function processProfilesBatch($profileId, $facilityTypes, &$context) {
     // @todo: Inject the msc_your_membership.org_sync service.
-
     /** @var OrgSync $sync */
     $sync = \Drupal::service('msc_your_membership.org_sync');
-    $start_formatted = date(OrgSync::DATE_FORMAT, $start_date);
-    $end_formatted = date(OrgSync::DATE_FORMAT, $end_date);
-    $context['message'] = Html::escape("Syncing $start_formatted to $end_formatted");
+    $start_formatted = date(OrgSync::DATE_FORMAT, $startDate);
+    $context['message'] = Html::escape("Syncing changes since $start_formatted.");
     try {
-      $orgs = $sync->getOrganizationChanges($start_date, $end_date);
-      if (empty($orgs)) {
+      // Get the member profile for $profileId.
+      $profile = $sync->getMemberProfile($profileId);
+      if (empty($profile)) {
         return TRUE;
       }
-      // Change $facilityTypes to be an array of facility_type term field_facility_type_code values.
-      $facilityTypes = array_map(function ($facilityTypeId) {
-        $term = Term::load($facilityTypeId);
-        if ($term) {
-          $field_member_type_code = $term->get('field_member_type_code')->value;
-          return $field_member_type_code;
-        }
-        return null;
-      }, array_keys($facilityTypes));
+      // Only process $profile if in_array($org['MemberTypeCode'], $facilityTypes).
+      if (!in_array($profile['MemberTypeCode'], $facilityTypes)) {
+        return TRUE;
+      }
 
-      // Filter $orgs to include only those with facility types in $facilityTypes.
-      $orgs = array_filter($orgs, function ($org) use ($facilityTypes) {
-        return in_array($org['MemberTypeCode'], $facilityTypes);
-      });
+
     } catch (\Exception $exception) {
       $msg = $exception->getMessage();
       $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period $start_formatted to $end_formatted: $msg";
       return TRUE;
     }
-    $sandbox_key = $start_date . $end_date;
+    $sandbox_key = $startDate;
     if (!isset($context['sandbox'][$sandbox_key]['pointer'])) {
       // Set the pointer to the index of the first element of $orgs.
       $context['sandbox'][$sandbox_key]['pointer'] = array_key_first($orgs);
