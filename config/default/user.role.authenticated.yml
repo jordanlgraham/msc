@@ -3,12 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.webform_default
     - user.role.authenticated
   module:
     - comment
     - contact
     - entity_print
     - file
+    - filter
     - forward
     - masquerade
     - media
@@ -36,4 +38,5 @@ permissions:
   - 'update any media'
   - 'update media'
   - 'use advanced search'
+  - 'use text format webform_default'
   - 'view media'
