@@ -815,7 +815,6 @@ $settings['config_exclude_modules'] = [
   'geolocation_google_maps',
   'netforum_soap',
   'shield',
-  'smtp',
   'stage_file_proxy',
   'twig_vardumper',
   'twig_xdebug'
