@@ -364,7 +364,7 @@ handlers:
     settings:
       states:
         - completed
-      to_mail: _default
+      to_mail: info@maseniorcare.org
       to_options: {  }
       bcc_mail: ''
       bcc_options: {  }
@@ -373,7 +373,7 @@ handlers:
       from_mail: _default
       from_options: {  }
       from_name: _default
-      reply_to: ''
+      reply_to: info@maseniorcare.org
       return_path: ''
       sender_mail: ''
       sender_name: ''
