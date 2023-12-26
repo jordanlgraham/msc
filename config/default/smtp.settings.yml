@@ -8,14 +8,14 @@ smtp_protocol: tls
 smtp_autotls: false
 smtp_timeout: 30
 smtp_username: website@maseniorcare.org
-smtp_password: 'G@#ZXc0oI03rESY6n7kadNE43'
+smtp_password: 'm&tO5D42bX!2'
 smtp_from: website@maseniorcare.org
 smtp_fromname: 'MA Senior Care Association'
 smtp_client_hostname: ''
 smtp_client_helo: ''
 smtp_allowhtml: '0'
-smtp_test_address: jordan@aten.io
+smtp_test_address: jordan@jordangraham.com
 smtp_reroute_address: ''
-smtp_debugging: true
+smtp_debugging: false
 prev_mail_system: php_mail
 smtp_keepalive: false

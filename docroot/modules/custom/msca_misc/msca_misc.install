@@ -33,3 +33,24 @@ function msca_misc_install() {
   $schema->addField($table, 'field_heading_background_color_name', $spec);
 
 }
+
+/**
+ * Removes the maillog table if it exists.
+ */
+function msca_misc_update_10001() {
+  $schema = Database::getConnection()->schema();
+  if ($schema->tableExists('maillog')) {
+    $schema->dropTable('maillog');
+    // Inform about the update.
+    $message = 'Deleted the maillog table.';
+    \Drupal::logger('msca_misc')->notice($message);
+    \Drupal::messenger()->addMessage($message);
+  } else {
+    // Inform about the update.
+    $message = 'No maillog table found.';
+    \Drupal::logger('msca_misc')->notice($message);
+    \Drupal::messenger()->addMessage($message);
+  }
+
+
+}

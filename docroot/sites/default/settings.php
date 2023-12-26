@@ -751,7 +751,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  */
 $settings['file_scan_ignore_directories'] = [
   'node_modules',
-  'bower_components',
+  'bower_components'
 ];
 
 /**
@@ -810,7 +810,15 @@ if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
   }
 }
 
-$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy', 'netforum_soap', 'twig_vardumper', 'geolocation_google_maps', 'twig_xdebug', 'shield'];
+$settings['config_exclude_modules'] = [
+  'devel',
+  'geolocation_google_maps',
+  'netforum_soap',
+  'shield',
+  'stage_file_proxy',
+  'twig_vardumper',
+  'twig_xdebug'
+];
 
 /**
  * Load local development override configuration, if available.

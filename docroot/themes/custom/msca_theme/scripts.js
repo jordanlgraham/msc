@@ -606,23 +606,17 @@ var Tab = function ($) {
     attach: function attach(context, settings) {
 
       // Expand second and third level menus on click
-      $(context).find('.has-submenu').each(function () {
-        if (!$(this).data('has-submenu')) {
-          $(this).data('has-submenu', true);
-          $(this).click(function (e) {
-            if ($(e.target).closest('li').hasClass('has-submenu')) {
-              // Find the parent of the current link and toggle it's immediate child UL.
-              // Another safeguard to keep parent classes from toggling
-              $(e.target).closest('li').toggleClass('submenu-open');
-
-              $(e.target).closest('li').find('> ul').toggleClass('subnav-active');
-              if (!window.matchMedia('(min-width: 768px)').matches) {
-                e.preventDefault();
-                e.stopPropagation();
-              }
+      $(context).find('.has-submenu:not(.submenu-open)').each(function () {
+        $(this).addClass('submenu-open').click(function (e) {
+          if ($(e.target).closest('li').hasClass('has-submenu')) {
+            // Find the parent of the current link and toggle its immediate child UL.
+            $(e.target).closest('li').find('> ul').toggleClass('subnav-active');
+            if (!window.matchMedia('(min-width: 768px)').matches) {
+              e.preventDefault();
+              e.stopPropagation();
             }
-          });
-        }
+          }
+        });
       });
     }
   };
