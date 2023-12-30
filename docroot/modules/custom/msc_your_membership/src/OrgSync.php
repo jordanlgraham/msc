@@ -392,7 +392,6 @@ class OrgSync {
     // Get the index from $usStates for the element with value $org['MemberProfessionalInfo']['WorkAddressLocation'].
     $abbreviation = array_search($org['MemberProfessionalInfo']['WorkAddressLocation'], $usStates);
     $node->field_address->administrative_area = $abbreviation;
-    // $node->field_address->administrative_area = $org['MemberProfessionalInfo']['WorkAddressLocation'];
     $node->field_address->locality = $org['MemberProfessionalInfo']['WorkAddressCity'];
     $node->field_address->postal_code = $org['MemberProfessionalInfo']['WorkAddressPostalCode'];
     $node->field_address->address_line1 = $org['MemberProfessionalInfo']['WorkAddressLine1'];

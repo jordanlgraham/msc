@@ -46,7 +46,6 @@ dependencies:
     - field.field.node.facility.field_linkedin
     - field.field.node.facility.field_manager
     - field.field.node.facility.field_massmap_member
-    - field.field.node.facility.field_master_member_id
     - field.field.node.facility.field_medicaid
     - field.field.node.facility.field_medicaid_occupancy
     - field.field.node.facility.field_medicare
@@ -228,6 +227,7 @@ third_party_settings:
         - field_facility_price_range_min
         - field_facility_price_range_max
         - field_ge
+        - field_website_member_id
       label: Miscellaneous
       region: content
       parent_name: group_netforum_data_auto_synchro
@@ -245,7 +245,7 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 5
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -562,13 +562,6 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
-  field_master_member_id:
-    type: number
-    weight: 123
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_medicaid:
     type: boolean_checkbox
     weight: 18
@@ -742,6 +735,7 @@ content:
       collapsible: false
       collapsed: false
       revision: false
+      removed_reference: optional
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
@@ -844,7 +838,7 @@ content:
     third_party_settings: {  }
   field_website_member_id:
     type: number
-    weight: 122
+    weight: 60
     region: content
     settings:
       placeholder: ''
@@ -859,33 +853,33 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 11
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 7
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   publish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 121
+    weight: 12
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 9
+    weight: 7
     region: content
     settings:
       display_label: true
@@ -910,12 +904,12 @@ content:
     third_party_settings: {  }
   unpublish_on:
     type: datetime_timestamp_no_default
-    weight: 30
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

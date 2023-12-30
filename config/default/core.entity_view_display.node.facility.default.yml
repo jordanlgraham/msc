@@ -45,7 +45,6 @@ dependencies:
     - field.field.node.facility.field_linkedin
     - field.field.node.facility.field_manager
     - field.field.node.facility.field_massmap_member
-    - field.field.node.facility.field_master_member_id
     - field.field.node.facility.field_medicaid
     - field.field.node.facility.field_medicaid_occupancy
     - field.field.node.facility.field_medicare
@@ -778,7 +777,6 @@ hidden:
   field_customer_id: true
   field_customer_key: true
   field_customer_type: true
-  field_master_member_id: true
   field_member_flag: true
   field_website_member_id: true
   links: true
