@@ -176,4 +176,240 @@ class YmApiUtils {
     }
     return $membersLastUpdated;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getYmIndeces($org) {
+    $ymIndices = [
+      'field_populations_served' => [
+        'type' => 'list_string',
+        'name' => 'Populations Served',
+      ],
+      'field_languages_spoken' => [
+        'type' => 'list_string',
+        'name' => 'Language',
+      ],
+      'field_licensed_nursing_facility_beds' => [
+        'type' => 'integer',
+        'name' => 'LNFB',
+      ],
+      'field_medicaid_certified' => [
+        'type' => 'boolean',
+        'name' => 'MedCert',
+      ],
+      'field_medicare_certified' => [
+        'type' => 'boolean',
+        'name' => 'MedicareCert',
+      ],
+      'field_pace_program' => [
+        'type' => 'boolean',
+        'name' => 'Pace',
+      ],
+      'field_services' => [
+        'type' => 'list_string',
+        'name' => 'Services',
+      ],
+      'field_populations_served' => [
+        'type' => 'list_string',
+        'name' => 'PopServed',
+      ],
+      'field_specialized_unit' => [
+        'type' => 'boolean',
+        'name' => 'SpecializedUnits',
+      ],
+      'field_va_contract' => [
+        'type' => 'boolean',
+        'name' => 'VAServices',
+      ],
+      'field_state_id' => [
+        'type' => 'string',
+        'name' => 'StateID',
+      ],
+      'field_congressional_district' => [
+        'type' => 'string',
+        'name' => 'Congressional District',
+      ],
+      'field_county' => [
+        'type' => 'list_string',
+        'name' => 'County',
+      ],
+      'field_owner' => [
+        'type' => 'string',
+        'name' => 'Owner',
+      ],
+      'field_number_of_employees' => [
+        'type' => 'string',
+        'name' => 'Number Of Employees',
+      ],
+      'field_chapter_affiliate' => [
+        'type' => 'list_string',
+        'name' => 'Chapter',
+      ],
+      'field_massmap_member' => [
+        'type' => 'boolean',
+        'name' => 'MassMapMember',
+      ],
+      'field_for_profit' => [
+        'type' => 'boolean',
+        'name' => 'ForProfit',
+      ],
+      'field_ahca_member' => [
+        'type' => 'boolean',
+        'name' => 'AHCA',
+      ],
+      'field_cna_training_site' => [
+        'type' => 'boolean',
+        'name' => 'CNATraining',
+      ],
+      'field_administrator_in_training' => [
+        'type' => 'boolean',
+        'name' => 'AdmininTraining',
+      ],
+      'field_ncal_member' => [
+        'type' => 'boolean',
+        'name' => 'NCAL',
+      ],
+      'field_assisted_living_beds' => [
+        'type' => 'integer',
+        'name' => 'ALB',
+      ],
+      'field_dementia_care_beds' => [
+        'type' => 'integer',
+        'name' => 'DCB',
+      ],
+      'field_dph_region' => [
+        'type' => 'string',
+        'name' => 'DPHRegion',
+      ],
+      'field_ep_region' => [
+        'type' => 'string',
+        'name' => 'EPRegion',
+      ],
+      'field_hospital_based_nf_tcu_beds' => [
+        'type' => 'integer',
+        'name' => 'Hospital Based NF (TCU) Beds',
+      ],
+      'field_independent_living_beds' => [
+        'type' => 'integer',
+        'name' => 'ILB',
+      ],
+      'field_licensed_rest_home_beds' => [
+        'type' => 'integer',
+        'name' => 'LRHB',
+      ],
+      'field_manager' => [
+        'type' => 'string',
+        'name' => 'Manager',
+      ],
+      'field_medicaid_occupancy_percent' => [
+        'type' => 'string',
+        'name' => 'MedOCC',
+      ],
+      'field_number_of_residents' => [
+        'type' => 'string',
+        'name' => 'Number of Residents',
+      ],
+      'field_one_bedroom' => [
+        'type' => 'integer',
+        'name' => 'One Bedroom',
+      ],
+      'field_representative_district' => [
+        'type' => 'string',
+        'name' => 'RepDistrict',
+      ],
+      'field_retirement_community_aff' => [
+        'type' => 'string',
+        'name' => 'Retirement Community Affiliation',
+      ],
+      'field_senate_district' => [
+        'type' => 'string',
+        'name' => 'SenateDistrict',
+      ],
+      'field_studio' => [
+        'type' => 'integer',
+        'name' => 'Studio',
+      ],
+      'field_total_annual_admissions' => [
+        'type' => 'integer',
+        'name' => 'Total Annual Admissions',
+      ],
+      'field_two_bedroom' => [
+        'type' => 'integer',
+        'name' => 'Two Bedroom',
+      ],
+      'field_wib_region' => [
+        'type' => 'string',
+        'name' => 'WIBregion',
+      ],
+      'field_primary_services' => [
+        'type' => 'list_string',
+        'name' => 'APS',
+      ],
+      'field_additional_services' => [
+        'type' => 'list_string',
+        'name' => 'OtherService',
+      ],
+      // @todo: calculate this field
+      // 'field_all_services' => [
+      //   'type' => 'list_string',
+      //   'name' => 'Associate Other Service',
+      // ],
+      'field_facebook' => [
+        'type' => 'link',
+        'name' => 'Facebook Page',
+      ],
+      'field_twitter' => [
+        'type' => 'link',
+        'name' => 'Twitter Page',
+      ],
+      'field_linkedin' => [
+        'type' => 'link',
+        'name' => 'LinkedIn Page',
+      ],
+    ];
+
+    // Concern ourselves with two content types.
+    $bundles = ['facility', 'vendor'];
+
+    // Iterate over ymIndices and add an 'index' element for each.
+    foreach ($ymIndices as $key => $field) {
+      $index = $this->getYmProfileIndex($field['name'], $org);
+      $ymIndices[$key]['index'] = $index;
+
+      // Determine whether the field exists on the bundle.
+      $ymIndices[$key]['bundles'] = [];
+      foreach ($bundles as $bundle) {
+        // Determine whether the field exists on the bundle.
+        $fieldExists = \Drupal::entityTypeManager()
+          ->getStorage('field_config')
+          ->loadByProperties([
+            'field_name' => $key,
+            'entity_type' => 'node',
+            'bundle' => $bundle,
+          ]);
+
+        if (!empty($fieldExists)) {
+          // The field exists in the bundle.
+          $ymIndices[$key]['bundles'][] = $bundle;
+        }
+      }
+    }
+
+    return $ymIndices;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function getYmProfileIndex($name, $profile) {
+    $index = 0;
+    foreach ($profile['MemberCustomFieldResponses'] as $field) {
+      if ($field['FieldCode'] == $name) {
+        return $index;
+      }
+      $index++;
+    }
+    return FALSE;
+  }
 }

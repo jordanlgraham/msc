@@ -44,7 +44,7 @@ class OrgSyncConfigForm extends ConfigFormBase {
   public function __construct(EntityTypeManagerInterface $entityTypeManager, OrgSync $orgSync) {
     $this->entityTypeManager = $entityTypeManager;
     $this->orgSync = $orgSync;
-    $this->ymApiUtils = \Drupal::service('msc_your_membership.ym_api_utils');
+    $this->ymApiUtils = \Drupal::service('msc_your_membership.ymapi_utils');
   }
 
   /**
@@ -226,9 +226,8 @@ class OrgSyncConfigForm extends ConfigFormBase {
 
     // Get an array of ProfileIDs from YM since $startDate.
     $profileIds = $this->orgSync->getProfileIdsSince($startDate);
-    foreach($profileIds as $profileId) {
-      $operations[] = [self::class . '::processProfilesBatch', [$profileId, $facilityTypes]];
-    }
+    $operations[] = [self::class . '::processProfilesBatch', [$profileIds, $facilityTypes, $startDate]];
+
 
     $batch = [
       'title' => $this->t('Sync organizations'),
@@ -242,50 +241,52 @@ class OrgSyncConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function processProfilesBatch($profileId, $facilityTypes, &$context) {
+  public static function processProfilesBatch(array $profileIds, array $facilityTypes, $startDate, &$context) {
     // @todo: Inject the msc_your_membership.org_sync service.
     /** @var OrgSync $sync */
     $sync = \Drupal::service('msc_your_membership.org_sync');
-    $start_formatted = date(OrgSync::DATE_FORMAT, $startDate);
-    $context['message'] = Html::escape("Syncing changes since $start_formatted.");
-    try {
-      // Get the member profile for $profileId.
-      $profile = $sync->getMemberProfile($profileId);
-      if (empty($profile)) {
-        return TRUE;
-      }
-      // Only process $profile if in_array($org['MemberTypeCode'], $facilityTypes).
-      if (!in_array($profile['MemberTypeCode'], $facilityTypes)) {
-        return TRUE;
-      }
+    $context['message'] = Html::escape("Syncing changes since $startDate.");
 
-
-    } catch (\Exception $exception) {
-      $msg = $exception->getMessage();
-      $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period $start_formatted to $end_formatted: $msg";
-      return TRUE;
-    }
     $sandbox_key = $startDate;
     if (!isset($context['sandbox'][$sandbox_key]['pointer'])) {
-      // Set the pointer to the index of the first element of $orgs.
-      $context['sandbox'][$sandbox_key]['pointer'] = array_key_first($orgs);
-      $context['sandbox'][$sandbox_key]['count'] = count($orgs);
+      // Set the pointer to the index of the first element of $profileIds.
+      $context['sandbox'][$sandbox_key]['pointer'] = array_key_first($profileIds);
+      $context['sandbox'][$sandbox_key]['count'] = count($profileIds);
     }
-    // Process the organizations 50 at a time.
+    // Process the organizations in batches.
+    $batchSize = 50;
     $start = $context['sandbox'][$sandbox_key]['pointer'];
-    $end = $context['sandbox'][$sandbox_key]['pointer'] + 50;
+    $end = $context['sandbox'][$sandbox_key]['pointer'] + $batchSize;
     for ($i = $start; $i < $end; $i++) {
-      if (!isset($orgs[$i])) {
+      if (!isset($profileIds[$i])) {
         break;
       }
-      $organization = $orgs[$i];
+      // @todo: uncomment next line and remove line setting static profileId.
+      // $profileId = $profileIds[$i];
+      $profileId = 74666099;
       try {
-        $node = $sync->syncOrganization($organization, $facilityTypes);
+        // Only process if this profile is in $facilityTypes.
+        try {
+         // Get the member profile for $profileId.
+         $profile = \Drupal::service('msc_your_membership.ymapi_utils')->getMemberProfile($profileId);
+         if (empty($profile)) {
+           return TRUE;
+         }
+         // Only process $profile if in_array($org['MemberTypeCode'], $facilityTypes).
+         if (!in_array($profile['MemberAccountInfo']['MemberTypeCode'], $facilityTypes)) {
+           return TRUE;
+         }
+        } catch (\Exception $exception) {
+         $msg = $exception->getMessage();
+         $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period beginning at $startDate: $msg";
+         return TRUE;
+        }
+        $node = $sync->syncOrganization($profile);
         if (is_object($node)) {
           $context['results']['success'][] = $node->id();
         }
       } catch (\Exception $exception) {
-        $context['results']['errors']['sync'][] = "Error syncing organization {$organization['org_cst_key']}: " .
+        $context['results']['errors']['sync'][] = "Error syncing organization with profile ID {$profileId}.";
         $exception->getMessage();
       }
       $context['sandbox'][$sandbox_key]['pointer']++;

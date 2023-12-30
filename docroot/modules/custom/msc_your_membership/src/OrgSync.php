@@ -3,6 +3,7 @@
 namespace Drupal\msc_your_membership;
 
 use \Exception;
+use Drupal\Core\Link;
 use Psr\Log\LoggerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\netforum_soap\SoapHelper;
@@ -72,7 +73,7 @@ class OrgSync {
   /**
    * Load or create a node based on the organization array retrieved from Netforum.
    *
-   * @param array $organization
+   * @param array $profileanization
    *
    * @return \Drupal\Core\Entity\EntityInterface|null
    */
@@ -111,10 +112,8 @@ class OrgSync {
    */
   private function loadOrgNode(array $organization) {
     //search for a node with the $cst_key so we can perform an update action.
-    $type = $this->getOrganizationType($organization);
     $query = $this->nodeStorage->getQuery();
     $query->condition('status', 1);
-    $query->condition('type', $type);
     $query->condition('field_website_member_id', $organization['ProfileID']);
     $query->accessCheck(FALSE);
     $entity_ids = $query->execute();
@@ -157,127 +156,29 @@ class OrgSync {
    * @return \Drupal\node\NodeInterface
    */
   private function saveOrgNode(array $org, NodeInterface $node) {
-    $merp = 'derp';
-    // $individual = $this->getIndividual($org['con__cst_key']);
-    //first handle fields that exist in both the Facility and Vendor content types
-    $node->set('title', $org['MemberProfessionalInfo']['EmployerName']);
-    $node->field_address->country_code = 'US';
-    $node->field_address->administrative_area = $org['MemberProfessionalInfo']['WorkAddressLocation'];
-    $node->field_address->locality = $org['MemberProfessionalInfo']['WorkAddressCity'];
-    $node->field_address->postal_code = $org['MemberProfessionalInfo']['WorkAddressPostalCode'];
-    $node->field_address->address_line1 = $org['MemberProfessionalInfo']['WorkAddressLine1'];
-    $node->field_address->address_line2 = $org['MemberProfessionalInfo']['WorkAddressLine2'];
-    $node->field_contact = $org['MemberPersonalInfo']['FirstName'] . ' ' . $org['MemberPersonalInfo']['LastName'];
-    $node->field_contact_title = $org['MemberProfessionalInfo']['WorkTitle'];
-    $node->field_email = $org['MemberPersonalInfo']['Email'];
-    $node->field_phone = $org['MemberPersonalInfo']['HomePhoneNumber'];
-    // $node->field_web_address = $org['MemberProfessionalInfo']['WorkUrl'];
-    // $node->field_facebook = $this->helper->URLfromSocialHandle($org['cel_facebook_name'], 'facebook'); //Link
-    // $node->field_linkedin = $this->helper->URLfromSocialHandle($org['cel_linkedin_name'], 'linkedin'); //Link
-    // $node->field_twitter = $this->helper->URLfromSocialHandle($org['cel_twitter_name'], 'twitter'); //Link
-    $node->field_website_member_id = $org['ProfileID'];
-    //fields specific to facility nodes
-    if($node->getType() == 'facility') {
-      // $node->field_administrator = $this->helper->cleanSoapField($org['con__cst_ind_full_name_dn']);// Text (plain)
-      $node->field_customer_fax_number = $org['MemberProfessionalInfo']['WorkFaxNumber'];// Text (plain)
-      $node->field_customer_phone_number = $org['MemberProfessionalInfo']['WorkPhoneNumber'];// Text (plain)
-      $node->field_customer_type = $this->helper->cleanSoapField($org['cst_type'], 'array');// List (text)
-      $node->field_customer_web_site = $org['MemberProfessionalInfo']['WorkUrl'];
-      $node->field_languages_spoken = $this->helper->cleanSoapField($org['org_custom_text_08'], 'array');//  List (text)
-      $node->field_licensed_nursing_facility_ = $this->helper->cleanSoapField($org['org_custom_integer_10']);//  Number (integer)
-      $node->field_medicaid = $this->helper->cleanSoapField($org['org_custom_flag_05'], 'boolean');//  Boolean
-      $node->field_medicare = $this->helper->cleanSoapField($org['org_custom_flag_09'], 'boolean');//  Boolean
-      $node->field_member_flag = $this->helper->cleanSoapField($org['cst_member_flag'], 'boolean');// Boolean
-      $node->field_pace_program = $this->helper->cleanSoapField($org['org_custom_flag_02'], 'boolean');//  Boolean
-      $node->field_service_type = $this->helper->cleanSoapField($org['org_custom_text_09'], 'array');//  List (text)
-      $node->field_populations_served = $this->helper->cleanSoapField($org['org_custom_text_11'], 'array');//  List (text)
-      $node->field_specialized_unit = $this->helper->cleanSoapField($org['org_custom_text_10'], 'array');//  List (text)
-      $node->field_va_contract = $this->helper->cleanSoapField($org['org_custom_flag_01'], 'boolean');// Boolean
-      $facility_type = [$this->helper->cleanSoapField([$org['org_ogt_code']])];
-      $node->field_facility_type = $this->loadOrCreateTermsByName($facility_type, 'facility_type');
-      $node->field_acronym = $this->helper->cleanSoapField($org['org_acronym']);
-      $node->field_state_id = $this->helper->cleanSoapField($org['org_custom_string_03']);
-      $node->field_congressional_district = $this->helper->cleanSoapField($org['org_custom_string_10']);
-      $pref_acos = $this->helper->cleanSoapField($org['org_custom_text_12'], 'array');
-      $node->field_preferred_provider_acos = $this->loadOrCreateTermsByName($pref_acos, 'preferred_provider_acos');
-      $contract_acos = $this->helper->cleanSoapField($org['org_custom_text_13'], 'array');
-      $node->field_contracted_acos = $this->loadOrCreateTermsByName($contract_acos, 'contracted_acos');
-      $node->field_county = $this->helper->cleanSoapField($org['org_custom_text_14'], 'array');
-      $node->field_owner = $this->helper->cleanSoapField($org['org_custom_string_05']);
-      $node->field_number_of_employees = $this->helper->cleanSoapField($org['org_num_employee']);
-      $node->field_chapter_affiliate = $this->helper->cleanSoapField($org['org_chapter_affiliate'], 'array');
-      $node->field_social_worker = $this->helper->cleanSoapField($org['org_custom_flag_03'], 'boolean');
-      $node->field_massmap_member = $this->helper->cleanSoapField($org['org_custom_flag_04'], 'boolean');
-      $node->field_for_profit = $this->helper->cleanSoapField($org['org_custom_flag_06'], 'boolean');
-      $node->field_income_subsidies = $this->helper->cleanSoapField($org['org_custom_flag_07'], 'boolean');
-      $node->field_ahca_member = $this->helper->cleanSoapField($org['org_custom_flag_08'], 'boolean');
-      $node->field_preferred_provider_of_aco = $this->helper->cleanSoapField($org['org_custom_flag_10'], 'boolean');
-      $node->field_contract_with_aco = $this->helper->cleanSoapField($org['org_custom_flag_11'], 'boolean');
-      $node->field_cna_training_site = $this->helper->cleanSoapField($org['org_custom_flag_12'], 'boolean');
-      $node->field_administrator_in_training = $this->helper->cleanSoapField($org['org_custom_flag_13'], 'boolean');
-      $node->field_assisted_living_on_campus = $this->helper->cleanSoapField($org['org_custom_flag_14'], 'boolean');
-      $node->field_ncal_member = $this->helper->cleanSoapField($org['org_custom_flag_15'], 'boolean');
-      $node->field_facility_price_range_min = $this->helper->cleanSoapField($org['org_custom_currency_01'], 'currency');
-      $node->field_facility_price_range_max = $this->helper->cleanSoapField($org['org_custom_currency_02'], 'currency');
-
-      $hmo = $this->helper->cleanSoapField($org['org_custom_text_05'], 'array');
-      $node->field_hmo_accepted = $this->loadOrCreateTermsByName($hmo, 'hmo_accepted');
-      $sco = $this->helper->cleanSoapField($org['org_custom_text_06'], 'array');
-      $node->field_sco_accepted = $this->loadOrCreateTermsByName($sco, 'sco_accepted');
-      $ltc = $this->helper->cleanSoapField($org['org_custom_text_07'], 'array');
-      $node->field_private_ltc_insurance = $this->loadOrCreateTermsByName($ltc, 'private_ltc_insurance_accepted');
-      $oasis = $this->helper->cleanSoapField($org['org_custom_text_15'], 'array');
-      $node->field_oasis_participation = $this->loadOrCreateTermsByName($oasis, 'oasis_participation');
-
-      $node->field_assisted_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_07']);
-      $node->field_companion_units = $this->helper->cleanSoapField($org['org_custom_integer_04']);
-      $node->field_dementia_care_beds = $this->helper->cleanSoapField($org['org_custom_integer_12']);
-      $node->field_dph_region = $this->helper->cleanSoapField($org['org_custom_integer_13']);
-      $node->field_ep_region = $this->helper->cleanSoapField($org['org_custom_string_04']);
-      $node->field_hospital_affiliation = $this->helper->cleanSoapField($org['org_custom_string_01']);
-      $node->field_hospital_based_nf_tcu_beds = $this->helper->cleanSoapField($org['org_custom_integer_08']);
-      $node->field_independent_living_beds = $this->helper->cleanSoapField($org['org_custom_integer_09']);
-      $node->field_licensed_rest_home_beds = $this->helper->cleanSoapField($org['org_custom_integer_11']);
-      $node->field_manager = $this->helper->cleanSoapField($org['org_custom_string_12']);
-      $node->field_medicaid_occupancy = $this->helper->cleanSoapField($org['org_custom_integer_02']);
-      $node->field_medicare_occupancy_percent = $this->helper->cleanSoapField($org['org_custom_integer_14']);
-      $node->field_name_of_assisted_living = $this->helper->cleanSoapField($org['org_custom_string_11']);
-      $node->field_network = $this->helper->cleanSoapField($org['org_custom_string_09']);
-      $node->field_number_of_beds_oos = $this->helper->cleanSoapField($org['org_custom_string_08']);
-      $node->field_number_of_residents = $this->helper->cleanSoapField($org['org_custom_integer_01']);
-      $node->field_one_bedroom = $this->helper->cleanSoapField($org['org_custom_integer_05']);
-      $node->field_previous_manager = $this->helper->cleanSoapField($org['org_custom_string_13']);
-      $node->field_representative_district = $this->helper->cleanSoapField($org['org_custom_string_06']);
-      $node->field_retirement_community_aff = $this->helper->cleanSoapField($org['org_custom_string_02']);
-      $node->field_senate_district = $this->helper->cleanSoapField($org['org_custom_string_07']);
-      $node->field_studio = $this->helper->cleanSoapField($org['org_custom_integer_03']);
-      $node->field_total_annual_admissions = $this->helper->cleanSoapField($org['org_custom_integer_15']);
-      $node->field_two_bedroom = $this->helper->cleanSoapField($org['org_custom_integer_06']);
-      $node->field_wib_region = $this->helper->cleanSoapField($org['org_custom_text_01']);
-      $memberFlag = $this->helper->cleanSoapField($org['cst_member_flag']);
-      if ($memberFlag == '0') {
-        $node->setUnpublished();
-      } elseif($memberFlag == '1') {
-        $node->setPublished();
-      }
-    }
-    // Fields specific to vendor nodes.
-    $primary_services = $this->helper->cleanSoapField($org['org_custom_text_03'], 'array');
-    $additional_services = $this->helper->cleanSoapField($org['org_custom_text_04'], 'array');
-
-    // Merge all services for use in the preferred vendors view.
-    $all_services = array_merge($primary_services, $additional_services);
-
-    if (!empty($primary_services)) {
-      $node->field_primary_services = $this->loadOrCreateTermsByName($primary_services, 'vendor_services_offered');
-    }
-    if (!empty($additional_services)) {
-      $node->field_additional_services = $this->loadOrCreateTermsByName($additional_services, 'vendor_services_offered');
-    }
-    if (!empty($all_services)) {
-      $node->field_all_services = $this->loadOrCreateTermsByName($all_services, 'vendor_services_offered');
+    // Set the values of the node's fields that are standard in YM.
+    $result = $this->setStandardFieldValues($org, $node);
+    if (!$result) {
+      // Add an entry in the database log.
+      $this->logger->error('Unable to set standard field values for @type @key',
+        ['@type' => $node->getType(), '@key' => $org['ProfileID']]);
+    } else {
+      // Use $result as our $node for the next step.
+      $node = $result;
     }
 
+    // Set the values of the node's fields that are custom in YM.
+    $result = $this->setCustomFieldValues($org, $node);
+    if (!$result) {
+      // Add an entry in the database log.
+      $this->logger->error(
+        'Unable to set facility custom field values for @type @key',
+        ['@type' => $node->getType(), '@key' => $org['ProfileID']]
+      );
+    } else {
+      // Use $result as our $node for the next step.
+      $node = $result;
+    }
 
     try {
       $node->save();
@@ -436,18 +337,12 @@ class OrgSync {
    *
    * @return bool|\Drupal\Core\Entity\EntityInterface|null
    */
-  public function syncOrganization(array $orgInfo, array $facility_types) {
-    // Get the full profile from YM.
-    $org = $this->ymApiUtils->getMemberProfile($orgInfo['ProfileID']);
-    // Bail if we couldn't get the profile.
-    if (empty($org)) {
-      return FALSE;
-    }
+  public function syncOrganization($profile) {
     // Make sure the organization is a member.
-    if (!$org['IsMember']) {
+    if (!$profile['IsMember']) {
       // A synced node may no longer be a member.
       // Check for any nodes with this key and unpublish them.
-      $node = $this->unpublishOrgNode($org);
+      $node = $this->unpublishOrgNode($profile);
       if ($node) {
         return $node;
       }
@@ -455,12 +350,13 @@ class OrgSync {
     }
 
     // Don't create any new facilities for 'Multi-Facility Corporate' orgs.
-    if ($org['MemberAccountInfo']['MemberTypeCode'] === 'Multi-Facility Corporate') {
+    if ($profile['MemberAccountInfo']['MemberTypeCode'] === 'Multi-Facility Corporate') {
       return FALSE;
     }
 
-    $node = $this->loadOrCreateOrgNode($org);
-    $this->saveOrgNode($org, $node);
+    $node = $this->loadOrCreateOrgNode($profile);
+
+    $this->saveOrgNode($profile, $node);
     return $node;
   }
 
@@ -479,6 +375,86 @@ class OrgSync {
     $memberTypes = [];
 
     return $memberTypes;
+  }
+
+  /**
+   * Set the value of a node's fields that are custom fields in YM.
+   *
+   * @param object $org
+   * @param Node $node
+   */
+  private function setStandardFieldValues($org, &$node) {
+    // Get the states array.
+    $usStates = include __DIR__ . '/../inc/states.inc';
+    // First handle fields that exist in both the Facility and Vendor content types.
+    $node->set('title', $org['MemberProfessionalInfo']['EmployerName']);
+    $node->field_address->country_code = 'US';
+    // Get the index from $usStates for the element with value $org['MemberProfessionalInfo']['WorkAddressLocation'].
+    $abbreviation = array_search($org['MemberProfessionalInfo']['WorkAddressLocation'], $usStates);
+    $node->field_address->administrative_area = $abbreviation;
+    // $node->field_address->administrative_area = $org['MemberProfessionalInfo']['WorkAddressLocation'];
+    $node->field_address->locality = $org['MemberProfessionalInfo']['WorkAddressCity'];
+    $node->field_address->postal_code = $org['MemberProfessionalInfo']['WorkAddressPostalCode'];
+    $node->field_address->address_line1 = $org['MemberProfessionalInfo']['WorkAddressLine1'];
+    $node->field_address->address_line2 = $org['MemberProfessionalInfo']['WorkAddressLine2'];
+    $node->field_contact = $org['MemberPersonalInfo']['FirstName'] . ' ' . $org['MemberPersonalInfo']['LastName'];
+    $node->field_contact_title = $org['MemberProfessionalInfo']['WorkTitle'];
+    $node->field_email = $org['MemberPersonalInfo']['Email'];
+    $node->field_phone = $org['MemberPersonalInfo']['HomePhoneNumber'];
+    $node->field_web_address = $org['MemberProfessionalInfo']['WorkUrl'];
+    $node->field_website_member_id = $org['ProfileID'];
+
+    // Set $node->status based on $org['IsMember'].
+    $node->set('status', $org['IsMember'] ? NodeInterface::PUBLISHED : NodeInterface::NOT_PUBLISHED);
+    return $node;
+  }
+
+  /**
+   * Set the value of a node's fields that are custom fields in YM.
+   *
+   * @param object $org
+   * @param Node $node
+   */
+  private function setCustomFieldValues($org, &$node) {
+    // Get the indices for this organization.
+    $fields = $this->ymApiUtils->getYmIndeces($org);
+    // Iterate over $fields and store the values in $node.
+    foreach ($fields as $key => $field) {
+      // Skip fields with index == false.
+      if ($field['index'] === FALSE) {
+        // Add an entry in the database log.
+        $this->logger->error('Cannot find YM custom fields index for field @field for @type @key',
+          ['@field' => $key, '@type' => $node->getType(), '@key' => $org['ProfileID']]);
+        continue;
+      }
+      // Skip fields that do not include $node->getType() in $field['bundles'].
+      if (!in_array($node->getType(), $field['bundles'])) {
+        continue;
+      }
+      // Set the field value based on the field type.
+      switch ($field['type']) {
+        case 'string':
+        case 'integer':
+        case 'boolean':
+          $node->set($key, $org['MemberCustomFieldResponses'][$field['index']]['Values'][0]['Value']);
+          break;
+        case 'list_string':
+          $node->set($key, array_map(function ($item) {
+            return ['value' => $item['Value']];
+          }, $org['MemberCustomFieldResponses'][$field['index']]['Values']));
+          break;
+        case 'link':
+          // Create an external link for $org['MemberCustomFieldResponses'][$field['index']]['Values'])).
+          $link = Link::fromTextAndUrl($org['MemberCustomFieldResponses'][$field['index']]['Values'][0]['Value'], Url::fromUri($org['MemberCustomFieldResponses'][$field['index']]['Values'][0]['Value']));
+          $node->set($key, $link);
+          break;
+      }
+    }
+    // Facility nodes also need a couple of standard fields.
+    $node->field_customer_fax_number = $org['MemberProfessionalInfo']['WorkFaxNumber'];
+    $node->field_customer_phone_number = $org['MemberProfessionalInfo']['WorkPhoneNumber'];
+
+    return $node;
   }
 
 }
