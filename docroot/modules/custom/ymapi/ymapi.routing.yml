@@ -1,7 +1,0 @@
-ymapi.example:
-  path: '/ymapi/example'
-  defaults:
-    _title: 'Example'
-    _controller: '\Drupal\ymapi\Controller\YmapiController::build'
-  requirements:
-    _permission: 'administer site configuration'
