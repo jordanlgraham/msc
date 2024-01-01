@@ -173,15 +173,17 @@ third_party_settings:
         - field_wib_region
         - group_social_links
         - group_miscellaneous
-      label: 'NetForum Data (Auto-synchronized)'
+      label: 'YourMembership Data (Auto-synchronized)'
       region: content
       parent_name: ''
       weight: 2
       format_type: details
       format_settings:
         classes: ''
+        show_empty_fields: false
         id: ''
         open: false
+        description: ''
         required_fields: true
     group_miscellaneous:
       children:
