@@ -153,7 +153,7 @@ class YmApiUtils {
   /**
    * {@inheritDoc}
    */
-  public function getMembersInfo() {
+  public function getProfileIdsSince(string $startDate) {
     $membersLastUpdated = [];
     $done = FALSE;
     $counter = 0;
@@ -164,6 +164,7 @@ class YmApiUtils {
           'UserType' => 'All',
           'PageNumber' => $counter,
           'PageSize' => 10000,
+          'TimeStamp' => $startDate,
         ]
       ]);
       if (!empty($response['IDList'])) {
@@ -357,15 +358,19 @@ class YmApiUtils {
       // ],
       'field_facebook' => [
         'type' => 'link',
-        'name' => 'Facebook Page',
+        'name' => 'FacebookPage',
       ],
       'field_twitter' => [
         'type' => 'link',
-        'name' => 'Twitter Page',
+        'name' => 'TwitterPage',
       ],
       'field_linkedin' => [
         'type' => 'link',
-        'name' => 'LinkedIn Page',
+        'name' => 'LinkedInPage',
+      ],
+      'field_customer_key' => [
+        'type' => 'string',
+        'name' => 'NFPCustomerKey',
       ],
     ];
 

@@ -225,7 +225,7 @@ class OrgSyncConfigForm extends ConfigFormBase {
     $startDate = date('c', $startDate);
 
     // Get an array of ProfileIDs from YM since $startDate.
-    $profileIds = $this->orgSync->getProfileIdsSince($startDate);
+    $profileIds = $this->ymApiUtils->getProfileIdsSince($startDate);
     $operations[] = [self::class . '::processProfilesBatch', [$profileIds, $facilityTypes, $startDate]];
 
 
@@ -245,7 +245,8 @@ class OrgSyncConfigForm extends ConfigFormBase {
     // @todo: Inject the msc_your_membership.org_sync service.
     /** @var OrgSync $sync */
     $sync = \Drupal::service('msc_your_membership.org_sync');
-    $context['message'] = Html::escape("Syncing changes since $startDate.");
+    $dateTime = new \DateTime($startDate);
+    $context['message'] = Html::escape("Syncing changes since " . $dateTime->format('F j, Y \a\t g:i a') . ".");
 
     $sandbox_key = $startDate;
     if (!isset($context['sandbox'][$sandbox_key]['pointer'])) {
@@ -258,28 +259,30 @@ class OrgSyncConfigForm extends ConfigFormBase {
     $start = $context['sandbox'][$sandbox_key]['pointer'];
     $end = $context['sandbox'][$sandbox_key]['pointer'] + $batchSize;
     for ($i = $start; $i < $end; $i++) {
+      $context['sandbox'][$sandbox_key]['pointer']++;
       if (!isset($profileIds[$i])) {
         break;
       }
-      // @todo: uncomment next line and remove line setting static profileId.
-      // $profileId = $profileIds[$i];
-      $profileId = 74666099;
+      // @todo: For debugging, uncomment the following line and comment out the
+      // line after it.
+      // $profileId = 74666099;
+      $profileId = $profileIds[$i];
       try {
         // Only process if this profile is in $facilityTypes.
         try {
          // Get the member profile for $profileId.
          $profile = \Drupal::service('msc_your_membership.ymapi_utils')->getMemberProfile($profileId);
          if (empty($profile)) {
-           return TRUE;
+           continue;
          }
          // Only process $profile if in_array($org['MemberTypeCode'], $facilityTypes).
          if (!in_array($profile['MemberAccountInfo']['MemberTypeCode'], $facilityTypes)) {
-           return TRUE;
+           continue;
          }
         } catch (\Exception $exception) {
          $msg = $exception->getMessage();
          $context['results']['errors']['orgs'][] = "Error retrieving organization changes for period beginning at $startDate: $msg";
-         return TRUE;
+         continue;
         }
         $node = $sync->syncOrganization($profile);
         if (is_object($node)) {
@@ -289,7 +292,6 @@ class OrgSyncConfigForm extends ConfigFormBase {
         $context['results']['errors']['sync'][] = "Error syncing organization with profile ID {$profileId}.";
         $exception->getMessage();
       }
-      $context['sandbox'][$sandbox_key]['pointer']++;
     }
 
     if ($context['sandbox'][$sandbox_key]['pointer'] === $context['sandbox'][$sandbox_key]['count']) {

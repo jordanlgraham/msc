@@ -111,7 +111,23 @@ class OrgSync {
    * @return bool|NodeInterface
    */
   private function loadOrgNode(array $organization) {
-    //search for a node with the $cst_key so we can perform an update action.
+    // Find the index for the NFPCustomerKey field.
+    // Get the indices for this organization.
+    $fields = $this->ymApiUtils->getYmIndeces($organization);
+    $index = $fields['field_customer_key']['index'];
+    $customerKey = $organization['MemberCustomFieldResponses'][$index]['Values'][0]['Value'];
+    // First, search for an existing node by the cst_key.
+    $query = $this->nodeStorage->getQuery();
+    $query->condition('status', 1);
+    $query->condition('field_customer_key', $customerKey);
+    $query->accessCheck(FALSE);
+    $entity_ids = $query->execute();
+    if (!empty(array_values($entity_ids)[0])) {
+      $nid = array_values($entity_ids)[0];
+      return $this->nodeStorage->load($nid);
+    }
+    // If we're here, there was no node with the cst_key.
+    // Search for an existing node by field_website_member_id.
     $query = $this->nodeStorage->getQuery();
     $query->condition('status', 1);
     $query->condition('field_website_member_id', $organization['ProfileID']);
@@ -324,7 +340,7 @@ class OrgSync {
   }
 
   public function getProfileIdsSince($startDate) {
-    return $this->ymApiUtils->getMembersInfo();
+    return $this->ymApiUtils->getMembersInfo($startDate);
   }
 
   /**
@@ -400,7 +416,7 @@ class OrgSync {
     $node->field_contact_title = $org['MemberProfessionalInfo']['WorkTitle'];
     $node->field_email = $org['MemberPersonalInfo']['Email'];
     $node->field_phone = $org['MemberPersonalInfo']['HomePhoneNumber'];
-    $node->field_web_address = $org['MemberProfessionalInfo']['WorkUrl'];
+    $node->field_customer_web_site = $org['MemberProfessionalInfo']['WorkUrl'];
     $node->field_website_member_id = $org['ProfileID'];
 
     // Set $node->status based on $org['IsMember'].
@@ -417,6 +433,10 @@ class OrgSync {
   private function setCustomFieldValues($org, &$node) {
     // Get the indices for this organization.
     $fields = $this->ymApiUtils->getYmIndeces($org);
+
+    // print_r the $fields array to /tmp/fields.txt.
+    // file_put_contents('/tmp/fields1.txt', print_r($fields, TRUE));
+
     // Iterate over $fields and store the values in $node.
     foreach ($fields as $key => $field) {
       // Skip fields with index == false.
