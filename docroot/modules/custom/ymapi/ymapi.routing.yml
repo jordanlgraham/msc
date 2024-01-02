@@ -1,0 +1,7 @@
+ymapi.debug_mode_form:
+  path: '/admin/config/ymapi/debug-mode'
+  defaults:
+    _form: '\Drupal\ymapi\Form\DebugModeForm'
+    _title: 'YMAPI Debug Mode'
+  requirements:
+    _permission: 'administer site configuration'
