@@ -158,6 +158,13 @@ class Client extends ClientBase {
       ];
       $options['authorization'] = 'Bearer ' . $this->getToken('x-ss-id');
     }
+    // Log the $options array if we're in debug mode.
+    $debug_mode = \Drupal::config('ymapi.settings')->get('debug_mode');
+    if ($debug_mode) {
+      // Debug mode is enabled.
+      $this->logger->debug('Your Membership API Request Options: @options', ['@options' => print_r($options, TRUE)]);
+    }
+
     try {
       $response = $this->httpClient->{$method}($url, $options);
       $response = $response->getBody()->getContents();
