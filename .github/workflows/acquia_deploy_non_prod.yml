@@ -65,12 +65,12 @@ jobs:
       - name: Deploy to Acquia
         run: git push --force --tags acquia HEAD:refs/heads/${GITHUB_REF##*/}
 
-      - name: Post to a Slack channel
-        if: always()
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          channel-id: '${{ vars.SLACK_CHANNEL }}'
-          slack-message: "@${{ github.actor }} is pushing code today and it was a ${{ job.status }}!\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}\nUsing Workflow: ${{ github.workflow }}\nAcquia Environment: ${GITHUB_REF##*/}"
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      # - name: Post to a Slack channel
+      #   if: always()
+      #   id: slack
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     channel-id: '${{ vars.SLACK_CHANNEL }}'
+      #     slack-message: "@${{ github.actor }} is pushing code today and it was a ${{ job.status }}!\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}\nUsing Workflow: ${{ github.workflow }}\nAcquia Environment: ${GITHUB_REF##*/}"
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
